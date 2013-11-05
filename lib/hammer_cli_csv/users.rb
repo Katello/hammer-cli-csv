@@ -43,6 +43,9 @@ require 'csv'
 
 module HammerCLICsv
   class UsersCommand < BaseCommand
+
+    option ['-x', '--threads'], 'THREADS', 'Number of threads to hammer with'
+
     def initialize(*args)
       super(args)
       # @users_api = KatelloApi::Resources::Users.new(@init_options)
@@ -50,21 +53,26 @@ module HammerCLICsv
     end
 
     def execute
-      lines_per_thread = csv.length/@threads + 1
-      threads = []
-      @client = RestCalls.new(build_url(@config))
+      csv = get_lines('/home/tomckay/code/trebuchet/data/csv/users.csv')[1..-1]  # TODO CLI option
+      lines_per_thread = csv.length/threads.to_i + 1
+      splits = []
 
-      @threads.times do |current_thread|
+      threads.to_i.times do |current_thread|
         start_index = ((current_thread) * lines_per_thread).to_i
         finish_index = ((current_thread + 1) * lines_per_thread).to_i
         lines = csv[start_index...finish_index].clone
-        threads << Thread.new do
+        splits << Thread.new do
           lines.each do |line|
             if line.index('#') != 0
-              creator.call(line)
+              create_users_from_csv(line)
             end
           end
         end
+      end
+
+      splits.each do |thread|
+        thread.join
+      end
 
       HammerCLI::EX_OK
     end
@@ -91,6 +99,10 @@ module HammerCLICsv
 
       details
     end
+
+    #def xthreads=(threads)
+    #  context[:threads] = threads
+    #end
   end
 
   HammerCLI::MainCommand.subcommand("csv:users", "ping the katello server", HammerCLICsv::UsersCommand)

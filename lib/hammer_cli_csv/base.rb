@@ -36,7 +36,7 @@ module HammerCLICsv
                         :password => HammerCLI::Settings.get(:katello, :password) }
     end
 
-    def self.get_lines(filename)
+    def get_lines(filename)
       file = File.open( filename ,'r')
       contents = file.readlines
       file.close
@@ -50,7 +50,5 @@ module HammerCLICsv
         name_format
       end
     end
-
-
   end
 end

@@ -48,8 +48,7 @@ module HammerCLICsv
 
     def initialize(*args)
       super(args)
-      # @users_api = KatelloApi::Resources::Users.new(@init_options)
-      @users_api = KatelloApi::Resources::Ping.new(@init_options)
+      @user_api = KatelloApi::Resources::User.new(@init_options)
     end
 
     def execute
@@ -64,7 +63,7 @@ module HammerCLICsv
         splits << Thread.new do
           lines.each do |line|
             if line.index('#') != 0
-              create_users_from_csv(line)
+              #create_users_from_csv(line)
             end
           end
         end
@@ -74,6 +73,8 @@ module HammerCLICsv
         thread.join
       end
 
+      print @user_api.users
+
       HammerCLI::EX_OK
     end
 
@@ -82,7 +83,7 @@ module HammerCLICsv
 
       details[:count].times do |number|
         name = namify(details[:name_format], number)
-        @users_api.create(:users, {
+        @user_api.create(:users, {
                             :user => {
                               :name => name,
                               :limit => details[:limit]
@@ -99,10 +100,6 @@ module HammerCLICsv
 
       details
     end
-
-    #def xthreads=(threads)
-    #  context[:threads] = threads
-    #end
   end
 
   HammerCLI::MainCommand.subcommand("csv:users", "ping the katello server", HammerCLICsv::UsersCommand)

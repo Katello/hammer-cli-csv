@@ -8,6 +8,8 @@ module HammerCLICsv
   end
 
   require 'hammer_cli_csv/exception_handler'
+  require 'hammer_cli_csv/base'
   require 'hammer_cli_csv/hello'
+  require 'hammer_cli_csv/users'
 
 end

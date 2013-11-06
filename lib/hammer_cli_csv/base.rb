@@ -21,3 +21,34 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
+#
+
+require 'hammer_cli'
+require 'katello_api'
+require 'json'
+require 'csv'
+
+module HammerCLICsv
+  class BaseCommand < HammerCLI::AbstractCommand
+    def initialize(*args)
+      @init_options = { :base_url => HammerCLI::Settings.get(:katello, :host),
+                        :username => HammerCLI::Settings.get(:katello, :username),
+                        :password => HammerCLI::Settings.get(:katello, :password) }
+    end
+
+    def get_lines(filename)
+      file = File.open( filename ,'r')
+      contents = file.readlines
+      file.close
+      contents
+    end
+
+    def namify(name_format, number)
+      if name_format.index('%')
+        name_format % number
+      else
+        name_format
+      end
+    end
+  end
+end

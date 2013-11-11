@@ -25,15 +25,32 @@
 # -= Users CSV =-
 #
 # Columns
-#   Login
+#   Name
 #     - Login name of the user.
 #     - May contain '%d' which will be replaced with current iteration number of Count
 #     - eg. "user%d" -> "user1"
 #   Count
 #     - Number of times to iterate on this line of the CSV file
-#   First Name
-#   Last Name
-#   Email
+#   Role
+#   Description
+#   Category
+#     - organizations, environments, activation_keys, system_groups, providers, users, roles, 
+#       content_view_definitions, content_views, all
+#   Verbs
+#     organizations - gpg, redhat_products, delete_distributors, delete_systems, manage_nodes,
+#                     update_distributors, update, update_systems, read_distributors, read,
+#                     read_systems, register_distributors, register_systems, sync
+#     environments - manage_changesets, delete_changesets, update_distributors, update_systems,
+#                    promote_changesets, read_changesets, read_distributors, read_contents, read_systems,
+#                    register_distributors, register_systems, delete_distributors, delete_systems
+#     activation_keys - manage_all, read_all
+#     system_groups - create, delete, delete_systems, update, update_systems, read, read_systems
+#     providers - create, delete, update, read
+#     users - create, delete, update, read
+#     roles - create, delete, update, read
+#     content_view_definitions - create, delete, update, publish, read
+#     content_views - promote, read, subscribe
+#     all
 #
 
 require 'hammer_cli'
@@ -53,7 +70,7 @@ module HammerCLICsv
     def execute
       # TODO: how to get verbose option value
 
-      options['csv_export'] ? export : import  # TODO: how to access :flag option value?
+      csv_export? ? export : import
     end
 
     def export
@@ -69,6 +86,16 @@ module HammerCLICsv
       @role_api.index[0].each do |role|
           @roles[role['name']] = role['id']
       end
+
+      @verbs = {}
+      puts @role_api.available_verbs[0]
+      return HammerCLI::EX_OK
+      @role_api.available_verbs[0].each do |verb|
+          @verbs[verb['name']] = verb['id']
+      end
+
+      puts @verbs
+      return
 
       @existing = {}
 

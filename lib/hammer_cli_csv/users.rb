@@ -56,6 +56,8 @@ module HammerCLICsv
       lines_per_thread = csv.length/threads.to_i + 1
       splits = []
 
+      existing_users = @user_api.index[0].collect { |u| u['username'] }
+
       threads.to_i.times do |current_thread|
         start_index = ((current_thread) * lines_per_thread).to_i
         finish_index = ((current_thread + 1) * lines_per_thread).to_i
@@ -63,7 +65,7 @@ module HammerCLICsv
         splits << Thread.new do
           lines.each do |line|
             if line.index('#') != 0
-              #create_users_from_csv(line)
+              create_users_from_csv(existing_users, line)
             end
           end
         end
@@ -73,22 +75,27 @@ module HammerCLICsv
         thread.join
       end
 
-      print @user_api.users
+      print @user_api.index[0].count
 
       HammerCLI::EX_OK
     end
 
-    def create_users_from_csv(line)
+    def create_users_from_csv(existing_users, line)
       details = parse_user_csv(line)
 
       details[:count].times do |number|
         name = namify(details[:name_format], number)
-        @user_api.create(:users, {
-                            :user => {
-                              :name => name,
-                              :limit => details[:limit]
-                            }
-                          })
+        if !existing_users.include? name
+          @user_api.create({
+                             :user => {
+                               :username => name,
+                               :email => details[:email],
+                               :password => 'admin'
+                             }
+                           }, {'Accept' => 'version=2,application/json'})
+        else
+          print "Skip existing user '#{name}'\n"
+        end
       end
     end
 

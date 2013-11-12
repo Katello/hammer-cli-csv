@@ -46,57 +46,37 @@ module HammerCLICsv
 
     def initialize(*args)
       super(args)
+      @organization_api = KatelloApi::Resources::Organization.new(@init_options)
       @systemgroup_api = KatelloApi::Resources::SystemGroup.new(@init_options)
       @permission_api = KatelloApi::Resources::Permission.new(@init_options)
     end
 
     def execute
-      # TODO: how to get verbose option value
+      csv_export? ? export : import
 
-      options['csv_export'] ? export : import  # TODO: how to access :flag option value?
+      HammerCLI::EX_OK
     end
 
     def export
-
-      # TODO: convert to use CSV gem
-
-      file = File.new(csv_file, 'w')
-      file.write "SystemGroup Name,SystemGroup Description\n"
-      @systemgroup_api.index[0].each do |systemgroup|
-        if !systemgroup['locked']
-          file.write "#{systemgroup['name']},#{systemgroup['description']}\n"
-          puts @systemgroup_api.permissions({:systemgroup_id => systemgroup['id']}, {'Accept' => 'version=2,application/json'})
-        end
-      end
-
-      HammerCLI::EX_OK
-    ensure
-      file.close unless file.nil?
-    end
-
-    def import
-      csv = get_lines(csv_file)[1..-1]
-      lines_per_thread = csv.length/threads.to_i + 1
-      splits = []
-
-      threads.to_i.times do |current_thread|
-        start_index = ((current_thread) * lines_per_thread).to_i
-        finish_index = ((current_thread + 1) * lines_per_thread).to_i
-        lines = csv[start_index...finish_index].clone
-        splits << Thread.new do
-          lines.each do |line|
-            if line.index('#') != 0
-              create_systemgroups_from_csv(line)
-            end
+      CSV.open(csv_file, 'wb') do |csv|
+        csv << ['Name', 'Count', 'Org Label', 'Limit', 'Description']
+        @organization_api.index[0].each do |organization|
+          @systemgroup_api.index({'organization_id' => organization['label']})[0].each do |systemgroup|
+            puts systemgroup
+            csv << [systemgroup['name'], 1, organization['label'],
+                    systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : sytemgroup['max_systems'],
+                    systemgroup['description']]
           end
         end
       end
+    end
 
-      splits.each do |thread|
-        thread.join
+    def import
+      @existing = {}
+
+      thread_import do |line|
+        create_systemgroups_from_csv(line)
       end
-
-      HammerCLI::EX_OK
     end
 
     def create_systemgroups_from_csv(line)
@@ -107,12 +87,10 @@ module HammerCLICsv
           @existing[details[:org_label]][systemgroup['name']] = systemgroup['id']
       end
 
-      #puts @systemgroup_api.index({'organization_id' => details[:org_label]})[0]
-      #puts @existing['megacorp'].include? 'abc'
-
       details[:count].times do |number|
         name = namify(details[:name_format], number)
         if !@existing[details[:org_label]].include? name
+          puts "Creating system group '#{name}'" if verbose?
           @systemgroup_api.create({
                              'organization_id' => details[:org_label],
                              'system_group' => {
@@ -122,7 +100,7 @@ module HammerCLICsv
                              }
                            }, HEADERS)
         else
-          puts "Update existing systemgroup '#{name}'" # TODO: verbose
+          puts "Updating systemgroup '#{name}'" if verbose?
           @systemgroup_api.update({
                              'organization_id' => details[:org_label],
                              'id' => @existing[details[:org_label]][name],

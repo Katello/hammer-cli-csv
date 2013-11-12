@@ -33,6 +33,7 @@ module HammerCLICsv
 
     HEADERS = {'Accept' => 'version=2,application/json'}
 
+    option ["-v", "--verbose"], :flag, "be verbose"
     option ['--threads'], 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
     option ['--csv-file'], 'FILE_NAME', 'CSV file to name'
     option ['--csv-export'], :flag, 'Export current data instead of importing'
@@ -44,7 +45,7 @@ module HammerCLICsv
     end
 
     def get_lines(filename)
-      file = File.open( filename ,'r')
+      file = File.open(filename ,'r')
       contents = file.readlines
       file.close
       contents
@@ -56,6 +57,30 @@ module HammerCLICsv
       else
         name_format
       end
+    end
+
+    def thread_import
+      csv = get_lines(csv_file)[1..-1]
+      lines_per_thread = csv.length/threads.to_i + 1
+      splits = []
+
+      threads.to_i.times do |current_thread|
+        start_index = ((current_thread) * lines_per_thread).to_i
+        finish_index = ((current_thread + 1) * lines_per_thread).to_i
+        lines = csv[start_index...finish_index].clone
+        splits << Thread.new do
+          lines.each do |line|
+            if line.index('#') != 0
+              yield line
+            end
+          end
+        end
+      end
+
+      splits.each do |thread|
+        thread.join
+      end
+
     end
   end
 end

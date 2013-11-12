@@ -35,7 +35,7 @@ module HammerCLICsv
 
     option ['--threads'], 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
     option ['--csv-file'], 'FILE_NAME', 'CSV file to name'
-    option ['--csv-export'], :flag, 'Export current data instead of importing', :attribute_name => :csv_export
+    option ['--csv-export'], :flag, 'Export current data instead of importing'
 
     def initialize(*args)
       @init_options = { :base_url => HammerCLI::Settings.get(:katello, :host),

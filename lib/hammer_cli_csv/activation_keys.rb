@@ -22,11 +22,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 #
-# -= System Groups CSV =-
+# -= Activation Key CSV =-
 #
 # Columns
 #   Name
-#     - System group name
+#     - Activation key name
 #     - May contain '%d' which will be replaced with current iteration number of Count
 #     - eg. "group%d" -> "group1"
 #   Count
@@ -42,12 +42,14 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class SystemGroupsCommand < BaseCommand
+  class ActivationKeysCommand < BaseCommand
 
     def initialize(*args)
       super(args)
+      @activationkey_api = KatelloApi::Resources::ActivationKey.new(@init_options)
       @organization_api = KatelloApi::Resources::Organization.new(@init_options)
-      @systemgroup_api = KatelloApi::Resources::SystemGroup.new(@init_options)
+      @environment_api = KatelloApi::Resources::Environment.new(@init_options)
+      @contentview_api = KatelloApi::Resources::ContentView.new(@init_options)
     end
 
     def execute
@@ -58,13 +60,13 @@ module HammerCLICsv
 
     def export
       CSV.open(csv_file, 'wb') do |csv|
-        csv << ['Name', 'Count', 'Org Label', 'Limit', 'Description']
+        csv << ['Name', 'Count', 'Org Label', 'Description', 'Limit', 'Environment', 'Content View', 'System Groups']
         @organization_api.index[0].each do |organization|
-          @systemgroup_api.index({'organization_id' => organization['label']})[0].each do |systemgroup|
-            puts systemgroup
-            csv << [systemgroup['name'], 1, organization['label'],
-                    systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : sytemgroup['max_systems'],
-                    systemgroup['description']]
+          @activationkey_api.index({'organization_id' => organization['label']})[0].each do |activationkey|
+            puts "Writing activation key '#{activationkey['name']}'"
+            csv << [activationkey['name'], 1, organization['label'],
+                    activationkey['description'],
+                    activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']]
           end
         end
       end
@@ -74,49 +76,58 @@ module HammerCLICsv
       @existing = {}
 
       thread_import do |line|
-        create_systemgroups_from_csv(line)
+        create_activationkeys_from_csv(line)
       end
     end
 
-    def create_systemgroups_from_csv(line)
-      details = parse_systemgroup_csv(line)
+    def create_activationkeys_from_csv(line)
+      details = parse_activationkey_csv(line)
 
       if !@existing[details[:org_label]]
         @existing[details[:org_label]] = {}
-        @systemgroup_api.index({'organization_id' => details[:org_label]})[0].each do |systemgroup|
-          @existing[details[:org_label]][systemgroup['name']] = systemgroup['id']
+        @activationkey_api.index({'organization_id' => details[:org_label]})[0].each do |activationkey|
+          @existing[details[:org_label]][activationkey['name']] = activationkey['id']
+        end
+        @environments = {}
+        @environments[details[:org_label]] = {}
+        @environment_api.index({'organization_id' => details[:org_label]})[0].each do |environment|
+          @environments[details[:org_label]][details[:environment]] = environment['id']
+        end
+        @contentviews = {}
+        @contentviews[details[:org_label]] = {}
+        @contentview_api.index({'organization_id' => details[:org_label]})[0].each do |contentview|
+          @contentviews[details[:org_label]][details[:content_view]] = contentview['id']
         end
       end
 
       details[:count].times do |number|
         name = namify(details[:name_format], number)
         if !@existing[details[:org_label]].include? name
-          puts "Creating system group '#{name}'" if verbose?
-          @systemgroup_api.create({
-                             'organization_id' => details[:org_label],
-                             'system_group' => {
+          puts "Creating activationkey '#{name}'" if verbose?
+          @activationkey_api.create({
+                             'environment_id' => @environments[details[:org_label]][details[:environment]],
+                             'activation_key' => {
                                'name' => name,
-                               'max_systems' => (details[:limit] == 'Unlimited') ? -1 : details[:limit],
+                               'content_view_id' => details[:content_view],
                                'description' => details[:description]
                              }
-                           }, HEADERS)
+                           })
         else
-          puts "Updating systemgroup '#{name}'" if verbose?
-          @systemgroup_api.update({
+          puts "Updating activationkey '#{name}'" if verbose?
+          @activationkey_api.update({
                              'organization_id' => details[:org_label],
                              'id' => @existing[details[:org_label]][name],
-                             'system_group' => {
+                             'activation_key' => {
                                'name' => name,
-                               'max_systems' => (details[:limit] == 'Unlimited') ? -1 : details[:limit],
                                'description' => details[:description]
                              }
-                           }, HEADERS)
+                           })
         end
       end
     end
 
-    def parse_systemgroup_csv(line)
-      keys = [:name_format, :count, :org_label, :limit, :description]
+    def parse_activationkey_csv(line)
+      keys = [:name_format, :count, :org_label, :description, :limit, :environment, :content_view, :system_groups]
       details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
 
       details[:count] = details[:count].to_i
@@ -125,5 +136,5 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:systemgroups", "ping the katello server", HammerCLICsv::SystemGroupsCommand)
+  HammerCLI::MainCommand.subcommand("csv:activationkeys", "ping the katello server", HammerCLICsv::ActivationKeysCommand)
 end

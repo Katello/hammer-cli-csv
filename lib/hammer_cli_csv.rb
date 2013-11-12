@@ -14,5 +14,6 @@ module HammerCLICsv
   require 'hammer_cli_csv/roles'
   require 'hammer_cli_csv/permissions'
   require 'hammer_cli_csv/system_groups'
+  require 'hammer_cli_csv/activation_keys'
 
 end

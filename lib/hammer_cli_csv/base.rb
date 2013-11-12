@@ -35,7 +35,7 @@ module HammerCLICsv
 
     option ["-v", "--verbose"], :flag, "be verbose"
     option ['--threads'], 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
-    option ['--csv-file'], 'FILE_NAME', 'CSV file to name'
+    option ['--csv-file'], 'FILE_NAME', 'CSV file to name', :required => true
     option ['--csv-export'], :flag, 'Export current data instead of importing'
 
     def initialize(*args)

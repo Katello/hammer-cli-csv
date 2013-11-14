@@ -22,18 +22,15 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 #
-# -= Operating Systems CSV =-
+# -= Environments CSV =-
 #
 # Columns
 #   Name
-#     - Operating system name
+#     - Environment name
 #     - May contain '%d' which will be replaced with current iteration number of Count
 #     - eg. "os%d" -> "os1"
 #   Count
 #     - Number of times to iterate on this line of the CSV file
-#   Major
-#   Minor
-#   Family
 #
 
 require 'hammer_cli'
@@ -43,11 +40,11 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class OperatingSystemsCommand < BaseCommand
+  class EnvironmentsCommand < BaseCommand
 
     def initialize(*args)
       super(args)
-      @operatingsystem_api = ForemanApi::Resources::OperatingSystem.new(@init_options[:foreman])
+      @environment_api = ForemanApi::Resources::Environment.new(@init_options[:foreman])
     end
 
     def execute
@@ -58,56 +55,47 @@ module HammerCLICsv
 
     def export
       CSV.open(csv_file, 'wb') do |csv|
-        csv << ['Name','Count','Major','Minor', 'Family']
-        @operatingsystem_api.index({}, HEADERS)[0].each do |operatingsystem|
-          operatingsystem = operatingsystem['operatingsystem']
-          name = operatingsystem['name']
+        csv << ['Name']
+        @environment_api.index({}, HEADERS)[0].each do |environment|
+          environment = environment['environment']
+          name = environment['name']
           count = 1
-          major = operatingsystem['major']
-          minor = operatingsystem['minor']
-          family = operatingsystem['family']
-          csv << [name, count, major, minor, family]
+          csv << [name, count]
         end
       end
     end
 
     def import
       @existing = {}
-      @operatingsystem_api.index[0].each do |operatingsystem|
-        operatingsystem = operatingsystem['operatingsystem']
-        @existing["#{operatingsystem['name']}-#{operatingsystem['major']}-#{operatingsystem['minor']}"] = operatingsystem['id']
+      @environment_api.index[0].each do |environment|
+        environment = environment['environment']
+        @existing[environment['name']] = environment['id']
       end
 
       thread_import do |line|
-        create_operatingsystems_from_csv(line)
+        create_environments_from_csv(line)
       end
     end
 
-    def create_operatingsystems_from_csv(line)
-      details = parse_operatingsystem_csv(line)
+    def create_environments_from_csv(line)
+      details = parse_environment_csv(line)
 
       details[:count].times do |number|
         name = namify(details[:name_format], number)
-        if !@existing.include? "#{name}-#{details[:major]}-#{details[:minor]}"
-          print "Creating operating system '#{name}'..." if verbose?
-          @operatingsystem_api.create({
-                             'operatingsystem' => {
-                               'name' => name,
-                               'major' => details[:major],
-                               'minor' => details[:minor],
-                               'family' => details[:family]
+        if !@existing.include? name
+          print "Creating environment '#{name}'..." if verbose?
+          @environment_api.create({
+                             'environment' => {
+                               'name' => name
                              }
                            }, HEADERS)
           print "done\n" if verbose?
         else
-          print "Updating operatingsystem '#{name}'..." if verbose?
-          @operatingsystem_api.create({
+          print "Updating environment '#{name}'..." if verbose?
+          @environment_api.create({
                              'id' => @existing["#{name}-#{details[:major]}-#{details[:minor]}"],
-                             'operatingsystem' => {
-                               'name' => name,
-                               'major' => details[:major],
-                               'minor' => details[:minor],
-                               'family' => details[:family]
+                             'environment' => {
+                               'name' => name
                              }
                            }, HEADERS)
           print "done\n" if verbose?
@@ -115,8 +103,8 @@ module HammerCLICsv
       end
     end
 
-    def parse_operatingsystem_csv(line)
-      keys = [:name_format, :count, :major, :minor, :family]
+    def parse_environment_csv(line)
+      keys = [:name_format, :count]
       details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
 
       details[:count] = details[:count].to_i
@@ -125,5 +113,5 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:operatingsystems", "ping the katello server", HammerCLICsv::OperatingSystemsCommand)
+  HammerCLI::MainCommand.subcommand("csv:environments", "ping the katello server", HammerCLICsv::EnvironmentsCommand)
 end

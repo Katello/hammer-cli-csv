@@ -25,6 +25,7 @@
 
 require 'hammer_cli'
 require 'katello_api'
+require 'foreman_api'
 require 'json'
 require 'csv'
 
@@ -39,9 +40,18 @@ module HammerCLICsv
     option ['--csv-export'], :flag, 'Export current data instead of importing'
 
     def initialize(*args)
-      @init_options = { :base_url => HammerCLI::Settings.get(:katello, :host),
-                        :username => HammerCLI::Settings.get(:katello, :username),
-                        :password => HammerCLI::Settings.get(:katello, :password) }
+      @init_options = {
+          :katello => {
+            :base_url => HammerCLI::Settings.get(:katello, :host),
+            :username => HammerCLI::Settings.get(:katello, :username),
+            :password => HammerCLI::Settings.get(:katello, :password)
+          },
+          :foreman => {
+            :base_url => HammerCLI::Settings.get(:foreman, :host),
+            :username => HammerCLI::Settings.get(:foreman, :username),
+            :password => HammerCLI::Settings.get(:foreman, :password)
+          }
+      }
     end
 
     def get_lines(filename)

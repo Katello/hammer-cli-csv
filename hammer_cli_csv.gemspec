@@ -17,4 +17,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency("hammer_cli", ">= 0.0.6")
   spec.add_dependency("katello_api")
+  spec.add_dependency("foreman_api")
 end

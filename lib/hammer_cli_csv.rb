@@ -16,4 +16,6 @@ module HammerCLICsv
   require 'hammer_cli_csv/system_groups'
   require 'hammer_cli_csv/activation_keys'
 
+  require 'hammer_cli_csv/operating_systems'
+
 end

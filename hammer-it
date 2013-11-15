@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#hammer csv:users --server http://localhost:3001/foreman --foreman --csv-file test/data/users.csv --verbose
+#hammer csv:architectures --server http://localhost:3001/foreman --foreman --csv-file test/data/architectures.csv --verbose
+#hammer csv:partitiontables --server http://localhost:3001/foreman --foreman --csv-file test/data/partitiontables.csv --verbose
+#hammer csv:environments --server http://localhost:3001/foreman --foreman --csv-file test/data/environments.csv --verbose
+#hammer csv:operatingsystems --server http://localhost:3001/foreman --foreman --csv-file test/data/operating_systems.csv --verbose
+#hammer csv:organizations --server http://localhost:3001/foreman --foreman --csv-file test/data/organizations.csv --verbose
+hammer csv:domains --server http://localhost:3001/foreman --foreman --csv-file test/data/domains.csv --verbose

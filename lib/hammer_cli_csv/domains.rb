@@ -22,11 +22,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 #
-# -= Environments CSV =-
+# -= Domains CSV =-
 #
 # Columns
 #   Name
-#     - Environment name
+#     - Domain name
 #     - May contain '%d' which will be replaced with current iteration number of Count
 #     - eg. "os%d" -> "os1"
 #   Count
@@ -38,58 +38,60 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class EnvironmentsCommand < BaseCommand
+  class DomainsCommand < BaseCommand
 
     NAME = 'Name'
     COUNT = 'Count'
+    FULLNAME = 'Full Name'
 
     def execute
       super
-      signal_usage_error '--katello unsupported with environments' if katello?
+      signal_usage_error '--katello unsupported with domains' if katello?
       csv_export? ? export : import
       HammerCLI::EX_OK
     end
 
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT]
-        @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
-          environment = environment['environment']
-          name = environment['name']
+        csv << [NAME, COUNT, FULLNAME]
+        @f_domain_api.index({:per_page => 999999}, HEADERS)[0].each do |domain|
+          domain = domain['domain']
+          name = domain['name']
           count = 1
-          csv << [name, count]
+          fullname = domain['fullname']
+          csv << [name, count, fullname]
         end
       end
     end
 
     def import
       @existing = {}
-      @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
-        environment = environment['environment']
-        @existing[environment['name']] = environment['id']
+      @f_domain_api.index({:per_page => 999999}, HEADERS)[0].each do |domain|
+        domain = domain['domain']
+        @existing[domain['name']] = domain['id']
       end
 
       thread_import do |line|
-        create_environments_from_csv(line)
+        create_domains_from_csv(line)
       end
     end
 
-    def create_environments_from_csv(line)
+    def create_domains_from_csv(line)
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating environment '#{name}'..." if verbose?
-          @f_environment_api.create({
-                             'environment' => {
+          print "Creating domain '#{name}'..." if verbose?
+          @f_domain_api.create({
+                             'domain' => {
                                'name' => name
                              }
                            }, HEADERS)
           print "done\n" if verbose?
         else
-          print "Updating environment '#{name}'..." if verbose?
-          @f_environment_api.update({
+          print "Updating domain '#{name}'..." if verbose?
+          @f_domain_api.update({
                              'id' => @existing[name],
-                             'environment' => {
+                             'domain' => {
                                'name' => name
                              }
                            }, HEADERS)
@@ -99,5 +101,5 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:environments", "Import or export environments", HammerCLICsv::EnvironmentsCommand)
+  HammerCLI::MainCommand.subcommand("csv:domains", "ping the katello server", HammerCLICsv::DomainsCommand)
 end

@@ -22,11 +22,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 #
-# -= Environments CSV =-
+# -= Partition Tables CSV =-
 #
 # Columns
 #   Name
-#     - Environment name
+#     - Partition table name
 #     - May contain '%d' which will be replaced with current iteration number of Count
 #     - eg. "os%d" -> "os1"
 #   Count
@@ -34,64 +34,74 @@
 #
 
 require 'hammer_cli'
+require 'katello_api'
+require 'foreman_api'
 require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class EnvironmentsCommand < BaseCommand
+  class PartitionTablesCommand < BaseCommand
 
     NAME = 'Name'
     COUNT = 'Count'
+    OSFAMILY = 'OS Family'
+    LAYOUT = 'Layout'
 
     def execute
       super
-      signal_usage_error '--katello unsupported with environments' if katello?
+      signal_usage_error '--katello unsupported with csv:partitiontables' if katello?
       csv_export? ? export : import
       HammerCLI::EX_OK
     end
 
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT]
-        @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
-          environment = environment['environment']
-          name = environment['name']
+        csv << [NAME, COUNT, OSFAMILY, LAYOUT]
+        @f_ptable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
+          ptable = ptable['ptable']
+          name = ptable['name']
           count = 1
-          csv << [name, count]
+          osfamily = ptable['os_family']
+          layout = ptable['layout']
+          csv << [name, count, osfamily, layout]
         end
       end
     end
 
     def import
       @existing = {}
-      @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
-        environment = environment['environment']
-        @existing[environment['name']] = environment['id']
+      @f_ptable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
+        ptable = ptable['ptable']
+        @existing[ptable['name']] = ptable['id']
       end
 
       thread_import do |line|
-        create_environments_from_csv(line)
+        create_ptables_from_csv(line)
       end
     end
 
-    def create_environments_from_csv(line)
+    def create_ptables_from_csv(line)
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating environment '#{name}'..." if verbose?
-          @f_environment_api.create({
-                             'environment' => {
-                               'name' => name
+          print "Creating ptable '#{name}'... " if verbose?
+          @f_ptable_api.create({
+                                 'ptable' => {
+                                   'name' => name,
+                                   'os_family' => line[OSFAMILY],
+                                   'layout' => line[LAYOUT]
                              }
                            }, HEADERS)
           print "done\n" if verbose?
         else
-          print "Updating environment '#{name}'..." if verbose?
-          @f_environment_api.update({
-                             'id' => @existing[name],
-                             'environment' => {
-                               'name' => name
-                             }
+          print "Updating ptable '#{name}'..." if verbose?
+          @f_ptable_api.update({
+                                 'id' => @existing[name],
+                                 'ptable' => {
+                                   'name' => name,
+                                   'os_family' => line[OSFAMILY],
+                                   'layout' => line[LAYOUT]
+                                 }
                            }, HEADERS)
           print "done\n" if verbose?
         end
@@ -99,5 +109,5 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:environments", "Import or export environments", HammerCLICsv::EnvironmentsCommand)
+  HammerCLI::MainCommand.subcommand("csv:partitiontables", "ping the katello server", HammerCLICsv::PartitionTablesCommand)
 end

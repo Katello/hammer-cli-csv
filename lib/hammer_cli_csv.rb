@@ -7,17 +7,19 @@ module HammerCLICsv
     HammerCLICsv::ExceptionHandler
   end
 
-  require 'hammer_cli_csv/exception_handler'
   require 'hammer_cli_csv/base'
-  require 'hammer_cli_csv/organizations'
-  require 'hammer_cli_csv/users'
-  require 'hammer_cli_csv/roles'
-  require 'hammer_cli_csv/permissions'
-  require 'hammer_cli_csv/system_groups'
-  require 'hammer_cli_csv/activation_keys'
+  require 'hammer_cli_csv/exception_handler'
 
-  require 'hammer_cli_csv/operating_systems'
+  require 'hammer_cli_csv/activation_keys'
+  require 'hammer_cli_csv/architectures'
+  require 'hammer_cli_csv/domains'
   require 'hammer_cli_csv/environments'
   require 'hammer_cli_csv/hosts'
-
+  require 'hammer_cli_csv/operating_systems'
+  require 'hammer_cli_csv/organizations'
+  require 'hammer_cli_csv/permissions'
+  require 'hammer_cli_csv/partitiontables'
+  require 'hammer_cli_csv/roles'
+  require 'hammer_cli_csv/system_groups'
+  require 'hammer_cli_csv/users'
 end

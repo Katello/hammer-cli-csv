@@ -1,0 +1,5 @@
+"Name","Count","Operating Systems"
+"x86_64","1","CentOS 6.4,Debian 6.0,Debian 7.0,Fedora 14.,Fedora 17.,Fedora 18.,Fedora 19.,OpenSuSE 11.4,RedHat 5.8,RedHat 6.3,RedHat 6.4,solaris 5.10,Ubuntu 12.10"
+"i386","1","Debian 6.0,Fedora 14.,Fedora 17.,OpenSuSE 11.4,RedHat 5.8,Ubuntu 12.10,windows 6.1"
+"Sparc","1","solaris 5.10"
+"armv5tel","1","Debian 6.0"

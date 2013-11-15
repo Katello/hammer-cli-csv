@@ -44,30 +44,45 @@ require 'csv'
 module HammerCLICsv
   class UsersCommand < BaseCommand
 
-    def initialize(*args)
-      super(args)
-      @user_api = KatelloApi::Resources::User.new(@init_options)
-    end
+    NAME = 'Login'
+    COUNT = 'Count'
+    FIRSTNAME = 'First Name'
+    LASTNAME = 'Last Name'
+    EMAIL = 'Email'
 
     def execute
+      super
       csv_export? ? export : import
 
       HammerCLI::EX_OK
     end
 
     def export
-      CSV.open(csv_file, 'wb') do |csv|
-        csv << ['Login','Count','First Name','Last Name', 'Email']
-        @user_api.index[0].each do |user|
-          csv << [user['username'], 1, '', '', user['email']]
+      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL]
+        if katello?
+          @k_user_api.index({}, HEADERS)[0].each do |user|
+            csv << [user['username'], 1, '', '', user['email']]
+          end
+        else
+          @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
+            csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail']]
+          end
         end
       end
     end
 
     def import
       @existing = {}
-      @user_api.index[0].each do |user|
+      if katello?
+        @k_user_api.index[0].each do |user|
           @existing[user['username']] = user['id']
+        end
+      else
+        @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
+          user = user['user']
+          @existing[user['login']] = user['id']
+        end
       end
 
       thread_import do |line|
@@ -76,32 +91,57 @@ module HammerCLICsv
     end
 
     def create_users_from_csv(line)
-      details = parse_user_csv(line)
-
-      details[:count].times do |number|
-        name = namify(details[:name_format], number)
+      line[COUNT].to_i.times do |number|
+        name = namify(line[NAME], number)
         if !@existing.include? name
-          puts "Creating user '#{name}'" if verbose?
-          @user_api.create({
-                             :user => {
-                               :username => name,
-                               :email => details[:email],
-                               :password => 'admin'
-                             }
-                           }, HEADERS)
+          print "Creating user '#{name}'... " if verbose?
+          if katello?
+            @k_user_api.create({
+                                 'user' => {
+                                   'username' => name,
+                                   'email' => line[EMAIL],
+                                   'password' => 'admin'
+                                 }
+                               }, HEADERS)
+          else
+            @f_user_api.create({
+                                 'user' => {
+                                   'login' => name,
+                                   'firstname' => line[FIRSTNAME],
+                                   'lastname' => line[LASTNAME],
+                                   'mail' => line[EMAIL],
+                                   'password' => 'admin',
+                                   'auth_source_id' => 1,  # INTERNAL auth
+                                 }
+                               }, HEADERS)
+          end
+          print "done\n" if verbose?
         else
-          puts "Updating user '#{name}'" if verbose?
+          print "Updating user '#{name}'... " if verbose?
+          if katello?
+            @k_user_api.update({
+                                 'id' => @existing[name],
+                                 'user' => {
+                                   'username' => name,
+                                   'email' => line[EMAIL],
+                                   'password' => 'admin'
+                                 }
+                               }, HEADERS)
+          else
+            @f_user_api.update({
+                                 'id' => @existing[name],
+                                 'user' => {
+                                   'login' => name,
+                                   'firstname' => line[FIRSTNAME],
+                                   'lastname' => line[LASTNAME],
+                                   'mail' => line[EMAIL],
+                                   'password' => 'admin'
+                                 }
+                               }, HEADERS)
+          end
+          print "done\n" if verbose?
         end
       end
-    end
-
-    def parse_user_csv(line)
-      keys = [:name_format, :count, :first_name, :last_name, :email]
-      details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
-
-      details[:count] = details[:count].to_i
-
-      details
     end
   end
 

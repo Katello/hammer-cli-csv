@@ -1,0 +1,3 @@
+Name,Count,Org Label,Environment Label,OS,Arch,MAC Address,Domain,Partition Table
+dhcp129-0%02d.megacorp.com,5,Mega Corporation,Development,RHEL 6.4,x86_64,"14:FE:B5:EA:70:%02x",megacorp.com,RedHat default
+dhcp129-4%02d.megacorp.com,5,Mega Corporation,Development,RHEL 6.3,x86_64,"FE:54:00:EB:83:%02x",megacorp.com,RedHat default

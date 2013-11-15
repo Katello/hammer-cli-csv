@@ -36,8 +36,8 @@ module HammerCLICsv
 
     option ["-v", "--verbose"], :flag, "be verbose"
     option ['--threads'], 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
-    option ['--csv-file'], 'FILE_NAME', 'CSV file to name', :required => true
     option ['--csv-export'], :flag, 'Export current data instead of importing'
+    option ['--csv-file'], 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
 
     def initialize(*args)
       @init_options = {
@@ -52,6 +52,13 @@ module HammerCLICsv
             :password => HammerCLI::Settings.get(:foreman, :password)
           }
       }
+    end
+
+    def execute
+      if !csv_file
+        csv_file = '/dev/stdout' if csv_export? # TODO: how to get this to actually set value?
+        signal_usage_error "--csv-file required" if !csv_file
+      end
     end
 
     def get_lines(filename)
@@ -90,7 +97,6 @@ module HammerCLICsv
       splits.each do |thread|
         thread.join
       end
-
     end
   end
 end

@@ -18,5 +18,6 @@ module HammerCLICsv
 
   require 'hammer_cli_csv/operating_systems'
   require 'hammer_cli_csv/environments'
+  require 'hammer_cli_csv/hosts'
 
 end

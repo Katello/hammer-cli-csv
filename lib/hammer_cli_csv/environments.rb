@@ -92,7 +92,7 @@ module HammerCLICsv
           print "done\n" if verbose?
         else
           print "Updating environment '#{name}'..." if verbose?
-          @environment_api.create({
+          @environment_api.update({
                              'id' => @existing["#{name}-#{details[:major]}-#{details[:minor]}"],
                              'environment' => {
                                'name' => name

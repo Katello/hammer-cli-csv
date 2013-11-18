@@ -38,8 +38,6 @@ module HammerCLICsv
     option ['--threads'], 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
     option ['--csv-export'], :flag, 'Export current data instead of importing'
     option ['--csv-file'], 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
-    option ['--katello'], :flag, 'Use katello'
-    option ['--foreman'], :flag, 'Use foreman'
     option ['--server'], 'SERVER', 'Server URL'
     option ['-u', '--username'], 'USERNAME', 'Username to access server'
     option ['-p', '--password'], 'PASSWORD', 'Password to access server'
@@ -49,32 +47,22 @@ module HammerCLICsv
         csv_file = '/dev/stdout' if csv_export? # TODO: how to get this to actually set value?
         signal_usage_error "--csv-file required" if !csv_file
       end
-      signal_usage_error "--katello and --foreman cannot both be specified" if katello? && foreman?
-      signal_usage_error "one of --katello or --foreman required" if !katello? && !foreman?
 
       @init_options = {
-        :base_url => server   || (katello? ? HammerCLI::Settings.get(:katello, :host) :
-                                             HammerCLI::Settings.get(:foreman, :host)),
-        :username => username || (katello? ? HammerCLI::Settings.get(:katello, :username) :
-                                             HammerCLI::Settings.get(:foreman, :username)),
-        :password => password || (katello? ? HammerCLI::Settings.get(:katello, :password) :
-                                             HammerCLI::Settings.get(:foreman, :password))
+        :base_url => server   || HammerCLI::Settings.get(:host),
+        :username => username || HammerCLI::Settings.get(:username),
+        :password => password || HammerCLI::Settings.get(:password)
       }
 
-      if katello?
-        # TODO
-        @k_user_api ||= KatelloApi::Resources::User.new(@init_options)
-        @k_organization_api ||= KatelloApi::Resources::Organization.new(@init_options)
-      else
-        @f_architecture_api ||= ForemanApi::Resources::Architecture.new(@init_options)
-        @f_domain_api ||= ForemanApi::Resources::Domain.new(@init_options)
-        @f_environment_api ||= ForemanApi::Resources::Environment.new(@init_options)
-        @f_host_api ||= ForemanApi::Resources::Host.new(@init_options)
-        @f_operatingsystem_api ||= ForemanApi::Resources::OperatingSystem.new(@init_options)
-        @f_organization_api ||= ForemanApi::Resources::Organization.new(@init_options)
-        @f_ptable_api ||= ForemanApi::Resources::Ptable.new(@init_options)
-        @f_user_api ||= ForemanApi::Resources::User.new(@init_options)
-      end
+      @f_architecture_api ||= ForemanApi::Resources::Architecture.new(@init_options)
+      @f_domain_api ||= ForemanApi::Resources::Domain.new(@init_options)
+      @f_environment_api ||= ForemanApi::Resources::Environment.new(@init_options)
+      @f_host_api ||= ForemanApi::Resources::Host.new(@init_options)
+      @f_operatingsystem_api ||= ForemanApi::Resources::OperatingSystem.new(@init_options)
+      @f_organization_api ||= ForemanApi::Resources::Organization.new(@init_options)
+      @f_ptable_api ||= ForemanApi::Resources::Ptable.new(@init_options)
+      @f_puppetfacts_api ||= ForemanApi::Resources::FactValue.new(@init_options)
+      @f_user_api ||= ForemanApi::Resources::User.new(@init_options)
     end
 
     def get_lines(filename)
@@ -92,9 +80,9 @@ module HammerCLICsv
       end
     end
 
-    def thread_import
+    def thread_import(return_headers=false)
       csv = []
-      CSV.foreach(csv_file, {:skip_blanks => true, :headers => :first_row, :return_headers => false}) do |line|
+      CSV.foreach(csv_file, {:skip_blanks => true, :headers => :first_row, :return_headers => return_headers}) do |line|
         csv << line
       end
       lines_per_thread = csv.length/threads.to_i + 1
@@ -122,18 +110,22 @@ module HammerCLICsv
       @organizations ||= {}
 
       if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @organizations[options[:name]]
         if !options[:id]
           organization = @f_organization_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
-          options[:id] = organization[0]['organization']['id']
+          raise RuntimeError.new("Organization '#{options[:name]}' not found") if !organization || organization.empty?
+          options[:id] = organization[0]['id']
           @organizations[options[:name]] = options[:id]
         end
         result = options[:id]
       else
+        return nil if options[:id].nil?
         options[:name] = @organizations.key(options[:id])
         if !options[:name]
           organization = @f_organization_api.show({'id' => options[:id]}, HEADERS)[0]
-          options[:name] = organization['organization']['name']
+          raise RuntimeError.new("Organization 'id=#{options[:id]}' not found") if !organization || organization.empty?
+          options[:name] = organization['name']
           @organizations[options[:name]] = options[:id]
         end
         result = options[:name]
@@ -146,18 +138,20 @@ module HammerCLICsv
       @environments ||= {}
 
       if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @environments[options[:name]]
         if !options[:id]
           environment = @f_environment_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
-          options[:id] = environment[0]['environment']['id']
+          options[:id] = environment[0]['id']
           @environments[options[:name]] = options[:id]
         end
         result = options[:id]
       else
+        return nil if options[:id].nil?
         options[:name] = @environments.key(options[:id])
         if !options[:name]
           environment = @f_environment_api.show({'id' => options[:id]}, HEADERS)[0]
-          options[:name] = environment['environment']['name']
+          options[:name] = environment['name']
           @environments[options[:name]] = options[:id]
         end
         result = options[:name]
@@ -170,6 +164,7 @@ module HammerCLICsv
       @operatingsystems ||= {}
 
       if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @operatingsystems[options[:name]]
         if !options[:id]
           (osname, major, minor) = split_os_name(options[:name])
@@ -180,6 +175,7 @@ module HammerCLICsv
         end
         result = options[:id]
       else
+        return nil if options[:id].nil?
         options[:name] = @operatingsystems.key(options[:id])
         if !options[:name]
           operatingsystem = @f_operatingsystem_api.show({'id' => options[:id]}, HEADERS)[0]
@@ -198,6 +194,7 @@ module HammerCLICsv
       @architectures ||= {}
 
       if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @architectures[options[:name]]
         if !options[:id]
           architecture = @f_architecture_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
@@ -206,6 +203,7 @@ module HammerCLICsv
         end
         result = options[:id]
       else
+        return nil if options[:id].nil?
         options[:name] = @architectures.key(options[:id])
         if !options[:name]
           architecture = @f_architecture_api.show({'id' => options[:id]}, HEADERS)[0]
@@ -222,18 +220,20 @@ module HammerCLICsv
       @domains ||= {}
 
       if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @domains[options[:name]]
         if !options[:id]
           domain = @f_domain_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
-          options[:id] = domain[0]['domain']['id']
+          options[:id] = domain[0]['id']
           @domains[options[:name]] = options[:id]
         end
         result = options[:id]
       else
+        return nil if options[:id].nil?
         options[:name] = @domains.key(options[:id])
         if !options[:name]
           domain = @f_domain_api.show({'id' => options[:id]}, HEADERS)[0]
-          options[:name] = domain['domain']['name']
+          options[:name] = domain['name']
           @domains[options[:name]] = options[:id]
         end
         result = options[:name]
@@ -246,6 +246,7 @@ module HammerCLICsv
       @ptables ||= {}
 
       if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @ptables[options[:name]]
         if !options[:id]
           ptable = @f_ptable_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
@@ -255,6 +256,7 @@ module HammerCLICsv
         end
         result = options[:id]
       elsif options[:id]
+        return nil if options[:id].nil?
         options[:name] = @ptables.key(options[:id])
         if !options[:name]
           ptable = @f_ptable_api.show({'id' => options[:id]}, HEADERS)[0]

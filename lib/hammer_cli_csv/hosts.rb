@@ -68,8 +68,9 @@ module HammerCLICsv
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
         @f_host_api.index({:per_page => 999999}, HEADERS)[0].each do |host|
-          host = @f_host_api.show({'id' => host['host']['id']}, HEADERS)[0]
-          host = host['host']
+          host = @f_host_api.show({'id' => host['id']}, HEADERS)[0]
+          raise RuntimeError.new("Host 'id=#{host['id']}' not found") if !host || host.empty?
+
           name = host['name']
           count = 1
           organization = foreman_organization(:id => host['organization_id'])
@@ -78,7 +79,7 @@ module HammerCLICsv
           architecture = foreman_architecture(:id => host['architecture_id'])
           mac = host['mac']
           domain = foreman_domain(:id => host['domain_id'])
-          ptable = foreman_ptable(:id => host['ptable_id'])
+          ptable = foreman_partitiontable(:id => host['ptable_id'])
 
           csv << [name, count, organization, environment, operatingsystem, architecture, mac, domain, ptable]
         end
@@ -88,7 +89,6 @@ module HammerCLICsv
     def import
       @existing = {}
       @f_host_api.index({:per_page => 999999}, HEADERS)[0].each do |host|
-        host = host['host']
         @existing[host['name']] = host['id']
       end
 
@@ -178,33 +178,33 @@ module HammerCLICsv
                                'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
                                'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
                                'domain_id' => foreman_domain(:name => line[DOMAIN]),
-                               'ptable_id' => foreman_ptable(:name => line[PARTITIONTABLE])
+                               'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
                              }
                            }, HEADERS)
           print "done\n" if verbose?
         else
           print "Updating host '#{name}'..." if verbose?
-          print "  TODO  " if verbose?
           @f_host_api.update({
                                'id' => @existing[name],
                                'host' => {
                                  'name' => name,
                                  'mac' => namify(line[MACADDRESS], number),
-                                 'organization_id' => foreman_organization(line[ORGANIZATION]),
-                                 'environment_id' => environment_id,
-                                 'operatingsystem_id' => operatingsystem_id,
-                                 'environment_id' => environment_id,
-                                 'operatingsystem_id' => operatingsystem_id,
-                                 'architecture_id' => architecture_id,
-                                 'domain_id' => domain_id,
-                                 'ptable_id' => ptable_id
+                                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                                 'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
+                                 'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
+                                 'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
+                                 'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
+                                 'domain_id' => foreman_domain(:name => line[DOMAIN]),
+                                 'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
                                }
                              }, HEADERS)
           print "done\n" if verbose?
         end
       end
+    rescue RuntimeError => e
+      raise RuntimeError.new("#{e}\n       #{line}")
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:hosts", "ping the katello server", HammerCLICsv::HostsCommand)
+  HammerCLI::MainCommand.subcommand("csv:hosts", "import/export hosts", HammerCLICsv::HostsCommand)
 end

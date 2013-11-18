@@ -60,19 +60,18 @@ module HammerCLICsv
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FAMILY, ARCHITECTURES, PARTITIONTABLES]
         @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0].each do |operatingsystem|
-          operatingsystem = operatingsystem['operatingsystem']
           name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
           count = 1
           family = operatingsystem['family']
-          partitiontables = ""
-          operatingsystem['ptables'].each do |partitiontable|
-            partitiontables += "," unless partitiontables == ""
-            partitiontables += partitiontable['ptable']['name']
-          end
           architectures = ""
           operatingsystem['architectures'].each do |architecture|
             architectures += "," unless architectures == ""
-            architectures += architecture['architecture']['name']
+            architectures += architecture['name']
+          end
+          partitiontables = ""
+          operatingsystem['ptables'].each do |partitiontable|
+            partitiontables += "," unless partitiontables == ""
+            partitiontables += partitiontable['name']
           end
           csv << [name, count, family, architectures, partitiontables]
         end
@@ -82,7 +81,6 @@ module HammerCLICsv
     def import
       @existing = {}
       @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0].each do |operatingsystem|
-        operatingsystem = operatingsystem['operatingsystem']
         @existing[build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])] = operatingsystem['id']
       end
 
@@ -92,6 +90,15 @@ module HammerCLICsv
     end
 
     def create_operatingsystems_from_csv(line)
+      architecture_ids = CSV.parse_line(line[ARCHITECTURES]).collect do |name|
+        foreman_architecture(:name => name)
+      end unless line[ARCHITECTURES].empty?
+      architecture_ids ||= []
+      partitiontable_ids = CSV.parse_line(line[PARTITIONTABLES]).collect do |name|
+        foreman_partitiontable(:name => name)
+      end unless line[PARTITIONTABLES].empty?
+      partitiontables_ids ||= []
+
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         (osname, major, minor) = split_os_name(name)
@@ -102,24 +109,29 @@ module HammerCLICsv
                                             'name' => osname,
                                             'major' => major,
                                             'minor' => minor,
-                                            'family' => line[FAMILY]
+                                            'family' => line[FAMILY],
+                                            'architecture_ids' => architecture_ids,
+                                            'ptable_ids' => partitiontable_ids
                                           }
                                         }, HEADERS)
-          print "done\n" if verbose?
         else
           print "Updating operatingsystem '#{name}'..." if verbose?
-          @f_operatingsystem_api.create({
+          @f_operatingsystem_api.update({
                                           'id' => @existing[name],
                                           'operatingsystem' => {
                                             'name' => osname,
                                             'major' => major,
                                             'minor' => minor,
-                                            'family' => line[FAMILY]
+                                            'family' => line[FAMILY],
+                                            'architecture_ids' => architecture_ids,
+                                            'ptable_ids' => partitiontable_ids
                                           }
                                         }, HEADERS)
-          print "done\n" if verbose?
         end
+        print "done\n" if verbose?
       end
+    rescue RuntimeError => e
+      raise RuntimeError.new("#{e}\n       #{line}")
     end
   end
 

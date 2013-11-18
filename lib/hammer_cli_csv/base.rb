@@ -175,7 +175,7 @@ module HammerCLICsv
           (osname, major, minor) = split_os_name(options[:name])
           search = "name=\"#{osname}\" and major=\"#{major}\" and minor=\"#{minor}\""
           operatingsystems = @f_operatingsystem_api.index({'search' => search}, HEADERS)[0]
-          options[:id] = operatingsystems[0]['operatingsystem']['id']
+          options[:id] = operatingsystems[0]['id']
           @operatingsystems[options[:name]] = options[:id]
         end
         result = options[:id]
@@ -183,9 +183,9 @@ module HammerCLICsv
         options[:name] = @operatingsystems.key(options[:id])
         if !options[:name]
           operatingsystem = @f_operatingsystem_api.show({'id' => options[:id]}, HEADERS)[0]
-          options[:name] = build_os_name(operatingsystem['operatingsystem']['name'],
-                                         operatingsystem['operatingsystem']['major'],
-                                         operatingsystem['operatingsystem']['minor'])
+          options[:name] = build_os_name(operatingsystem['name'],
+                                         operatingsystem['major'],
+                                         operatingsystem['minor'])
           @operatingsystems[options[:name]] = options[:id]
         end
         result = options[:name]
@@ -201,7 +201,7 @@ module HammerCLICsv
         options[:id] = @architectures[options[:name]]
         if !options[:id]
           architecture = @f_architecture_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
-          options[:id] = architecture[0]['architecture']['id']
+          options[:id] = architecture[0]['id']
           @architectures[options[:name]] = options[:id]
         end
         result = options[:id]
@@ -209,7 +209,7 @@ module HammerCLICsv
         options[:name] = @architectures.key(options[:id])
         if !options[:name]
           architecture = @f_architecture_api.show({'id' => options[:id]}, HEADERS)[0]
-          options[:name] = architecture['architecture']['name']
+          options[:name] = architecture['name']
           @architectures[options[:name]] = options[:id]
         end
         result = options[:name]
@@ -242,14 +242,15 @@ module HammerCLICsv
       result
     end
 
-    def foreman_ptable(options={})
+    def foreman_partitiontable(options={})
       @ptables ||= {}
 
       if options[:name]
         options[:id] = @ptables[options[:name]]
         if !options[:id]
           ptable = @f_ptable_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
-          options[:id] = ptable[0]['ptable']['id']
+          raise RuntimeError.new("Partition table '#{options[:name]}' not found") if !ptable || ptable.empty?
+          options[:id] = ptable[0]['id']
           @ptables[options[:name]] = options[:id]
         end
         result = options[:id]
@@ -257,7 +258,7 @@ module HammerCLICsv
         options[:name] = @ptables.key(options[:id])
         if !options[:name]
           ptable = @f_ptable_api.show({'id' => options[:id]}, HEADERS)[0]
-          options[:name] = ptable['ptable']['name']
+          options[:name] = ptable['name']
           @ptables[options[:name]] = options[:id]
         end
         result = options[:name]

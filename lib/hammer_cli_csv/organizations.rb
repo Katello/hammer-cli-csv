@@ -46,29 +46,36 @@ require 'csv'
 module HammerCLICsv
   class OrganizationsCommand < BaseCommand
 
-    def initialize(*args)
-      super(args)
-      @organization_api = KatelloApi::Resources::Organization.new(@init_options)
-    end
+    NAME = 'Name'
+    COUNT = 'Count'
+    ORGLABEL = 'Org Label'
+    DESCRIPTION = 'Description'
 
     def execute
+      super
       csv_export? ? export : import
-
       HammerCLI::EX_OK
     end
 
     def export
-      CSV.open(csv_file, 'wb') do |csv|
-        csv << ['Name','Count','Org Label', 'Description']
-        @organization_api.index[0].each do |organization|
-          csv << [organization['name'], 1, organization['label'], organization['description']]
+      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        csv << [NAME, COUNT, ORGLABEL, DESCRIPTION]
+        if katello?
+          @k_organization_api.index[0].each do |organization|
+            csv << [organization['name'], 1, organization['label'], organization['description']]
+          end
+        else
+          @f_organization_api.index({:per_page => 999999}, HEADERS)[0].each do |organization|
+            organization = organization['organization']
+            csv << [organization['name'], 1, '', '']
+          end
         end
       end
     end
 
     def import
       @existing = {}
-      @organization_api.index[0].each do |organization|
+      @f_organization_api.index({:per_page => 999999}, HEADERS)[0].each do |organization|
           @existing[organization['name']] = organization['label']
       end
 
@@ -78,40 +85,29 @@ module HammerCLICsv
     end
 
     def create_organizations_from_csv(line)
-      details = parse_organization_csv(line)
-
-      details[:count].times do |number|
-        name = namify(details[:name_format], number)
-        label = namify(details[:label_format], number)
+      line[COUNT].to_i.times do |number|
+        name = namify(line[NAME], number)
+        label = namify(line[ORGLABEL], number)
         if !@existing.include? name
           puts "Creating organization '#{name}'" if verbose?
-          @organization_api.create({
-                             :organization => {
-                               :name => name,
-                               :label => label,
-                               :description => details[:description]
+          @f_organization_api.create({
+                             'organization' => {
+                               'name' => name,
+                               'label' => label,
+                               'description' => line[DESCRIPTION]
                              }
                            }, HEADERS)
         else
           puts "Updating organization '#{name}'" if verbose?
           @organization_api.update({
                              'id' => label,
-                             :organization => {
-                               :name => name,
-                               :description => details[:description]
+                             'organization' => {
+                               'name' => name,
+                               'description' => line[DESCRIPTION]
                              }
                            }, HEADERS)
         end
       end
-    end
-
-    def parse_organization_csv(line)
-      keys = [:name_format, :count, :label_format, :description]
-      details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
-
-      details[:count] = details[:count].to_i
-
-      details
     end
   end
 

@@ -1,3 +1,17 @@
-Name,Count,Major,Minor,Family
-RHEL,1,"6","4",Redhat
-RHEL,1,"6","3",Redhat
+"Name","Count","Family"
+"CentOS 6.4","1","Redhat"
+"Debian 6.0","1","Debian"
+"Debian 7.0","1","Debian"
+"Fedora 14","1","Redhat"
+"Fedora 17","1","Redhat"
+"Fedora 18","1","Redhat"
+"Fedora 19","1","Redhat"
+"OpenSuSE 11.4","1","Suse"
+"RedHat 5.8","1","Redhat"
+"RedHat 6.3","1","Redhat"
+"RedHat 5.7","1","Redhat"
+"RedHat 6.3","1","Redhat"
+"RedHat 6.4","1","Redhat"
+"solaris 5.10","1","Solaris"
+"Ubuntu 12.10","1","Debian"
+"windows 6.1","1","Windows"

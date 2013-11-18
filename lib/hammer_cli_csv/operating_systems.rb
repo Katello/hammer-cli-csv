@@ -37,45 +37,53 @@
 #
 
 require 'hammer_cli'
-require 'katello_api'
-require 'foreman_api'
 require 'json'
 require 'csv'
 
 module HammerCLICsv
   class OperatingSystemsCommand < BaseCommand
 
-    def initialize(*args)
-      super(args)
-      @operatingsystem_api = ForemanApi::Resources::OperatingSystem.new(@init_options[:foreman])
-    end
+    NAME = 'Name'
+    COUNT = 'Count'
+    FAMILY = 'Family'
+    ARCHITECTURES = 'Architectures'
+    PARTITIONTABLES = 'Partition Tables'
 
     def execute
+      super
+      signal_usage_error '--katello unsupported with operating systems' if katello?
       csv_export? ? export : import
-
       HammerCLI::EX_OK
     end
 
     def export
-      CSV.open(csv_file, 'wb') do |csv|
-        csv << ['Name','Count','Major','Minor', 'Family']
-        @operatingsystem_api.index({}, HEADERS)[0].each do |operatingsystem|
+      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        csv << [NAME, COUNT, FAMILY, ARCHITECTURES, PARTITIONTABLES]
+        @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0].each do |operatingsystem|
           operatingsystem = operatingsystem['operatingsystem']
-          name = operatingsystem['name']
+          name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
           count = 1
-          major = operatingsystem['major']
-          minor = operatingsystem['minor']
           family = operatingsystem['family']
-          csv << [name, count, major, minor, family]
+          partitiontables = ""
+          operatingsystem['ptables'].each do |partitiontable|
+            partitiontables += "," unless partitiontables == ""
+            partitiontables += partitiontable['ptable']['name']
+          end
+          architectures = ""
+          operatingsystem['architectures'].each do |architecture|
+            architectures += "," unless architectures == ""
+            architectures += architecture['architecture']['name']
+          end
+          csv << [name, count, family, architectures, partitiontables]
         end
       end
     end
 
     def import
       @existing = {}
-      @operatingsystem_api.index[0].each do |operatingsystem|
+      @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0].each do |operatingsystem|
         operatingsystem = operatingsystem['operatingsystem']
-        @existing["#{operatingsystem['name']}-#{operatingsystem['major']}-#{operatingsystem['minor']}"] = operatingsystem['id']
+        @existing[build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])] = operatingsystem['id']
       end
 
       thread_import do |line|
@@ -84,44 +92,34 @@ module HammerCLICsv
     end
 
     def create_operatingsystems_from_csv(line)
-      details = parse_operatingsystem_csv(line)
-
-      details[:count].times do |number|
-        name = namify(details[:name_format], number)
-        if !@existing.include? "#{name}-#{details[:major]}-#{details[:minor]}"
+      line[COUNT].to_i.times do |number|
+        name = namify(line[NAME], number)
+        (osname, major, minor) = split_os_name(name)
+        if !@existing.include? name
           print "Creating operating system '#{name}'..." if verbose?
-          @operatingsystem_api.create({
-                             'operatingsystem' => {
-                               'name' => name,
-                               'major' => details[:major],
-                               'minor' => details[:minor],
-                               'family' => details[:family]
-                             }
-                           }, HEADERS)
+          @f_operatingsystem_api.create({
+                                          'operatingsystem' => {
+                                            'name' => osname,
+                                            'major' => major,
+                                            'minor' => minor,
+                                            'family' => line[FAMILY]
+                                          }
+                                        }, HEADERS)
           print "done\n" if verbose?
         else
           print "Updating operatingsystem '#{name}'..." if verbose?
-          @operatingsystem_api.create({
-                             'id' => @existing["#{name}-#{details[:major]}-#{details[:minor]}"],
-                             'operatingsystem' => {
-                               'name' => name,
-                               'major' => details[:major],
-                               'minor' => details[:minor],
-                               'family' => details[:family]
-                             }
-                           }, HEADERS)
+          @f_operatingsystem_api.create({
+                                          'id' => @existing[name],
+                                          'operatingsystem' => {
+                                            'name' => osname,
+                                            'major' => major,
+                                            'minor' => minor,
+                                            'family' => line[FAMILY]
+                                          }
+                                        }, HEADERS)
           print "done\n" if verbose?
         end
       end
-    end
-
-    def parse_operatingsystem_csv(line)
-      keys = [:name_format, :count, :major, :minor, :family]
-      details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
-
-      details[:count] = details[:count].to_i
-
-      details
     end
   end
 

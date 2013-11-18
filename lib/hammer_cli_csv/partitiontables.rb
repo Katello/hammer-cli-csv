@@ -56,13 +56,13 @@ module HammerCLICsv
 
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, OSFAMILY, LAYOUT]
+        csv << [NAME, COUNT, OSFAMILY, LAYOUT, OPERATINGSYSTEMS]
         @f_ptable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
-          ptable = ptable['ptable']
           name = ptable['name']
           count = 1
           osfamily = ptable['os_family']
           layout = ptable['layout']
+          puts ptable
           csv << [name, count, osfamily, layout]
         end
       end
@@ -71,7 +71,6 @@ module HammerCLICsv
     def import
       @existing = {}
       @f_ptable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
-        ptable = ptable['ptable']
         @existing[ptable['name']] = ptable['id']
       end
 

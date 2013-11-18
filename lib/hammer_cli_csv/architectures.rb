@@ -57,7 +57,6 @@ module HammerCLICsv
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, OPERATINGSYSTEMS]
         @f_architecture_api.index({:per_page => 999999}, HEADERS)[0].each do |architecture|
-          architecture = architecture['architecture']
           name = architecture['name']
           count = 1
           operatingsystems = architecture['operatingsystem_ids'].collect do |operatingsystem_id|
@@ -71,8 +70,7 @@ module HammerCLICsv
     def import
       @existing = {}
       @f_architecture_api.index({:per_page => 999999}, HEADERS)[0].each do |architecture|
-        architecture = architecture['architecture']
-        @existing[architecture['name']] = architecture['id']
+        @existing[architecture['name']] = architecture['id'] if architecture
       end
 
       thread_import do |line|
@@ -83,24 +81,42 @@ module HammerCLICsv
     def create_architectures_from_csv(line)
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
-        if !@existing.include? name
+        architecture_id = @existing[name]
+        if !architecture_id
           print "Creating architecture '#{name}'..." if verbose?
-          @f_architecture_api.create({
+          architecture_id = @f_architecture_api.create({
                              'architecture' => {
                                'name' => name
                              }
-                           }, HEADERS)
-          print "done\n" if verbose?
+                           }, HEADERS)['id']
         else
           print "Updating architecture '#{name}'..." if verbose?
           @f_architecture_api.update({
-                             'id' => @existing[name],
+                             'id' => architecture_id,
                              'architecture' => {
                                'name' => name
                              }
                            }, HEADERS)
-          print "done\n" if verbose?
         end
+
+        # Update operating systems refered to
+        CSV.parse_line(line[OPERATINGSYSTEMS]).each do |operatingsystem_name|
+          operatingsystem = @f_operatingsystem_api.show({
+                                                          'id' => foreman_operatingsystem(:name => operatingsystem_name)
+                                                        }, HEADERS)[0]
+          architecture_ids = operatingsystem['architectures'].collect { |a| a['id'] }
+          if !architecture_ids.include? architecture_id
+            architecture_ids << architecture_id
+            @f_operatingsystem_api.update({
+                                            'id' => operatingsystem['id'],
+                                            'operatingsystem' => {
+                                              'architecture_ids' => architecture_ids
+                                            }
+                                          }, HEADERS)
+          end
+        end
+
+        print "done\n" if verbose?
       end
     end
   end

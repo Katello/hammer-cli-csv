@@ -34,7 +34,6 @@
 #
 
 require 'hammer_cli'
-require 'katello_api'
 require 'foreman_api'
 require 'json'
 require 'csv'
@@ -48,7 +47,6 @@ module HammerCLICsv
 
     def execute
       super
-      signal_usage_error '--katello unsupported with architectures' if katello?
       csv_export? ? export : import
       HammerCLI::EX_OK
     end
@@ -88,7 +86,7 @@ module HammerCLICsv
                              'architecture' => {
                                'name' => name
                              }
-                           }, HEADERS)['id']
+                           }, HEADERS)
         else
           print "Updating architecture '#{name}'..." if verbose?
           @f_architecture_api.update({
@@ -99,6 +97,7 @@ module HammerCLICsv
                            }, HEADERS)
         end
 
+=begin
         # Update operating systems refered to
         CSV.parse_line(line[OPERATINGSYSTEMS]).each do |operatingsystem_name|
           operatingsystem = @f_operatingsystem_api.show({
@@ -115,9 +114,12 @@ module HammerCLICsv
                                           }, HEADERS)
           end
         end
+=end
 
         print "done\n" if verbose?
       end
+    rescue RuntimeError => e
+      raise RuntimeError.new("#{e}\n       #{line}")
     end
   end
 

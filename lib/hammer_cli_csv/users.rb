@@ -60,29 +60,16 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL]
-        if katello?
-          @k_user_api.index({}, HEADERS)[0].each do |user|
-            csv << [user['username'], 1, '', '', user['email']]
-          end
-        else
-          @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
-            csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail']]
-          end
+        @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
+          csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail']]
         end
       end
     end
 
     def import
       @existing = {}
-      if katello?
-        @k_user_api.index[0].each do |user|
-          @existing[user['username']] = user['id']
-        end
-      else
-        @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
-          user = user['user']
-          @existing[user['login']] = user['id']
-        end
+      @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
+        @existing[user['login']] = user['id']
       end
 
       thread_import do |line|
@@ -95,53 +82,33 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         if !@existing.include? name
           print "Creating user '#{name}'... " if verbose?
-          if katello?
-            @k_user_api.create({
-                                 'user' => {
-                                   'username' => name,
-                                   'email' => line[EMAIL],
-                                   'password' => 'admin'
-                                 }
-                               }, HEADERS)
-          else
-            @f_user_api.create({
-                                 'user' => {
-                                   'login' => name,
-                                   'firstname' => line[FIRSTNAME],
-                                   'lastname' => line[LASTNAME],
-                                   'mail' => line[EMAIL],
-                                   'password' => 'admin',
-                                   'auth_source_id' => 1,  # INTERNAL auth
-                                 }
-                               }, HEADERS)
-          end
-          print "done\n" if verbose?
+          @f_user_api.create({
+                               'user' => {
+                                 'login' => name,
+                                 'firstname' => line[FIRSTNAME],
+                                 'lastname' => line[LASTNAME],
+                                 'mail' => line[EMAIL],
+                                 'password' => 'admin',
+                                 'auth_source_id' => 1,  # INTERNAL auth
+                               }
+                             }, HEADERS)
         else
           print "Updating user '#{name}'... " if verbose?
-          if katello?
-            @k_user_api.update({
-                                 'id' => @existing[name],
-                                 'user' => {
-                                   'username' => name,
-                                   'email' => line[EMAIL],
-                                   'password' => 'admin'
-                                 }
-                               }, HEADERS)
-          else
-            @f_user_api.update({
-                                 'id' => @existing[name],
-                                 'user' => {
-                                   'login' => name,
-                                   'firstname' => line[FIRSTNAME],
-                                   'lastname' => line[LASTNAME],
-                                   'mail' => line[EMAIL],
-                                   'password' => 'admin'
-                                 }
-                               }, HEADERS)
-          end
-          print "done\n" if verbose?
+          @f_user_api.update({
+                               'id' => @existing[name],
+                               'user' => {
+                                 'login' => name,
+                                 'firstname' => line[FIRSTNAME],
+                                 'lastname' => line[LASTNAME],
+                                 'mail' => line[EMAIL],
+                                 'password' => 'admin'
+                               }
+                             }, HEADERS)
         end
+        print "done\n" if verbose?
       end
+    rescue RuntimeError => e
+      raise RuntimeError.new("#{e}\n       #{line}")
     end
   end
 

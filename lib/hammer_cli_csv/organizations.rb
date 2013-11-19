@@ -60,15 +60,9 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGLABEL, DESCRIPTION]
-        if katello?
-          @k_organization_api.index[0].each do |organization|
-            csv << [organization['name'], 1, organization['label'], organization['description']]
-          end
-        else
-          @f_organization_api.index({:per_page => 999999}, HEADERS)[0].each do |organization|
-            organization = organization['organization']
-            csv << [organization['name'], 1, '', '']
-          end
+        @f_organization_api.index({:per_page => 999999}, HEADERS)[0].each do |organization|
+          organization = organization['organization']
+          csv << [organization['name'], 1, '', '']
         end
       end
     end
@@ -89,24 +83,26 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         label = namify(line[ORGLABEL], number)
         if !@existing.include? name
-          puts "Creating organization '#{name}'" if verbose?
+          print "Creating organization '#{name}'... " if verbose?
           @f_organization_api.create({
                              'organization' => {
                                'name' => name,
-                               'label' => label,
-                               'description' => line[DESCRIPTION]
+                               #'label' => label,
+                               #'description' => line[DESCRIPTION]
                              }
                            }, HEADERS)
         else
-          puts "Updating organization '#{name}'" if verbose?
-          @organization_api.update({
-                             'id' => label,
-                             'organization' => {
-                               'name' => name,
-                               'description' => line[DESCRIPTION]
-                             }
-                           }, HEADERS)
+          print "Updating organization '#{name}'... " if verbose?
+          puts "\nWARNING: Updating organizations is not supported since the entire organization data must be passed in\n"
+          # @f_organization_api.update({
+          #                    'id' => name,
+          #                    'organization' => {
+          #                      'name' => name,
+          #                      #'description' => line[DESCRIPTION]
+          #                    }
+          #                  }, HEADERS)
         end
+        print "done\n" if verbose?
       end
     end
   end

@@ -34,8 +34,6 @@
 #
 
 require 'hammer_cli'
-require 'katello_api'
-require 'foreman_api'
 require 'json'
 require 'csv'
 
@@ -49,7 +47,6 @@ module HammerCLICsv
 
     def execute
       super
-      signal_usage_error '--katello unsupported with csv:partitiontables' if katello?
       csv_export? ? export : import
       HammerCLI::EX_OK
     end
@@ -70,7 +67,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_ptable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
+      @f_partitiontable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
         @existing[ptable['name']] = ptable['id']
       end
 
@@ -84,17 +81,16 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         if !@existing.include? name
           print "Creating ptable '#{name}'... " if verbose?
-          @f_ptable_api.create({
+          @f_partitiontable_api.create({
                                  'ptable' => {
                                    'name' => name,
                                    'os_family' => line[OSFAMILY],
                                    'layout' => line[LAYOUT]
                              }
                            }, HEADERS)
-          print "done\n" if verbose?
         else
           print "Updating ptable '#{name}'..." if verbose?
-          @f_ptable_api.update({
+          @f_partitiontable_api.update({
                                  'id' => @existing[name],
                                  'ptable' => {
                                    'name' => name,
@@ -102,9 +98,11 @@ module HammerCLICsv
                                    'layout' => line[LAYOUT]
                                  }
                            }, HEADERS)
-          print "done\n" if verbose?
         end
+        print "done\n" if verbose?
       end
+    rescue RuntimeError => e
+      raise RuntimeError.new("#{e}\n       #{line}")
     end
   end
 

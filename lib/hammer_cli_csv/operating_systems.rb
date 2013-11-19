@@ -51,7 +51,6 @@ module HammerCLICsv
 
     def execute
       super
-      signal_usage_error '--katello unsupported with operating systems' if katello?
       csv_export? ? export : import
       HammerCLI::EX_OK
     end

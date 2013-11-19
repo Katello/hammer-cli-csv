@@ -22,4 +22,5 @@ module HammerCLICsv
   require 'hammer_cli_csv/roles'
   require 'hammer_cli_csv/system_groups'
   require 'hammer_cli_csv/users'
+  require 'hammer_cli_csv/puppetfacts'
 end

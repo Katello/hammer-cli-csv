@@ -60,7 +60,7 @@ module HammerCLICsv
       @f_host_api ||= ForemanApi::Resources::Host.new(@init_options)
       @f_operatingsystem_api ||= ForemanApi::Resources::OperatingSystem.new(@init_options)
       @f_organization_api ||= ForemanApi::Resources::Organization.new(@init_options)
-      @f_ptable_api ||= ForemanApi::Resources::Ptable.new(@init_options)
+      @f_partitiontable_api ||= ForemanApi::Resources::Ptable.new(@init_options)
       @f_puppetfacts_api ||= ForemanApi::Resources::FactValue.new(@init_options)
       @f_user_api ||= ForemanApi::Resources::User.new(@init_options)
     end
@@ -142,6 +142,7 @@ module HammerCLICsv
         options[:id] = @environments[options[:name]]
         if !options[:id]
           environment = @f_environment_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
           options[:id] = environment[0]['id']
           @environments[options[:name]] = options[:id]
         end
@@ -151,6 +152,7 @@ module HammerCLICsv
         options[:name] = @environments.key(options[:id])
         if !options[:name]
           environment = @f_environment_api.show({'id' => options[:id]}, HEADERS)[0]
+          raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
           options[:name] = environment['name']
           @environments[options[:name]] = options[:id]
         end
@@ -170,7 +172,9 @@ module HammerCLICsv
           (osname, major, minor) = split_os_name(options[:name])
           search = "name=\"#{osname}\" and major=\"#{major}\" and minor=\"#{minor}\""
           operatingsystems = @f_operatingsystem_api.index({'search' => search}, HEADERS)[0]
-          options[:id] = operatingsystems[0]['id']
+          operatingsystem = operatingsystems[0]
+          raise RuntimeError.new("Operating system '#{options[:name]}' not found") if !operatingsystem || operatingsystem.empty?
+          options[:id] = operatingsystem['id']
           @operatingsystems[options[:name]] = options[:id]
         end
         result = options[:id]
@@ -179,6 +183,7 @@ module HammerCLICsv
         options[:name] = @operatingsystems.key(options[:id])
         if !options[:name]
           operatingsystem = @f_operatingsystem_api.show({'id' => options[:id]}, HEADERS)[0]
+          raise RuntimeError.new("Operating system 'id=#{options[:id]}' not found") if !operatingsystem || operatingsystem.empty?
           options[:name] = build_os_name(operatingsystem['name'],
                                          operatingsystem['major'],
                                          operatingsystem['minor'])
@@ -198,6 +203,7 @@ module HammerCLICsv
         options[:id] = @architectures[options[:name]]
         if !options[:id]
           architecture = @f_architecture_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          raise RuntimeError.new("Architecture '#{options[:name]}' not found") if !architecture || architecture.empty?
           options[:id] = architecture[0]['id']
           @architectures[options[:name]] = options[:id]
         end
@@ -207,6 +213,7 @@ module HammerCLICsv
         options[:name] = @architectures.key(options[:id])
         if !options[:name]
           architecture = @f_architecture_api.show({'id' => options[:id]}, HEADERS)[0]
+          raise RuntimeError.new("Architecture 'id=#{options[:id]}' not found") if !architecture || architecture.empty?
           options[:name] = architecture['name']
           @architectures[options[:name]] = options[:id]
         end
@@ -224,6 +231,7 @@ module HammerCLICsv
         options[:id] = @domains[options[:name]]
         if !options[:id]
           domain = @f_domain_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          raise RuntimeError.new("Domain '#{options[:name]}' not found") if !domain || domain.empty?
           options[:id] = domain[0]['id']
           @domains[options[:name]] = options[:id]
         end
@@ -233,6 +241,7 @@ module HammerCLICsv
         options[:name] = @domains.key(options[:id])
         if !options[:name]
           domain = @f_domain_api.show({'id' => options[:id]}, HEADERS)[0]
+          raise RuntimeError.new("Domain 'id=#{options[:id]}' not found") if !domain || domain.empty?
           options[:name] = domain['name']
           @domains[options[:name]] = options[:id]
         end
@@ -249,7 +258,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @ptables[options[:name]]
         if !options[:id]
-          ptable = @f_ptable_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          ptable = @f_partitiontable_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
           raise RuntimeError.new("Partition table '#{options[:name]}' not found") if !ptable || ptable.empty?
           options[:id] = ptable[0]['id']
           @ptables[options[:name]] = options[:id]
@@ -259,7 +268,7 @@ module HammerCLICsv
         return nil if options[:id].nil?
         options[:name] = @ptables.key(options[:id])
         if !options[:name]
-          ptable = @f_ptable_api.show({'id' => options[:id]}, HEADERS)[0]
+          ptable = @f_partitiontable_api.show({'id' => options[:id]}, HEADERS)[0]
           options[:name] = ptable['name']
           @ptables[options[:name]] = options[:id]
         end

@@ -38,14 +38,13 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class EnvironmentsCommand < BaseCommand
+  class PuppetEnvironmentsCommand < BaseCommand
 
     NAME = 'Name'
     COUNT = 'Count'
 
     def execute
       super
-      signal_usage_error '--katello unsupported with environments' if katello?
       csv_export? ? export : import
       HammerCLI::EX_OK
     end
@@ -54,7 +53,6 @@ module HammerCLICsv
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT]
         @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
-          environment = environment['environment']
           name = environment['name']
           count = 1
           csv << [name, count]
@@ -65,7 +63,6 @@ module HammerCLICsv
     def import
       @existing = {}
       @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
-        environment = environment['environment']
         @existing[environment['name']] = environment['id']
       end
 
@@ -80,24 +77,25 @@ module HammerCLICsv
         if !@existing.include? name
           print "Creating environment '#{name}'..." if verbose?
           @f_environment_api.create({
-                             'environment' => {
-                               'name' => name
-                             }
-                           }, HEADERS)
-          print "done\n" if verbose?
+                                      'environment' => {
+                                        'name' => name
+                                      }
+                                    }, HEADERS)
         else
           print "Updating environment '#{name}'..." if verbose?
           @f_environment_api.update({
-                             'id' => @existing[name],
-                             'environment' => {
-                               'name' => name
-                             }
-                           }, HEADERS)
-          print "done\n" if verbose?
+                                      'id' => @existing[name],
+                                      'environment' => {
+                                        'name' => name
+                                      }
+                                    }, HEADERS)
         end
+        print "done\n" if verbose?
       end
+    rescue RuntimeError => e
+      raise RuntimeError.new("#{e}\n       #{line}")
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:environments", "Import or export environments", HammerCLICsv::EnvironmentsCommand)
+  HammerCLI::MainCommand.subcommand("csv:puppetenvironments", "Import or export puppet environments", HammerCLICsv::PuppetEnvironmentsCommand)
 end

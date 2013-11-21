@@ -42,9 +42,6 @@ require 'csv'
 module HammerCLICsv
   class PuppetFactsCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
-
     def execute
       super
       csv_export? ? export : import
@@ -88,7 +85,6 @@ module HammerCLICsv
         return
       end
 
-      puts line
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         print "Updating puppetfacts '#{name}'..." if verbose?
@@ -99,7 +95,7 @@ module HammerCLICsv
         # Namify the values if the host name was namified
         if name != line[NAME]
           facts.each do |fact, value|
-            facts[fact] = namify(value, number)
+            facts[fact] = namify(value, number) unless value.nil? || value.empty?
           end
         end
 

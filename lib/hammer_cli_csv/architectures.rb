@@ -41,8 +41,6 @@ require 'csv'
 module HammerCLICsv
   class ArchitecturesCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
     OPERATINGSYSTEMS = 'Operating Systems'
 
     def execute

@@ -40,8 +40,6 @@ require 'csv'
 module HammerCLICsv
   class PartitionTablesCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
     OSFAMILY = 'OS Family'
     LAYOUT = 'Layout'
 

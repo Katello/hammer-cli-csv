@@ -48,8 +48,6 @@ require 'uri'
 module HammerCLICsv
   class HostsCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
     ORGANIZATION = 'Organization'
     ENVIRONMENT = 'Environment'
     OPERATINGSYSTEM = 'Operating System'

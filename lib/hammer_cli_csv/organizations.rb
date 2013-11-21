@@ -46,8 +46,6 @@ require 'csv'
 module HammerCLICsv
   class OrganizationsCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
     ORGLABEL = 'Org Label'
     DESCRIPTION = 'Description'
 

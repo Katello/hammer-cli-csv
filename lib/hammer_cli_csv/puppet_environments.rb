@@ -40,9 +40,6 @@ require 'csv'
 module HammerCLICsv
   class PuppetEnvironmentsCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
-
     def execute
       super
       csv_export? ? export : import

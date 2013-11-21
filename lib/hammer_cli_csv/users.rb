@@ -44,8 +44,6 @@ require 'csv'
 module HammerCLICsv
   class UsersCommand < BaseCommand
 
-    NAME = 'Login'
-    COUNT = 'Count'
     FIRSTNAME = 'First Name'
     LASTNAME = 'Last Name'
     EMAIL = 'Email'

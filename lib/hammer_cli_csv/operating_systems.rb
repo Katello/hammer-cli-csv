@@ -43,8 +43,6 @@ require 'csv'
 module HammerCLICsv
   class OperatingSystemsCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
     FAMILY = 'Family'
     ARCHITECTURES = 'Architectures'
     PARTITIONTABLES = 'Partition Tables'

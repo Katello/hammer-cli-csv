@@ -32,6 +32,9 @@ require 'csv'
 module HammerCLICsv
   class BaseCommand < HammerCLI::AbstractCommand
 
+    NAME = 'Name'
+    COUNT = 'Count'
+
     HEADERS = {'Accept' => 'version=2,application/json'}
 
     option ["-v", "--verbose"], :flag, "be verbose"
@@ -94,7 +97,7 @@ module HammerCLICsv
         lines = csv[start_index...finish_index].clone
         splits << Thread.new do
           lines.each do |line|
-            if line.index('#') != 0
+            if line[NAME][0] != '#'
               yield line
             end
           end

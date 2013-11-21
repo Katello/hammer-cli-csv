@@ -40,8 +40,6 @@ require 'csv'
 module HammerCLICsv
   class DomainsCommand < BaseCommand
 
-    NAME = 'Name'
-    COUNT = 'Count'
     FULLNAME = 'Full Name'
 
     def execute

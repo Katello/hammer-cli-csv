@@ -52,7 +52,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, OSFAMILY, LAYOUT, OPERATINGSYSTEMS]
-        @f_ptable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
+        @f_ptable_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |ptable|
           name = ptable['name']
           count = 1
           osfamily = ptable['os_family']
@@ -65,8 +65,8 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_partitiontable_api.index({:per_page => 999999}, HEADERS)[0].each do |ptable|
-        @existing[ptable['name']] = ptable['id']
+      @f_partitiontable_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |ptable|
+        @existing[ptable['name']] = ptable['id'] if ptable
       end
 
       thread_import do |line|

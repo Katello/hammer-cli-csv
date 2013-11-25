@@ -65,7 +65,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
-        @f_host_api.index({:per_page => 999999}, HEADERS)[0].each do |host|
+        @f_host_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |host|
           host = @f_host_api.show({'id' => host['id']}, HEADERS)[0]
           raise RuntimeError.new("Host 'id=#{host['id']}' not found") if !host || host.empty?
 
@@ -86,8 +86,8 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_host_api.index({:per_page => 999999}, HEADERS)[0].each do |host|
-        @existing[host['name']] = host['id']
+      @f_host_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |host|
+        @existing[host['name']] = host['id'] if host
       end
 
       thread_import do |line|

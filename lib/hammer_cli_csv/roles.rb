@@ -77,7 +77,7 @@ module HammerCLICsv
 
       @existing = {}
       @role_api.index[0].each do |role|
-          @existing[role['name']] = role['id']
+          @existing[role['name']] = role['id'] if role
       end
 
       threads.to_i.times do |current_thread|

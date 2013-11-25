@@ -116,7 +116,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @organizations[options[:name]]
         if !options[:id]
-          organization = @f_organization_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          organization = @f_organization_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]['results']
           raise RuntimeError.new("Organization '#{options[:name]}' not found") if !organization || organization.empty?
           options[:id] = organization[0]['id']
           @organizations[options[:name]] = options[:id]
@@ -144,7 +144,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @environments[options[:name]]
         if !options[:id]
-          environment = @f_environment_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          environment = @f_environment_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]['results']
           raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
           options[:id] = environment[0]['id']
           @environments[options[:name]] = options[:id]
@@ -174,7 +174,7 @@ module HammerCLICsv
         if !options[:id]
           (osname, major, minor) = split_os_name(options[:name])
           search = "name=\"#{osname}\" and major=\"#{major}\" and minor=\"#{minor}\""
-          operatingsystems = @f_operatingsystem_api.index({'search' => search}, HEADERS)[0]
+          operatingsystems = @f_operatingsystem_api.index({'search' => search}, HEADERS)[0]['results']
           operatingsystem = operatingsystems[0]
           raise RuntimeError.new("Operating system '#{options[:name]}' not found") if !operatingsystem || operatingsystem.empty?
           options[:id] = operatingsystem['id']
@@ -205,7 +205,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @architectures[options[:name]]
         if !options[:id]
-          architecture = @f_architecture_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          architecture = @f_architecture_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]['results']
           raise RuntimeError.new("Architecture '#{options[:name]}' not found") if !architecture || architecture.empty?
           options[:id] = architecture[0]['id']
           @architectures[options[:name]] = options[:id]
@@ -233,7 +233,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @domains[options[:name]]
         if !options[:id]
-          domain = @f_domain_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          domain = @f_domain_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]['results']
           raise RuntimeError.new("Domain '#{options[:name]}' not found") if !domain || domain.empty?
           options[:id] = domain[0]['id']
           @domains[options[:name]] = options[:id]
@@ -261,7 +261,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @ptables[options[:name]]
         if !options[:id]
-          ptable = @f_partitiontable_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          ptable = @f_partitiontable_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]['results']
           raise RuntimeError.new("Partition table '#{options[:name]}' not found") if !ptable || ptable.empty?
           options[:id] = ptable[0]['id']
           @ptables[options[:name]] = options[:id]

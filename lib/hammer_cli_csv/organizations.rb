@@ -58,7 +58,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGLABEL, DESCRIPTION]
-        @f_organization_api.index({:per_page => 999999}, HEADERS)[0].each do |organization|
+        @f_organization_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |organization|
           organization = organization['organization']
           csv << [organization['name'], 1, '', '']
         end
@@ -67,8 +67,8 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_organization_api.index({:per_page => 999999}, HEADERS)[0].each do |organization|
-          @existing[organization['name']] = organization['label']
+      @f_organization_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |organization|
+        @existing[organization['name']] = organization['label'] if organization
       end
 
       thread_import do |line|

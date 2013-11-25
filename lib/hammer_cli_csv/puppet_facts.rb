@@ -53,13 +53,11 @@ module HammerCLICsv
         headers = [NAME, COUNT]
         # Extracted facts are always based upon the first host found, otherwise this would be an intensive
         # method to gather all the possible column names
-        host = @f_host_api.index({:per_page => 1}, HEADERS)[0][0]
-        host = host['host'] # TODO: old style
-        headers += @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999}, HEADERS)[0][host['name']].keys
+        host = @f_host_api.index({:per_page => 1}, HEADERS)[0]['results'][0]
+        headers += @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999}, HEADERS)[0]['results'][host['name']].keys
         csv << headers
 
-        @f_host_api.index({:per_page => 999999}, HEADERS)[0].each do |host|
-          host = host['host'] # TODO: old style
+        @f_host_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |host|
           line = [host['name'], 1]
           facts = @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999}, HEADERS)[0][host['name']]
           facts ||= {}

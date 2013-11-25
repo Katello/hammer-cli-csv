@@ -58,7 +58,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL]
-        @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
+        @f_user_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |user|
           csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail']]
         end
       end
@@ -66,8 +66,8 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_user_api.index({:per_page => 999999}, HEADERS)[0].each do |user|
-        @existing[user['login']] = user['id']
+      @f_user_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |user|
+        @existing[user['login']] = user['id'] if user
       end
 
       thread_import do |line|

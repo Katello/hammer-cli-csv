@@ -49,7 +49,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT]
-        @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
+        @f_environment_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |environment|
           name = environment['name']
           count = 1
           csv << [name, count]
@@ -59,8 +59,8 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_environment_api.index({:per_page => 999999}, HEADERS)[0].each do |environment|
-        @existing[environment['name']] = environment['id']
+      @f_environment_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |environment|
+        @existing[environment['name']] = environment['id'] if environment
       end
 
       thread_import do |line|

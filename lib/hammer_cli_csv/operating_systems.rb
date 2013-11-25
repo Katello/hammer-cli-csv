@@ -56,7 +56,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FAMILY, ARCHITECTURES, PARTITIONTABLES]
-        @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0].each do |operatingsystem|
+        @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |operatingsystem|
           name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
           count = 1
           family = operatingsystem['family']
@@ -77,8 +77,8 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0].each do |operatingsystem|
-        @existing[build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])] = operatingsystem['id']
+      @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |operatingsystem|
+        @existing[build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])] = operatingsystem['id'] if operatingsystem
       end
 
       thread_import do |line|

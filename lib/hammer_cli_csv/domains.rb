@@ -51,7 +51,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FULLNAME]
-        @f_domain_api.index({:per_page => 999999}, HEADERS)[0].each do |domain|
+        @f_domain_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |domain|
           name = domain['name']
           count = 1
           fullname = domain['fullname']
@@ -62,8 +62,8 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_domain_api.index({:per_page => 999999}, HEADERS)[0].each do |domain|
-        @existing[domain['name']] = domain['id']
+      @f_domain_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |domain|
+        @existing[domain['name']] = domain['id'] if domain
       end
 
       thread_import do |line|

@@ -52,7 +52,7 @@ module HammerCLICsv
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, OPERATINGSYSTEMS]
-        @f_architecture_api.index({:per_page => 999999}, HEADERS)[0].each do |architecture|
+        @f_architecture_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |architecture|
           name = architecture['name']
           count = 1
           operatingsystems = architecture['operatingsystem_ids'].collect do |operatingsystem_id|
@@ -65,7 +65,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_architecture_api.index({:per_page => 999999}, HEADERS)[0].each do |architecture|
+      @f_architecture_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |architecture|
         @existing[architecture['name']] = architecture['id'] if architecture
       end
 
@@ -94,26 +94,6 @@ module HammerCLICsv
                              }
                            }, HEADERS)
         end
-
-=begin
-        # Update operating systems refered to
-        CSV.parse_line(line[OPERATINGSYSTEMS]).each do |operatingsystem_name|
-          operatingsystem = @f_operatingsystem_api.show({
-                                                          'id' => foreman_operatingsystem(:name => operatingsystem_name)
-                                                        }, HEADERS)[0]
-          architecture_ids = operatingsystem['architectures'].collect { |a| a['id'] }
-          if !architecture_ids.include? architecture_id
-            architecture_ids << architecture_id
-            @f_operatingsystem_api.update({
-                                            'id' => operatingsystem['id'],
-                                            'operatingsystem' => {
-                                              'architecture_ids' => architecture_ids
-                                            }
-                                          }, HEADERS)
-          end
-        end
-=end
-
         print "done\n" if verbose?
       end
     rescue RuntimeError => e

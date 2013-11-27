@@ -58,6 +58,7 @@ module HammerCLICsv
       }
 
       @k_system_api ||= KatelloApi::Resources::System.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}/katello"}))
+      @k_environment_api ||= KatelloApi::Resources::Environment.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}/katello"}))
 
       @f_architecture_api ||= ForemanApi::Resources::Architecture.new(@init_options)
       @f_domain_api ||= ForemanApi::Resources::Domain.new(@init_options)
@@ -285,24 +286,26 @@ module HammerCLICsv
       result
     end
 
-    def katello_environment(options={})
+    def katello_environment(organization, options={})
       @environments ||= {}
+      @environments[organization] ||= {}
 
       if options[:name]
         return nil if options[:name].nil? || options[:name].empty?
-        options[:id] = @environments[options[:name]]
+        options[:id] = @environments[organization][options[:name]]
         if !options[:id]
-          environment = @k_environment_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
-          raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
-          options[:id] = environment[0]['id']
-          @environments[options[:name]] = options[:id]
+          @k_environment_api.index({'organization_id' => organization}, HEADERS)[0].each do |environment|
+            @environments[organization][environment['environment']['name']] = environment['environment']['id']
+          end
+          options[:id] = @environments[organization][options[:name]]
+          raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !options[:id]
         end
         result = options[:id]
       else
         return nil if options[:id].nil?
         options[:name] = @environments.key(options[:id])
         if !options[:name]
-          environment = @f_environment_api.show({'id' => options[:id]}, HEADERS)[0]
+          environment = @k_environment_api.show({'id' => options[:id]}, HEADERS)[0]
           raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
           options[:name] = environment['name']
           @environments[options[:name]] = options[:id]

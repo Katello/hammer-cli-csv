@@ -69,29 +69,14 @@ module HammerCLICsv
     end
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
-        @f_host_api.index({:per_page => 999999}, HEADERS)[0].each do |host|
-          host = @f_host_api.show({'id' => host['id']}, HEADERS)[0]
-          raise RuntimeError.new("Host 'id=#{host['id']}' not found") if !host || host.empty?
-
-          name = host['name']
-          count = 1
-          organization = foreman_organization(:id => host['organization_id'])
-          environment = foreman_environment(:id => host['environment_id'])
-          operatingsystem = foreman_operatingsystem(:id => host['operatingsystem_id'])
-          architecture = foreman_architecture(:id => host['architecture_id'])
-          mac = host['mac']
-          domain = foreman_domain(:id => host['domain_id'])
-          ptable = foreman_partitiontable(:id => host['ptable_id'])
-
-          csv << [name, count, organization, environment, operatingsystem, architecture, mac, domain, ptable]
-        end
-      end
+      # TODO
     end
 
     def import
       @existing = {}
+
+      puts katello_environment('megacorp', :name => 'Library')
+      return
 
       thread_import do |line|
         create_systems_from_csv(line)
@@ -102,14 +87,8 @@ module HammerCLICsv
 
       @k_system_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true}, HEADERS)[0]['results'].each do |system|
         @existing[line[ORGANIZATION]] ||= {}
-        puts "#####'#{system}'"
-        @existing[line[ORGANIZATION]][system['name']] = system['id'] unless system.nil? || system.empty?
+        @existing[line[ORGANIZATION]][system['name']] = system['id'] if system
       end
-
-      puts @existing
-      puts katello_environment(:organization => line[ORGANIZATION], :name => line[ENVIRONMENT])
-
-      return
 
       facts = {}
       facts['cpu.core(s)_per_socket'] = line[CORES]

@@ -51,11 +51,16 @@ module HammerCLICsv
     ORGANIZATION = 'Organization'
     ENVIRONMENT = 'Environment'
     CONTENTVIEW = 'Content View'
-    OPERATINGSYSTEM = 'Operating System'
-    ARCHITECTURE = 'Architecture'
-    MACADDRESS = 'MAC Address'
-    DOMAIN = 'Domain'
-    PARTITIONTABLE = 'Partition Table'
+    VIRTUAL = 'Virtual'
+    HOST = 'Host'
+    OPERATINGSYSTEM = 'OS'
+    ARCHITECTURE = 'Arch'
+    SOCKETS = 'Sockets'
+    RAM = 'RAM'
+    CORES = 'Cores'
+    SLA = 'SLA'
+    PRODUCTS = 'Products'
+    SUBSCRIPTIONS = 'Subscriptions'
 
     def execute
       super
@@ -95,17 +100,33 @@ module HammerCLICsv
 
     def create_systems_from_csv(line)
 
-      puts @k_system_api.index({'organization_id' => line[ORGANIZATION], 'paged' => 'true'}, HEADERS)[0]
+      @k_system_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true}, HEADERS)[0]['results'].each do |system|
+        @existing[line[ORGANIZATION]] ||= {}
+        puts "#####'#{system}'"
+        @existing[line[ORGANIZATION]][system['name']] = system['id'] unless system.nil? || system.empty?
+      end
+
+      puts @existing
+      puts katello_environment(:organization => line[ORGANIZATION], :name => line[ENVIRONMENT])
+
       return
-      @k_system_api.index({:per_page => 999999}, HEADERS)[0].each do |host|
-        @existing[host['name']] = host['id']
+
+      facts = {}
+      facts['cpu.core(s)_per_socket'] = line[CORES]
+      facts['cpu.cpu_socket(s)'] = line[SOCKETS]
+      facts['memory.memtotal'] = line[RAM]
+      facts['uname.machine'] = line[ARCH]
+      if line[OS].index(' ')
+        (facts['distribution.name'], facts['distribution.version']) = line[OS].split(' ')
+      else
+        (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OS]]
       end
 
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating host '#{name}'..." if verbose?
-          @f_host_api.create({
+          print "Creating system '#{name}'..." if verbose?
+          @k_system_api.create({
                              'host' => {
                                'name' => name,
                                'mac' => namify(line[MACADDRESS], number),

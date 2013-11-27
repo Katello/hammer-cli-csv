@@ -285,6 +285,34 @@ module HammerCLICsv
       result
     end
 
+    def katello_environment(options={})
+      @environments ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @environments[options[:name]]
+        if !options[:id]
+          environment = @k_environment_api.index({'search' => "name=\"#{options[:name]}\""}, HEADERS)[0]
+          raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
+          options[:id] = environment[0]['id']
+          @environments[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @environments.key(options[:id])
+        if !options[:name]
+          environment = @f_environment_api.show({'id' => options[:id]}, HEADERS)[0]
+          raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
+          options[:name] = environment['name']
+          @environments[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
     def build_os_name(name, major, minor)
       name += " #{major}" if major && major != ""
       name += ".#{minor}" if minor && minor != ""

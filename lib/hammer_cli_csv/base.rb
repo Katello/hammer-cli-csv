@@ -57,6 +57,8 @@ module HammerCLICsv
         :password => password || HammerCLI::Settings.get(:password)
       }
 
+      @k_system_api ||= KatelloApi::Resources::System.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}/katello"}))
+
       @f_architecture_api ||= ForemanApi::Resources::Architecture.new(@init_options)
       @f_domain_api ||= ForemanApi::Resources::Domain.new(@init_options)
       @f_environment_api ||= ForemanApi::Resources::Environment.new(@init_options)

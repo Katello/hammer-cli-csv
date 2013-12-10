@@ -22,11 +22,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 #
-# -= Hosts CSV =-
+# -= Systems CSV =-
 #
 # Columns
 #   Name
-#     - Host name
+#     - System name
 #     - May contain '%d' which will be replaced with current iteration number of Count
 #     - eg. "os%d" -> "os1"
 #   Count
@@ -46,70 +46,72 @@ require 'csv'
 require 'uri'
 
 module HammerCLICsv
-  class HostsCommand < BaseCommand
+  class SystemsCommand < BaseCommand
 
     ORGANIZATION = 'Organization'
     ENVIRONMENT = 'Environment'
-    OPERATINGSYSTEM = 'Operating System'
-    ARCHITECTURE = 'Architecture'
-    MACADDRESS = 'MAC Address'
-    DOMAIN = 'Domain'
-    PARTITIONTABLE = 'Partition Table'
+    CONTENTVIEW = 'Content View'
+    VIRTUAL = 'Virtual'
+    HOST = 'Host'
+    OPERATINGSYSTEM = 'OS'
+    ARCHITECTURE = 'Arch'
+    SOCKETS = 'Sockets'
+    RAM = 'RAM'
+    CORES = 'Cores'
+    SLA = 'SLA'
+    PRODUCTS = 'Products'
+    SUBSCRIPTIONS = 'Subscriptions'
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
-        @f_host_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |host|
-          host = @f_host_api.show({'id' => host['id']}, HEADERS)[0]
-          raise RuntimeError.new("Host 'id=#{host['id']}' not found") if !host || host.empty?
-
-          name = host['name']
-          count = 1
-          organization = foreman_organization(:id => host['organization_id'])
-          environment = foreman_environment(:id => host['environment_id'])
-          operatingsystem = foreman_operatingsystem(:id => host['operatingsystem_id'])
-          architecture = foreman_architecture(:id => host['architecture_id'])
-          mac = host['mac']
-          domain = foreman_domain(:id => host['domain_id'])
-          ptable = foreman_partitiontable(:id => host['ptable_id'])
-
-          csv << [name, count, organization, environment, operatingsystem, architecture, mac, domain, ptable]
-        end
-      end
+      # TODO
     end
 
     def import
       @existing = {}
-      @f_host_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |host|
-        @existing[host['name']] = host['id'] if host
-      end
+
+      #puts "ENVIRONMENT #{katello_environment('ACME_Corporation', :name => 'Library')}"
+      #puts "CONTENTVIEW #{katello_contentview('ACME_Corporation', :name => 'Default_Organization_View')}"
 
       thread_import do |line|
-        create_hosts_from_csv(line)
+        create_systems_from_csv(line)
       end
     end
 
-    def create_hosts_from_csv(line)
+    def create_systems_from_csv(line)
+
+      @k_system_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true}, HEADERS)[0]['results'].each do |system|
+        @existing[line[ORGANIZATION]] ||= {}
+        @existing[line[ORGANIZATION]][system['name']] = system['id'] if system
+      end
+
+      facts = {}
+      facts['cpu.core(s)_per_socket'] = line[CORES]
+      facts['cpu.cpu_socket(s)'] = line[SOCKETS]
+      facts['memory.memtotal'] = line[RAM]
+      facts['uname.machine'] = line[ARCHITECTURE]
+      if line[OPERATINGSYSTEM].index(' ')
+        (facts['distribution.name'], facts['distribution.version']) = line[OPERATINGSYSTEM].split(' ')
+      else
+        (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OPERATINGSYSTEM]]
+      end
+
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating host '#{name}'..." if verbose?
-          @f_host_api.create({
-                             'host' => {
-                               'name' => name,
-                               'mac' => namify(line[MACADDRESS], number),
-                               'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                               'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
-                               'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
-                               'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
-                               'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
-                               'domain_id' => foreman_domain(:name => line[DOMAIN]),
-                               'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
-                             }
+          print "Creating system '#{name}'..." if verbose?
+          @k_system_api.create({
+                                 'name' => name,
+                                 'organization_id' => 'ACME_Corporation', #foreman_organization(:name => line[ORGANIZATION]),
+                                 'environment_id' => 1, #katello_environment(:name => line[ENVIRONMENT]),
+                                 'content_view_id' => 1, #katello_contentview(:name => line[CONTENTVIEW]),
+                                 'facts' => facts,
+                                 'cp_type' => 'system'
                            }, HEADERS)
+          print "done\n" if verbose?
         else
           print "Updating host '#{name}'..." if verbose?
-          @f_host_api.update({
+=begin
+          @k_system_api.update({
                                'id' => @existing[name],
                                'host' => {
                                  'name' => name,
@@ -123,13 +125,14 @@ module HammerCLICsv
                                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
                                }
                              }, HEADERS)
+=end
+          print "done\n" if verbose?
         end
-        print "done\n" if verbose?
       end
     rescue RuntimeError => e
       raise RuntimeError.new("#{e}\n       #{line}")
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:hosts", "import/export hosts", HammerCLICsv::HostsCommand)
+  HammerCLI::MainCommand.subcommand("csv:systems", "import/export systems", HammerCLICsv::SystemsCommand)
 end

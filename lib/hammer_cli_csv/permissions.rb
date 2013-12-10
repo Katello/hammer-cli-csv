@@ -67,12 +67,6 @@ module HammerCLICsv
       @permission_api = KatelloApi::Resources::Permission.new(@init_options)
     end
 
-    def execute
-      # TODO: how to get verbose option value
-
-      csv_export? ? export : import
-    end
-
     def export
       # TODO
     end

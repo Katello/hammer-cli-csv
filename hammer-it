@@ -9,3 +9,6 @@ bundle exec hammer -v csv:puppetenvironments --verbose --csv-file test/data/pupp
 bundle exec hammer -v csv:operatingsystems   --verbose --csv-file test/data/operatingsystems.csv
 bundle exec hammer -v csv:hosts              --verbose --csv-file test/data/hosts.csv
 bundle exec hammer -v csv:puppetfacts        --verbose --csv-file test/data/puppetfacts.csv
+
+bundle exec hammer -v csv:systemgroups       --verbose --csv-file test/data/systemgroups.csv
+bundle exec hammer -v csv:systems            --verbose --csv-file test/data/systems.csv

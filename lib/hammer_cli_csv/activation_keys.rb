@@ -52,12 +52,6 @@ module HammerCLICsv
       @contentview_api = KatelloApi::Resources::ContentView.new(@init_options)
     end
 
-    def execute
-      csv_export? ? export : import
-
-      HammerCLI::EX_OK
-    end
-
     def export
       CSV.open(csv_file, 'wb') do |csv|
         csv << ['Name', 'Count', 'Org Label', 'Description', 'Limit', 'Environment', 'Content View', 'System Groups']

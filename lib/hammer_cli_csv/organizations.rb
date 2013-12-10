@@ -49,12 +49,6 @@ module HammerCLICsv
     ORGLABEL = 'Org Label'
     DESCRIPTION = 'Description'
 
-    def execute
-      super
-      csv_export? ? export : import
-      HammerCLI::EX_OK
-    end
-
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGLABEL, DESCRIPTION]

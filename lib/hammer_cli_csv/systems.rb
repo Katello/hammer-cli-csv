@@ -62,12 +62,6 @@ module HammerCLICsv
     PRODUCTS = 'Products'
     SUBSCRIPTIONS = 'Subscriptions'
 
-    def execute
-      super
-      csv_export? ? export : import
-      HammerCLI::EX_OK
-    end
-
     def export
       # TODO
     end
@@ -75,8 +69,8 @@ module HammerCLICsv
     def import
       @existing = {}
 
-      puts katello_environment('megacorp', :name => 'Library')
-      return
+      #puts "ENVIRONMENT #{katello_environment('ACME_Corporation', :name => 'Library')}"
+      #puts "CONTENTVIEW #{katello_contentview('ACME_Corporation', :name => 'Default_Organization_View')}"
 
       thread_import do |line|
         create_systems_from_csv(line)
@@ -94,11 +88,11 @@ module HammerCLICsv
       facts['cpu.core(s)_per_socket'] = line[CORES]
       facts['cpu.cpu_socket(s)'] = line[SOCKETS]
       facts['memory.memtotal'] = line[RAM]
-      facts['uname.machine'] = line[ARCH]
-      if line[OS].index(' ')
-        (facts['distribution.name'], facts['distribution.version']) = line[OS].split(' ')
+      facts['uname.machine'] = line[ARCHITECTURE]
+      if line[OPERATINGSYSTEM].index(' ')
+        (facts['distribution.name'], facts['distribution.version']) = line[OPERATINGSYSTEM].split(' ')
       else
-        (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OS]]
+        (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OPERATINGSYSTEM]]
       end
 
       line[COUNT].to_i.times do |number|
@@ -106,22 +100,18 @@ module HammerCLICsv
         if !@existing.include? name
           print "Creating system '#{name}'..." if verbose?
           @k_system_api.create({
-                             'host' => {
-                               'name' => name,
-                               'mac' => namify(line[MACADDRESS], number),
-                               'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                               'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
-                               'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
-                               'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
-                               'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
-                               'domain_id' => foreman_domain(:name => line[DOMAIN]),
-                               'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
-                             }
+                                 'name' => name,
+                                 'organization_id' => 'ACME_Corporation', #foreman_organization(:name => line[ORGANIZATION]),
+                                 'environment_id' => 1, #katello_environment(:name => line[ENVIRONMENT]),
+                                 'content_view_id' => 1, #katello_contentview(:name => line[CONTENTVIEW]),
+                                 'facts' => facts,
+                                 'cp_type' => 'system'
                            }, HEADERS)
           print "done\n" if verbose?
         else
           print "Updating host '#{name}'..." if verbose?
-          @f_host_api.update({
+=begin
+          @k_system_api.update({
                                'id' => @existing[name],
                                'host' => {
                                  'name' => name,
@@ -135,6 +125,7 @@ module HammerCLICsv
                                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
                                }
                              }, HEADERS)
+=end
           print "done\n" if verbose?
         end
       end

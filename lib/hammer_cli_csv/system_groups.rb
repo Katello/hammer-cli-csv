@@ -44,22 +44,14 @@ require 'csv'
 module HammerCLICsv
   class SystemGroupsCommand < BaseCommand
 
-    def initialize(*args)
-      super(args)
-      @organization_api = KatelloApi::Resources::Organization.new(@init_options)
-      @systemgroup_api = KatelloApi::Resources::SystemGroup.new(@init_options)
-    end
-
-    def execute
-      csv_export? ? export : import
-
-      HammerCLI::EX_OK
-    end
+    ORGANIZATION = 'Organization'
+    LIMIT = 'Limit'
+    DESCRIPTION = 'Description'
 
     def export
       CSV.open(csv_file, 'wb') do |csv|
-        csv << ['Name', 'Count', 'Org Label', 'Limit', 'Description']
-        @organization_api.index[0].each do |organization|
+        csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
+        @f_organization_api.index[0].each do |organization|
           @systemgroup_api.index({'organization_id' => organization['label']})[0].each do |systemgroup|
             puts systemgroup
             csv << [systemgroup['name'], 1, organization['label'],
@@ -79,51 +71,37 @@ module HammerCLICsv
     end
 
     def create_systemgroups_from_csv(line)
-      details = parse_systemgroup_csv(line)
-
-      if !@existing[details[:org_label]]
-        @existing[details[:org_label]] = {}
-        @systemgroup_api.index({'organization_id' => details[:org_label]})[0].each do |systemgroup|
-          @existing[details[:org_label]][systemgroup['name']] = systemgroup['id']
+      if !@existing[line[ORGANIZATION]]
+        @existing[line[ORGANIZATION]] = {}
+        @k_systemgroup_api.index({'organization_id' => line[ORGANIZATION]})[0]['results'].each do |systemgroup|
+          @existing[line[ORGANIZATION]][systemgroup['name']] = systemgroup['id']
         end
       end
 
-      details[:count].times do |number|
-        name = namify(details[:name_format], number)
-        if !@existing[details[:org_label]].include? name
-          puts "Creating system group '#{name}'" if verbose?
-          @systemgroup_api.create({
-                             'organization_id' => details[:org_label],
-                             'system_group' => {
-                               'name' => name,
-                               'max_systems' => (details[:limit] == 'Unlimited') ? -1 : details[:limit],
-                               'description' => details[:description]
-                             }
-                           }, HEADERS)
+      line[COUNT].to_i.times do |number|
+        name = namify(line[NAME], number)
+        if !@existing[line[ORGANIZATION]].include? name
+          print "Creating system group '#{name}'..." if verbose?
+          @k_systemgroup_api.create({
+                                    'organization_id' => line[ORGANIZATION],
+                                    'name' => name,
+                                    'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
+                                    'description' => line[DESCRIPTION]
+                                  }, HEADERS)
         else
-          puts "Updating systemgroup '#{name}'" if verbose?
-          @systemgroup_api.update({
-                             'organization_id' => details[:org_label],
-                             'id' => @existing[details[:org_label]][name],
-                             'system_group' => {
-                               'name' => name,
-                               'max_systems' => (details[:limit] == 'Unlimited') ? -1 : details[:limit],
-                               'description' => details[:description]
-                             }
-                           }, HEADERS)
+          print "Updating systemgroup '#{name}'..." if verbose?
+          @k_systemgroup_api.update({
+                                      'organization_id' => line[ORGANIZATION],
+                                      'id' => @existing[line[ORGANIZATION]][name],
+                                      'name' => name,
+                                      'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
+                                      'description' => line[DESCRIPTION]
+                                    }, HEADERS)
         end
+    print "done\n" if verbose?
       end
-    end
-
-    def parse_systemgroup_csv(line)
-      keys = [:name_format, :count, :org_label, :limit, :description]
-      details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
-
-      details[:count] = details[:count].to_i
-
-      details
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:systemgroups", "ping the katello server", HammerCLICsv::SystemGroupsCommand)
+  HammerCLI::MainCommand.subcommand("csv:systemgroups", "system groups", HammerCLICsv::SystemGroupsCommand)
 end

@@ -56,12 +56,6 @@ module HammerCLICsv
     DOMAIN = 'Domain'
     PARTITIONTABLE = 'Partition Table'
 
-    def execute
-      super
-      csv_export? ? export : import
-      HammerCLI::EX_OK
-    end
-
     def export
       CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
@@ -113,7 +107,6 @@ module HammerCLICsv
                                'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
                              }
                            }, HEADERS)
-          print "done\n" if verbose?
         else
           print "Updating host '#{name}'..." if verbose?
           @f_host_api.update({
@@ -130,8 +123,8 @@ module HammerCLICsv
                                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
                                }
                              }, HEADERS)
-          print "done\n" if verbose?
         end
+        print "done\n" if verbose?
       end
     rescue RuntimeError => e
       raise RuntimeError.new("#{e}\n       #{line}")

@@ -57,8 +57,10 @@ module HammerCLICsv
         :password => password || HammerCLI::Settings.get(:password)
       }
 
-      @k_system_api ||= KatelloApi::Resources::System.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}/katello"}))
-      @k_environment_api ||= KatelloApi::Resources::Environment.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}/katello"}))
+      @k_system_api ||= KatelloApi::Resources::System.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
+      @k_systemgroup_api ||= KatelloApi::Resources::SystemGroup.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
+      @k_environment_api ||= KatelloApi::Resources::Environment.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
+      @k_contentview_api ||= KatelloApi::Resources::ContentView.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
 
       @f_architecture_api ||= ForemanApi::Resources::Architecture.new(@init_options)
       @f_domain_api ||= ForemanApi::Resources::Domain.new(@init_options)
@@ -69,6 +71,9 @@ module HammerCLICsv
       @f_partitiontable_api ||= ForemanApi::Resources::Ptable.new(@init_options)
       @f_puppetfacts_api ||= ForemanApi::Resources::FactValue.new(@init_options)
       @f_user_api ||= ForemanApi::Resources::User.new(@init_options)
+
+      csv_export? ? export : import
+      HammerCLI::EX_OK
     end
 
     def get_lines(filename)
@@ -309,6 +314,38 @@ module HammerCLICsv
           raise RuntimeError.new("Puppet environment '#{options[:name]}' not found") if !environment || environment.empty?
           options[:name] = environment['name']
           @environments[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def katello_contentview(organization, options={})
+      @contentviews ||= {}
+      @contentviews[organization] ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @contentviews[organization][options[:name]]
+        if !options[:id]
+          puts @k_contentview_api.index({'organization_id' => organization, 'environment_id' => 2, 'label' => 'Default_Organization_View'}, HEADERS)[0]
+          @k_contentview_api.index({'organization_id' => organization, 'label' => options[:name]}, HEADERS)[0].each do |contentview|
+            puts contentview
+            @contentviews[organization][contentview['contentview']['name']] = contentview['contentview']['id']
+          end
+          options[:id] = @contentviews[organization][options[:name]]
+          raise RuntimeError.new("Puppet contentview '#{options[:name]}' not found") if !options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @contentviews.key(options[:id])
+        if !options[:name]
+          contentview = @k_contentview_api.show({'id' => options[:id]}, HEADERS)[0]
+          raise RuntimeError.new("Puppet contentview '#{options[:name]}' not found") if !contentview || contentview.empty?
+          options[:name] = contentview['name']
+          @contentviews[options[:name]] = options[:id]
         end
         result = options[:name]
       end

@@ -50,18 +50,17 @@ module HammerCLICsv
     DESCRIPTION = 'Description'
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGLABEL, DESCRIPTION]
-        @f_organization_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |organization|
-          organization = organization['organization']
-          csv << [organization['name'], 1, '', '']
+        @k_organization_api.index({:per_page => 999999})[0]['results'].each do |organization|
+          csv << [organization['name'], 1, organization['label'], organization['description']]
         end
       end
     end
 
     def import
       @existing = {}
-      @f_organization_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |organization|
+      @k_organization_api.index({:per_page => 999999})[0]['results'].each do |organization|
         @existing[organization['name']] = organization['label'] if organization
       end
 
@@ -75,26 +74,20 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         label = namify(line[ORGLABEL], number)
         if !@existing.include? name
-          print "Creating organization '#{name}'... " if verbose?
-          @f_organization_api.create({
-                             'organization' => {
-                               'name' => name,
-                               #'label' => label,
-                               #'description' => line[DESCRIPTION]
-                             }
-                           }, HEADERS)
+          print "Creating organization '#{name}'... " if option_verbose?
+          @k_organization_api.create({
+                                       'name' => name,
+                                       'label' => label,
+                                       'description' => line[DESCRIPTION]
+                                     })
         else
-          print "Updating organization '#{name}'... " if verbose?
-          puts "\nWARNING: Updating organizations is not supported since the entire organization data must be passed in\n"
-          # @f_organization_api.update({
-          #                    'id' => name,
-          #                    'organization' => {
-          #                      'name' => name,
-          #                      #'description' => line[DESCRIPTION]
-          #                    }
-          #                  }, HEADERS)
+          print "Updating organization '#{name}'... " if option_verbose?
+          @k_organization_api.update({
+                                       'id' => label,
+                                       'description' => line[DESCRIPTION]
+                                     })
         end
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
       end
     end
   end

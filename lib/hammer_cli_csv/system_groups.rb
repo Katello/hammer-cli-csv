@@ -49,7 +49,7 @@ module HammerCLICsv
     DESCRIPTION = 'Description'
 
     def export
-      CSV.open(csv_file, 'wb') do |csv|
+      CSV.open(option_csv_file, 'wb') do |csv|
         csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
         @f_organization_api.index[0].each do |organization|
           @systemgroup_api.index({'organization_id' => organization['label']})[0].each do |systemgroup|
@@ -81,24 +81,24 @@ module HammerCLICsv
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing[line[ORGANIZATION]].include? name
-          print "Creating system group '#{name}'..." if verbose?
+          print "Creating system group '#{name}'..." if option_verbose?
           @k_systemgroup_api.create({
                                     'organization_id' => line[ORGANIZATION],
                                     'name' => name,
                                     'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
                                     'description' => line[DESCRIPTION]
-                                  }, HEADERS)
+                                  })
         else
-          print "Updating systemgroup '#{name}'..." if verbose?
+          print "Updating systemgroup '#{name}'..." if option_verbose?
           @k_systemgroup_api.update({
                                       'organization_id' => line[ORGANIZATION],
                                       'id' => @existing[line[ORGANIZATION]][name],
                                       'name' => name,
                                       'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
                                       'description' => line[DESCRIPTION]
-                                    }, HEADERS)
+                                    })
         end
-    print "done\n" if verbose?
+    print "done\n" if option_verbose?
       end
     end
   end

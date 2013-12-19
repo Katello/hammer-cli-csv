@@ -44,14 +44,14 @@ module HammerCLICsv
     LAYOUT = 'Layout'
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, OSFAMILY, LAYOUT, OPERATINGSYSTEMS]
-        @f_ptable_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |ptable|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        csv << [NAME, COUNT, OSFAMILY, LAYOUT]
+        @f_partitiontable_api.index({:per_page => 999999})[0]['results'].each do |ptable|
+          ptable = @f_partitiontable_api.show({'id' => ptable['id']})[0]
           name = ptable['name']
           count = 1
           osfamily = ptable['os_family']
           layout = ptable['layout']
-          puts ptable
           csv << [name, count, osfamily, layout]
         end
       end
@@ -59,7 +59,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_partitiontable_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |ptable|
+      @f_partitiontable_api.index({:per_page => 999999})[0]['results'].each do |ptable|
         @existing[ptable['name']] = ptable['id'] if ptable
       end
 
@@ -72,16 +72,16 @@ module HammerCLICsv
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating ptable '#{name}'... " if verbose?
+          print "Creating ptable '#{name}'... " if option_verbose?
           @f_partitiontable_api.create({
                                  'ptable' => {
                                    'name' => name,
                                    'os_family' => line[OSFAMILY],
                                    'layout' => line[LAYOUT]
                              }
-                           }, HEADERS)
+                           })
         else
-          print "Updating ptable '#{name}'..." if verbose?
+          print "Updating ptable '#{name}'..." if option_verbose?
           @f_partitiontable_api.update({
                                  'id' => @existing[name],
                                  'ptable' => {
@@ -89,12 +89,12 @@ module HammerCLICsv
                                    'os_family' => line[OSFAMILY],
                                    'layout' => line[LAYOUT]
                                  }
-                           }, HEADERS)
+                           })
         end
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

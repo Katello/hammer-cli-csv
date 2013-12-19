@@ -65,14 +65,14 @@ module HammerCLICsv
 
     def create_products_from_csv(line)
       if !@existing_providers[line[ORGANIZATION]]
-
+        # TODO: get the red hat provider explicitly and put into list since it's not returned by index
+        @existing_providers[line[ORGANIZATION]] = {}
         @k_provider_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})[0]['results'].each do |provider|
-          @existing_providers[line[ORGANIZATION]] ||= {}
           @existing_providers[line[ORGANIZATION]][provider['name']] = provider['id'] if provider
         end
 
+        @existing_products[line[ORGANIZATION]] = {}
         @k_product_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})[0]['results'].each do |product|
-          @existing_products[line[ORGANIZATION]] ||= {}
           @existing_products[line[ORGANIZATION]][product['name']] = product['id'] if product
 
           if product
@@ -92,13 +92,13 @@ module HammerCLICsv
 
       # Only creating providers, not updating
       if !@existing_providers[line[ORGANIZATION]][line[PROVIDER]]
-        print "Creating provider '#{line[PROVIDER]}'..." if verbose?
+        print "Creating provider '#{line[PROVIDER]}'..." if option_verbose?
         id = @k_provider_api.create({
                                       'name' => line[PROVIDER],
                                       'organization_id' => line[ORGANIZATION]
                                     })[0]['id']
         @existing_providers[line[ORGANIZATION]][line[PROVIDER]] = id
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
       end
       provider_id = @existing_providers[line[ORGANIZATION]][line[PROVIDER]]
 
@@ -107,20 +107,20 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         product_id = @existing_products[line[ORGANIZATION]][name]
         if !product_id
-          print "Creating product '#{name}'..." if verbose?
+          print "Creating product '#{name}'..." if option_verbose?
           product_id = @k_product_api.create({
                                                'name' => name,
                                                'provider_id' => provider_id
                                              })[0]['id']
           @existing_products[line[ORGANIZATION]][name] = product_id
-          print "done\n" if verbose?
+          print "done\n" if option_verbose?
         end
         @existing_repositories[line[ORGANIZATION] + name] ||= {}
 
         # Only creating repositories, not updating
         repository_name = namify(line[REPOSITORY], number)
         if !@existing_repositories[line[ORGANIZATION] + name][labelize(repository_name)]
-          print "Creating repository '#{repository_name}' in product '#{name}'..." if verbose?
+          print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
           @k_repository_api.create({
                                      'name' => repository_name,
                                      'label' => labelize(repository_name),
@@ -128,12 +128,12 @@ module HammerCLICsv
                                      'url' => line[REPOSITORY_URL],
                                      'content_type' => line[REPOSITORY_TYPE]
                                    })
-          print "done\n" if verbose?
+          print "done\n" if option_verbose?
         end
       end
 
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

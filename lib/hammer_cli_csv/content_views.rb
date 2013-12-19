@@ -72,7 +72,7 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         contentview_id = @existing_contentviews[line[ORGANIZATION]][name]
         if !contentview_id
-          print "Creating content view '#{name}'..." if verbose?
+          print "Creating content view '#{name}'..." if option_verbose?
           contentview_id = @k_contentviewdefinition_api.create({
                                                                  'organization_id' => line[ORGANIZATION],
                                                                  'name' => name,
@@ -82,7 +82,7 @@ module HammerCLICsv
                                                                })[0]['id']
           @existing_contentviews[line[ORGANIZATION]][name] = contentview_id
         else
-          print "Updating content view '#{name}'..." if verbose?
+          print "Updating content view '#{name}'..." if option_verbose?
           @k_contentviewdefinition_api.create({
                                                 'description' => line[DESCRIPTION],
                                               })
@@ -93,13 +93,13 @@ module HammerCLICsv
         elsif line[PRODUCT]
           puts "UPDATING PRODUCT"
         end
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
 
 =begin
         # Only creating repositories, not updating
         repository_name = namify(line[REPOSITORY], number)
         if !@existing_repositories[line[ORGANIZATION] + name][labelize(repository_name)]
-          print "Creating repository '#{repository_name}' in contentview '#{name}'..." if verbose?
+          print "Creating repository '#{repository_name}' in contentview '#{name}'..." if option_verbose?
           @k_repository_api.create({
                                      'name' => repository_name,
                                      'label' => labelize(repository_name),
@@ -107,13 +107,13 @@ module HammerCLICsv
                                      'url' => line[REPOSITORY_URL],
                                      'content_type' => line[REPOSITORY_TYPE]
                                    })
-          print "done\n" if verbose?
+          print "done\n" if option_verbose?
         end
 =end
       end
 
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

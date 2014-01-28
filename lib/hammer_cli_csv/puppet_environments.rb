@@ -41,9 +41,9 @@ module HammerCLICsv
   class PuppetEnvironmentsCommand < BaseCommand
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT]
-        @f_environment_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |environment|
+        @f_environment_api.index({:per_page => 999999})[0]['results'].each do |environment|
           name = environment['name']
           count = 1
           csv << [name, count]
@@ -53,7 +53,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_environment_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |environment|
+      @f_environment_api.index({:per_page => 999999})[0]['results'].each do |environment|
         @existing[environment['name']] = environment['id'] if environment
       end
 
@@ -66,25 +66,25 @@ module HammerCLICsv
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating environment '#{name}'..." if verbose?
+          print "Creating environment '#{name}'..." if option_verbose?
           @f_environment_api.create({
                                       'environment' => {
                                         'name' => name
                                       }
-                                    }, HEADERS)
+                                    })
         else
-          print "Updating environment '#{name}'..." if verbose?
+          print "Updating environment '#{name}'..." if option_verbose?
           @f_environment_api.update({
                                       'id' => @existing[name],
                                       'environment' => {
                                         'name' => name
                                       }
-                                    }, HEADERS)
+                                    })
         end
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

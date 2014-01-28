@@ -41,11 +41,13 @@ module HammerCLICsv
   class DomainsCommand < BaseCommand
 
     FULLNAME = 'Full Name'
+    ORGANIZATIONS = 'Organizations'
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FULLNAME]
-        @f_domain_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |domain|
+        @f_domain_api.index({:per_page => 999999})[0]['results'].each do |domain|
+          puts domain
           name = domain['name']
           count = 1
           fullname = domain['fullname']
@@ -56,7 +58,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_domain_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |domain|
+      @f_domain_api.index({:per_page => 999999})[0]['results'].each do |domain|
         @existing[domain['name']] = domain['id'] if domain
       end
 
@@ -69,25 +71,33 @@ module HammerCLICsv
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating domain '#{name}'..." if verbose?
-          @f_domain_api.create({
-                             'domain' => {
-                               'name' => name
-                             }
-                           }, HEADERS)
+          print "Creating domain '#{name}'..." if option_verbose?
+          domain_id = @f_domain_api.create({
+                                             'domain' => {
+                                               'name' => name
+                                             }
+                                           })[0]['domain']['id']
         else
-          print "Updating domain '#{name}'..." if verbose?
-          @f_domain_api.update({
-                             'id' => @existing[name],
-                             'domain' => {
-                               'name' => name
-                             }
-                           }, HEADERS)
+          print "Updating domain '#{name}'..." if option_verbose?
+          domain_id = @f_domain_api.update({
+                                             'id' => @existing[name],
+                                             'domain' => {
+                                               'name' => name
+                                             }
+                                           })[0]['domain']['id']
         end
-        print "done\n" if verbose?
+
+        CSV.parse_line(line[ORGANIZATIONS]).each do |organization_label|
+          @k_organization_api.update({
+                                       'id' => organization_label,
+                                       'domain_ids' => [domain_id]
+                                     })
+        end
+
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

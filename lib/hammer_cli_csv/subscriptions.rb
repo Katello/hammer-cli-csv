@@ -59,7 +59,7 @@ module HammerCLICsv
     def create_subscriptions_from_csv(line)
       puts "TODO: import #{line[MANIFEST]} into organization #{line[ORGANIZATION]}"
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

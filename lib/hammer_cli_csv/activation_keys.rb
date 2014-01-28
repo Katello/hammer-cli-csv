@@ -53,7 +53,7 @@ module HammerCLICsv
     end
 
     def export
-      CSV.open(csv_file, 'wb') do |csv|
+      CSV.open(option_csv_file, 'wb') do |csv|
         csv << ['Name', 'Count', 'Org Label', 'Description', 'Limit', 'Environment', 'Content View', 'System Groups']
         @organization_api.index[0].each do |organization|
           @activationkey_api.index({'organization_id' => organization['label']})[0].each do |activationkey|
@@ -97,7 +97,7 @@ module HammerCLICsv
       details[:count].times do |number|
         name = namify(details[:name_format], number)
         if !@existing[details[:org_label]].include? name
-          puts "Creating activationkey '#{name}'" if verbose?
+          puts "Creating activationkey '#{name}'" if option_verbose?
           @activationkey_api.create({
                              'environment_id' => @environments[details[:org_label]][details[:environment]],
                              'activation_key' => {
@@ -107,7 +107,7 @@ module HammerCLICsv
                              }
                            })
         else
-          puts "Updating activationkey '#{name}'" if verbose?
+          puts "Updating activationkey '#{name}'" if option_verbose?
           @activationkey_api.update({
                              'organization_id' => details[:org_label],
                              'id' => @existing[details[:org_label]][name],

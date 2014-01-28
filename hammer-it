@@ -2,15 +2,16 @@
 
 bundle exec hammer -v csv:organizations      --verbose --csv-file test/data/organizations.csv
 bundle exec hammer -v csv:users              --verbose --csv-file test/data/users.csv
+bundle exec hammer -v csv:operatingsystems   --verbose --csv-file test/data/operatingsystems.csv
 bundle exec hammer -v csv:architectures      --verbose --csv-file test/data/architectures.csv
 bundle exec hammer -v csv:partitiontables    --verbose --csv-file test/data/partitiontables.csv
 bundle exec hammer -v csv:domains            --verbose --csv-file test/data/domains.csv
 bundle exec hammer -v csv:puppetenvironments --verbose --csv-file test/data/puppetenvironments.csv
-bundle exec hammer -v csv:operatingsystems   --verbose --csv-file test/data/operatingsystems.csv
 bundle exec hammer -v csv:hosts              --verbose --csv-file test/data/hosts.csv
 bundle exec hammer -v csv:puppetfacts        --verbose --csv-file test/data/puppetfacts.csv
 
 bundle exec hammer -v csv:products           --verbose --csv-file test/data/products.csv
 
+bundle exec hammer -v csv:lifecycleenv       --verbose --csv-file test/data/lifecycleenvironments.csv
 bundle exec hammer -v csv:systemgroups       --verbose --csv-file test/data/systemgroups.csv
 bundle exec hammer -v csv:systems            --verbose --csv-file test/data/systems.csv

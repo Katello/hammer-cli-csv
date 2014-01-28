@@ -44,34 +44,22 @@ module HammerCLICsv
   class OperatingSystemsCommand < BaseCommand
 
     FAMILY = 'Family'
-    ARCHITECTURES = 'Architectures'
-    PARTITIONTABLES = 'Partition Tables'
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, FAMILY, ARCHITECTURES, PARTITIONTABLES]
-        @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |operatingsystem|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        csv << [NAME, COUNT, FAMILY]
+        @f_operatingsystem_api.index({:per_page => 999999})[0]['results'].each do |operatingsystem|
           name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
           count = 1
           family = operatingsystem['family']
-          architectures = ""
-          operatingsystem['architectures'].each do |architecture|
-            architectures += "," unless architectures == ""
-            architectures += architecture['name']
-          end
-          partitiontables = ""
-          operatingsystem['ptables'].each do |partitiontable|
-            partitiontables += "," unless partitiontables == ""
-            partitiontables += partitiontable['name']
-          end
-          csv << [name, count, family, architectures, partitiontables]
+          csv << [name, count, family]
         end
       end
     end
 
     def import
       @existing = {}
-      @f_operatingsystem_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |operatingsystem|
+      @f_operatingsystem_api.index({:per_page => 999999})[0]['results'].each do |operatingsystem|
         @existing[build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])] = operatingsystem['id'] if operatingsystem
       end
 
@@ -81,48 +69,35 @@ module HammerCLICsv
     end
 
     def create_operatingsystems_from_csv(line)
-      architecture_ids = CSV.parse_line(line[ARCHITECTURES]).collect do |name|
-        foreman_architecture(:name => name)
-      end unless line[ARCHITECTURES].empty?
-      architecture_ids ||= []
-      partitiontable_ids = CSV.parse_line(line[PARTITIONTABLES]).collect do |name|
-        foreman_partitiontable(:name => name)
-      end unless line[PARTITIONTABLES].empty?
-      partitiontables_ids ||= []
-
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         (osname, major, minor) = split_os_name(name)
         if !@existing.include? name
-          print "Creating operating system '#{name}'..." if verbose?
+          print "Creating operating system '#{name}'..." if option_verbose?
           @f_operatingsystem_api.create({
                                           'operatingsystem' => {
                                             'name' => osname,
                                             'major' => major,
                                             'minor' => minor,
-                                            'family' => line[FAMILY],
-                                            'architecture_ids' => architecture_ids,
-                                            'ptable_ids' => partitiontable_ids
+                                            'family' => line[FAMILY]
                                           }
-                                        }, HEADERS)
+                                        })
         else
-          print "Updating operatingsystem '#{name}'..." if verbose?
+          print "Updating operatingsystem '#{name}'..." if option_verbose?
           @f_operatingsystem_api.update({
                                           'id' => @existing[name],
                                           'operatingsystem' => {
                                             'name' => osname,
                                             'major' => major,
                                             'minor' => minor,
-                                            'family' => line[FAMILY],
-                                            'architecture_ids' => architecture_ids,
-                                            'ptable_ids' => partitiontable_ids
+                                            'family' => line[FAMILY]
                                           }
-                                        }, HEADERS)
+                                        })
         end
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

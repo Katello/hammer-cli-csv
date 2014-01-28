@@ -43,17 +43,17 @@ module HammerCLICsv
   class PuppetFactsCommand < BaseCommand
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         headers = [NAME, COUNT]
         # Extracted facts are always based upon the first host found, otherwise this would be an intensive
         # method to gather all the possible column names
-        host = @f_host_api.index({:per_page => 1}, HEADERS)[0]['results'][0]
-        headers += @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999}, HEADERS)[0]['results'][host['name']].keys
+        host = @f_host_api.index({:per_page => 1})[0]['results'][0]
+        headers += @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999})[0]['results'][host['name']].keys
         csv << headers
 
-        @f_host_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |host|
+        @f_host_api.index({:per_page => 999999})[0]['results'].each do |host|
           line = [host['name'], 1]
-          facts = @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999}, HEADERS)[0][host['name']]
+          facts = @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999})[0][host['name']]
           facts ||= {}
           headers[2..-1].each do |fact_name|
             line << facts[fact_name] || ''
@@ -79,7 +79,7 @@ module HammerCLICsv
 
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
-        print "Updating puppetfacts '#{name}'..." if verbose?
+        print "Updating puppetfacts '#{name}'..." if option_verbose?
         facts = line.to_hash
         facts.delete(NAME)
         facts.delete(COUNT)
@@ -94,11 +94,11 @@ module HammerCLICsv
         @f_host_api.facts({
                             'name' => name,
                             'facts' => facts
-                          }, HEADERS)
-        print "done\n" if verbose?
+                          })
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

@@ -48,17 +48,10 @@ module HammerCLICsv
     LASTNAME = 'Last Name'
     EMAIL = 'Email'
 
-    def execute
-      super
-      csv_export? ? export : import
-
-      HammerCLI::EX_OK
-    end
-
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL]
-        @f_user_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |user|
+        @f_user_api.index({:per_page => 999999})[0]['results'].each do |user|
           csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail']]
         end
       end
@@ -66,7 +59,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_user_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |user|
+      @f_user_api.index({:per_page => 999999})[0]['results'].each do |user|
         @existing[user['login']] = user['id'] if user
       end
 
@@ -79,7 +72,7 @@ module HammerCLICsv
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         if !@existing.include? name
-          print "Creating user '#{name}'... " if verbose?
+          print "Creating user '#{name}'... " if option_verbose?
           @f_user_api.create({
                                'user' => {
                                  'login' => name,
@@ -89,9 +82,9 @@ module HammerCLICsv
                                  'password' => 'admin',
                                  'auth_source_id' => 1,  # INTERNAL auth
                                }
-                             }, HEADERS)
+                             })
         else
-          print "Updating user '#{name}'... " if verbose?
+          print "Updating user '#{name}'... " if option_verbose?
           @f_user_api.update({
                                'id' => @existing[name],
                                'user' => {
@@ -101,14 +94,14 @@ module HammerCLICsv
                                  'mail' => line[EMAIL],
                                  'password' => 'admin'
                                }
-                             }, HEADERS)
+                             })
         end
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:users", "ping the katello server", HammerCLICsv::UsersCommand)
+  HammerCLI::MainCommand.subcommand("csv:users", "import or export users as CSV", HammerCLICsv::UsersCommand)
 end

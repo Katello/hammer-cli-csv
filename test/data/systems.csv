@@ -1,4 +1,4 @@
 Name,Count,Organization,Environment,Content View,Groups,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions
-host%d,1,megacorp,Library,Default_Organization_View,,No,,RHEL 6.4,x86_64,1,4,1,Standard,"69|Red Hat Enterprise Linux Server,79|Red Hat Enterprise Linux Server",RH0103708|Red Hat Enterprise Linux Server Premium (8 sockets) (Up to 4 guests)
-guest%d,1,megacorp,Library,Default_Organization_View,,Yes,host1,RHEL 6.4,x86_64,1,4,1,Standard,"69|Red Hat Enterprise Linux Server,79|Red Hat Enterprise Linux Server",RH0103708|Red Hat Enterprise Linux Server Premium (8 sockets) (Up to 4 guests)
+host%d,1,megacorp,Library,Default_Organization_View,"Mega Corp HQ",No,,RHEL 6.4,x86_64,1,4,1,Standard,"69|Red Hat Enterprise Linux Server,79|Red Hat Enterprise Linux Server",RH0103708|Red Hat Enterprise Linux Server Premium (8 sockets) (Up to 4 guests)
+guest%d,1,megacorp,Library,Default_Organization_View,"Mega Corp HQ,Accounting",Yes,host0,RHEL 6.4,x86_64,1,4,1,Standard,"69|Red Hat Enterprise Linux Server,79|Red Hat Enterprise Linux Server",RH0103708|Red Hat Enterprise Linux Server Premium (8 sockets) (Up to 4 guests)
 

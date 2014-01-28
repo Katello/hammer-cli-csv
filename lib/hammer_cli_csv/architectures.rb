@@ -44,14 +44,16 @@ module HammerCLICsv
     OPERATINGSYSTEMS = 'Operating Systems'
 
     def export
-      CSV.open(csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, OPERATINGSYSTEMS]
-        @f_architecture_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |architecture|
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        csv << [NAME, COUNT, ORGANIZATIONS, OPERATINGSYSTEMS]
+        @f_architecture_api.index({:per_page => 999999})[0]['results'].each do |architecture|
           name = architecture['name']
           count = 1
-          operatingsystems = architecture['operatingsystem_ids'].collect do |operatingsystem_id|
-            foreman_operatingsystem(:id => operatingsystem_id)
-          end.join(',')
+          # TODO: http://projects.theforeman.org/issues/4198
+          #operatingsystems = architecture['operatingsystem_ids'].collect do |operatingsystem_id|
+          #  foreman_operatingsystem(:id => operatingsystem_id)
+          #end.join(',')
+          operatingsystems = ''
           csv << [name, count, operatingsystems]
         end
       end
@@ -59,7 +61,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_architecture_api.index({:per_page => 999999}, HEADERS)[0]['results'].each do |architecture|
+      @f_architecture_api.index({:per_page => 999999})[0]['results'].each do |architecture|
         @existing[architecture['name']] = architecture['id'] if architecture
       end
 
@@ -72,26 +74,31 @@ module HammerCLICsv
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
         architecture_id = @existing[name]
+        operatingsystem_ids = CSV.parse_line(line[OPERATINGSYSTEMS]).collect do |operatingsystem_name|
+          foreman_operatingsystem(:name => operatingsystem_name)
+        end
         if !architecture_id
-          print "Creating architecture '#{name}'..." if verbose?
+          print "Creating architecture '#{name}'..." if option_verbose?
           architecture_id = @f_architecture_api.create({
                              'architecture' => {
-                               'name' => name
+                               'name' => name,
+                               'operatingsystem_ids' => operatingsystem_ids
                              }
-                           }, HEADERS)
+                           })
         else
-          print "Updating architecture '#{name}'..." if verbose?
+          print "Updating architecture '#{name}'..." if option_verbose?
           @f_architecture_api.update({
                              'id' => architecture_id,
                              'architecture' => {
-                               'name' => name
+                               'name' => name,
+                               'operatingsystem_ids' => operatingsystem_ids
                              }
-                           }, HEADERS)
+                           })
         end
-        print "done\n" if verbose?
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
   end
 

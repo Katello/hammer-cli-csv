@@ -51,6 +51,7 @@ module HammerCLICsv
     ORGANIZATION = 'Organization'
     ENVIRONMENT = 'Environment'
     CONTENTVIEW = 'Content View'
+    SYSTEMGROUPS = 'Groups'
     VIRTUAL = 'Virtual'
     HOST = 'Host'
     OPERATINGSYSTEM = 'OS'
@@ -68,16 +69,28 @@ module HammerCLICsv
 
     def import
       @existing = {}
+      @host_guests = {}
 
       thread_import do |line|
         create_systems_from_csv(line)
       end
+
+      print "Updating host and guest associations..." if option_verbose?
+      @host_guests.each do |host_id, guest_ids|
+        puts "HOST=#{host_id}"
+        puts "GUESTS=#{guest_ids}"
+        @k_system_api.update({
+                               'id' => host_id,
+                               'guest_ids' => guest_ids
+                             })
+      end
+      print "done" if option_verbose?
     end
 
     def create_systems_from_csv(line)
       if !@existing[line[ORGANIZATION]]
         @existing[line[ORGANIZATION]] = {}
-        @k_system_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})[0]['results'].each do |system|
+        @k_system_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999})[0]['results'].each do |system|
           @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
         end
       end
@@ -85,38 +98,49 @@ module HammerCLICsv
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
 
-        subscriptions(line).each do |subscription|
-          puts subscription
-          katello_subscription(line[ORGANIZATION], :name => subscription[:number])
-        end
+        # TODO w/ @daviddavis p-r
+        #subscriptions(line).each do |subscription|
+        #  katello_subscription(line[ORGANIZATION], :name => subscription[:number])
+        #end
 
         if !@existing[line[ORGANIZATION]].include? name
-          print "Creating system '#{name}'..." if verbose?
-          @k_system_api.create({
+          print "Creating system '#{name}'..." if option_verbose?
+          system_id = @k_system_api.create({
                                  'name' => name,
                                  'organization_id' => line[ORGANIZATION],
                                  'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                  'content_view_id' => 2, # TODO: katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                  'facts' => facts(line),
-                                 'installedProducts' => products(line),
+                                 'installed_products' => products(line),
                                  'type' => 'system'
-                               })
+                               })[0]['uuid']
+          @existing[line[ORGANIZATION]][name] = system_id
         else
-          print "Updating host '#{name}'..." if verbose?
-          @k_system_api.update({
+          print "Updating host '#{name}'..." if option_verbose?
+          system_id = @k_system_api.update({
                                  'id' => @existing[line[ORGANIZATION]][name],
                                  'name' => name,
-                                 'organization_id' => line[ORGANIZATION],
                                  'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                  'content_view_id' => 2, # TODO: katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                  'facts' => facts(line),
-                                 'installedProducts' => products(line)
-                               })
+                                 'installed_products' => products(line)
+                               })[0]['uuid']
         end
-        print "done\n" if verbose?
+
+=begin # TODO: tmp
+        if line[VIRTUAL] == 'Yes' && line[HOST]
+          raise "Host system '#{line[HOST]}' not found" if !@existing[line[ORGANIZATION]][line[HOST]]
+          @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] ||= []
+          @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] << system_id
+        end
+
+        set_system_groups(system_id, line)
+=end
+
+        print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
-      raise RuntimeError.new("#{e}\n       #{line}")
+      raise "#{e}\n       #{line}"
     end
 
     private
@@ -133,6 +157,15 @@ module HammerCLICsv
         (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OPERATINGSYSTEM]]
       end
       facts
+    end
+
+    def set_system_groups(system_id, line)
+      CSV.parse_line(line[SYSTEMGROUPS]).each do |systemgroup_name|
+        @k_systemgroup_api.add_systems({
+                                         'id' => katello_systemgroup(line[ORGANIZATION], :name => systemgroup_name),
+                                         'system_ids' => [system_id]
+                                       })
+      end
     end
 
     def products(line)

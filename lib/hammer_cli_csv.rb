@@ -24,6 +24,7 @@ module HammerCLICsv
   require 'hammer_cli_csv/users'
   require 'hammer_cli_csv/puppet_facts'
 
+  require 'hammer_cli_csv/lifecycle_environments'
   require 'hammer_cli_csv/content_views'
   require 'hammer_cli_csv/subscriptions'
   require 'hammer_cli_csv/systems'

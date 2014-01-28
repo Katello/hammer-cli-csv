@@ -56,7 +56,7 @@ module HammerCLICsv
 
       # TODO: convert to use CSV gem
 
-      file = File.new(csv_file, 'w')
+      file = File.new(option_csv_file, 'w')
       file.write "Name,Count,Description\n"
       @role_api.index[0].each do |role|
         if !role['locked']
@@ -71,7 +71,7 @@ module HammerCLICsv
     end
 
     def import
-      csv = get_lines(csv_file)[1..-1]
+      csv = get_lines(option_csv_file)[1..-1]
       lines_per_thread = csv.length/threads.to_i + 1
       splits = []
 

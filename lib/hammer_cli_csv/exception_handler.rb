@@ -5,6 +5,7 @@ module HammerCLICsv
 
     def mappings
       super + [
+        [Exception, :handle_csv_exception],
         [RestClient::Forbidden, :handle_forbidden],
         [RestClient::UnprocessableEntity, :handle_unprocessable_entity],
         [ArgumentError, :handle_argument_error]
@@ -12,6 +13,12 @@ module HammerCLICsv
     end
 
     protected
+
+    def handle_csv_exception(e)
+      $stderr.puts e.message
+      log_full_error e
+      HammerCLI::EX_DATAERR
+    end
 
     def handle_unprocessable_entity(e)
       response = JSON.parse(e.response)

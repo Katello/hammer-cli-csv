@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/csh -f
 
 bundle exec hammer -v csv:organizations      --verbose --csv-file test/data/organizations.csv
 bundle exec hammer -v csv:users              --verbose --csv-file test/data/users.csv
@@ -9,6 +9,11 @@ bundle exec hammer -v csv:domains            --verbose --csv-file test/data/doma
 bundle exec hammer -v csv:puppetenvironments --verbose --csv-file test/data/puppetenvironments.csv
 bundle exec hammer -v csv:hosts              --verbose --csv-file test/data/hosts.csv
 bundle exec hammer -v csv:puppetfacts        --verbose --csv-file test/data/puppetfacts.csv
+
+bundle exec hammer subscription upload --organization-id megacorp --file ~/Downloads/megacorp.zip
+echo "Waiting 30s for manifest upload to complete..."
+sleep 30
+echo "...continuing"
 
 bundle exec hammer -v csv:products           --verbose --csv-file test/data/products.csv
 

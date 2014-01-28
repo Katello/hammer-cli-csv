@@ -1,5 +1,5 @@
-Name,Count,Org Label,Description,Limit,Environment,Content View,System Groups
-damon.dials@megacorp.org,1,megacorp,"Individual account",1,Library,Default_Organization_View,"Employee"
+Name,Count,Organization,Description,Limit,Environment,Content View,System Groups,Subscriptions
+damon.dials@megacorp.org,1,megacorp,"Individual account",1,Library,Default_Organization_View,"Employee","""RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"""
 jenee.jahns@megacorp.org,1,megacorp,"Individual account",1,Library,Default_Organization_View,"Employee"
 gilbert.guerriero@megacorp.org,1,megacorp,"Individual account",1,Library,Default_Organization_View,"Employee"
 quiana.quesnel@megacorp.org,1,megacorp,"Individual account",1,Library,Default_Organization_View,"Employee"

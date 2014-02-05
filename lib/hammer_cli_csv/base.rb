@@ -39,14 +39,18 @@ module HammerCLICsv
     option ['--threads'], 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
     option ['--csv-export'], :flag, 'Export current data instead of importing'
     option ['--csv-file'], 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
+    option ['--prefix'], 'PREFIX', 'Prefix for all name columns'
     option ['--server'], 'SERVER', 'Server URL'
     option ['-u', '--username'], 'USERNAME', 'Username to access server'
     option ['-p', '--password'], 'PASSWORD', 'Password to access server'
 
     def execute
       if !option_csv_file
-        option_csv_file = '/dev/stdout' if option_csv_export? # TODO: how to get this to actually set value?
-        signal_usage_error "--csv-file required" if !option_csv_file
+        if option_csv_export?
+          option_csv_file = '/dev/stdout'
+        else
+          option_csv_file = '/dev/stdin'
+        end
       end
 
       @init_options = {
@@ -65,6 +69,7 @@ module HammerCLICsv
       @k_contentviewdefinition_api ||= KatelloApi::Resources::ContentViewDefinition.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
       @k_subscription_api ||= KatelloApi::Resources::Subscription.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
       @k_organization_api ||= KatelloApi::Resources::Organization.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
+      @k_activationkey_api ||= KatelloApi::Resources::ActivationKey.new(@init_options.merge({:base_url => "#{@init_options[:base_url]}"}))
 
       @f_architecture_api ||= ForemanApi::Resources::Architecture.new(@init_options)
       @f_domain_api ||= ForemanApi::Resources::Domain.new(@init_options)
@@ -87,12 +92,14 @@ module HammerCLICsv
       contents
     end
 
-    def namify(name_format, number)
+    def namify(name_format, number=0)
       if name_format.index('%')
-        name_format % number
+        name = name_format % number
       else
-        name_format
+        name = name_format
       end
+      name = "#{option_prefix}#{name}" if option_prefix
+      name
     end
 
     def labelize(name)
@@ -101,7 +108,8 @@ module HammerCLICsv
 
     def thread_import(return_headers=false)
       csv = []
-      CSV.foreach(option_csv_file, {:skip_blanks => true, :headers => :first_row, :return_headers => return_headers}) do |line|
+      CSV.foreach(option_csv_file || '/dev/stdin', {:skip_blanks => true, :headers => :first_row, 
+                    :return_headers => return_headers}) do |line|
         csv << line
       end
       lines_per_thread = csv.length/option_threads.to_i + 1
@@ -300,7 +308,6 @@ module HammerCLICsv
     end
 
     def katello_environment(organization, options={})
-      return '1' # TODO: tmp until env crud
       @environments ||= {}
       @environments[organization] ||= {}
 
@@ -308,11 +315,11 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @environments[organization][options[:name]]
         if !options[:id]
-          @k_environment_api.index({'organization_id' => organization})[0].each do |environment|
-            @environments[organization][environment['environment']['name']] = environment['environment']['id']
+          @k_environment_api.index({'organization_id' => organization})[0]['results'].each do |environment|
+            @environments[organization][environment['name']] = environment['id']
           end
           options[:id] = @environments[organization][options[:name]]
-          raise "Puppet environment '#{options[:name]}' not found" if !options[:id]
+          raise "Lifecycle environment '#{options[:name]}' not found" if !options[:id]
         end
         result = options[:id]
       else
@@ -320,7 +327,7 @@ module HammerCLICsv
         options[:name] = @environments.key(options[:id])
         if !options[:name]
           environment = @k_environment_api.show({'id' => options[:id]})[0]
-          raise "Puppet environment '#{options[:name]}' not found" if !environment || environment.empty?
+          raise "Lifecycle environment '#{options[:name]}' not found" if !environment || environment.empty?
           options[:name] = environment['name']
           @environments[options[:name]] = options[:id]
         end
@@ -331,7 +338,6 @@ module HammerCLICsv
     end
 
     def katello_contentview(organization, options={})
-      return 'Default_Organization_View' # TODO: tmp until env crud
       @contentviews ||= {}
       @contentviews[organization] ||= {}
 
@@ -339,16 +345,11 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @contentviews[organization][options[:name]]
         if !options[:id]
-          puts "CONTENTVIEWS=#{@k_contentview_api.index({'organization_id' => organization, 'environment_id' => 2, 'label' => 'Default_Organization_View'})[0]}"
-          @k_contentview_api.index({
-                                     'organization_id' => organization,
-                                     'label' => options[:name]
-                                   })[0].each do |contentview|
-            puts contentview
-            @contentviews[organization][contentview['contentview']['name']] = contentview['contentview']['id']
+          @k_contentview_api.index({'organization_id' => organization})[0]['results'].each do |contentview|
+            @contentviews[organization][contentview['name']] = contentview['id']
           end
           options[:id] = @contentviews[organization][options[:name]]
-          raise "Puppet contentview '#{options[:name]}' not found" if !options[:id]
+          raise "Content view '#{options[:name]}' not found" if !options[:id]
         end
         result = options[:id]
       else
@@ -374,17 +375,14 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @subscriptions[organization][options[:name]]
         if !options[:id]
-          puts @k_subscription_api.index({
-                                           'organization_id' => organization,
-                                           'search' => "product_id:\"#{options[:name]}\""
-                                         })[0]
-          @k_subscription_api.index({
-                                      'organization_id' => organization,
-                                      'search' => "product_id:\"#{options[:name]}\""
-                                    })[0]['results'].each do |subscription|
-            puts subscription
-            @subscriptions[organization][subscription['subscription']['name']] = subscription['subscription']['id'] if subscription
-          end
+          results = @k_subscription_api.index({
+                                                'organization_id' => organization,
+                                                'search' => "name:\"#{options[:name]}\""
+                                              })[0]
+          raise "No subscriptions match '#{options[:name]}'" if results['subtotal'] == 0
+          raise "Too many subscriptions match '#{options[:name]}'" if results['subtotal'] > 1
+          subscription = results['results'][0]
+          @subscriptions[organization][options[:name]] = subscription['id']
           options[:id] = @subscriptions[organization][options[:name]]
           raise "Subscription '#{options[:name]}' not found" if !options[:id]
         end

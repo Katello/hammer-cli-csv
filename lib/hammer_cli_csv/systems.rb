@@ -51,7 +51,7 @@ module HammerCLICsv
     ORGANIZATION = 'Organization'
     ENVIRONMENT = 'Environment'
     CONTENTVIEW = 'Content View'
-    SYSTEMGROUPS = 'Groups'
+    SYSTEMGROUPS = 'System Groups'
     VIRTUAL = 'Virtual'
     HOST = 'Host'
     OPERATINGSYSTEM = 'OS'
@@ -64,7 +64,55 @@ module HammerCLICsv
     SUBSCRIPTIONS = 'Subscriptions'
 
     def export
-      # TODO
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+        csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
+               OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
+        @k_organization_api.index({:per_page => 999999})[0]['results'].each do |organization|
+          @k_system_api.index({
+                                'per_page' => 999999,
+                                'organization_id' => organization['label']
+                               })[0]['results'].each do |system|
+            system = @k_system_api.show({
+                                          'id' => system['uuid'],
+                                          'fields' => 'full'
+                                        })[0]
+
+            name = system['name']
+            count = 1
+            organization_label = organization['label']
+            environment = system['environment']['label']
+            contentview = system['content_view']['name']
+            systemgroups = CSV.generate do |column|
+              column << system['systemGroups'].collect do |systemgroup|
+                systemgroup['name']
+              end
+            end.delete!("\n")
+            virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
+            host = system['host']
+            operatingsystem = "#{system['facts']['distribution.name']} " if system['facts']['distribution.name']
+            operatingsystem += system['facts']['distribution.version'] if system['facts']['distribution.version']
+            architecture = system['facts']['uname.machine']
+            sockets = system['facts']['cpu.cpu_socket(s)']
+            ram = system['facts']['memory.memtotal']
+            cores = system['facts']['cpu.core(s)_per_socket']
+            sla = ""
+            products = CSV.generate do |column|
+              column << system['installedProducts'].collect do |product|
+                "#{product['productId']}|#{product['productName']}"
+              end
+            end.delete!("\n")
+            subscriptions = CSV.generate do |column|
+              column << @k_subscription_api.index({
+                                                    'system_id' => system['uuid']
+                                                  })[0]['results'].collect do |subscription|
+                "#{subscription['product_id']}|#{subscription['product_name']}"
+              end
+            end.delete!("\n")
+            csv << [name, count, organization_label, environment, contentview, systemgroups, virtual, host,
+                    operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
+          end
+        end
+      end
     end
 
     def import
@@ -77,14 +125,12 @@ module HammerCLICsv
 
       print "Updating host and guest associations..." if option_verbose?
       @host_guests.each do |host_id, guest_ids|
-        puts "HOST=#{host_id}"
-        puts "GUESTS=#{guest_ids}"
         @k_system_api.update({
                                'id' => host_id,
                                'guest_ids' => guest_ids
                              })
       end
-      print "done" if option_verbose?
+      puts "done" if option_verbose?
     end
 
     def create_systems_from_csv(line)
@@ -109,25 +155,25 @@ module HammerCLICsv
                                  'name' => name,
                                  'organization_id' => line[ORGANIZATION],
                                  'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                                 'content_view_id' => 2, # TODO: katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                                 'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                  'facts' => facts(line),
                                  'installed_products' => products(line),
                                  'type' => 'system'
                                })[0]['uuid']
           @existing[line[ORGANIZATION]][name] = system_id
         else
-          print "Updating host '#{name}'..." if option_verbose?
+          print "Updating system '#{name}'..." if option_verbose?
+          puts line
           system_id = @k_system_api.update({
                                  'id' => @existing[line[ORGANIZATION]][name],
                                  'name' => name,
                                  'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                                 'content_view_id' => 2, # TODO: katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                                 'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                  'facts' => facts(line),
                                  'installed_products' => products(line)
                                })[0]['uuid']
         end
 
-=begin # TODO: tmp
         if line[VIRTUAL] == 'Yes' && line[HOST]
           raise "Host system '#{line[HOST]}' not found" if !@existing[line[ORGANIZATION]][line[HOST]]
           @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] ||= []
@@ -135,9 +181,8 @@ module HammerCLICsv
         end
 
         set_system_groups(system_id, line)
-=end
 
-        print "done\n" if option_verbose?
+        puts "done" if option_verbose?
       end
     rescue RuntimeError => e
       raise "#{e}\n       #{line}"
@@ -156,6 +201,7 @@ module HammerCLICsv
       else
         (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OPERATINGSYSTEM]]
       end
+      facts['virt.is_guest'] = line[VIRTUAL] == 'Yes' ? true : false
       facts
     end
 
@@ -171,7 +217,9 @@ module HammerCLICsv
     def products(line)
       products = CSV.parse_line(line[PRODUCTS]).collect do |product_details|
         product = {}
-        (product[:product_id], product[:productName]) = product_details.split('|')
+        # TODO: these get passed straight through to candlepin; probably would be better to process in server
+        #       to allow underscore product_id here
+        (product['productId'], product['productName']) = product_details.split('|')
         product
       end
       products

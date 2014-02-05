@@ -44,23 +44,44 @@ require 'csv'
 module HammerCLICsv
   class ActivationKeysCommand < BaseCommand
 
-    def initialize(*args)
-      super(args)
-      @activationkey_api = KatelloApi::Resources::ActivationKey.new(@init_options)
-      @organization_api = KatelloApi::Resources::Organization.new(@init_options)
-      @environment_api = KatelloApi::Resources::Environment.new(@init_options)
-      @contentview_api = KatelloApi::Resources::ContentView.new(@init_options)
-    end
+    ORGANIZATION = 'Organization'
+    DESCRIPTION = 'Description'
+    LIMIT = 'Limit'
+    ENVIRONMENT = 'Environment'
+    CONTENTVIEW = 'Content View'
+    SYSTEMGROUPS = 'System Groups'
+    SUBSCRIPTIONS = 'Subscriptions'
 
     def export
-      CSV.open(option_csv_file, 'wb') do |csv|
-        csv << ['Name', 'Count', 'Org Label', 'Description', 'Limit', 'Environment', 'Content View', 'System Groups']
-        @organization_api.index[0].each do |organization|
-          @activationkey_api.index({'organization_id' => organization['label']})[0].each do |activationkey|
-            puts "Writing activation key '#{activationkey['name']}'"
-            csv << [activationkey['name'], 1, organization['label'],
-                    activationkey['description'],
-                    activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']]
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+        csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
+                SYSTEMGROUPS, SUBSCRIPTIONS]
+        @k_organization_api.index({:per_page => 999999})[0]['results'].each do |organization|
+          @k_activationkey_api.index({'per_page' => 999999,
+                                       'organization_id' => organization['label']
+                                     })[0]['results'].each do |activationkey|
+            puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
+            name = namify(activationkey['name'])
+            count = 1
+            description = activationkey['description']
+            limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
+            environment = activationkey['environment']['label']
+            contentview = activationkey['content_view']['name']
+            systemgroups = CSV.generate do |column|
+              column << activationkey['systemGroups'].collect do |systemgroup|
+                systemgroup['name']
+              end
+            end.delete!("\n") if activationkey['systemGroups']
+            subscriptions = CSV.generate do |column|
+              column << @k_subscription_api.index({
+                                                    'activation_key_id' => activationkey['id']
+                                                  })[0]['results'].collect do |subscription|
+                amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
+                "#{amount}|#{subscription['product_name']}"
+              end
+            end.delete!("\n")
+            csv << [name, count, organization['label'], description, limit, environment, contentview,
+                    systemgroups, subscriptions]
           end
         end
       end
@@ -75,60 +96,64 @@ module HammerCLICsv
     end
 
     def create_activationkeys_from_csv(line)
-      details = parse_activationkey_csv(line)
-
-      if !@existing[details[:org_label]]
-        @existing[details[:org_label]] = {}
-        @activationkey_api.index({'organization_id' => details[:org_label]})[0].each do |activationkey|
-          @existing[details[:org_label]][activationkey['name']] = activationkey['id']
-        end
-        @environments = {}
-        @environments[details[:org_label]] = {}
-        @environment_api.index({'organization_id' => details[:org_label]})[0].each do |environment|
-          @environments[details[:org_label]][details[:environment]] = environment['id']
-        end
-        @contentviews = {}
-        @contentviews[details[:org_label]] = {}
-        @contentview_api.index({'organization_id' => details[:org_label]})[0].each do |contentview|
-          @contentviews[details[:org_label]][details[:content_view]] = contentview['id']
+      if !@existing[line[ORGANIZATION]]
+        @existing[line[ORGANIZATION]] = {}
+        @k_activationkey_api.index({
+                                     'page_size' => 999999,
+                                     'organization_id' => line[ORGANIZATION]
+                                   })[0]['results'].each do |activationkey|
+          @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
         end
       end
 
-      details[:count].times do |number|
-        name = namify(details[:name_format], number)
-        if !@existing[details[:org_label]].include? name
-          puts "Creating activationkey '#{name}'" if option_verbose?
-          @activationkey_api.create({
-                             'environment_id' => @environments[details[:org_label]][details[:environment]],
-                             'activation_key' => {
-                               'name' => name,
-                               'content_view_id' => details[:content_view],
-                               'description' => details[:description]
-                             }
-                           })
+      line[COUNT].to_i.times do |number|
+        name = namify(line[NAME], number)
+
+        if !@existing[line[ORGANIZATION]].include? name
+          print "Creating activation key '#{name}'..." if option_verbose?
+          activationkey_id = @k_activationkey_api.create({
+                                      'name' => name,
+                                      'environment_id' => katello_environment(line[ORGANIZATION],
+                                                                              :name => line[ENVIRONMENT]),
+                                      'content_view_id' => katello_contentview(line[ORGANIZATION],
+                                                                               :name => line[CONTENTVIEW]),
+                                      'description' => line[DESCRIPTION]
+                                    })[0]['id']
         else
-          puts "Updating activationkey '#{name}'" if option_verbose?
-          @activationkey_api.update({
-                             'organization_id' => details[:org_label],
-                             'id' => @existing[details[:org_label]][name],
-                             'activation_key' => {
-                               'name' => name,
-                               'description' => details[:description]
-                             }
-                           })
+          print "Updating activationkey '#{name}'..." if option_verbose?
+          activationkey_id = @k_activationkey_api.update({
+                                        'id' => @existing[line[ORGANIZATION]][name],
+                                        'name' => name,
+                                        'environment_id' => katello_environment(line[ORGANIZATION],
+                                                                                :name => line[ENVIRONMENT]),
+                                        'content_view_id' => katello_contentview(line[ORGANIZATION],
+                                                                                 :name => line[CONTENTVIEW]),
+                                        'description' => line[DESCRIPTION]
+                                      })[0]['id']
         end
+
+        if line[SUBSCRIPTIONS] && line[SUBSCRIPTIONS] != ''
+          subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |subscription_details|
+            subscription = {}
+            (amount, name) = subscription_details.split('|')
+            {
+              :subscription => {
+                :id => katello_subscription(line[ORGANIZATION], :name => name),
+                :quantity => amount
+              }
+            }
+          end
+          @k_subscription_api.create({
+                                       'activation_key_id' => activationkey_id,
+                                       'subscriptions' => subscriptions
+                                     })
+        end
+
+        puts "done" if option_verbose?
       end
     end
 
-    def parse_activationkey_csv(line)
-      keys = [:name_format, :count, :org_label, :description, :limit, :environment, :content_view, :system_groups]
-      details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
-
-      details[:count] = details[:count].to_i
-
-      details
-    end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:activationkeys", "ping the katello server", HammerCLICsv::ActivationKeysCommand)
+  HammerCLI::MainCommand.subcommand("csv:activationkeys", "import/export activation keys", HammerCLICsv::ActivationKeysCommand)
 end

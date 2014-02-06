@@ -1,22 +1,23 @@
 #!/bin/csh -f
 
-bundle exec hammer -v csv:organizations      --verbose --csv-file test/data/organizations.csv
-bundle exec hammer -v csv:users              --verbose --csv-file test/data/users.csv
-bundle exec hammer -v csv:operatingsystems   --verbose --csv-file test/data/operatingsystems.csv
-bundle exec hammer -v csv:architectures      --verbose --csv-file test/data/architectures.csv
-bundle exec hammer -v csv:partitiontables    --verbose --csv-file test/data/partitiontables.csv
-bundle exec hammer -v csv:domains            --verbose --csv-file test/data/domains.csv
-bundle exec hammer -v csv:puppetenvironments --verbose --csv-file test/data/puppetenvironments.csv
-bundle exec hammer -v csv:hosts              --verbose --csv-file test/data/hosts.csv
-bundle exec hammer -v csv:puppetfacts        --verbose --csv-file test/data/puppetfacts.csv
+bundle exec hammer -v csv:organizations      --csv-file test/data/organizations.csv
+bundle exec hammer -v csv:users              --csv-file test/data/users.csv
+bundle exec hammer -v csv:operatingsystems   --csv-file test/data/operatingsystems.csv
+bundle exec hammer -v csv:architectures      --csv-file test/data/architectures.csv
+bundle exec hammer -v csv:partitiontables    --csv-file test/data/partitiontables.csv
+bundle exec hammer -v csv:domains            --csv-file test/data/domains.csv
+bundle exec hammer -v csv:puppetenvironments --csv-file test/data/puppetenvironments.csv
+bundle exec hammer -v csv:hosts              --csv-file test/data/hosts.csv
+bundle exec hammer -v csv:puppetfacts        --csv-file test/data/puppetfacts.csv
 
 bundle exec hammer subscription upload --organization-id megacorp --file ~/Downloads/megacorp.zip
 echo "Waiting 30s for manifest upload to complete..."
 sleep 30
 echo "...continuing"
 
-bundle exec hammer -v csv:products           --verbose --csv-file test/data/products.csv
+bundle exec hammer -v csv:products           --csv-file test/data/products.csv
 
-bundle exec hammer -v csv:lifecycleenv       --verbose --csv-file test/data/lifecycleenvironments.csv
-bundle exec hammer -v csv:systemgroups       --verbose --csv-file test/data/systemgroups.csv
-bundle exec hammer -v csv:systems            --verbose --csv-file test/data/systems.csv
+bundle exec hammer -v csv:lifecycleenv       --csv-file test/data/lifecycleenvironments.csv
+bundle exec hammer -v csv:systemgroups       --csv-file test/data/systemgroups.csv
+bundle exec hammer -v csv:systems            --csv-file test/data/systems.csv
+bundle exec hammer -v csv:activationkeys     --csv-file test/data/activationkeys.csv

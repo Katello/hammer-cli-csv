@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Red Hat
+# Copyright (c) 2013-2014 Red Hat
 #
 # MIT License
 #
@@ -42,91 +42,108 @@ require 'csv'
 module HammerCLICsv
   class RolesCommand < BaseCommand
 
-    def initialize(*args)
-      super(args)
-      @role_api = KatelloApi::Resources::Role.new(@init_options)
-      @permission_api = KatelloApi::Resources::Permission.new(@init_options)
-    end
-
-    def execute
-      options['csv_export'] ? export : import  # TODO: how to access :flag option value?
-    end
+    ROLE = "Role"
+    FILTER = "Filter"
+    PERMISSIONS = "Permissions"
+    ORGANIZATIONS = "Organizations"
+    LOCATIONS = "Locations"
 
     def export
-
-      # TODO: convert to use CSV gem
-
-      file = File.new(option_csv_file, 'w')
-      file.write "Name,Count,Description\n"
-      @role_api.index[0].each do |role|
-        if !role['locked']
-          file.write "#{role['name']},1,#{role['description']}\n"
-          puts @role_api.permissions({:role_id => role['id']}, {'Accept' => 'version=2,application/json'})
-        end
-      end
-
-      HammerCLI::EX_OK
-    ensure
-      file.close unless file.nil?
-    end
-
-    def import
-      csv = get_lines(option_csv_file)[1..-1]
-      lines_per_thread = csv.length/threads.to_i + 1
-      splits = []
-
-      @existing = {}
-      @role_api.index[0].each do |role|
-          @existing[role['name']] = role['id'] if role
-      end
-
-      threads.to_i.times do |current_thread|
-        start_index = ((current_thread) * lines_per_thread).to_i
-        finish_index = ((current_thread + 1) * lines_per_thread).to_i
-        lines = csv[start_index...finish_index].clone
-        splits << Thread.new do
-          lines.each do |line|
-            if line.index('#') != 0
-              create_roles_from_csv(line)
+      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+        csv << [NAME, COUNT, FILTER, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
+        @f_role_api.index({'per_page' => 999999})[0]['results'].each do |role|
+          @f_filter_api.index({
+                                'per_page' => 999999,
+                                'search' => "role=\"#{role['name']}\""
+                              })[0]['results'].each do |filter|
+            if filter['search'] && filter['search'] != ''
+              permissions = CSV.generate do |column|
+                column << filter['permissions'].collect do |permission|
+                  permission['name']
+                end
+              end.delete!("\n")
+              organizations = CSV.generate do |column|
+                column << filter['organizations'].collect do |organization|
+                  organization['name']
+                end
+              end.delete!("\n")
+              locations = CSV.generate do |column|
+                column << filter['locations'].collect do |location|
+                  location['name']
+                end
+              end.delete!("\n")
+              csv << [role['name'], 1, filter['search'], permissions, organizations, locations]
             end
           end
         end
       end
 
-      splits.each do |thread|
-        thread.join
-      end
-
       HammerCLI::EX_OK
     end
 
-    def create_roles_from_csv(line)
-      details = parse_role_csv(line)
+    def import
+      @existing_roles = {}
+      @f_role_api.index({'per_page' => 999999})[0]['results'].each do |role|
+        @existing_roles[role['name']] = role['id']
+      end
 
-      details[:count].times do |number|
-        name = namify(details[:name_format], number)
-        if !@existing.include? name
-          @role_api.create({
-                             'role' => {
-                               'name' => name,
-                               'description' => details[:description]
-                             }
-                           }, {'Accept' => 'version=2,application/json'})
-        else
-          puts "Skip existing role '#{name}'"
-        end
+      @existing_filters = {}
+      @f_filter_api.index({'per_page' => 999999})[0]['results'].each do |role|
+        @existing_filters[role['name']] = role['id']
+      end
+
+      thread_import do |line|
+        create_roles_from_csv(line)
       end
     end
 
-    def parse_role_csv(line)
-      keys = [:name_format, :count, :description]
-      details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
+    def create_roles_from_csv(line)
+      line[COUNT].to_i.times do |number|
+        name = namify(line[NAME], number)
+        filter = namify(line[FILTER], number)
 
-      details[:count] = details[:count].to_i
+        if !@existing_roles[name]
+          print "Creating role '#{name}'..." if option_verbose?
+        else
+          print "Updating role '#{name}'..." if option_verbose?
+          @f_role_api.update({
+                               'id' => @existing_roles[name]
+                             })
+        end
 
-      details
+        permissions = CSV.parse_line(line[PERMISSIONS], {:skip_blanks => true}).collect do |permission|
+          foreman_permission(:name => permission)
+        end
+        puts permissions
+        organizations = CSV.parse_line(line[ORGANIZATIONS], {:skip_blanks => true}).collect do |organization|
+          foreman_organization(:name => organization)
+        end
+        locations = CSV.parse_line(line[LOCATIONS], {:skip_blanks => true}).collect do |location|
+          foreman_location(:name => location)
+        end
+
+        filter_id = foreman_filter(name, :name => filter)
+        if !filter_id
+          @f_filter_api.create({
+                                 'role_id' => @existing_roles[name],
+                                 'search' => filter,
+                                 'organization_ids' => organizations,
+                                 'location_ids' => locations
+                               })
+        else
+          @f_filter_api.update({
+                                 'id' => filter_id,
+                                 'search' => filter,
+                                 'organization_ids' => organizations,
+                                 'location_ids' => locations,
+                                 'permission_ids' => permissions
+                               })
+        end
+
+        puts "done" if option_verbose?
+      end
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:roles", "ping the katello server", HammerCLICsv::RolesCommand)
+  HammerCLI::MainCommand.subcommand("csv:roles", "import / export roles", HammerCLICsv::RolesCommand)
 end

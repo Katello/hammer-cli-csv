@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright (c) 2014 Red Hat
 #
 # MIT License
 #
@@ -46,7 +46,7 @@ require 'csv'
 require 'uri'
 
 module HammerCLICsv
-  class SystemsCommand < BaseCommand
+  class PuppetReportsCommand < BaseCommand
 
     ORGANIZATION = 'Organization'
     ENVIRONMENT = 'Environment'
@@ -163,6 +163,7 @@ module HammerCLICsv
           @existing[line[ORGANIZATION]][name] = system_id
         else
           print "Updating system '#{name}'..." if option_verbose?
+          puts line
           system_id = @k_system_api.update({
                                  'id' => @existing[line[ORGANIZATION]][name],
                                  'name' => name,
@@ -235,5 +236,5 @@ module HammerCLICsv
 
   end
 
-  HammerCLI::MainCommand.subcommand("csv:systems", "import/export systems", HammerCLICsv::SystemsCommand)
+  HammerCLI::MainCommand.subcommand("csv:puppetreports", "import/export puppet reports", HammerCLICsv::PuppetReportsCommand)
 end

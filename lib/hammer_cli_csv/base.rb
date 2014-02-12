@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Red Hat
+# Copyright (c) 2013-2014 Red Hat
 #
 # MIT License
 #
@@ -74,11 +74,15 @@ module HammerCLICsv
       @f_architecture_api ||= ForemanApi::Resources::Architecture.new(@init_options)
       @f_domain_api ||= ForemanApi::Resources::Domain.new(@init_options)
       @f_environment_api ||= ForemanApi::Resources::Environment.new(@init_options)
+      @f_filter_api ||= ForemanApi::Resources::Filter.new(@init_options)
       @f_host_api ||= ForemanApi::Resources::Host.new(@init_options)
+      @f_location_api ||= ForemanApi::Resources::Location.new(@init_options)
       @f_operatingsystem_api ||= ForemanApi::Resources::OperatingSystem.new(@init_options)
       @f_organization_api ||= ForemanApi::Resources::Organization.new(@init_options)
+      @f_permission_api ||= ForemanApi::Resources::Permission.new(@init_options)
       @f_partitiontable_api ||= ForemanApi::Resources::Ptable.new(@init_options)
       @f_puppetfacts_api ||= ForemanApi::Resources::FactValue.new(@init_options)
+      @f_role_api ||= ForemanApi::Resources::Role.new(@init_options)
       @f_user_api ||= ForemanApi::Resources::User.new(@init_options)
 
       option_csv_export? ? export : import
@@ -154,6 +158,93 @@ module HammerCLICsv
           raise "Organization 'id=#{options[:id]}' not found" if !organization || organization.empty?
           options[:name] = organization['name']
           @organizations[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def foreman_location(options={})
+      @locations ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @locations[options[:name]]
+        if !options[:id]
+          location = @f_location_api.index({'search' => "name=\"#{options[:name]}\""})[0]['results']
+          raise RuntimeError, "Location '#{options[:name]}' not found" if !location || location.empty?
+          options[:id] = location[0]['id']
+          @locations[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @locations.key(options[:id])
+        if !options[:name]
+          location = @f_location_api.show({'id' => options[:id]})[0]
+          raise "Location 'id=#{options[:id]}' not found" if !location || location.empty?
+          options[:name] = location['name']
+          @locations[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def foreman_permission(options={})
+      @permissions ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @permissions[options[:name]]
+        if !options[:id]
+          permission = @f_permission_api.index({'name' => options[:name]})[0]['results']
+          raise RuntimeError, "Permission '#{options[:name]}' not found" if !permission || permission.empty?
+          options[:id] = permission[0]['id']
+          @permissions[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @permissions.key(options[:id])
+        if !options[:name]
+          permission = @f_permission_api.show({'id' => options[:id]})[0]
+          raise "Permission 'id=#{options[:id]}' not found" if !permission || permission.empty?
+          options[:name] = permission['name']
+          @permissions[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def foreman_filter(role, options={})
+      @filters ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @filters[options[:name]]
+        if !options[:id]
+          filter = @f_filter_api.index({'search' => "role=\"#{role}\" and search=\"#{options[:name]}\""})[0]['results']
+          if !filter || filter.empty?
+            options[:id] = nil
+          else
+            options[:id] = filter[0]['id']
+            @filters[options[:name]] = options[:id]
+          end
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @filters.key(options[:id])
+        if !options[:name]
+          filter = @f_filter_api.show({'id' => options[:id]})[0]
+          raise "Filter 'id=#{options[:id]}' not found" if !filter || filter.empty?
+          options[:name] = filter['name']
+          @filters[options[:name]] = options[:id]
         end
         result = options[:name]
       end

@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Red Hat
+# Copyright (c) 2013-2014 Red Hat
 #
 # MIT License
 #
@@ -99,7 +99,7 @@ module HammerCLICsv
       if !@existing[line[ORGANIZATION]]
         @existing[line[ORGANIZATION]] = {}
         @k_activationkey_api.index({
-                                     'page_size' => 999999,
+                                     'per_page' => 999999,
                                      'organization_id' => line[ORGANIZATION]
                                    })[0]['results'].each do |activationkey|
           @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
@@ -111,17 +111,18 @@ module HammerCLICsv
 
         if !@existing[line[ORGANIZATION]].include? name
           print "Creating activation key '#{name}'..." if option_verbose?
-          activationkey_id = @k_activationkey_api.create({
+          activationkey = @k_activationkey_api.create({
                                       'name' => name,
                                       'environment_id' => katello_environment(line[ORGANIZATION],
                                                                               :name => line[ENVIRONMENT]),
                                       'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                :name => line[CONTENTVIEW]),
                                       'description' => line[DESCRIPTION]
-                                    })[0]['id']
+                                    })[0]
+          @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
         else
           print "Updating activationkey '#{name}'..." if option_verbose?
-          activationkey_id = @k_activationkey_api.update({
+          activationkey = @k_activationkey_api.update({
                                         'id' => @existing[line[ORGANIZATION]][name],
                                         'name' => name,
                                         'environment_id' => katello_environment(line[ORGANIZATION],
@@ -129,27 +130,56 @@ module HammerCLICsv
                                         'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                  :name => line[CONTENTVIEW]),
                                         'description' => line[DESCRIPTION]
-                                      })[0]['id']
+                                      })[0]
         end
 
-        if line[SUBSCRIPTIONS] && line[SUBSCRIPTIONS] != ''
-          subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |subscription_details|
-            subscription = {}
-            (amount, name) = subscription_details.split('|')
-            {
-              :subscription => {
-                :id => katello_subscription(line[ORGANIZATION], :name => name),
-                :quantity => amount
-              }
-            }
-          end
-          @k_subscription_api.create({
-                                       'activation_key_id' => activationkey_id,
-                                       'subscriptions' => subscriptions
-                                     })
-        end
+        update_subscriptions(activationkey, line)
+        update_groups(activationkey, line)
 
         puts "done" if option_verbose?
+      end
+    end
+
+    def update_groups(activationkey, line)
+      if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
+        # TODO: note that existing system groups are not removed
+        CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
+          @k_systemgroup_api.add_activation_keys({
+                                                   'id' => katello_systemgroup(line[ORGANIZATION], :name => name),
+                                                   'activation_key_ids' => [activationkey['id']]
+                                                 })
+        end
+      end
+    end
+
+    def update_subscriptions(activationkey, line)
+      if line[SUBSCRIPTIONS] && line[SUBSCRIPTIONS] != ''
+        subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |subscription_details|
+          subscription = {}
+          (amount, name) = subscription_details.split('|')
+          {
+            :subscription => {
+              :id => katello_subscription(line[ORGANIZATION], :name => name),
+              :quantity => amount
+            }
+          }
+        end
+
+        # TODO: should there be a destroy_all similar to systems?
+        @k_subscription_api.index({
+                                  'per_page' => 999999,
+                                  'activation_key_id' => activationkey['id']
+                                })[0]['results'].each do |subscription|
+          @k_subscription_api.destroy({
+                                        'id' => subscription['id'],
+                                        'activation_key_id' => activationkey['id']
+                                      })
+        end
+
+        @k_subscription_api.create({
+                                     'activation_key_id' => activationkey['id'],
+                                     'subscriptions' => subscriptions
+                                   })
       end
     end
 

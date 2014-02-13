@@ -1,21 +1,21 @@
-"Name","Count","OS Family","Layout"
-"ext4 default","1","Redhat","zerombr
+"Name","Count","OS Family","Operating Systems","Layout"
+"ext4 default","1","Redhat",,"zerombr
 clearpart --all --initlabel
 part /boot --fstype=ext4 --size=500
 part / --fstype=ext4 --size=1024 --grow
 part swap  --recommended"
-"F16 / Grub2","1","Redhat","part biosboot --fstype=biosboot --size=1
+"F16 / Grub2","1","Redhat",,"part biosboot --fstype=biosboot --size=1
 zerombr
 clearpart --all --initlabel
 part /boot --fstype=ext4 --size=500
 part / --fstype=ext4 --size=1024 --grow
 part swap  --recommended"
-"Katello Fedora Default","1","Redhat","zerombr
+"Katello Fedora Default","1","Redhat",,"zerombr
 clearpart --all --initlabel
 part /boot --fstype ext3 --size=100 --asprimary
 part /     --fstype ext3 --size=1024 --grow
 part swap  --recommended"
-"OpenStack Storage","1","Debian","d-i partman-auto/disk string /dev/vda
+"OpenStack Storage","1","Debian",,"d-i partman-auto/disk string /dev/vda
 d-i partman-auto/method string lvm
 
 d-i partman-lvm/device_remove_lvm boolean true
@@ -72,35 +72,35 @@ d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true
 "
-"RedHat default","1","Redhat","zerombr yes
+"RedHat default","1","Redhat","RHEL 6.4,RHEL 6.3","zerombr yes
 clearpart --all --initlabel
 part /boot --fstype ext3 --size=100 --asprimary
 part /     --fstype ext3 --size=1024 --grow
 part swap  --recommended"
-"Solaris medium disk mirrored","1","Solaris","filesys mirror:d10 c1t0d0s0 c1t1d0s0 16000 /
+"Solaris medium disk mirrored","1","Solaris",,"filesys mirror:d10 c1t0d0s0 c1t1d0s0 16000 /
 filesys mirror:d20 c1t0d0s1 c1t1d0s1 8000 swap
 filesys mirror:d40 c1t0d0s4 c1t1d0s4 free /var/tmp
 metadb c1t0d0s7 size 8192 count 3
 metadb c1t1d0s7 size 8192 count 3
 "
-"Solaris small disk c1t0","1","Solaris","filesys c1t0d0s0 7000 /
+"Solaris small disk c1t0","1","Solaris",,"filesys c1t0d0s0 7000 /
 filesys c1t0d0s1 1000 swap
 filesys c1t0d0s3 15 unnamed
 filesys c1t0d0s7 free /tmp2
 "
-"Suse Entire SCSI Disk","1","Suse","  <partitioning  config:type=""list"">
+"Suse Entire SCSI Disk","1","Suse",,"  <partitioning  config:type=""list"">
     <drive>
       <device>/dev/sda</device>       
       <use>all</use>
     </drive>
   </partitioning>"
-"Suse Entire Virtual Disk","1","Suse","  <partitioning  config:type=""list"">
+"Suse Entire Virtual Disk","1","Suse",,"  <partitioning  config:type=""list"">
     <drive>
       <device>/dev/vda</device>       
       <use>all</use>
     </drive>
   </partitioning>"
-"Ubuntu custom LVM","1","Debian","d-i partman-auto/disk string /dev/vda
+"Ubuntu custom LVM","1","Debian",,"d-i partman-auto/disk string /dev/vda
 d-i partman-auto/method string lvm
 
 d-i partman-lvm/device_remove_lvm boolean true
@@ -158,7 +158,7 @@ d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true
 "
-"Ubuntu default","1","Debian","d-i partman-auto/disk string /dev/vda
+"Ubuntu default","1","Debian",,"d-i partman-auto/disk string /dev/vda
 d-i partman-auto/method string regular
 d-i partman-auto/init_automatically_partition select Guided - use entire disk
 d-i partman/confirm_write_new_label boolean true
@@ -166,20 +166,20 @@ d-i partman/choose_partition select \
 Finish partitioning and write changes to disk
 d-i partman/confirm boolean true
 "
-"vg-redhat","1","Redhat","zerombr yes
+"vg-redhat","1","Redhat",,"zerombr yes
 clearpart --all --initlabel
 part /boot --fstype ext4 --size 200 --asprimary
 part pv.01 --grow --size=1024
 volgroup <%= shortname %> pv.01
 logvol / --fstype=ext4 --name=root --vgname=<%= shortname %> --grow --size=1024
 logvol swap --name=swap --vgname=<%= shortname %>  --recommended"
-"Windows Entire SCSI Disk","1","Windows","  <partitioning  config:type=""list"">
+"Windows Entire SCSI Disk","1","Windows",,"  <partitioning  config:type=""list"">
     <drive>
       <device>/stuff</device>       
       <use>all</use>
     </drive>
   </partitioning>"
-"Windows Entire Virtual Disk","1","Windows","  <partitioning  config:type=""list"">
+"Windows Entire Virtual Disk","1","Windows",,"  <partitioning  config:type=""list"">
     <drive>
       <device>/data</device>       
       <use>all</use>

@@ -83,7 +83,7 @@ module HammerCLICsv
                                           }
                                         })
         else
-          print "Updating operatingsystem '#{name}'..." if option_verbose?
+          print "Updating operating system '#{name}'..." if option_verbose?
           @f_operatingsystem_api.update({
                                           'id' => @existing[name],
                                           'operatingsystem' => {

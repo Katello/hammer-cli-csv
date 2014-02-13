@@ -44,7 +44,6 @@ module HammerCLICsv
   class ProductsCommand < BaseCommand
 
     ORGANIZATION = 'Organization'
-    PROVIDER = 'Provider'
     REPOSITORY = 'Repository'
     REPOSITORY_TYPE = 'Repository Type'
     REPOSITORY_URL = 'Repository Url'
@@ -55,7 +54,6 @@ module HammerCLICsv
 
     def import
       @existing_products = {}
-      @existing_providers = {}
       @existing_repositories = {}
 
       thread_import do |line|
@@ -64,20 +62,18 @@ module HammerCLICsv
     end
 
     def create_products_from_csv(line)
-      if !@existing_providers[line[ORGANIZATION]]
-        # TODO: get the red hat provider explicitly and put into list since it's not returned by index
-        @existing_providers[line[ORGANIZATION]] = {}
-        @k_provider_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})[0]['results'].each do |provider|
-          @existing_providers[line[ORGANIZATION]][provider['name']] = provider['id'] if provider
-        end
-
+      if !@existing_products[line[ORGANIZATION]]
         @existing_products[line[ORGANIZATION]] = {}
-        @k_product_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})[0]['results'].each do |product|
+        @k_product_api.index({
+                               'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                               'page_size' => 999999,
+                               'paged' => true
+                             })[0]['results'].each do |product|
           @existing_products[line[ORGANIZATION]][product['name']] = product['id'] if product
 
           if product
             @k_repository_api.index({
-                                      'organization_id' => line[ORGANIZATION],
+                                      'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                       'product_id' => product['id'],
                                       'enabled' => true,
                                       'library' => true,
@@ -90,18 +86,6 @@ module HammerCLICsv
         end
       end
 
-      # Only creating providers, not updating
-      if !@existing_providers[line[ORGANIZATION]][line[PROVIDER]]
-        print "Creating provider '#{line[PROVIDER]}'..." if option_verbose?
-        id = @k_provider_api.create({
-                                      'name' => line[PROVIDER],
-                                      'organization_id' => line[ORGANIZATION]
-                                    })[0]['id']
-        @existing_providers[line[ORGANIZATION]][line[PROVIDER]] = id
-        print "done\n" if option_verbose?
-      end
-      provider_id = @existing_providers[line[ORGANIZATION]][line[PROVIDER]]
-
       # Only creating products, not updating
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
@@ -109,8 +93,8 @@ module HammerCLICsv
         if !product_id
           print "Creating product '#{name}'..." if option_verbose?
           product_id = @k_product_api.create({
-                                               'name' => name,
-                                               'provider_id' => provider_id
+                                               'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                               'name' => name
                                              })[0]['id']
           @existing_products[line[ORGANIZATION]][name] = product_id
           print "done\n" if option_verbose?
@@ -122,6 +106,7 @@ module HammerCLICsv
         if !@existing_repositories[line[ORGANIZATION] + name][labelize(repository_name)]
           print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
           @k_repository_api.create({
+                                     'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                      'name' => repository_name,
                                      'label' => labelize(repository_name),
                                      'product_id' => product_id,
@@ -137,5 +122,6 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:products", "import/export products and repositories", HammerCLICsv::ProductsCommand)
+  HammerCLI::MainCommand.subcommand("csv:products", "import/export products and repositories",
+                                    HammerCLICsv::ProductsCommand)
 end

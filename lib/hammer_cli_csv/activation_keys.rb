@@ -100,7 +100,7 @@ module HammerCLICsv
         @existing[line[ORGANIZATION]] = {}
         @k_activationkey_api.index({
                                      'per_page' => 999999,
-                                     'organization_id' => line[ORGANIZATION]
+                                     'organization_id' => katello_organization(:name => line[ORGANIZATION])
                                    })[0]['results'].each do |activationkey|
           @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
         end
@@ -121,7 +121,7 @@ module HammerCLICsv
                                     })[0]
           @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
         else
-          print "Updating activationkey '#{name}'..." if option_verbose?
+          print "Updating activation key '#{name}'..." if option_verbose?
           activationkey = @k_activationkey_api.update({
                                         'id' => @existing[line[ORGANIZATION]][name],
                                         'name' => name,

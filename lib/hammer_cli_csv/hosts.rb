@@ -97,6 +97,7 @@ module HammerCLICsv
           @f_host_api.create({
                              'host' => {
                                'name' => name,
+                               'root_pass' => 'changeme',
                                'mac' => namify(line[MACADDRESS], number),
                                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),

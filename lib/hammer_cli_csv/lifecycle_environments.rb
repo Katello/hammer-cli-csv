@@ -59,7 +59,7 @@ module HammerCLICsv
               label = environment['label']
               prior = environment['prior']
               description = environment['description']
-              csv << [name, count, label, organization['label'], prior, description]
+              csv << [name, count, label, organization['name'], prior, description]
             end
           end
         end
@@ -71,10 +71,10 @@ module HammerCLICsv
       @k_organization_api.index({'per_page' => 999999})[0]['results'].each do |organization|
         @k_environment_api.index({
                                    'per_page' => 999999,
-                                   'organization_id' => organization['label']
+                                   'organization_id' => katello_organization(:name => organization['name'])
                                  })[0]['results'].each do |environment|
-          @existing[organization['label']] ||= {}
-          @existing[organization['label']][environment['name']] = environment['id'] if environment
+          @existing[organization['name']] ||= {}
+          @existing[organization['name']][environment['name']] = environment['id'] if environment
         end
       end
 
@@ -92,19 +92,19 @@ module HammerCLICsv
         if !@existing[line[ORGANIZATION]].include? name
           print "Creating environment '#{name}'..." if option_verbose?
           @k_environment_api.create({
-                                      'organization_id' => line[ORGANIZATION],
+                                      'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                       'name' => name,
                                       'label' => label,
-                                      'prior' => prior,
+                                      'prior' => katello_environment(line[ORGANIZATION], :name => prior),
                                       'description' => line[DESCRIPTION]
                                     })
         else
           print "Updating environment '#{name}'..." if option_verbose?
           @k_environment_api.update({
-                                      'id' => label,
+                                      'id' => katello_environment(line[ORGANIZATION], :name => label),
                                       'name' => name,
                                       'new_name' => name,
-                                      'organization_id' => line[ORGANIZATION],
+                                      'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                       'prior' => prior,
                                       'description' => line[DESCRIPTION]
                                     })

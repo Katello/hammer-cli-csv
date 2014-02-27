@@ -40,12 +40,15 @@ require 'csv'
 module HammerCLICsv
   class PuppetEnvironmentsCommand < BaseCommand
 
+    ORGANIZATIONS = 'Organizations'
+
     def export
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT]
+        csv << [NAME, COUNT, ORGANIZATIONS]
         @f_environment_api.index({:per_page => 999999})[0]['results'].each do |environment|
           name = environment['name']
           count = 1
+          raise "TODO: organizations"
           csv << [name, count]
         end
       end
@@ -67,20 +70,28 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         if !@existing.include? name
           print "Creating environment '#{name}'..." if option_verbose?
-          @f_environment_api.create({
-                                      'environment' => {
-                                        'name' => name
-                                      }
-                                    })
+          id = @f_environment_api.create({
+                                           'environment' => {
+                                             'name' => name
+                                           }
+                                         })[0]['environment']['id']
         else
           print "Updating environment '#{name}'..." if option_verbose?
-          @f_environment_api.update({
-                                      'id' => @existing[name],
-                                      'environment' => {
-                                        'name' => name
-                                      }
-                                    })
+          id = @f_environment_api.update({
+                                           'id' => @existing[name],
+                                           'environment' => {
+                                             'name' => name
+                                           }
+                                         })[0]['environment']['id']
         end
+
+        CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
+          @k_organization_api.update({
+                                       'id' => foreman_organization(:name => organization),
+                                       'environment_ids' => [id]
+                                     })
+        end
+
         print "done\n" if option_verbose?
       end
     rescue RuntimeError => e

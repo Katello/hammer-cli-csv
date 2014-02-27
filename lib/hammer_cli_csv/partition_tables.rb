@@ -41,17 +41,19 @@ module HammerCLICsv
   class PartitionTablesCommand < BaseCommand
 
     OSFAMILY = 'OS Family'
+    OPERATINGSYSTEMS = 'Operating Systems'
     LAYOUT = 'Layout'
 
     def export
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, OSFAMILY, LAYOUT]
+        csv << [NAME, COUNT, OSFAMILY, OPERATINGSYSTEMS, LAYOUT]
         @f_partitiontable_api.index({:per_page => 999999})[0]['results'].each do |ptable|
           ptable = @f_partitiontable_api.show({'id' => ptable['id']})[0]
           name = ptable['name']
           count = 1
           osfamily = ptable['os_family']
           layout = ptable['layout']
+          raise "TODO: operating systems"
           csv << [name, count, osfamily, layout]
         end
       end
@@ -71,23 +73,28 @@ module HammerCLICsv
     def create_ptables_from_csv(line)
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
+        operatingsystem_ids = CSV.parse_line(line[OPERATINGSYSTEMS]).collect do |operatingsystem_name|
+          foreman_operatingsystem(:name => operatingsystem_name)
+        end if line[OPERATINGSYSTEMS]
         if !@existing.include? name
           print "Creating ptable '#{name}'... " if option_verbose?
           @f_partitiontable_api.create({
-                                 'ptable' => {
-                                   'name' => name,
-                                   'os_family' => line[OSFAMILY],
-                                   'layout' => line[LAYOUT]
-                             }
-                           })
+                                         'ptable' => {
+                                           'name' => name,
+                                           'os_family' => line[OSFAMILY],
+                                           'operatingsystem_ids' => operatingsystem_ids,
+                                           'layout' => line[LAYOUT]
+                                         }
+                                       })
         else
           print "Updating ptable '#{name}'..." if option_verbose?
           @f_partitiontable_api.update({
-                                 'id' => @existing[name],
-                                 'ptable' => {
-                                   'name' => name,
-                                   'os_family' => line[OSFAMILY],
-                                   'layout' => line[LAYOUT]
+                                         'id' => @existing[name],
+                                         'ptable' => {
+                                           'name' => name,
+                                           'os_family' => line[OSFAMILY],
+                                           'operatingsystem_ids' => operatingsystem_ids,
+                                           'layout' => line[LAYOUT]
                                  }
                            })
         end

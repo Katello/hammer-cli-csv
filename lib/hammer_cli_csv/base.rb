@@ -82,18 +82,12 @@ module HammerCLICsv
       @f_permission_api ||= ForemanApi::Resources::Permission.new(@init_options)
       @f_partitiontable_api ||= ForemanApi::Resources::Ptable.new(@init_options)
       @f_puppetfacts_api ||= ForemanApi::Resources::FactValue.new(@init_options)
+      @f_report_api ||= ForemanApi::Resources::Report.new(@init_options)
       @f_role_api ||= ForemanApi::Resources::Role.new(@init_options)
       @f_user_api ||= ForemanApi::Resources::User.new(@init_options)
 
       option_csv_export? ? export : import
       HammerCLI::EX_OK
-    end
-
-    def get_lines(filename)
-      file = File.open(filename ,'r')
-      contents = file.readlines
-      file.close
-      contents
     end
 
     def namify(name_format, number=0)
@@ -144,7 +138,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @organizations[options[:name]]
         if !options[:id]
-          organization = @f_organization_api.index({'search' => "name=\"#{options[:name]}\""})[0]['results']
+          organization = @f_organization_api.index({'search' => "title=\"#{options[:name]}\""})[0]['results']
           raise RuntimeError, "Organization '#{options[:name]}' not found" if !organization || organization.empty?
           options[:id] = organization[0]['id']
           @organizations[options[:name]] = options[:id]
@@ -155,6 +149,34 @@ module HammerCLICsv
         options[:name] = @organizations.key(options[:id])
         if !options[:name]
           organization = @f_organization_api.show({'id' => options[:id]})[0]
+          raise "Organization 'id=#{options[:id]}' not found" if !organization || organization.empty?
+          options[:name] = organization['name']
+          @organizations[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def katello_organization(options={})
+      @organizations ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @organizations[options[:name]]
+        if !options[:id]
+          organization = @k_organization_api.index({'search' => "title=\"#{options[:name]}\""})[0]['results']
+          raise RuntimeError, "Organization '#{options[:name]}' not found" if !organization || organization.empty?
+          options[:id] = organization[0]['label']
+          @organizations[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @organizations.key(options[:id])
+        if !options[:name]
+          organization = @k_organization_api.show({'id' => options[:id]})[0]
           raise "Organization 'id=#{options[:id]}' not found" if !organization || organization.empty?
           options[:name] = organization['name']
           @organizations[options[:name]] = options[:id]
@@ -186,6 +208,34 @@ module HammerCLICsv
           raise "Location 'id=#{options[:id]}' not found" if !location || location.empty?
           options[:name] = location['name']
           @locations[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def foreman_role(options={})
+      @roles ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @roles[options[:name]]
+        if !options[:id]
+          role = @f_role_api.index({'search' => "name=\"#{options[:name]}\""})[0]['results']
+          raise RuntimeError, "Role '#{options[:name]}' not found" if !role || role.empty?
+          options[:id] = role[0]['id']
+          @roles[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @roles.key(options[:id])
+        if !options[:name]
+          role = @f_role_api.show({'id' => options[:id]})[0]
+          raise "Role 'id=#{options[:id]}' not found" if !role || role.empty?
+          options[:name] = role['name']
+          @roles[options[:name]] = options[:id]
         end
         result = options[:name]
       end
@@ -406,7 +456,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @environments[organization][options[:name]]
         if !options[:id]
-          @k_environment_api.index({'organization_id' => organization})[0]['results'].each do |environment|
+          @k_environment_api.index({'organization_id' => katello_organization(:name => organization)})[0]['results'].each do |environment|
             @environments[organization][environment['name']] = environment['id']
           end
           options[:id] = @environments[organization][options[:name]]
@@ -436,7 +486,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @contentviews[organization][options[:name]]
         if !options[:id]
-          @k_contentview_api.index({'organization_id' => organization})[0]['results'].each do |contentview|
+          @k_contentview_api.index({'organization_id' => katello_organization(:name => organization)})[0]['results'].each do |contentview|
             @contentviews[organization][contentview['name']] = contentview['id']
           end
           options[:id] = @contentviews[organization][options[:name]]
@@ -467,7 +517,7 @@ module HammerCLICsv
         options[:id] = @subscriptions[organization][options[:name]]
         if !options[:id]
           results = @k_subscription_api.index({
-                                                'organization_id' => organization,
+                                                'organization_id' => katello_organization(:name => organization),
                                                 'search' => "name:\"#{options[:name]}\""
                                               })[0]
           raise "No subscriptions match '#{options[:name]}'" if results['subtotal'] == 0
@@ -502,7 +552,7 @@ module HammerCLICsv
         options[:id] = @systemgroups[organization][options[:name]]
         if !options[:id]
           @k_systemgroup_api.index({
-                                     'organization_id' => organization,
+                                     'organization_id' => katello_organization(:name => organization),
                                      'search' => "name:\"#{options[:name]}\""
                                    })[0]['results'].each do |systemgroup|
             @systemgroups[organization][systemgroup['name']] = systemgroup['id'] if systemgroup
@@ -532,8 +582,17 @@ module HammerCLICsv
       name
     end
 
+    # "Red Hat 6.4" => "Red Hat", "6", "4"
+    # "Red Hat 6"   => "Red Hat", "6", ""
     def split_os_name(name)
-      (name, major, minor) = name.split(' ').collect {|s| s.split('.')}.flatten
+      tokens = name.split(' ')
+      is_number = Float(tokens[-1]) rescue false
+      if is_number
+        (major, minor) = tokens[-1].split('.').flatten
+        name = tokens[0...-1].join(' ')
+      else
+        name = tokens.join(' ')
+      end
       [name, major || "", minor || ""]
     end
   end

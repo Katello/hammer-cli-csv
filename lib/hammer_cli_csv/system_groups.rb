@@ -89,7 +89,7 @@ module HammerCLICsv
                                     'description' => line[DESCRIPTION]
                                   })
         else
-          print "Updating systemgroup '#{name}'..." if option_verbose?
+          print "Updating system group '#{name}'..." if option_verbose?
           @k_systemgroup_api.update({
                                       'organization_id' => line[ORGANIZATION],
                                       'id' => @existing[line[ORGANIZATION]][name],

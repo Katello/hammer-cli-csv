@@ -87,9 +87,9 @@ module HammerCLICsv
                                            })[0]['domain']['id']
         end
 
-        CSV.parse_line(line[ORGANIZATIONS]).each do |organization_label|
+        CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
           @k_organization_api.update({
-                                       'id' => organization_label,
+                                       'id' => foreman_organization(:name => organization),
                                        'domain_ids' => [domain_id]
                                      })
         end

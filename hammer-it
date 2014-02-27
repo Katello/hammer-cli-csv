@@ -1,5 +1,7 @@
 #!/bin/csh -f
 
+# Replaced with: rake test TEST=test/setup_test.rb
+
 bundle exec hammer -v csv:organizations      --csv-file test/data/organizations.csv
 bundle exec hammer -v csv:users              --csv-file test/data/users.csv
 bundle exec hammer -v csv:operatingsystems   --csv-file test/data/operatingsystems.csv
@@ -21,3 +23,4 @@ bundle exec hammer -v csv:lifecycleenv       --csv-file test/data/lifecycleenvir
 bundle exec hammer -v csv:systemgroups       --csv-file test/data/systemgroups.csv
 bundle exec hammer -v csv:systems            --csv-file test/data/systems.csv
 bundle exec hammer -v csv:activationkeys     --csv-file test/data/activationkeys.csv
+bundle exec hammer -v csv:roles              --csv-file test/data/roles.csv

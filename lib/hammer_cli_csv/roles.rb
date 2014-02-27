@@ -100,10 +100,14 @@ module HammerCLICsv
     def create_roles_from_csv(line)
       line[COUNT].to_i.times do |number|
         name = namify(line[NAME], number)
-        filter = namify(line[FILTER], number)
+        filter = namify(line[FILTER], number) if line[FILTER]
 
         if !@existing_roles[name]
           print "Creating role '#{name}'..." if option_verbose?
+          role = @f_role_api.create({
+                                      'name' => name
+                                    })[0]
+          @existing_roles[name] = role['id']
         else
           print "Updating role '#{name}'..." if option_verbose?
           @f_role_api.update({
@@ -113,31 +117,33 @@ module HammerCLICsv
 
         permissions = CSV.parse_line(line[PERMISSIONS], {:skip_blanks => true}).collect do |permission|
           foreman_permission(:name => permission)
-        end
-        puts permissions
+        end if line[PERMISSIONS]
         organizations = CSV.parse_line(line[ORGANIZATIONS], {:skip_blanks => true}).collect do |organization|
           foreman_organization(:name => organization)
-        end
+        end if line[ORGANIZATIONS]
         locations = CSV.parse_line(line[LOCATIONS], {:skip_blanks => true}).collect do |location|
           foreman_location(:name => location)
-        end
+        end if line[LOCATIONS]
 
-        filter_id = foreman_filter(name, :name => filter)
-        if !filter_id
-          @f_filter_api.create({
-                                 'role_id' => @existing_roles[name],
-                                 'search' => filter,
-                                 'organization_ids' => organizations,
-                                 'location_ids' => locations
-                               })
-        else
-          @f_filter_api.update({
-                                 'id' => filter_id,
-                                 'search' => filter,
-                                 'organization_ids' => organizations,
-                                 'location_ids' => locations,
-                                 'permission_ids' => permissions
-                               })
+        if filter
+          filter_id = foreman_filter(name, :name => filter)
+          if !filter_id
+            @f_filter_api.create({
+                                   'role_id' => @existing_roles[name],
+                                   'search' => filter,
+                                   'organization_ids' => organizations || [],
+                                   'location_ids' => locations || [],
+                                   'permission_ids' => permissions || []
+                                 })
+          else
+            @f_filter_api.update({
+                                   'id' => filter_id,
+                                   'search' => filter,
+                                   'organization_ids' => organizations || [],
+                                   'location_ids' => locations || [],
+                                   'permission_ids' => permissions || []
+                                 })
+          end
         end
 
         puts "done" if option_verbose?

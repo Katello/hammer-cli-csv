@@ -105,7 +105,7 @@ describe 'setup' do
         hammer.run(%W{-v subscription upload --organization-id megacorp --file test/data/megacorp.zip})
       }
       stderr.must_equal ''
-      stdout.must_equal '.*Manifest is being uploaded.*'
+      stdout.must_match '.*Manifest is being uploaded.*'
     end
   end
 
@@ -115,7 +115,7 @@ describe 'setup' do
         hammer.run(%W{-v csv:products --csv-file test/data/products.csv})
       }
       stderr.must_equal ''
-      stdout.must_match /.*xxx.*/
+      stdout.must_match /.*product 'Point of Sale'.*/
     end
   end
 
@@ -145,7 +145,7 @@ describe 'setup' do
         hammer.run(%W{-v csv:systems --csv-file test/data/systems.csv})
       }
       stderr.must_equal ''
-      stdout.must_match /.*xxx.*/
+      stdout.must_match /.*system 'host0'.*/
     end
   end
 
@@ -155,7 +155,7 @@ describe 'setup' do
         hammer.run(%W{-v csv:activationkeys --csv-file test/data/activationkeys.csv})
       }
       stderr.must_equal ''
-      stdout.must_match /.*xxx.*/
+      stdout.must_match /.*activation key 'damon\.dials@megacorp\.com'.*/
     end
   end
 

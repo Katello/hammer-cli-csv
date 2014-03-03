@@ -74,7 +74,7 @@ module HammerCLICsv
                                            'environment' => {
                                              'name' => name
                                            }
-                                         })[0]['environment']['id']
+                                         })[0]['id']
         else
           print "Updating environment '#{name}'..." if option_verbose?
           id = @f_environment_api.update({

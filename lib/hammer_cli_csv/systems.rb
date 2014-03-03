@@ -70,7 +70,7 @@ module HammerCLICsv
         @k_organization_api.index({:per_page => 999999})[0]['results'].each do |organization|
           @k_system_api.index({
                                 'per_page' => 999999,
-                                'organization_id' => organization['label']
+                                'organization_id' => katello_organization(:name => organization['name'])
                                })[0]['results'].each do |system|
             system = @k_system_api.show({
                                           'id' => system['uuid'],
@@ -79,7 +79,7 @@ module HammerCLICsv
 
             name = system['name']
             count = 1
-            organization_label = organization['label']
+            organization_name = organization['name']
             environment = system['environment']['label']
             contentview = system['content_view']['name']
             systemgroups = CSV.generate do |column|
@@ -108,7 +108,7 @@ module HammerCLICsv
                 "#{subscription['product_id']}|#{subscription['product_name']}"
               end
             end.delete!("\n")
-            csv << [name, count, organization_label, environment, contentview, systemgroups, virtual, host,
+            csv << [name, count, organization_name, environment, contentview, systemgroups, virtual, host,
                     operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
           end
         end
@@ -136,7 +136,9 @@ module HammerCLICsv
     def create_systems_from_csv(line)
       if !@existing[line[ORGANIZATION]]
         @existing[line[ORGANIZATION]] = {}
-        @k_system_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999})[0]['results'].each do |system|
+        @k_system_api.index({
+                              'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                              'page_size' => 999999})[0]['results'].each do |system|
           @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
         end
       end
@@ -153,7 +155,7 @@ module HammerCLICsv
           print "Creating system '#{name}'..." if option_verbose?
           system_id = @k_system_api.create({
                                  'name' => name,
-                                 'organization_id' => line[ORGANIZATION],
+                                 'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                  'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                  'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                  'facts' => facts(line),

@@ -20,13 +20,12 @@ require 'hammer_cli_foreman'
 
 def ctx
   {
-    :adapter => :csv,
     :interactive => false
   }
 end
 
-def hammer
-  HammerCLI::MainCommand.new("", ctx)
+def hammer(context=nil)
+  HammerCLI::MainCommand.new("", context || ctx)
 end
 
 def capture

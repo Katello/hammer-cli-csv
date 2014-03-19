@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Users CSV =-
 #
@@ -54,7 +42,6 @@
 #
 
 require 'hammer_cli'
-require 'katello_api'
 require 'json'
 require 'csv'
 
@@ -116,11 +103,11 @@ module HammerCLICsv
     def create_permissions_from_csv(line)
       details = parse_permission_csv(line)
 
-      puts @permission_api.index({'role_id' => @roles['User System Group']})[0]
+      puts @permission_api.index({'role_id' => @roles['User System Group']})
       # {"all_tags"=>false, "all_verbs"=>false, "created_at"=>"2013-11-11T02:31:23Z", "description"=>"and it's description!", "id"=>12, "name"=>"Accounting System Group Modify Systems", "organization_id"=>2, "resource_type_id"=>5, "role_id"=>124, "updated_at"=>"2013-11-11T02:31:23Z", "tags"=>[{"created_at"=>"2013-11-11T02:31:23Z", "formatted"=>{"name"=>6, "display_name"=>"Accounting"}, "id"=>2, "permission_id"=>12, "tag_id"=>6, "updated_at"=>"2013-11-11T02:31:23Z"}], "verbs"=>[{"created_at"=>"2013-11-07T19:44:45Z", "id"=>7, "updated_at"=>"2013-11-07T19:44:45Z", "verb"=>"update_systems"}], "resource_type"=>{"created_at"=>"2013-11-07T16:36:56Z", "id"=>5, "name"=>"system_groups", "updated_at"=>"2013-11-07T16:36:56Z"}}
 
       @existing[@roles[details[:role]]] ||= {}
-      @permission_api.index({'role_id' => @roles[details[:role]]})[0].each do |permission|
+      @permission_api.index({'role_id' => @roles[details[:role]]}).each do |permission|
           @existing[@roles[details[:role]]][permission['name']] = permission['id']
       end
 

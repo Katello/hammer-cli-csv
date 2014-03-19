@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Systems CSV =-
 #
@@ -34,8 +22,6 @@
 
 
 require 'hammer_cli'
-require 'katello_api'
-require 'foreman_api'
 require 'json'
 require 'csv'
 require 'uri'
@@ -63,7 +49,7 @@ module HammerCLICsv
     def create_contentviews_from_csv(line)
       if !@existing_contentviews[line[ORGANIZATION]]
         @existing_contentviews[line[ORGANIZATION]] ||= {}
-        @k_contentviewdefinition_api.index({'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})[0]['results'].each do |contentview|
+        @api.resource(:contentviewdefinitions).call(:index, {'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})['results'].each do |contentview|
           @existing_contentviews[line[ORGANIZATION]][contentview['name']] = contentview['id'] if contentview
         end
       end
@@ -73,17 +59,17 @@ module HammerCLICsv
         contentview_id = @existing_contentviews[line[ORGANIZATION]][name]
         if !contentview_id
           print "Creating content view '#{name}'..." if option_verbose?
-          contentview_id = @k_contentviewdefinition_api.create({
+          contentview_id = @api.resource(:contentviewdefinitions).call(:create, {
                                                                  'organization_id' => line[ORGANIZATION],
                                                                  'name' => name,
                                                                  'label' => labelize(name),
                                                                  'description' => line[DESCRIPTION],
                                                                  'composite' => false # TODO: add column?
-                                                               })[0]['id']
+                                                               })['id']
           @existing_contentviews[line[ORGANIZATION]][name] = contentview_id
         else
           print "Updating content view '#{name}'..." if option_verbose?
-          @k_contentviewdefinition_api.create({
+          @api.resource(:contentviewdefinitions).call(:create, {
                                                 'description' => line[DESCRIPTION],
                                               })
         end
@@ -100,7 +86,7 @@ module HammerCLICsv
         repository_name = namify(line[REPOSITORY], number)
         if !@existing_repositories[line[ORGANIZATION] + name][labelize(repository_name)]
           print "Creating repository '#{repository_name}' in contentview '#{name}'..." if option_verbose?
-          @k_repository_api.create({
+          @api.resource(:repositorys).call(:create, {
                                      'name' => repository_name,
                                      'label' => labelize(repository_name),
                                      'contentview_id' => contentview_id,

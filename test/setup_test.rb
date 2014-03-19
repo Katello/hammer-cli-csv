@@ -5,7 +5,7 @@ describe 'setup' do
   extend CommandTestHelper
 
   before :each do
-    HammerCLI::Settings.load_from_file ['test/config.yml']
+    HammerCLI::Settings.load_from_file 'test/config.yml'
   end
 
   context 'Setup Organizations' do

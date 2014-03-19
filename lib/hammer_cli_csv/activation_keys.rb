@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Activation Key CSV =-
 #
@@ -37,7 +25,6 @@
 #
 
 require 'hammer_cli'
-require 'katello_api'
 require 'json'
 require 'csv'
 
@@ -56,10 +43,10 @@ module HammerCLICsv
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
         csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
                 SYSTEMGROUPS, SUBSCRIPTIONS]
-        @k_organization_api.index({:per_page => 999999})[0]['results'].each do |organization|
-          @k_activationkey_api.index({'per_page' => 999999,
+        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+          @api.resource(:activationkeys).call(:index, {'per_page' => 999999,
                                        'organization_id' => organization['label']
-                                     })[0]['results'].each do |activationkey|
+                                     })['results'].each do |activationkey|
             puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
             name = namify(activationkey['name'])
             count = 1
@@ -73,9 +60,9 @@ module HammerCLICsv
               end
             end.delete!("\n") if activationkey['systemGroups']
             subscriptions = CSV.generate do |column|
-              column << @k_subscription_api.index({
+              column << @api.resource(:subscriptions).call(:index, {
                                                     'activation_key_id' => activationkey['id']
-                                                  })[0]['results'].collect do |subscription|
+                                                  })['results'].collect do |subscription|
                 amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
                 "#{amount}|#{subscription['product_name']}"
               end
@@ -98,10 +85,10 @@ module HammerCLICsv
     def create_activationkeys_from_csv(line)
       if !@existing[line[ORGANIZATION]]
         @existing[line[ORGANIZATION]] = {}
-        @k_activationkey_api.index({
+        @api.resource(:activationkeys).call(:index, {
                                      'per_page' => 999999,
                                      'organization_id' => katello_organization(:name => line[ORGANIZATION])
-                                   })[0]['results'].each do |activationkey|
+                                   })['results'].each do |activationkey|
           @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
         end
       end
@@ -111,18 +98,18 @@ module HammerCLICsv
 
         if !@existing[line[ORGANIZATION]].include? name
           print "Creating activation key '#{name}'..." if option_verbose?
-          activationkey = @k_activationkey_api.create({
+          activationkey = @api.resource(:activationkeys).call(:create, {
                                       'name' => name,
                                       'environment_id' => katello_environment(line[ORGANIZATION],
                                                                               :name => line[ENVIRONMENT]),
                                       'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                :name => line[CONTENTVIEW]),
                                       'description' => line[DESCRIPTION]
-                                    })[0]
+                                    })
           @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
         else
           print "Updating activation key '#{name}'..." if option_verbose?
-          activationkey = @k_activationkey_api.update({
+          activationkey = @api.resource(:activationkeys).call(:update, {
                                         'id' => @existing[line[ORGANIZATION]][name],
                                         'name' => name,
                                         'environment_id' => katello_environment(line[ORGANIZATION],
@@ -130,7 +117,7 @@ module HammerCLICsv
                                         'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                  :name => line[CONTENTVIEW]),
                                         'description' => line[DESCRIPTION]
-                                      })[0]
+                                      })
         end
 
         update_subscriptions(activationkey, line)
@@ -144,7 +131,7 @@ module HammerCLICsv
       if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
         # TODO: note that existing system groups are not removed
         CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
-          @k_systemgroup_api.add_activation_keys({
+          @api.resource(:systemgroups).call(:add_activation_keys, {
                                                    'id' => katello_systemgroup(line[ORGANIZATION], :name => name),
                                                    'activation_key_ids' => [activationkey['id']]
                                                  })
@@ -166,20 +153,20 @@ module HammerCLICsv
         end
 
         # TODO: should there be a destroy_all similar to systems?
-        @k_subscription_api.index({
-                                  'per_page' => 999999,
-                                  'activation_key_id' => activationkey['id']
-                                })[0]['results'].each do |subscription|
-          @k_subscription_api.destroy({
-                                        'id' => subscription['id'],
-                                        'activation_key_id' => activationkey['id']
-                                      })
+        @api.resource(:subscriptions).call(:index, {
+                                             'per_page' => 999999,
+                                             'activation_key_id' => activationkey['id']
+                                           })['results'].each do |subscription|
+          @api.resource(:subscriptions).call(:destroy, {
+                                               'id' => subscription['id'],
+                                               'activation_key_id' => activationkey['id']
+                                             })
         end
 
-        @k_subscription_api.create({
-                                     'activation_key_id' => activationkey['id'],
-                                     'subscriptions' => subscriptions
-                                   })
+        @api.resource(:subscriptions).call(:create, {
+                                             'activation_key_id' => activationkey['id'],
+                                             'subscriptions' => subscriptions
+                                           })
       end
     end
 

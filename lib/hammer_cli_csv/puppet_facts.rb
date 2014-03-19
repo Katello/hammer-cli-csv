@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Puppet Facts CSV =-
 #
@@ -47,13 +35,13 @@ module HammerCLICsv
         headers = [NAME, COUNT]
         # Extracted facts are always based upon the first host found, otherwise this would be an intensive
         # method to gather all the possible column names
-        host = @f_host_api.index({:per_page => 1})[0]['results'][0]
-        headers += @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999})[0]['results'][host['name']].keys
+        host = @api.resource(:hosts).call(:index, {:per_page => 1})['results'][0]
+        headers += @api.resource(:puppetfactss).call(:index, {'host_id' => host['name'], 'per_page' => 999999})['results'][host['name']].keys
         csv << headers
 
-        @f_host_api.index({:per_page => 999999})[0]['results'].each do |host|
+        @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|
           line = [host['name'], 1]
-          facts = @f_puppetfacts_api.index({'host_id' => host['name'], 'per_page' => 999999})[0][host['name']]
+          facts = @api.resource(:puppetfactss).call(:index, {'host_id' => host['name'], 'per_page' => 999999})[host['name']]
           facts ||= {}
           headers[2..-1].each do |fact_name|
             line << facts[fact_name] || ''
@@ -91,7 +79,7 @@ module HammerCLICsv
           end
         end
 
-        @f_host_api.facts({
+        @api.resource(:hosts).call(:facts, {
                             'name' => name,
                             'facts' => facts
                           })

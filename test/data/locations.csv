@@ -1,9 +1,10 @@
-Name,Count
-Asia Pacific (Tokyo) Region,1
-Asia Pacific (Singapore) Region,1
-Asia Pacific (Sydney) Region,1
-EU (Ireland) Region,1
-South America (Sao Paulo) Region,1
-US East (Northern Virginia) Region,1
-US West (Northern California) Region,1
-US West (Oregon) Region,1
+Name,Count,Parent Location
+Asia Pacific,1,
+Asia Pacific (Tokyo) Region,1,Asia Pacific
+Asia Pacific (Singapore) Region,1,Asia Pacific
+Asia Pacific (Sydney) Region,1,Asia Pacific
+EU (Ireland) Region,1,
+South America (Sao Paulo) Region,1,
+US East (Northern Virginia) Region,1,
+US West (Northern California) Region,1,
+US West (Oregon) Region,1,

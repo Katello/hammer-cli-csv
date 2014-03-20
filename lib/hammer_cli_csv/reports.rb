@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 
 module HammerCLICsv
   class ReportsCommand < BaseCommand
@@ -37,7 +25,7 @@ module HammerCLICsv
     def export
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
         csv << [NAME, COUNT]
-        @f_report_api.index({'per_page' => 999999})[0]['results'].each do |report|
+        @api.resource(:reports).call(:index, {'per_page' => 999999})['results'].each do |report|
           csv << [report['host_name'], 1, report['metrics'].to_json]
         end
       end
@@ -47,7 +35,7 @@ module HammerCLICsv
 
     def import
       @existing_reports = {}
-      @f_report_api.index({'per_page' => 999999})[0]['results'].each do |report|
+      @api.resource(:reports).call(:index, {'per_page' => 999999})['results'].each do |report|
         @existing_reports[report['name']] = report['id']
       end
 
@@ -62,7 +50,7 @@ module HammerCLICsv
 
         if !@existing_reports[name]
           print "Creating report '#{name}'..." if option_verbose?
-          report = @f_report_api.create({
+          report = @api.resource(:reports).call(:create, {
                                           'host' => name,
                                           'reported_at' => line[TIME],
                                           'status' => {
@@ -75,7 +63,7 @@ module HammerCLICsv
                                           },
                                           'metrics' => JSON.parse(line[METRICS]),
                                           'logs' => []
-                                        })[0]
+                                        })
 =begin
                                           'metrics' => {
                                             'time' => {
@@ -99,7 +87,7 @@ module HammerCLICsv
           @existing_reports[name] = report['id']
         else
           print "Updating report '#{name}'..." if option_verbose?
-          @f_report_api.update({
+          @api.resource(:reports).call(:update, {
                                  'id' => @existing_reports[name]
                                })
         end

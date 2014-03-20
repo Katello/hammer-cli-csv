@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Domains CSV =-
 #
@@ -46,7 +34,7 @@ module HammerCLICsv
     def export
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FULLNAME]
-        @f_domain_api.index({:per_page => 999999})[0]['results'].each do |domain|
+        @api.resource(:domains).call(:index, {:per_page => 999999})['results'].each do |domain|
           puts domain
           name = domain['name']
           count = 1
@@ -58,7 +46,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_domain_api.index({:per_page => 999999})[0]['results'].each do |domain|
+      @api.resource(:domains).call(:index, {:per_page => 999999})['results'].each do |domain|
         @existing[domain['name']] = domain['id'] if domain
       end
 
@@ -72,26 +60,37 @@ module HammerCLICsv
         name = namify(line[NAME], number)
         if !@existing.include? name
           print "Creating domain '#{name}'..." if option_verbose?
-          domain_id = @f_domain_api.create({
-                                             'domain' => {
-                                               'name' => name
-                                             }
-                                           })[0]['domain']['id']
+          domain_id = @api.resource(:domains).call(:create, {
+                                             'name' => name,
+                                             'organization_ids' => organization_ids
+                                           })['domain']['id']
         else
           print "Updating domain '#{name}'..." if option_verbose?
-          domain_id = @f_domain_api.update({
+          domain_id = @api.resource(:domains).call(:update, {
                                              'id' => @existing[name],
                                              'domain' => {
                                                'name' => name
                                              }
-                                           })[0]['domain']['id']
+                                           })['domain']['id']
         end
 
+        # Update associated resources
+        domains ||= {}
         CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
-          @k_organization_api.update({
-                                       'id' => foreman_organization(:name => organization),
-                                       'domain_ids' => [domain_id]
-                                     })
+          organization_id = foreman_organization(:name => organization)
+          if domains[organization].nil?
+            domains[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})['domains'].collect do |domain|
+              domain['id']
+            end
+          end
+          domains[organization] += [domain_id] if !domains[organization].include? domain_id
+
+          @api.resource(:organizations).call(:update, {
+                                               'id' => organization_id,
+                                               'organization' => {
+                                                 'domain_ids' => domains[organization]
+                                               }
+                                             })
         end
 
         print "done\n" if option_verbose?

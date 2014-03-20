@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Systems CSV =-
 #
@@ -39,8 +27,6 @@
 #
 
 require 'hammer_cli'
-require 'katello_api'
-require 'foreman_api'
 require 'json'
 require 'csv'
 require 'uri'
@@ -67,15 +53,15 @@ module HammerCLICsv
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
         csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
                OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
-        @k_organization_api.index({:per_page => 999999})[0]['results'].each do |organization|
-          @k_system_api.index({
+        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+          @api.resource(:systems).call(:index, {
                                 'per_page' => 999999,
                                 'organization_id' => katello_organization(:name => organization['name'])
-                               })[0]['results'].each do |system|
-            system = @k_system_api.show({
+                               })['results'].each do |system|
+            system = @api.resource(:systems).call(:show, {
                                           'id' => system['uuid'],
                                           'fields' => 'full'
-                                        })[0]
+                                        })
 
             name = system['name']
             count = 1
@@ -102,9 +88,9 @@ module HammerCLICsv
               end
             end.delete!("\n")
             subscriptions = CSV.generate do |column|
-              column << @k_subscription_api.index({
+              column << @api.resource(:subscriptions).call(:index, {
                                                     'system_id' => system['uuid']
-                                                  })[0]['results'].collect do |subscription|
+                                                  })['results'].collect do |subscription|
                 "#{subscription['product_id']}|#{subscription['product_name']}"
               end
             end.delete!("\n")
@@ -125,7 +111,7 @@ module HammerCLICsv
 
       print "Updating host and guest associations..." if option_verbose?
       @host_guests.each do |host_id, guest_ids|
-        @k_system_api.update({
+        @api.resource(:systems).call(:update, {
                                'id' => host_id,
                                'guest_ids' => guest_ids
                              })
@@ -136,9 +122,9 @@ module HammerCLICsv
     def create_systems_from_csv(line)
       if !@existing[line[ORGANIZATION]]
         @existing[line[ORGANIZATION]] = {}
-        @k_system_api.index({
+        @api.resource(:systems).call(:index, {
                               'organization_id' => katello_organization(:name => line[ORGANIZATION]),
-                              'page_size' => 999999})[0]['results'].each do |system|
+                              'page_size' => 999999})['results'].each do |system|
           @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
         end
       end
@@ -153,7 +139,7 @@ module HammerCLICsv
 
         if !@existing[line[ORGANIZATION]].include? name
           print "Creating system '#{name}'..." if option_verbose?
-          system_id = @k_system_api.create({
+          system_id = @api.resource(:systems).call(:create, {
                                  'name' => name,
                                  'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                  'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
@@ -161,18 +147,18 @@ module HammerCLICsv
                                  'facts' => facts(line),
                                  'installed_products' => products(line),
                                  'type' => 'system'
-                               })[0]['uuid']
+                               })['uuid']
           @existing[line[ORGANIZATION]][name] = system_id
         else
           print "Updating system '#{name}'..." if option_verbose?
-          system_id = @k_system_api.update({
+          system_id = @api.resource(:systems).call(:update, {
                                  'id' => @existing[line[ORGANIZATION]][name],
                                  'name' => name,
                                  'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                  'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                  'facts' => facts(line),
                                  'installed_products' => products(line)
-                               })[0]['uuid']
+                               })['uuid']
         end
 
         if line[VIRTUAL] == 'Yes' && line[HOST]
@@ -208,7 +194,7 @@ module HammerCLICsv
 
     def set_system_groups(system_id, line)
       CSV.parse_line(line[SYSTEMGROUPS]).each do |systemgroup_name|
-        @k_systemgroup_api.add_systems({
+        @api.resource(:systemgroups).call(:add_systems, {
                                          'id' => katello_systemgroup(line[ORGANIZATION], :name => systemgroup_name),
                                          'system_ids' => [system_id]
                                        })

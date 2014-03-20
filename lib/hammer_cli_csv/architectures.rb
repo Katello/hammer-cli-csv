@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Architectures CSV =-
 #
@@ -34,7 +22,6 @@
 #
 
 require 'hammer_cli'
-require 'foreman_api'
 require 'json'
 require 'csv'
 
@@ -46,7 +33,7 @@ module HammerCLICsv
     def export
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGANIZATIONS, OPERATINGSYSTEMS]
-        @f_architecture_api.index({:per_page => 999999})[0]['results'].each do |architecture|
+        @api.resource(:architectures).call(:index, {:per_page => 999999})['results'].each do |architecture|
           name = architecture['name']
           count = 1
           # TODO: http://projects.theforeman.org/issues/4198
@@ -61,7 +48,7 @@ module HammerCLICsv
 
     def import
       @existing = {}
-      @f_architecture_api.index({:per_page => 999999})[0]['results'].each do |architecture|
+      @api.resource(:architectures).call(:index, {:per_page => 999999})['results'].each do |architecture|
         @existing[architecture['name']] = architecture['id'] if architecture
       end
 
@@ -79,7 +66,7 @@ module HammerCLICsv
         end
         if !architecture_id
           print "Creating architecture '#{name}'..." if option_verbose?
-          architecture_id = @f_architecture_api.create({
+          architecture_id = @api.resource(:architectures).call(:create, {
                              'architecture' => {
                                'name' => name,
                                'operatingsystem_ids' => operatingsystem_ids
@@ -87,7 +74,7 @@ module HammerCLICsv
                            })
         else
           print "Updating architecture '#{name}'..." if option_verbose?
-          @f_architecture_api.update({
+          @api.resource(:architectures).call(:update, {
                              'id' => architecture_id,
                              'architecture' => {
                                'name' => name,

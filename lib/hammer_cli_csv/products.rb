@@ -1,26 +1,14 @@
-# Copyright (c) 2013-2014 Red Hat
+# Copyright 2013-2014 Red Hat, Inc.
 #
-# MIT License
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+# This software is licensed to you under the GNU General Public
+# License as published by the Free Software Foundation; either version
+# 2 of the License (GPLv2) or (at your option) any later version.
+# There is NO WARRANTY for this software, express or implied,
+# including the implied warranties of MERCHANTABILITY,
+# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
+# have received a copy of GPLv2 along with this software; if not, see
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+
 #
 # -= Systems CSV =-
 #
@@ -34,8 +22,6 @@
 
 
 require 'hammer_cli'
-require 'katello_api'
-require 'foreman_api'
 require 'json'
 require 'csv'
 require 'uri'
@@ -64,21 +50,21 @@ module HammerCLICsv
     def create_products_from_csv(line)
       if !@existing_products[line[ORGANIZATION]]
         @existing_products[line[ORGANIZATION]] = {}
-        @k_product_api.index({
+        @api.resource(:products).call(:index, {
                                'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                'page_size' => 999999,
                                'paged' => true
-                             })[0]['results'].each do |product|
+                             })['results'].each do |product|
           @existing_products[line[ORGANIZATION]][product['name']] = product['id'] if product
 
           if product
-            @k_repository_api.index({
+            @api.resource(:repositorys).call(:index, {
                                       'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                       'product_id' => product['id'],
                                       'enabled' => true,
                                       'library' => true,
                                       'page_size' => 999999, 'paged' => true
-                                    })[0]['results'].each do |repository|
+                                    })['results'].each do |repository|
               @existing_repositories[line[ORGANIZATION]+product['name']] ||= {}
               @existing_repositories[line[ORGANIZATION]+product['name']][repository['label']] = repository['id']
             end
@@ -92,10 +78,10 @@ module HammerCLICsv
         product_id = @existing_products[line[ORGANIZATION]][name]
         if !product_id
           print "Creating product '#{name}'..." if option_verbose?
-          product_id = @k_product_api.create({
+          product_id = @api.resource(:products).call(:create, {
                                                'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                                'name' => name
-                                             })[0]['id']
+                                             })['id']
           @existing_products[line[ORGANIZATION]][name] = product_id
           print "done\n" if option_verbose?
         end
@@ -105,7 +91,7 @@ module HammerCLICsv
         repository_name = namify(line[REPOSITORY], number)
         if !@existing_repositories[line[ORGANIZATION] + name][labelize(repository_name)]
           print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
-          @k_repository_api.create({
+          @api.resource(:repositorys).call(:create, {
                                      'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                      'name' => repository_name,
                                      'label' => labelize(repository_name),

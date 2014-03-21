@@ -140,25 +140,27 @@ module HammerCLICsv
         if !@existing[line[ORGANIZATION]].include? name
           print "Creating system '#{name}'..." if option_verbose?
           system_id = @api.resource(:systems).call(:create, {
-                                 'name' => name,
-                                 'organization_id' => katello_organization(:name => line[ORGANIZATION]),
-                                 'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                                 'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                                 'facts' => facts(line),
-                                 'installed_products' => products(line),
-                                 'type' => 'system'
-                               })['uuid']
+                                                     'name' => name,
+                                                     'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                                     'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                                                     'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                                                     'facts' => facts(line),
+                                                     'installed_products' => products(line),
+                                                     'type' => 'system'
+                                                   })['uuid']
           @existing[line[ORGANIZATION]][name] = system_id
         else
           print "Updating system '#{name}'..." if option_verbose?
           system_id = @api.resource(:systems).call(:update, {
-                                 'id' => @existing[line[ORGANIZATION]][name],
-                                 'name' => name,
-                                 'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                                 'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                                 'facts' => facts(line),
-                                 'installed_products' => products(line)
-                               })['uuid']
+                                                     'id' => @existing[line[ORGANIZATION]][name],
+                                                     'system' => {
+                                                       'name' => name,
+                                                       'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                                                       'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                                                       'facts' => facts(line),
+                                                       'installed_products' => products(line)
+                                                     }
+                                                   })['uuid']
         end
 
         if line[VIRTUAL] == 'Yes' && line[HOST]
@@ -194,7 +196,7 @@ module HammerCLICsv
 
     def set_system_groups(system_id, line)
       CSV.parse_line(line[SYSTEMGROUPS]).each do |systemgroup_name|
-        @api.resource(:systemgroups).call(:add_systems, {
+        @api.resource(:system_groups).call(:add_systems, {
                                          'id' => katello_systemgroup(line[ORGANIZATION], :name => systemgroup_name),
                                          'system_ids' => [system_id]
                                        })

@@ -44,7 +44,7 @@ module HammerCLICsv
         csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
                 SYSTEMGROUPS, SUBSCRIPTIONS]
         @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-          @api.resource(:activationkeys).call(:index, {'per_page' => 999999,
+          @api.resource(:activation_keys).call(:index, {'per_page' => 999999,
                                        'organization_id' => organization['label']
                                      })['results'].each do |activationkey|
             puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
@@ -85,7 +85,7 @@ module HammerCLICsv
     def create_activationkeys_from_csv(line)
       if !@existing[line[ORGANIZATION]]
         @existing[line[ORGANIZATION]] = {}
-        @api.resource(:activationkeys).call(:index, {
+        @api.resource(:activation_keys).call(:index, {
                                      'per_page' => 999999,
                                      'organization_id' => katello_organization(:name => line[ORGANIZATION])
                                    })['results'].each do |activationkey|
@@ -98,7 +98,7 @@ module HammerCLICsv
 
         if !@existing[line[ORGANIZATION]].include? name
           print "Creating activation key '#{name}'..." if option_verbose?
-          activationkey = @api.resource(:activationkeys).call(:create, {
+          activationkey = @api.resource(:activation_keys).call(:create, {
                                       'name' => name,
                                       'environment_id' => katello_environment(line[ORGANIZATION],
                                                                               :name => line[ENVIRONMENT]),
@@ -109,7 +109,7 @@ module HammerCLICsv
           @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
         else
           print "Updating activation key '#{name}'..." if option_verbose?
-          activationkey = @api.resource(:activationkeys).call(:update, {
+          activationkey = @api.resource(:activation_keys).call(:update, {
                                         'id' => @existing[line[ORGANIZATION]][name],
                                         'name' => name,
                                         'environment_id' => katello_environment(line[ORGANIZATION],
@@ -131,7 +131,7 @@ module HammerCLICsv
       if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
         # TODO: note that existing system groups are not removed
         CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
-          @api.resource(:systemgroups).call(:add_activation_keys, {
+          @api.resource(:system_groups).call(:add_activation_keys, {
                                                    'id' => katello_systemgroup(line[ORGANIZATION], :name => name),
                                                    'activation_key_ids' => [activationkey['id']]
                                                  })

@@ -88,7 +88,6 @@ module HammerCLICsv
                                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
                                'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
-                               'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
                                'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
                                'domain_id' => foreman_domain(:name => line[DOMAIN]),
                                'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
@@ -104,7 +103,6 @@ module HammerCLICsv
                                  'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                  'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
                                  'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
-                                 'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
                                  'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
                                  'domain_id' => foreman_domain(:name => line[DOMAIN]),
                                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])

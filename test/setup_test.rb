@@ -101,6 +101,8 @@ describe 'setup' do
 
   context 'subscription setup' do
     it "hammer -v subscription upload --organization-id megacorp --file test/data/megacorp.zip" do
+      # TODO: http://projects.theforeman.org/issues/4748
+      "".must_equal "TODO: Bug #4748 - errors on import manifest should complete dynflow task and display information to user"
       stdout,stderr = capture {
         hammer.run(%W{-v subscription upload --organization-id megacorp --file test/data/megacorp.zip})
       }
@@ -125,7 +127,7 @@ describe 'setup' do
         hammer.run(%W{-v csv:lifecycleenv --csv-file test/data/lifecycleenvironments.csv})
       }
       stderr.must_equal ''
-      stdout.must_match /.*xxx.*/
+      stdout.must_match /.*environment 'Development'.*/
     end
   end
 

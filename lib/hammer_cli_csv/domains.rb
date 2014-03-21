@@ -62,15 +62,12 @@ module HammerCLICsv
           print "Creating domain '#{name}'..." if option_verbose?
           domain_id = @api.resource(:domains).call(:create, {
                                              'name' => name,
-                                             'organization_ids' => organization_ids
                                            })['domain']['id']
         else
           print "Updating domain '#{name}'..." if option_verbose?
           domain_id = @api.resource(:domains).call(:update, {
                                              'id' => @existing[name],
-                                             'domain' => {
-                                               'name' => name
-                                             }
+                                             'name' => name
                                            })['domain']['id']
         end
 

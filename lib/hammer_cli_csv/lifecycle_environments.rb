@@ -59,7 +59,8 @@ module HammerCLICsv
       @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
         @api.resource(:environments).call(:index, {
                                    'per_page' => 999999,
-                                   'organization_id' => katello_organization(:name => organization['name'])
+                                   'organization_id' => katello_organization(:name => organization['name']),
+                                   'library' => true
                                  })['results'].each do |environment|
           @existing[organization['name']] ||= {}
           @existing[organization['name']][environment['name']] = environment['id'] if environment
@@ -89,7 +90,7 @@ module HammerCLICsv
         else
           print "Updating environment '#{name}'..." if option_verbose?
           @api.resource(:environments).call(:update, {
-                                      'id' => katello_environment(line[ORGANIZATION], :name => label),
+                                      'id' => @existing[line[ORGANIZATION]][name],
                                       'name' => name,
                                       'new_name' => name,
                                       'organization_id' => katello_organization(:name => line[ORGANIZATION]),

@@ -58,7 +58,7 @@ module HammerCLICsv
           @existing_products[line[ORGANIZATION]][product['name']] = product['id'] if product
 
           if product
-            @api.resource(:repositorys).call(:index, {
+            @api.resource(:repositories).call(:index, {
                                       'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                       'product_id' => product['id'],
                                       'enabled' => true,
@@ -83,15 +83,18 @@ module HammerCLICsv
                                                'name' => name
                                              })['id']
           @existing_products[line[ORGANIZATION]][name] = product_id
-          print "done\n" if option_verbose?
+        else
+          # Nothing to update for products
+          print "Updating product '#{name}'..." if option_verbose?
         end
+        print "done\n" if option_verbose?
         @existing_repositories[line[ORGANIZATION] + name] ||= {}
 
         # Only creating repositories, not updating
         repository_name = namify(line[REPOSITORY], number)
         if !@existing_repositories[line[ORGANIZATION] + name][labelize(repository_name)]
           print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
-          @api.resource(:repositorys).call(:create, {
+          @api.resource(:repositories).call(:create, {
                                      'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                      'name' => repository_name,
                                      'label' => labelize(repository_name),

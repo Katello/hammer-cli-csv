@@ -74,6 +74,9 @@ module HammerCLICsv
         end
 
         # Update associated resources
+        # TODO: Bug #4738: organization json does not include puppet environments
+        #       http://projects.theforeman.org/issues/4738#change-15319
+        #       Update below to match style of domains
         organization_ids = CSV.parse_line(line[ORGANIZATIONS]).collect do |organization|
           foreman_organization(:name => organization)
         end

@@ -415,7 +415,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @environments[organization][options[:name]]
         if !options[:id]
-          @api.resource(:environments).call(:index, {'organization_id' => katello_organization(:name => organization)})['results'].each do |environment|
+          @api.resource(:lifecycle_environments).call(:index, {
+                                                        'organization_id' => katello_organization(:name => organization),
+                                                        'library' => true
+                                                      })['results'].each do |environment|
             @environments[organization][environment['name']] = environment['id']
           end
           options[:id] = @environments[organization][options[:name]]
@@ -426,7 +429,7 @@ module HammerCLICsv
         return nil if options[:id].nil?
         options[:name] = @environments.key(options[:id])
         if !options[:name]
-          environment = @api.resource(:environments).call(:show, {'id' => options[:id]})
+          environment = @api.resource(:lifecycle_environments).call(:show, {'id' => options[:id]})
           raise "Lifecycle environment '#{options[:name]}' not found" if !environment || environment.empty?
           options[:name] = environment['name']
           @environments[options[:name]] = options[:id]
@@ -445,7 +448,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @contentviews[organization][options[:name]]
         if !options[:id]
-          @api.resource(:contentviews).call(:index, {'organization_id' => katello_organization(:name => organization)})['results'].each do |contentview|
+          @api.resource(:content_views).call(:index, {'organization_id' => katello_organization(:name => organization)})['results'].each do |contentview|
             @contentviews[organization][contentview['name']] = contentview['id']
           end
           options[:id] = @contentviews[organization][options[:name]]
@@ -456,7 +459,7 @@ module HammerCLICsv
         return nil if options[:id].nil?
         options[:name] = @contentviews.key(options[:id])
         if !options[:name]
-          contentview = @api.resource(:contentviews).call(:show, {'id' => options[:id]})
+          contentview = @api.resource(:content_views).call(:show, {'id' => options[:id]})
           raise "Puppet contentview '#{options[:name]}' not found" if !contentview || contentview.empty?
           options[:name] = contentview['name']
           @contentviews[options[:name]] = options[:id]
@@ -510,7 +513,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @systemgroups[organization][options[:name]]
         if !options[:id]
-          @api.resource(:systemgroups).call(:index, {
+          @api.resource(:system_groups).call(:index, {
                                      'organization_id' => katello_organization(:name => organization),
                                      'search' => "name:\"#{options[:name]}\""
                                    })['results'].each do |systemgroup|
@@ -524,7 +527,7 @@ module HammerCLICsv
         return nil if options[:id].nil?
         options[:name] = @systemgroups.key(options[:id])
         if !options[:name]
-          systemgroup = @api.resource(:systemgroups).call(:show, {'id' => options[:id]})
+          systemgroup = @api.resource(:system_groups).call(:show, {'id' => options[:id]})
           raise "System group '#{options[:name]}' not found" if !systemgroup || systemgroup.empty?
           options[:name] = systemgroup['name']
           @systemgroups[options[:name]] = options[:id]

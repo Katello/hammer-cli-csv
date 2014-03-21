@@ -23,3 +23,4 @@ config/initializers/secret_token.rb
 test/data/*.zip
 test/config.yml
 .ruby-version
+.idea

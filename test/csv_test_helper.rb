@@ -14,13 +14,20 @@ require 'minitest/spec'
 require "minitest-spec-context"
 require "mocha/setup"
 
+require 'hammer_cli'
+require 'hammer_cli_foreman/commands'
+
+HammerCLI::Settings.load_from_file 'test/config.yml'
+
 require 'hammer_cli_csv'
-require 'hammer_cli_katello'
 require 'hammer_cli_foreman'
+require 'hammer_cli_katello'
 
 def ctx
   {
-    :interactive => false
+    :interactive => false,
+    :username => 'admin',
+    :password => 'changeme'
   }
 end
 

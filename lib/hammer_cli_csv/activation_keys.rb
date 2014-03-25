@@ -145,11 +145,9 @@ module HammerCLICsv
           subscription = {}
           (amount, name) = subscription_details.split('|')
           {
-            :subscription => {
-              :id => katello_subscription(line[ORGANIZATION], :name => name),
-              :quantity => amount
-            }
-          }
+            :id => katello_subscription(line[ORGANIZATION], :name => name),
+            :quantity => amount
+           }
         end
 
         # TODO: should there be a destroy_all similar to systems?

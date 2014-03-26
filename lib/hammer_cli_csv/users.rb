@@ -9,14 +9,8 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class UsersCommand < BaseCommand
-
     FIRSTNAME = 'First Name'
     LASTNAME = 'Last Name'
     EMAIL = 'Email'
@@ -28,23 +22,33 @@ module HammerCLICsv
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ROLES]
         @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
-          organizations = CSV.generate do |column|
-            column << user['organizations'].collect do |organization|
-              organization['name']
+          if user['organizations']
+            organizations = CSV.generate do |column|
+              column << user['organizations'].collect do |organization|
+                organization['name']
+              end
             end
-          end.delete!("\n") if user['organizations']
-          locations = CSV.generate do |column|
-            column << user['locations'].collect do |location|
-              location['name']
+            organizations.delete!("\n")
+          end
+          if user['locations']
+            locations = CSV.generate do |column|
+              column << user['locations'].collect do |location|
+                location['name']
+              end
             end
-          end.delete!("\n") if user['locations']
-          roles = CSV.generate do |column|
-            column << user['roles'].collect do |role|
-              role['name']
+            locations.delete!("\n")
+          end
+          if user['roles']
+            roles = CSV.generate do |column|
+              column << user['roles'].collect do |role|
+                role['name']
+              end
             end
-          end.delete!("\n") if user['roles']
+            roles.delete!("\n")
+          end
           if user['login'] != 'admin' && !user['login'].start_with?('hidden-')
-            csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail'], organizations, locations, roles]
+            csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail'],
+                    organizations, locations, roles]
           end
         end
       end
@@ -76,42 +80,52 @@ module HammerCLICsv
         end if line[LOCATIONS]
 
         if !@existing.include? name
-          print "Creating user '#{name}'... " if option_verbose?
-          @api.resource(:users).call(:create, {
-                               'user' => {
-                                 'login' => name,
-                                 'firstname' => line[FIRSTNAME],
-                                 'lastname' => line[LASTNAME],
-                                 'mail' => line[EMAIL],
-                                 'password' => 'changeme',
-                                 'auth_source_id' => 1,  # INTERNAL auth
-                                 'organization_ids' => organizations,
-                                 'location_ids' => locations,
-                                 'role_ids' => roles
-                               }
-                             })
+          create_user(line, name, roles, organizations, locations)
         else
-          print "Updating user '#{name}'... " if option_verbose?
-          @api.resource(:users).call(:update, {
-                               'id' => @existing[name],
-                               'user' => {
-                                 'login' => name,
-                                 'firstname' => line[FIRSTNAME],
-                                 'lastname' => line[LASTNAME],
-                                 'mail' => line[EMAIL],
-                                 'password' => 'changeme',
-                                 'organization_ids' => organizations,
-                                 'location_ids' => locations,
-                                 'role_ids' => roles
-                               }
-                             })
+          update_user(line, name, roles, organizations, locations)
         end
         print "done\n" if option_verbose?
       end
     rescue RuntimeError => e
       raise "#{e}\n       #{line}"
     end
+
+    def create_user(line, name, roles, organizations, locations)
+      print "Creating user '#{name}'... " if option_verbose?
+      @api.resource(:users).call(:create, {
+                                   'user' => {
+                                     'login' => name,
+                                     'firstname' => line[FIRSTNAME],
+                                     'lastname' => line[LASTNAME],
+                                     'mail' => line[EMAIL],
+                                     'password' => 'changeme',
+                                     'auth_source_id' => 1,  # INTERNAL auth
+                                     'organization_ids' => organizations,
+                                     'location_ids' => locations,
+                                     'role_ids' => roles
+                                   }
+                                 })
+    end
+
+    def update_user(line, name, roles, organizations, locations)
+      print "Updating user '#{name}'... " if option_verbose?
+      @api.resource(:users).call(:update, {
+                                   'id' => @existing[name],
+                                   'user' => {
+                                     'login' => name,
+                                     'firstname' => line[FIRSTNAME],
+                                     'lastname' => line[LASTNAME],
+                                     'mail' => line[EMAIL],
+                                     'password' => 'changeme',
+                                     'organization_ids' => organizations,
+                                     'location_ids' => locations,
+                                     'role_ids' => roles
+                                   }
+                                 })
+    end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:users", "import or export users as CSV", HammerCLICsv::UsersCommand)
+  HammerCLI::MainCommand.subcommand('csv:users',
+                                    'import or export users as CSV',
+                                    HammerCLICsv::UsersCommand)
 end

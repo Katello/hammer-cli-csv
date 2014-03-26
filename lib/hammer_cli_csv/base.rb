@@ -16,24 +16,25 @@ require 'csv'
 
 module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
-
     NAME = 'Name'
     COUNT = 'Count'
 
-    option ["-v", "--verbose"], :flag, "be verbose"
-    option ['--threads'], 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
-    option ['--csv-export'], :flag, 'Export current data instead of importing'
-    option ['--csv-file'], 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
-    option ['--prefix'], 'PREFIX', 'Prefix for all name columns'
-    option ['--server'], 'SERVER', 'Server URL'
-    option ['-u', '--username'], 'USERNAME', 'Username to access server'
-    option ['-p', '--password'], 'PASSWORD', 'Password to access server'
+    option %w(-v --verbose), :flag, 'be verbose'
+    option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
+    option %w(--csv-export), :flag, 'Export current data instead of importing'
+    option %w(--csv-file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
+    option %w(--prefix), 'PREFIX', 'Prefix for all name columns'
+    option %w(--server), 'SERVER', 'Server URL'
+    option %w(-u --username), 'USERNAME', 'Username to access server'
+    option %w(-p --password), 'PASSWORD', 'Password to access server'
 
     def execute
       if !option_csv_file
         if option_csv_export?
+          # rubocop:disable UselessAssignment
           option_csv_file = '/dev/stdout'
         else
+          # rubocop:disable UselessAssignment
           option_csv_file = '/dev/stdin'
         end
       end
@@ -49,7 +50,7 @@ module HammerCLICsv
       HammerCLI::EX_OK
     end
 
-    def namify(name_format, number=0)
+    def namify(name_format, number = 0)
       if name_format.index('%')
         name = name_format % number
       else
@@ -60,16 +61,19 @@ module HammerCLICsv
     end
 
     def labelize(name)
-      name.gsub(/[^a-z0-9\-_]/i, "_")
+      name.gsub(/[^a-z0-9\-_]/i, '_')
     end
 
-    def thread_import(return_headers=false)
+    def thread_import(return_headers = false)
       csv = []
-      CSV.foreach(option_csv_file || '/dev/stdin', {:skip_blanks => true, :headers => :first_row, 
-                    :return_headers => return_headers}) do |line|
+      CSV.foreach(option_csv_file || '/dev/stdin', {
+                                                     :skip_blanks => true,
+                                                     :headers => :first_row,
+                                                     :return_headers => return_headers
+                                                   }) do |line|
         csv << line
       end
-      lines_per_thread = csv.length/option_threads.to_i + 1
+      lines_per_thread = csv.length / option_threads.to_i + 1
       splits = []
 
       option_threads.to_i.times do |current_thread|
@@ -90,7 +94,7 @@ module HammerCLICsv
       end
     end
 
-    def foreman_organization(options={})
+    def foreman_organization(options = {})
       @organizations ||= {}
 
       if options[:name]
@@ -98,7 +102,7 @@ module HammerCLICsv
         options[:id] = @organizations[options[:name]]
         if !options[:id]
           organization = @api.resource(:organizations).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
-          raise RuntimeError, "Organization '#{options[:name]}' not found" if !organization || organization.empty?
+          raise "Organization '#{options[:name]}' not found" if !organization || organization.empty?
           options[:id] = organization[0]['id']
           @organizations[options[:name]] = options[:id]
         end
@@ -118,7 +122,7 @@ module HammerCLICsv
       result
     end
 
-    def katello_organization(options={})
+    def katello_organization(options = {})
       @organizations ||= {}
 
       if options[:name]
@@ -126,7 +130,7 @@ module HammerCLICsv
         options[:id] = @organizations[options[:name]]
         if !options[:id]
           organization = @api.resource(:organizations).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
-          raise RuntimeError, "Organization '#{options[:name]}' not found" if !organization || organization.empty?
+          raise "Organization '#{options[:name]}' not found" if !organization || organization.empty?
           options[:id] = organization[0]['label']
           @organizations[options[:name]] = options[:id]
         end
@@ -146,7 +150,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_location(options={})
+    def foreman_location(options = {})
       @locations ||= {}
 
       if options[:name]
@@ -154,7 +158,7 @@ module HammerCLICsv
         options[:id] = @locations[options[:name]]
         if !options[:id]
           location = @api.resource(:locations).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
-          raise RuntimeError, "Location '#{options[:name]}' not found" if !location || location.empty?
+          raise "Location '#{options[:name]}' not found" if !location || location.empty?
           options[:id] = location[0]['id']
           @locations[options[:name]] = options[:id]
         end
@@ -174,7 +178,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_role(options={})
+    def foreman_role(options = {})
       @roles ||= {}
 
       if options[:name]
@@ -182,7 +186,7 @@ module HammerCLICsv
         options[:id] = @roles[options[:name]]
         if !options[:id]
           role = @api.resource(:roles).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
-          raise RuntimeError, "Role '#{options[:name]}' not found" if !role || role.empty?
+          raise "Role '#{options[:name]}' not found" if !role || role.empty?
           options[:id] = role[0]['id']
           @roles[options[:name]] = options[:id]
         end
@@ -202,7 +206,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_permission(options={})
+    def foreman_permission(options = {})
       @permissions ||= {}
 
       if options[:name]
@@ -210,7 +214,7 @@ module HammerCLICsv
         options[:id] = @permissions[options[:name]]
         if !options[:id]
           permission = @api.resource(:permissions).call(:index, {'name' => options[:name]})['results']
-          raise RuntimeError, "Permission '#{options[:name]}' not found" if !permission || permission.empty?
+          raise "Permission '#{options[:name]}' not found" if !permission || permission.empty?
           options[:id] = permission[0]['id']
           @permissions[options[:name]] = options[:id]
         end
@@ -230,7 +234,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_filter(role, options={})
+    def foreman_filter(role, options = {})
       @filters ||= {}
 
       if options[:name]
@@ -261,7 +265,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_environment(options={})
+    def foreman_environment(options = {})
       @environments ||= {}
 
       if options[:name]
@@ -289,7 +293,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_operatingsystem(options={})
+    def foreman_operatingsystem(options = {})
       @operatingsystems ||= {}
 
       if options[:name]
@@ -322,7 +326,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_architecture(options={})
+    def foreman_architecture(options = {})
       @architectures ||= {}
 
       if options[:name]
@@ -350,7 +354,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_domain(options={})
+    def foreman_domain(options = {})
       @domains ||= {}
 
       if options[:name]
@@ -378,7 +382,7 @@ module HammerCLICsv
       result
     end
 
-    def foreman_partitiontable(options={})
+    def foreman_partitiontable(options = {})
       @ptables ||= {}
 
       if options[:name]
@@ -407,7 +411,7 @@ module HammerCLICsv
       result
     end
 
-    def katello_environment(organization, options={})
+    def katello_environment(organization, options = {})
       @environments ||= {}
       @environments[organization] ||= {}
 
@@ -440,7 +444,7 @@ module HammerCLICsv
       result
     end
 
-    def katello_contentview(organization, options={})
+    def katello_contentview(organization, options = {})
       @contentviews ||= {}
       @contentviews[organization] ||= {}
 
@@ -448,7 +452,9 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @contentviews[organization][options[:name]]
         if !options[:id]
-          @api.resource(:content_views).call(:index, {'organization_id' => katello_organization(:name => organization)})['results'].each do |contentview|
+          @api.resource(:content_views).call(:index, {
+                                               'organization_id' => katello_organization(:name => organization)
+                                             })['results'].each do |contentview|
             @contentviews[organization][contentview['name']] = contentview['id']
           end
           options[:id] = @contentviews[organization][options[:name]]
@@ -470,7 +476,7 @@ module HammerCLICsv
       result
     end
 
-    def katello_subscription(organization, options={})
+    def katello_subscription(organization, options = {})
       @subscriptions ||= {}
       @subscriptions[organization] ||= {}
 
@@ -505,7 +511,7 @@ module HammerCLICsv
       result
     end
 
-    def katello_systemgroup(organization, options={})
+    def katello_systemgroup(organization, options = {})
       @systemgroups ||= {}
       @systemgroups[organization] ||= {}
 
@@ -539,13 +545,13 @@ module HammerCLICsv
     end
 
     def build_os_name(name, major, minor)
-      name += " #{major}" if major && major != ""
-      name += ".#{minor}" if minor && minor != ""
+      name += " #{major}" if major && major != ''
+      name += ".#{minor}" if minor && minor != ''
       name
     end
 
     # "Red Hat 6.4" => "Red Hat", "6", "4"
-    # "Red Hat 6"   => "Red Hat", "6", ""
+    # "Red Hat 6"   => "Red Hat", "6", ''
     def split_os_name(name)
       tokens = name.split(' ')
       is_number = Float(tokens[-1]) rescue false
@@ -555,7 +561,7 @@ module HammerCLICsv
       else
         name = tokens.join(' ')
       end
-      [name, major || "", minor || ""]
+      [name, major || '', minor || '']
     end
   end
 end

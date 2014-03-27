@@ -1,5 +1,3 @@
-# TODO: needed? require File.join(File.dirname(__FILE__), '../test_output_adapter')
-
 
 module CommandTestHelper
 

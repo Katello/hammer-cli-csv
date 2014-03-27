@@ -33,7 +33,6 @@ require 'uri'
 
 module HammerCLICsv
   class SystemsCommand < BaseCommand
-
     ORGANIZATION = 'Organization'
     ENVIRONMENT = 'Environment'
     CONTENTVIEW = 'Content View'
@@ -52,7 +51,7 @@ module HammerCLICsv
     def export
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
         csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
-               OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
+                OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
         @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
           @api.resource(:systems).call(:index, {
                                 'per_page' => 999999,
@@ -72,7 +71,8 @@ module HammerCLICsv
               column << system['systemGroups'].collect do |systemgroup|
                 systemgroup['name']
               end
-            end.delete!("\n")
+            end
+            systemgroups.delete!("\n")
             virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
             host = system['host']
             operatingsystem = "#{system['facts']['distribution.name']} " if system['facts']['distribution.name']
@@ -81,19 +81,21 @@ module HammerCLICsv
             sockets = system['facts']['cpu.cpu_socket(s)']
             ram = system['facts']['memory.memtotal']
             cores = system['facts']['cpu.core(s)_per_socket']
-            sla = ""
+            sla = ''
             products = CSV.generate do |column|
               column << system['installedProducts'].collect do |product|
                 "#{product['productId']}|#{product['productName']}"
               end
-            end.delete!("\n")
+            end
+            products.delete!("\n")
             subscriptions = CSV.generate do |column|
               column << @api.resource(:subscriptions).call(:index, {
                                                     'system_id' => system['uuid']
                                                   })['results'].collect do |subscription|
                 "#{subscription['product_id']}|#{subscription['product_name']}"
               end
-            end.delete!("\n")
+            end
+            subscriptions.delete!("\n")
             csv << [name, count, organization_name, environment, contentview, systemgroups, virtual, host,
                     operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
           end
@@ -109,14 +111,14 @@ module HammerCLICsv
         create_systems_from_csv(line)
       end
 
-      print "Updating host and guest associations..." if option_verbose?
+      print 'Updating host and guest associations...' if option_verbose?
       @host_guests.each do |host_id, guest_ids|
         @api.resource(:systems).call(:update, {
                                'id' => host_id,
                                'guest_ids' => guest_ids
                              })
       end
-      puts "done" if option_verbose?
+      puts 'done' if option_verbose?
     end
 
     def create_systems_from_csv(line)
@@ -144,7 +146,7 @@ module HammerCLICsv
                                                      'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                                      'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                                      'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                                                     'facts' => facts(line),
+                                                     'facts' => facts(name, line),
                                                      'installed_products' => products(line),
                                                      'type' => 'system'
                                                    })['uuid']
@@ -157,7 +159,7 @@ module HammerCLICsv
                                                        'name' => name,
                                                        'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                                        'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                                                       'facts' => facts(line),
+                                                       'facts' => facts(name, line),
                                                        'installed_products' => products(line)
                                                      }
                                                    })['uuid']
@@ -171,7 +173,7 @@ module HammerCLICsv
 
         set_system_groups(system_id, line)
 
-        puts "done" if option_verbose?
+        puts 'done' if option_verbose?
       end
     rescue RuntimeError => e
       raise "#{e}\n       #{line}"
@@ -179,7 +181,7 @@ module HammerCLICsv
 
     private
 
-    def facts(line)
+    def facts(name, line)
       facts = {}
       facts['cpu.core(s)_per_socket'] = line[CORES]
       facts['cpu.cpu_socket(s)'] = line[SOCKETS]
@@ -191,6 +193,7 @@ module HammerCLICsv
         (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OPERATINGSYSTEM]]
       end
       facts['virt.is_guest'] = line[VIRTUAL] == 'Yes' ? true : false
+      facts['virt.uuid'] = "#{line[ORGANIZATION]}/#{name}" if facts['virt.is_guest']
       facts
     end
 
@@ -204,6 +207,7 @@ module HammerCLICsv
     end
 
     def products(line)
+      return nil if !line[PRODUCTS]
       products = CSV.parse_line(line[PRODUCTS]).collect do |product_details|
         product = {}
         # TODO: these get passed straight through to candlepin; probably would be better to process in server
@@ -215,6 +219,7 @@ module HammerCLICsv
     end
 
     def subscriptions(line)
+      return nil if !line[SUBSCRIPTIONS]
       subscriptions = CSV.parse_line(line[SUBSCRIPTIONS]).collect do |subscription_details|
         subscription = {}
         (subscription[:number], subscription[:name]) = subscription_details.split('|')
@@ -222,8 +227,7 @@ module HammerCLICsv
       end
       subscriptions
     end
-
   end
 
-  HammerCLI::MainCommand.subcommand("csv:systems", "import/export systems", HammerCLICsv::SystemsCommand)
+  HammerCLI::MainCommand.subcommand('csv:systems', 'import/export systems', HammerCLICsv::SystemsCommand)
 end

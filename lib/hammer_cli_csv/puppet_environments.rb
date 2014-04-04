@@ -99,5 +99,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:puppetenvironments", "Import or export puppet environments", HammerCLICsv::PuppetEnvironmentsCommand)
+  HammerCLICsv::CsvCommand.subcommand("puppet-environments",
+                                      "import or export puppet environments",
+                                      HammerCLICsv::PuppetEnvironmentsCommand)
 end

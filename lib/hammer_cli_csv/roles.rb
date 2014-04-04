@@ -138,5 +138,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:roles", "import / export roles", HammerCLICsv::RolesCommand)
+  HammerCLICsv::CsvCommand.subcommand("roles",
+                                      "import or export roles",
+                                      HammerCLICsv::RolesCommand)
 end

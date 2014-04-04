@@ -68,8 +68,7 @@ AllCops:
     - config/navigation.rb
 
 MethodLength:
-  Description: 'Avoid methods longer than 30 lines of code.'
-  Max: 50
+  Max: 250
 
 SpaceInsideHashLiteralBraces:
   EnforcedStyleIsWithSpaces: false

@@ -13,11 +13,17 @@ require 'apipie-bindings'
 require 'hammer_cli'
 require 'json'
 require 'csv'
+require 'hammer_cli_csv/csv'
 
 module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
     NAME = 'Name'
     COUNT = 'Count'
+
+    def request_help(help_command = 'hammer csv', help_options = '')
+      puts "TODO: write some help!"
+      exit(HammerCLI::EX_OK)
+    end
 
     option %w(-v --verbose), :flag, 'be verbose'
     option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1

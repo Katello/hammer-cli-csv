@@ -170,5 +170,7 @@ module HammerCLICsv
 
   end
 
-  HammerCLI::MainCommand.subcommand("csv:activationkeys", "import/export activation keys", HammerCLICsv::ActivationKeysCommand)
+  HammerCLICsv::CsvCommand.subcommand("activation-keys",
+                                      "import or export activation keys",
+                                      HammerCLICsv::ActivationKeysCommand)
 end

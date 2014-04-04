@@ -90,5 +90,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:puppetfacts", "ping the katello server", HammerCLICsv::PuppetFactsCommand)
+  HammerCLICsv::CsvCommand.subcommand("puppet-facts",
+                                      "import or export puppet facts",
+                                      HammerCLICsv::PuppetFactsCommand)
 end

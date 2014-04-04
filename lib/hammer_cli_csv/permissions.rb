@@ -140,5 +140,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:permissions", "ping the katello server", HammerCLICsv::PermissionsCommand)
+  HammerCLICsv::CsvCommand.subcommand("permissions",
+                                      "import or export permissions",
+                                      HammerCLICsv::PermissionsCommand)
 end

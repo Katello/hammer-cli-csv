@@ -93,5 +93,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:partitiontables", "ping the katello server", HammerCLICsv::PartitionTablesCommand)
+  HammerCLICsv::CsvCommand.subcommand("partition-tables",
+                                      "import or export partition tables",
+                                      HammerCLICsv::PartitionTablesCommand)
 end

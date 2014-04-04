@@ -49,5 +49,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:subscriptions", "import subscriptions", HammerCLICsv::SubscriptionsCommand)
+  HammerCLICsv::CsvCommand.subcommand("subscriptions",
+                                      "import or export subscriptions",
+                                      HammerCLICsv::SubscriptionsCommand)
 end

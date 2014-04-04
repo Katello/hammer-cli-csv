@@ -78,5 +78,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:locations", "ping the katello server", HammerCLICsv::LocationsCommand)
+  HammerCLICsv::CsvCommand.subcommand("locations",
+                                      "import or export locations",
+                                      HammerCLICsv::LocationsCommand)
 end

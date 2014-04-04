@@ -24,7 +24,7 @@ eos
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{-v csv:users --csv-file #{file.path}})
+        hammer.run(%W{csv users -v --csv-file #{file.path}})
       }
       stderr.must_equal ''
       stdout[0..-2].must_equal 'Updating user \'damon.dials@megacorp.com\'... done'

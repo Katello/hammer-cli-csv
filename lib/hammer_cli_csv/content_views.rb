@@ -103,5 +103,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:contentviews", "import/export content views", HammerCLICsv::ContentViewsCommand)
+  HammerCLICsv::CsvCommand.subcommand("content-views",
+                                      "import or export content-views",
+                                      HammerCLICsv::ContentViewsCommand)
 end

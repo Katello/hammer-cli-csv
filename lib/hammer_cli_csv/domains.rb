@@ -97,5 +97,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:domains", "ping the katello server", HammerCLICsv::DomainsCommand)
+  HammerCLICsv::CsvCommand.subcommand("domains",
+                                      "import or export domains",
+                                      HammerCLICsv::DomainsCommand)
 end

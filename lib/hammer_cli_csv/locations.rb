@@ -28,57 +28,58 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class LocationsCommand < BaseCommand
+  class CsvCommand
+    class LocationsCommand < BaseCommand
 
-    PARENT = 'Parent Location'
+      command_name "locations"
+      desc         "import or export locations"
 
-    def export
-      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, PARENT]
+      PARENT = 'Parent Location'
+
+      def export
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+          csv << [NAME, COUNT, PARENT]
+          @api.resource(:locations).call(:index, {:per_page => 999999})['results'].each do |location|
+            csv << [location['name'], 1]
+          end
+        end
+      end
+
+      def import
+        @existing = {}
         @api.resource(:locations).call(:index, {:per_page => 999999})['results'].each do |location|
-          csv << [location['name'], 1]
+          @existing[location['name']] = location['id'] if location
+        end
+
+        thread_import do |line|
+          create_locations_from_csv(line)
         end
       end
-    end
 
-    def import
-      @existing = {}
-      @api.resource(:locations).call(:index, {:per_page => 999999})['results'].each do |location|
-        @existing[location['name']] = location['id'] if location
-      end
-
-      thread_import do |line|
-        create_locations_from_csv(line)
-      end
-    end
-
-    def create_locations_from_csv(line)
-      line[COUNT].to_i.times do |number|
-        name = namify(line[NAME], number)
-        location_id = @existing[name]
-        if !location_id
-          print "Creating location '#{name}'... " if option_verbose?
-          @api.resource(:locations).call(:create, {
-                                           'location' => {
-                                             'name' => name,
-                                             'parent_id' => foreman_location(:name => line[PARENT])
-                                           }
-                                         })
-        else
-          print "Updating location '#{name}'... " if option_verbose?
-          @api.resource(:locations).call(:update, {
-                                           'id' => location_id,
-                                           'location' => {
-                                             'parent_id' => foreman_location(:name => line[PARENT])
-                                           }
-                                         })
+      def create_locations_from_csv(line)
+        line[COUNT].to_i.times do |number|
+          name = namify(line[NAME], number)
+          location_id = @existing[name]
+          if !location_id
+            print "Creating location '#{name}'... " if option_verbose?
+            @api.resource(:locations).call(:create, {
+                                             'location' => {
+                                               'name' => name,
+                                               'parent_id' => foreman_location(:name => line[PARENT])
+                                             }
+                                           })
+          else
+            print "Updating location '#{name}'... " if option_verbose?
+            @api.resource(:locations).call(:update, {
+                                             'id' => location_id,
+                                             'location' => {
+                                               'parent_id' => foreman_location(:name => line[PARENT])
+                                             }
+                                           })
+          end
+          print "done\n" if option_verbose?
         end
-        print "done\n" if option_verbose?
       end
     end
   end
-
-  HammerCLICsv::CsvCommand.subcommand("locations",
-                                      "import or export locations",
-                                      HammerCLICsv::LocationsCommand)
 end

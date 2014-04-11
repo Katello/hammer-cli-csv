@@ -29,67 +29,68 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class OperatingSystemsCommand < BaseCommand
+  class CsvCommand
+    class OperatingSystemsCommand < BaseCommand
 
-    FAMILY = 'Family'
+      command_name "operating-systems"
+      desc         "import or export operating systems"
 
-    def export
-      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, FAMILY]
+      FAMILY = 'Family'
+
+      def export
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+          csv << [NAME, COUNT, FAMILY]
+          @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem|
+            name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
+            count = 1
+            family = operatingsystem['family']
+            csv << [name, count, family]
+          end
+        end
+      end
+
+      def import
+        @existing = {}
         @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem|
-          name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
-          count = 1
-          family = operatingsystem['family']
-          csv << [name, count, family]
+          @existing[build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])] = operatingsystem['id'] if operatingsystem
+        end
+
+        thread_import do |line|
+          create_operatingsystems_from_csv(line)
         end
       end
-    end
 
-    def import
-      @existing = {}
-      @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem|
-        @existing[build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])] = operatingsystem['id'] if operatingsystem
-      end
-
-      thread_import do |line|
-        create_operatingsystems_from_csv(line)
-      end
-    end
-
-    def create_operatingsystems_from_csv(line)
-      line[COUNT].to_i.times do |number|
-        name = namify(line[NAME], number)
-        (osname, major, minor) = split_os_name(name)
-        if !@existing.include? name
-          print "Creating operating system '#{name}'..." if option_verbose?
-          @api.resource(:operatingsystems).call(:create, {
-                                          'operatingsystem' => {
-                                            'name' => osname,
-                                            'major' => major,
-                                            'minor' => minor,
-                                            'family' => line[FAMILY]
-                                          }
-                                        })
-        else
-          print "Updating operating system '#{name}'..." if option_verbose?
-          @api.resource(:operatingsystems).call(:update, {
-                                          'id' => @existing[name],
-                                          'operatingsystem' => {
-                                            'name' => osname,
-                                            'major' => major,
-                                            'minor' => minor,
-                                            'family' => line[FAMILY]
-                                          }
-                                        })
+      def create_operatingsystems_from_csv(line)
+        line[COUNT].to_i.times do |number|
+          name = namify(line[NAME], number)
+          (osname, major, minor) = split_os_name(name)
+          if !@existing.include? name
+            print "Creating operating system '#{name}'..." if option_verbose?
+            @api.resource(:operatingsystems).call(:create, {
+                                            'operatingsystem' => {
+                                              'name' => osname,
+                                              'major' => major,
+                                              'minor' => minor,
+                                              'family' => line[FAMILY]
+                                            }
+                                          })
+          else
+            print "Updating operating system '#{name}'..." if option_verbose?
+            @api.resource(:operatingsystems).call(:update, {
+                                            'id' => @existing[name],
+                                            'operatingsystem' => {
+                                              'name' => osname,
+                                              'major' => major,
+                                              'minor' => minor,
+                                              'family' => line[FAMILY]
+                                            }
+                                          })
+          end
+          print "done\n" if option_verbose?
         end
-        print "done\n" if option_verbose?
+      rescue RuntimeError => e
+        raise "#{e}\n       #{line}"
       end
-    rescue RuntimeError => e
-      raise "#{e}\n       #{line}"
     end
   end
-
-  HammerCLICsv::CsvCommand.subcommand("operating-systems",
-                                      "import or export operating systems",
-                                      HammerCLICsv::OperatingSystemsCommand)
 end

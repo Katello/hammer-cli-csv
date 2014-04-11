@@ -15,10 +15,6 @@ require 'hammer_cli/exit_codes'
 
 module HammerCLICsv
   class CsvCommand < HammerCLI::AbstractCommand
-    # def request_help
-    #   puts _("import to, or export from a running foretello server")
-    #   exit(HammerCLI::EX_OK)
-    # end
   end
 
   HammerCLI::MainCommand.subcommand("csv",

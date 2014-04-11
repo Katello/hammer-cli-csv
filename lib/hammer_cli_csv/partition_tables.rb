@@ -26,74 +26,75 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class PartitionTablesCommand < BaseCommand
+  class CsvCommand
+    class PartitionTablesCommand < BaseCommand
 
-    OSFAMILY = 'OS Family'
-    OPERATINGSYSTEMS = 'Operating Systems'
-    LAYOUT = 'Layout'
+      command_name "partition-tables"
+      desc         "import or export partition tables"
 
-    def export
-      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, OSFAMILY, OPERATINGSYSTEMS, LAYOUT]
+      OSFAMILY = 'OS Family'
+      OPERATINGSYSTEMS = 'Operating Systems'
+      LAYOUT = 'Layout'
+
+      def export
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+          csv << [NAME, COUNT, OSFAMILY, OPERATINGSYSTEMS, LAYOUT]
+          @api.resource(:ptables).call(:index, {:per_page => 999999})['results'].each do |ptable|
+            ptable = @api.resource(:ptables).call(:show, {'id' => ptable['id']})
+            name = ptable['name']
+            count = 1
+            osfamily = ptable['os_family']
+            layout = ptable['layout']
+            raise "TODO: operating systems"
+            csv << [name, count, osfamily, layout]
+          end
+        end
+      end
+
+      def import
+        @existing = {}
         @api.resource(:ptables).call(:index, {:per_page => 999999})['results'].each do |ptable|
-          ptable = @api.resource(:ptables).call(:show, {'id' => ptable['id']})
-          name = ptable['name']
-          count = 1
-          osfamily = ptable['os_family']
-          layout = ptable['layout']
-          raise "TODO: operating systems"
-          csv << [name, count, osfamily, layout]
+          @existing[ptable['name']] = ptable['id'] if ptable
+        end
+
+        thread_import do |line|
+          create_ptables_from_csv(line)
         end
       end
-    end
 
-    def import
-      @existing = {}
-      @api.resource(:ptables).call(:index, {:per_page => 999999})['results'].each do |ptable|
-        @existing[ptable['name']] = ptable['id'] if ptable
-      end
-
-      thread_import do |line|
-        create_ptables_from_csv(line)
-      end
-    end
-
-    def create_ptables_from_csv(line)
-      line[COUNT].to_i.times do |number|
-        name = namify(line[NAME], number)
-        operatingsystem_ids = CSV.parse_line(line[OPERATINGSYSTEMS]).collect do |operatingsystem_name|
-          foreman_operatingsystem(:name => operatingsystem_name)
-        end if line[OPERATINGSYSTEMS]
-        if !@existing.include? name
-          print "Creating ptable '#{name}'... " if option_verbose?
-          @api.resource(:ptables).call(:create, {
-                                         'ptable' => {
-                                           'name' => name,
-                                           'os_family' => line[OSFAMILY],
-                                           'operatingsystem_ids' => operatingsystem_ids,
-                                           'layout' => line[LAYOUT]
-                                         }
-                                       })
-        else
-          print "Updating ptable '#{name}'..." if option_verbose?
-          @api.resource(:ptables).call(:update, {
-                                         'id' => @existing[name],
-                                         'ptable' => {
-                                           'name' => name,
-                                           'os_family' => line[OSFAMILY],
-                                           'operatingsystem_ids' => operatingsystem_ids,
-                                           'layout' => line[LAYOUT]
-                                 }
-                           })
+      def create_ptables_from_csv(line)
+        line[COUNT].to_i.times do |number|
+          name = namify(line[NAME], number)
+          operatingsystem_ids = CSV.parse_line(line[OPERATINGSYSTEMS]).collect do |operatingsystem_name|
+            foreman_operatingsystem(:name => operatingsystem_name)
+          end if line[OPERATINGSYSTEMS]
+          if !@existing.include? name
+            print "Creating ptable '#{name}'... " if option_verbose?
+            @api.resource(:ptables).call(:create, {
+                                           'ptable' => {
+                                             'name' => name,
+                                             'os_family' => line[OSFAMILY],
+                                             'operatingsystem_ids' => operatingsystem_ids,
+                                             'layout' => line[LAYOUT]
+                                           }
+                                         })
+          else
+            print "Updating ptable '#{name}'..." if option_verbose?
+            @api.resource(:ptables).call(:update, {
+                                           'id' => @existing[name],
+                                           'ptable' => {
+                                             'name' => name,
+                                             'os_family' => line[OSFAMILY],
+                                             'operatingsystem_ids' => operatingsystem_ids,
+                                             'layout' => line[LAYOUT]
+                                   }
+                             })
+          end
+          print "done\n" if option_verbose?
         end
-        print "done\n" if option_verbose?
+      rescue RuntimeError => e
+        raise "#{e}\n       #{line}"
       end
-    rescue RuntimeError => e
-      raise "#{e}\n       #{line}"
     end
   end
-
-  HammerCLICsv::CsvCommand.subcommand("partition-tables",
-                                      "import or export partition tables",
-                                      HammerCLICsv::PartitionTablesCommand)
 end

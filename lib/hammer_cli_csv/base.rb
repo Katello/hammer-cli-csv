@@ -17,14 +17,6 @@ require 'hammer_cli_csv/csv'
 
 module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
-    NAME = 'Name'
-    COUNT = 'Count'
-
-    def request_help(help_command = 'hammer csv', help_options = '')
-      puts "TODO: write some help!"
-      exit(HammerCLI::EX_OK)
-    end
-
     option %w(-v --verbose), :flag, 'be verbose'
     option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
     option %w(--csv-export), :flag, 'Export current data instead of importing'
@@ -33,6 +25,9 @@ module HammerCLICsv
     option %w(--server), 'SERVER', 'Server URL'
     option %w(-u --username), 'USERNAME', 'Username to access server'
     option %w(-p --password), 'PASSWORD', 'Password to access server'
+
+    NAME = 'Name'
+    COUNT = 'Count'
 
     def execute
       if !option_csv_file

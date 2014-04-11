@@ -222,5 +222,7 @@ module HammerCLICsv
 
   end
 
-  HammerCLI::MainCommand.subcommand("csv:puppetreports", "import/export puppet reports", HammerCLICsv::PuppetReportsCommand)
+  HammerCLICsv::CsvCommand.subcommand("puppet-reports",
+                                      "import or export puppet reports",
+                                      HammerCLICsv::PuppetReportsCommand)
 end

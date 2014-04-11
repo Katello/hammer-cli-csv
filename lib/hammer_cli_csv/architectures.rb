@@ -89,5 +89,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:architectures", "ping the katello server", HammerCLICsv::ArchitecturesCommand)
+  HammerCLICsv::CsvCommand.subcommand("architectures",
+                                      "import or export architectures",
+                                      HammerCLICsv::ArchitecturesCommand)
 end

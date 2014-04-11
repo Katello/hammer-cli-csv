@@ -32,14 +32,13 @@ require 'csv'
 
 module HammerCLICsv
   class OrganizationsCommand < BaseCommand
-
     ORGLABEL = 'Org Label'
     DESCRIPTION = 'Description'
 
     def export
       CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
         csv << [NAME, COUNT, ORGLABEL, DESCRIPTION]
-        @api.resource(:organization).call(:index, {:per_page => 999999})['results'].each do |organization|
+        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
           csv << [organization['name'], 1, organization['label'], organization['description']]
         end
       end
@@ -79,5 +78,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:organizations", "ping the katello server", HammerCLICsv::OrganizationsCommand)
+  HammerCLICsv::CsvCommand.subcommand('organizations',
+                                      'import or export organizations',
+                                      HammerCLICsv::OrganizationsCommand)
 end

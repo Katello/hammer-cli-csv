@@ -105,5 +105,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:lifecycleenv", "Import or export lifecycle environments", HammerCLICsv::LifecycleEnvironmentsCommand)
+  HammerCLICsv::CsvCommand.subcommand("lifecycle-environment",
+                                      "import or export lifecycle environments",
+                                      HammerCLICsv::LifecycleEnvironmentsCommand)
 end

@@ -89,5 +89,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:operatingsystems", "ping the katello server", HammerCLICsv::OperatingSystemsCommand)
+  HammerCLICsv::CsvCommand.subcommand("operating-systems",
+                                      "import or export operating systems",
+                                      HammerCLICsv::OperatingSystemsCommand)
 end

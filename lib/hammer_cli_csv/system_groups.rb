@@ -90,5 +90,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:systemgroups", "system groups", HammerCLICsv::SystemGroupsCommand)
+  HammerCLICsv::CsvCommand.subcommand("system-groups",
+                                      "import or export system groups",
+                                      HammerCLICsv::SystemGroupsCommand)
 end

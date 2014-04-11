@@ -229,5 +229,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand('csv:systems', 'import/export systems', HammerCLICsv::SystemsCommand)
+  HammerCLICsv::CsvCommand.subcommand('systems',
+                                      'import or export systems',
+                                      HammerCLICsv::SystemsCommand)
 end

@@ -71,13 +71,13 @@ module HammerCLICsv
 
         roles = CSV.parse_line(line[ROLES], {:skip_blanks => true}).collect do |role|
           foreman_role(:name => namify(role, number))
-        end if line[ROLES]
+        end if line[ROLES] && !line[ROLES].empty?
         organizations = CSV.parse_line(line[ORGANIZATIONS], {:skip_blanks => true}).collect do |organization|
           foreman_organization(:name => organization)
-        end if line[ORGANIZATIONS]
+        end if line[ORGANIZATIONS] && !line[ORGANIZATIONS].empty?
         locations = CSV.parse_line(line[LOCATIONS], {:skip_blanks => true}).collect do |location|
           foreman_location(:name => location)
-        end if line[LOCATIONS]
+        end if line[LOCATIONS] && !line[LOCATIONS].empty?
 
         if !@existing.include? name
           create_user(line, name, roles, organizations, locations)
@@ -125,7 +125,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand('csv:users',
-                                    'import or export users as CSV',
-                                    HammerCLICsv::UsersCommand)
+  HammerCLICsv::CsvCommand.subcommand('users',
+                                      'import or export users',
+                                      HammerCLICsv::UsersCommand)
 end

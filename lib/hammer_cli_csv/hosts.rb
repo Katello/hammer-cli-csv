@@ -116,5 +116,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:hosts", "import/export hosts", HammerCLICsv::HostsCommand)
+  HammerCLICsv::CsvCommand.subcommand("hosts",
+                                      "import or export hosts",
+                                      HammerCLICsv::HostsCommand)
 end

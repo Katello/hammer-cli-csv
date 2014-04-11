@@ -97,5 +97,7 @@ module HammerCLICsv
     end
   end
 
-  HammerCLI::MainCommand.subcommand("csv:reports", "import / export reports", HammerCLICsv::ReportsCommand)
+  HammerCLICsv::CsvCommand.subcommand("reports",
+                                      "import or export reports",
+                                      HammerCLICsv::ReportsCommand)
 end

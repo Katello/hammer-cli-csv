@@ -15,5 +15,9 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*.rb"]
   spec.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
 
-  spec.add_dependency("hammer_cli")
+  spec.add_dependency('hammer_cli')
+  spec.add_dependency('hammer_cli_foreman')
+  spec.add_dependency('hammer_cli_katello')
+  #spec.add_dependency('hammer_cli_foreman_tasks', '0.0.2')
+
 end

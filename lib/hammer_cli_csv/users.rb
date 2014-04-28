@@ -10,122 +10,124 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 module HammerCLICsv
-  class UsersCommand < BaseCommand
-    FIRSTNAME = 'First Name'
-    LASTNAME = 'Last Name'
-    EMAIL = 'Email'
-    ORGANIZATIONS = 'Organizations'
-    LOCATIONS = 'Locations'
-    ROLES = 'Roles'
+  class CsvCommand
+    class UsersCommand < BaseCommand
+      command_name 'users'
+      desc         'import or export users'
 
-    def export
-      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ROLES]
+      FIRSTNAME = 'First Name'
+      LASTNAME = 'Last Name'
+      EMAIL = 'Email'
+      ORGANIZATIONS = 'Organizations'
+      LOCATIONS = 'Locations'
+      ROLES = 'Roles'
+
+      def export
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+          csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ROLES]
+          @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
+            if user['organizations']
+              organizations = CSV.generate do |column|
+                column << user['organizations'].collect do |organization|
+                  organization['name']
+                end
+              end
+              organizations.delete!("\n")
+            end
+            if user['locations']
+              locations = CSV.generate do |column|
+                column << user['locations'].collect do |location|
+                  location['name']
+                end
+              end
+              locations.delete!("\n")
+            end
+            if user['roles']
+              roles = CSV.generate do |column|
+                column << user['roles'].collect do |role|
+                  role['name']
+                end
+              end
+              roles.delete!("\n")
+            end
+            if user['login'] != 'admin' && !user['login'].start_with?('hidden-')
+              csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail'],
+                      organizations, locations, roles]
+            end
+          end
+        end
+      end
+
+      def import
+        @existing = {}
         @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
-          if user['organizations']
-            organizations = CSV.generate do |column|
-              column << user['organizations'].collect do |organization|
-                organization['name']
-              end
-            end
-            organizations.delete!("\n")
-          end
-          if user['locations']
-            locations = CSV.generate do |column|
-              column << user['locations'].collect do |location|
-                location['name']
-              end
-            end
-            locations.delete!("\n")
-          end
-          if user['roles']
-            roles = CSV.generate do |column|
-              column << user['roles'].collect do |role|
-                role['name']
-              end
-            end
-            roles.delete!("\n")
-          end
-          if user['login'] != 'admin' && !user['login'].start_with?('hidden-')
-            csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail'],
-                    organizations, locations, roles]
-          end
+          @existing[user['login']] = user['id'] if user
+        end
+
+        thread_import do |line|
+          create_users_from_csv(line)
         end
       end
-    end
 
-    def import
-      @existing = {}
-      @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
-        @existing[user['login']] = user['id'] if user
-      end
+      def create_users_from_csv(line)
+        line[COUNT].to_i.times do |number|
+          name = namify(line[NAME], number)
 
-      thread_import do |line|
-        create_users_from_csv(line)
-      end
-    end
+          roles = CSV.parse_line(line[ROLES], {:skip_blanks => true}).collect do |role|
+            foreman_role(:name => namify(role, number))
+          end if line[ROLES] && !line[ROLES].empty?
+          organizations = CSV.parse_line(line[ORGANIZATIONS], {:skip_blanks => true}).collect do |organization|
+            foreman_organization(:name => organization)
+          end if line[ORGANIZATIONS] && !line[ORGANIZATIONS].empty?
+          locations = CSV.parse_line(line[LOCATIONS], {:skip_blanks => true}).collect do |location|
+            foreman_location(:name => location)
+          end if line[LOCATIONS] && !line[LOCATIONS].empty?
 
-    def create_users_from_csv(line)
-      line[COUNT].to_i.times do |number|
-        name = namify(line[NAME], number)
-
-        roles = CSV.parse_line(line[ROLES], {:skip_blanks => true}).collect do |role|
-          foreman_role(:name => namify(role, number))
-        end if line[ROLES] && !line[ROLES].empty?
-        organizations = CSV.parse_line(line[ORGANIZATIONS], {:skip_blanks => true}).collect do |organization|
-          foreman_organization(:name => organization)
-        end if line[ORGANIZATIONS] && !line[ORGANIZATIONS].empty?
-        locations = CSV.parse_line(line[LOCATIONS], {:skip_blanks => true}).collect do |location|
-          foreman_location(:name => location)
-        end if line[LOCATIONS] && !line[LOCATIONS].empty?
-
-        if !@existing.include? name
-          create_user(line, name, roles, organizations, locations)
-        else
-          update_user(line, name, roles, organizations, locations)
+          if !@existing.include? name
+            create_user(line, name, roles, organizations, locations)
+          else
+            update_user(line, name, roles, organizations, locations)
+          end
+          print "done\n" if option_verbose?
         end
-        print "done\n" if option_verbose?
+      rescue RuntimeError => e
+        raise "#{e}\n       #{line}"
       end
-    rescue RuntimeError => e
-      raise "#{e}\n       #{line}"
-    end
 
-    def create_user(line, name, roles, organizations, locations)
-      print "Creating user '#{name}'... " if option_verbose?
-      @api.resource(:users).call(:create, {
-                                   'user' => {
-                                     'login' => name,
-                                     'firstname' => line[FIRSTNAME],
-                                     'lastname' => line[LASTNAME],
-                                     'mail' => line[EMAIL],
-                                     'password' => 'changeme',
-                                     'auth_source_id' => 1,  # INTERNAL auth
-                                     'organization_ids' => organizations,
-                                     'location_ids' => locations,
-                                     'role_ids' => roles
-                                   }
-                                 })
-    end
+      def create_user(line, name, roles, organizations, locations)
+        print "Creating user '#{name}'... " if option_verbose?
+        @api.resource(:users).call(:create, {
+                                     'user' => {
+                                       'login' => name,
+                                       'firstname' => line[FIRSTNAME],
+                                       'lastname' => line[LASTNAME],
+                                       'mail' => line[EMAIL],
+                                       'password' => 'changeme',
+                                       'auth_source_id' => 1,  # INTERNAL auth
+                                       'organization_ids' => organizations,
+                                       'location_ids' => locations,
+                                       'role_ids' => roles
+                                     }
+                                   })
+      end
 
-    def update_user(line, name, roles, organizations, locations)
-      print "Updating user '#{name}'... " if option_verbose?
-      @api.resource(:users).call(:update, {
-                                   'id' => @existing[name],
-                                   'user' => {
-                                     'login' => name,
-                                     'firstname' => line[FIRSTNAME],
-                                     'lastname' => line[LASTNAME],
-                                     'mail' => line[EMAIL],
-                                     'password' => 'changeme',
-                                     'organization_ids' => organizations,
-                                     'location_ids' => locations,
-                                     'role_ids' => roles
-                                   }
-                                 })
+      def update_user(line, name, roles, organizations, locations)
+        print "Updating user '#{name}'... " if option_verbose?
+        @api.resource(:users).call(:update, {
+                                     'id' => @existing[name],
+                                     'user' => {
+                                       'login' => name,
+                                       'firstname' => line[FIRSTNAME],
+                                       'lastname' => line[LASTNAME],
+                                       'mail' => line[EMAIL],
+                                       'password' => 'changeme',
+                                       'organization_ids' => organizations,
+                                       'location_ids' => locations,
+                                       'role_ids' => roles
+                                     }
+                                   })
+      end
     end
+    autoload_subcommands
   end
-
-  HammerCLICsv::CsvCommand.subcommand('users',
-                                      'import or export users',
-                                      HammerCLICsv::UsersCommand)
 end

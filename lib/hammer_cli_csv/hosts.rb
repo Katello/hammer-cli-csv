@@ -32,73 +32,62 @@ require 'csv'
 require 'uri'
 
 module HammerCLICsv
-  class HostsCommand < BaseCommand
+  class CsvCommand
+    class HostsCommand < BaseCommand
 
-    ORGANIZATION = 'Organization'
-    ENVIRONMENT = 'Environment'
-    OPERATINGSYSTEM = 'Operating System'
-    ARCHITECTURE = 'Architecture'
-    MACADDRESS = 'MAC Address'
-    DOMAIN = 'Domain'
-    PARTITIONTABLE = 'Partition Table'
+      command_name "hosts"
+      desc         "import or export hosts"
 
-    def export
-      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-        csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
-        @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|
-          host = @api.resource(:hosts).call(:show, {'id' => host['id']})
-          raise "Host 'id=#{host['id']}' not found" if !host || host.empty?
+      ORGANIZATION = 'Organization'
+      ENVIRONMENT = 'Environment'
+      OPERATINGSYSTEM = 'Operating System'
+      ARCHITECTURE = 'Architecture'
+      MACADDRESS = 'MAC Address'
+      DOMAIN = 'Domain'
+      PARTITIONTABLE = 'Partition Table'
 
-          name = host['name']
-          count = 1
-          organization = foreman_organization(:id => host['organization_id'])
-          environment = foreman_environment(:id => host['environment_id'])
-          operatingsystem = foreman_operatingsystem(:id => host['operatingsystem_id'])
-          architecture = foreman_architecture(:id => host['architecture_id'])
-          mac = host['mac']
-          domain = foreman_domain(:id => host['domain_id'])
-          ptable = foreman_partitiontable(:id => host['ptable_id'])
+      def export
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+          csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
+          @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|
+            host = @api.resource(:hosts).call(:show, {'id' => host['id']})
+            raise "Host 'id=#{host['id']}' not found" if !host || host.empty?
 
-          csv << [name, count, organization, environment, operatingsystem, architecture, mac, domain, ptable]
+            name = host['name']
+            count = 1
+            organization = foreman_organization(:id => host['organization_id'])
+            environment = foreman_environment(:id => host['environment_id'])
+            operatingsystem = foreman_operatingsystem(:id => host['operatingsystem_id'])
+            architecture = foreman_architecture(:id => host['architecture_id'])
+            mac = host['mac']
+            domain = foreman_domain(:id => host['domain_id'])
+            ptable = foreman_partitiontable(:id => host['ptable_id'])
+
+            csv << [name, count, organization, environment, operatingsystem, architecture, mac, domain, ptable]
+          end
         end
       end
-    end
 
-    def import
-      @existing = {}
-      @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|
-        @existing[host['name']] = host['id'] if host
+      def import
+        @existing = {}
+        @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|
+          @existing[host['name']] = host['id'] if host
+        end
+
+        thread_import do |line|
+          create_hosts_from_csv(line)
+        end
       end
 
-      thread_import do |line|
-        create_hosts_from_csv(line)
-      end
-    end
-
-    def create_hosts_from_csv(line)
-      line[COUNT].to_i.times do |number|
-        name = namify(line[NAME], number)
-        if !@existing.include? name
-          print "Creating host '#{name}'..." if option_verbose?
-          @api.resource(:hosts).call(:create, {
-                             'host' => {
-                               'name' => name,
-                               'root_pass' => 'changeme',
-                               'mac' => namify(line[MACADDRESS], number),
-                               'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                               'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
-                               'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
-                               'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
-                               'domain_id' => foreman_domain(:name => line[DOMAIN]),
-                               'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
-                             }
-                           })
-        else
-          print "Updating host '#{name}'..." if option_verbose?
-          @api.resource(:hosts).call(:update, {
-                               'id' => @existing[name],
+      def create_hosts_from_csv(line)
+        line[COUNT].to_i.times do |number|
+          name = namify(line[NAME], number)
+          if !@existing.include? name
+            print "Creating host '#{name}'..." if option_verbose?
+            @api.resource(:hosts).call(:create, {
                                'host' => {
                                  'name' => name,
+                                 'root_pass' => 'changeme',
                                  'mac' => namify(line[MACADDRESS], number),
                                  'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                  'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
@@ -108,15 +97,27 @@ module HammerCLICsv
                                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
                                }
                              })
+          else
+            print "Updating host '#{name}'..." if option_verbose?
+            @api.resource(:hosts).call(:update, {
+                                 'id' => @existing[name],
+                                 'host' => {
+                                   'name' => name,
+                                   'mac' => namify(line[MACADDRESS], number),
+                                   'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                                   'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
+                                   'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
+                                   'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
+                                   'domain_id' => foreman_domain(:name => line[DOMAIN]),
+                                   'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
+                                 }
+                               })
+          end
+          print "done\n" if option_verbose?
         end
-        print "done\n" if option_verbose?
+      rescue RuntimeError => e
+        raise "#{e}\n       #{line}"
       end
-    rescue RuntimeError => e
-      raise "#{e}\n       #{line}"
     end
   end
-
-  HammerCLICsv::CsvCommand.subcommand("hosts",
-                                      "import or export hosts",
-                                      HammerCLICsv::HostsCommand)
 end

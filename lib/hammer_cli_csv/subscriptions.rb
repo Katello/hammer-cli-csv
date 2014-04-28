@@ -27,29 +27,30 @@ require 'csv'
 require 'uri'
 
 module HammerCLICsv
-  class SubscriptionsCommand < BaseCommand
+  class CsvCommand
+    class SubscriptionsCommand < BaseCommand
 
-    ORGANIZATION = 'Organization'
-    MANIFEST = 'Manifest File'
+      command_name "subscriptions"
+      desc         "import or export subscriptions"
 
-    def export
-      # TODO
-    end
+      ORGANIZATION = 'Organization'
+      MANIFEST = 'Manifest File'
 
-    def import
-      thread_import do |line|
-        create_subscriptions_from_csv(line)
+      def export
+        # TODO
+      end
+
+      def import
+        thread_import do |line|
+          create_subscriptions_from_csv(line)
+        end
+      end
+
+      def create_subscriptions_from_csv(line)
+        puts "TODO: import #{line[MANIFEST]} into organization #{line[ORGANIZATION]}"
+      rescue RuntimeError => e
+        raise "#{e}\n       #{line}"
       end
     end
-
-    def create_subscriptions_from_csv(line)
-      puts "TODO: import #{line[MANIFEST]} into organization #{line[ORGANIZATION]}"
-    rescue RuntimeError => e
-      raise "#{e}\n       #{line}"
-    end
   end
-
-  HammerCLICsv::CsvCommand.subcommand("subscriptions",
-                                      "import or export subscriptions",
-                                      HammerCLICsv::SubscriptionsCommand)
 end

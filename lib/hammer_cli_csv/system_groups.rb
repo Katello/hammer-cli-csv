@@ -29,68 +29,69 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class SystemGroupsCommand < BaseCommand
+  class CsvCommand
+    class SystemGroupsCommand < BaseCommand
 
-    ORGANIZATION = 'Organization'
-    LIMIT = 'Limit'
-    DESCRIPTION = 'Description'
+      command_name "system-groups"
+      desc         "import or export system groups"
 
-    def export
-      CSV.open(option_csv_file, 'wb') do |csv|
-        csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
-        @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
-          @api.resource(:system_groups).call(:index, {'organization_id' => organization['label']}).each do |systemgroup|
-            puts systemgroup
-            csv << [systemgroup['name'], 1, organization['label'],
-                    systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : sytemgroup['max_systems'],
-                    systemgroup['description']]
+      ORGANIZATION = 'Organization'
+      LIMIT = 'Limit'
+      DESCRIPTION = 'Description'
+
+      def export
+        CSV.open(option_csv_file, 'wb') do |csv|
+          csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
+          @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
+            @api.resource(:system_groups).call(:index, {'organization_id' => organization['label']}).each do |systemgroup|
+              puts systemgroup
+              csv << [systemgroup['name'], 1, organization['label'],
+                      systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : sytemgroup['max_systems'],
+                      systemgroup['description']]
+            end
           end
         end
       end
-    end
 
-    def import
-      @existing = {}
+      def import
+        @existing = {}
 
-      thread_import do |line|
-        create_systemgroups_from_csv(line)
-      end
-    end
-
-    def create_systemgroups_from_csv(line)
-      if !@existing[line[ORGANIZATION]]
-        @existing[line[ORGANIZATION]] = {}
-        @api.resource(:system_groups).call(:index, {'organization_id' => line[ORGANIZATION]})['results'].each do |systemgroup|
-          @existing[line[ORGANIZATION]][systemgroup['name']] = systemgroup['id']
+        thread_import do |line|
+          create_systemgroups_from_csv(line)
         end
       end
 
-      line[COUNT].to_i.times do |number|
-        name = namify(line[NAME], number)
-        if !@existing[line[ORGANIZATION]].include? name
-          print "Creating system group '#{name}'..." if option_verbose?
-          @api.resource(:system_groups).call(:create, {
-                                    'organization_id' => line[ORGANIZATION],
-                                    'name' => name,
-                                    'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
-                                    'description' => line[DESCRIPTION]
-                                  })
-        else
-          print "Updating system group '#{name}'..." if option_verbose?
-          @api.resource(:system_groups).call(:update, {
+      def create_systemgroups_from_csv(line)
+        if !@existing[line[ORGANIZATION]]
+          @existing[line[ORGANIZATION]] = {}
+          @api.resource(:system_groups).call(:index, {'organization_id' => line[ORGANIZATION]})['results'].each do |systemgroup|
+            @existing[line[ORGANIZATION]][systemgroup['name']] = systemgroup['id']
+          end
+        end
+
+        line[COUNT].to_i.times do |number|
+          name = namify(line[NAME], number)
+          if !@existing[line[ORGANIZATION]].include? name
+            print "Creating system group '#{name}'..." if option_verbose?
+            @api.resource(:system_groups).call(:create, {
                                       'organization_id' => line[ORGANIZATION],
-                                      'id' => @existing[line[ORGANIZATION]][name],
                                       'name' => name,
                                       'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
                                       'description' => line[DESCRIPTION]
                                     })
+          else
+            print "Updating system group '#{name}'..." if option_verbose?
+            @api.resource(:system_groups).call(:update, {
+                                        'organization_id' => line[ORGANIZATION],
+                                        'id' => @existing[line[ORGANIZATION]][name],
+                                        'name' => name,
+                                        'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
+                                        'description' => line[DESCRIPTION]
+                                      })
+          end
+      print "done\n" if option_verbose?
         end
-    print "done\n" if option_verbose?
       end
     end
   end
-
-  HammerCLICsv::CsvCommand.subcommand("system-groups",
-                                      "import or export system groups",
-                                      HammerCLICsv::SystemGroupsCommand)
 end

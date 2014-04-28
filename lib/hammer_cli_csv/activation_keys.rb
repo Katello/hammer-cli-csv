@@ -29,88 +29,80 @@ require 'json'
 require 'csv'
 
 module HammerCLICsv
-  class ActivationKeysCommand < BaseCommand
+  class CsvCommand
+    class ActivationKeysCommand < BaseCommand
 
-    ORGANIZATION = 'Organization'
-    DESCRIPTION = 'Description'
-    LIMIT = 'Limit'
-    ENVIRONMENT = 'Environment'
-    CONTENTVIEW = 'Content View'
-    SYSTEMGROUPS = 'System Groups'
-    SUBSCRIPTIONS = 'Subscriptions'
+      command_name "activation-keys"
+      desc         "import or export activation keys"
 
-    def export
-      CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-        csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
-                SYSTEMGROUPS, SUBSCRIPTIONS]
-        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-          @api.resource(:activation_keys).call(:index, {'per_page' => 999999,
-                                       'organization_id' => organization['label']
-                                     })['results'].each do |activationkey|
-            puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
-            name = namify(activationkey['name'])
-            count = 1
-            description = activationkey['description']
-            limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
-            environment = activationkey['environment']['label']
-            contentview = activationkey['content_view']['name']
-            systemgroups = CSV.generate do |column|
-              column << activationkey['systemGroups'].collect do |systemgroup|
-                systemgroup['name']
-              end
-            end.delete!("\n") if activationkey['systemGroups']
-            subscriptions = CSV.generate do |column|
-              column << @api.resource(:subscriptions).call(:index, {
-                                                    'activation_key_id' => activationkey['id']
-                                                  })['results'].collect do |subscription|
-                amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
-                "#{amount}|#{subscription['product_name']}"
-              end
-            end.delete!("\n")
-            csv << [name, count, organization['label'], description, limit, environment, contentview,
-                    systemgroups, subscriptions]
+      ORGANIZATION = 'Organization'
+      DESCRIPTION = 'Description'
+      LIMIT = 'Limit'
+      ENVIRONMENT = 'Environment'
+      CONTENTVIEW = 'Content View'
+      SYSTEMGROUPS = 'System Groups'
+      SUBSCRIPTIONS = 'Subscriptions'
+
+      def export
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+          csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
+                  SYSTEMGROUPS, SUBSCRIPTIONS]
+          @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+            @api.resource(:activation_keys).call(:index, {'per_page' => 999999,
+                                         'organization_id' => organization['label']
+                                       })['results'].each do |activationkey|
+              puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
+              name = namify(activationkey['name'])
+              count = 1
+              description = activationkey['description']
+              limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
+              environment = activationkey['environment']['label']
+              contentview = activationkey['content_view']['name']
+              systemgroups = CSV.generate do |column|
+                column << activationkey['systemGroups'].collect do |systemgroup|
+                  systemgroup['name']
+                end
+              end.delete!("\n") if activationkey['systemGroups']
+              subscriptions = CSV.generate do |column|
+                column << @api.resource(:subscriptions).call(:index, {
+                                                      'activation_key_id' => activationkey['id']
+                                                    })['results'].collect do |subscription|
+                  amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
+                  "#{amount}|#{subscription['product_name']}"
+                end
+              end.delete!("\n")
+              csv << [name, count, organization['label'], description, limit, environment, contentview,
+                      systemgroups, subscriptions]
+            end
           end
         end
       end
-    end
 
-    def import
-      @existing = {}
+      def import
+        @existing = {}
 
-      thread_import do |line|
-        create_activationkeys_from_csv(line)
-      end
-    end
-
-    def create_activationkeys_from_csv(line)
-      if !@existing[line[ORGANIZATION]]
-        @existing[line[ORGANIZATION]] = {}
-        @api.resource(:activation_keys).call(:index, {
-                                     'per_page' => 999999,
-                                     'organization_id' => katello_organization(:name => line[ORGANIZATION])
-                                   })['results'].each do |activationkey|
-          @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
+        thread_import do |line|
+          create_activationkeys_from_csv(line)
         end
       end
 
-      line[COUNT].to_i.times do |number|
-        name = namify(line[NAME], number)
+      def create_activationkeys_from_csv(line)
+        if !@existing[line[ORGANIZATION]]
+          @existing[line[ORGANIZATION]] = {}
+          @api.resource(:activation_keys).call(:index, {
+                                       'per_page' => 999999,
+                                       'organization_id' => katello_organization(:name => line[ORGANIZATION])
+                                     })['results'].each do |activationkey|
+            @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
+          end
+        end
 
-        if !@existing[line[ORGANIZATION]].include? name
-          print "Creating activation key '#{name}'..." if option_verbose?
-          activationkey = @api.resource(:activation_keys).call(:create, {
-                                      'name' => name,
-                                      'environment_id' => katello_environment(line[ORGANIZATION],
-                                                                              :name => line[ENVIRONMENT]),
-                                      'content_view_id' => katello_contentview(line[ORGANIZATION],
-                                                                               :name => line[CONTENTVIEW]),
-                                      'description' => line[DESCRIPTION]
-                                    })
-          @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
-        else
-          print "Updating activation key '#{name}'..." if option_verbose?
-          activationkey = @api.resource(:activation_keys).call(:update, {
-                                        'id' => @existing[line[ORGANIZATION]][name],
+        line[COUNT].to_i.times do |number|
+          name = namify(line[NAME], number)
+
+          if !@existing[line[ORGANIZATION]].include? name
+            print "Creating activation key '#{name}'..." if option_verbose?
+            activationkey = @api.resource(:activation_keys).call(:create, {
                                         'name' => name,
                                         'environment_id' => katello_environment(line[ORGANIZATION],
                                                                                 :name => line[ENVIRONMENT]),
@@ -118,59 +110,68 @@ module HammerCLICsv
                                                                                  :name => line[CONTENTVIEW]),
                                         'description' => line[DESCRIPTION]
                                       })
+            @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
+          else
+            print "Updating activation key '#{name}'..." if option_verbose?
+            activationkey = @api.resource(:activation_keys).call(:update, {
+                                          'id' => @existing[line[ORGANIZATION]][name],
+                                          'name' => name,
+                                          'environment_id' => katello_environment(line[ORGANIZATION],
+                                                                                  :name => line[ENVIRONMENT]),
+                                          'content_view_id' => katello_contentview(line[ORGANIZATION],
+                                                                                   :name => line[CONTENTVIEW]),
+                                          'description' => line[DESCRIPTION]
+                                        })
+          end
+
+          update_subscriptions(activationkey, line)
+          update_groups(activationkey, line)
+
+          puts "done" if option_verbose?
         end
-
-        update_subscriptions(activationkey, line)
-        update_groups(activationkey, line)
-
-        puts "done" if option_verbose?
       end
-    end
 
-    def update_groups(activationkey, line)
-      if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
-        # TODO: note that existing system groups are not removed
-        CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
-          @api.resource(:system_groups).call(:add_activation_keys, {
-                                                   'id' => katello_systemgroup(line[ORGANIZATION], :name => name),
-                                                   'activation_key_ids' => [activationkey['id']]
-                                                 })
+      def update_groups(activationkey, line)
+        if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
+          # TODO: note that existing system groups are not removed
+          CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
+            @api.resource(:system_groups).call(:add_activation_keys, {
+                                                     'id' => katello_systemgroup(line[ORGANIZATION], :name => name),
+                                                     'activation_key_ids' => [activationkey['id']]
+                                                   })
+          end
         end
       end
-    end
 
-    def update_subscriptions(activationkey, line)
-      if line[SUBSCRIPTIONS] && line[SUBSCRIPTIONS] != ''
-        subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |subscription_details|
-          subscription = {}
-          (amount, name) = subscription_details.split('|')
-          {
-            :id => katello_subscription(line[ORGANIZATION], :name => name),
-            :quantity => amount
-           }
-        end
+      def update_subscriptions(activationkey, line)
+        if line[SUBSCRIPTIONS] && line[SUBSCRIPTIONS] != ''
+          subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |subscription_details|
+            subscription = {}
+            (amount, name) = subscription_details.split('|')
+            {
+              :id => katello_subscription(line[ORGANIZATION], :name => name),
+              :quantity => amount
+             }
+          end
 
-        # TODO: should there be a destroy_all similar to systems?
-        @api.resource(:subscriptions).call(:index, {
-                                             'per_page' => 999999,
-                                             'activation_key_id' => activationkey['id']
-                                           })['results'].each do |subscription|
-          @api.resource(:subscriptions).call(:destroy, {
-                                               'id' => subscription['id'],
+          # TODO: should there be a destroy_all similar to systems?
+          @api.resource(:subscriptions).call(:index, {
+                                               'per_page' => 999999,
                                                'activation_key_id' => activationkey['id']
+                                             })['results'].each do |subscription|
+            @api.resource(:subscriptions).call(:destroy, {
+                                                 'id' => subscription['id'],
+                                                 'activation_key_id' => activationkey['id']
+                                               })
+          end
+
+          @api.resource(:subscriptions).call(:create, {
+                                               'activation_key_id' => activationkey['id'],
+                                               'subscriptions' => subscriptions
                                              })
         end
-
-        @api.resource(:subscriptions).call(:create, {
-                                             'activation_key_id' => activationkey['id'],
-                                             'subscriptions' => subscriptions
-                                           })
       end
     end
 
   end
-
-  HammerCLICsv::CsvCommand.subcommand("activation-keys",
-                                      "import or export activation keys",
-                                      HammerCLICsv::ActivationKeysCommand)
 end

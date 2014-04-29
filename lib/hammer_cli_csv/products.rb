@@ -203,9 +203,9 @@ module HammerCLICsv
 
       def content_type(repository_type)
         case repository_type
-          when /Yum/
+          when /yum/i
             'yum'
-          when /Puppet/
+          when /puppet/i
             'puppet'
           else
           raise "Unrecognized repository type '#{repository_type}'"

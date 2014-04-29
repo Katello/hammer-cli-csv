@@ -2,12 +2,6 @@ source "https://rubygems.org"
 
 gemspec
 
-gem 'apipie-bindings', :path => "../apipie-bindings"
-gem 'hammer_cli', :path => "../hammer-cli"
-gem 'hammer_cli_foreman', :path => "../hammer-cli-foreman"
-gem 'hammer_cli_katello', :path => "../hammer-cli-katello"
-gem 'hammer_cli_foreman_tasks', :path => "../hammer-cli-foreman-tasks"
-
 group :test do
   gem 'rake'
   gem 'thor'
@@ -17,3 +11,7 @@ group :test do
   gem 'mocha'
   gem 'ci_reporter'
 end
+
+# load local gemfile
+local_gemfile = File.join(File.dirname(__FILE__), 'Gemfile.local')
+self.instance_eval(Bundler.read_file(local_gemfile)) if File.exist?(local_gemfile)

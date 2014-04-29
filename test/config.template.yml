@@ -1,0 +1,17 @@
+:csv:
+  :enable_module: true
+  :host:          'https://localhost'
+  :username:      'admin'
+  :password:      'changeme'
+
+:foreman:
+  :enable_module: true
+  :host:          'https://localhost'
+  :username:      'admin'
+  :password:      'changeme'
+
+:katello:
+  :enable_module: true
+  :host:          'https://localhost'
+  :username:      'admin'
+  :password:      'changeme'

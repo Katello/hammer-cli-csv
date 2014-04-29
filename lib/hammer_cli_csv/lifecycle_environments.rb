@@ -29,7 +29,7 @@ module HammerCLICsv
   class CsvCommand
     class LifecycleEnvironmentsCommand < BaseCommand
 
-      command_name "lifecycle-environment"
+      command_name "lifecycle-environments"
       desc         "import or export lifecycle environments"
 
       LABEL = "Label"

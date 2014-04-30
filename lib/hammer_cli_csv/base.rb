@@ -520,10 +520,11 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @systemgroups[organization][options[:name]]
         if !options[:id]
-          @api.resource(:system_groups).call(:index, {
-                                     'organization_id' => katello_organization(:name => organization),
-                                     'search' => "name:\"#{options[:name]}\""
-                                   })['results'].each do |systemgroup|
+          @api.resource(:system_groups)
+            .call(:index, {
+                    'organization_id' => katello_organization(:name => organization),
+                    'search' => "name:\"#{options[:name]}\""
+                  })['results'].each do |systemgroup|
             @systemgroups[organization][systemgroup['name']] = systemgroup['id'] if systemgroup
           end
           options[:id] = @systemgroups[organization][options[:name]]
@@ -563,6 +564,69 @@ module HammerCLICsv
         name = tokens.join(' ')
       end
       [name, major || '', minor || '']
+    end
+
+    def export_column(object, name, field)
+      values = CSV.generate do |column|
+        column << object[name].collect do |fields|
+          fields[field]
+        end
+      end
+      values.delete!("\n")
+    end
+
+    def pluralize(name)
+      case name
+        when /smart_proxy/
+          'smart_proxies'
+        else
+          "#{name}s"
+      end
+    end
+
+    def associate_organizations(id, organizations, name)
+      return if organizations.nil?
+
+      associations ||= {}
+      CSV.parse_line(organizations).each do |organization|
+        organization_id = foreman_organization(:name => organization)
+        if associations[organization].nil?
+          associations[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})[pluralize(name)].collect do |reference_object|
+            reference_object['id']
+          end
+        end
+        associations[organization] += [id] if !associations[organization].include? id
+        @api.resource(:organizations)
+          .call(:update, {
+                  'id' => organization_id,
+                  'organization' => {
+                    "#{name}_ids" => associations[organization]
+                  }
+                })
+      end if organizations && !organizations.empty?
+    end
+
+    def associate_locations(id, locations, name)
+      return if locations.nil?
+
+      associations ||= {}
+      CSV.parse_line(locations).each do |location|
+        location_id = foreman_location(:name => location)
+        if associations[location].nil?
+          associations[location] = @api.resource(:locations).call(:show, {'id' => location_id})[pluralize(name)].collect do |reference_object|
+            reference_object['id']
+          end
+        end
+        associations[location] += [id] if !associations[location].include? id
+
+        @api.resource(:locations)
+          .call(:update, {
+                  'id' => location_id,
+                  'location' => {
+                    "#{name}_ids" => associations[location]
+                  }
+                })
+      end if locations && !locations.empty?
     end
   end
 end

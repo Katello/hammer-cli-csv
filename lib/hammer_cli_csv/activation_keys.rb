@@ -108,7 +108,8 @@ module HammerCLICsv
                                                                                 :name => line[ENVIRONMENT]),
                                         'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                  :name => line[CONTENTVIEW]),
-                                        'description' => line[DESCRIPTION]
+                                        'description' => line[DESCRIPTION],
+                                        'usage_limit' => usage_limit(line[LIMIT])
                                       })
             @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
           else
@@ -120,7 +121,8 @@ module HammerCLICsv
                                                                                   :name => line[ENVIRONMENT]),
                                           'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                    :name => line[CONTENTVIEW]),
-                                          'description' => line[DESCRIPTION]
+                                          'description' => line[DESCRIPTION],
+                                          'usage_limit' => usage_limit(line[LIMIT])
                                         })
           end
 
@@ -151,7 +153,7 @@ module HammerCLICsv
             {
               :id => katello_subscription(line[ORGANIZATION], :name => name),
               :quantity => amount
-             }
+            }
           end
 
           # TODO: should there be a destroy_all similar to systems?
@@ -171,7 +173,10 @@ module HammerCLICsv
                                              })
         end
       end
-    end
 
+      def usage_limit(limit)
+        Integer(limit) rescue -1
+      end
+    end
   end
 end

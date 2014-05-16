@@ -102,7 +102,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @organizations[options[:name]]
         if !options[:id]
-          organization = @api.resource(:organizations).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          organization = @api.resource(:organizations).call(:index, {
+                                                              :per_page => 999999,
+                                                              'search' => "name=\"#{options[:name]}\""
+                                                            })['results']
           raise "Organization '#{options[:name]}' not found" if !organization || organization.empty?
           options[:id] = organization[0]['id']
           @organizations[options[:name]] = options[:id]
@@ -130,7 +133,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @organizations[options[:name]]
         if !options[:id]
-          organization = @api.resource(:organizations).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          organization = @api.resource(:organizations).call(:index, {
+                                                              :per_page => 999999,
+                                                              'search' => "name=\"#{options[:name]}\""
+                                                            })['results']
           raise "Organization '#{options[:name]}' not found" if !organization || organization.empty?
           options[:id] = organization[0]['label']
           @organizations[options[:name]] = options[:id]
@@ -158,7 +164,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @locations[options[:name]]
         if !options[:id]
-          location = @api.resource(:locations).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          location = @api.resource(:locations).call(:index, {
+                                                      :per_page => 999999,
+                                                      'search' => "name=\"#{options[:name]}\""
+                                                    })['results']
           raise "Location '#{options[:name]}' not found" if !location || location.empty?
           options[:id] = location[0]['id']
           @locations[options[:name]] = options[:id]
@@ -186,7 +195,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @roles[options[:name]]
         if !options[:id]
-          role = @api.resource(:roles).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          role = @api.resource(:roles).call(:index, {
+                                               :per_page => 999999,
+                                              'search' => "name=\"#{options[:name]}\""
+                                            })['results']
           raise "Role '#{options[:name]}' not found" if !role || role.empty?
           options[:id] = role[0]['id']
           @roles[options[:name]] = options[:id]
@@ -214,7 +226,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @permissions[options[:name]]
         if !options[:id]
-          permission = @api.resource(:permissions).call(:index, {'name' => options[:name]})['results']
+          permission = @api.resource(:permissions).call(:index, {
+                                                          :per_page => 999999,
+                                                          'name' => options[:name]
+                                                        })['results']
           raise "Permission '#{options[:name]}' not found" if !permission || permission.empty?
           options[:id] = permission[0]['id']
           @permissions[options[:name]] = options[:id]
@@ -235,35 +250,17 @@ module HammerCLICsv
       result
     end
 
-    def foreman_filter(role, options = {})
-      @filters ||= {}
-
-      if options[:name]
-        return nil if options[:name].nil? || options[:name].empty?
-        options[:id] = @filters[options[:name]]
-        if !options[:id]
-          filter = @api.resource(:filters).call(:index, {'search' => "role=\"#{role}\" and search=\"#{options[:name]}\""})['results']
-          if !filter || filter.empty?
-            options[:id] = nil
-          else
-            options[:id] = filter[0]['id']
-            @filters[options[:name]] = options[:id]
-          end
-        end
-        result = options[:id]
-      else
-        return nil if options[:id].nil?
-        options[:name] = @filters.key(options[:id])
-        if !options[:name]
-          filter = @api.resource(:filters).call(:show, {'id' => options[:id]})
-          raise "Filter 'id=#{options[:id]}' not found" if !filter || filter.empty?
-          options[:name] = filter['name']
-          @filters[options[:name]] = options[:id]
-        end
-        result = options[:name]
+    def foreman_filter(role, resource, search)
+      search = nil if search && search.empty?
+      filters = @api.resource(:filters).call(:index, {
+                                               :per_page => 999999,
+                                               'search' => "role=\"#{role}\""
+                                             })['results']
+      filters.each do |filter|
+        return filter['id'] if filter['resource_type'] == resource && filter['search'] == search
       end
 
-      result
+      nil
     end
 
     def foreman_environment(options = {})
@@ -273,7 +270,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @environments[options[:name]]
         if !options[:id]
-          environment = @api.resource(:environments).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          environment = @api.resource(:environments).call(:index, {
+                                               :per_page => 999999,
+                                                            'search' => "name=\"#{options[:name]}\""
+                                                          })['results']
           raise "Puppet environment '#{options[:name]}' not found" if !environment || environment.empty?
           options[:id] = environment[0]['id']
           @environments[options[:name]] = options[:id]
@@ -303,7 +303,10 @@ module HammerCLICsv
         if !options[:id]
           (osname, major, minor) = split_os_name(options[:name])
           search = "name=\"#{osname}\" and major=\"#{major}\" and minor=\"#{minor}\""
-          operatingsystems = @api.resource(:operatingsystems).call(:index, {'search' => search})['results']
+          operatingsystems = @api.resource(:operatingsystems).call(:index, {
+                                                                     :per_page => 999999,
+                                                                     'search' => search
+                                                                   })['results']
           operatingsystem = operatingsystems[0]
           raise "Operating system '#{options[:name]}' not found" if !operatingsystem || operatingsystem.empty?
           options[:id] = operatingsystem['id']
@@ -334,7 +337,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @architectures[options[:name]]
         if !options[:id]
-          architecture = @api.resource(:architectures).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          architecture = @api.resource(:architectures).call(:index, {
+                                                              :per_page => 999999,
+                                                              'search' => "name=\"#{options[:name]}\""
+                                                            })['results']
           raise "Architecture '#{options[:name]}' not found" if !architecture || architecture.empty?
           options[:id] = architecture[0]['id']
           @architectures[options[:name]] = options[:id]
@@ -362,7 +368,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @domains[options[:name]]
         if !options[:id]
-          domain = @api.resource(:domains).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          domain = @api.resource(:domains).call(:index, {
+                                                  :per_page => 999999,
+                                                  'search' => "name=\"#{options[:name]}\""
+                                                })['results']
           raise "Domain '#{options[:name]}' not found" if !domain || domain.empty?
           options[:id] = domain[0]['id']
           @domains[options[:name]] = options[:id]
@@ -390,7 +399,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @ptables[options[:name]]
         if !options[:id]
-          ptable = @api.resource(:ptables).call(:index, {'search' => "name=\"#{options[:name]}\""})['results']
+          ptable = @api.resource(:ptables).call(:index, {
+                                                  :per_page => 999999,
+                                                  'search' => "name=\"#{options[:name]}\""
+                                                })['results']
           raise "Partition table '#{options[:name]}' not found" if !ptable || ptable.empty?
           options[:id] = ptable[0]['id']
           @ptables[options[:name]] = options[:id]
@@ -414,13 +426,15 @@ module HammerCLICsv
 
     def katello_environment(organization, options = {})
       @environments ||= {}
-      @environments[organization] ||= {}
+      @environments[organization] ||= {
+      }
 
       if options[:name]
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @environments[organization][options[:name]]
         if !options[:id]
           @api.resource(:lifecycle_environments).call(:index, {
+                                                        :per_page => 999999,
                                                         'organization_id' => katello_organization(:name => organization),
                                                         'library' => true
                                                       })['results'].each do |environment|
@@ -454,6 +468,7 @@ module HammerCLICsv
         options[:id] = @contentviews[organization][options[:name]]
         if !options[:id]
           @api.resource(:content_views).call(:index, {
+                                               :per_page => 999999,
                                                'organization_id' => katello_organization(:name => organization)
                                              })['results'].each do |contentview|
             @contentviews[organization][contentview['name']] = contentview['id']
@@ -486,9 +501,10 @@ module HammerCLICsv
         options[:id] = @subscriptions[organization][options[:name]]
         if !options[:id]
           results = @api.resource(:subscriptions).call(:index, {
-                                                'organization_id' => katello_organization(:name => organization),
-                                                'search' => "name:\"#{options[:name]}\""
-                                              })
+                                                         :per_page => 999999,
+                                                         'organization_id' => katello_organization(:name => organization),
+                                                         'search' => "name:\"#{options[:name]}\""
+                                                       })
           raise "No subscriptions match '#{options[:name]}'" if results['subtotal'] == 0
           raise "Too many subscriptions match '#{options[:name]}'" if results['subtotal'] > 1
           subscription = results['results'][0]
@@ -520,8 +536,9 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @systemgroups[organization][options[:name]]
         if !options[:id]
-          @api.resource(:system_groups)
-            .call(:index, {
+          @api.resource(:system_groups).call(:index,
+                  {
+                    :per_page => 999999,
                     'organization_id' => katello_organization(:name => organization),
                     'search' => "name:\"#{options[:name]}\""
                   })['results'].each do |systemgroup|
@@ -573,6 +590,13 @@ module HammerCLICsv
         end
       end
       values.delete!("\n")
+    end
+
+    def collect_column(column)
+      return [] if column.nil? || column.empty?
+      CSV.parse_line(column, {:skip_blanks => true}).collect do |value|
+        yield value
+      end
     end
 
     def pluralize(name)

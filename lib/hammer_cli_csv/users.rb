@@ -73,15 +73,15 @@ module HammerCLICsv
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
 
-          roles = CSV.parse_line(line[ROLES], {:skip_blanks => true}).collect do |role|
-            foreman_role(:name => namify(role, number))
-          end if line[ROLES] && !line[ROLES].empty?
-          organizations = CSV.parse_line(line[ORGANIZATIONS], {:skip_blanks => true}).collect do |organization|
+          roles = collect_column(line[ROLES]) do |role|
+            foreman_role(:name => role)
+          end
+          organizations = collect_column(line[ORGANIZATIONS]) do |organization|
             foreman_organization(:name => organization)
-          end if line[ORGANIZATIONS] && !line[ORGANIZATIONS].empty?
-          locations = CSV.parse_line(line[LOCATIONS], {:skip_blanks => true}).collect do |location|
+          end
+          locations = collect_column(line[LOCATIONS]) do |location|
             foreman_location(:name => location)
-          end if line[LOCATIONS] && !line[LOCATIONS].empty?
+          end
 
           if !@existing.include? name
             create_user(line, name, roles, organizations, locations)

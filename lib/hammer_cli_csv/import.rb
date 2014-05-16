@@ -53,16 +53,17 @@ module HammerCLICsv
                                          :api_version => 2
                                        })
 
-        organizations = option_organizations
-        organizations ||= "#{option_dir}/organizations.csv" if option_dir
-        hammer.run(%W{ csv organizations -v --csv-file #{organizations} }) if File.exists? organizations
-
-        hosts = option_hosts
-        hosts ||= "#{option_dir}/hosts.csv" if option_dir
-        hammer.run(%W{ csv hosts -v --csv-file #{hosts} }) if File.exists? hosts
-
+        swing('organizations')
+        swing('roles')
+        swing('hosts')
 
         HammerCLI::EX_OK
+      end
+
+      def swing(resource)
+        options_file = self.send("option_#{resource}")
+        options_file ||= "#{option_dir}/#{resource}.csv" if option_dir
+        hammer.run(%W{ csv #{resource} -v --csv-file #{options_file} }) if File.exists? options_file
       end
 
     end

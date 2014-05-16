@@ -56,7 +56,7 @@ AccessorMethodName:
 
 AllCops:
   RunRailsCops: true # automatically run rails cops
-  Excludes:
+  Exclude:
     - script/rails
     - script/thin
     - db/migrate/20131014135042_katello_tables.rb

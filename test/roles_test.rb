@@ -9,7 +9,7 @@ describe 'something' do
 
 
   before :each do
-    HammerCLI::Settings.load_from_file ['test/config.yml']
+    HammerCLI::Settings.load_from_file 'test/config.yml'
   end
 
   context 'activation keys' do

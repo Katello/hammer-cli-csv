@@ -29,42 +29,29 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class RolesCommand < BaseCommand
+      command_name 'roles'
+      desc 'import or export roles'
 
-      command_name "roles"
-      desc         "import or export roles"
-
-      ROLE = "Role"
-      FILTER = "Filter"
-      PERMISSIONS = "Permissions"
-      ORGANIZATIONS = "Organizations"
-      LOCATIONS = "Locations"
+      RESOURCE = 'Resource'
+      SEARCH = 'Search'
+      PERMISSIONS = 'Permissions'
+      ORGANIZATIONS = 'Organizations'
+      LOCATIONS = 'Locations'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, FILTER, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
+          csv << [NAME, COUNT, RESOURCE, SEARCH, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
           @api.resource(:roles).call(:index, {'per_page' => 999999})['results'].each do |role|
             @api.resource(:filters).call(:index, {
-                                  'per_page' => 999999,
-                                  'search' => "role=\"#{role['name']}\""
+                                           'per_page' => 999999,
+                                           'search' => "role=\"#{role['name']}\""
                                 })['results'].each do |filter|
-              if filter['search'] && filter['search'] != ''
-                permissions = CSV.generate do |column|
-                  column << filter['permissions'].collect do |permission|
-                    permission['name']
-                  end
-                end.delete!("\n")
-                organizations = CSV.generate do |column|
-                  column << filter['organizations'].collect do |organization|
-                    organization['name']
-                  end
-                end.delete!("\n")
-                locations = CSV.generate do |column|
-                  column << filter['locations'].collect do |location|
-                    location['name']
-                  end
-                end.delete!("\n")
-                csv << [role['name'], 1, filter['search'], permissions, organizations, locations]
-              end
+              filter = @api.resource(:filters).call(:show, 'id' => filter['id'])
+
+              permissions = export_column(filter, 'permissions', 'name')
+              organizations = export_column(filter, 'organizations', 'name')
+              locations = export_column(filter, 'locations', 'name')
+              csv << [role['name'], 1, filter['resource_type'], filter['search'] || '', permissions, organizations, locations]
             end
           end
         end
@@ -91,53 +78,53 @@ module HammerCLICsv
       def create_roles_from_csv(line)
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
-          filter = namify(line[FILTER], number) if line[FILTER]
+          search = namify(line[SEARCH], number) if line[SEARCH]
 
           if !@existing_roles[name]
             print "Creating role '#{name}'..." if option_verbose?
             role = @api.resource(:roles).call(:create, {
-                                        'name' => name
-                                      })
+                                                'name' => name
+                                              })
             @existing_roles[name] = role['id']
           else
             print "Updating role '#{name}'..." if option_verbose?
             @api.resource(:roles).call(:update, {
-                                 'id' => @existing_roles[name]
-                               })
+                                         'id' => @existing_roles[name]
+                                       })
           end
 
-          permissions = CSV.parse_line(line[PERMISSIONS], {:skip_blanks => true}).collect do |permission|
+          permissions = collect_column(line[PERMISSIONS]) do |permission|
             foreman_permission(:name => permission)
-          end if line[PERMISSIONS]
-          organizations = CSV.parse_line(line[ORGANIZATIONS], {:skip_blanks => true}).collect do |organization|
+          end
+          organizations = collect_column(line[ORGANIZATIONS]) do |organization|
             foreman_organization(:name => organization)
-          end if line[ORGANIZATIONS]
-          locations = CSV.parse_line(line[LOCATIONS], {:skip_blanks => true}).collect do |location|
+          end
+          locations = collect_column(line[LOCATIONS]) do |location|
             foreman_location(:name => location)
-          end if line[LOCATIONS]
-
-          if filter
-            filter_id = foreman_filter(name, :name => filter)
-            if !filter_id
-              @api.resource(:filters).call(:create, {
-                                     'role_id' => @existing_roles[name],
-                                     'search' => filter,
-                                     'organization_ids' => organizations || [],
-                                     'location_ids' => locations || [],
-                                     'permission_ids' => permissions || []
-                                   })
-            else
-              @api.resource(:filters).call(:update, {
-                                     'id' => filter_id,
-                                     'search' => filter,
-                                     'organization_ids' => organizations || [],
-                                     'location_ids' => locations || [],
-                                     'permission_ids' => permissions || []
-                                   })
-            end
           end
 
-          puts "done" if option_verbose?
+          filter_id = foreman_filter(name, line[RESOURCE], search)
+          if !filter_id
+            print " creating filter #{line[RESOURCE]}..."
+            @api.resource(:filters).call(:create, {
+                                           'role_id' => @existing_roles[name],
+                                           'search' => search,
+                                           'organization_ids' => organizations,
+                                           'location_ids' => locations,
+                                           'permission_ids' => permissions
+                                         })
+          else
+            print " updating filter #{line[RESOURCE]}..."
+            @api.resource(:filters).call(:update, {
+                                           'id' => filter_id,
+                                           'search' => search,
+                                           'organization_ids' => organizations,
+                                           'location_ids' => locations,
+                                           'permission_ids' => permissions
+                                         })
+          end
+
+          puts 'done' if option_verbose?
         end
       end
     end

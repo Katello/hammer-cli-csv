@@ -31,9 +31,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class OperatingSystemsCommand < BaseCommand
-
-      command_name "operating-systems"
-      desc         "import or export operating systems"
+      command_name 'operating-systems'
+      desc         'import or export operating systems'
 
       FAMILY = 'Family'
 

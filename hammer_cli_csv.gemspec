@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('hammer_cli')
   spec.add_dependency('hammer_cli_foreman')
   spec.add_dependency('hammer_cli_katello')
-  #spec.add_dependency('hammer_cli_foreman_tasks', '0.0.2')
+
+  spec.add_development_dependency "rubocop", "0.17.0"
 
 end

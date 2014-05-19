@@ -28,9 +28,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class ArchitecturesCommand < BaseCommand
-
-      command_name "architectures"
-      desc         "import or export architectures"
+      command_name 'architectures'
+      desc         'import or export architectures'
 
       OPERATINGSYSTEMS = 'Operating Systems'
 

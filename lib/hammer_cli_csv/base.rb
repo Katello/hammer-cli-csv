@@ -196,7 +196,7 @@ module HammerCLICsv
         options[:id] = @roles[options[:name]]
         if !options[:id]
           role = @api.resource(:roles).call(:index, {
-                                               :per_page => 999999,
+                                              :per_page => 999999,
                                               'search' => "name=\"#{options[:name]}\""
                                             })['results']
           raise "Role '#{options[:name]}' not found" if !role || role.empty?
@@ -271,8 +271,8 @@ module HammerCLICsv
         options[:id] = @environments[options[:name]]
         if !options[:id]
           environment = @api.resource(:environments).call(:index, {
-                                               :per_page => 999999,
-                                                            'search' => "name=\"#{options[:name]}\""
+                                                            :per_page => 999999,
+                                                            'search' => "name=\"#{ options[:name] }\""
                                                           })['results']
           raise "Puppet environment '#{options[:name]}' not found" if !environment || environment.empty?
           options[:id] = environment[0]['id']
@@ -584,6 +584,7 @@ module HammerCLICsv
     end
 
     def export_column(object, name, field)
+      return '' unless object[name]
       values = CSV.generate do |column|
         column << object[name].collect do |fields|
           fields[field]
@@ -601,10 +602,10 @@ module HammerCLICsv
 
     def pluralize(name)
       case name
-        when /smart_proxy/
-          'smart_proxies'
-        else
-          "#{name}s"
+      when /smart_proxy/
+        'smart_proxies'
+      else
+        "#{name}s"
       end
     end
 

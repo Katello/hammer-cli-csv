@@ -28,9 +28,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class PartitionTablesCommand < BaseCommand
-
-      command_name "partition-tables"
-      desc         "import or export partition tables"
+      command_name 'partition-tables'
+      desc         'import or export partition tables'
 
       OSFAMILY = 'OS Family'
       OPERATINGSYSTEMS = 'Operating Systems'
@@ -45,7 +44,7 @@ module HammerCLICsv
             count = 1
             osfamily = ptable['os_family']
             layout = ptable['layout']
-            raise "TODO: operating systems"
+            raise 'TODO: operating systems'
             csv << [name, count, osfamily, layout]
           end
         end

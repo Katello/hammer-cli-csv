@@ -30,17 +30,19 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class PuppetFactsCommand < BaseCommand
-
-      command_name "puppet-facts"
-      desc         "import or export puppet facts"
+      command_name 'puppet-facts'
+      desc         'import or export puppet facts'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           headers = [NAME, COUNT]
           # Extracted facts are always based upon the first host found, otherwise this would be an intensive
           # method to gather all the possible column names
-          host = @api.resource(:hosts).call(:index, {:per_page => 1})['results'][0]
-          headers += @api.resource(:puppetfactss).call(:index, {'host_id' => host['name'], 'per_page' => 999999})['results'][host['name']].keys
+          any_host = @api.resource(:hosts).call(:index, {:per_page => 1})['results'][0]
+          headers += @api.resource(:puppetfactss).call(:index, {
+                                                         'host_id' => any_host['name'],
+                                                         'per_page' => 999999
+                                                       })['results'][any_host['name']].keys
           csv << headers
 
           @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|

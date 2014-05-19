@@ -31,9 +31,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class ActivationKeysCommand < BaseCommand
-
-      command_name "activation-keys"
-      desc         "import or export activation keys"
+      command_name 'activation-keys'
+      desc         'import or export activation keys'
 
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
@@ -49,7 +48,7 @@ module HammerCLICsv
                   SYSTEMGROUPS, SUBSCRIPTIONS]
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
             @api.resource(:activation_keys).call(:index, {'per_page' => 999999,
-                                         'organization_id' => organization['label']
+                                                          'organization_id' => organization['label']
                                        })['results'].each do |activationkey|
               puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
               name = namify(activationkey['name'])
@@ -58,11 +57,7 @@ module HammerCLICsv
               limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
               environment = activationkey['environment']['label']
               contentview = activationkey['content_view']['name']
-              systemgroups = CSV.generate do |column|
-                column << activationkey['systemGroups'].collect do |systemgroup|
-                  systemgroup['name']
-                end
-              end.delete!("\n") if activationkey['systemGroups']
+              systemgroups = export_column(activationkey, 'systemGroups', 'name')
               subscriptions = CSV.generate do |column|
                 column << @api.resource(:subscriptions).call(:index, {
                                                       'activation_key_id' => activationkey['id']
@@ -70,7 +65,8 @@ module HammerCLICsv
                   amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
                   "#{amount}|#{subscription['product_name']}"
                 end
-              end.delete!("\n")
+              end
+              subscriptions.delete!("\n")
               csv << [name, count, organization['label'], description, limit, environment, contentview,
                       systemgroups, subscriptions]
             end
@@ -129,7 +125,7 @@ module HammerCLICsv
           update_subscriptions(activationkey, line)
           update_groups(activationkey, line)
 
-          puts "done" if option_verbose?
+          puts 'done' if option_verbose?
         end
       end
 
@@ -148,7 +144,6 @@ module HammerCLICsv
       def update_subscriptions(activationkey, line)
         if line[SUBSCRIPTIONS] && line[SUBSCRIPTIONS] != ''
           subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |subscription_details|
-            subscription = {}
             (amount, name) = subscription_details.split('|')
             {
               :id => katello_subscription(line[ORGANIZATION], :name => name),

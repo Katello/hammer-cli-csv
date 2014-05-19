@@ -17,7 +17,7 @@ module HammerCLICsv
   class CsvCommand < HammerCLI::AbstractCommand
   end
 
-  HammerCLI::MainCommand.subcommand("csv",
-                                    _("import to, or export from a running foretello server"),
+  HammerCLI::MainCommand.subcommand('csv',
+                                    _('import to, or export from a running foretello server'),
                                     HammerCLICsv::CsvCommand)
 end

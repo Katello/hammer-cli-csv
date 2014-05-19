@@ -28,14 +28,13 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class LifecycleEnvironmentsCommand < BaseCommand
+      command_name 'lifecycle-environments'
+      desc         'import or export lifecycle environments'
 
-      command_name "lifecycle-environments"
-      desc         "import or export lifecycle environments"
-
-      LABEL = "Label"
-      ORGANIZATION = "Organization"
-      PRIORENVIRONMENT = "Prior Environment"
-      DESCRIPTION = "Description"
+      LABEL = 'Label'
+      ORGANIZATION = 'Organization'
+      PRIORENVIRONMENT = 'Prior Environment'
+      DESCRIPTION = 'Description'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|

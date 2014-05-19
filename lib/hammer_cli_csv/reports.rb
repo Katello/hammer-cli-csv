@@ -9,13 +9,11 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-
 module HammerCLICsv
   class CsvCommand
     class ReportsCommand < BaseCommand
-
-      command_name "reports"
-      desc         "import or export reports"
+      command_name 'reports'
+      desc         'import or export reports'
 
       TIME = 'Time'
       APPLIED = 'Applied'
@@ -96,7 +94,7 @@ module HammerCLICsv
                                  })
           end
 
-          puts "done" if option_verbose?
+          puts 'done' if option_verbose?
         end
       end
     end

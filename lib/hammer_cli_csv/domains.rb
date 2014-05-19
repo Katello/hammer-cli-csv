@@ -28,9 +28,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class DomainsCommand < BaseCommand
-
-      command_name "domains"
-      desc         "import or export domains"
+      command_name 'domains'
+      desc         'import or export domains'
 
       FULLNAME = 'Full Name'
       ORGANIZATIONS = 'Organizations'
@@ -65,14 +64,14 @@ module HammerCLICsv
           if !@existing.include? name
             print "Creating domain '#{name}'..." if option_verbose?
             domain_id = @api.resource(:domains).call(:create, {
-                                               'name' => name,
-                                             })['domain']['id']
+                                                       'name' => name
+                                                     })['domain']['id']
           else
             print "Updating domain '#{name}'..." if option_verbose?
             domain_id = @api.resource(:domains).call(:update, {
-                                               'id' => @existing[name],
-                                               'name' => name
-                                             })['domain']['id']
+                                                       'id' => @existing[name],
+                                                       'name' => name
+                                                     })['domain']['id']
           end
 
           # Update associated resources
@@ -100,6 +99,5 @@ module HammerCLICsv
         raise "#{e}\n       #{line}"
       end
     end
-
   end
 end

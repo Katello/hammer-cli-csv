@@ -140,7 +140,7 @@ module HammerCLICsv
             print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
             if line[REPOSITORY_TYPE] =~ /Red Hat/
               # TMP
-              puts "TMP"
+              puts 'TMP'
               @api.resource(:repositories).call(:index, {
                                                   'organization_id' => katello_organization(:name => line[ORGANIZATION]),
                                                   'library' => true,
@@ -149,7 +149,7 @@ module HammerCLICsv
                                                 })['results'].each do |repository|
                 puts repository if repository['name'] == repository_name
               end
-              puts "END TMP"
+              puts 'END TMP'
               #repository_id = redhat_create_repository(product_id, repository_name)
 
             else
@@ -164,7 +164,7 @@ module HammerCLICsv
             end
             @existing_repositories[line[ORGANIZATION] + name][line[LABEL]] = repository_id
 
-            puts "TODO: skipping sync"
+            puts 'TODO: skipping sync'
             # task_id = @api.resource(:repositories).call(:sync, {
             #                                               'organization_id' => katello_organization(:name => line[ORGANIZATION]),
             #                                               'id' => repository_id

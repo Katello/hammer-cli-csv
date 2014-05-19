@@ -31,9 +31,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class SystemGroupsCommand < BaseCommand
-
-      command_name "system-groups"
-      desc         "import or export system groups"
+      command_name 'system-groups'
+      desc         'import or export system groups'
 
       ORGANIZATION = 'Organization'
       LIMIT = 'Limit'

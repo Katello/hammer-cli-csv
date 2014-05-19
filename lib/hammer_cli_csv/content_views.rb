@@ -20,7 +20,6 @@
 #   Count
 #     - Number of times to iterate on this line of the CSV file
 
-
 require 'hammer_cli'
 require 'json'
 require 'csv'
@@ -29,9 +28,8 @@ require 'uri'
 module HammerCLICsv
   class CsvCommand
     class ContentViewsCommand < BaseCommand
-      command_name "content-views"
-      desc         "import or export content-views"
-
+      command_name 'content-views'
+      desc         'import or export content-views'
 
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
@@ -74,14 +72,14 @@ module HammerCLICsv
           else
             print "Updating content view '#{name}'..." if option_verbose?
             @api.resource(:contentviewdefinitions).call(:create, {
-                                                  'description' => line[DESCRIPTION],
-                                                })
+                                                          'description' => line[DESCRIPTION],
+                                                        })
           end
 
           if line[REPOSITORY]
-            puts "UPDATING REPOSITORY"
+            puts 'UPDATING REPOSITORY'
           elsif line[PRODUCT]
-            puts "UPDATING PRODUCT"
+            puts 'UPDATING PRODUCT'
           end
           print "done\n" if option_verbose?
 

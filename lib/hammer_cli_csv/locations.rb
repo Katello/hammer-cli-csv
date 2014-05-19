@@ -30,9 +30,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class LocationsCommand < BaseCommand
-
-      command_name "locations"
-      desc         "import or export locations"
+      command_name 'locations'
+      desc         'import or export locations'
 
       PARENT = 'Parent Location'
 

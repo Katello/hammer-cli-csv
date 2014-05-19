@@ -9,7 +9,6 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-
 require 'hammer_cli'
 require 'hammer_cli_csv'
 require 'hammer_cli_foreman'
@@ -21,15 +20,16 @@ require 'uri'
 module HammerCLICsv
   class CsvCommand
     class ImportCommand < HammerCLI::Apipie::Command
-
-      command_name "import"
-      desc         "import by directory"
+      command_name 'import'
+      desc         'import by directory'
 
       option %w(-v --verbose), :flag, 'be verbose'
       option %w(--server), 'SERVER', 'Server URL'
       option %w(-u --username), 'USERNAME', 'Username to access server'
       option %w(-p --password), 'PASSWORD', 'Password to access server'
       option '--dir', 'DIRECTORY', 'directory to import from'
+      option '--roles', 'FILE', 'source to import roles'
+      option '--users', 'FILE', 'source to import users'
       option '--hosts', 'FILE', 'source to import hosts'
       option '--organizations', 'FILE', 'source to import organizations'
 
@@ -41,8 +41,8 @@ module HammerCLICsv
         }
       end
 
-      def hammer(context=nil)
-        HammerCLI::MainCommand.new("", context || ctx)
+      def hammer(context = nil)
+        HammerCLI::MainCommand.new('', context || ctx)
       end
 
       def execute
@@ -53,8 +53,10 @@ module HammerCLICsv
                                          :api_version => 2
                                        })
 
+        # Swing the hammers
         swing('organizations')
         swing('roles')
+        swing('users')
         swing('hosts')
 
         HammerCLI::EX_OK
@@ -63,9 +65,10 @@ module HammerCLICsv
       def swing(resource)
         options_file = self.send("option_#{resource}")
         options_file ||= "#{option_dir}/#{resource}.csv" if option_dir
-        hammer.run(%W{ csv #{resource} -v --csv-file #{options_file} }) if File.exists? options_file
+        args = %W{ csv #{resource} --csv-file #{options_file} }
+        args << '-v' if option_verbose?
+        hammer.run(args) if File.exists? options_file
       end
-
     end
   end
 end

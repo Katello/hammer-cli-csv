@@ -34,9 +34,8 @@ require 'uri'
 module HammerCLICsv
   class CsvCommand
     class HostsCommand < BaseCommand
-
-      command_name "hosts"
-      desc         "import or export hosts"
+      command_name 'hosts'
+      desc         'import or export hosts'
 
       ORGANIZATION = 'Organization'
       ENVIRONMENT = 'Environment'

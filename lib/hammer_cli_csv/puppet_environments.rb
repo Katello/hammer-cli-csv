@@ -28,9 +28,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class PuppetEnvironmentsCommand < BaseCommand
-
-      command_name "puppet-environments"
-      desc         "import or export puppet environments"
+      command_name 'puppet-environments'
+      desc         'import or export puppet environments'
 
       ORGANIZATIONS = 'Organizations'
 
@@ -40,7 +39,7 @@ module HammerCLICsv
           @api.resource(:environments).call(:index, {:per_page => 999999})['results'].each do |environment|
             name = environment['name']
             count = 1
-            raise "TODO: organizations"
+            raise 'TODO: organizations'
             csv << [name, count]
           end
         end

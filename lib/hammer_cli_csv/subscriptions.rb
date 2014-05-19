@@ -20,7 +20,6 @@
 #   Count
 #     - Number of times to iterate on this line of the CSV file
 
-
 require 'hammer_cli'
 require 'json'
 require 'csv'
@@ -29,9 +28,8 @@ require 'uri'
 module HammerCLICsv
   class CsvCommand
     class SubscriptionsCommand < BaseCommand
-
-      command_name "subscriptions"
-      desc         "import or export subscriptions"
+      command_name 'subscriptions'
+      desc         'import or export subscriptions'
 
       ORGANIZATION = 'Organization'
       MANIFEST = 'Manifest File'

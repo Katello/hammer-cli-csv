@@ -48,9 +48,8 @@ require 'csv'
 module HammerCLICsv
   class CsvCommand
     class PermissionsCommand < BaseCommand
-
-      command_name "permissions"
-      desc         "import or export permissions"
+      command_name 'permissions'
+      desc         'import or export permissions'
 
       def initialize(*args)
         super(args)
@@ -64,7 +63,7 @@ module HammerCLICsv
 
       def import
         csv = get_lines(option_csv_file)[1..-1]
-        lines_per_thread = csv.length/threads.to_i + 1
+        lines_per_thread = csv.length / threads.to_i + 1
         splits = []
 
         @roles = {}
@@ -136,7 +135,7 @@ module HammerCLICsv
 
       def parse_permission_csv(line)
         keys = [:name_format, :count, :role, :description]
-        details = CSV.parse(line).map { |a| Hash[keys.zip(a)] }[0]
+        details = CSV.parse(line).collect { |a| Hash[keys.zip(a)] }[0]
 
         details[:count] = details[:count].to_i
 

@@ -52,9 +52,9 @@ module HammerCLICsv
             network_to = subnet['to']
             domains = export_column(subnet, 'domains', 'name')
             gateway = subnet['gateway']
-            dhcp_proxy = (subnet['dhcp'] && subnet['dhcp'].has_key?('name')) ? subnet['dhcp']['name'] : ''
-            tftp_proxy = (subnet['tftp'] && subnet['tftp'].has_key?('name')) ? subnet['tftp']['name'] : ''
-            dns_proxy = (subnet['dns'] && subnet['dns'].has_key?('name')) ? subnet['dns']['name'] : ''
+            dhcp_proxy = (subnet['dhcp'] && subnet['dhcp'].key?('name')) ? subnet['dhcp']['name'] : ''
+            tftp_proxy = (subnet['tftp'] && subnet['tftp'].key?('name')) ? subnet['tftp']['name'] : ''
+            dns_proxy = (subnet['dns'] && subnet['dns'].key?('name')) ? subnet['dns']['name'] : ''
             dns_primary = subnet['dns_primary']
             dns_secondary = subnet['dns_secondary']
             vlan_id = subnet['vlanid']

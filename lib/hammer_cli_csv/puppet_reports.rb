@@ -59,7 +59,7 @@ module HammerCLICsv
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
             @api.resource(:systems).call(:index, {
                                   'per_page' => 999999,
-                                  'organization_id' => organization['label']
+                                  'organization_id' => organization['id']
                                  })['results'].each do |system|
               system = @api.resource(:systems).call(:show, {
                                             'id' => system['uuid'],
@@ -71,9 +71,9 @@ module HammerCLICsv
               organization_label = organization['label']
               environment = system['environment']['label']
               contentview = system['content_view']['name']
-              systemgroups = CSV.generate do |column|
-                column << system['systemGroups'].collect do |systemgroup|
-                  systemgroup['name']
+              hostcollections = CSV.generate do |column|
+                column << system['systemGroups'].collect do |hostcollection|
+                  hostcollection['name']
                 end
               end.delete!("\n")
               virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
@@ -97,7 +97,7 @@ module HammerCLICsv
                   "#{subscription['product_id']}|#{subscription['product_name']}"
                 end
               end.delete!("\n")
-              csv << [name, count, organization_label, environment, contentview, systemgroups, virtual, host,
+              csv << [name, count, organization_label, environment, contentview, hostcollections, virtual, host,
                       operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
             end
           end
@@ -169,7 +169,7 @@ module HammerCLICsv
             @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] << system_id
           end
 
-          set_system_groups(system_id, line)
+          set_host_collections(system_id, line)
 
           puts 'done' if option_verbose?
         end
@@ -194,10 +194,10 @@ module HammerCLICsv
         facts
       end
 
-      def set_system_groups(system_id, line)
-        CSV.parse_line(line[SYSTEMGROUPS]).each do |systemgroup_name|
-          @api.resource(:systemgroups).call(:add_systems, {
-                                           'id' => katello_systemgroup(line[ORGANIZATION], :name => systemgroup_name),
+      def set_host_collections(system_id, line)
+        CSV.parse_line(line[SYSTEMGROUPS]).each do |hostcollection_name|
+          @api.resource(:hostcollections).call(:add_systems, {
+                                           'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
                                            'system_ids' => [system_id]
                                          })
         end

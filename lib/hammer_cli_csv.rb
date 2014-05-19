@@ -14,10 +14,6 @@ require 'hammer_cli/exit_codes'
 
 module HammerCLICsv
 
-  #def self.exception_handler_class
-  #  HammerCLICsv::ExceptionHandler
-  #end
-
   require 'hammer_cli_csv/base'
   require 'hammer_cli_csv/exception_handler'
 
@@ -26,8 +22,10 @@ module HammerCLICsv
   require 'hammer_cli_csv/architectures'
   require 'hammer_cli_csv/compute_profiles'
   require 'hammer_cli_csv/compute_resources'
+  require 'hammer_cli_csv/content_hosts'
   require 'hammer_cli_csv/content_views'
   require 'hammer_cli_csv/domains'
+  require 'hammer_cli_csv/host_collections'
   require 'hammer_cli_csv/hosts'
   require 'hammer_cli_csv/import'
   require 'hammer_cli_csv/lifecycle_environments'
@@ -45,8 +43,6 @@ module HammerCLICsv
   require 'hammer_cli_csv/smart_proxies'
   require 'hammer_cli_csv/subnets'
   require 'hammer_cli_csv/subscriptions'
-  require 'hammer_cli_csv/systems'
-  require 'hammer_cli_csv/system_groups'
   require 'hammer_cli_csv/users'
 
 end

@@ -33,14 +33,14 @@ require 'uri'
 
 module HammerCLICsv
   class CsvCommand
-    class SystemsCommand < BaseCommand
-      command_name 'systems'
-      desc         'import or export systems'
+    class ContentHostsCommand < BaseCommand
+      command_name 'content-hosts'
+      desc         'import or export content hosts'
 
       ORGANIZATION = 'Organization'
       ENVIRONMENT = 'Environment'
       CONTENTVIEW = 'Content View'
-      SYSTEMGROUPS = 'System Groups'
+      HOSTCOLLECTIONS = 'Host Collections'
       VIRTUAL = 'Virtual'
       HOST = 'Host'
       OPERATINGSYSTEM = 'OS'
@@ -54,12 +54,12 @@ module HammerCLICsv
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
+          csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
             @api.resource(:systems).call(:index, {
                                   'per_page' => 999999,
-                                  'organization_id' => katello_organization(:name => organization['name'])
+                                  'organization_id' => foreman_organization(:name => organization['name'])
                                  })['results'].each do |system|
               system = @api.resource(:systems).call(:show, {
                                             'id' => system['uuid'],
@@ -71,12 +71,12 @@ module HammerCLICsv
               organization_name = organization['name']
               environment = system['environment']['label']
               contentview = system['content_view']['name']
-              systemgroups = CSV.generate do |column|
-                column << system['systemGroups'].collect do |systemgroup|
-                  systemgroup['name']
+              hostcollections = CSV.generate do |column|
+                column << system['systemGroups'].collect do |hostcollection|
+                  hostcollection['name']
                 end
               end
-              systemgroups.delete!("\n")
+              hostcollections.delete!("\n")
               virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
               host = system['host']
               operatingsystem = "#{system['facts']['distribution.name']} " if system['facts']['distribution.name']
@@ -100,7 +100,7 @@ module HammerCLICsv
                 end
               end
               subscriptions.delete!("\n")
-              csv << [name, count, organization_name, environment, contentview, systemgroups, virtual, host,
+              csv << [name, count, organization_name, environment, contentview, hostcollections, virtual, host,
                       operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
             end
           end
@@ -129,7 +129,7 @@ module HammerCLICsv
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
           @api.resource(:systems).call(:index, {
-                                'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                 'page_size' => 999999})['results'].each do |system|
             @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
           end
@@ -147,7 +147,7 @@ module HammerCLICsv
             print "Creating system '#{name}'..." if option_verbose?
             system_id = @api.resource(:systems).call(:create, {
                                                        'name' => name,
-                                                       'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                                        'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                                        'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                                        'facts' => facts(name, line),
@@ -175,7 +175,7 @@ module HammerCLICsv
             @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] << system_id
           end
 
-          set_system_groups(system_id, line)
+          set_host_collections(system_id, line)
 
           puts 'done' if option_verbose?
         end
@@ -201,12 +201,12 @@ module HammerCLICsv
         facts
       end
 
-      def set_system_groups(system_id, line)
-        CSV.parse_line(line[SYSTEMGROUPS]).each do |systemgroup_name|
-          @api.resource(:system_groups).call(:add_systems, {
-                                           'id' => katello_systemgroup(line[ORGANIZATION], :name => systemgroup_name),
-                                           'system_ids' => [system_id]
-                                         })
+      def set_host_collections(system_id, line)
+        CSV.parse_line(line[HOSTCOLLECTIONS]).each do |hostcollection_name|
+          @api.resource(:host_collections).call(:add_systems, {
+                                                  'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
+                                                  'system_ids' => [system_id]
+                                                })
         end
       end
 

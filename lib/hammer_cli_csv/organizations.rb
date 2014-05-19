@@ -51,7 +51,7 @@ module HammerCLICsv
       def import
         @existing = {}
         @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-          @existing[organization['name']] = organization['label'] if organization
+          @existing[organization['name']] = organization['id'] if organization
         end
 
         thread_import do |line|

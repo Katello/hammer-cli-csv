@@ -45,7 +45,7 @@ module HammerCLICsv
             @api.resource(:products).call(:index, {
                                             'per_page' => 999999,
                                             'enabled' => true,
-                                            'organization_id' => katello_organization(:name => organization['name'])
+                                            'organization_id' => foreman_organization(:name => organization['name'])
                                           })['results'].each do |product|
               # product = @api.resource(:products).call(:show, {
               #                                           'id' => product['id'],
@@ -78,7 +78,7 @@ module HammerCLICsv
         if !@existing_products[line[ORGANIZATION]]
           @existing_products[line[ORGANIZATION]] = {}
           @api.resource(:products).call(:index, {
-                                 'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                  'page_size' => 999999,
                                  'paged' => true
                                })['results'].each do |product|
@@ -86,7 +86,7 @@ module HammerCLICsv
 
             if product
               @api.resource(:repositories).call(:index, {
-                                        'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                        'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                         'product_id' => product['id'],
                                         'enabled' => true,
                                         'library' => true,
@@ -111,7 +111,7 @@ module HammerCLICsv
             end
 
             product_id = @api.resource(:products).call(:create, {
-                                                 'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                                  'name' => name
                                                })['id']
             @existing_products[line[ORGANIZATION]][name] = product_id
@@ -127,7 +127,7 @@ module HammerCLICsv
           # Hash the existing repositories for the product
           if !@existing_repositories[line[ORGANIZATION] + name][repository_name]
             @api.resource(:repositories).call(:index, {
-                                                'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                                 'library' => true,
                                                 'all' => false,
                                                 'product_id' => product_id
@@ -142,7 +142,7 @@ module HammerCLICsv
               # TMP
               puts 'TMP'
               @api.resource(:repositories).call(:index, {
-                                                  'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                                  'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                                   'library' => true,
                                                   'all' => true,
                                                   'product_id' => product_id
@@ -154,7 +154,7 @@ module HammerCLICsv
 
             else
               repository_id = @api.resource(:repositories).call(:create, {
-                                         'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                         'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                          'name' => repository_name,
                                          'label' => labelize(repository_name),
                                          'product_id' => product_id,
@@ -166,7 +166,7 @@ module HammerCLICsv
 
             puts 'TODO: skipping sync'
             # task_id = @api.resource(:repositories).call(:sync, {
-            #                                               'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+            #                                               'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
             #                                               'id' => repository_id
             #                                             })['id']
             # TODO: wait for sync task

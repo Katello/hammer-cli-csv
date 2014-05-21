@@ -22,7 +22,7 @@
 #   Role
 #   Description
 #   Category
-#     - organizations, environments, activation_keys, system_groups, providers, users, roles,
+#     - organizations, environments, activation_keys, host_collections, providers, users, roles,
 #       content_view_definitions, content_views, all
 #   Verbs
 #     organizations - gpg, redhat_products, delete_distributors, delete_systems, manage_nodes,
@@ -32,7 +32,7 @@
 #                    promote_changesets, read_changesets, read_distributors, read_contents, read_systems,
 #                    register_distributors, register_systems, delete_distributors, delete_systems
 #     activation_keys - manage_all, read_all
-#     system_groups - create, delete, delete_systems, update, update_systems, read, read_systems
+#     host_collections - create, delete, delete_systems, update, update_systems, read, read_systems
 #     providers - create, delete, update, read
 #     users - create, delete, update, read
 #     roles - create, delete, update, read
@@ -107,7 +107,7 @@ module HammerCLICsv
         details = parse_permission_csv(line)
 
         puts @permission_api.index({'role_id' => @roles['User System Group']})
-        # {"all_tags"=>false, "all_verbs"=>false, "created_at"=>"2013-11-11T02:31:23Z", "description"=>"and it's description!", "id"=>12, "name"=>"Accounting System Group Modify Systems", "organization_id"=>2, "resource_type_id"=>5, "role_id"=>124, "updated_at"=>"2013-11-11T02:31:23Z", "tags"=>[{"created_at"=>"2013-11-11T02:31:23Z", "formatted"=>{"name"=>6, "display_name"=>"Accounting"}, "id"=>2, "permission_id"=>12, "tag_id"=>6, "updated_at"=>"2013-11-11T02:31:23Z"}], "verbs"=>[{"created_at"=>"2013-11-07T19:44:45Z", "id"=>7, "updated_at"=>"2013-11-07T19:44:45Z", "verb"=>"update_systems"}], "resource_type"=>{"created_at"=>"2013-11-07T16:36:56Z", "id"=>5, "name"=>"system_groups", "updated_at"=>"2013-11-07T16:36:56Z"}}
+        # {"all_tags"=>false, "all_verbs"=>false, "created_at"=>"2013-11-11T02:31:23Z", "description"=>"and it's description!", "id"=>12, "name"=>"Accounting System Group Modify Systems", "organization_id"=>2, "resource_type_id"=>5, "role_id"=>124, "updated_at"=>"2013-11-11T02:31:23Z", "tags"=>[{"created_at"=>"2013-11-11T02:31:23Z", "formatted"=>{"name"=>6, "display_name"=>"Accounting"}, "id"=>2, "permission_id"=>12, "tag_id"=>6, "updated_at"=>"2013-11-11T02:31:23Z"}], "verbs"=>[{"created_at"=>"2013-11-07T19:44:45Z", "id"=>7, "updated_at"=>"2013-11-07T19:44:45Z", "verb"=>"update_systems"}], "resource_type"=>{"created_at"=>"2013-11-07T16:36:56Z", "id"=>5, "name"=>"host_collections", "updated_at"=>"2013-11-07T16:36:56Z"}}
 
         @existing[@roles[details[:role]]] ||= {}
         @permission_api.index({'role_id' => @roles[details[:role]]}).each do |permission|

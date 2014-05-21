@@ -48,8 +48,8 @@ module HammerCLICsv
                   SYSTEMGROUPS, SUBSCRIPTIONS]
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
             @api.resource(:activation_keys).call(:index, {'per_page' => 999999,
-                                                          'organization_id' => organization['label']
-                                       })['results'].each do |activationkey|
+                                                   'organization_id' => organization['id']
+                                                 })['results'].each do |activationkey|
               puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
               name = namify(activationkey['name'])
               count = 1
@@ -57,7 +57,7 @@ module HammerCLICsv
               limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
               environment = activationkey['environment']['label']
               contentview = activationkey['content_view']['name']
-              systemgroups = export_column(activationkey, 'systemGroups', 'name')
+              hostcollections = export_column(activationkey, 'systemGroups', 'name')
               subscriptions = CSV.generate do |column|
                 column << @api.resource(:subscriptions).call(:index, {
                                                       'activation_key_id' => activationkey['id']
@@ -68,7 +68,7 @@ module HammerCLICsv
               end
               subscriptions.delete!("\n")
               csv << [name, count, organization['label'], description, limit, environment, contentview,
-                      systemgroups, subscriptions]
+                      hostcollections, subscriptions]
             end
           end
         end
@@ -87,7 +87,7 @@ module HammerCLICsv
           @existing[line[ORGANIZATION]] = {}
           @api.resource(:activation_keys).call(:index, {
                                        'per_page' => 999999,
-                                       'organization_id' => katello_organization(:name => line[ORGANIZATION])
+                                       'organization_id' => foreman_organization(:name => line[ORGANIZATION])
                                      })['results'].each do |activationkey|
             @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
           end
@@ -133,8 +133,8 @@ module HammerCLICsv
         if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
           # TODO: note that existing system groups are not removed
           CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
-            @api.resource(:system_groups).call(:add_activation_keys, {
-                                                     'id' => katello_systemgroup(line[ORGANIZATION], :name => name),
+            @api.resource(:host_collections).call(:add_activation_keys, {
+                                                     'id' => katello_hostcollection(line[ORGANIZATION], :name => name),
                                                      'activation_key_ids' => [activationkey['id']]
                                                    })
           end

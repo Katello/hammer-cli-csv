@@ -30,9 +30,9 @@ require 'csv'
 
 module HammerCLICsv
   class CsvCommand
-    class SystemGroupsCommand < BaseCommand
-      command_name 'system-groups'
-      desc         'import or export system groups'
+    class HostCollectionsCommand < BaseCommand
+      command_name 'host-collections'
+      desc         'import or export host collections'
 
       ORGANIZATION = 'Organization'
       LIMIT = 'Limit'
@@ -42,11 +42,11 @@ module HammerCLICsv
         CSV.open(option_csv_file, 'wb') do |csv|
           csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
           @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
-            @api.resource(:system_groups).call(:index, {'organization_id' => organization['label']}).each do |systemgroup|
-              puts systemgroup
-              csv << [systemgroup['name'], 1, organization['label'],
-                      systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : sytemgroup['max_systems'],
-                      systemgroup['description']]
+            @api.resource(:host_collections).call(:index, {'organization_id' => organization['id']}).each do |hostcollection|
+              puts hostcollection
+              csv << [hostcollection['name'], 1, organization['id'],
+                      hostcollection['max_systems'].to_i < 0 ? 'Unlimited' : sytemgroup['max_systems'],
+                      hostcollection['description']]
             end
           end
         end
@@ -56,15 +56,18 @@ module HammerCLICsv
         @existing = {}
 
         thread_import do |line|
-          create_systemgroups_from_csv(line)
+          create_hostcollections_from_csv(line)
         end
       end
 
-      def create_systemgroups_from_csv(line)
+      def create_hostcollections_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:system_groups).call(:index, {'organization_id' => line[ORGANIZATION]})['results'].each do |systemgroup|
-            @existing[line[ORGANIZATION]][systemgroup['name']] = systemgroup['id']
+          @api.resource(:host_collections).call(:index, {
+                                                  'per_page' => 999999,
+                                                  'organization_id' => foreman_organization(:name => line[ORGANIZATION])
+                                                })['results'].each do |hostcollection|
+            @existing[line[ORGANIZATION]][hostcollection['name']] = hostcollection['id']
           end
         end
 
@@ -72,15 +75,15 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating system group '#{name}'..." if option_verbose?
-            @api.resource(:system_groups).call(:create, {
-                                      'organization_id' => line[ORGANIZATION],
+            @api.resource(:host_collections).call(:create, {
+                                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                       'name' => name,
                                       'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
                                       'description' => line[DESCRIPTION]
                                     })
           else
             print "Updating system group '#{name}'..." if option_verbose?
-            @api.resource(:system_groups).call(:update, {
+            @api.resource(:host_collections).call(:update, {
                                         'organization_id' => line[ORGANIZATION],
                                         'id' => @existing[line[ORGANIZATION]][name],
                                         'name' => name,

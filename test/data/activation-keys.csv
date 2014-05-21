@@ -1,4 +1,4 @@
-Name,Count,Organization,Description,Limit,Environment,Content View,System Groups,Subscriptions
+Name,Count,Organization,Description,Limit,Environment,Content View,Host Collections,Subscriptions
 damon.dials@megacorp.com,1,Mega Corporation,"Individual account",1,Library,Default Organization View,"Employee","""RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"""
 jenee.jahns@megacorp.com,1,Mega Corporation,"Individual account",1,Library,Default Organization View,"Employee"
 gilbert.guerriero@megacorp.com,1,Mega Corporation,"Individual account",1,Library,Default Organization View,"Employee"

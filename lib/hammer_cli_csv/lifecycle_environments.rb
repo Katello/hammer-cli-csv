@@ -42,7 +42,7 @@ module HammerCLICsv
           @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
             @api.resource(:environments).call(:index, {
                                        'per_page' => 999999,
-                                       'organization_id' => organization['label']
+                                       'organization_id' => organization['id']
                                      })['results'].each do |environment|
               if environment['label'] != 'Library'
                 name = environment['name']
@@ -62,7 +62,7 @@ module HammerCLICsv
         @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
           @api.resource(:environments).call(:index, {
                                      'per_page' => 999999,
-                                     'organization_id' => katello_organization(:name => organization['name']),
+                                     'organization_id' => foreman_organization(:name => organization['name']),
                                      'library' => true
                                    })['results'].each do |environment|
             @existing[organization['name']] ||= {}
@@ -84,7 +84,7 @@ module HammerCLICsv
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating environment '#{name}'..." if option_verbose?
             @api.resource(:environments).call(:create, {
-                                        'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                        'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                         'name' => name,
                                         'label' => label,
                                         'prior' => katello_environment(line[ORGANIZATION], :name => prior),
@@ -96,7 +96,7 @@ module HammerCLICsv
                                         'id' => @existing[line[ORGANIZATION]][name],
                                         'name' => name,
                                         'new_name' => name,
-                                        'organization_id' => katello_organization(:name => line[ORGANIZATION]),
+                                        'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                         'prior' => prior,
                                         'description' => line[DESCRIPTION]
                                       })

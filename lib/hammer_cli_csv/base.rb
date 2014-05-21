@@ -126,37 +126,6 @@ module HammerCLICsv
       result
     end
 
-    def katello_organization(options = {})
-      @organizations ||= {}
-
-      if options[:name]
-        return nil if options[:name].nil? || options[:name].empty?
-        options[:id] = @organizations[options[:name]]
-        if !options[:id]
-          organization = @api.resource(:organizations).call(:index, {
-                                                              :per_page => 999999,
-                                                              'search' => "name=\"#{options[:name]}\""
-                                                            })['results']
-          raise "Organization '#{options[:name]}' not found" if !organization || organization.empty?
-          options[:id] = organization[0]['label']
-          @organizations[options[:name]] = options[:id]
-        end
-        result = options[:id]
-      else
-        return nil if options[:id].nil?
-        options[:name] = @organizations.key(options[:id])
-        if !options[:name]
-          organization = @api.resource(:organizations).call(:show, {'id' => options[:id]})
-          raise "Organization 'id=#{options[:id]}' not found" if !organization || organization.empty?
-          options[:name] = organization['name']
-          @organizations[options[:name]] = options[:id]
-        end
-        result = options[:name]
-      end
-
-      result
-    end
-
     def foreman_location(options = {})
       @locations ||= {}
 
@@ -435,7 +404,7 @@ module HammerCLICsv
         if !options[:id]
           @api.resource(:lifecycle_environments).call(:index, {
                                                         :per_page => 999999,
-                                                        'organization_id' => katello_organization(:name => organization),
+                                                        'organization_id' => foreman_organization(:name => organization),
                                                         'library' => true
                                                       })['results'].each do |environment|
             @environments[organization][environment['name']] = environment['id']
@@ -469,7 +438,7 @@ module HammerCLICsv
         if !options[:id]
           @api.resource(:content_views).call(:index, {
                                                :per_page => 999999,
-                                               'organization_id' => katello_organization(:name => organization)
+                                               'organization_id' => foreman_organization(:name => organization)
                                              })['results'].each do |contentview|
             @contentviews[organization][contentview['name']] = contentview['id']
           end
@@ -502,7 +471,7 @@ module HammerCLICsv
         if !options[:id]
           results = @api.resource(:subscriptions).call(:index, {
                                                          :per_page => 999999,
-                                                         'organization_id' => katello_organization(:name => organization),
+                                                         'organization_id' => foreman_organization(:name => organization),
                                                          'search' => "name:\"#{options[:name]}\""
                                                        })
           raise "No subscriptions match '#{options[:name]}'" if results['subtotal'] == 0
@@ -528,34 +497,34 @@ module HammerCLICsv
       result
     end
 
-    def katello_systemgroup(organization, options = {})
-      @systemgroups ||= {}
-      @systemgroups[organization] ||= {}
+    def katello_hostcollection(organization, options = {})
+      @hostcollections ||= {}
+      @hostcollections[organization] ||= {}
 
       if options[:name]
         return nil if options[:name].nil? || options[:name].empty?
-        options[:id] = @systemgroups[organization][options[:name]]
+        options[:id] = @hostcollections[organization][options[:name]]
         if !options[:id]
-          @api.resource(:system_groups).call(:index,
+          @api.resource(:host_collections).call(:index,
                   {
                     :per_page => 999999,
-                    'organization_id' => katello_organization(:name => organization),
+                    'organization_id' => foreman_organization(:name => organization),
                     'search' => "name:\"#{options[:name]}\""
-                  })['results'].each do |systemgroup|
-            @systemgroups[organization][systemgroup['name']] = systemgroup['id'] if systemgroup
+                  })['results'].each do |hostcollection|
+            @hostcollections[organization][hostcollection['name']] = hostcollection['id'] if hostcollection
           end
-          options[:id] = @systemgroups[organization][options[:name]]
+          options[:id] = @hostcollections[organization][options[:name]]
           raise "System group '#{options[:name]}' not found" if !options[:id]
         end
         result = options[:id]
       else
         return nil if options[:id].nil?
-        options[:name] = @systemgroups.key(options[:id])
+        options[:name] = @hostcollections.key(options[:id])
         if !options[:name]
-          systemgroup = @api.resource(:system_groups).call(:show, {'id' => options[:id]})
-          raise "System group '#{options[:name]}' not found" if !systemgroup || systemgroup.empty?
-          options[:name] = systemgroup['name']
-          @systemgroups[options[:name]] = options[:id]
+          hostcollection = @api.resource(:host_collections).call(:show, {'id' => options[:id]})
+          raise "System group '#{options[:name]}' not found" if !hostcollection || hostcollection.empty?
+          options[:name] = hostcollection['name']
+          @hostcollections[options[:name]] = options[:id]
         end
         result = options[:name]
       end

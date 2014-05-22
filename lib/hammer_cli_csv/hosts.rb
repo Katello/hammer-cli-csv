@@ -84,7 +84,6 @@ module HammerCLICsv
           if !@existing.include? name
             print "Creating host '#{name}'..." if option_verbose?
             @api.resource(:hosts).call(:create, {
-                               'host' => {
                                  'name' => name,
                                  'root_pass' => 'changeme',
                                  'mac' => namify(line[MACADDRESS], number),
@@ -94,13 +93,11 @@ module HammerCLICsv
                                  'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
                                  'domain_id' => foreman_domain(:name => line[DOMAIN]),
                                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
-                               }
                              })
           else
             print "Updating host '#{name}'..." if option_verbose?
             @api.resource(:hosts).call(:update, {
                                  'id' => @existing[name],
-                                 'host' => {
                                    'name' => name,
                                    'mac' => namify(line[MACADDRESS], number),
                                    'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
@@ -109,7 +106,6 @@ module HammerCLICsv
                                    'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
                                    'domain_id' => foreman_domain(:name => line[DOMAIN]),
                                    'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
-                                 }
                                })
           end
           print "done\n" if option_verbose?

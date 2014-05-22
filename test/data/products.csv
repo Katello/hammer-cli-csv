@@ -1,3 +1,3 @@
 Name,Count,Organization,Repository,Repository Type,Repository Url
-Point of Sale,1,Mega Corporation,katello-1.4-client,yum,http://fedorapeople.org/groups/katello/releases/yum/1.4-client/RHEL/6Server/x86_64/
+katello-client-1.4,1,Mega Corporation,katello-1.4-client,yum,http://fedorapeople.org/groups/katello/releases/yum/1.4-client/RHEL/6Server/x86_64/
 katello-1.4,1,Mega Corporation,katello-1.4,yum,http://fedorapeople.org/groups/katello/releases/yum/1.4/RHEL/6Server/x86_64/

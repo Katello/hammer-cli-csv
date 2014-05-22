@@ -393,34 +393,33 @@ module HammerCLICsv
       result
     end
 
-    def katello_environment(organization, options = {})
-      @environments ||= {}
-      @environments[organization] ||= {
+    def lifecycle_environment(organization, options = {})
+      @lifecycle_environments ||= {}
+      @lifecycle_environments[organization] ||= {
       }
 
       if options[:name]
         return nil if options[:name].nil? || options[:name].empty?
-        options[:id] = @environments[organization][options[:name]]
+        options[:id] = @lifecycle_environments[organization][options[:name]]
         if !options[:id]
           @api.resource(:lifecycle_environments).call(:index, {
                                                         :per_page => 999999,
                                                         'organization_id' => foreman_organization(:name => organization),
-                                                        'library' => true
                                                       })['results'].each do |environment|
-            @environments[organization][environment['name']] = environment['id']
+            @lifecycle_environments[organization][environment['name']] = environment['id']
           end
-          options[:id] = @environments[organization][options[:name]]
+          options[:id] = @lifecycle_environments[organization][options[:name]]
           raise "Lifecycle environment '#{options[:name]}' not found" if !options[:id]
         end
         result = options[:id]
       else
         return nil if options[:id].nil?
-        options[:name] = @environments.key(options[:id])
+        options[:name] = @lifecycle_environments.key(options[:id])
         if !options[:name]
           environment = @api.resource(:lifecycle_environments).call(:show, {'id' => options[:id]})
           raise "Lifecycle environment '#{options[:name]}' not found" if !environment || environment.empty?
           options[:name] = environment['name']
-          @environments[options[:name]] = options[:id]
+          @lifecycle_environments[options[:name]] = options[:id]
         end
         result = options[:name]
       end

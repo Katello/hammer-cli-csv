@@ -28,17 +28,14 @@ module HammerCLICsv
       option %w(-u --username), 'USERNAME', 'Username to access server'
       option %w(-p --password), 'PASSWORD', 'Password to access server'
       option '--dir', 'DIRECTORY', 'directory to import from'
-      option '--roles', 'FILE', 'source to import roles'
-      option '--users', 'FILE', 'source to import users'
-      option '--hosts', 'FILE', 'source to import hosts'
-      option '--organizations', 'FILE', 'source to import organizations'
-      option '--locations', 'FILE', 'source to import locations'
-      option '--puppet-environments', 'FILE', 'source to puppet environments'
-      option '--operating-systems', 'FILE', 'source to operating systems'
-      option '--architectures', 'FILE', 'source to architectures'
-      option '--domains', 'FILE', 'source to domains'
-      option '--architectures', 'FILE', 'source to architectures'
-      option '--partition-tables', 'FILE', 'source to partition-tables'
+
+      RESOURCES = %w( organizations locations roles users puppet_environments operating_systems
+            domains architectures partition_tables lifecycle_environments host_collections
+            subscriptions activation_keys hosts content_hosts reports )
+      RESOURCES.each do |resource|
+        dashed = resource.sub('_', '-')
+        option "--#{dashed}", 'FILE', "csv file for #{dashed}"
+      end
 
       def ctx
         {
@@ -61,19 +58,22 @@ module HammerCLICsv
                                        })
 
         # Swing the hammers
-        %w( organizations locations roles users puppet_environments operating_systems
-            hosts domains architectures partition_tables ).each do |resource|
-          swing(resource)
+        RESOURCES.each do |resource|
+          hammer_resource(resource)
         end
 
         HammerCLI::EX_OK
       end
 
-      def swing(resource)
+      def hammer_resource(resource)
         return if !self.send("option_#{resource}") && !option_dir
         options_file = self.send("option_#{resource}") || "#{option_dir}/#{resource.sub('_', '-')}.csv"
-        raise "File for #{resource} '#{options_file}' does not exist" unless File.exists? options_file
-        args = %W{ csv #{resource.sub('_', '-')} --csv-file #{options_file} }
+        if !File.exists? options_file
+          return if option_dir
+          raise "File for #{resource} '#{options_file}' does not exist"
+        end
+
+        args = %W( csv #{resource.sub('_', '-')} --csv-file #{options_file} )
         args << '-v' if option_verbose?
         hammer.run(args)
       end

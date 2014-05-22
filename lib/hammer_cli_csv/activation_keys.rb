@@ -100,7 +100,7 @@ module HammerCLICsv
             print "Creating activation key '#{name}'..." if option_verbose?
             activationkey = @api.resource(:activation_keys).call(:create, {
                                         'name' => name,
-                                        'environment_id' => katello_environment(line[ORGANIZATION],
+                                        'environment_id' => lifecycle_environment(line[ORGANIZATION],
                                                                                 :name => line[ENVIRONMENT]),
                                         'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                  :name => line[CONTENTVIEW]),
@@ -113,7 +113,7 @@ module HammerCLICsv
             activationkey = @api.resource(:activation_keys).call(:update, {
                                           'id' => @existing[line[ORGANIZATION]][name],
                                           'name' => name,
-                                          'environment_id' => katello_environment(line[ORGANIZATION],
+                                          'environment_id' => lifecycle_environment(line[ORGANIZATION],
                                                                                   :name => line[ENVIRONMENT]),
                                           'content_view_id' => katello_contentview(line[ORGANIZATION],
                                                                                    :name => line[CONTENTVIEW]),

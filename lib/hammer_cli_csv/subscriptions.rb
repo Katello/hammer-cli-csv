@@ -45,10 +45,25 @@ module HammerCLICsv
       end
 
       def create_subscriptions_from_csv(line)
-        puts "TODO: import #{line[MANIFEST]} into organization #{line[ORGANIZATION]}"
+        args = %W{ subscription upload --file #{ line[MANIFEST] }
+                   --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) } }
+        hammer.run(args)
       rescue RuntimeError => e
         raise "#{e}\n       #{line}"
       end
+
+      def ctx
+        {
+          :interactive => false,
+          :username => 'admin',
+          :password => 'changeme'
+        }
+      end
+
+      def hammer(context = nil)
+        HammerCLI::MainCommand.new('', context || ctx)
+      end
+
     end
   end
 end

@@ -31,26 +31,24 @@ module HammerCLICsv
       command_name 'lifecycle-environments'
       desc         'import or export lifecycle environments'
 
-      LABEL = 'Label'
       ORGANIZATION = 'Organization'
       PRIORENVIRONMENT = 'Prior Environment'
       DESCRIPTION = 'Description'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, LABEL, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
+          csv << [NAME, COUNT, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
           @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
-            @api.resource(:environments).call(:index, {
+            @api.resource(:lifecycle_environments).call(:index, {
                                        'per_page' => 999999,
                                        'organization_id' => organization['id']
                                      })['results'].each do |environment|
-              if environment['label'] != 'Library'
+              if environment['name'] != 'Library'
                 name = environment['name']
                 count = 1
-                label = environment['label']
                 prior = environment['prior']
                 description = environment['description']
-                csv << [name, count, label, organization['name'], prior, description]
+                csv << [name, count, organization['name'], prior, description]
               end
             end
           end
@@ -60,10 +58,9 @@ module HammerCLICsv
       def import
         @existing = {}
         @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
-          @api.resource(:environments).call(:index, {
+          @api.resource(:lifecycle_environments).call(:index, {
                                      'per_page' => 999999,
                                      'organization_id' => foreman_organization(:name => organization['name']),
-                                     'library' => true
                                    })['results'].each do |environment|
             @existing[organization['name']] ||= {}
             @existing[organization['name']][environment['name']] = environment['id'] if environment
@@ -78,21 +75,19 @@ module HammerCLICsv
       def create_environments_from_csv(line)
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
-          label = namify(line[LABEL], number)
           prior = namify(line[PRIORENVIRONMENT], number)
           raise "Organization '#{line[ORGANIZATION]}' does not exist" if !@existing.include? line[ORGANIZATION]
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating environment '#{name}'..." if option_verbose?
-            @api.resource(:environments).call(:create, {
+            @api.resource(:lifecycle_environments).call(:create, {
                                         'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                                         'name' => name,
-                                        'label' => label,
-                                        'prior' => katello_environment(line[ORGANIZATION], :name => prior),
+                                        'prior' => lifecycle_environment(line[ORGANIZATION], :name => prior),
                                         'description' => line[DESCRIPTION]
                                       })
           else
             print "Updating environment '#{name}'..." if option_verbose?
-            @api.resource(:environments).call(:update, {
+            @api.resource(:lifecycle_environments).call(:update, {
                                         'id' => @existing[line[ORGANIZATION]][name],
                                         'name' => name,
                                         'new_name' => name,

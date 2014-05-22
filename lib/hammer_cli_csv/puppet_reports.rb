@@ -143,8 +143,8 @@ module HammerCLICsv
             system_id = @api.resource(:systems).call(:create, {
                                    'name' => name,
                                    'organization_id' => line[ORGANIZATION],
-                                   'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                                   'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                                   'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                                   'content_view_id' => lifecycle_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                    'facts' => facts(line),
                                    'installed_products' => products(line),
                                    'type' => 'system'

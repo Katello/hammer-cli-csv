@@ -148,7 +148,7 @@ module HammerCLICsv
             system_id = @api.resource(:systems).call(:create, {
                                                        'name' => name,
                                                        'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                                                       'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                                                       'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                                        'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                                        'facts' => facts(name, line),
                                                        'installed_products' => products(line),
@@ -161,7 +161,7 @@ module HammerCLICsv
                                                        'id' => @existing[line[ORGANIZATION]][name],
                                                        'system' => {
                                                          'name' => name,
-                                                         'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                                                         'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                                                          'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                                                          'facts' => facts(name, line),
                                                          'installed_products' => products(line)
@@ -187,6 +187,7 @@ module HammerCLICsv
 
       def facts(name, line)
         facts = {}
+        facts['network.hostname'] = name
         facts['cpu.core(s)_per_socket'] = line[CORES]
         facts['cpu.cpu_socket(s)'] = line[SOCKETS]
         facts['memory.memtotal'] = line[RAM]

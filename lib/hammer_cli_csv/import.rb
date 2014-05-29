@@ -24,6 +24,7 @@ module HammerCLICsv
       desc         'import by directory'
 
       option %w(-v --verbose), :flag, 'be verbose'
+      option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
       option %w(--server), 'SERVER', 'Server URL'
       option %w(-u --username), 'USERNAME', 'Username to access server'
       option %w(-p --password), 'PASSWORD', 'Password to access server'
@@ -75,6 +76,7 @@ module HammerCLICsv
 
         args = %W( csv #{resource.sub('_', '-')} --csv-file #{options_file} )
         args << '-v' if option_verbose?
+        args += %W( --threads #{option_threads} )
         hammer.run(args)
       end
     end

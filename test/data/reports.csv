@@ -1,4 +1,4 @@
 Name,Count,Time,Applied,Restarted,Failed,Failed Restarts,Skipped,Pending,Metrics
-dhcp129-000.megacorp.com,1,2009-10-22 05:14:54 UTC,1,0,0,0,0,0,"{""time"":{""config_retrieval"":""12.34""}, ""resources"":{""applied"":0, ""failed"":0, ""failed_restarts"":0, ""out_of_sync"":0, ""restarted"":0, ""scheduled"":1368, ""skipped"":1, ""total"":1450}, ""changes"":{""total"":0}}"
-dhcp129-00%d.megacorp.com,3,2009-10-23 05:14:54 UTC,1,0,0,0,0,0,"{""time"":{""config_retrieval"":""12.34""}, ""resources"":{""applied"":0, ""failed"":0, ""failed_restarts"":0, ""out_of_sync"":0, ""restarted"":0, ""scheduled"":1368, ""skipped"":1, ""total"":1450}, ""changes"":{""total"":0}}"
+dhcp129-000.megacorp.com,1,,1,0,0,0,0,0,"{""time"":{""config_retrieval"":12.34}, ""resources"":{""applied"":0, ""failed"":0, ""failed_restarts"":0, ""out_of_sync"":0, ""restarted"":0, ""scheduled"":1368, ""skipped"":1, ""total"":1450}, ""changes"":{""total"":0}}"
+dhcp129-01%d.megacorp.com,3,2009-10-23 05:14:54 UTC,1,0,0,0,0,0,"{""time"":{""config_retrieval"":12.34}, ""resources"":{""applied"":0, ""failed"":0, ""failed_restarts"":0, ""out_of_sync"":0, ""restarted"":0, ""scheduled"":1368, ""skipped"":1, ""total"":1450}, ""changes"":{""total"":0}}"
 

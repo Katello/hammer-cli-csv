@@ -52,9 +52,10 @@ module HammerCLICsv
 
           if !@existing_reports[name]
             print "Creating report '#{name}'..." if option_verbose?
+            reported_at = line[TIME] || Time.now
             report = @api.resource(:reports).call(:create, {
                                             'host' => name,
-                                            'reported_at' => line[TIME],
+                                            'reported_at' => reported_at,
                                             'status' => {
                                               'applied' => line[APPLIED],
                                               'restarted' => line[RESTARTED],

@@ -80,11 +80,14 @@ module HammerCLICsv
       option_threads.to_i.times do |current_thread|
         start_index = ((current_thread) * lines_per_thread).to_i
         finish_index = ((current_thread + 1) * lines_per_thread).to_i
-        lines = csv[start_index...finish_index].clone
-        splits << Thread.new do
-          lines.each do |line|
-            if line[NAME][0] != '#'
-              yield line
+        finish_index = csv.length if finish_index > csv.length
+        if start_index <= finish_index
+          lines = csv[start_index...finish_index].clone
+          splits << Thread.new do
+            lines.each do |line|
+              if line[NAME][0] != '#'
+                yield line
+              end
             end
           end
         end

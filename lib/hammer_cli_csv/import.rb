@@ -38,18 +38,6 @@ module HammerCLICsv
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"
       end
 
-      def ctx
-        {
-          :interactive => false,
-          :username => 'admin',
-          :password => 'changeme'
-        }
-      end
-
-      def hammer(context = nil)
-        HammerCLI::MainCommand.new('', context || ctx)
-      end
-
       def execute
         @api = ApipieBindings::API.new({
                                          :uri => option_server || HammerCLI::Settings.get(:csv, :host),

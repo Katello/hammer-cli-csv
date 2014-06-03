@@ -1,3 +1,19 @@
-Name,Count,Organization,Repository,Repository Type,Repository Url
-katello-client-1.4,1,Mega Corporation,katello-1.4-client,yum,http://fedorapeople.org/groups/katello/releases/yum/1.4-client/RHEL/6Server/x86_64/
-katello-1.4,1,Mega Corporation,katello-1.4,yum,http://fedorapeople.org/groups/katello/releases/yum/1.4/RHEL/6Server/x86_64/
+Name,Count,Label,Organization,Repository,Repository Type,Repository Url
+katello-client-1.4,1,katello-client-1_4,Mega Corporation,katello-1.4-client,Custom Yum,http://fedorapeople.org/groups/katello/releases/yum/1.4-client/RHEL/6Server/x86_64/
+katello-1.4,1,katello-1_4,Mega Corporation,katello-1.4,Custom Yum,http://fedorapeople.org/groups/katello/releases/yum/1.4/RHEL/6Server/x86_64/
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server Kickstart x86_64 6.1,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.1/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server Kickstart x86_64 6.2,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.2/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server Kickstart x86_64 6.3,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.3/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server Kickstart x86_64 6.4,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.4/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server Kickstart x86_64 6.5,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.5/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server Kickstart x86_64 6Server,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server RPMs x86_64 6.1,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.1/x86_64/os
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server RPMs x86_64 6.2,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.2/x86_64/os
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server RPMs x86_64 6.3,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.3/x86_64/os
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server RPMs x86_64 6.4,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.4/x86_64/os
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server RPMs x86_64 6.5,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6.5/x86_64/os
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 6 Server RPMs x86_64 6Server,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/os
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.0,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/7/7.0/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 7 Server Kickstart x86_64 7Server,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/kickstart
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 7 Server RPMs x86_64 7.0,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/7/7.0/x86_64/os
+Red Hat Enterprise Linux Server,1,Red_Hat_Enterprise_Linux_Server,Mega Corporation,Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Yum,https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/os

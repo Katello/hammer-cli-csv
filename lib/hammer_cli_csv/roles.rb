@@ -9,23 +9,6 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-#
-# -= Users CSV =-
-#
-# Columns
-#   Name
-#     - Login name of the user.
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "user%d" -> "user1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-#   Description
-#
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class CsvCommand
     class RolesCommand < BaseCommand

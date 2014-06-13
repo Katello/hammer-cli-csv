@@ -1,0 +1,6 @@
+Name,Count,Organization,Description,Composite,Repositories
+Katello,1,Mega Corporation,"Katello - The Sysadmin's Fortress",No,katello-1.4
+Katello,1,Mega Corporation,"Katello - The Sysadmin's Fortress",No,katello-1.4-client
+RHEL 6Server (Minimal),1,Mega Corporation,"RHEL 6Server - minimal installation",No,Red Hat Enterprise Linux 6 Server RPMs x86_64 6Server
+RHEL 6.1 Kickstart,1,Mega Corporation,"RHEL 6.1 Kickstart",No,Red Hat Enterprise Linux 6 Server Kickstart x86_64 6.1
+

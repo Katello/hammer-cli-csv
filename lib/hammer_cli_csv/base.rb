@@ -98,6 +98,19 @@ module HammerCLICsv
       end
     end
 
+    def hammer_context
+      {
+        :interactive => false,
+        :username => 'admin', # TODO: this needs to come from config/settings
+        :password => 'changeme' # TODO: this needs to come from config/settings
+      }
+    end
+
+    def hammer(context = nil)
+      HammerCLI::MainCommand.new('', context || hammer_context)
+    end
+
+
     def foreman_organization(options = {})
       @organizations ||= {}
 

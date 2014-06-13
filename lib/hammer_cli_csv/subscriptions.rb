@@ -33,37 +33,123 @@ module HammerCLICsv
 
       ORGANIZATION = 'Organization'
       MANIFEST = 'Manifest File'
+      CONTENT_SET = 'Content Set'
+      ARCH = 'Arch'
+      RELEASE = 'Release'
 
       def export
-        # TODO
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+          csv << [NAME, COUNT, ORGANIZATION, MANIFEST, CONTENT_SET, ARCH, RELEASE]
+          @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+            @api.resource(:products).call(:index, {
+                                            'per_page' => 999999,
+                                            'organization_id' => foreman_organization(:name => organization['name']),
+                                            'enabled' => true
+                                          })['results'].each do |product|
+              if product['provider']['name'] == 'Red Hat'
+                product['product_content'].each do |product_content|
+                  if product_content['enabled']
+                    puts product_content
+                    content_set = product_content['content']['name']
+                    release = '?????'
+                    arches = product_content['content']['arches']
+                    if arches.nil?
+                      csv << [product['name'], 1, organization['name'], nil, content_set, nil, release]
+                    else
+                      arches.split(",").each do |arch|
+                        csv << [product['name'], 1, organization['name'], nil, content_set, arch, release]
+                      end
+                    end
+                  end
+                end
+=begin
+                @api.resource(:repository_sets).call(:index, {
+                                                'per_page' => 999999,
+                                                'organization_id' => foreman_organization(:name => organization['name']),
+                                                'product_id' => product['id']
+                                              })['results'].each do |repository_set|
+                  puts repository_set
+                  repository_set['repositories'].each do |repository|
+                    #repository = @api.resource(:repositories).call(:show, { 'id' => repository['id'] })
+                    #puts repository
+                  end
+                  #products = export_column(repository_set, 'repositories', 'name')
+                  #product_content = product['product_content'].find do |content|
+                  #  content['content']['name'] == line[CONTENT_SET]
+                  #end
+                  #if products != ''
+                  #  csv << [product['name'], 1, organization['name'], nil, products]
+                  #end
+                end
+=end
+              end
+            end
+          end
+        end
       end
 
       def import
         thread_import do |line|
-          create_subscriptions_from_csv(line)
+          if line[MANIFEST] && !line[MANIFEST].empty?
+            import_manifest_from_csv(line)
+          else
+            enable_products_from_csv(line)
+          end
         end
       end
 
-      def create_subscriptions_from_csv(line)
+      def enable_products_from_csv(line)
+        results = @api.resource(:products).call(:index, {
+                                                  'per_page' => 999999,
+                                                  'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                                                  'name' => line[NAME]
+                                                })['results']
+        raise "No match for product '#{line[NAME]}'" if results.length == 0
+        raise "Multiple matches for product '#{line[NAME]}'" if results.length != 1
+        product = results[0]
+
+        results = @api.resource(:repository_sets).call(:index, {
+                                                         'per_page' => 999999,
+                                                         'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                                                         'product_id' => product['id'],
+                                                         'name' => line[CONTENT_SET]
+                                                       })['results']
+        raise "No match for content set '#{line[CONTENT_SET]}'" if results.length == 0
+        raise "Multiple matches for content set '#{line[CONTENT_SET]}'" if results.length != 1
+        repository_set = results[0]
+
+        repository = repository_set['repositories'].find do |repository|
+          repository['name'].end_with?("#{line[ARCH]} #{line[RELEASE]}")
+        end
+
+        if repository.nil?
+          print "Enabling repository #{line[CONTENT_SET]} #{line[ARCH]} #{line[RELEASE]}..." if option_verbose?
+          product_content = product['product_content'].find do |content| 
+            content['content']['name'] == line[CONTENT_SET]
+          end
+          raise "No match for content set '#{line[CONTENT_SET]}'" if !product_content
+
+          @api.resource(:repository_sets).call(:enable, {
+                                                 'id' => product_content['content']['id'],
+                                                 'product_id' => product['id'],
+                                                 'basearch' => line[ARCH],
+                                                 'releasever' => line[RELEASE]
+                                               })
+          puts "done" if option_verbose?
+        else
+          puts "Repository #{repository['name']} already enabled" if option_verbose?
+        end
+      end
+
+      def import_manifest_from_csv(line)
+        # TODO: --server needs to come from config/settings
         args = %W{ subscription upload --file #{ line[MANIFEST] }
                    --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) } }
         hammer.run(args)
+
       rescue RuntimeError => e
         raise "#{e}\n       #{line}"
       end
-
-      def ctx
-        {
-          :interactive => false,
-          :username => 'admin',
-          :password => 'changeme'
-        }
-      end
-
-      def hammer(context = nil)
-        HammerCLI::MainCommand.new('', context || ctx)
-      end
-
     end
   end
 end

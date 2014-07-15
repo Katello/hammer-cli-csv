@@ -1,0 +1,7 @@
+Name,Count,Path,OS Family
+"CentOS mirror","1","http://mirror.centos.org/centos/$major.$minor/os/$arch","Redhat"
+"Debian mirror","1","http://ftp.debian.org/debian/","Debian"
+"Fedora mirror","1","http://dl.fedoraproject.org/pub/fedora/linux/releases/$major/Fedora/$arch/os/","Redhat"
+"FreeBSD mirror","1","http://ftp.freebsd.org/pub/FreeBSD/releases/$arch/$major.$minor-RELEASE/","Freebsd"
+"OpenSUSE mirror","1","http://download.opensuse.org/distribution/$major.$minor/repo/oss","Suse"
+"Ubuntu mirror","1","http://archive.ubuntu.com/ubuntu/","Debian"

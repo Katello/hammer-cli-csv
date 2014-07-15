@@ -31,8 +31,8 @@ module HammerCLICsv
       option '--dir', 'DIRECTORY', 'directory to import from'
 
       RESOURCES = %w( organizations locations roles users puppet_environments operating_systems
-            domains architectures partition_tables lifecycle_environments host_collections
-            subscriptions activation_keys hosts content_hosts reports )
+                      domains architectures partition_tables lifecycle_environments host_collections
+                      subscriptions activation_keys hosts content_hosts reports )
       RESOURCES.each do |resource|
         dashed = resource.sub('_', '-')
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"
@@ -52,6 +52,16 @@ module HammerCLICsv
         end
 
         HammerCLI::EX_OK
+      end
+
+      def hammer(context = nil)
+        context ||= {
+          :interactive => false,
+          :username => 'admin', # TODO: this needs to come from config/settings
+          :password => 'changeme' # TODO: this needs to come from config/settings
+        }
+
+        HammerCLI::MainCommand.new('', context)
       end
 
       def hammer_resource(resource)

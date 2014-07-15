@@ -60,7 +60,7 @@ module HammerCLICsv
           @existing_products[line[ORGANIZATION]] = {}
           @api.resource(:products)
             .call(:index, {
-                    'page_size' => 999999, 'paged' => true,
+                    'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                     'enabled' => true
                   })['results'].each do |product|
@@ -131,12 +131,12 @@ module HammerCLICsv
                       'content_type' => content_type(line[REPOSITORY_TYPE])
                     })
             @existing_repositories[line[ORGANIZATION] + name][line[LABEL]] = repository
-            puts "done" if option_verbose?
+            puts 'done' if option_verbose?
           end
 
           print "Sync'ing repository '#{repository_name}' in product '#{name}'..." if option_verbose?
           if repository['sync_state'] == 'finished'
-            puts "already done" if option_verbose?
+            puts 'already done' if option_verbose?
           else
             if line[REPOSITORY_TYPE] =~ /Red Hat/
               print 'skipping Red Hat repo sync... so slow!... '
@@ -155,11 +155,11 @@ module HammerCLICsv
 
       def content_type(repository_type)
         case repository_type
-          when /yum/i
-            'yum'
-          when /puppet/i
-            'puppet'
-          else
+        when /yum/i
+          'yum'
+        when /puppet/i
+          'puppet'
+        else
           raise "Unrecognized repository type '#{repository_type}'"
         end
       end

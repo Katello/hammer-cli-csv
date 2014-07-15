@@ -39,8 +39,8 @@ module HammerCLICsv
           @api.resource(:environments).call(:index, {:per_page => 999999})['results'].each do |environment|
             name = environment['name']
             count = 1
-            raise 'TODO: organizations'
             csv << [name, count]
+            raise 'TODO: organizations'
           end
         end
       end

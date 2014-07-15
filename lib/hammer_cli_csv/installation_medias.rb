@@ -9,86 +9,71 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-#
-# -= Domains CSV =-
-#
-# Columns
-#   Name
-#     - Domain name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "os%d" -> "os1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-#
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class CsvCommand
-    class DomainsCommand < BaseCommand
-      command_name 'domains'
-      desc         'import or export domains'
+    class InstallationMediasCommand < BaseCommand
+      command_name 'installation-medias'
+      desc         'import or export installation media'
 
-      FULLNAME = 'Full Name'
+      OSFAMILY = 'OS Family'
+      PATH = 'Path'
       ORGANIZATIONS = 'Organizations'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, FULLNAME]
-          @api.resource(:domains).call(:index, {:per_page => 999999})['results'].each do |domain|
-            puts domain
-            name = domain['name']
+          csv << [NAME, COUNT, PATH, OSFAMILY]
+          @api.resource(:media).call(:index, {:per_page => 999999})['results'].each do |installation_media|
+            name = installation_media['name']
             count = 1
-            fullname = domain['fullname']
-            csv << [name, count, fullname]
+            path = installation_media['path']
+            os_family = installation_media['os_family']
+            csv << [name, count, path, os_family]
           end
         end
       end
 
       def import
         @existing = {}
-        @api.resource(:domains).call(:index, {:per_page => 999999})['results'].each do |domain|
-          @existing[domain['name']] = domain['id'] if domain
+        @api.resource(:media).call(:index, {:per_page => 999999})['results'].each do |installation_media|
+          @existing[installation_media['name']] = installation_media['id'] if installation_media
         end
 
         thread_import do |line|
-          create_domains_from_csv(line)
+          create_installation_medias_from_csv(line)
         end
       end
 
-      def create_domains_from_csv(line)
+      def create_installation_medias_from_csv(line)
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
-            print "Creating domain '#{name}'..." if option_verbose?
-            domain_id = @api.resource(:domains).call(:create, {
+            print "Creating installation_media '#{name}'..." if option_verbose?
+            installation_media_id = @api.resource(:media).call(:create, {
                                                        'name' => name
                                                      })['id']
           else
-            print "Updating domain '#{name}'..." if option_verbose?
-            domain_id = @api.resource(:domains).call(:update, {
+            print "Updating installation_media '#{name}'..." if option_verbose?
+            installation_media_id = @api.resource(:media).call(:update, {
                                                        'id' => @existing[name],
                                                        'name' => name
                                                      })['id']
           end
 
           # Update associated resources
-          domains ||= {}
+          installation_medias ||= {}
           CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
             organization_id = foreman_organization(:name => organization)
-            if domains[organization].nil?
-              domains[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})['domains'].collect do |domain|
-                domain['id']
+            if installation_medias[organization].nil?
+              installation_medias[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})['installation_medias'].collect do |installation_media|
+                installation_media['id']
               end
             end
-            domains[organization] += [domain_id] if !domains[organization].include? domain_id
+            installation_medias[organization] += [installation_media_id] if !installation_medias[organization].include? installation_media_id
 
             @api.resource(:organizations).call(:update, {
                                                  'id' => organization_id,
                                                  'organization' => {
-                                                   'domain_ids' => domains[organization]
+                                                   'installation_media_ids' => installation_medias[organization]
                                                  }
                                                })
           end

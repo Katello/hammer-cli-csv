@@ -37,6 +37,8 @@ module HammerCLICsv
       command_name 'content-hosts'
       desc         'import or export content hosts'
 
+      option %w(--sam), :flag, 'export from SAM-1.3 or SAM-1.4'
+
       ORGANIZATION = 'Organization'
       ENVIRONMENT = 'Environment'
       CONTENTVIEW = 'Content View'
@@ -56,53 +58,151 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
-          @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-            @api.resource(:systems).call(:index, {
-                                  'per_page' => 999999,
-                                  'organization_id' => foreman_organization(:name => organization['name'])
-                                 })['results'].each do |system|
-              system = @api.resource(:systems).call(:show, {
-                                            'id' => system['uuid'],
-                                            'fields' => 'full'
-                                          })
+          if option_sam?
+            export_sam csv
+          else
+            export_foretello csv
+          end
+        end
+      end
 
-              name = system['name']
-              count = 1
-              organization_name = organization['name']
-              environment = system['environment']['label']
-              contentview = system['content_view']['name']
-              hostcollections = CSV.generate do |column|
-                column << system['systemGroups'].collect do |hostcollection|
-                  hostcollection['name']
-                end
-              end
-              hostcollections.delete!("\n")
-              virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
-              host = system['host']
-              operatingsystem = "#{system['facts']['distribution.name']} " if system['facts']['distribution.name']
-              operatingsystem += system['facts']['distribution.version'] if system['facts']['distribution.version']
-              architecture = system['facts']['uname.machine']
-              sockets = system['facts']['cpu.cpu_socket(s)']
-              ram = system['facts']['memory.memtotal']
-              cores = system['facts']['cpu.core(s)_per_socket']
-              sla = ''
-              products = CSV.generate do |column|
-                column << system['installedProducts'].collect do |product|
-                  "#{product['productId']}|#{product['productName']}"
-                end
-              end
-              products.delete!("\n")
-              subscriptions = CSV.generate do |column|
-                column << @api.resource(:subscriptions).call(:index, {
-                                                      'system_id' => system['uuid']
-                                                    })['results'].collect do |subscription|
-                  "#{subscription['product_id']}|#{subscription['product_name']}"
-                end
-              end
-              subscriptions.delete!("\n")
-              csv << [name, count, organization_name, environment, contentview, hostcollections, virtual, host,
-                      operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
+      def export_sam(csv)
+        guests_host = {}
+
+        server = option_server || HammerCLI::Settings.get(:csv, :host)
+        username = option_username || HammerCLI::Settings.get(:csv, :username)
+        password = option_password || HammerCLI::Settings.get(:csv, :password)
+        url = "#{server}/api/systems?organization_id=satellite-1"
+        uri = URI(url)
+        system_ids = Net::HTTP.start(uri.host, uri.port,
+                                     :use_ssl => uri.scheme == 'https',
+                                     :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+          request = Net::HTTP::Get.new uri.request_uri
+          request.basic_auth(username, password)
+          response = http.request(request)
+
+          JSON.parse(response.body).collect do |system|
+            system['guests'].each { |guest| guests_host[guest['uuid']] = system['name'] }
+            system['uuid']
+          end
+        end
+
+        #system_ids = ['327bf5cc-5498-4927-aa27-39b1503edf58', 'eeb6de95-afaf-4b14-9f92-e845ff269ccb']
+
+        system_ids.each do |system_id|
+          url = "#{server}/api/systems/#{system_id}"
+          uri = URI(url)
+          system = Net::HTTP.start(uri.host, uri.port,
+                                  :use_ssl => uri.scheme == 'https',
+                                  :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+            request = Net::HTTP::Get.new uri.request_uri
+            request.basic_auth(username, password)
+            response = http.request(request)
+
+            JSON.parse(response.body)
+          end
+
+          url = "#{server}/api/systems/#{system_id}/subscriptions"
+          uri = URI(url)
+          system_subscriptions = Net::HTTP.start(uri.host, uri.port,
+                                                 :use_ssl => uri.scheme == 'https',
+                                                 :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+            request = Net::HTTP::Get.new uri.request_uri
+            request.basic_auth(username, password)
+            response = http.request(request)
+
+            JSON.parse(response.body)['entitlements']
+          end
+
+          name = system['name']
+          count = 1
+          organization_name = system['owner']['displayName']
+          environment = system['environment']['name']
+          contentview = system['content_view']['name']
+          hostcollections = nil
+          virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
+          host = guests_host[system['uuid']]
+          if system['facts']['distribution.name']
+            operatingsystem = "#{system['facts']['distribution.name']} "
+            operatingsystem += system['facts']['distribution.version'] if system['facts']['distribution.version']
+            operatingsystem.strip!
+          end
+          architecture = system['facts']['uname.machine']
+          sockets = system['facts']['cpu.cpu_socket(s)']
+          ram = system['facts']['memory.memtotal']
+          cores = system['facts']['cpu.core(s)_per_socket'] || 1
+          sla = system['serviceLevel']
+
+          products = CSV.generate do |column|
+            column << system['installedProducts'].collect do |product|
+              "#{product['productId']}|#{product['productName']}"
             end
+          end
+          products.delete!("\n")
+
+          subscriptions = CSV.generate do |column|
+            column << system_subscriptions.collect do |subscription|
+              "#{subscription['quantity']}|#{subscription['productId']}|#{subscription['poolName']}"
+            end
+          end
+          subscriptions.delete!("\n")
+
+          csv << [name, count, organization_name, environment, contentview, hostcollections, virtual, host,
+                  operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
+        end
+      end
+
+      def export_foretello(csv)
+        @api.resource(:organizations)
+          .call(:index, {:per_page => 999999})['results'].each do |organization|
+          @api.resource(:systems)
+            .call(:index, {
+                    'per_page' => 999999,
+                    'organization_id' => foreman_organization(:name => organization['name'])
+                  })['results'].each do |system|
+            system = @api.resource(:systems)
+              .call(:show, {
+                      'id' => system['uuid'],
+                      'fields' => 'full'
+                    })
+
+            name = system['name']
+            count = 1
+            organization_name = organization['name']
+            environment = system['environment']['label']
+            contentview = system['content_view']['name']
+            hostcollections = CSV.generate do |column|
+              column << system['systemGroups'].collect do |hostcollection|
+                hostcollection['name']
+              end
+            end
+            hostcollections.delete!("\n")
+            virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
+            host = system['virtual_host']
+            operatingsystem = "#{system['facts']['distribution.name']} " if system['facts']['distribution.name']
+            operatingsystem += system['facts']['distribution.version'] if system['facts']['distribution.version']
+            architecture = system['facts']['uname.machine']
+            sockets = system['facts']['cpu.cpu_socket(s)']
+            ram = system['facts']['memory.memtotal']
+            cores = system['facts']['cpu.core(s)_per_socket'] || 1
+            sla = ''
+            products = CSV.generate do |column|
+              column << system['installedProducts'].collect do |product|
+                "#{product['productId']}|#{product['productName']}"
+              end
+            end
+            products.delete!("\n")
+            subscriptions = CSV.generate do |column|
+              column << @api.resource(:subscriptions)
+                .call(:index, {
+                        'system_id' => system['uuid']
+                      })['results'].collect do |subscription|
+                "#{subscription['quantity']}|#{subscription['product_id']}|#{subscription['product_name']}"
+              end
+            end
+            subscriptions.delete!("\n")
+            csv << [name, count, organization_name, environment, contentview, hostcollections, virtual, host,
+                    operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
           end
         end
       end
@@ -117,10 +217,11 @@ module HammerCLICsv
 
         print 'Updating host and guest associations...' if option_verbose?
         @host_guests.each do |host_id, guest_ids|
-          @api.resource(:systems).call(:update, {
-                                 'id' => host_id,
-                                 'guest_ids' => guest_ids
-                               })
+          @api.resource(:systems)
+            .call(:update, {
+                    'id' => host_id,
+                    'guest_ids' => guest_ids
+                  })
         end
         puts 'done' if option_verbose?
       end
@@ -128,51 +229,65 @@ module HammerCLICsv
       def create_systems_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:systems).call(:index, {
-                                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                                'page_size' => 999999})['results'].each do |system|
-            @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
+          # Fetching all content hosts is too slow and times out due to the complexity of the data
+          # rendered in the json.
+          # http://projects.theforeman.org/issues/6307
+          total = @api.resource(:systems)
+            .call(:index, {
+                    'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                    'per_page' => 1
+                  })['total'].to_i
+          (total / 20 + 2).to_i.times do |page|
+            @api.resource(:systems)
+              .call(:index, {
+                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                      'page' => page,
+                      'per_page' => 20
+                    })['results'].each do |system|
+              @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
+            end
           end
         end
 
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
 
-          # TODO w/ @daviddavis p-r
+          # TODO: w/ @daviddavis p-r
           #subscriptions(line).each do |subscription|
           #  katello_subscription(line[ORGANIZATION], :name => subscription[:number])
           #end
 
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating system '#{name}'..." if option_verbose?
-            system_id = @api.resource(:systems).call(:create, {
-                                                       'name' => name,
-                                                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                                                       'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                                                       'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                                                       'facts' => facts(name, line),
-                                                       'installed_products' => products(line),
-                                                       'type' => 'system'
-                                                     })['uuid']
+            system_id = @api.resource(:systems)
+              .call(:create, {
+                      'name' => name,
+                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                      'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                      'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                      'facts' => facts(name, line),
+                      'installed_products' => products(line)
+                    })['uuid']
             @existing[line[ORGANIZATION]][name] = system_id
           else
             print "Updating system '#{name}'..." if option_verbose?
-            system_id = @api.resource(:systems).call(:update, {
-                                                       'id' => @existing[line[ORGANIZATION]][name],
-                                                       'system' => {
-                                                         'name' => name,
-                                                         'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                                                         'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                                                         'facts' => facts(name, line),
-                                                         'installed_products' => products(line)
-                                                       }
-                                                     })['uuid']
+            system_id = @api.resource(:systems)
+              .call(:update, {
+                      'id' => @existing[line[ORGANIZATION]][name],
+                      'system' => {
+                        'name' => name,
+                        'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                        'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                        'facts' => facts(name, line),
+                        'installed_products' => products(line)
+                      }
+                    })['uuid']
           end
 
           if line[VIRTUAL] == 'Yes' && line[HOST]
             raise "Host system '#{line[HOST]}' not found" if !@existing[line[ORGANIZATION]][line[HOST]]
             @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] ||= []
-            @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] << system_id
+            @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] << "#{line[ORGANIZATION]}/#{name}"
           end
 
           set_host_collections(system_id, line)
@@ -192,7 +307,10 @@ module HammerCLICsv
         facts['cpu.cpu_socket(s)'] = line[SOCKETS]
         facts['memory.memtotal'] = line[RAM]
         facts['uname.machine'] = line[ARCHITECTURE]
-        if line[OPERATINGSYSTEM].index(' ')
+        if line[OPERATINGSYSTEM].nil?
+          facts['distribution.name'] = nil
+          facts['distribution.version'] = nil
+        elsif line[OPERATINGSYSTEM].index(' ')
           (facts['distribution.name'], facts['distribution.version']) = line[OPERATINGSYSTEM].split(' ')
         else
           (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OPERATINGSYSTEM]]
@@ -203,11 +321,13 @@ module HammerCLICsv
       end
 
       def set_host_collections(system_id, line)
+        return nil if !line[HOSTCOLLECTIONS]
         CSV.parse_line(line[HOSTCOLLECTIONS]).each do |hostcollection_name|
-          @api.resource(:host_collections).call(:add_systems, {
-                                                  'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
-                                                  'system_ids' => [system_id]
-                                                })
+          @api.resource(:host_collections)
+            .call(:add_systems, {
+                    'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
+                    'system_ids' => [system_id]
+                  })
         end
       end
 
@@ -227,7 +347,7 @@ module HammerCLICsv
         return nil if !line[SUBSCRIPTIONS]
         subscriptions = CSV.parse_line(line[SUBSCRIPTIONS]).collect do |subscription_details|
           subscription = {}
-          (subscription[:number], subscription[:name]) = subscription_details.split('|')
+          (subscription[:quantity], subscription[:number], subscription[:name]) = subscription_details.split('|')
           subscription
         end
         subscriptions

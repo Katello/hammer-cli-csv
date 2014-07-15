@@ -44,7 +44,6 @@ module HammerCLICsv
             count = 1
             osfamily = ptable['os_family']
             layout = ptable['layout']
-            raise 'TODO: operating systems'
             csv << [name, count, osfamily, layout]
           end
         end

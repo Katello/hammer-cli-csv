@@ -97,15 +97,17 @@ module HammerCLICsv
       def create_user(line, name, roles, organizations, locations)
         print "Creating user '#{name}'... " if option_verbose?
         @api.resource(:users).call(:create, {
-                                     'login' => name,
-                                     'firstname' => line[FIRSTNAME],
-                                     'lastname' => line[LASTNAME],
-                                     'mail' => line[EMAIL],
-                                     'password' => 'changeme',
-                                     'auth_source_id' => 1,  # INTERNAL auth
-                                     'organization_ids' => organizations,
-                                     'location_ids' => locations,
-                                     'role_ids' => roles
+                                     'user' => {
+                                       'login' => name,
+                                       'firstname' => line[FIRSTNAME],
+                                       'lastname' => line[LASTNAME],
+                                       'mail' => line[EMAIL],
+                                       'password' => 'redhat',
+                                       'auth_source_id' => 1,  # INTERNAL auth
+                                       'role_ids' => roles,
+                                       'organization_ids' => organizations,
+                                       'location_ids' => locations
+                                     }
                                    })
       end
 
@@ -113,14 +115,16 @@ module HammerCLICsv
         print "Updating user '#{name}'... " if option_verbose?
         @api.resource(:users).call(:update, {
                                      'id' => @existing[name],
-                                     'login' => name,
-                                     'firstname' => line[FIRSTNAME],
-                                     'lastname' => line[LASTNAME],
-                                     'mail' => line[EMAIL],
-                                     'password' => 'changeme',
-                                     'organization_ids' => organizations,
-                                     'location_ids' => locations,
-                                     'role_ids' => roles
+                                     'user' => {
+                                       'login' => name,
+                                       'firstname' => line[FIRSTNAME],
+                                       'lastname' => line[LASTNAME],
+                                       'password' => 'redhat',
+                                       'mail' => line[EMAIL],
+                                       'role_ids' => roles,
+                                       'organization_ids' => organizations,
+                                       'location_ids' => locations
+                                     }
                                    })
       end
     end

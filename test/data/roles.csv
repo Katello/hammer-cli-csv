@@ -1,159 +1,159 @@
 Name,Count,Resource,Search,Permissions,Organizations,Locations
-annamaeaudie,1,Katello::ActivationKey,name = annamae.audie@megacorp.com,"view_activation_keys",Mega Corporation,
-aronaskew,1,Katello::ActivationKey,name = aron.askew@megacorp.com,"view_activation_keys",Mega Corporation,
-ashtonaumann,1,Katello::ActivationKey,name = ashton.aumann@megacorp.com,"view_activation_keys",Mega Corporation,
-ayakoalday,1,Katello::ActivationKey,name = ayako.alday@megacorp.com,"view_activation_keys",Mega Corporation,
-bambibivona,1,Katello::ActivationKey,name = bambi.bivona@megacorp.com,"view_activation_keys",Mega Corporation,
-bernardbigler,1,Katello::ActivationKey,name = bernard.bigler@megacorp.com,"view_activation_keys",Mega Corporation,
-bettinabudniewski,1,Katello::ActivationKey,name = bettina.budniewski@megacorp.com,"view_activation_keys",Mega Corporation,
-boydbuckle,1,Katello::ActivationKey,name = boyd.buckle@megacorp.com,"view_activation_keys",Mega Corporation,
-brucebutterworth,1,Katello::ActivationKey,name = bruce.butterworth@megacorp.com,"view_activation_keys",Mega Corporation,
-carolanncorbo,1,Katello::ActivationKey,name = carolann.corbo@megacorp.com,"view_activation_keys",Mega Corporation,
-carollcolquitt,1,Katello::ActivationKey,name = caroll.colquitt@megacorp.com,"view_activation_keys",Mega Corporation,
-chayacordova,1,Katello::ActivationKey,name = chaya.cordova@megacorp.com,"view_activation_keys",Mega Corporation,
-chelseacalaway,1,Katello::ActivationKey,name = chelsea.calaway@megacorp.com,"view_activation_keys",Mega Corporation,
-cinthiacadieux,1,Katello::ActivationKey,name = cinthia.cadieux@megacorp.com,"view_activation_keys",Mega Corporation,
-coraleeculbert,1,Katello::ActivationKey,name = coralee.culbert@megacorp.com,"view_activation_keys",Mega Corporation,
-damondials,1,Katello::ActivationKey,name = damon.dials@megacorp.com,"view_activation_keys",Mega Corporation,
-danaedrayer,1,Katello::ActivationKey,name = danae.drayer@megacorp.com,"view_activation_keys",Mega Corporation,
-danettedewitt,1,Katello::ActivationKey,name = danette.dewitt@megacorp.com,"view_activation_keys",Mega Corporation,
-danilodilbeck,1,Katello::ActivationKey,name = danilo.dilbeck@megacorp.com,"view_activation_keys",Mega Corporation,
-debbydupuy,1,Katello::ActivationKey,name = debby.dupuy@megacorp.com,"view_activation_keys",Mega Corporation,
-delciediez,1,Katello::ActivationKey,name = delcie.diez@megacorp.com,"view_activation_keys",Mega Corporation,
-dennadebartolo,1,Katello::ActivationKey,name = denna.debartolo@megacorp.com,"view_activation_keys",Mega Corporation,
-diedradarrow,1,Katello::ActivationKey,name = diedra.darrow@megacorp.com,"view_activation_keys",Mega Corporation,
-doloresdelay,1,Katello::ActivationKey,name = dolores.delay@megacorp.com,"view_activation_keys",Mega Corporation,
-dominicadubberly,1,Katello::ActivationKey,name = dominica.dubberly@megacorp.com,"view_activation_keys",Mega Corporation,
-earthaedie,1,Katello::ActivationKey,name = eartha.edie@megacorp.com,"view_activation_keys",Mega Corporation,
-eddaelam,1,Katello::ActivationKey,name = edda.elam@megacorp.com,"view_activation_keys",Mega Corporation,
-edrisekhoff,1,Katello::ActivationKey,name = edris.ekhoff@megacorp.com,"view_activation_keys",Mega Corporation,
-eldeneasley,1,Katello::ActivationKey,name = elden.easley@megacorp.com,"view_activation_keys",Mega Corporation,
-elenaeisert,1,Katello::ActivationKey,name = elena.eisert@megacorp.com,"view_activation_keys",Mega Corporation,
-elnoraefaw,1,Katello::ActivationKey,name = elnora.efaw@megacorp.com,"view_activation_keys",Mega Corporation,
-evelinaelders,1,Katello::ActivationKey,name = evelina.elders@megacorp.com,"view_activation_keys",Mega Corporation,
-evitaepting,1,Katello::ActivationKey,name = evita.epting@megacorp.com,"view_activation_keys",Mega Corporation,
-faustofortino,1,Katello::ActivationKey,name = fausto.fortino@megacorp.com,"view_activation_keys",Mega Corporation,
-georgeannagriffiths,1,Katello::ActivationKey,name = georgeanna.griffiths@megacorp.com,"view_activation_keys",Mega Corporation,
-georginegrimmett,1,Katello::ActivationKey,name = georgine.grimmett@megacorp.com,"view_activation_keys",Mega Corporation,
-gilbertguerriero,1,Katello::ActivationKey,name = gilbert.guerriero@megacorp.com,"view_activation_keys",Mega Corporation,
-gildagutirrez,1,Katello::ActivationKey,name = gilda.gutirrez@megacorp.com,"view_activation_keys",Mega Corporation,
-gregggault,1,Katello::ActivationKey,name = gregg.gault@megacorp.com,"view_activation_keys",Mega Corporation,
-guillerminagloster,1,Katello::ActivationKey,name = guillermina.gloster@megacorp.com,"view_activation_keys",Mega Corporation,
-herminiahochmuth,1,Katello::ActivationKey,name = herminia.hochmuth@megacorp.com,"view_activation_keys",Mega Corporation,
-hienhamby,1,Katello::ActivationKey,name = hien.hamby@megacorp.com,"view_activation_keys",Mega Corporation,
-hsiuhenningsen,1,Katello::ActivationKey,name = hsiu.henningsen@megacorp.com,"view_activation_keys",Mega Corporation,
-jacquesjoaquin,1,Katello::ActivationKey,name = jacques.joaquin@megacorp.com,"view_activation_keys",Mega Corporation,
-janayjohnson,1,Katello::ActivationKey,name = janay.johnson@megacorp.com,"view_activation_keys",Mega Corporation,
-jeffersonjock,1,Katello::ActivationKey,name = jefferson.jock@megacorp.com,"view_activation_keys",Mega Corporation,
-jeneejahns,1,Katello::ActivationKey,,"view_activation_keys,create_activation_keys,edit_activation_keys,destroy_activation_keys",Mega Corporation,
-jeremyjong,1,Katello::ActivationKey,name = jeremy.jong@megacorp.com,"view_activation_keys",Mega Corporation,
-judithjoachim,1,Katello::ActivationKey,name = judith.joachim@megacorp.com,"view_activation_keys",Mega Corporation,
-juliojerabek,1,Katello::ActivationKey,name = julio.jerabek@megacorp.com,"view_activation_keys",Mega Corporation,
-kalynkimzey,1,Katello::ActivationKey,name = kalyn.kimzey@megacorp.com,"view_activation_keys",Mega Corporation,
-kamilahkurland,1,Katello::ActivationKey,name = kamilah.kurland@megacorp.com,"view_activation_keys",Mega Corporation,
-karlenekirch,1,Katello::ActivationKey,name = karlene.kirch@megacorp.com,"view_activation_keys",Mega Corporation,
-karriekindel,1,Katello::ActivationKey,name = karrie.kindel@megacorp.com,"view_activation_keys",Mega Corporation,
-kourtneykyle,1,Katello::ActivationKey,name = kourtney.kyle@megacorp.com,"view_activation_keys",Mega Corporation,
-kristenkellems,1,Katello::ActivationKey,name = kristen.kellems@megacorp.com,"view_activation_keys",Mega Corporation,
-lakeeshaloiacono,1,Katello::ActivationKey,name = lakeesha.loiacono@megacorp.com,"view_activation_keys",Mega Corporation,
-lashonlocker,1,Katello::ActivationKey,name = lashon.locker@megacorp.com,"view_activation_keys",Mega Corporation,
-leelitchfield,1,Katello::ActivationKey,name = lee.litchfield@megacorp.com,"view_activation_keys",Mega Corporation,
-leleggett,1,Katello::ActivationKey,name = le.leggett@megacorp.com,"view_activation_keys",Mega Corporation,
-leonorlimberg,1,Katello::ActivationKey,name = leonor.limberg@megacorp.com,"view_activation_keys",Mega Corporation,
-lienlipscomb,1,Katello::ActivationKey,name = lien.lipscomb@megacorp.com,"view_activation_keys",Mega Corporation,
-lillianlouviere,1,Katello::ActivationKey,name = lillian.louviere@megacorp.com,"view_activation_keys",Mega Corporation,
-luanalarson,1,Katello::ActivationKey,name = luana.larson@megacorp.com,"view_activation_keys",Mega Corporation,
-macmalmberg,1,Katello::ActivationKey,name = mac.malmberg@megacorp.com,"view_activation_keys",Mega Corporation,
-madeleinemagers,1,Katello::ActivationKey,name = madeleine.magers@megacorp.com,"view_activation_keys",Mega Corporation,
-mandiemcquinn,1,Katello::ActivationKey,name = mandie.mcquinn@megacorp.com,"view_activation_keys",Mega Corporation,
-mariellamolock,1,Katello::ActivationKey,name = mariella.molock@megacorp.com,"view_activation_keys",Mega Corporation,
-mariettamenzel,1,Katello::ActivationKey,name = marietta.menzel@megacorp.com,"view_activation_keys",Mega Corporation,
-mariloumcintosh,1,Katello::ActivationKey,name = marilou.mcintosh@megacorp.com,"view_activation_keys",Mega Corporation,
-martinmagallon,1,Katello::ActivationKey,name = martin.magallon@megacorp.com,"view_activation_keys",Mega Corporation,
-maryleemillsap,1,Katello::ActivationKey,name = marylee.millsap@megacorp.com,"view_activation_keys",Mega Corporation,
-meldametheny,1,Katello::ActivationKey,name = melda.metheny@megacorp.com,"view_activation_keys",Mega Corporation,
-meliameche,1,Katello::ActivationKey,name = melia.meche@megacorp.com,"view_activation_keys",Mega Corporation,
-merlemiceli,1,Katello::ActivationKey,name = merle.miceli@megacorp.com,"view_activation_keys",Mega Corporation,
-milfordmize,1,Katello::ActivationKey,name = milford.mize@megacorp.com,"view_activation_keys",Mega Corporation,
-miriammessenger,1,Katello::ActivationKey,name = miriam.messenger@megacorp.com,"view_activation_keys",Mega Corporation,
-moniquemaly,1,Katello::ActivationKey,name = monique.maly@megacorp.com,"view_activation_keys",Mega Corporation,
-mosesmodisette,1,Katello::ActivationKey,name = moses.modisette@megacorp.com,"view_activation_keys",Mega Corporation,
-myronmclawhorn,1,Katello::ActivationKey,name = myron.mclawhorn@megacorp.com,"view_activation_keys",Mega Corporation,
-nancienassar,1,Katello::ActivationKey,name = nancie.nassar@megacorp.com,"view_activation_keys",Mega Corporation,
-nannienobles,1,Katello::ActivationKey,name = nannie.nobles@megacorp.com,"view_activation_keys",Mega Corporation,
-nganordquist,1,Katello::ActivationKey,name = nga.nordquist@megacorp.com,"view_activation_keys",Mega Corporation,
-nieshanold,1,Katello::ActivationKey,name = niesha.nold@megacorp.com,"view_activation_keys",Mega Corporation,
-nydianeil,1,Katello::ActivationKey,name = nydia.neil@megacorp.com,"view_activation_keys",Mega Corporation,
-orvilleoneill,1,Katello::ActivationKey,name = orville.oneill@megacorp.com,"view_activation_keys",Mega Corporation,
-parkerpaetzold,1,Katello::ActivationKey,name = parker.paetzold@megacorp.com,"view_activation_keys",Mega Corporation,
-peggiephillips,1,Katello::ActivationKey,name = peggie.phillips@megacorp.com,"view_activation_keys",Mega Corporation,
-quianaquesnel,1,Katello::ActivationKey,name = quiana.quesnel@megacorp.com,"view_activation_keys",Mega Corporation,
-rafaelarasco,1,Katello::ActivationKey,name = rafaela.rasco@megacorp.com,"view_activation_keys",Mega Corporation,
-reinaldoreardon,1,Katello::ActivationKey,name = reinaldo.reardon@megacorp.com,"view_activation_keys",Mega Corporation,
-renearubenstein,1,Katello::ActivationKey,name = renea.rubenstein@megacorp.com,"view_activation_keys",Mega Corporation,
-rettarosso,1,Katello::ActivationKey,name = retta.rosso@megacorp.com,"view_activation_keys",Mega Corporation,
-robbirosendahl,1,Katello::ActivationKey,name = robbi.rosendahl@megacorp.com,"view_activation_keys",Mega Corporation,
-rolfrueb,1,Katello::ActivationKey,name = rolf.rueb@megacorp.com,"view_activation_keys",Mega Corporation,
-roryrollinson,1,Katello::ActivationKey,name = rory.rollinson@megacorp.com,"view_activation_keys",Mega Corporation,
-rubinravenscroft,1,Katello::ActivationKey,name = rubin.ravenscroft@megacorp.com,"view_activation_keys",Mega Corporation,
-rubyrieser,1,Katello::ActivationKey,name = ruby.rieser@megacorp.com,"view_activation_keys",Mega Corporation,
-shanispinks,1,Katello::ActivationKey,name = shani.spinks@megacorp.com,"view_activation_keys",Mega Corporation,
-shemikaspikes,1,Katello::ActivationKey,name = shemika.spikes@megacorp.com,"view_activation_keys",Mega Corporation,
-shirasitzes,1,Katello::ActivationKey,name = shira.sitzes@megacorp.com,"view_activation_keys",Mega Corporation,
-shirelystowe,1,Katello::ActivationKey,name = shirely.stowe@megacorp.com,"view_activation_keys",Mega Corporation,
-silvasotelo,1,Katello::ActivationKey,name = silva.sotelo@megacorp.com,"view_activation_keys",Mega Corporation,
-skyestrobl,1,Katello::ActivationKey,name = skye.strobl@megacorp.com,"view_activation_keys",Mega Corporation,
-stanstokely,1,Katello::ActivationKey,name = stan.stokely@megacorp.com,"view_activation_keys",Mega Corporation,
-starlascheiber,1,Katello::ActivationKey,name = starla.scheiber@megacorp.com,"view_activation_keys",Mega Corporation,
-sungskipper,1,Katello::ActivationKey,name = sung.skipper@megacorp.com,"view_activation_keys",Mega Corporation,
-tajuanathies,1,Katello::ActivationKey,name = tajuana.thies@megacorp.com,"view_activation_keys",Mega Corporation,
-tenishatinajero,1,Katello::ActivationKey,name = tenisha.tinajero@megacorp.com,"view_activation_keys",Mega Corporation,
-tessatreiber,1,Katello::ActivationKey,name = tessa.treiber@megacorp.com,"view_activation_keys",Mega Corporation,
-theodoretalbert,1,Katello::ActivationKey,name = theodore.talbert@megacorp.com,"view_activation_keys",Mega Corporation,
-tinytacy,1,Katello::ActivationKey,name = tiny.tacy@megacorp.com,"view_activation_keys",Mega Corporation,
-vallievizcaino,1,Katello::ActivationKey,name = vallie.vizcaino@megacorp.com,"view_activation_keys",Mega Corporation,
-vanvillanveva,1,Katello::ActivationKey,name = van.villanveva@megacorp.com,"view_activation_keys",Mega Corporation,
-weswallner,1,Katello::ActivationKey,name = wes.wallner@megacorp.com,"view_activation_keys",Mega Corporation,
-winifredwessels,1,Katello::ActivationKey,name = winifred.wessels@megacorp.com,"view_activation_keys",Mega Corporation,
-yunyarberry,1,Katello::ActivationKey,name = yun.yarberry@megacorp.com,"view_activation_keys",Mega Corporation,
-zelmazemke,1,Katello::ActivationKey,name = zelma.zemke@megacorp.com,"view_activation_keys",Mega Corporation,
-Mega Corporation Admin,1,Katello::ActivationKey,"","view_activation_keys,create_activation_keys,edit_activation_keys,destroy_activation_keys",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Architecture,"","view_architectures,create_architectures,edit_architectures,destroy_architectures",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Audit,"",view_audit_logs,Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Bookmark,"","view_bookmarks,create_bookmarks,edit_bookmarks,destroy_bookmarks",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,CommonParameter,"","view_globals,create_globals,edit_globals,destroy_globals",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,ComputeProfile,"","view_compute_profiles,create_compute_profiles,edit_compute_profiles,destroy_compute_profiles",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,ComputeResource,"","console_compute_resources_vms,power_compute_resources_vms,destroy_compute_resources_vms,edit_compute_resources_vms,create_compute_resources_vms,view_compute_resources_vms,destroy_compute_resources,edit_compute_resources,create_compute_resources,view_compute_resources",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Katello::System,"","view_content_hosts,create_content_hosts,edit_content_hosts,destroy_content_hosts",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Katello::ContentView,"","view_content_views,create_content_views,edit_content_views,destroy_content_views,publish_content_views",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Domain,"","view_domains,create_domains,edit_domains,destroy_domains",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Environment,"","view_environments,create_environments,edit_environments,destroy_environments,import_environments",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,FactValue,"","view_facts,upload_facts",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Filter,"","view_filters,create_filters,edit_filters,destroy_filters",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Katello::GpgKey,"","view_gpg_keys,create_gpg_keys,edit_gpg_keys,destroy_gpg_keys",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Hostgroup,"","view_hostgroups,create_hostgroups,edit_hostgroups,destroy_hostgroups",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,HostClass,"",edit_classes,Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Host,"","puppetrun_hosts,ipmi_boot,console_hosts,power_hosts,build_hosts,destroy_hosts,edit_hosts,create_hosts,view_hosts",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Image,"","view_images,create_images,edit_images,destroy_images",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Location,"","view_locations,create_locations,edit_locations,destroy_locations,assign_locations",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Katello::KTEnvironment,"","view_lifecycle_environments,create_lifecycle_environments,edit_lifecycle_environments,destroy_lifecycle_environments",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,LookupKey,"","view_external_variables,create_external_variables,edit_external_variables,destroy_external_variables",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Medium,"","view_media,create_media,edit_media,destroy_media",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Model,"","view_models,create_models,edit_models,destroy_models",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Operatingsystem,"","view_operatingsystems,create_operatingsystems,edit_operatingsystems,destroy_operatingsystems",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Organization,"","delete_manifest,import_manifest,unattach_subscriptions,attach_subscriptions,view_subscriptions,assign_organizations,edit_organizations,view_organizations",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Parameter,"","create_params,edit_params,destroy_params",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Ptable,"","view_ptables,create_ptables,edit_ptables,destroy_ptables",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Katello::Product,"","view_products,create_products,edit_products,destroy_products,sync_products",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,ConfigTemplate,"","view_templates,create_templates,edit_templates,destroy_templates,deploy_templates",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Puppetclass,"","view_puppetclasses,create_puppetclasses,edit_puppetclasses,destroy_puppetclasses,import_puppetclasses",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Realm,"","view_realms,create_realms,edit_realms,destroy_realms",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Report,"","view_reports,destroy_reports,upload_reports",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Role,"","view_roles,create_roles,edit_roles,destroy_roles",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,SmartProxy,"","destroy_smart_proxies_puppetca,edit_smart_proxies_puppetca,view_smart_proxies_puppetca,destroy_smart_proxies_autosign,create_smart_proxies_autosign,view_smart_proxies_autosign,destroy_smart_proxies,edit_smart_proxies,create_smart_proxies,view_smart_proxies",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Subnet,"","view_subnets,create_subnets,edit_subnets,destroy_subnets,import_subnets",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Katello::SyncPlan,"","view_sync_plans,create_sync_plans,edit_sync_plans,destroy_sync_plans",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Trend,"","view_trends,create_trends,edit_trends,destroy_trends,edit_trends",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,User,"","view_users,create_users,edit_users,destroy_users",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,Usergroup,"","view_usergroups,create_usergroups,edit_usergroups,destroy_usergroups",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
-Mega Corporation Admin,1,,"","view_tasks,view_statistics,view_plugins,view_discovered_hosts,provision_discovered_hosts,edit_discovered_hosts,destroy_discovered_hosts,access_settings,access_dashboard",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+annamaeaudie,1,ActivationKey,name = annamae.audie@megacorp.com,"view_activation_keys",Mega Corporation,
+aronaskew,1,ActivationKey,name = aron.askew@megacorp.com,"view_activation_keys",Mega Corporation,
+ashtonaumann,1,ActivationKey,name = ashton.aumann@megacorp.com,"view_activation_keys",Mega Corporation,
+ayakoalday,1,ActivationKey,name = ayako.alday@megacorp.com,"view_activation_keys",Mega Corporation,
+bambibivona,1,ActivationKey,name = bambi.bivona@megacorp.com,"view_activation_keys",Mega Corporation,
+bernardbigler,1,ActivationKey,name = bernard.bigler@megacorp.com,"view_activation_keys",Mega Corporation,
+bettinabudniewski,1,ActivationKey,name = bettina.budniewski@megacorp.com,"view_activation_keys",Mega Corporation,
+boydbuckle,1,ActivationKey,name = boyd.buckle@megacorp.com,"view_activation_keys",Mega Corporation,
+brucebutterworth,1,ActivationKey,name = bruce.butterworth@megacorp.com,"view_activation_keys",Mega Corporation,
+carolanncorbo,1,ActivationKey,name = carolann.corbo@megacorp.com,"view_activation_keys",Mega Corporation,
+carollcolquitt,1,ActivationKey,name = caroll.colquitt@megacorp.com,"view_activation_keys",Mega Corporation,
+chayacordova,1,ActivationKey,name = chaya.cordova@megacorp.com,"view_activation_keys",Mega Corporation,
+chelseacalaway,1,ActivationKey,name = chelsea.calaway@megacorp.com,"view_activation_keys",Mega Corporation,
+cinthiacadieux,1,ActivationKey,name = cinthia.cadieux@megacorp.com,"view_activation_keys",Mega Corporation,
+coraleeculbert,1,ActivationKey,name = coralee.culbert@megacorp.com,"view_activation_keys",Mega Corporation,
+damondials,1,ActivationKey,name = damon.dials@megacorp.com,"view_activation_keys",Mega Corporation,
+danaedrayer,1,ActivationKey,name = danae.drayer@megacorp.com,"view_activation_keys",Mega Corporation,
+danettedewitt,1,ActivationKey,name = danette.dewitt@megacorp.com,"view_activation_keys",Mega Corporation,
+danilodilbeck,1,ActivationKey,name = danilo.dilbeck@megacorp.com,"view_activation_keys",Mega Corporation,
+debbydupuy,1,ActivationKey,name = debby.dupuy@megacorp.com,"view_activation_keys",Mega Corporation,
+delciediez,1,ActivationKey,name = delcie.diez@megacorp.com,"view_activation_keys",Mega Corporation,
+dennadebartolo,1,ActivationKey,name = denna.debartolo@megacorp.com,"view_activation_keys",Mega Corporation,
+diedradarrow,1,ActivationKey,name = diedra.darrow@megacorp.com,"view_activation_keys",Mega Corporation,
+doloresdelay,1,ActivationKey,name = dolores.delay@megacorp.com,"view_activation_keys",Mega Corporation,
+dominicadubberly,1,ActivationKey,name = dominica.dubberly@megacorp.com,"view_activation_keys",Mega Corporation,
+earthaedie,1,ActivationKey,name = eartha.edie@megacorp.com,"view_activation_keys",Mega Corporation,
+eddaelam,1,ActivationKey,name = edda.elam@megacorp.com,"view_activation_keys",Mega Corporation,
+edrisekhoff,1,ActivationKey,name = edris.ekhoff@megacorp.com,"view_activation_keys",Mega Corporation,
+eldeneasley,1,ActivationKey,name = elden.easley@megacorp.com,"view_activation_keys",Mega Corporation,
+elenaeisert,1,ActivationKey,name = elena.eisert@megacorp.com,"view_activation_keys",Mega Corporation,
+elnoraefaw,1,ActivationKey,name = elnora.efaw@megacorp.com,"view_activation_keys",Mega Corporation,
+evelinaelders,1,ActivationKey,name = evelina.elders@megacorp.com,"view_activation_keys",Mega Corporation,
+evitaepting,1,ActivationKey,name = evita.epting@megacorp.com,"view_activation_keys",Mega Corporation,
+faustofortino,1,ActivationKey,name = fausto.fortino@megacorp.com,"view_activation_keys",Mega Corporation,
+georgeannagriffiths,1,ActivationKey,name = georgeanna.griffiths@megacorp.com,"view_activation_keys",Mega Corporation,
+georginegrimmett,1,ActivationKey,name = georgine.grimmett@megacorp.com,"view_activation_keys",Mega Corporation,
+gilbertguerriero,1,ActivationKey,name = gilbert.guerriero@megacorp.com,"view_activation_keys",Mega Corporation,
+gildagutirrez,1,ActivationKey,name = gilda.gutirrez@megacorp.com,"view_activation_keys",Mega Corporation,
+gregggault,1,ActivationKey,name = gregg.gault@megacorp.com,"view_activation_keys",Mega Corporation,
+guillerminagloster,1,ActivationKey,name = guillermina.gloster@megacorp.com,"view_activation_keys",Mega Corporation,
+herminiahochmuth,1,ActivationKey,name = herminia.hochmuth@megacorp.com,"view_activation_keys",Mega Corporation,
+hienhamby,1,ActivationKey,name = hien.hamby@megacorp.com,"view_activation_keys",Mega Corporation,
+hsiuhenningsen,1,ActivationKey,name = hsiu.henningsen@megacorp.com,"view_activation_keys",Mega Corporation,
+jacquesjoaquin,1,ActivationKey,name = jacques.joaquin@megacorp.com,"view_activation_keys",Mega Corporation,
+janayjohnson,1,ActivationKey,name = janay.johnson@megacorp.com,"view_activation_keys",Mega Corporation,
+jeffersonjock,1,ActivationKey,name = jefferson.jock@megacorp.com,"view_activation_keys",Mega Corporation,
+jeneejahns,1,ActivationKey,,"view_activation_keys,create_activation_keys,edit_activation_keys,destroy_activation_keys",Mega Corporation,
+jeremyjong,1,ActivationKey,name = jeremy.jong@megacorp.com,"view_activation_keys",Mega Corporation,
+judithjoachim,1,ActivationKey,name = judith.joachim@megacorp.com,"view_activation_keys",Mega Corporation,
+juliojerabek,1,ActivationKey,name = julio.jerabek@megacorp.com,"view_activation_keys",Mega Corporation,
+kalynkimzey,1,ActivationKey,name = kalyn.kimzey@megacorp.com,"view_activation_keys",Mega Corporation,
+kamilahkurland,1,ActivationKey,name = kamilah.kurland@megacorp.com,"view_activation_keys",Mega Corporation,
+karlenekirch,1,ActivationKey,name = karlene.kirch@megacorp.com,"view_activation_keys",Mega Corporation,
+karriekindel,1,ActivationKey,name = karrie.kindel@megacorp.com,"view_activation_keys",Mega Corporation,
+kourtneykyle,1,ActivationKey,name = kourtney.kyle@megacorp.com,"view_activation_keys",Mega Corporation,
+kristenkellems,1,ActivationKey,name = kristen.kellems@megacorp.com,"view_activation_keys",Mega Corporation,
+lakeeshaloiacono,1,ActivationKey,name = lakeesha.loiacono@megacorp.com,"view_activation_keys",Mega Corporation,
+lashonlocker,1,ActivationKey,name = lashon.locker@megacorp.com,"view_activation_keys",Mega Corporation,
+leelitchfield,1,ActivationKey,name = lee.litchfield@megacorp.com,"view_activation_keys",Mega Corporation,
+leleggett,1,ActivationKey,name = le.leggett@megacorp.com,"view_activation_keys",Mega Corporation,
+leonorlimberg,1,ActivationKey,name = leonor.limberg@megacorp.com,"view_activation_keys",Mega Corporation,
+lienlipscomb,1,ActivationKey,name = lien.lipscomb@megacorp.com,"view_activation_keys",Mega Corporation,
+lillianlouviere,1,ActivationKey,name = lillian.louviere@megacorp.com,"view_activation_keys",Mega Corporation,
+luanalarson,1,ActivationKey,name = luana.larson@megacorp.com,"view_activation_keys",Mega Corporation,
+macmalmberg,1,ActivationKey,name = mac.malmberg@megacorp.com,"view_activation_keys",Mega Corporation,
+madeleinemagers,1,ActivationKey,name = madeleine.magers@megacorp.com,"view_activation_keys",Mega Corporation,
+mandiemcquinn,1,ActivationKey,name = mandie.mcquinn@megacorp.com,"view_activation_keys",Mega Corporation,
+mariellamolock,1,ActivationKey,name = mariella.molock@megacorp.com,"view_activation_keys",Mega Corporation,
+mariettamenzel,1,ActivationKey,name = marietta.menzel@megacorp.com,"view_activation_keys",Mega Corporation,
+mariloumcintosh,1,ActivationKey,name = marilou.mcintosh@megacorp.com,"view_activation_keys",Mega Corporation,
+martinmagallon,1,ActivationKey,name = martin.magallon@megacorp.com,"view_activation_keys",Mega Corporation,
+maryleemillsap,1,ActivationKey,name = marylee.millsap@megacorp.com,"view_activation_keys",Mega Corporation,
+meldametheny,1,ActivationKey,name = melda.metheny@megacorp.com,"view_activation_keys",Mega Corporation,
+meliameche,1,ActivationKey,name = melia.meche@megacorp.com,"view_activation_keys",Mega Corporation,
+merlemiceli,1,ActivationKey,name = merle.miceli@megacorp.com,"view_activation_keys",Mega Corporation,
+milfordmize,1,ActivationKey,name = milford.mize@megacorp.com,"view_activation_keys",Mega Corporation,
+miriammessenger,1,ActivationKey,name = miriam.messenger@megacorp.com,"view_activation_keys",Mega Corporation,
+moniquemaly,1,ActivationKey,name = monique.maly@megacorp.com,"view_activation_keys",Mega Corporation,
+mosesmodisette,1,ActivationKey,name = moses.modisette@megacorp.com,"view_activation_keys",Mega Corporation,
+myronmclawhorn,1,ActivationKey,name = myron.mclawhorn@megacorp.com,"view_activation_keys",Mega Corporation,
+nancienassar,1,ActivationKey,name = nancie.nassar@megacorp.com,"view_activation_keys",Mega Corporation,
+nannienobles,1,ActivationKey,name = nannie.nobles@megacorp.com,"view_activation_keys",Mega Corporation,
+nganordquist,1,ActivationKey,name = nga.nordquist@megacorp.com,"view_activation_keys",Mega Corporation,
+nieshanold,1,ActivationKey,name = niesha.nold@megacorp.com,"view_activation_keys",Mega Corporation,
+nydianeil,1,ActivationKey,name = nydia.neil@megacorp.com,"view_activation_keys",Mega Corporation,
+orvilleoneill,1,ActivationKey,name = orville.oneill@megacorp.com,"view_activation_keys",Mega Corporation,
+parkerpaetzold,1,ActivationKey,name = parker.paetzold@megacorp.com,"view_activation_keys",Mega Corporation,
+peggiephillips,1,ActivationKey,name = peggie.phillips@megacorp.com,"view_activation_keys",Mega Corporation,
+quianaquesnel,1,ActivationKey,name = quiana.quesnel@megacorp.com,"view_activation_keys",Mega Corporation,
+rafaelarasco,1,ActivationKey,name = rafaela.rasco@megacorp.com,"view_activation_keys",Mega Corporation,
+reinaldoreardon,1,ActivationKey,name = reinaldo.reardon@megacorp.com,"view_activation_keys",Mega Corporation,
+renearubenstein,1,ActivationKey,name = renea.rubenstein@megacorp.com,"view_activation_keys",Mega Corporation,
+rettarosso,1,ActivationKey,name = retta.rosso@megacorp.com,"view_activation_keys",Mega Corporation,
+robbirosendahl,1,ActivationKey,name = robbi.rosendahl@megacorp.com,"view_activation_keys",Mega Corporation,
+rolfrueb,1,ActivationKey,name = rolf.rueb@megacorp.com,"view_activation_keys",Mega Corporation,
+roryrollinson,1,ActivationKey,name = rory.rollinson@megacorp.com,"view_activation_keys",Mega Corporation,
+rubinravenscroft,1,ActivationKey,name = rubin.ravenscroft@megacorp.com,"view_activation_keys",Mega Corporation,
+rubyrieser,1,ActivationKey,name = ruby.rieser@megacorp.com,"view_activation_keys",Mega Corporation,
+shanispinks,1,ActivationKey,name = shani.spinks@megacorp.com,"view_activation_keys",Mega Corporation,
+shemikaspikes,1,ActivationKey,name = shemika.spikes@megacorp.com,"view_activation_keys",Mega Corporation,
+shirasitzes,1,ActivationKey,name = shira.sitzes@megacorp.com,"view_activation_keys",Mega Corporation,
+shirelystowe,1,ActivationKey,name = shirely.stowe@megacorp.com,"view_activation_keys",Mega Corporation,
+silvasotelo,1,ActivationKey,name = silva.sotelo@megacorp.com,"view_activation_keys",Mega Corporation,
+skyestrobl,1,ActivationKey,name = skye.strobl@megacorp.com,"view_activation_keys",Mega Corporation,
+stanstokely,1,ActivationKey,name = stan.stokely@megacorp.com,"view_activation_keys",Mega Corporation,
+starlascheiber,1,ActivationKey,name = starla.scheiber@megacorp.com,"view_activation_keys",Mega Corporation,
+sungskipper,1,ActivationKey,name = sung.skipper@megacorp.com,"view_activation_keys",Mega Corporation,
+tajuanathies,1,ActivationKey,name = tajuana.thies@megacorp.com,"view_activation_keys",Mega Corporation,
+tenishatinajero,1,ActivationKey,name = tenisha.tinajero@megacorp.com,"view_activation_keys",Mega Corporation,
+tessatreiber,1,ActivationKey,name = tessa.treiber@megacorp.com,"view_activation_keys",Mega Corporation,
+theodoretalbert,1,ActivationKey,name = theodore.talbert@megacorp.com,"view_activation_keys",Mega Corporation,
+tinytacy,1,ActivationKey,name = tiny.tacy@megacorp.com,"view_activation_keys",Mega Corporation,
+vallievizcaino,1,ActivationKey,name = vallie.vizcaino@megacorp.com,"view_activation_keys",Mega Corporation,
+vanvillanveva,1,ActivationKey,name = van.villanveva@megacorp.com,"view_activation_keys",Mega Corporation,
+weswallner,1,ActivationKey,name = wes.wallner@megacorp.com,"view_activation_keys",Mega Corporation,
+winifredwessels,1,ActivationKey,name = winifred.wessels@megacorp.com,"view_activation_keys",Mega Corporation,
+yunyarberry,1,ActivationKey,name = yun.yarberry@megacorp.com,"view_activation_keys",Mega Corporation,
+zelmazemke,1,ActivationKey,name = zelma.zemke@megacorp.com,"view_activation_keys",Mega Corporation,
+Mega Corporation Admin,1,ActivationKey,"","view_activation_keys,create_activation_keys,edit_activation_keys,destroy_activation_keys",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Architecture,"","view_architectures,create_architectures,edit_architectures,destroy_architectures",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Audit,"",view_audit_logs,Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Bookmark,"","view_bookmarks,create_bookmarks,edit_bookmarks,destroy_bookmarks",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,CommonParameter,"","view_globals,create_globals,edit_globals,destroy_globals",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,ComputeProfile,"","view_compute_profiles,create_compute_profiles,edit_compute_profiles,destroy_compute_profiles",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,ComputeResource,"","console_compute_resources_vms,power_compute_resources_vms,destroy_compute_resources_vms,edit_compute_resources_vms,create_compute_resources_vms,view_compute_resources_vms,destroy_compute_resources,edit_compute_resources,create_compute_resources,view_compute_resources",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,System,"","view_content_hosts,create_content_hosts,edit_content_hosts,destroy_content_hosts",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,ContentView,"","view_content_views,create_content_views,edit_content_views,destroy_content_views,publish_content_views",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Domain,"","view_domains,create_domains,edit_domains,destroy_domains",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Environment,"","view_environments,create_environments,edit_environments,destroy_environments,import_environments",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,FactValue,"","view_facts,upload_facts",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Filter,"","view_filters,create_filters,edit_filters,destroy_filters",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,GpgKey,"","view_gpg_keys,create_gpg_keys,edit_gpg_keys,destroy_gpg_keys",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Hostgroup,"","view_hostgroups,create_hostgroups,edit_hostgroups,destroy_hostgroups",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,HostClass,"",edit_classes,Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Host,"","puppetrun_hosts,ipmi_boot,console_hosts,power_hosts,build_hosts,destroy_hosts,edit_hosts,create_hosts,view_hosts",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Image,"","view_images,create_images,edit_images,destroy_images",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Location,"","view_locations,create_locations,edit_locations,destroy_locations,assign_locations",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,KTEnvironment,"","view_lifecycle_environments,create_lifecycle_environments,edit_lifecycle_environments,destroy_lifecycle_environments",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,LookupKey,"","view_external_variables,create_external_variables,edit_external_variables,destroy_external_variables",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Medium,"","view_media,create_media,edit_media,destroy_media",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Model,"","view_models,create_models,edit_models,destroy_models",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Operatingsystem,"","view_operatingsystems,create_operatingsystems,edit_operatingsystems,destroy_operatingsystems",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Organization,"","delete_manifest,import_manifest,unattach_subscriptions,attach_subscriptions,view_subscriptions,assign_organizations,edit_organizations,view_organizations",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Parameter,"","create_params,edit_params,destroy_params",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Ptable,"","view_ptables,create_ptables,edit_ptables,destroy_ptables",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Product,"","view_products,create_products,edit_products,destroy_products,sync_products",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,ConfigTemplate,"","view_templates,create_templates,edit_templates,destroy_templates,deploy_templates",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Puppetclass,"","view_puppetclasses,create_puppetclasses,edit_puppetclasses,destroy_puppetclasses,import_puppetclasses",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Realm,"","view_realms,create_realms,edit_realms,destroy_realms",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Report,"","view_reports,destroy_reports,upload_reports",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Role,"","view_roles,create_roles,edit_roles,destroy_roles",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,SmartProxy,"","destroy_smart_proxies_puppetca,edit_smart_proxies_puppetca,view_smart_proxies_puppetca,destroy_smart_proxies_autosign,create_smart_proxies_autosign,view_smart_proxies_autosign,destroy_smart_proxies,edit_smart_proxies,create_smart_proxies,view_smart_proxies",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Subnet,"","view_subnets,create_subnets,edit_subnets,destroy_subnets,import_subnets",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,SyncPlan,"","view_sync_plans,create_sync_plans,edit_sync_plans,destroy_sync_plans",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Trend,"","view_trends,create_trends,edit_trends,destroy_trends,edit_trends",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,User,"","view_users,create_users,edit_users,destroy_users",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,Usergroup,"","view_usergroups,create_usergroups,edit_usergroups,destroy_usergroups",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"
+Mega Corporation Admin,1,,"","view_tasks,view_statistics,view_plugins,access_settings,access_dashboard",Mega Corporation,"Asia Pacific,Asia Pacific (Singapore) Region,Asia Pacific (Sydney) Region,Asia Pacific (Tokyo) Region,Default_Location,EU (Ireland) Region,South America (Sao Paulo) Region,US East (Northern Virginia) Region,US West (Northern California) Region,US West (Oregon) Region"

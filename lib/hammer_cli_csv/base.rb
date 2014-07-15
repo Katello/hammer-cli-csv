@@ -26,6 +26,7 @@ module HammerCLICsv
     option %w(-u --username), 'USERNAME', 'Username to access server'
     option %w(-p --password), 'PASSWORD', 'Password to access server'
 
+
     NAME = 'Name'
     COUNT = 'Count'
 
@@ -469,6 +470,40 @@ module HammerCLICsv
           raise "Puppet contentview '#{options[:name]}' not found" if !contentview || contentview.empty?
           options[:name] = contentview['name']
           @contentviews[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def katello_repository(organization, options = {})
+      @repositories ||= {}
+      @repositories[organization] ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @repositories[organization][options[:name]]
+        if !options[:id]
+          @api.resource(:repositories)
+            .call(:index, {
+                    :per_page => 999999,
+                    'organization_id' => foreman_organization(:name => organization)
+                  })['results'].each do |repository|
+            @repositories[organization][repository['name']] = repository['id']
+          end
+          options[:id] = @repositories[organization][options[:name]]
+          raise "Repository '#{options[:name]}' not found" if !options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @repositories.key(options[:id])
+        if !options[:name]
+          repository = @api.resource(:repositories).call(:show, {'id' => options[:id]})
+          raise "Puppet repository '#{options[:name]}' not found" if !repository || repository.empty?
+          options[:name] = repository['name']
+          @repositoriesr[options[:name]] = options[:id]
         end
         result = options[:name]
       end

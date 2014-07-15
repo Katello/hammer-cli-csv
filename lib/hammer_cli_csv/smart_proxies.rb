@@ -22,10 +22,11 @@ module HammerCLICsv
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
       URL = 'URL'
+      LIFECYCLE_ENVIRONMENTS = 'Lifecycle Environments'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, URL]
+          csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, URL, LIFECYCLE_ENVIRONMENTS]
           @api.resource(:smart_proxies).call(:index, {:per_page => 999999})['results'].each do |smart_proxy|
             smart_proxy = @api.resource(:smart_proxies).call(:show, {'id' => smart_proxy['id']})
             name = smart_proxy['name']
@@ -41,7 +42,7 @@ module HammerCLICsv
       def import
         @existing = {}
         @api.resource(:smart_proxies).call(:index, {:per_page => 999999})['results'].each do |smart_proxy|
-          @existing[smart_proxy['name']] = smart_proxy['id'] if smart_proxy
+          @existing[smart_proxy['url']] = smart_proxy['id'] if smart_proxy
         end
 
         thread_import do |line|
@@ -52,7 +53,7 @@ module HammerCLICsv
       def create_smart_proxies_from_csv(line)
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
-          if !@existing.include? name
+          if !@existing.include? line[URL]
             print "Creating smart proxy '#{name}'..." if option_verbose?
             id = @api.resource(:smart_proxies)
               .call(:create, {

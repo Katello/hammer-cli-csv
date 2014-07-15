@@ -27,6 +27,7 @@
 #
 
 require 'hammer_cli'
+#require 'net/http'
 require 'json'
 require 'csv'
 
@@ -36,14 +37,35 @@ module HammerCLICsv
       command_name 'organizations'
       desc         'import or export organizations'
 
-      ORGLABEL = 'Org Label'
+      option %w(--sam), :flag, 'export from SAM-1.3 or SAM-1.4'
+
+      ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGLABEL, DESCRIPTION]
-          @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-            csv << [organization['name'], 1, organization['label'], organization['description']]
+          csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION]
+          if option_sam?
+            server = option_server || HammerCLI::Settings.get(:csv, :host)
+            username = option_username || HammerCLI::Settings.get(:csv, :username)
+            password = option_password || HammerCLI::Settings.get(:csv, :password)
+            url = "#{server}/api/organizations"
+            uri = URI(url)
+            Net::HTTP.start(uri.host, uri.port,
+                            :use_ssl => uri.scheme == 'https', 
+                            :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+              request = Net::HTTP::Get.new uri.request_uri
+              request.basic_auth(username, password)
+              response = http.request(request)
+
+              JSON.parse(response.body).each do |organization|
+                csv << [organization['name'], 1, organization['label'], organization['description']]
+              end
+            end
+          else
+            @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+              csv << [organization['name'], 1, organization['label'], organization['description']]
+            end
           end
         end
       end
@@ -62,7 +84,7 @@ module HammerCLICsv
       def create_organizations_from_csv(line)
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
-          label = namify(line[ORGLABEL], number)
+          label = namify(line[ORGANIZATION], number)
           if !@existing.include? name
             print "Creating organization '#{name}'... " if option_verbose?
             @api.resource(:organizations).call(:create, {

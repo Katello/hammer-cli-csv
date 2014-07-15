@@ -125,7 +125,7 @@ module HammerCLICsv
       def create_systems_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:systems).call(:index, {'organization_id' => line[ORGANIZATION], 'page_size' => 999999})['results'].each do |system|
+          @api.resource(:systems).call(:index, {'organization_id' => line[ORGANIZATION], 'per_page' => 999999})['results'].each do |system|
             @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
           end
         end

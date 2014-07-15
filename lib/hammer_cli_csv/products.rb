@@ -60,7 +60,7 @@ module HammerCLICsv
           @existing_products[line[ORGANIZATION]] = {}
           @api.resource(:products)
             .call(:index, {
-                    'page_size' => 999999, 'paged' => true,
+                    'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                     'enabled' => true
                   })['results'].each do |product|

@@ -9,22 +9,6 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-#
-# -= Systems CSV =-
-#
-# Columns
-#   Name
-#     - System name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "os%d" -> "os1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-require 'uri'
-
 module HammerCLICsv
   class CsvCommand
     class ContentViewsCommand < BaseCommand
@@ -33,8 +17,8 @@ module HammerCLICsv
 
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
-      PRODUCT = 'Product'
-      REPOSITORY = 'Repository'
+      COMPOSITE = 'Composite'
+      REPOSITORIES = 'Repositories'
 
       def export
         # TODO
@@ -51,53 +35,47 @@ module HammerCLICsv
       def create_contentviews_from_csv(line)
         if !@existing_contentviews[line[ORGANIZATION]]
           @existing_contentviews[line[ORGANIZATION]] ||= {}
-          @api.resource(:contentviewdefinitions).call(:index, {'organization_id' => line[ORGANIZATION], 'page_size' => 999999, 'paged' => true})['results'].each do |contentview|
+          @api.resource(:content_views)
+            .call(:index, {
+                    'per_page' => 999999,
+                    'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                    'nondefault' => true
+                  })['results'].each do |contentview|
             @existing_contentviews[line[ORGANIZATION]][contentview['name']] = contentview['id'] if contentview
           end
         end
 
+        repository_ids = collect_column(line[REPOSITORIES]) do |repository|
+          katello_repository(line[ORGANIZATION], :name => repository)
+        end
+
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
+          composite = line[COMPOSITE] == 'Yes' ? true : false
+
           contentview_id = @existing_contentviews[line[ORGANIZATION]][name]
           if !contentview_id
             print "Creating content view '#{name}'..." if option_verbose?
-            contentview_id = @api.resource(:contentviewdefinitions).call(:create, {
-                                                                   'organization_id' => line[ORGANIZATION],
-                                                                   'name' => name,
-                                                                   'label' => labelize(name),
-                                                                   'description' => line[DESCRIPTION],
-                                                                   'composite' => false # TODO: add column?
-                                                                 })['id']
+            contentview_id = @api.resource(:content_views)
+              .call(:create, {
+                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                      'name' => name,
+                      'label' => labelize(name),
+                      'description' => line[DESCRIPTION],
+                      'composite' => composite,
+                      'repository_ids' => repository_ids
+                    })['id']
             @existing_contentviews[line[ORGANIZATION]][name] = contentview_id
           else
             print "Updating content view '#{name}'..." if option_verbose?
-            @api.resource(:contentviewdefinitions).call(:create, {
-                                                          'description' => line[DESCRIPTION],
-                                                        })
+            @api.resource(:content_views)
+              .call(:update, {
+                      'id' => contentview_id,
+                      'description' => line[DESCRIPTION],
+                      'repository_ids' => repository_ids
+                    })
           end
-
-          if line[REPOSITORY]
-            puts 'UPDATING REPOSITORY'
-          elsif line[PRODUCT]
-            puts 'UPDATING PRODUCT'
-          end
-          print "done\n" if option_verbose?
-
-=begin
-          # Only creating repositories, not updating
-          repository_name = namify(line[REPOSITORY], number)
-          if !@existing_repositories[line[ORGANIZATION] + name][labelize(repository_name)]
-            print "Creating repository '#{repository_name}' in contentview '#{name}'..." if option_verbose?
-            @api.resource(:repositorys).call(:create, {
-                                       'name' => repository_name,
-                                       'label' => labelize(repository_name),
-                                       'contentview_id' => contentview_id,
-                                       'url' => line[REPOSITORY_URL],
-                                       'content_type' => line[REPOSITORY_TYPE]
-                                     })
-            print "done\n" if option_verbose?
-          end
-=end
+          puts 'done' if option_verbose?
         end
 
       rescue RuntimeError => e

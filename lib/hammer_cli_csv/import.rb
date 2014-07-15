@@ -54,6 +54,16 @@ module HammerCLICsv
         HammerCLI::EX_OK
       end
 
+      def hammer(context = nil)
+        context ||= {
+          :interactive => false,
+          :username => 'admin', # TODO: this needs to come from config/settings
+          :password => 'changeme' # TODO: this needs to come from config/settings
+        }
+
+        HammerCLI::MainCommand.new('', context)
+      end
+
       def hammer_resource(resource)
         return if !self.send("option_#{resource}") && !option_dir
         options_file = self.send("option_#{resource}") || "#{option_dir}/#{resource.sub('_', '-')}.csv"

@@ -64,7 +64,6 @@ module HammerCLICsv
           CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
             organization_id = foreman_organization(:name => organization)
             if installation_medias[organization].nil?
-              x = @api.resource(:organizations).call(:show, {'id' => organization_id})
               installation_medias[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})['installation_medias'].collect do |installation_media|
                 installation_media['id']
               end

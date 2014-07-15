@@ -79,7 +79,6 @@ module HammerCLICsv
           CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
             organization_id = foreman_organization(:name => organization)
             if domains[organization].nil?
-              x = @api.resource(:organizations).call(:show, {'id' => organization_id})
               domains[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})['domains'].collect do |domain|
                 domain['id']
               end

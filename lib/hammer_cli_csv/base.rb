@@ -26,7 +26,6 @@ module HammerCLICsv
     option %w(-u --username), 'USERNAME', 'Username to access server'
     option %w(-p --password), 'PASSWORD', 'Password to access server'
 
-
     NAME = 'Name'
     COUNT = 'Count'
 
@@ -110,7 +109,6 @@ module HammerCLICsv
     def hammer(context = nil)
       HammerCLI::MainCommand.new('', context || hammer_context)
     end
-
 
     def foreman_organization(options = {})
       @organizations ||= {}
@@ -419,10 +417,11 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @lifecycle_environments[organization][options[:name]]
         if !options[:id]
-          @api.resource(:lifecycle_environments).call(:index, {
-                                                        :per_page => 999999,
-                                                        'organization_id' => foreman_organization(:name => organization),
-                                                      })['results'].each do |environment|
+          @api.resource(:lifecycle_environments)
+            .call(:index, {
+                    :per_page => 999999,
+                    'organization_id' => foreman_organization(:name => organization)
+                  })['results'].each do |environment|
             @lifecycle_environments[organization][environment['name']] = environment['id']
           end
           options[:id] = @lifecycle_environments[organization][options[:name]]

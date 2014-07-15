@@ -31,8 +31,8 @@ module HammerCLICsv
       option '--dir', 'DIRECTORY', 'directory to import from'
 
       RESOURCES = %w( organizations locations roles users puppet_environments operating_systems
-            domains architectures partition_tables lifecycle_environments host_collections
-            subscriptions activation_keys hosts content_hosts reports )
+                      domains architectures partition_tables lifecycle_environments host_collections
+                      subscriptions activation_keys hosts content_hosts reports )
       RESOURCES.each do |resource|
         dashed = resource.sub('_', '-')
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"

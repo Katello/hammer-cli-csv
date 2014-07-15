@@ -33,9 +33,6 @@ module HammerCLICsv
           @api.resource(:compute_profiles).call(:index, {:per_page => 999999})['results'].each do |compute_profile|
             puts compute_profile
             compute_profile = @api.resource(:compute_profiles).call(:show, {'id' => compute_profile['id']})
-            puts compute_profile
-            return
-
             name = compute_profile['name']
             count = 1
             organizations = export_column(compute_profile, 'organizations', 'name')

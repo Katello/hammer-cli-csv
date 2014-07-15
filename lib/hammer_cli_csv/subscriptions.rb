@@ -56,32 +56,12 @@ module HammerCLICsv
                     if arches.nil?
                       csv << [product['name'], 1, organization['name'], nil, content_set, nil, release]
                     else
-                      arches.split(",").each do |arch|
+                      arches.split(',').each do |arch|
                         csv << [product['name'], 1, organization['name'], nil, content_set, arch, release]
                       end
                     end
                   end
                 end
-=begin
-                @api.resource(:repository_sets).call(:index, {
-                                                'per_page' => 999999,
-                                                'organization_id' => foreman_organization(:name => organization['name']),
-                                                'product_id' => product['id']
-                                              })['results'].each do |repository_set|
-                  puts repository_set
-                  repository_set['repositories'].each do |repository|
-                    #repository = @api.resource(:repositories).call(:show, { 'id' => repository['id'] })
-                    #puts repository
-                  end
-                  #products = export_column(repository_set, 'repositories', 'name')
-                  #product_content = product['product_content'].find do |content|
-                  #  content['content']['name'] == line[CONTENT_SET]
-                  #end
-                  #if products != ''
-                  #  csv << [product['name'], 1, organization['name'], nil, products]
-                  #end
-                end
-=end
               end
             end
           end
@@ -118,13 +98,13 @@ module HammerCLICsv
         raise "Multiple matches for content set '#{line[CONTENT_SET]}'" if results.length != 1
         repository_set = results[0]
 
-        repository = repository_set['repositories'].find do |repository|
-          repository['name'].end_with?("#{line[ARCH]} #{line[RELEASE]}")
+        repository = repository_set['repositories'].find do |repo|
+          repo['name'].end_with?("#{line[ARCH]} #{line[RELEASE]}")
         end
 
         if repository.nil?
           print "Enabling repository #{line[CONTENT_SET]} #{line[ARCH]} #{line[RELEASE]}..." if option_verbose?
-          product_content = product['product_content'].find do |content| 
+          product_content = product['product_content'].find do |content|
             content['content']['name'] == line[CONTENT_SET]
           end
           raise "No match for content set '#{line[CONTENT_SET]}'" if !product_content
@@ -135,7 +115,7 @@ module HammerCLICsv
                                                  'basearch' => line[ARCH],
                                                  'releasever' => line[RELEASE]
                                                })
-          puts "done" if option_verbose?
+          puts 'done' if option_verbose?
         else
           puts "Repository #{repository['name']} already enabled" if option_verbose?
         end

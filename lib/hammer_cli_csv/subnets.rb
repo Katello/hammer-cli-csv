@@ -58,9 +58,9 @@ module HammerCLICsv
             dns_primary = subnet['dns_primary']
             dns_secondary = subnet['dns_secondary']
             vlan_id = subnet['vlanid']
-      csv << [name, count, organizations, locations, network, network_mask,
-              network_from, network_to, domains, gateway, dhcp_proxy, tftp_proxy, dns_proxy,
-              dns_primary, dns_secondary, vlan_id]
+            csv << [name, count, organizations, locations, network, network_mask,
+                    network_from, network_to, domains, gateway, dhcp_proxy, tftp_proxy, dns_proxy,
+                    dns_primary, dns_secondary, vlan_id]
           end
         end
       end
@@ -88,7 +88,7 @@ module HammerCLICsv
             id = @api.resource(:subnets)
               .call(:create, {
                       'subnet' => {
-                        'name' => name,
+                        'name' => name
                       }
                     })['id']
           else

@@ -75,7 +75,7 @@ module HammerCLICsv
         url = "#{server}/api/systems?organization_id=satellite-1"
         uri = URI(url)
         system_ids = Net::HTTP.start(uri.host, uri.port,
-                                     :use_ssl => uri.scheme == 'https', 
+                                     :use_ssl => uri.scheme == 'https',
                                      :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
           request = Net::HTTP::Get.new uri.request_uri
           request.basic_auth(username, password)
@@ -252,7 +252,7 @@ module HammerCLICsv
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
 
-          # TODO w/ @daviddavis p-r
+          # TODO: w/ @daviddavis p-r
           #subscriptions(line).each do |subscription|
           #  katello_subscription(line[ORGANIZATION], :name => subscription[:number])
           #end

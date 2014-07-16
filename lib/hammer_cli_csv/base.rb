@@ -448,7 +448,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @lifecycle_environments[organization][options[:name]]
         if !options[:id]
-          @api.resource(:lifecycle_environments)
+          @api.resource(:lifecycle_environments)\
             .call(:index, {
                     :per_page => 999999,
                     'organization_id' => foreman_organization(:name => organization)
@@ -515,7 +515,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @repositories[organization][options[:name]]
         if !options[:id]
-          @api.resource(:repositories)
+          @api.resource(:repositories)\
             .call(:index, {
                     :per_page => 999999,
                     'organization_id' => foreman_organization(:name => organization)
@@ -670,7 +670,7 @@ module HammerCLICsv
           end
         end
         associations[organization] += [id] if !associations[organization].include? id
-        @api.resource(:organizations)
+        @api.resource(:organizations)\
           .call(:update, {
                   'id' => organization_id,
                   'organization' => {
@@ -693,7 +693,7 @@ module HammerCLICsv
         end
         associations[location] += [id] if !associations[location].include? id
 
-        @api.resource(:locations)
+        @api.resource(:locations)\
           .call(:update, {
                   'id' => location_id,
                   'location' => {

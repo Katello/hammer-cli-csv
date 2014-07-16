@@ -59,7 +59,7 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating compute resource '#{name}'..." if option_verbose?
-            id = @api.resource(:compute_resources)
+            id = @api.resource(:compute_resources)\
               .call(:create, {
                       'compute_resource' => {
                         'name' => name,
@@ -68,7 +68,7 @@ module HammerCLICsv
                     })['id']
           else
             print "Updating compute resource '#{name}'..." if option_verbose?
-            id = @api.resource(:compute_resources)
+            id = @api.resource(:compute_resources)\
               .call(:update, {
                       'id' => @existing[name],
                       'compute_resource' => {

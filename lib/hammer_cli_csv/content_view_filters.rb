@@ -41,7 +41,7 @@ module HammerCLICsv
         @existing_filters[line[ORGANIZATION]] ||= {}
         if !@existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]]
           @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]] ||= {}
-          @api.resource(:content_view_filters)
+          @api.resource(:content_view_filters)\
             .call(:index, {
                     'per_page' => 999999,
                     'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
@@ -60,7 +60,7 @@ module HammerCLICsv
           filter_id = @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]][name]
           if !filter_id
             print "Creating filter '#{name}' for content view filter '#{line[CONTENTVIEW]}'..." if option_verbose?
-            filter_id = @api.resource(:content_view_filters)
+            filter_id = @api.resource(:content_view_filters)\
               .call(:create, {
                       'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                       'name' => name,
@@ -72,7 +72,7 @@ module HammerCLICsv
             @existing_filters[line[ORGANIZATION]][name] = filter_id
           else
             print "Updating filter '#{name}' for content view filter '#{line[CONTENTVIEW]}'..." if option_verbose?
-            @api.resource(:content_view_filters)
+            @api.resource(:content_view_filters)\
               .call(:update, {
                       'id' => filter_id,
                       'description' => line[DESCRIPTION],
@@ -85,7 +85,7 @@ module HammerCLICsv
           @existing_rules ||= {}
           @existing_rules[line[ORGANIZATION]] ||= {}
           @existing_rules[line[ORGANIZATION]][line[CONTENTVIEW]] ||= {}
-          @api.resource(:content_view_filter_rules)
+          @api.resource(:content_view_filter_rules)\
             .call(:index, {
                     'per_page' => 999999,
                     'content_view_filter_id' => filter_id

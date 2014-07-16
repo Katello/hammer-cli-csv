@@ -38,11 +38,11 @@ module HammerCLICsv
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
-          @api.resource(:organizations)
+          @api.resource(:organizations)\
             .call(:index, {
                     'per_page' => 999999
                   })['results'].each do |organization|
-            @api.resource(:lifecycle_environments)
+            @api.resource(:lifecycle_environments)\
               .call(:index, {
                       'per_page' => 999999,
                       'organization_id' => organization['id']
@@ -61,11 +61,11 @@ module HammerCLICsv
 
       def import
         @existing = {}
-        @api.resource(:organizations)
+        @api.resource(:organizations)\
           .call(:index, {
                   'per_page' => 999999
                 })['results'].each do |organization|
-          @api.resource(:lifecycle_environments)
+          @api.resource(:lifecycle_environments)\
             .call(:index, {
                     'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => organization['name'])
@@ -87,7 +87,7 @@ module HammerCLICsv
           raise "Organization '#{line[ORGANIZATION]}' does not exist" if !@existing.include? line[ORGANIZATION]
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating environment '#{name}'..." if option_verbose?
-            @api.resource(:lifecycle_environments)
+            @api.resource(:lifecycle_environments)\
               .call(:create, {
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                       'name' => name,
@@ -96,7 +96,7 @@ module HammerCLICsv
                     })
           else
             print "Updating environment '#{name}'..." if option_verbose?
-            @api.resource(:lifecycle_environments)
+            @api.resource(:lifecycle_environments)\
               .call(:update, {
                       'id' => @existing[line[ORGANIZATION]][name],
                       'name' => name,

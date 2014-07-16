@@ -25,11 +25,11 @@ module HammerCLICsv
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, LABEL, ORGANIZATION, REPOSITORY, REPOSITORY_TYPE, REPOSITORY_URL]
-          @api.resource(:organizations)
+          @api.resource(:organizations)\
             .call(:index, {
                     :per_page => 999999
                   })['results'].each do |organization|
-            @api.resource(:products)
+            @api.resource(:products)\
               .call(:index, {
                       'per_page' => 999999,
                       'enabled' => true,
@@ -58,7 +58,7 @@ module HammerCLICsv
       def create_products_from_csv(line)
         if !@existing_products[line[ORGANIZATION]]
           @existing_products[line[ORGANIZATION]] = {}
-          @api.resource(:products)
+          @api.resource(:products)\
             .call(:index, {
                     'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
@@ -66,7 +66,7 @@ module HammerCLICsv
                   })['results'].each do |product|
             @existing_products[line[ORGANIZATION]][product['name']] = product['id']
 
-            @api.resource(:repositories)
+            @api.resource(:repositories)\
               .call(:index, {
                       'page_size' => 999999, 'paged' => true,
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
@@ -89,7 +89,7 @@ module HammerCLICsv
               raise "Red Hat product '#{name}' does not exist in '#{line[ORGANIZATION]}'"
             end
 
-            product_id = @api.resource(:products)
+            product_id = @api.resource(:products)\
               .call(:create, {
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                       'name' => name
@@ -105,7 +105,7 @@ module HammerCLICsv
           repository_name = namify(line[REPOSITORY], number)
 
           if !@existing_repositories[line[ORGANIZATION] + name][repository_name]
-            @api.resource(:repositories)
+            @api.resource(:repositories)\
               .call(:index, {
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                       'library' => true,
@@ -121,7 +121,7 @@ module HammerCLICsv
             raise "Red Hat product '#{name}' does not have repository '#{repository_name}'" if line[REPOSITORY_TYPE] =~ /Red Hat/
 
             print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
-            repository = @api.resource(:repositories)
+            repository = @api.resource(:repositories)\
               .call(:create, {
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                       'name' => repository_name,

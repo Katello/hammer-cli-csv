@@ -29,3 +29,4 @@ test/config.yml
 .ruby-version
 .idea
 Gemfile.local
+hammer_cli_csv*.gem

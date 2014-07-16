@@ -153,14 +153,14 @@ module HammerCLICsv
       end
 
       def export_foretello(csv)
-        @api.resource(:organizations)
+        @api.resource(:organizations)\
           .call(:index, {:per_page => 999999})['results'].each do |organization|
-          @api.resource(:systems)
+          @api.resource(:systems)\
             .call(:index, {
                     'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => organization['name'])
                   })['results'].each do |system|
-            system = @api.resource(:systems)
+            system = @api.resource(:systems)\
               .call(:show, {
                       'id' => system['uuid'],
                       'fields' => 'full'
@@ -193,7 +193,7 @@ module HammerCLICsv
             end
             products.delete!("\n")
             subscriptions = CSV.generate do |column|
-              column << @api.resource(:subscriptions)
+              column << @api.resource(:subscriptions)\
                 .call(:index, {
                         'system_id' => system['uuid']
                       })['results'].collect do |subscription|
@@ -217,7 +217,7 @@ module HammerCLICsv
 
         print 'Updating host and guest associations...' if option_verbose?
         @host_guests.each do |host_id, guest_ids|
-          @api.resource(:systems)
+          @api.resource(:systems)\
             .call(:update, {
                     'id' => host_id,
                     'guest_ids' => guest_ids
@@ -232,13 +232,13 @@ module HammerCLICsv
           # Fetching all content hosts is too slow and times out due to the complexity of the data
           # rendered in the json.
           # http://projects.theforeman.org/issues/6307
-          total = @api.resource(:systems)
+          total = @api.resource(:systems)\
             .call(:index, {
                     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                     'per_page' => 1
                   })['total'].to_i
           (total / 20 + 2).to_i.times do |page|
-            @api.resource(:systems)
+            @api.resource(:systems)\
               .call(:index, {
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                       'page' => page,
@@ -259,7 +259,7 @@ module HammerCLICsv
 
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating system '#{name}'..." if option_verbose?
-            system_id = @api.resource(:systems)
+            system_id = @api.resource(:systems)\
               .call(:create, {
                       'name' => name,
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
@@ -271,7 +271,7 @@ module HammerCLICsv
             @existing[line[ORGANIZATION]][name] = system_id
           else
             print "Updating system '#{name}'..." if option_verbose?
-            system_id = @api.resource(:systems)
+            system_id = @api.resource(:systems)\
               .call(:update, {
                       'id' => @existing[line[ORGANIZATION]][name],
                       'system' => {
@@ -323,7 +323,7 @@ module HammerCLICsv
       def set_host_collections(system_id, line)
         return nil if !line[HOSTCOLLECTIONS]
         CSV.parse_line(line[HOSTCOLLECTIONS]).each do |hostcollection_name|
-          @api.resource(:host_collections)
+          @api.resource(:host_collections)\
             .call(:add_systems, {
                     'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
                     'system_ids' => [system_id]

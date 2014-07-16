@@ -56,16 +56,16 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
-          @api.resource(:organizations)
+          @api.resource(:organizations)\
             .call(:index, {
                     :per_page => 999999
                   })['results'].each do |organization|
-            @api.resource(:systems)
+            @api.resource(:systems)\
               .call(:index, {
                       'per_page' => 999999,
                       'organization_id' => organization['id']
                     })['results'].each do |system|
-              system = @api.resource(:systems)
+              system = @api.resource(:systems)\
                 .call(:show, {
                         'id' => system['uuid'],
                         'fields' => 'full'
@@ -98,7 +98,7 @@ module HammerCLICsv
               end
               products.delete!("\n")
               subscriptions = CSV.generate do |column|
-                column << @api.resource(:subscriptions)
+                column << @api.resource(:subscriptions)\
                   .call(:index, {
                           'system_id' => system['uuid']
                         })['results'].collect do |subscription|
@@ -123,7 +123,7 @@ module HammerCLICsv
 
         print 'Updating host and guest associations...' if option_verbose?
         @host_guests.each do |host_id, guest_ids|
-          @api.resource(:systems)
+          @api.resource(:systems)\
             .call(:update, {
                     'id' => host_id,
                     'guest_ids' => guest_ids
@@ -135,7 +135,7 @@ module HammerCLICsv
       def create_systems_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:systems)
+          @api.resource(:systems)\
             .call(:index, {
                     'organization_id' => line[ORGANIZATION],
                     'per_page' => 999999
@@ -154,7 +154,7 @@ module HammerCLICsv
 
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating system '#{name}'..." if option_verbose?
-            system_id = @api.resource(:systems)
+            system_id = @api.resource(:systems)\
               .call(:create, {
                       'name' => name,
                       'organization_id' => line[ORGANIZATION],
@@ -168,7 +168,7 @@ module HammerCLICsv
           else
             print "Updating system '#{name}'..." if option_verbose?
             puts line
-            system_id = @api.resource(:systems)
+            system_id = @api.resource(:systems)\
               .call(:update, {
                       'id' => @existing[line[ORGANIZATION]][name],
                       'name' => name,
@@ -212,7 +212,7 @@ module HammerCLICsv
 
       def set_host_collections(system_id, line)
         CSV.parse_line(line[SYSTEMGROUPS]).each do |hostcollection_name|
-          @api.resource(:hostcollections)
+          @api.resource(:hostcollections)\
             .call(:add_systems, {
                     'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
                     'system_ids' => [system_id]

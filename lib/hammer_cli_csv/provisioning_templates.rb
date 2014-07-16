@@ -23,7 +23,7 @@ module HammerCLICsv
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, KIND, SOURCE]
-          @api.resource(:config_templates)
+          @api.resource(:config_templates)\
             .call(:index, {
                     :per_page => 999999
                   })['results'].each do |template_id|
@@ -42,7 +42,7 @@ module HammerCLICsv
 
       def import
         @existing = {}
-        @api.resource(:config_templates)
+        @api.resource(:config_templates)\
           .call(:index, {
                   :per_page => 999999
                 })['results'].each do |template|
@@ -66,7 +66,7 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating provisioning template '#{name}'..." if option_verbose?
-            id = @api.resource(:config_templates)
+            id = @api.resource(:config_templates)\
               .call(:create, {
                       'name' => name,
                       'snippet' => line[KIND] == 'snippet',
@@ -76,7 +76,7 @@ module HammerCLICsv
                     })['id']
           else
             print "Updating provisioning template '#{name}'..." if option_verbose?
-            id = @api.resource(:config_template)
+            id = @api.resource(:config_template)\
               .call(:update, {
                       'id' => @existing[name],
                       'name' => name,

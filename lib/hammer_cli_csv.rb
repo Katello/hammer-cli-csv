@@ -13,7 +13,6 @@ require 'hammer_cli'
 require 'hammer_cli/exit_codes'
 
 module HammerCLICsv
-
   require 'hammer_cli_csv/base'
   require 'hammer_cli_csv/exception_handler'
 
@@ -35,8 +34,8 @@ module HammerCLICsv
   require 'hammer_cli_csv/operating_systems'
   require 'hammer_cli_csv/organizations'
   require 'hammer_cli_csv/partition_tables'
-  require 'hammer_cli_csv/permissions'
   require 'hammer_cli_csv/products'
+  require 'hammer_cli_csv/provisioning_templates'
   require 'hammer_cli_csv/puppet_environments'
   require 'hammer_cli_csv/puppet_facts'
   require 'hammer_cli_csv/puppet_reports'
@@ -46,5 +45,4 @@ module HammerCLICsv
   require 'hammer_cli_csv/subnets'
   require 'hammer_cli_csv/subscriptions'
   require 'hammer_cli_csv/users'
-
 end

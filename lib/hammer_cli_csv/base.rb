@@ -278,6 +278,37 @@ module HammerCLICsv
       result
     end
 
+    def foreman_template_kind(options = {})
+      @template_kinds ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @template_kinds[options[:name]]
+        if !options[:id]
+          template_kind = @api.resource(:template_kinds).call(:index, {
+                                              :per_page => 999999,
+                                              'search' => "name=\"#{options[:name]}\""
+                                            })['results']
+          raise "Template kind '#{options[:name]}' not found" if !template_kind || template_kind.empty?
+          options[:id] = template_kind[0]['id']
+          @template_kinds[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @template_kinds.key(options[:id])
+        if !options[:name]
+          template_kind = @api.resource(:template_kinds).call(:show, {'id' => options[:id]})
+          raise "Template kind 'id=#{options[:id]}' not found" if !template_kind || template_kind.empty?
+          options[:name] = template_kind['name']
+          @template_kinds[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
     def foreman_operatingsystem(options = {})
       @operatingsystems ||= {}
 

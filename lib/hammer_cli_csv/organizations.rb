@@ -39,12 +39,12 @@ module HammerCLICsv
 
       option %w(--sam), :flag, 'export from SAM-1.3 or SAM-1.4'
 
-      ORGANIZATION = 'Organization'
+      LABEL = 'Label'
       DESCRIPTION = 'Description'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION]
+          csv << [NAME, COUNT, LABEL, DESCRIPTION]
           if option_sam?
             server = option_server || HammerCLI::Settings.get(:csv, :host)
             username = option_username || HammerCLI::Settings.get(:csv, :username)
@@ -84,7 +84,7 @@ module HammerCLICsv
       def create_organizations_from_csv(line)
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
-          label = namify(line[ORGANIZATION], number)
+          label = namify(line[LABEL], number)
           if !@existing.include? name
             print "Creating organization '#{name}'... " if option_verbose?
             @api.resource(:organizations).call(:create, {

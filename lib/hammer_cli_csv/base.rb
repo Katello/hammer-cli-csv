@@ -40,10 +40,22 @@ module HammerCLICsv
         end
       end
 
+      server = option_server ||
+        HammerCLI::Settings.get(:csv, :host) ||
+        HammerCLI::Settings.get(:katello, :host) ||
+        HammerCLI::Settings.get(:foreman, :host)
+      username = option_username ||
+        HammerCLI::Settings.get(:csv, :username) ||
+        HammerCLI::Settings.get(:katello, :username) ||
+        HammerCLI::Settings.get(:foreman, :username)
+      password = option_password ||
+        HammerCLI::Settings.get(:csv, :password) ||
+        HammerCLI::Settings.get(:katello, :password) ||
+        HammerCLI::Settings.get(:foreman, :password)
       @api = ApipieBindings::API.new({
-                                       :uri => option_server || HammerCLI::Settings.get(:csv, :host),
-                                       :username => option_username || HammerCLI::Settings.get(:csv, :username),
-                                       :password => option_password || HammerCLI::Settings.get(:csv, :password),
+                                       :uri => server,
+                                       :username => username,
+                                       :password => password,
                                        :api_version => 2
                                      })
 

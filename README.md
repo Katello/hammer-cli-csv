@@ -18,6 +18,11 @@ The following sections will cover installation, usage, and examples. All of the 
 
 ## Installation
 
+```
+gem install hammer_cli_csv
+
+```
+
 ## Usage
 
 ## Examples
@@ -45,6 +50,35 @@ The following sections will cover installation, usage, and examples. All of the 
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
 | Label | Unique organization label | x |   | x | x |   |
 | Description | Organization description |   | x | x | x |   |
+
+**Examples**
+
+Here is an example of a CSV file to create an organization
+
+```
+Name, Count, Label, Description
+# Start a row with a # to indicate a comment, a row to be skipped
+Mega Corporation, 1, megacorp, The number one mega company in the world!
+```
+
+If above is saved to a file such as **megacorp/organizations.csv** the following command will run import to create or update the organization.
+
+```
+$ hammer csv organizations --version --csv-file megacorp/organizations.csv
+Updating organization 'Mega Corporation'... done
+
+$ hammer csv organizations --csv-export
+"Name","Count","Label","Description"
+"Mega Corporation","1","megacorp","The number one mega company in the world!"
+
+# Import but prefix all substitution columns with a string
+$ hammer csv organizations --verbose --csv-file test/data/organizations.csv --prefix xyz
+Creating organization 'xyzMega Corporation'... done
+
+# Export and pipe to import with a new prefix
+$ hammer csv organizations --csv-export | hammer csv organizations --verbose --csv-file test/data/organizations.csv --prefix abc
+Creating organization 'abcMega Corporation'... done
+```
 
 ## Locations
 

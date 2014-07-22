@@ -9,8 +9,8 @@
 
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
-Version: 0.0.1
-Release: 11%{?dist}
+Version: 0.0.2
+Release: 0%{?dist}
 Group: Development/Languages
 License: GPLv3
 URL: https://github.com/Katello/hammer-cli-csv

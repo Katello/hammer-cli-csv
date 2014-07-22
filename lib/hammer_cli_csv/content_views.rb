@@ -35,7 +35,7 @@ module HammerCLICsv
       def create_contentviews_from_csv(line)
         if !@existing_contentviews[line[ORGANIZATION]]
           @existing_contentviews[line[ORGANIZATION]] ||= {}
-          @api.resource(:content_views)
+          @api.resource(:content_views)\
             .call(:index, {
                     'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
@@ -56,7 +56,7 @@ module HammerCLICsv
           contentview_id = @existing_contentviews[line[ORGANIZATION]][name]
           if !contentview_id
             print "Creating content view '#{name}'..." if option_verbose?
-            contentview_id = @api.resource(:content_views)
+            contentview_id = @api.resource(:content_views)\
               .call(:create, {
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                       'name' => name,
@@ -68,7 +68,7 @@ module HammerCLICsv
             @existing_contentviews[line[ORGANIZATION]][name] = contentview_id
           else
             print "Updating content view '#{name}'..." if option_verbose?
-            @api.resource(:content_views)
+            @api.resource(:content_views)\
               .call(:update, {
                       'id' => contentview_id,
                       'description' => line[DESCRIPTION],

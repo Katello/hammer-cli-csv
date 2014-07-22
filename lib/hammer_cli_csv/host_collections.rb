@@ -41,11 +41,11 @@ module HammerCLICsv
       def export
         CSV.open(option_csv_file, 'wb') do |csv|
           csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
-          @api.resource(:organizations)
+          @api.resource(:organizations)\
             .call(:index, {
                     'per_page' => 999999
                   })['results'].each do |organization|
-            @api.resource(:host_collections)
+            @api.resource(:host_collections)\
               .call(:index, {
                       'organization_id' => organization['id']
                     }).each do |hostcollection|
@@ -69,7 +69,7 @@ module HammerCLICsv
       def create_hostcollections_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:host_collections)
+          @api.resource(:host_collections)\
             .call(:index, {
                     'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => line[ORGANIZATION])
@@ -82,7 +82,7 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating system group '#{name}'..." if option_verbose?
-            @api.resource(:host_collections)
+            @api.resource(:host_collections)\
               .call(:create, {
                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                       'name' => name,
@@ -91,7 +91,7 @@ module HammerCLICsv
                     })
           else
             print "Updating system group '#{name}'..." if option_verbose?
-            @api.resource(:host_collections)
+            @api.resource(:host_collections)\
               .call(:update, {
                       'organization_id' => line[ORGANIZATION],
                       'id' => @existing[line[ORGANIZATION]][name],

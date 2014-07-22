@@ -27,11 +27,11 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
                   SYSTEMGROUPS, SUBSCRIPTIONS]
-          @api.resource(:organizations)
+          @api.resource(:organizations)\
             .call(:index, {
                     :per_page => 999999
                   })['results'].each do |organization|
-            @api.resource(:activation_keys)
+            @api.resource(:activation_keys)\
               .call(:index, {
                       'per_page' => 999999,
                       'organization_id' => organization['id']
@@ -71,7 +71,7 @@ module HammerCLICsv
       def create_activationkeys_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:activation_keys)
+          @api.resource(:activation_keys)\
             .call(:index, {
                     'per_page' => 999999,
                     'organization_id' => foreman_organization(:name => line[ORGANIZATION])
@@ -85,7 +85,7 @@ module HammerCLICsv
 
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating activation key '#{name}'..." if option_verbose?
-            activationkey = @api.resource(:activation_keys)
+            activationkey = @api.resource(:activation_keys)\
               .call(:create, {
                       'name' => name,
                       'environment_id' => lifecycle_environment(line[ORGANIZATION],
@@ -98,7 +98,7 @@ module HammerCLICsv
             @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
           else
             print "Updating activation key '#{name}'..." if option_verbose?
-            activationkey = @api.resource(:activation_keys)
+            activationkey = @api.resource(:activation_keys)\
               .call(:update, {
                       'id' => @existing[line[ORGANIZATION]][name],
                       'name' => name,
@@ -122,7 +122,7 @@ module HammerCLICsv
         if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
           # TODO: note that existing system groups are not removed
           CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
-            @api.resource(:host_collections)
+            @api.resource(:host_collections)\
               .call(:add_activation_keys, {
                       'id' => katello_hostcollection(line[ORGANIZATION], :name => name),
                       'activation_key_ids' => [activationkey['id']]
@@ -142,19 +142,19 @@ module HammerCLICsv
           end
 
           # TODO: should there be a destroy_all similar to systems?
-          @api.resource(:subscriptions)
+          @api.resource(:subscriptions)\
             .call(:index, {
                     'per_page' => 999999,
                     'activation_key_id' => activationkey['id']
                   })['results'].each do |subscription|
-            @api.resource(:subscriptions)
+            @api.resource(:subscriptions)\
               .call(:destroy, {
                       'id' => subscription['id'],
                       'activation_key_id' => activationkey['id']
                     })
           end
 
-          @api.resource(:subscriptions)
+          @api.resource(:subscriptions)\
             .call(:create, {
                     'activation_key_id' => activationkey['id'],
                     'subscriptions' => subscriptions

@@ -40,10 +40,22 @@ module HammerCLICsv
         end
       end
 
+      server = option_server ||
+        HammerCLI::Settings.get(:csv, :host) ||
+        HammerCLI::Settings.get(:katello, :host) ||
+        HammerCLI::Settings.get(:foreman, :host)
+      username = option_username ||
+        HammerCLI::Settings.get(:csv, :username) ||
+        HammerCLI::Settings.get(:katello, :username) ||
+        HammerCLI::Settings.get(:foreman, :username)
+      password = option_password ||
+        HammerCLI::Settings.get(:csv, :password) ||
+        HammerCLI::Settings.get(:katello, :password) ||
+        HammerCLI::Settings.get(:foreman, :password)
       @api = ApipieBindings::API.new({
-                                       :uri => option_server || HammerCLI::Settings.get(:csv, :host),
-                                       :username => option_username || HammerCLI::Settings.get(:csv, :username),
-                                       :password => option_password || HammerCLI::Settings.get(:csv, :password),
+                                       :uri => server,
+                                       :username => username,
+                                       :password => password,
                                        :api_version => 2
                                      })
 
@@ -278,6 +290,37 @@ module HammerCLICsv
       result
     end
 
+    def foreman_template_kind(options = {})
+      @template_kinds ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @template_kinds[options[:name]]
+        if !options[:id]
+          template_kind = @api.resource(:template_kinds).call(:index, {
+                                              :per_page => 999999,
+                                              'search' => "name=\"#{options[:name]}\""
+                                            })['results']
+          raise "Template kind '#{options[:name]}' not found" if !template_kind || template_kind.empty?
+          options[:id] = template_kind[0]['id']
+          @template_kinds[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @template_kinds.key(options[:id])
+        if !options[:name]
+          template_kind = @api.resource(:template_kinds).call(:show, {'id' => options[:id]})
+          raise "Template kind 'id=#{options[:id]}' not found" if !template_kind || template_kind.empty?
+          options[:name] = template_kind['name']
+          @template_kinds[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
     def foreman_operatingsystem(options = {})
       @operatingsystems ||= {}
 
@@ -417,7 +460,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @lifecycle_environments[organization][options[:name]]
         if !options[:id]
-          @api.resource(:lifecycle_environments)
+          @api.resource(:lifecycle_environments)\
             .call(:index, {
                     :per_page => 999999,
                     'organization_id' => foreman_organization(:name => organization)
@@ -484,7 +527,7 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @repositories[organization][options[:name]]
         if !options[:id]
-          @api.resource(:repositories)
+          @api.resource(:repositories)\
             .call(:index, {
                     :per_page => 999999,
                     'organization_id' => foreman_organization(:name => organization)
@@ -639,7 +682,7 @@ module HammerCLICsv
           end
         end
         associations[organization] += [id] if !associations[organization].include? id
-        @api.resource(:organizations)
+        @api.resource(:organizations)\
           .call(:update, {
                   'id' => organization_id,
                   'organization' => {
@@ -662,7 +705,7 @@ module HammerCLICsv
         end
         associations[location] += [id] if !associations[location].include? id
 
-        @api.resource(:locations)
+        @api.resource(:locations)\
           .call(:update, {
                   'id' => location_id,
                   'location' => {

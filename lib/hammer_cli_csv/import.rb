@@ -30,9 +30,10 @@ module HammerCLICsv
       option %w(-p --password), 'PASSWORD', 'Password to access server'
       option '--dir', 'DIRECTORY', 'directory to import from'
 
-      RESOURCES = %w( organizations locations roles users puppet_environments operating_systems
+      RESOURCES = %w( organizations locations puppet_environments operating_systems
                       domains architectures partition_tables lifecycle_environments host_collections
-                      subscriptions activation_keys hosts content_hosts reports )
+                      provisioning_templates
+                      subscriptions activation_keys hosts content_hosts reports roles users )
       RESOURCES.each do |resource|
         dashed = resource.sub('_', '-')
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"

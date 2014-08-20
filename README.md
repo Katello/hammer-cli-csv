@@ -1,5 +1,4 @@
-# hammer-cli-csv
-================
+# hammer-cli-csv ![Travis # Status](https://travis-ci.org/Katello/hammer-cli-csv.svg?branch=master)
 
 ## Introduction
 

@@ -10,6 +10,7 @@ group :test do
   gem 'simplecov'
   gem 'mocha'
   gem 'ci_reporter'
+  gem 'rubocop-checkstyle_formatter'
 end
 
 # load local gemfile

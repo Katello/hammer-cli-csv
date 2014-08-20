@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.require_paths = %w(lib)
 
-  spec.add_dependency('hammer_cli_katello', "~> 0.0.4")
+  spec.add_dependency('hammer_cli_katello')
 
   spec.add_development_dependency("rubocop", "0.17.0")
 

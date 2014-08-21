@@ -1,3 +1,15 @@
+:ui:
+  :interactive: true
+  :per_page: 20
+  :history_file: './log/history'
+
+:watch_plain: true # enable/disable color output of logger in Clamp commands
+
+:log_dir: './log'
+:log_level: 'error'
+:log_api_calls: false
+:log_size: 5 # MB
+
 :csv:
   :enable_module: true
   :host:          'https://localhost'
@@ -12,6 +24,3 @@
 
 :katello:
   :enable_module: true
-  :host:          'https://localhost'
-  :username:      'admin'
-  :password:      'changeme'

@@ -25,16 +25,15 @@ require 'hammer_cli_csv'
 require 'hammer_cli_foreman'
 require 'hammer_cli_katello'
 
-def ctx
-  {
-    :interactive => false,
-    :username => 'admin',
-    :password => 'changeme'
-  }
+module HammerCLIForeman
+  def self.clear_credentials
+    @credentials = nil
+  end
 end
 
+
 def hammer(context=nil)
-  HammerCLI::MainCommand.new("", context || ctx)
+  HammerCLI::MainCommand.new("", context || HammerCLI::Settings.dump)
 end
 
 def capture
@@ -50,12 +49,22 @@ ensure
 end
 
 def set_user(username, password='changeme')
+  HammerCLI::Connection.drop_all
+  HammerCLIForeman.clear_credentials
   HammerCLI::Settings.load({
-                             :_params => {
-                               :username => username,
-                               :password => password,
-                               :interactive => false
-                             }})
+                               :_params => {
+                                   :username => username,
+                                   :password => password
+                               },
+                               :foreman => {
+                                   :username => username,
+                                   :password => password
+                               },
+                               :csv => {
+                                   :username => username,
+                                   :password => password
+                               }
+                           })
 end
 
 

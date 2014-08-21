@@ -417,10 +417,9 @@ The following sections will cover installation, usage, and examples. All of the 
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/roles.csv)
 * Supported products and version
-  * Foreman-1.5, Foreman-nightly
+  * Foreman-1.6, Foreman-nightly
   * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Satellite-6.0.4
 
 **CSV Columns**
 

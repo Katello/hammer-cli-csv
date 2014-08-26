@@ -21,6 +21,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('hammer_cli_katello')
 
-  spec.add_development_dependency("rubocop", "0.17.0")
+  spec.add_development_dependency("rubocop", "0.24.1")
 
 end

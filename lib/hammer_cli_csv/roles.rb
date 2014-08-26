@@ -59,6 +59,17 @@ module HammerCLICsv
       end
 
       def create_roles_from_csv(line)
+
+        permissions = collect_column(line[PERMISSIONS]) do |permission|
+          foreman_permission(:name => permission)
+        end
+        organizations = collect_column(line[ORGANIZATIONS]) do |organization|
+          foreman_organization(:name => organization)
+        end
+        locations = collect_column(line[LOCATIONS]) do |location|
+          foreman_location(:name => location)
+        end
+
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
           search = namify(line[SEARCH], number) if line[SEARCH]
@@ -76,26 +87,16 @@ module HammerCLICsv
                                        })
           end
 
-          permissions = collect_column(line[PERMISSIONS]) do |permission|
-            foreman_permission(:name => permission)
-          end
-          organizations = collect_column(line[ORGANIZATIONS]) do |organization|
-            foreman_organization(:name => organization)
-          end
-          locations = collect_column(line[LOCATIONS]) do |location|
-            foreman_location(:name => location)
-          end
-
           filter_id = foreman_filter(name, line[RESOURCE], search)
           if !filter_id
             print " creating filter #{line[RESOURCE]}..."
-            @api.resource(:filters).call(:create, {
+            @api.resource(:filters).call(:create, { 'filter' => {
                                            'role_id' => @existing_roles[name],
                                            'search' => search,
                                            'organization_ids' => organizations,
                                            'location_ids' => locations,
                                            'permission_ids' => permissions
-                                         })
+                                         }})
           else
             print " updating filter #{line[RESOURCE]}..."
             @api.resource(:filters).call(:update, {

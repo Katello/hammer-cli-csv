@@ -462,3 +462,35 @@ The following sections will cover installation, usage, and examples. All of the 
 | Organizations | Comma separated list of organizations |   | x | x | x |   |
 | Locations | Comma separated list of locations |   | x | x | x |   |
 | Roles | Comma separated list of role names for user |   | x | x | x |   |
+
+## Import
+
+**Overview**
+* [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=users&state=open)
+* [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/users_test.rb)
+
+**Examples**
+
+% hammer csv import -v --organizations test/data/organizations.csv --locations test/data/locations.csv
+Creating organization 'Mega Corporation'... done
+Creating organization 'Mega Subsidiary'... done
+Creating location 'Asia Pacific'... done
+Creating location 'Asia Pacific (Tokyo) Region'... done
+Creating location 'Asia Pacific (Singapore) Region'... done
+Creating location 'Asia Pacific (Sydney) Region'... done
+Creating location 'EU (Ireland) Region'... done
+Creating location 'South America (Sao Paulo) Region'... done
+Creating location 'US East (Northern Virginia) Region'... done
+Creating location 'US West (Northern California) Region'... done
+Creating location 'US West (Oregon) Region'... done
+
+# Development
+
+## Code style
+
+rubocop -R <file>
+
+## Tests
+
+The tests are meant to run against a live server.
+

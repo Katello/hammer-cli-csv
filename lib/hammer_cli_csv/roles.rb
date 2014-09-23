@@ -72,7 +72,7 @@ module HammerCLICsv
 
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
-          search = namify(line[SEARCH], number) if line[SEARCH]
+          search = line[SEARCH] ? namify(line[SEARCH], number) : nil
 
           if !@existing_roles[name]
             print "Creating role '#{name}'..." if option_verbose?

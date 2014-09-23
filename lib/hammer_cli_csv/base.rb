@@ -253,7 +253,8 @@ module HammerCLICsv
                                                'search' => "role=\"#{role}\""
                                              })['results']
       filters.each do |filter|
-        return filter['id'] if filter['resource_type'] == resource && filter['search'] == search
+        resource_type = filter['resource_type'].split(':')[-1] # To remove "Katello::" when present
+        return filter['id'] if resource_type == resource && filter['search'] == search
       end
 
       nil

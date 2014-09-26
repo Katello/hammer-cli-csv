@@ -15,6 +15,7 @@ require 'json'
 require 'csv'
 require 'hammer_cli_csv/csv'
 
+# rubocop:disable ClassLength
 module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
     option %w(-v --verbose), :flag, 'be verbose'

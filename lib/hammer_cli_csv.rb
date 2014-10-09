@@ -25,6 +25,7 @@ module HammerCLICsv
   require 'hammer_cli_csv/content_views'
   require 'hammer_cli_csv/content_view_filters'
   require 'hammer_cli_csv/domains'
+  require 'hammer_cli_csv/export'
   require 'hammer_cli_csv/host_collections'
   require 'hammer_cli_csv/hosts'
   require 'hammer_cli_csv/import'

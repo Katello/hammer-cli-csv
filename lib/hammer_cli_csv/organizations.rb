@@ -37,15 +37,14 @@ module HammerCLICsv
       command_name 'organizations'
       desc         'import or export organizations'
 
-      option %w(--sam), :flag, 'export from SAM-1.3 or SAM-1.4'
-
       LABEL = 'Label'
       DESCRIPTION = 'Description'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, LABEL, DESCRIPTION]
-          if option_sam?
+
+          if @server_status['release'] == 'Headpin'
             server = option_server || HammerCLI::Settings.get(:csv, :host)
             username = option_username || HammerCLI::Settings.get(:csv, :username)
             password = option_password || HammerCLI::Settings.get(:csv, :password)

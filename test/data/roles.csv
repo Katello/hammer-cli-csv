@@ -46,7 +46,7 @@ hsiuhenningsen,1,ActivationKey,name = hsiu.henningsen@megacorp.com,"view_activat
 jacquesjoaquin,1,ActivationKey,name = jacques.joaquin@megacorp.com,"view_activation_keys",Mega Corporation,
 janayjohnson,1,ActivationKey,name = janay.johnson@megacorp.com,"view_activation_keys",Mega Corporation,
 jeffersonjock,1,ActivationKey,name = jefferson.jock@megacorp.com,"view_activation_keys",Mega Corporation,
-jeneejahns,1,ActivationKey,,"view_activation_keys,create_activation_keys,edit_activation_keys,destroy_activation_keys",Mega Corporation,
+jeneejahns,1,ActivationKey,name = jenee.jahns@megacorp.com,"view_activation_keys,create_activation_keys,edit_activation_keys,destroy_activation_keys",Mega Corporation,
 jeremyjong,1,ActivationKey,name = jeremy.jong@megacorp.com,"view_activation_keys",Mega Corporation,
 judithjoachim,1,ActivationKey,name = judith.joachim@megacorp.com,"view_activation_keys",Mega Corporation,
 juliojerabek,1,ActivationKey,name = julio.jerabek@megacorp.com,"view_activation_keys",Mega Corporation,

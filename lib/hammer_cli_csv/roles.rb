@@ -89,7 +89,7 @@ module HammerCLICsv
 
           filter_id = foreman_filter(name, line[RESOURCE], search)
           if !filter_id
-            print " creating filter #{line[RESOURCE]}..."
+            print " creating filter #{line[RESOURCE]}..." if option_verbose?
             @api.resource(:filters).call(:create, { 'filter' => {
                                            'role_id' => @existing_roles[name],
                                            'search' => search,

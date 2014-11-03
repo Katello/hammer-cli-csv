@@ -90,22 +90,26 @@ module HammerCLICsv
           filter_id = foreman_filter(name, line[RESOURCE], search)
           if !filter_id
             print " creating filter #{line[RESOURCE]}..." if option_verbose?
-            @api.resource(:filters).call(:create, { 'filter' => {
-                                           'role_id' => @existing_roles[name],
-                                           'search' => search,
-                                           'organization_ids' => organizations,
-                                           'location_ids' => locations,
-                                           'permission_ids' => permissions
-                                         }})
+            @api.resource(:filters)
+              .call(:create, { 'filter' => {
+                        'role_id' => @existing_roles[name],
+                        'search' => search,
+                        'unlimited' => search.empty?,
+                        'organization_ids' => organizations,
+                        'location_ids' => locations,
+                        'permission_ids' => permissions
+                      }})
           else
             print " updating filter #{line[RESOURCE]}..."
-            @api.resource(:filters).call(:update, {
-                                           'id' => filter_id,
-                                           'search' => search,
-                                           'organization_ids' => organizations,
-                                           'location_ids' => locations,
-                                           'permission_ids' => permissions
-                                         })
+            @api.resource(:filters)
+              .call(:update, {
+                      'id' => filter_id,
+                      'search' => search,
+                      'unlimited' => search.empty?,
+                      'organization_ids' => organizations,
+                      'location_ids' => locations,
+                      'permission_ids' => permissions
+                    })
           end
 
           puts 'done' if option_verbose?

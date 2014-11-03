@@ -39,7 +39,7 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, PARENT]
           @api.resource(:locations).call(:index, {:per_page => 999999})['results'].each do |location|
-            csv << [location['name'], 1]
+            csv << [location['name'], 1, '']
           end
         end
       end

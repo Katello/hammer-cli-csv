@@ -60,8 +60,28 @@ module HammerCLICsv
                                        :api_version => 2
                                      })
 
+      @server_status = check_server_status
+
       option_csv_export? ? export : import
       HammerCLI::EX_OK
+    end
+
+    def check_server_status
+      server = option_server || HammerCLI::Settings.get(:csv, :host)
+      username = option_username || HammerCLI::Settings.get(:csv, :username)
+      password = option_password || HammerCLI::Settings.get(:csv, :password)
+      url = "#{server}/api/status"
+      uri = URI(url)
+      server_status = Net::HTTP.start(uri.host, uri.port,
+                               :use_ssl => uri.scheme == 'https',
+                               :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+        request = Net::HTTP::Get.new uri.request_uri
+        request.basic_auth(username, password)
+        response = http.request(request)
+        JSON.parse(response.body)
+      end
+
+      server_status
     end
 
     def namify(name_format, number = 0)
@@ -254,7 +274,7 @@ module HammerCLICsv
                                                'search' => "role=\"#{role}\""
                                              })['results']
       filters.each do |filter|
-        resource_type = filter['resource_type'].split(':')[-1] # To remove "Katello::" when present
+        resource_type = (filter['resource_type'] || '').split(':')[-1] # To remove "Katello::" when present
         return filter['id'] if resource_type == resource && filter['search'] == search
       end
 

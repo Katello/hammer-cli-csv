@@ -27,34 +27,60 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
                   SYSTEMGROUPS, SUBSCRIPTIONS]
-          @api.resource(:organizations)\
-            .call(:index, {
-                    :per_page => 999999
-                  })['results'].each do |organization|
-            @api.resource(:activation_keys)\
-              .call(:index, {
-                      'per_page' => 999999,
-                      'organization_id' => organization['id']
-                    })['results'].each do |activationkey|
-              puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
-              name = namify(activationkey['name'])
-              count = 1
-              description = activationkey['description']
-              limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
-              environment = activationkey['environment']['label']
-              contentview = activationkey['content_view']['name']
-              hostcollections = export_column(activationkey, 'systemGroups', 'name')
-              subscriptions = CSV.generate do |column|
-                column << @api.resource(:subscriptions).call(:index, {
-                                                      'activation_key_id' => activationkey['id']
-                                                    })['results'].collect do |subscription|
-                  amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
-                  "#{amount}|#{subscription['product_name']}"
+          if @server_status['release'] == 'Headpin'
+            @headpin.get(:organizations).each do |organization|
+              @headpin.get("organizations/#{organization['label']}/activation_keys").each do |activationkey|
+                puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
+                name = namify(activationkey['name'])
+                count = 1
+                description = activationkey['description']
+                limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : activationkey['usage_limit']
+                environment = @headpin.environment(activationkey['environment_id'])['name']
+                contentview = @headpin.content_view(activationkey['content_view_id'])['name']
+                # TODO: https://bugzilla.redhat.com/show_bug.cgi?id=1160888
+                #       Act keys in SAM-1 do not include system groups
+                hostcollections = nil #???? export_column(activationkey, 'systemGroups', 'name')
+                subscriptions = CSV.generate do |column|
+                  column << activationkey['pools'].collect do |subscription|
+                    amount = subscription['calculatedAttributes']['compliance_type'] == 'Stackable' ? 1 : 'Automatic'
+                    "#{amount}|#{subscription['productId']}|#{subscription['productName']}"
+                  end
                 end
+                subscriptions.delete!("\n")
+                csv << [name, count, organization['label'], description, limit, environment, contentview,
+                        hostcollections, subscriptions]
               end
-              subscriptions.delete!("\n")
-              csv << [name, count, organization['label'], description, limit, environment, contentview,
-                      hostcollections, subscriptions]
+            end
+          else
+            @api.resource(:organizations)\
+              .call(:index, {
+                      :per_page => 999999
+                    })['results'].each do |organization|
+              @api.resource(:activation_keys)\
+                .call(:index, {
+                        'per_page' => 999999,
+                        'organization_id' => organization['id']
+                      })['results'].each do |activationkey|
+                puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
+                name = namify(activationkey['name'])
+                count = 1
+                description = activationkey['description']
+                limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
+                environment = activationkey['environment']['label']
+                contentview = activationkey['content_view']['name']
+                hostcollections = export_column(activationkey, 'systemGroups', 'name')
+                subscriptions = CSV.generate do |column|
+                  column << @api.resource(:subscriptions).call(:index, {
+                                                        'activation_key_id' => activationkey['id']
+                                                      })['results'].collect do |subscription|
+                    amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
+                    "#{amount}|#{subscription['product_name']}"
+                  end
+                end
+                subscriptions.delete!("\n")
+                csv << [name, count, organization['label'], description, limit, environment, contentview,
+                        hostcollections, subscriptions]
+              end
             end
           end
         end
@@ -109,10 +135,10 @@ module HammerCLICsv
                       'description' => line[DESCRIPTION],
                       'usage_limit' => usage_limit(line[LIMIT])
                     })
-          end
 
-          update_subscriptions(activationkey, line)
-          update_groups(activationkey, line)
+            update_subscriptions(activationkey, line)
+            update_groups(activationkey, line)
+          end
 
           puts 'done' if option_verbose?
         end

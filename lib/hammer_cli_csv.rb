@@ -46,4 +46,6 @@ module HammerCLICsv
   require 'hammer_cli_csv/subnets'
   require 'hammer_cli_csv/subscriptions'
   require 'hammer_cli_csv/users'
+
+  require 'hammer_cli_csv/headpin_api'
 end

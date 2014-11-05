@@ -53,14 +53,23 @@ module HammerCLICsv
         HammerCLI::Settings.get(:csv, :password) ||
         HammerCLI::Settings.get(:katello, :password) ||
         HammerCLI::Settings.get(:foreman, :password)
-      @api = ApipieBindings::API.new({
-                                       :uri => server,
-                                       :username => username,
-                                       :password => password,
-                                       :api_version => 2
-                                     })
 
       @server_status = check_server_status
+
+      if @server_status['release'] == 'Headpin'
+        @headpin = HeadpinApi.new({
+                                    :server => server,
+                                    :username => username,
+                                    :password => password
+                                  })
+      else
+        @api = ApipieBindings::API.new({
+                                         :uri => server,
+                                         :username => username,
+                                         :password => password,
+                                         :api_version => 2
+                                       })
+      end
 
       option_csv_export? ? export : import
       HammerCLI::EX_OK
@@ -72,9 +81,10 @@ module HammerCLICsv
       password = option_password || HammerCLI::Settings.get(:csv, :password)
       url = "#{server}/api/status"
       uri = URI(url)
-      server_status = Net::HTTP.start(uri.host, uri.port,
-                               :use_ssl => uri.scheme == 'https',
-                               :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+      nethttp = Net::HTTP.new(uri.host, uri.port)
+      nethttp.use_ssl = uri.scheme == 'https'
+      nethttp.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      server_status = nethttp.start do |http|
         request = Net::HTTP::Get.new uri.request_uri
         request.basic_auth(username, password)
         response = http.request(request)

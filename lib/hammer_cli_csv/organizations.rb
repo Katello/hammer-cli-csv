@@ -45,21 +45,8 @@ module HammerCLICsv
           csv << [NAME, COUNT, LABEL, DESCRIPTION]
 
           if @server_status['release'] == 'Headpin'
-            server = option_server || HammerCLI::Settings.get(:csv, :host)
-            username = option_username || HammerCLI::Settings.get(:csv, :username)
-            password = option_password || HammerCLI::Settings.get(:csv, :password)
-            url = "#{server}/api/organizations"
-            uri = URI(url)
-            Net::HTTP.start(uri.host, uri.port,
-                            :use_ssl => uri.scheme == 'https',
-                            :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
-              request = Net::HTTP::Get.new uri.request_uri
-              request.basic_auth(username, password)
-              response = http.request(request)
-
-              JSON.parse(response.body).each do |organization|
-                csv << [organization['name'], 1, organization['label'], organization['description']]
-              end
+            @headpin.get(:organizations).each do |organization|
+              csv << [organization['name'], 1, organization['label'], organization['description']]
             end
           else
             @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|

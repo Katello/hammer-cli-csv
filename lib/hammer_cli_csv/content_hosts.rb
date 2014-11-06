@@ -58,7 +58,7 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
-          if option_sam?
+          if @server_status['release'] == 'Headpin'
             export_sam csv
           else
             export_foretello csv
@@ -68,51 +68,19 @@ module HammerCLICsv
 
       def export_sam(csv)
         guests_host = {}
+        system_ids = []
 
-        server = option_server || HammerCLI::Settings.get(:csv, :host)
-        username = option_username || HammerCLI::Settings.get(:csv, :username)
-        password = option_password || HammerCLI::Settings.get(:csv, :password)
-        url = "#{server}/api/systems?organization_id=satellite-1"
-        uri = URI(url)
-        system_ids = Net::HTTP.start(uri.host, uri.port,
-                                     :use_ssl => uri.scheme == 'https',
-                                     :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
-          request = Net::HTTP::Get.new uri.request_uri
-          request.basic_auth(username, password)
-          response = http.request(request)
-
-          JSON.parse(response.body).collect do |system|
+        @headpin.get(:organizations).each do |organization|
+          #url = "#{server}/api/systems?organization_id=satellite-1"
+          system_ids = @headpin.get("organizations/#{organization['label']}/systems").collect do |system|
             system['guests'].each { |guest| guests_host[guest['uuid']] = system['name'] }
             system['uuid']
           end
         end
 
-        #system_ids = ['327bf5cc-5498-4927-aa27-39b1503edf58', 'eeb6de95-afaf-4b14-9f92-e845ff269ccb']
-
         system_ids.each do |system_id|
-          url = "#{server}/api/systems/#{system_id}"
-          uri = URI(url)
-          system = Net::HTTP.start(uri.host, uri.port,
-                                  :use_ssl => uri.scheme == 'https',
-                                  :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
-            request = Net::HTTP::Get.new uri.request_uri
-            request.basic_auth(username, password)
-            response = http.request(request)
-
-            JSON.parse(response.body)
-          end
-
-          url = "#{server}/api/systems/#{system_id}/subscriptions"
-          uri = URI(url)
-          system_subscriptions = Net::HTTP.start(uri.host, uri.port,
-                                                 :use_ssl => uri.scheme == 'https',
-                                                 :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
-            request = Net::HTTP::Get.new uri.request_uri
-            request.basic_auth(username, password)
-            response = http.request(request)
-
-            JSON.parse(response.body)['entitlements']
-          end
+          system = @headpin.get("systems/#{system_id}")
+          system_subscriptions = @headpin.get("systems/#{system_id}/subscriptions")['entitlements']
 
           name = system['name']
           count = 1

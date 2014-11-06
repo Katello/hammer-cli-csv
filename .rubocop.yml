@@ -11,7 +11,7 @@ EmptyLinesAroundBody:
   Enabled: false
 
 HashSyntax:
-  Enabled: false
+  EnforcedStyle: hash_rockets
 
 SpaceInsideHashLiteralBraces:
   Enabled: false

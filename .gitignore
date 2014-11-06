@@ -27,6 +27,7 @@ config/cli.modules.d/katello.yml
 test/data/*.zip
 test/config.yml
 .ruby-version
+.ruby-gemset
 .idea
 Gemfile.local
 hammer_cli_csv*.gem

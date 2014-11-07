@@ -41,13 +41,13 @@ describe 'roles tests' do
       }
       lines = stdout.split("\n")
       lines.length.must_equal 5
-      lines[3].must_match /.*damon.dials@megacorp\.com.*/
+      lines[3].must_match(/.*damon.dials@megacorp\.com.*/)
 
       id = lines[3].split(' ')[0]
       stdout,stderr = capture {
         hammer.run(%W{activation-key info --id #{id}}).must_equal HammerCLI::EX_OK
       }
-      stdout.split("\n")[0].must_match /.*damon.dials@megacorp.com/
+      stdout.split("\n")[0].must_match(/.*damon.dials@megacorp.com/)
     end
 
   end

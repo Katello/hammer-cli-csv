@@ -16,7 +16,7 @@ describe 'setup' do
       }
       stderr.must_equal ''
       stdout.split("\n").length.must_equal 2
-      stdout.must_match /.*dhcp129-000\.megacorp\.com.*/
+      stdout.must_match(/.*dhcp129-000\.megacorp\.com.*/)
 
       host_id = stdout.split("\n")[1].split(",")[0]
     end

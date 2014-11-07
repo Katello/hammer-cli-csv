@@ -35,7 +35,7 @@ module CommandTestHelper
       arguments ||= respond_to?(:with_params) ? with_params : []
 
       cmd.stubs(:context).returns({ :adapter => :test })
-      proc { cmd.run(arguments) }.must_output /.*##{column_name}#.*/
+      proc { cmd.run(arguments) }.must_output(/.*##{column_name}#.*/)
     end
   end
 

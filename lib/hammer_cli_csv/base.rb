@@ -23,38 +23,25 @@ module HammerCLICsv
     option %w(--csv-export), :flag, 'Export current data instead of importing'
     option %w(--csv-file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
     option %w(--prefix), 'PREFIX', 'Prefix for all name columns'
-    option %w(--server), 'SERVER', 'Server URL'
-    option %w(-u --username), 'USERNAME', 'Username to access server'
-    option %w(-p --password), 'PASSWORD', 'Password to access server'
 
     NAME = 'Name'
     COUNT = 'Count'
 
     def execute
-      if !option_csv_file
-        if option_csv_export?
-          # rubocop:disable UselessAssignment
-          option_csv_file = '/dev/stdout'
-        else
-          # rubocop:disable UselessAssignment
-          option_csv_file = '/dev/stdin'
-        end
-      end
-
-      server = option_server ||
+      server = HammerCLI::Settings.settings[:_params][:host] ||
         HammerCLI::Settings.get(:csv, :host) ||
         HammerCLI::Settings.get(:katello, :host) ||
         HammerCLI::Settings.get(:foreman, :host)
-      username = option_username ||
+      username = HammerCLI::Settings.settings[:_params][:username] ||
         HammerCLI::Settings.get(:csv, :username) ||
         HammerCLI::Settings.get(:katello, :username) ||
         HammerCLI::Settings.get(:foreman, :username)
-      password = option_password ||
+      password = HammerCLI::Settings.settings[:_params][:password] ||
         HammerCLI::Settings.get(:csv, :password) ||
         HammerCLI::Settings.get(:katello, :password) ||
         HammerCLI::Settings.get(:foreman, :password)
 
-      @server_status = check_server_status
+      @server_status = check_server_status(server, username, password)
 
       if @server_status['release'] == 'Headpin'
         @headpin = HeadpinApi.new({
@@ -75,10 +62,7 @@ module HammerCLICsv
       HammerCLI::EX_OK
     end
 
-    def check_server_status
-      server = option_server || HammerCLI::Settings.get(:csv, :host)
-      username = option_username || HammerCLI::Settings.get(:csv, :username)
-      password = option_password || HammerCLI::Settings.get(:csv, :password)
+    def check_server_status(server, username, password)
       url = "#{server}/api/status"
       uri = URI(url)
       nethttp = Net::HTTP.new(uri.host, uri.port)

@@ -74,16 +74,22 @@ module HammerCLICsv
           if !@existing.include? name
             print "Creating organization '#{name}'... " if option_verbose?
             @api.resource(:organizations).call(:create, {
-                                         'name' => name,
-                                         'label' => label,
-                                         'description' => line[DESCRIPTION]
-                                       })
+                'name' => name,
+                'organization' => {
+                    'name' => name,
+                    'label' => label,
+                    'description' => line[DESCRIPTION]
+                }
+            })
           else
             print "Updating organization '#{name}'... " if option_verbose?
             @api.resource(:organizations).call(:update, {
-                                         'id' => label,
-                                         'description' => line[DESCRIPTION]
-                                       })
+                'id' => foreman_organization(:name => name),
+                'organization' => {
+                    'id' => foreman_organization(:name => name),
+                    'description' => line[DESCRIPTION]
+                }
+            })
           end
           print "done\n" if option_verbose?
         end

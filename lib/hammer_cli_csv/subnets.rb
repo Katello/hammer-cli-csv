@@ -85,26 +85,24 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating subnet '#{name}'..." if option_verbose?
-            id = @api.resource(:subnets)\
-              .call(:create, {
-                      'subnet' => {
-                        'name' => name
-                      }
-                    })['id']
+            id = @api.resource(:subnets).call(:create, {
+                'subnet' => {
+                    'name' => name
+                }
+            })['id']
           else
             print "Updating subnet '#{name}'..." if option_verbose?
-            id = @api.resource(:subnets)\
-              .call(:update, {
-                      'id' => @existing[name],
-                      'subnet' => {
-                        'name' => name,
-                        'network' => line[NETWORK],
-                        'mask' => line[NETWORK_MASK],
-                        'from' => line[NETWORK_FROM],
-                        'to' => line[NETWORK_TO],
-                        'domain_ids' => line[DOMAINS]
-                      }
-                    })['id']
+            id = @api.resource(:subnets).call(:update, {
+                'id' => @existing[name],
+                'subnet' => {
+                    'name' => name,
+                    'network' => line[NETWORK],
+                    'mask' => line[NETWORK_MASK],
+                    'from' => line[NETWORK_FROM],
+                    'to' => line[NETWORK_TO],
+                    'domain_ids' => line[DOMAINS]
+                }
+            })['id']
           end
 
           # Update associated resources

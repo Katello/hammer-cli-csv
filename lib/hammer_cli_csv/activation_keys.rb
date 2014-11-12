@@ -20,17 +20,16 @@ module HammerCLICsv
       LIMIT = 'Limit'
       ENVIRONMENT = 'Environment'
       CONTENTVIEW = 'Content View'
-      SYSTEMGROUPS = 'System Groups'
+      HOSTCOLLECTIONS = 'System Groups'
       SUBSCRIPTIONS = 'Subscriptions'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
-                  SYSTEMGROUPS, SUBSCRIPTIONS]
+                  HOSTCOLLECTIONS, SUBSCRIPTIONS]
           if @server_status['release'] == 'Headpin'
             @headpin.get(:organizations).each do |organization|
               @headpin.get("organizations/#{organization['label']}/activation_keys").each do |activationkey|
-                puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
                 name = namify(activationkey['name'])
                 count = 1
                 description = activationkey['description']
@@ -59,11 +58,10 @@ module HammerCLICsv
                   'per_page' => 999999,
                   'organization_id' => organization['id']
               })['results'].each do |activationkey|
-                puts "Writing activation key '#{activationkey['name']}'" if option_verbose?
                 name = namify(activationkey['name'])
                 count = 1
                 description = activationkey['description']
-                limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : sytemgroup['usage_limit']
+                limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : activationkey['usage_limit']
                 environment = activationkey['environment']['label']
                 contentview = activationkey['content_view']['name']
                 hostcollections = export_column(activationkey, 'systemGroups', 'name')
@@ -142,9 +140,9 @@ module HammerCLICsv
       end
 
       def update_groups(activationkey, line)
-        if line[SYSTEMGROUPS] && line[SYSTEMGROUPS] != ''
+        if line[HOSTCOLLECTIONS] && line[HOSTCOLLECTIONS] != ''
           # TODO: note that existing system groups are not removed
-          CSV.parse_line(line[SYSTEMGROUPS], {:skip_blanks => true}).each do |name|
+          CSV.parse_line(line[HOSTCOLLECTIONS], {:skip_blanks => true}).each do |name|
             @api.resource(:host_collections).call(:add_activation_keys, {
                 'id' => katello_hostcollection(line[ORGANIZATION], :name => name),
                 'activation_key_ids' => [activationkey['id']]

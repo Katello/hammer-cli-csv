@@ -28,32 +28,32 @@ module HammerCLICsv
     COUNT = 'Count'
 
     def execute
-      server = HammerCLI::Settings.settings[:_params][:host] ||
+      @server = HammerCLI::Settings.settings[:_params][:host] ||
         HammerCLI::Settings.get(:csv, :host) ||
         HammerCLI::Settings.get(:katello, :host) ||
         HammerCLI::Settings.get(:foreman, :host)
-      username = HammerCLI::Settings.settings[:_params][:username] ||
+      @username = HammerCLI::Settings.settings[:_params][:username] ||
         HammerCLI::Settings.get(:csv, :username) ||
         HammerCLI::Settings.get(:katello, :username) ||
         HammerCLI::Settings.get(:foreman, :username)
-      password = HammerCLI::Settings.settings[:_params][:password] ||
+      @password = HammerCLI::Settings.settings[:_params][:password] ||
         HammerCLI::Settings.get(:csv, :password) ||
         HammerCLI::Settings.get(:katello, :password) ||
         HammerCLI::Settings.get(:foreman, :password)
 
-      @server_status = check_server_status(server, username, password)
+      @server_status = check_server_status(@server, @username, @password)
 
       if @server_status['release'] == 'Headpin'
         @headpin = HeadpinApi.new({
-                                    :server => server,
-                                    :username => username,
-                                    :password => password
+                                    :server => @server,
+                                    :username => @username,
+                                    :password => @password
                                   })
       else
         @api = ApipieBindings::API.new({
-                                         :uri => server,
-                                         :username => username,
-                                         :password => password,
+                                         :uri => @server,
+                                         :username => @username,
+                                         :password => @password,
                                          :api_version => 2
                                        })
       end
@@ -476,11 +476,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @lifecycle_environments[organization][options[:name]]
         if !options[:id]
-          @api.resource(:lifecycle_environments)\
-            .call(:index, {
-                    :per_page => 999999,
-                    'organization_id' => foreman_organization(:name => organization)
-                  })['results'].each do |environment|
+          @api.resource(:lifecycle_environments).call(:index, {
+              :per_page => 999999,
+              'organization_id' => foreman_organization(:name => organization)
+          })['results'].each do |environment|
             @lifecycle_environments[organization][environment['name']] = environment['id']
           end
           options[:id] = @lifecycle_environments[organization][options[:name]]
@@ -511,9 +510,9 @@ module HammerCLICsv
         options[:id] = @contentviews[organization][options[:name]]
         if !options[:id]
           @api.resource(:content_views).call(:index, {
-                                               :per_page => 999999,
-                                               'organization_id' => foreman_organization(:name => organization)
-                                             })['results'].each do |contentview|
+              :per_page => 999999,
+              'organization_id' => foreman_organization(:name => organization)
+          })['results'].each do |contentview|
             @contentviews[organization][contentview['name']] = contentview['id']
           end
           options[:id] = @contentviews[organization][options[:name]]
@@ -535,6 +534,30 @@ module HammerCLICsv
       result
     end
 
+    def katello_contentviewversion(organization, name, version)
+      @contentviewversions ||= {}
+      @contentviewversions[organization] ||= {}
+      versionname = "#{version}|#{name}"
+
+      return nil if name.nil? || name.empty?
+      id = @contentviewversions[organization][versionname]
+      if !id
+        contentview_id = katello_contentview(organization, :name => name)
+        @api.resource(:content_view_versions).call(:index, {
+            :per_page => 999999,
+            'content_view_id' => contentview_id
+        })['results'].each do |contentviewversion|
+          if contentviewversion['version'] == version.to_i
+            @contentviewversions[organization][versionname] = contentviewversion['id']
+          end
+        end
+        id = @contentviewversions[organization][versionname]
+        raise "Content view version '#{name}' with version '#{version}' not found" if !id
+      end
+
+      id
+    end
+
     def katello_repository(organization, options = {})
       @repositories ||= {}
       @repositories[organization] ||= {}
@@ -543,11 +566,10 @@ module HammerCLICsv
         return nil if options[:name].nil? || options[:name].empty?
         options[:id] = @repositories[organization][options[:name]]
         if !options[:id]
-          @api.resource(:repositories)\
-            .call(:index, {
-                    :per_page => 999999,
-                    'organization_id' => foreman_organization(:name => organization)
-                  })['results'].each do |repository|
+          @api.resource(:repositories).call(:index, {
+              :per_page => 999999,
+              'organization_id' => foreman_organization(:name => organization)
+          })['results'].each do |repository|
             @repositories[organization][repository['name']] = repository['id']
           end
           options[:id] = @repositories[organization][options[:name]]
@@ -698,13 +720,12 @@ module HammerCLICsv
           end
         end
         associations[organization] += [id] if !associations[organization].include? id
-        @api.resource(:organizations)\
-          .call(:update, {
-                  'id' => organization_id,
-                  'organization' => {
-                    "#{name}_ids" => associations[organization]
-                  }
-                })
+        @api.resource(:organizations).call(:update, {
+            'id' => organization_id,
+            'organization' => {
+                "#{name}_ids" => associations[organization]
+            }
+        })
       end if organizations && !organizations.empty?
     end
 
@@ -721,13 +742,12 @@ module HammerCLICsv
         end
         associations[location] += [id] if !associations[location].include? id
 
-        @api.resource(:locations)\
-          .call(:update, {
-                  'id' => location_id,
-                  'location' => {
-                    "#{name}_ids" => associations[location]
-                  }
-                })
+        @api.resource(:locations).call(:update, {
+            'id' => location_id,
+            'location' => {
+                "#{name}_ids" => associations[location]
+            }
+        })
       end if locations && !locations.empty?
     end
   end

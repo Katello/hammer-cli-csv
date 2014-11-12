@@ -61,23 +61,21 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating compute profile '#{name}'..." if option_verbose?
-            id = @api.resource(:compute_profiles)\
-              .call(:create, {
-                      'compute_profile' => {
-                        'name' => name,
-                        'url' => line[URL]
-                      }
-                    })['id']
+            id = @api.resource(:compute_profiles).call(:create, {
+                'compute_profile' => {
+                    'name' => name,
+                    'url' => line[URL]
+                }
+            })['id']
           else
             print "Updating compute profile '#{name}'..." if option_verbose?
-            id = @api.resource(:compute_profiles)\
-              .call(:update, {
-                      'id' => @existing[name],
-                      'compute_profile' => {
-                        'name' => name,
-                        'url' => line[URL]
-                      }
-                    })['compute_profile']['id']
+            id = @api.resource(:compute_profiles).call(:update, {
+                'id' => @existing[name],
+                'compute_profile' => {
+                    'name' => name,
+                    'url' => line[URL]
+                }
+            })['compute_profile']['id']
           end
 
           # Update associated profiles

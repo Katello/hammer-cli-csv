@@ -94,6 +94,7 @@ module HammerCLICsv
         args += %W( csv #{resource.sub('_', '-')} --csv-export --csv-file #{options_file} )
         args << '-v' if option_verbose?
         args += %W( --threads #{option_threads} )
+        puts "Exporting '#{args.join(' ')}'" if option_verbose?
         hammer.run(args)
       end
 

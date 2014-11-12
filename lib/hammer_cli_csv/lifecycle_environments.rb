@@ -38,15 +38,13 @@ module HammerCLICsv
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
-          @api.resource(:organizations)\
-            .call(:index, {
-                    'per_page' => 999999
-                  })['results'].each do |organization|
-            @api.resource(:lifecycle_environments)\
-              .call(:index, {
-                      'per_page' => 999999,
-                      'organization_id' => organization['id']
-                    })['results'].each do |environment|
+          @api.resource(:organizations).call(:index, {
+              'per_page' => 999999
+          })['results'].each do |organization|
+            @api.resource(:lifecycle_environments).call(:index, {
+                'per_page' => 999999,
+                'organization_id' => organization['id']
+            })['results'].each do |environment|
               if environment['name'] != 'Library'
                 name = environment['name']
                 count = 1
@@ -61,15 +59,13 @@ module HammerCLICsv
 
       def import
         @existing = {}
-        @api.resource(:organizations)\
-          .call(:index, {
-                  'per_page' => 999999
-                })['results'].each do |organization|
-          @api.resource(:lifecycle_environments)\
-            .call(:index, {
-                    'per_page' => 999999,
-                    'organization_id' => foreman_organization(:name => organization['name'])
-                  })['results'].each do |environment|
+        @api.resource(:organizations).call(:index, {
+            'per_page' => 999999
+        })['results'].each do |organization|
+          @api.resource(:lifecycle_environments).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => foreman_organization(:name => organization['name'])
+          })['results'].each do |environment|
             @existing[organization['name']] ||= {}
             @existing[organization['name']][environment['name']] = environment['id'] if environment
           end
@@ -87,24 +83,22 @@ module HammerCLICsv
           raise "Organization '#{line[ORGANIZATION]}' does not exist" if !@existing.include? line[ORGANIZATION]
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating environment '#{name}'..." if option_verbose?
-            @api.resource(:lifecycle_environments)\
-              .call(:create, {
-                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                      'name' => name,
-                      'prior' => lifecycle_environment(line[ORGANIZATION], :name => prior),
-                      'description' => line[DESCRIPTION]
-                    })
+            @api.resource(:lifecycle_environments).call(:create, {
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'name' => name,
+                'prior' => lifecycle_environment(line[ORGANIZATION], :name => prior),
+                'description' => line[DESCRIPTION]
+            })
           else
             print "Updating environment '#{name}'..." if option_verbose?
-            @api.resource(:lifecycle_environments)\
-              .call(:update, {
-                      'id' => @existing[line[ORGANIZATION]][name],
-                      'name' => name,
-                      'new_name' => name,
-                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                      'prior' => prior,
-                      'description' => line[DESCRIPTION]
-                    })
+            @api.resource(:lifecycle_environments).call(:update, {
+                'id' => @existing[line[ORGANIZATION]][name],
+                'name' => name,
+                'new_name' => name,
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'prior' => prior,
+                'description' => line[DESCRIPTION]
+            })
           end
           print "done\n" if option_verbose?
         end

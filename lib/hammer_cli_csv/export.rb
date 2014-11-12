@@ -18,30 +18,58 @@ module HammerCLICsv
 
       option %w(-v --verbose), :flag, 'be verbose'
       option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
-      option %w(--server), 'SERVER', 'Server URL'
-      option %w(-u --username), 'USERNAME', 'Username to access server'
-      option %w(-p --password), 'PASSWORD', 'Password to access server'
       option '--dir', 'DIRECTORY', 'directory to import from'
 
-      RESOURCES = %w( organizations locations puppet_environments operating_systems
-                      domains architectures partition_tables lifecycle_environments host_collections
-                      provisioning_templates
-                      subscriptions activation_keys hosts content_hosts reports roles users )
+      RESOURCES = %w(
+        organizations locations puppet_environments operating_systems
+        domains architectures partition_tables lifecycle_environments host_collections
+        provisioning_templates
+        subscriptions activation_keys hosts content_hosts reports roles users
+      )
       RESOURCES.each do |resource|
         dashed = resource.sub('_', '-')
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"
       end
 
       def execute
-        @api = ApipieBindings::API.new({
-                                         :uri => option_server || HammerCLI::Settings.get(:csv, :host),
-                                         :username => option_username || HammerCLI::Settings.get(:csv, :username),
-                                         :password => option_password || HammerCLI::Settings.get(:csv, :password),
-                                         :api_version => 2
-                                       })
+        @server = HammerCLI::Settings.settings[:_params][:host] ||
+          HammerCLI::Settings.get(:csv, :host) ||
+          HammerCLI::Settings.get(:katello, :host) ||
+          HammerCLI::Settings.get(:foreman, :host)
+        @username = HammerCLI::Settings.settings[:_params][:username] ||
+          HammerCLI::Settings.get(:csv, :username) ||
+          HammerCLI::Settings.get(:katello, :username) ||
+          HammerCLI::Settings.get(:foreman, :username)
+        @password = HammerCLI::Settings.settings[:_params][:password] ||
+          HammerCLI::Settings.get(:csv, :password) ||
+          HammerCLI::Settings.get(:katello, :password) ||
+          HammerCLI::Settings.get(:foreman, :password)
+
+        @server_status = check_server_status(@server, @username, @password)
+
+        if @server_status['release'] == 'Headpin'
+          @headpin = HeadpinApi.new({
+                                      :server => @server,
+                                      :username => @username,
+                                      :password => @password
+                                    })
+          skipped_resources = %w( locations puppet_environments operating_systems
+                                  domains architectures partition_tables lifecycle_environments
+                                  provisioning_templates
+                                  hosts reports )
+          skipped_resources += %w( subscriptions content_hosts roles users )  # TODO: not implemented yet
+        else
+          @api = ApipieBindings::API.new({
+                                           :uri => @server,
+                                           :username => @username,
+                                           :password => @password,
+                                           :api_version => 2
+                                         })
+          skipped_resources = []
+        end
 
         # Swing the hammers
-        RESOURCES.each do |resource|
+        (RESOURCES - skipped_resources).each do |resource|
           hammer_resource(resource)
         end
 
@@ -51,8 +79,8 @@ module HammerCLICsv
       def hammer(context = nil)
         context ||= {
           :interactive => false,
-          :username => 'admin', # TODO: this needs to come from config/settings
-          :password => 'changeme' # TODO: this needs to come from config/settings
+          :username => @username,
+          :password => @password
         }
 
         HammerCLI::MainCommand.new('', context)
@@ -61,11 +89,28 @@ module HammerCLICsv
       def hammer_resource(resource)
         return if !self.send("option_#{resource}") && !option_dir
         options_file = self.send("option_#{resource}") || "#{option_dir}/#{resource.sub('_', '-')}.csv"
-        args = %W( csv #{resource.sub('_', '-')} --csv-export --csv-file #{options_file} )
+        args = []
+        args += %W( --server #{@server} ) if @server
+        args += %W( csv #{resource.sub('_', '-')} --csv-export --csv-file #{options_file} )
         args << '-v' if option_verbose?
         args += %W( --threads #{option_threads} )
-        args += %W( --server #{option_server} ) if option_server
         hammer.run(args)
+      end
+
+      def check_server_status(server, username, password)
+        url = "#{server}/api/status"
+        uri = URI(url)
+        nethttp = Net::HTTP.new(uri.host, uri.port)
+        nethttp.use_ssl = uri.scheme == 'https'
+        nethttp.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        server_status = nethttp.start do |http|
+          request = Net::HTTP::Get.new uri.request_uri
+          request.basic_auth(username, password)
+          response = http.request(request)
+          JSON.parse(response.body)
+        end
+
+        server_status
       end
     end
   end

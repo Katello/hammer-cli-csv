@@ -578,10 +578,10 @@ module HammerCLICsv
         options[:id] = @subscriptions[organization][options[:name]]
         if !options[:id]
           results = @api.resource(:subscriptions).call(:index, {
-                                                         :per_page => 999999,
-                                                         'organization_id' => foreman_organization(:name => organization),
-                                                         'search' => "name:\"#{options[:name]}\""
-                                                       })
+              :per_page => 999999,
+              'organization_id' => foreman_organization(:name => organization),
+              'search' => "name:\"#{options[:name]}\""
+          })
           raise "No subscriptions match '#{options[:name]}'" if results['subtotal'] == 0
           raise "Too many subscriptions match '#{options[:name]}'" if results['subtotal'] > 1
           subscription = results['results'][0]

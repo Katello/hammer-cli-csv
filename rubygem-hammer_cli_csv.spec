@@ -10,7 +10,7 @@
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
 Version: 0.0.6
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv3
 URL: https://github.com/Katello/hammer-cli-csv
@@ -72,6 +72,9 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_dir}/doc/%{gemname}-%{version}
 
 %changelog
+* Tue Dec 09 2014 Jason Montleon <jmontleo@redhat.com> 0.0.6-1
+- set up hammer-cli-csv to use distribution tagger (jmontleo@redhat.com)
+- Update to 0.0.6
 * Tue Jul 22 2014 Jason Montleon <jmontleo@redhat.com> 0.0.2-1
 - fix version in rpm spec (jmontleo@redhat.com)
 

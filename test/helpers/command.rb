@@ -2,14 +2,14 @@
 module CommandTestHelper
 
   def with_params(params, &block)
-    context "with params "+params.to_s do
+    context "with params " + params.to_s do
       let(:with_params) { params }
-      self.instance_eval &block
+      self.instance_eval(&block)
     end
   end
 
   def it_should_call_action(action, params)
-    it "should call action "+action.to_s do
+    it "should call action " + action.to_s do
       arguments ||= respond_to?(:with_params) ? with_params : []
       cmd.resource.resource_class.expects_with(action, params)
       cmd.run(arguments)
@@ -33,7 +33,7 @@ module CommandTestHelper
       arguments ||= respond_to?(:with_params) ? with_params : []
 
       cmd.stubs(:context).returns({ :adapter => :test })
-      proc { cmd.run(arguments) }.must_output /.*##{column_name}#.*/
+      proc { cmd.run(arguments) }.must_output(/.*##{column_name}#.*/)
     end
   end
 

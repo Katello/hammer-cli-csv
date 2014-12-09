@@ -39,20 +39,25 @@ module HammerCLICsv
       DESCRIPTION = 'Description'
 
       def export
-        CSV.open(option_csv_file, 'wb') do |csv|
+        CSV.open(option_csv_file || '/dev/stdout', 'wb') do |csv|
           csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
-          @api.resource(:organizations)\
-            .call(:index, {
-                    'per_page' => 999999
-                  })['results'].each do |organization|
-            @api.resource(:host_collections)\
-              .call(:index, {
-                      'organization_id' => organization['id']
-                    }).each do |hostcollection|
-              puts hostcollection
-              csv << [hostcollection['name'], 1, organization['id'],
-                      hostcollection['max_systems'].to_i < 0 ? 'Unlimited' : sytemgroup['max_systems'],
-                      hostcollection['description']]
+          if @server_status['release'] == 'Headpin'
+            @headpin.get(:organizations).each do |organization|
+              @headpin.get("organizations/#{organization['label']}/system_groups").each do |systemgroup|
+                csv << [systemgroup['name'], 1, organization['name'],
+                        systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : systemgroup['max_systems'],
+                        systemgroup['description']]
+              end
+            end
+          else
+            @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
+              @api.resource(:host_collections).call(:index, {
+                  'organization_id' => organization['id']
+              })['results'].each do |hostcollection|
+                csv << [hostcollection['name'], 1, organization['id'],
+                        hostcollection['max_systems'].to_i < 0 ? 'Unlimited' : hostcollection['max_systems'],
+                        hostcollection['description']]
+              end
             end
           end
         end
@@ -69,11 +74,10 @@ module HammerCLICsv
       def create_hostcollections_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:host_collections)\
-            .call(:index, {
-                    'per_page' => 999999,
-                    'organization_id' => foreman_organization(:name => line[ORGANIZATION])
-                  })['results'].each do |hostcollection|
+          @api.resource(:host_collections).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => foreman_organization(:name => line[ORGANIZATION])
+          })['results'].each do |hostcollection|
             @existing[line[ORGANIZATION]][hostcollection['name']] = hostcollection['id']
           end
         end
@@ -82,23 +86,21 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating system group '#{name}'..." if option_verbose?
-            @api.resource(:host_collections)\
-              .call(:create, {
-                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                      'name' => name,
-                      'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
-                      'description' => line[DESCRIPTION]
-                    })
+            @api.resource(:host_collections).call(:create, {
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'name' => name,
+                'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
+                'description' => line[DESCRIPTION]
+            })
           else
             print "Updating system group '#{name}'..." if option_verbose?
-            @api.resource(:host_collections)\
-              .call(:update, {
-                      'organization_id' => line[ORGANIZATION],
-                      'id' => @existing[line[ORGANIZATION]][name],
-                      'name' => name,
-                      'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
-                      'description' => line[DESCRIPTION]
-                    })
+            @api.resource(:host_collections).call(:update, {
+                'organization_id' => line[ORGANIZATION],
+                'id' => @existing[line[ORGANIZATION]][name],
+                'name' => name,
+                'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
+                'description' => line[DESCRIPTION]
+            })
           end
           print "done\n" if option_verbose?
         end

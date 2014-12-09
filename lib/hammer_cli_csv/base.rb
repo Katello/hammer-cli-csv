@@ -15,6 +15,7 @@ require 'json'
 require 'csv'
 require 'hammer_cli_csv/csv'
 
+# rubocop:disable ClassLength
 module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
     option %w(-v --verbose), :flag, 'be verbose'
@@ -22,45 +23,59 @@ module HammerCLICsv
     option %w(--csv-export), :flag, 'Export current data instead of importing'
     option %w(--csv-file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
     option %w(--prefix), 'PREFIX', 'Prefix for all name columns'
-    option %w(--server), 'SERVER', 'Server URL'
-    option %w(-u --username), 'USERNAME', 'Username to access server'
-    option %w(-p --password), 'PASSWORD', 'Password to access server'
 
     NAME = 'Name'
     COUNT = 'Count'
 
     def execute
-      if !option_csv_file
-        if option_csv_export?
-          # rubocop:disable UselessAssignment
-          option_csv_file = '/dev/stdout'
-        else
-          # rubocop:disable UselessAssignment
-          option_csv_file = '/dev/stdin'
-        end
-      end
-
-      server = option_server ||
+      server = HammerCLI::Settings.settings[:_params][:host] ||
         HammerCLI::Settings.get(:csv, :host) ||
         HammerCLI::Settings.get(:katello, :host) ||
         HammerCLI::Settings.get(:foreman, :host)
-      username = option_username ||
+      username = HammerCLI::Settings.settings[:_params][:username] ||
         HammerCLI::Settings.get(:csv, :username) ||
         HammerCLI::Settings.get(:katello, :username) ||
         HammerCLI::Settings.get(:foreman, :username)
-      password = option_password ||
+      password = HammerCLI::Settings.settings[:_params][:password] ||
         HammerCLI::Settings.get(:csv, :password) ||
         HammerCLI::Settings.get(:katello, :password) ||
         HammerCLI::Settings.get(:foreman, :password)
-      @api = ApipieBindings::API.new({
-                                       :uri => server,
-                                       :username => username,
-                                       :password => password,
-                                       :api_version => 2
-                                     })
+
+      @server_status = check_server_status(server, username, password)
+
+      if @server_status['release'] == 'Headpin'
+        @headpin = HeadpinApi.new({
+                                    :server => server,
+                                    :username => username,
+                                    :password => password
+                                  })
+      else
+        @api = ApipieBindings::API.new({
+                                         :uri => server,
+                                         :username => username,
+                                         :password => password,
+                                         :api_version => 2
+                                       })
+      end
 
       option_csv_export? ? export : import
       HammerCLI::EX_OK
+    end
+
+    def check_server_status(server, username, password)
+      url = "#{server}/api/status"
+      uri = URI(url)
+      nethttp = Net::HTTP.new(uri.host, uri.port)
+      nethttp.use_ssl = uri.scheme == 'https'
+      nethttp.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      server_status = nethttp.start do |http|
+        request = Net::HTTP::Get.new uri.request_uri
+        request.basic_auth(username, password)
+        response = http.request(request)
+        JSON.parse(response.body)
+      end
+
+      server_status
     end
 
     def namify(name_format, number = 0)
@@ -253,7 +268,8 @@ module HammerCLICsv
                                                'search' => "role=\"#{role}\""
                                              })['results']
       filters.each do |filter|
-        return filter['id'] if filter['resource_type'] == resource && filter['search'] == search
+        resource_type = (filter['resource_type'] || '').split(':')[-1] # To remove "Katello::" when present
+        return filter['id'] if resource_type == resource && filter['search'] == search
       end
 
       nil
@@ -562,10 +578,10 @@ module HammerCLICsv
         options[:id] = @subscriptions[organization][options[:name]]
         if !options[:id]
           results = @api.resource(:subscriptions).call(:index, {
-                                                         :per_page => 999999,
-                                                         'organization_id' => foreman_organization(:name => organization),
-                                                         'search' => "name:\"#{options[:name]}\""
-                                                       })
+              :per_page => 999999,
+              'organization_id' => foreman_organization(:name => organization),
+              'search' => "name:\"#{options[:name]}\""
+          })
           raise "No subscriptions match '#{options[:name]}'" if results['subtotal'] == 0
           raise "Too many subscriptions match '#{options[:name]}'" if results['subtotal'] > 1
           subscription = results['results'][0]

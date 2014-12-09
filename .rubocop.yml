@@ -1,137 +1,23 @@
+inherit_from:
+  - .rubocop_todo.yml
 
-LineLength:
-  Max: 200
-
-ParameterLists:
-  Max: 10
-
-CollectionMethods:
-  PreferredMethods:
-    map: collect
-
-SignalException:
+Documentation:
   Enabled: false
 
 StringLiterals:
-  Enabled: true
-
-SpaceAroundBlockBraces:
-  Enabled: true
-
-BlockNesting:
-  Enabled: 4
-
-ClassLength:
   Enabled: false
-
-IndentationWidth:
-  Enabled: 2
 
 EmptyLinesAroundBody:
-  Enabled: true
-
-Output:
   Enabled: false
-
-CyclomaticComplexity:
-  Enabled: false
-
-BracesAroundHashParameters:
-  Enabled: false
-
-AlignHash:
-  Enabled: true
-
-IndentationConsistency:
-  Enabled: true
-
-TrailingComma:
-  Enabled: true
-
-ConditionPosition:
-  Enabled: true
-
-AccessorMethodName:
-  Enabled: true
-
-AllCops:
-  RunRailsCops: true # automatically run rails cops
-  Exclude:
-    - script/rails
-    - script/thin
-    - db/migrate/20131014135042_katello_tables.rb
-    - engines/bastion/node_modules/**
-    - engines/bastion/vendor/assets/dev-components/**
-    # TODO: remove these other paths as we fix them
-    - spec/**
-    - test/**
-    - config/navigation.rb
-
-MethodLength:
-  Max: 250
-
-SpaceInsideHashLiteralBraces:
-  EnforcedStyleIsWithSpaces: false
 
 HashSyntax:
-  Enabled: false # don't force 1.9 hash syntax
+  EnforcedStyle: hash_rockets
 
 SpaceInsideHashLiteralBraces:
-  Enabled: false # allow spaces (eg { :a => 1 })
-
-LeadingCommentSpace:
   Enabled: false
-
-IfUnlessModifier:
-  Enabled: false
-
-RescueModifier:
-  Enabled: false
-
-AssignmentInCondition:
-  Enabled: false
-
-FavorUnlessOverNegatedIf:
-  Enabled: false
-
-WhileUntilModifier:
-  Enabled: false
-
-AlignParameters:
-  Enabled: false # don't care if parameters are not aligned
-
-ParenthesesAroundCondition:
-  Enabled: false
-
-DotPosition:
-  Enabled: false
-
-Lambda:
-  Enabled: false # don't require -> for single line lambdas
-
-FavorSprintf:
-  Enabled: false # we use % for i18n
-
-RedundantSelf:
-  Enabled: false
-
-RedundantReturn:
-  Enabled: false
-
-SpaceInsideHashLiteralBraces:
-  Enabled: false # we allow spaces inside hash brackets
-
-Documentation:
-  Enabled: false # don't require documentation
 
 Encoding:
-  Enabled: false # don't require utf-8 encoding on every file
-
-MethodCalledOnDoEndBlock:
-  Enabled: true
-
-SingleLineBlockParams:
   Enabled: false
 
-NumericLiterals:
-  Enabled: false
+#LineLength:
+  #Max: 100

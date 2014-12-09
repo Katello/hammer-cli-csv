@@ -37,30 +37,16 @@ module HammerCLICsv
       command_name 'organizations'
       desc         'import or export organizations'
 
-      option %w(--sam), :flag, 'export from SAM-1.3 or SAM-1.4'
-
       LABEL = 'Label'
       DESCRIPTION = 'Description'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, LABEL, DESCRIPTION]
-          if option_sam?
-            server = option_server || HammerCLI::Settings.get(:csv, :host)
-            username = option_username || HammerCLI::Settings.get(:csv, :username)
-            password = option_password || HammerCLI::Settings.get(:csv, :password)
-            url = "#{server}/api/organizations"
-            uri = URI(url)
-            Net::HTTP.start(uri.host, uri.port,
-                            :use_ssl => uri.scheme == 'https',
-                            :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
-              request = Net::HTTP::Get.new uri.request_uri
-              request.basic_auth(username, password)
-              response = http.request(request)
 
-              JSON.parse(response.body).each do |organization|
-                csv << [organization['name'], 1, organization['label'], organization['description']]
-              end
+          if @server_status['release'] == 'Headpin'
+            @headpin.get(:organizations).each do |organization|
+              csv << [organization['name'], 1, organization['label'], organization['description']]
             end
           else
             @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
@@ -88,16 +74,22 @@ module HammerCLICsv
           if !@existing.include? name
             print "Creating organization '#{name}'... " if option_verbose?
             @api.resource(:organizations).call(:create, {
-                                         'name' => name,
-                                         'label' => label,
-                                         'description' => line[DESCRIPTION]
-                                       })
+                'name' => name,
+                'organization' => {
+                    'name' => name,
+                    'label' => label,
+                    'description' => line[DESCRIPTION]
+                }
+            })
           else
             print "Updating organization '#{name}'... " if option_verbose?
             @api.resource(:organizations).call(:update, {
-                                         'id' => label,
-                                         'description' => line[DESCRIPTION]
-                                       })
+                'id' => foreman_organization(:name => name),
+                'organization' => {
+                    'id' => foreman_organization(:name => name),
+                    'description' => line[DESCRIPTION]
+                }
+            })
           end
           print "done\n" if option_verbose?
         end

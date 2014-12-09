@@ -1,5 +1,5 @@
 Name,Count,Organization,Manifest File,Content Set,Arch,Release
-MegaCorp,1,Mega Corporation,~/Downloads/megacorp.zip,
+MegaCorp,1,Mega Corporation,test/data/megacorp.zip,
 Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6Server
 Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6.1
 Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6.2

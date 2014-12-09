@@ -1,24 +1,38 @@
-# hammer-cli-csv
-================
+# hammer-cli-csv ![Travis # Status](https://travis-ci.org/Katello/hammer-cli-csv.svg?branch=master)
 
 ## Introduction
 
-[Hammer](https://github.com/theforeman/hammer-cli/blob/master/README.md) is a command line interface (CLI) framework which provides a core to which plugins may be added. This plugin, hammer-cli-csv, adds commands to interact with the following products: [Foreman](https://theforeman.org) standalone, [Foreman](https://theforeman.org) with [Katello](http://www.katello.org/) (Foretello), Red Hat's Satellite-6, and Red Hat's Subscription Asset Manager (SAM).
+[Hammer](https://github.com/theforeman/hammer-cli/blob/master/README.md) is a command line interface (CLI) framework which provides a core to which modules may be added. This module, hammer-cli-csv, adds commands to interact with the following products: [Foreman](https://theforeman.org) standalone, [Katello](http://www.katello.org/), Red Hat's Satellite-6, and Red Hat's Subscription Asset Manager (SAM).
 
-The purpose of this plugin's commands are to allow a convenient mechanism to both export to and import from CSV files (comma separated values). Each of the server's supported resource types, such as organizations and users, are handled.
+The purpose of this module's commands are to allow a convenient mechanism to both export to and import from CSV files (comma separated values). Each of the server's supported resource types, such as organizations and users, are handled.
 
 Some possible uses include
 
 * Import demo or development data easily and consistently
 * Export another server's data and then import into elsewhere for testing and debug
 * Export for backup and auditing
-* Export from SAM-1.3 to import into Satellite-6
+* Export from SAM-1.4 to import into Satellite-6
 
 The following sections will cover installation, usage, and examples. All of the resource types are follow in the order which generally is required for dependency resolution (eg. roles must exist to assign to users so the role section comes first).
 
 ## Installation
 
+```
+gem install hammer_cli_csv
+gem install hammer_cli_katello
+
+```
+
 ## Usage
+
+| Option | Description |
+| --csv-export | If not specified will run import. |
+| --csv-file FILE_NAME | File to import from or export to. If not specified reads or writes to/from stdin and stdout. Note: On ruby-1.8.7 this option is required. |
+| --prefix PREFIX | Convenience method to add a prefix to all Count substituted values. See examples below. |
+| --server SERVER | The server to run against. Overrides any config file value. |
+| --username USERNAME | Username for server. Overrides any config file value. |
+| --password PASSWORD | Password for user. Overrides any config file value. |
+| --verbose | Display verbose progress information during import. |
 
 ## Examples
 
@@ -31,20 +45,49 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/organizations.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the organization to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Label | Unique organization label | x |   | x | x |   |
-| Description | Organization description |   | x | x | x |   |
+| Name         | Name of the organization to update or create | x | x | x | x | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x | x |
+| Label | Unique organization label | x |   | x | x | x |
+| Description | Organization description |   | x | x | x | x |
+
+**Examples**
+
+Here is an example of a CSV file to create an organization
+
+```
+Name, Count, Label, Description
+# Start a row with a # to indicate a comment, a row to be skipped
+Mega Corporation, 1, megacorp, The number one mega company in the world!
+```
+
+If above is saved to a file such as **megacorp/organizations.csv** the following command will run import to create or update the organization.
+
+```
+$ hammer csv organizations --version --csv-file megacorp/organizations.csv
+Updating organization 'Mega Corporation'... done
+
+$ hammer csv organizations --csv-export
+"Name","Count","Label","Description"
+"Mega Corporation","1","megacorp","The number one mega company in the world!"
+
+# Import but prefix all substitution columns with a string
+$ hammer csv organizations --verbose --csv-file test/data/organizations.csv --prefix xyz
+Creating organization 'xyzMega Corporation'... done
+
+# Export and pipe to import with a new prefix
+$ hammer csv organizations --csv-export | hammer csv organizations --verbose --csv-file test/data/organizations.csv --prefix abc
+Creating organization 'abcMega Corporation'... done
+```
 
 ## Locations
 
@@ -55,15 +98,14 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/locations.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the location to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -78,15 +120,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/puppet-environments.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the puppet environments to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -101,15 +143,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/operating-systems.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the operating systems to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -124,15 +166,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/domains.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the domains to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -148,15 +190,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/architectures.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the architectures to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -171,15 +213,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/partition-tables.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the partition tables to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -196,15 +238,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/lifecycle-environments.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the lifecycle environments to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -221,15 +263,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/host-collections.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the host collections to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -246,15 +288,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/provisionings.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the provisioning templates to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -268,15 +310,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/subscriptions.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the subscriptions to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -294,16 +336,19 @@ The following sections will cover installation, usage, and examples. All of the 
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/activation-keys.csv)
 * Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Export
+    * Katello-nightly
+    * Satellite-6.0
+    * SAM-1.4
+  * Import
+    * Katello-nightly
+    * Satellite-6.0
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the activation keys to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -324,15 +369,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/hosts.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the hosts to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -353,15 +398,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/content-hosts.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the content hosts to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -389,15 +434,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/reports.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the reports to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -418,16 +463,15 @@ The following sections will cover installation, usage, and examples. All of the 
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/roles.csv)
 * Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Foreman-1.6, Foreman-nightly
+  * Katello-nightly
+  * Satellite-6.0.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the roles to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -446,15 +490,15 @@ The following sections will cover installation, usage, and examples. All of the 
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/users.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
-  * Foreman-nightly w/ Katello-nightly
-  * Satellite-6.0.3
-  * SAM-1.3, SAM-1.4
+  * Katello-nightly
+  * Satellite-6.0
+  * SAM-1.4
 
 **CSV Columns**
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Foretello | Satellite | SAM |
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the users to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
@@ -464,3 +508,35 @@ The following sections will cover installation, usage, and examples. All of the 
 | Organizations | Comma separated list of organizations |   | x | x | x |   |
 | Locations | Comma separated list of locations |   | x | x | x |   |
 | Roles | Comma separated list of role names for user |   | x | x | x |   |
+
+## Import
+
+**Overview**
+* [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=users&state=open)
+* [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/users_test.rb)
+
+**Examples**
+
+% hammer csv import -v --organizations test/data/organizations.csv --locations test/data/locations.csv
+Creating organization 'Mega Corporation'... done
+Creating organization 'Mega Subsidiary'... done
+Creating location 'Asia Pacific'... done
+Creating location 'Asia Pacific (Tokyo) Region'... done
+Creating location 'Asia Pacific (Singapore) Region'... done
+Creating location 'Asia Pacific (Sydney) Region'... done
+Creating location 'EU (Ireland) Region'... done
+Creating location 'South America (Sao Paulo) Region'... done
+Creating location 'US East (Northern Virginia) Region'... done
+Creating location 'US West (Northern California) Region'... done
+Creating location 'US West (Oregon) Region'... done
+
+# Development
+
+## Code style
+
+rubocop -R <file>
+
+## Tests
+
+The tests are meant to run against a live server.
+

@@ -9,12 +9,12 @@
 
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
-Version: 0.0.2
-Release: 1%{?dist}
+Version: 0.0.6
+Release: 0%{?dist}
 Group: Development/Languages
 License: GPLv3
 URL: https://github.com/Katello/hammer-cli-csv
-Source0: %{gemname}-%{version}.gem
+Source0: rubygem-%{gemname}-%{version}.tar.gz
 Source1: csv.yml
 
 %if !( 0%{?rhel} > 6 || 0%{?fedora} > 18 )
@@ -46,10 +46,13 @@ BuildArch: noarch
 Documentation for %{name}
 
 %prep
-%setup -q -c -T
+%setup -q -n rubygem-%{gemname}-%{version}
+%{?scl:scl enable %{scl} "}
+gem build %{gemname}.gemspec
+%{?scl:"}
 mkdir -p .%{gem_dir}
 gem install --local --install-dir .%{gem_dir} \
-            --force %{SOURCE0}
+            --force %{gemname}-%{version}.gem
 
 %install
 mkdir -p %{buildroot}%{_sysconfdir}/%{confdir}/cli.modules.d

@@ -56,20 +56,17 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
-          @api.resource(:organizations)\
-            .call(:index, {
-                    :per_page => 999999
-                  })['results'].each do |organization|
-            @api.resource(:systems)\
-              .call(:index, {
-                      'per_page' => 999999,
-                      'organization_id' => organization['id']
-                    })['results'].each do |system|
-              system = @api.resource(:systems)\
-                .call(:show, {
-                        'id' => system['uuid'],
-                        'fields' => 'full'
-                      })
+          @api.resource(:organizations).call(:index, {
+              :per_page => 999999
+          })['results'].each do |organization|
+            @api.resource(:systems).call(:index, {
+                'per_page' => 999999,
+                'organization_id' => organization['id']
+            })['results'].each do |system|
+              system = @api.resource(:systems).call(:show, {
+                  'id' => system['uuid'],
+                  'fields' => 'full'
+              })
 
               name = system['name']
               count = 1
@@ -98,10 +95,9 @@ module HammerCLICsv
               end
               products.delete!("\n")
               subscriptions = CSV.generate do |column|
-                column << @api.resource(:subscriptions)\
-                  .call(:index, {
-                          'system_id' => system['uuid']
-                        })['results'].collect do |subscription|
+                column << @api.resource(:subscriptions).call(:index, {
+                    'system_id' => system['uuid']
+                })['results'].collect do |subscription|
                   "#{subscription['product_id']}|#{subscription['product_name']}"
                 end
               end
@@ -123,11 +119,10 @@ module HammerCLICsv
 
         print 'Updating host and guest associations...' if option_verbose?
         @host_guests.each do |host_id, guest_ids|
-          @api.resource(:systems)\
-            .call(:update, {
-                    'id' => host_id,
-                    'guest_ids' => guest_ids
-                  })
+          @api.resource(:systems).call(:update, {
+              'id' => host_id,
+              'guest_ids' => guest_ids
+          })
         end
         puts 'done' if option_verbose?
       end
@@ -135,11 +130,10 @@ module HammerCLICsv
       def create_systems_from_csv(line)
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
-          @api.resource(:systems)\
-            .call(:index, {
-                    'organization_id' => line[ORGANIZATION],
-                    'per_page' => 999999
-                  })['results'].each do |system|
+          @api.resource(:systems).call(:index, {
+              'organization_id' => line[ORGANIZATION],
+              'per_page' => 999999
+          })['results'].each do |system|
             @existing[line[ORGANIZATION]][system['name']] = system['uuid'] if system
           end
         end
@@ -154,29 +148,27 @@ module HammerCLICsv
 
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating system '#{name}'..." if option_verbose?
-            system_id = @api.resource(:systems)\
-              .call(:create, {
-                      'name' => name,
-                      'organization_id' => line[ORGANIZATION],
-                      'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                      'content_view_id' => lifecycle_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                      'facts' => facts(line),
-                      'installed_products' => products(line),
-                      'type' => 'system'
-                    })['uuid']
+            system_id = @api.resource(:systems).call(:create, {
+                'name' => name,
+                'organization_id' => line[ORGANIZATION],
+                'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                'content_view_id' => lifecycle_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                'facts' => facts(line),
+                'installed_products' => products(line),
+                'type' => 'system'
+            })['uuid']
             @existing[line[ORGANIZATION]][name] = system_id
           else
             print "Updating system '#{name}'..." if option_verbose?
             puts line
-            system_id = @api.resource(:systems)\
-              .call(:update, {
-                      'id' => @existing[line[ORGANIZATION]][name],
-                      'name' => name,
-                      'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                      'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                      'facts' => facts(line),
-                      'installed_products' => products(line)
-                    })['uuid']
+            system_id = @api.resource(:systems).call(:update, {
+                'id' => @existing[line[ORGANIZATION]][name],
+                'name' => name,
+                'environment_id' => katello_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                'facts' => facts(line),
+                'installed_products' => products(line)
+            })['uuid']
           end
 
           if line[VIRTUAL] == 'Yes' && line[HOST]
@@ -212,11 +204,10 @@ module HammerCLICsv
 
       def set_host_collections(system_id, line)
         CSV.parse_line(line[SYSTEMGROUPS]).each do |hostcollection_name|
-          @api.resource(:hostcollections)\
-            .call(:add_systems, {
-                    'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
-                    'system_ids' => [system_id]
-                  })
+          @api.resource(:hostcollections).call(:add_systems, {
+              'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
+              'system_ids' => [system_id]
+          })
         end
       end
 

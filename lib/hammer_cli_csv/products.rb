@@ -25,21 +25,21 @@ module HammerCLICsv
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, LABEL, ORGANIZATION, REPOSITORY, REPOSITORY_TYPE, REPOSITORY_URL]
-          @api.resource(:organizations)\
-            .call(:index, {
-                    :per_page => 999999
-                  })['results'].each do |organization|
-            @api.resource(:products)\
-              .call(:index, {
-                      'per_page' => 999999,
-                      'enabled' => true,
-                      'organization_id' => foreman_organization(:name => organization['name'])
-                    })['results'].each do |product|
-              product['repositories'].each do |repository|
-                repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
-                repository_type += " #{repository['content_type'].capitalize}"
-                csv << [product['name'], 1, product['label'], organization['name'],
-                        repository['name'], repository_type, repository['url']]
+          @api.resource(:organizations).call(:index, {
+              :per_page => 999999
+          })['results'].each do |organization|
+            @api.resource(:products).call(:index, {
+                'per_page' => 999999,
+                'enabled' => true,
+                'organization_id' => organization['id']
+            })['results'].each do |product|
+              unless product['provider']['name'] == 'Red Hat'
+                product['repositories'].each do |repository|
+                  repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
+                  repository_type += " #{repository['content_type'].capitalize}"
+                  csv << [product['name'], 1, product['label'], organization['name'],
+                          repository['name'], repository_type, repository['url']]
+                end
               end
             end
           end
@@ -58,22 +58,20 @@ module HammerCLICsv
       def create_products_from_csv(line)
         if !@existing_products[line[ORGANIZATION]]
           @existing_products[line[ORGANIZATION]] = {}
-          @api.resource(:products)\
-            .call(:index, {
-                    'per_page' => 999999,
-                    'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                    'enabled' => true
-                  })['results'].each do |product|
+          @api.resource(:products).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+              'enabled' => true
+          })['results'].each do |product|
             @existing_products[line[ORGANIZATION]][product['name']] = product['id']
 
-            @api.resource(:repositories)\
-              .call(:index, {
-                      'page_size' => 999999, 'paged' => true,
-                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                      'product_id' => product['id'],
-                      'enabled' => true,
-                      'library' => true
-                    })['results'].each do |repository|
+            @api.resource(:repositories).call(:index, {
+                'page_size' => 999999, 'paged' => true,
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'product_id' => product['id'],
+                'enabled' => true,
+                'library' => true
+            })['results'].each do |repository|
               @existing_repositories[line[ORGANIZATION] + product['name']] ||= {}
               @existing_repositories[line[ORGANIZATION] + product['name']][repository['label']] = repository['id']
             end
@@ -89,11 +87,10 @@ module HammerCLICsv
               raise "Red Hat product '#{name}' does not exist in '#{line[ORGANIZATION]}'"
             end
 
-            product_id = @api.resource(:products)\
-              .call(:create, {
-                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                      'name' => name
-                    })['id']
+            product_id = @api.resource(:products).call(:create, {
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'name' => name
+            })['id']
             @existing_products[line[ORGANIZATION]][name] = product_id
           else
             # Nothing to update for products
@@ -105,13 +102,12 @@ module HammerCLICsv
           repository_name = namify(line[REPOSITORY], number)
 
           if !@existing_repositories[line[ORGANIZATION] + name][repository_name]
-            @api.resource(:repositories)\
-              .call(:index, {
-                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                      'library' => true,
-                      'all' => false,
-                      'product_id' => product_id
-                    })['results'].each do |repository|
+            @api.resource(:repositories).call(:index, {
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'library' => true,
+                'all' => false,
+                'product_id' => product_id
+            })['results'].each do |repository|
               @existing_repositories[line[ORGANIZATION] + name][repository['name']] = repository
             end
           end
@@ -121,15 +117,14 @@ module HammerCLICsv
             raise "Red Hat product '#{name}' does not have repository '#{repository_name}'" if line[REPOSITORY_TYPE] =~ /Red Hat/
 
             print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
-            repository = @api.resource(:repositories)\
-              .call(:create, {
-                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                      'name' => repository_name,
-                      'label' => labelize(repository_name),
-                      'product_id' => product_id,
-                      'url' => line[REPOSITORY_URL],
-                      'content_type' => content_type(line[REPOSITORY_TYPE])
-                    })
+            repository = @api.resource(:repositories).call(:create, {
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'name' => repository_name,
+                'label' => labelize(repository_name),
+                'product_id' => product_id,
+                'url' => line[REPOSITORY_URL],
+                'content_type' => content_type(line[REPOSITORY_TYPE])
+            })
             @existing_repositories[line[ORGANIZATION] + name][line[LABEL]] = repository
             puts 'done' if option_verbose?
           end

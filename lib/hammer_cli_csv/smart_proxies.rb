@@ -55,23 +55,21 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           if !@existing.include? line[URL]
             print "Creating smart proxy '#{name}'..." if option_verbose?
-            id = @api.resource(:smart_proxies)\
-              .call(:create, {
-                      'smart_proxy' => {
-                        'name' => name,
-                        'url' => line[URL]
-                      }
-                    })['id']
+            id = @api.resource(:smart_proxies).call(:create, {
+                'smart_proxy' => {
+                    'name' => name,
+                    'url' => line[URL]
+                }
+            })['id']
           else
             print "Updating smart proxy '#{name}'..." if option_verbose?
-            id = @api.resource(:smart_proxies)\
-              .call(:update, {
-                      'id' => @existing[name],
-                      'smart_proxy' => {
-                        'name' => name,
-                        'url' => line[URL]
-                      }
-                    })['smart_proxy']['id']
+            id = @api.resource(:smart_proxies).call(:update, {
+                'id' => @existing[name],
+                'smart_proxy' => {
+                    'name' => name,
+                    'url' => line[URL]
+                }
+            })['smart_proxy']['id']
           end
 
           # Update associated resources

@@ -26,9 +26,9 @@ module HammerCLICsv
           csv << [NAME, COUNT, RESOURCE, SEARCH, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
           @api.resource(:roles).call(:index, {'per_page' => 999999})['results'].each do |role|
             @api.resource(:filters).call(:index, {
-                                           'per_page' => 999999,
-                                           'search' => "role=\"#{role['name']}\""
-                                })['results'].each do |filter|
+                'per_page' => 999999,
+                'search' => "role=\"#{role['name']}\""
+            })['results'].each do |filter|
               filter = @api.resource(:filters).call(:show, 'id' => filter['id'])
 
               permissions = export_column(filter, 'permissions', 'name')
@@ -77,39 +77,39 @@ module HammerCLICsv
           if !@existing_roles[name]
             print "Creating role '#{name}'..." if option_verbose?
             role = @api.resource(:roles).call(:create, {
-                                                'name' => name
-                                              })
+                'role' => {
+                    'name' => name
+                }
+            })
             @existing_roles[name] = role['id']
           else
             print "Updating role '#{name}'..." if option_verbose?
             @api.resource(:roles).call(:update, {
-                                         'id' => @existing_roles[name]
-                                       })
+                'id' => @existing_roles[name]
+            })
           end
 
           filter_id = foreman_filter(name, line[RESOURCE], search)
           if !filter_id
             print " creating filter #{line[RESOURCE]}..." if option_verbose?
-            @api.resource(:filters)\
-              .call(:create, { 'filter' => {
-                        'role_id' => @existing_roles[name],
-                        'search' => search,
-                        'unlimited' => search.empty?,
-                        'organization_ids' => organizations,
-                        'location_ids' => locations,
-                        'permission_ids' => permissions
-                      }})
+            @api.resource(:filters).call(:create, { 'filter' => {
+                'role_id' => @existing_roles[name],
+                'search' => search,
+                'unlimited' => search.empty?,
+                'organization_ids' => organizations,
+                'location_ids' => locations,
+                'permission_ids' => permissions
+            }})
           else
             print " updating filter #{line[RESOURCE]}..."
-            @api.resource(:filters)\
-              .call(:update, {
-                      'id' => filter_id,
-                      'search' => search,
-                      'unlimited' => search.empty?,
-                      'organization_ids' => organizations,
-                      'location_ids' => locations,
-                      'permission_ids' => permissions
-                    })
+            @api.resource(:filters).call(:update, {
+                'id' => filter_id,
+                'search' => search,
+                'unlimited' => search.empty?,
+                'organization_ids' => organizations,
+                'location_ids' => locations,
+                'permission_ids' => permissions
+            })
           end
 
           puts 'done' if option_verbose?

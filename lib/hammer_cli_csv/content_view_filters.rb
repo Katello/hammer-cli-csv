@@ -20,13 +20,59 @@ module HammerCLICsv
 
       CONTENTVIEW = 'Content View'
       ORGANIZATION = 'Organization'
-      TYPE = 'Type'
       DESCRIPTION = 'Description'
+      TYPE = 'Type'
       REPOSITORIES = 'Repositories'
       RULES = 'Rules'
 
       def export
-        # TODO
+        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+          csv << [NAME, COUNT, CONTENTVIEW, ORGANIZATION, TYPE, DESCRIPTION, REPOSITORIES, RULES]
+          @api.resource(:organizations).call(:index, {
+              :per_page => 999999
+          })['results'].each do |organization|
+            composite_contentviews = []
+            @api.resource(:content_views).call(:index, {
+                'per_page' => 999999,
+                'organization_id' => organization['id'],
+                'nondefault' => true
+            })['results'].each do |contentview|
+              @api.resource(:content_view_filters).call(:index, {
+                  'content_view_id' => contentview['id']
+              })['results'].collect do |filter|
+                filter_type = "#{filter['inclusion'] == true ? 'Include' : 'Exclude'} #{filter['type']}"
+
+                case filter['type']
+                when /rpm/
+                  rules = CSV.generate do |column|
+                    column << filter['rules'].collect do |rule|
+                      if rule['version']
+                        "#{rule['name']}|=|#{rule['version']}"
+                      elsif rule['min_version'] && rule['max_version']
+                        "#{rule['name']}|-|#{rule['min_version']},#{rule['max_version']}"
+                      elsif rule['min_version']
+                        "#{rule['name']}|>|#{rule['min_version']}"
+                      elsif rule['max_version']
+                        "#{rule['name']}|<|#{rule['max_version']}"
+                      end
+                    end
+                  end
+                  rules.delete!("\n")
+                when /erratum/
+                when /package_group/
+                else
+                  raise "Unknown filter rule type '#{filter['type']}'"
+                end
+                #puts "#{filter['type']} -> #{rule}"
+
+                name = contentview['name']
+                repositories = export_column(filter, 'repositories', 'name')
+                csv << [name, 1, contentview['name'], organization['name'], filter_type, filter['description'],
+                        repositories, rules]
+              end
+            end
+          end
+        end
       end
 
       def import
@@ -41,11 +87,10 @@ module HammerCLICsv
         @existing_filters[line[ORGANIZATION]] ||= {}
         if !@existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]]
           @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]] ||= {}
-          @api.resource(:content_view_filters)\
-            .call(:index, {
-                    'per_page' => 999999,
-                    'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
-                  })['results'].each do |filter|
+          @api.resource(:content_view_filters).call(:index, {
+              'per_page' => 999999,
+              'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
+          })['results'].each do |filter|
             @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]][filter['name']] = filter['id'] if filter
           end
         end
@@ -60,36 +105,33 @@ module HammerCLICsv
           filter_id = @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]][name]
           if !filter_id
             print "Creating filter '#{name}' for content view filter '#{line[CONTENTVIEW]}'..." if option_verbose?
-            filter_id = @api.resource(:content_view_filters)\
-              .call(:create, {
-                      'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                      'name' => name,
-                      'description' => line[DESCRIPTION],
-                      'type' => filter_type(line[TYPE]),
-                      'inclusion' => filter_inclusion?(line[TYPE]),
-                      'repository_ids' => repository_ids
-                    })['id']
+            filter_id = @api.resource(:content_view_filters).call(:create, {
+                'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
+                'name' => name,
+                'description' => line[DESCRIPTION],
+                'type' => filter_type(line[TYPE]),
+                'inclusion' => filter_inclusion?(line[TYPE]),
+                'repository_ids' => repository_ids
+            })['id']
             @existing_filters[line[ORGANIZATION]][name] = filter_id
           else
             print "Updating filter '#{name}' for content view filter '#{line[CONTENTVIEW]}'..." if option_verbose?
-            @api.resource(:content_view_filters)\
-              .call(:update, {
-                      'id' => filter_id,
-                      'description' => line[DESCRIPTION],
-                      'type' => filter_type(line[TYPE]),
-                      'inclusion' => filter_inclusion?(line[TYPE]),
-                      'repository_ids' => repository_ids
-                    })
+            @api.resource(:content_view_filters).call(:update, {
+                'id' => filter_id,
+                'description' => line[DESCRIPTION],
+                'type' => filter_type(line[TYPE]),
+                'inclusion' => filter_inclusion?(line[TYPE]),
+                'repository_ids' => repository_ids
+            })
           end
 
           @existing_rules ||= {}
           @existing_rules[line[ORGANIZATION]] ||= {}
           @existing_rules[line[ORGANIZATION]][line[CONTENTVIEW]] ||= {}
-          @api.resource(:content_view_filter_rules)\
-            .call(:index, {
-                    'per_page' => 999999,
-                    'content_view_filter_id' => filter_id
-                  })['results'].each do |rule|
+          @api.resource(:content_view_filter_rules).call(:index, {
+              'per_page' => 999999,
+              'content_view_filter_id' => filter_id
+          })['results'].each do |rule|
             @existing_rules[line[ORGANIZATION]][line[CONTENTVIEW]][rule['name']] = rule
           end
 
@@ -119,11 +161,11 @@ module HammerCLICsv
 
             rule = @existing_rules[line[ORGANIZATION]][line[CONTENTVIEW]][name]
             if !rule
-              print "creating rule '#{rule}'..." if option_verbose?
+              print "." if option_verbose?
               rule = @api.resource(:content_view_filter_rules).call(:create, params)
               @existing_rules[line[ORGANIZATION]][line[CONTENTVIEW]][rule['name']] = rule
             else
-              print "updating rule '#{rule}'..." if option_verbose?
+              print "." if option_verbose?
               params['id'] = rule['id']
               @api.resource(:content_view_filter_rules).call(:update, params)
             end

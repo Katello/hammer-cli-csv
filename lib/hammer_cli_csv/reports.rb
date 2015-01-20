@@ -27,10 +27,9 @@ module HammerCLICsv
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT]
-          @api.resource(:reports)\
-            .call(:index, {
-                    'per_page' => 999999
-                  })['results'].each do |report|
+          @api.resource(:reports).call(:index, {
+              'per_page' => 999999
+          })['results'].each do |report|
             csv << [report['host_name'], 1, report['metrics'].to_json]
           end
         end
@@ -40,10 +39,9 @@ module HammerCLICsv
 
       def import
         @existing_reports = {}
-        @api.resource(:reports)\
-          .call(:index, {
-                  'per_page' => 999999
-                })['results'].each do |report|
+        @api.resource(:reports).call(:index, {
+            'per_page' => 999999
+        })['results'].each do |report|
           @existing_reports[report['name']] = report['id']
         end
 
@@ -59,28 +57,26 @@ module HammerCLICsv
           if !@existing_reports[name]
             print "Creating report '#{name}'..." if option_verbose?
             reported_at = line[TIME] || Time.now
-            report = @api.resource(:reports)\
-              .call(:create, {
-                      'host' => name,
-                      'reported_at' => reported_at,
-                      'status' => {
-                        'applied' => line[APPLIED],
-                        'restarted' => line[RESTARTED],
-                        'failed' => line[FAILED],
-                        'failed_restarts' => line[FAILED_RESTARTS],
-                        'skipped' => line[SKIPPED],
-                        'pending' => line[PENDING]
-                      },
-                      'metrics' => JSON.parse(line[METRICS]),
-                      'logs' => []
-                    })
+            report = @api.resource(:reports).call(:create, {
+                'host' => name,
+                'reported_at' => reported_at,
+                'status' => {
+                    'applied' => line[APPLIED],
+                    'restarted' => line[RESTARTED],
+                    'failed' => line[FAILED],
+                    'failed_restarts' => line[FAILED_RESTARTS],
+                    'skipped' => line[SKIPPED],
+                    'pending' => line[PENDING]
+                },
+                'metrics' => JSON.parse(line[METRICS]),
+                'logs' => []
+            })
             @existing_reports[name] = report['id']
           else
             print "Updating report '#{name}'..." if option_verbose?
-            @api.resource(:reports)\
-              .call(:update, {
-                      'id' => @existing_reports[name]
-                    })
+            @api.resource(:reports).call(:update, {
+                'id' => @existing_reports[name]
+            })
           end
 
           puts 'done' if option_verbose?

@@ -26,6 +26,7 @@ gem install hammer_cli_katello
 ## Usage
 
 | Option | Description |
+| ---------------:| --------------:|
 | --csv-export | If not specified will run import. |
 | --csv-file FILE_NAME | File to import from or export to. If not specified reads or writes to/from stdin and stdout. Note: On ruby-1.8.7 this option is required. |
 | --prefix PREFIX | Convenience method to add a prefix to all Count substituted values. See examples below. |
@@ -517,6 +518,7 @@ Creating organization 'abcMega Corporation'... done
 
 **Examples**
 
+```
 % hammer csv import -v --organizations test/data/organizations.csv --locations test/data/locations.csv
 Creating organization 'Mega Corporation'... done
 Creating organization 'Mega Subsidiary'... done
@@ -529,12 +531,13 @@ Creating location 'South America (Sao Paulo) Region'... done
 Creating location 'US East (Northern Virginia) Region'... done
 Creating location 'US West (Northern California) Region'... done
 Creating location 'US West (Oregon) Region'... done
+```
 
 # Development
 
 ## Code style
 
-rubocop -R <file>
+```rubocop -R <file>```
 
 ## Tests
 

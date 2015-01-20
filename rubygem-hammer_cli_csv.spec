@@ -10,7 +10,7 @@
 
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
-Version: 0.0.6.1
+Version: 0.0.6.2
 Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv3
@@ -70,6 +70,13 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_dir}/doc/%{gemname}-%{gemversion}
 
 %changelog
+* Tue Jan 20 2015 Jason Montleon <jmontleo@redhat.com> 0.0.6.2-1
+- Merge remote-tracking branch 'upstream/master' into SATELLITE-6.1.0
+  (jmontleo@redhat.com)
+- Merge pull request #68 from thomasmckay/full-export (thomasmckay@redhat.com)
+- lots of general clean up for SAM and robotello (thomasmckay@redhat.com)
+- Styling fixes to README (elobatocs@gmail.com)
+
 * Tue Jan 13 2015 Jason Montleon <jmontleo@redhat.com> 0.0.6.1-1
 - update versioning (jmontleo@redhat.com)
 

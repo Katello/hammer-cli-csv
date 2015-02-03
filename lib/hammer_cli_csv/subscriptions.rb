@@ -124,7 +124,7 @@ module HammerCLICsv
         args = %W{
           --server #{ @server } --username #{ @username } --password #{ @server }
           subscription upload --file #{ line[MANIFEST] }
-          -organization-id #{ foreman_organization(:name => line[ORGANIZATION]) }
+          --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) }
         }
         hammer.run(args)
 

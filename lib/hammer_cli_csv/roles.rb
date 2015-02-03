@@ -95,7 +95,7 @@ module HammerCLICsv
             @api.resource(:filters).call(:create, { 'filter' => {
                 'role_id' => @existing_roles[name],
                 'search' => search,
-                'unlimited' => search.empty?,
+                'unlimited' => search.nil? || search.empty?,
                 'organization_ids' => organizations,
                 'location_ids' => locations,
                 'permission_ids' => permissions
@@ -105,7 +105,7 @@ module HammerCLICsv
             @api.resource(:filters).call(:update, {
                 'id' => filter_id,
                 'search' => search,
-                'unlimited' => search.empty?,
+                'unlimited' => search.nil? || search.empty?,
                 'organization_ids' => organizations,
                 'location_ids' => locations,
                 'permission_ids' => permissions

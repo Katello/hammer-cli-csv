@@ -180,7 +180,7 @@ module HammerCLICsv
           create_systems_from_csv(line)
         end
 
-        print 'Updating host and guest associations...' if option_verbose?
+        print 'Updating hypervisor and guest associations...' if option_verbose?
         @host_guests.each do |host_id, guest_ids|
           @api.resource(:systems).call(:update, {
               'id' => host_id,
@@ -214,13 +214,8 @@ module HammerCLICsv
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
 
-          # TODO: w/ @daviddavis p-r
-          #subscriptions(line).each do |subscription|
-          #  katello_subscription(line[ORGANIZATION], :name => subscription[:number])
-          #end
-
           if !@existing[line[ORGANIZATION]].include? name
-            print "Creating system '#{name}'..." if option_verbose?
+            print "Creating content host '#{name}'..." if option_verbose?
             system_id = @api.resource(:systems).call(:create, {
                 'name' => name,
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
@@ -228,11 +223,12 @@ module HammerCLICsv
                 'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                 'facts' => facts(name, line),
                 'installed_products' => products(line),
+                'service_level' => line[SLA],
                 'type' => 'system'
             })['uuid']
             @existing[line[ORGANIZATION]][name] = system_id
           else
-            print "Updating system '#{name}'..." if option_verbose?
+            print "Updating content host '#{name}'..." if option_verbose?
             system_id = @api.resource(:systems).call(:update, {
                 'id' => @existing[line[ORGANIZATION]][name],
                 'system' => {
@@ -241,17 +237,20 @@ module HammerCLICsv
                     'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                     'facts' => facts(name, line),
                     'installed_products' => products(line)
-                }
+                },
+                'installed_products' => products(line),  # TODO: http://projects.theforeman.org/issues/9191,
+                'service_level' => line[SLA]
             })['uuid']
           end
 
           if line[VIRTUAL] == 'Yes' && line[HOST]
-            raise "Host system '#{line[HOST]}' not found" if !@existing[line[ORGANIZATION]][line[HOST]]
+            raise "Content host '#{line[HOST]}' not found" if !@existing[line[ORGANIZATION]][line[HOST]]
             @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] ||= []
             @host_guests[@existing[line[ORGANIZATION]][line[HOST]]] << "#{line[ORGANIZATION]}/#{name}"
           end
 
-          set_host_collections(system_id, line)
+          update_host_collections(system_id, line)
+          update_subscriptions(system_id, line)
 
           puts 'done' if option_verbose?
         end
@@ -263,25 +262,20 @@ module HammerCLICsv
 
       def facts(name, line)
         facts = {}
+        facts['system.certificate_version'] = '3.2'  # Required for auto-attach to work
         facts['network.hostname'] = name
         facts['cpu.core(s)_per_socket'] = line[CORES]
         facts['cpu.cpu_socket(s)'] = line[SOCKETS]
         facts['memory.memtotal'] = line[RAM]
         facts['uname.machine'] = line[ARCHITECTURE]
-        if line[OPERATINGSYSTEM].nil?
-          facts['distribution.name'] = nil
-          facts['distribution.version'] = nil
-        elsif line[OPERATINGSYSTEM].index(' ')
-          (facts['distribution.name'], facts['distribution.version']) = line[OPERATINGSYSTEM].split(' ')
-        else
-          (facts['distribution.name'], facts['distribution.version']) = ['RHEL', line[OPERATINGSYSTEM]]
-        end
+        (facts['distribution.name'], facts['distribution.version']) = os_name_version(line[OPERATINGSYSTEM])
         facts['virt.is_guest'] = line[VIRTUAL] == 'Yes' ? true : false
         facts['virt.uuid'] = "#{line[ORGANIZATION]}/#{name}" if facts['virt.is_guest']
+        facts['cpu.cpu(s)'] = 1
         facts
       end
 
-      def set_host_collections(system_id, line)
+      def update_host_collections(system_id, line)
         return nil if !line[HOSTCOLLECTIONS]
         CSV.parse_line(line[HOSTCOLLECTIONS]).each do |hostcollection_name|
           @api.resource(:host_collections).call(:add_systems, {
@@ -291,6 +285,18 @@ module HammerCLICsv
         end
       end
 
+      def os_name_version(operatingsystem)
+        if operatingsystem.nil?
+          name = nil
+          version = nil
+        elsif operatingsystem.index(' ')
+          (name, version) = operatingsystem.split(' ')
+        else
+          (name, version) = ['RHEL', operatingsystem]
+        end
+        [name, version]
+      end
+
       def products(line)
         return nil if !line[PRODUCTS]
         products = CSV.parse_line(line[PRODUCTS]).collect do |product_details|
@@ -298,19 +304,40 @@ module HammerCLICsv
           # TODO: these get passed straight through to candlepin; probably would be better to process in server
           #       to allow underscore product_id here
           (product['productId'], product['productName']) = product_details.split('|')
+          product['arch'] = line[ARCHITECTURE]
+          product['version'] = os_name_version(line[OPERATINGSYSTEM])[1]
           product
         end
         products
       end
 
-      def subscriptions(line)
-        return nil if !line[SUBSCRIPTIONS]
-        subscriptions = CSV.parse_line(line[SUBSCRIPTIONS]).collect do |subscription_details|
-          subscription = {}
-          (subscription[:quantity], subscription[:number], subscription[:name]) = subscription_details.split('|')
-          subscription
+      def update_subscriptions(content_host_id, line)
+        existing_subscriptions = @api.resource(:subscriptions).call(:index, {
+            'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+            'per_page' => 999999,
+            'system_id' => content_host_id
+        })['results']
+        if existing_subscriptions.length > 0
+          @api.resource(:systems).call(:remove_subscriptions, {
+            'id' => content_host_id,
+            'subscriptions' => existing_subscriptions
+          })
         end
-        subscriptions
+
+        return if line[SUBSCRIPTIONS].nil? || line[SUBSCRIPTIONS].empty?
+
+        subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |details|
+          (amount, sku, name) = details.split('|')
+          {
+            :id => katello_subscription(line[ORGANIZATION], :name => name),
+            :quantity => (amount.nil? || amount.empty? || amount == 'Automatic') ? 0 : amount
+          }
+        end
+
+        @api.resource(:subscriptions).call(:create, {
+            'system_id' => content_host_id,
+            'subscriptions' => subscriptions
+        })
       end
     end
   end

@@ -10,7 +10,7 @@
 
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
-Version: 0.0.6.2
+Version: 0.0.6.3
 Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv3
@@ -67,5 +67,8 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_dir}/doc/%{gemname}-%{gemversion}
 
 %changelog
+* Tue Feb 10 2015 Jason Montleon <jmontleo@redhat.com> 0.0.6.3-1
+- add specfile and csv.yml (komidore64@gmail.com)
+
 * Wed Mar 26 2014 Mike McCune <mmccune@redhat.com> 0.0.1-1
 - initial version (mmccune@redhat.com)

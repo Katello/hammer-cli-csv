@@ -22,9 +22,7 @@ Source1: csv.yml
 Requires: ruby(abi)
 %endif
 Requires: ruby(rubygems)
-Requires: rubygem(hammer_cli)
-Requires: rubygem(foreman_api)
-Requires: rubygem(katello_api)
+Requires: rubygem(hammer_cli_katello)
 BuildRequires: ruby(rubygems)
 %if 0%{?fedora} || 0%{?rhel} > 6
 BuildRequires: rubygems-devel
@@ -35,7 +33,6 @@ Provides: rubygem(%{gemname}) = %{gemversion}
 
 %description
 CSV input/output command plugin for the Hammer CLI.
-
 
 %package doc
 Summary: Documentation for %{name}
@@ -70,78 +67,5 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_dir}/doc/%{gemname}-%{gemversion}
 
 %changelog
-* Tue Jan 20 2015 Jason Montleon <jmontleo@redhat.com> 0.0.6.2-1
-- Merge remote-tracking branch 'upstream/master' into SATELLITE-6.1.0
-  (jmontleo@redhat.com)
-- Merge pull request #68 from thomasmckay/full-export (thomasmckay@redhat.com)
-- lots of general clean up for SAM and robotello (thomasmckay@redhat.com)
-- Styling fixes to README (elobatocs@gmail.com)
-
-* Tue Jan 13 2015 Jason Montleon <jmontleo@redhat.com> 0.0.6.1-1
-- update versioning (jmontleo@redhat.com)
-
-* Tue Dec 09 2014 Jason Montleon <jmontleo@redhat.com> 0.0.6-1
-- set up hammer-cli-csv to use distribution tagger (jmontleo@redhat.com)
-- Update to 0.0.6
-* Tue Jul 22 2014 Jason Montleon <jmontleo@redhat.com> 0.0.2-1
-- fix version in rpm spec (jmontleo@redhat.com)
-
-* Tue Jul 22 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-11
-- Merge remote-tracking branch 'upstream/master' into SATELLITE-6.0.4
-  (jmontleo@redhat.com)
-- First pass at documentation (thomasmckay@redhat.com)
-- version-0.2.2 - updated to run on ruby 1.8.7 (thomasmckay@redhat.com)
-- corrected syntax for ruby-1.8.7, gitignore .gem file (thomasmckay@redhat.com)
-- preparing gemspec for rubygems push (komidore64@gmail.com)
-- beginning to add provisioning templates (thomasmckay@redhat.com)
-
-* Tue Jul 15 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-10
-- Merge remote-tracking branch 'upstream/master' into SATELLITE-6.0.4
-  (jmontleo@redhat.com)
-- rubocop - removed all offences (thomasmckay@redhat.com)
-- content-views and content-view-filters and myriad more
-  (thomasmckay@redhat.com)
-
-* Wed Jul 09 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-9
-- myriad changes... all for the better! (thomasmckay@redhat.com)
-- corrected threading (thomasmckay@redhat.com)
-- updates to csv (thomasmckay@redhat.com)
-
-* Thu May 22 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-8
-- Merge remote-tracking branch 'upstream/master' (jmontleo@redhat.com)
-- a lot of fixes and updates across many resources to match katello updates
-  (thomasmckay@redhat.com)
-- update releasers (jmontleo@redhat.com)
-- rubocop - fixes (thomasmckay@redhat.com)
-- removed commented lines from roles.csv (thomasmckay@redhat.com)
-- + updated 'hammer csv import' command + fixed import/export roles
-  (thomasmckay@redhat.com)
-
-* Sat May 17 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-7
-- Merge remote-tracking branch 'upstream/master' (jmontleo@redhat.com)
-- export smart proxies (thomasmckay@redhat.com)
-
-* Tue May 06 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-6
-- Merge remote-tracking branch 'upstream/master' (jmontleo@redhat.com)
-- fixing limit on activation key (thomasmckay@redhat.com)
-
-* Mon May 05 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-5
-- correct macros to work with RHEL 7 (jmontleo@redhat.com)
-
-* Wed Apr 30 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-4
-- Merge remote-tracking branch 'upstream/master' (jmontleo@redhat.com)
-- removed hammer-it (thomasmckay@redhat.com)
-- Rehomed command-classes so that Clamp would work correctly
-  (ggainey@redhat.com)
-
-* Thu Apr 17 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-3
-- Merge remote-tracking branch 'upstream/master' (jmontleo@redhat.com)
-- csv-scope - lots of cleanup (thomasmckay@redhat.com)
-- fixes #4926 - systems test and rubocop cleanup (thomasmckay@redhat.com)
-
-* Fri Mar 28 2014 Jason Montleon <jmontleo@redhat.com> 0.0.1-2
-- new package built with tito
-
 * Wed Mar 26 2014 Mike McCune <mmccune@redhat.com> 0.0.1-1
 - initial version (mmccune@redhat.com)
-

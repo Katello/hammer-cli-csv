@@ -20,10 +20,10 @@ rerun.txt
 pickle-email-*.html
 .project
 config/initializers/secret_token.rb
-config/cli_config.yml
-config/cli.modules.d/csv.yml
-config/cli.modules.d/foreman.yml
-config/cli.modules.d/katello.yml
+config/*.yml
+config/cli.modules.d/*.yml
+!config/*.template.yml
+!config/cli.modules.d/*.template.yml
 test/data/*.zip
 test/config.yml
 .ruby-version

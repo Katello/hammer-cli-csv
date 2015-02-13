@@ -31,9 +31,30 @@ module HammerCLIForeman
   end
 end
 
-
 def hammer(context=nil)
   HammerCLI::MainCommand.new("", context || HammerCLI::Settings.dump)
+end
+
+require 'apipie-bindings'
+def api
+  @server = HammerCLI::Settings.settings[:_params][:host] ||
+    HammerCLI::Settings.get(:csv, :host) ||
+    HammerCLI::Settings.get(:katello, :host) ||
+    HammerCLI::Settings.get(:foreman, :host)
+  @username = HammerCLI::Settings.settings[:_params][:username] ||
+    HammerCLI::Settings.get(:csv, :username) ||
+    HammerCLI::Settings.get(:katello, :username) ||
+    HammerCLI::Settings.get(:foreman, :username)
+  @password = HammerCLI::Settings.settings[:_params][:password] ||
+    HammerCLI::Settings.get(:csv, :password) ||
+    HammerCLI::Settings.get(:katello, :password) ||
+    HammerCLI::Settings.get(:foreman, :password)
+  @api = ApipieBindings::API.new({
+                                   :uri => @server,
+                                   :username => @username,
+                                   :password => @password,
+                                   :api_version => 2
+                                 })
 end
 
 def capture
@@ -67,8 +88,6 @@ def set_user(username, password='changeme')
                            })
 end
 
-
-#require File.join(File.dirname(__FILE__), 'test_output_adapter')
 require File.join(File.dirname(__FILE__), 'apipie_resource_mock')
 require File.join(File.dirname(__FILE__), 'helpers/command')
 require File.join(File.dirname(__FILE__), 'helpers/resource_disabled')

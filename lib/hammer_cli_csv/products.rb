@@ -133,11 +133,7 @@ module HammerCLICsv
           if repository['sync_state'] == 'finished'
             puts 'already done' if option_verbose?
           else
-            if line[REPOSITORY_TYPE] =~ /Red Hat/
-              print 'skipping Red Hat repo sync... so slow!... '
-            else
-              sync_repository(line, repository)
-            end
+            sync_repository(line, repository)
             print "done\n" if option_verbose?
           end
         end

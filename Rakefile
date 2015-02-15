@@ -15,6 +15,19 @@ rescue
   puts "Rubocop not loaded"
 end
 
+namespace :gettext do
+  desc "Update pot file"
+  task :find do
+    require "hammer_cli_csv/version"
+    require "hammer_cli_csv/i18n"
+    require 'gettext/tools'
+
+    domain = HammerCLICsv::I18n::LocaleDomain.new
+    GetText.update_pofiles(domain.domain_name, domain.translated_files, "#{domain.domain_name} #{HammerCLICsv.version.to_s}", :po_root => domain.locale_dir)
+  end
+end
+
+
 task :default do
   Rake::Task['rubocop'].execute
 end

@@ -19,6 +19,8 @@ Source1: csv.yml
 
 %if 0%{?rhel} == 6 || 0%{?fedora} < 19
 Requires: ruby(abi)
+%else
+Requires: ruby(release)
 %endif
 Requires: ruby(rubygems)
 Requires: rubygem(hammer_cli_katello)

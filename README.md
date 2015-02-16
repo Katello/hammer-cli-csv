@@ -26,7 +26,7 @@ gem install hammer_cli_katello
 ## Usage
 
 | Option | Description |
-| ---------------:| --------------:|
+| ---------------:| :--------------|
 | --csv-export | If not specified will run import. |
 | --csv-file FILE_NAME | File to import from or export to. If not specified reads or writes to/from stdin and stdout. Note: On ruby-1.8.7 this option is required. |
 | --prefix PREFIX | Convenience method to add a prefix to all Count substituted values. See examples below. |
@@ -257,15 +257,18 @@ Creating organization 'abcMega Corporation'... done
 
 ## Host Collections
 
+| Additional arguments | Description |
+| ---------------:| :--------------|
+| --organization | Only process organization matching this name |
+
 **Overview**
 * [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=host-collections&state=open)
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/host_collections_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/host-collections.csv)
 * Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
+  * Katello-nightly, Katello-2.1, Katello-2.2
+  * Satellite-6.0, Satellite-6.1
   * SAM-1.4
 
 **CSV Columns**
@@ -392,14 +395,17 @@ Creating organization 'abcMega Corporation'... done
 
 ## Content Hosts
 
+| Additional arguments | Description |
+| ---------------:| :--------------|
+| --organization | Only process organization matching this name |
+
 **Overview**
 * [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=content-hosts&state=open)
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/content_hosts_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/content-hosts.csv)
 * Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
+  * Katello-nightly, Katello-2.1, Katello-2.2
   * Satellite-6.0
   * SAM-1.4
 

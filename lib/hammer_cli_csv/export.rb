@@ -57,7 +57,7 @@ module HammerCLICsv
                                   domains architectures partition_tables lifecycle_environments
                                   provisioning_templates
                                   hosts reports )
-          skipped_resources += %w( subscriptions content_hosts roles users )  # TODO: not implemented yet
+          skipped_resources += %w( subscriptions roles users )  # TODO: not implemented yet
         else
           @api = ApipieBindings::API.new({
                                            :uri => @server,

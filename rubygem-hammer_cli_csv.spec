@@ -1,23 +1,24 @@
 %global gemname hammer_cli_csv
 %global confdir hammer
 
-%if 0%{?rhel}
+%if 0%{?rhel} < 7
 %global gem_dir /usr/lib/ruby/gems/1.8
 %endif
 
-%global geminstdir %{gem_dir}/gems/%{gemname}-%{version}
+%global geminstdir %{gem_dir}/gems/%{gemname}-%{gemversion}
+%global gemversion 0.0.6
 
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
-Version: 0.0.6
+Version: 0.0.6.3
 Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv3
 URL: https://github.com/Katello/hammer-cli-csv
-Source0: %{gemname}-%{version}.gem
+Source0: %{gemname}-%{gemversion}.gem
 Source1: csv.yml
 
-%if 0%{?rhel} == 6 || 0%{?fedora} < 19
+%if !( 0%{?rhel} > 6 || 0%{?fedora} > 18 )
 Requires: ruby(abi)
 %else
 Requires: ruby(release)
@@ -25,12 +26,12 @@ Requires: ruby(release)
 Requires: ruby(rubygems)
 Requires: rubygem(hammer_cli_katello)
 BuildRequires: ruby(rubygems)
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 6
 BuildRequires: rubygems-devel
 %endif
 BuildRequires: ruby
 BuildArch: noarch
-Provides: rubygem(%{gemname}) = %{version}
+Provides: rubygem(%{gemname}) = %{gemversion}
 
 %description
 CSV input/output command plugin for the Hammer CLI.
@@ -45,7 +46,7 @@ BuildArch: noarch
 Documentation for %{name}
 
 %prep
-%setup -q -c -T
+%setup -n %{gemname}-%{gemversion} -T -c
 mkdir -p .%{gem_dir}
 gem install --local --install-dir .%{gem_dir} \
             --force %{SOURCE0}
@@ -61,12 +62,15 @@ cp -pa .%{gem_dir}/* \
 %dir %{geminstdir}
 %{geminstdir}/lib
 %config(noreplace) %{_sysconfdir}/%{confdir}/cli.modules.d/csv.yml
-%exclude %{gem_dir}/cache/%{gemname}-%{version}.gem
-%{gem_dir}/specifications/%{gemname}-%{version}.gemspec
+%exclude %{gem_dir}/cache/%{gemname}-%{gemversion}.gem
+%{gem_dir}/specifications/%{gemname}-%{gemversion}.gemspec
 
 %files doc
-%doc %{gem_dir}/doc/%{gemname}-%{version}
+%doc %{gem_dir}/doc/%{gemname}-%{gemversion}
 
 %changelog
+* Tue Feb 10 2015 Jason Montleon <jmontleo@redhat.com> 0.0.6.3-1
+- add specfile and csv.yml (komidore64@gmail.com)
+
 * Wed Mar 26 2014 Mike McCune <mmccune@redhat.com> 0.0.1-1
 - initial version (mmccune@redhat.com)

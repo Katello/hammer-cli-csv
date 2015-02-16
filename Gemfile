@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 gemspec
 
+gem 'gettext', '~> 2.0'
+
 group :test do
   gem 'rake'
   gem 'thor'

@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w(lib)
 
   spec.add_dependency('hammer_cli_katello')
-
+  spec.add_dependency("gettext", "~> 2.0")
   spec.add_development_dependency("rubocop", "0.24.1")
 
 end

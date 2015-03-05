@@ -66,6 +66,9 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_dir}/doc/%{gemname}-%{version}
 
 %changelog
+* Thu Mar 05 2015 Eric D. Helms <ericdhelms@gmail.com>
+- Require rubygems-devel in all cases. (ericdhelms@gmail.com)
+
 * Wed Mar 04 2015 Adam Price <komidore64@gmail.com> 1.0.0-1
 - new package built with tito
 

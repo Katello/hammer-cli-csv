@@ -25,9 +25,7 @@ Requires: ruby(release)
 Requires: ruby(rubygems)
 Requires: rubygem(hammer_cli_katello)
 BuildRequires: ruby(rubygems)
-%if 0%{?fedora}
 BuildRequires: rubygems-devel
-%endif
 BuildRequires: ruby
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}

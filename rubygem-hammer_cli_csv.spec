@@ -1,10 +1,6 @@
 %global gemname hammer_cli_csv
 %global confdir hammer
 
-%if 0%{?rhel}
-%global gem_dir /usr/lib/ruby/gems/1.8
-%endif
-
 %global geminstdir %{gem_dir}/gems/%{gemname}-%{version}
 
 Summary: CSV input/output command plugin for the Hammer CLI

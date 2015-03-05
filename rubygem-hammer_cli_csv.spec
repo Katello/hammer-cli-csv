@@ -6,7 +6,7 @@
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
 Version: 1.0.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Group: Development/Languages
 License: GPLv3
 URL: https://github.com/Katello/hammer-cli-csv
@@ -62,6 +62,9 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_dir}/doc/%{gemname}-%{version}
 
 %changelog
+* Thu Mar 05 2015 Eric D. Helms <ericdhelms@gmail.com> 1.0.0-4
+- Remove gem_dir definition. (ericdhelms@gmail.com)
+
 * Thu Mar 05 2015 Eric D. Helms <ericdhelms@gmail.com> 1.0.0-3
 - Adding default configuration for tags. (ericdhelms@gmail.com)
 

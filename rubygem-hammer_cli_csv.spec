@@ -13,7 +13,7 @@ URL: https://github.com/Katello/hammer-cli-csv
 Source0: %{gemname}-%{version}.gem
 Source1: csv.yml
 
-%if 0%{?rhel} == 6 || 0%{?fedora} < 19
+%if 0%{?rhel} == 6
 Requires: ruby(abi)
 %else
 Requires: ruby(release)

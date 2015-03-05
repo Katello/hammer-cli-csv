@@ -10,7 +10,7 @@
 Summary: CSV input/output command plugin for the Hammer CLI
 Name: rubygem-%{gemname}
 Version: 1.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group: Development/Languages
 License: GPLv3
 URL: https://github.com/Katello/hammer-cli-csv
@@ -66,6 +66,11 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_dir}/doc/%{gemname}-%{version}
 
 %changelog
+* Thu Mar 05 2015 Eric D. Helms <ericdhelms@gmail.com> 1.0.0-2
+- Adding basic releasers configuration for Koji. (ericdhelms@gmail.com)
+- Switch to ReleaseTagger for tito (ericdhelms@gmail.com)
+- Require rubygems-devel in all cases. (ericdhelms@gmail.com)
+
 * Thu Mar 05 2015 Eric D. Helms <ericdhelms@gmail.com>
 - Require rubygems-devel in all cases. (ericdhelms@gmail.com)
 

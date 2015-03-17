@@ -18,6 +18,8 @@ module HammerCLICsv
       command_name 'content-view-filters'
       desc         'import or export content-view-filters'
 
+      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+
       CONTENTVIEW = 'Content View'
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
@@ -31,6 +33,8 @@ module HammerCLICsv
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
+            next if option_organization && organization['name'] != option_organization
+
             composite_contentviews = []
             @api.resource(:content_views).call(:index, {
                 'per_page' => 999999,
@@ -84,6 +88,8 @@ module HammerCLICsv
       end
 
       def create_filters_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         @existing_filters[line[ORGANIZATION]] ||= {}
         if !@existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]]
           @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]] ||= {}

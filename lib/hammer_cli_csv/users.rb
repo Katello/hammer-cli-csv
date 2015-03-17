@@ -20,11 +20,12 @@ module HammerCLICsv
       EMAIL = 'Email'
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
+      ADMIN = 'Administrator'
       ROLES = 'Roles'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ROLES]
+          csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ADMIN, ROLES]
           @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
             if user['organizations']
               organizations = CSV.generate do |column|
@@ -50,9 +51,10 @@ module HammerCLICsv
               end
               roles.delete!("\n")
             end
+            admin = user['admin'] ? 'Yes' : 'No'
             if user['login'] != 'admin' && !user['login'].start_with?('hidden-')
               csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail'],
-                      organizations, locations, roles]
+                      organizations, locations, admin, roles]
             end
           end
         end
@@ -104,6 +106,7 @@ module HammerCLICsv
                                        'mail' => line[EMAIL],
                                        'password' => 'redhat',
                                        'auth_source_id' => 1,  # INTERNAL auth
+                                       'admin' => line[ADMIN] == 'Yes' ? true : false,
                                        'role_ids' => roles,
                                        'organization_ids' => organizations,
                                        'location_ids' => locations
@@ -122,6 +125,7 @@ module HammerCLICsv
                                        'password' => 'redhat',
                                        'mail' => line[EMAIL],
                                        'role_ids' => roles,
+                                       'admin' => line[ADMIN] == 'Yes' ? true : false,
                                        'organization_ids' => organizations,
                                        'location_ids' => locations
                                      }

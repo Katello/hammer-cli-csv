@@ -31,6 +31,8 @@ module HammerCLICsv
       command_name 'lifecycle-environments'
       desc         'import or export lifecycle environments'
 
+      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+
       ORGANIZATION = 'Organization'
       PRIORENVIRONMENT = 'Prior Environment'
       DESCRIPTION = 'Description'
@@ -41,14 +43,16 @@ module HammerCLICsv
           @api.resource(:organizations).call(:index, {
               'per_page' => 999999
           })['results'].each do |organization|
+            next if option_organization && organization['name'] != option_organization
+
             @api.resource(:lifecycle_environments).call(:index, {
                 'per_page' => 999999,
                 'organization_id' => organization['id']
-            })['results'].each do |environment|
+            })['results'].sort { |a, b| a['created_at'] <=> b['created_at'] }.each do |environment|
               if environment['name'] != 'Library'
                 name = environment['name']
                 count = 1
-                prior = environment['prior']
+                prior = environment['prior']['name']
                 description = environment['description']
                 csv << [name, count, organization['name'], prior, description]
               end
@@ -77,6 +81,8 @@ module HammerCLICsv
       end
 
       def create_environments_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
           prior = namify(line[PRIORENVIRONMENT], number)

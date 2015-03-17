@@ -15,6 +15,8 @@ module HammerCLICsv
       command_name 'products'
       desc         'import or export products'
 
+      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+
       LABEL = 'Label'
       ORGANIZATION = 'Organization'
       REPOSITORY = 'Repository'
@@ -28,18 +30,17 @@ module HammerCLICsv
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
+            next if option_organization && organization['name'] != option_organization
             @api.resource(:products).call(:index, {
                 'per_page' => 999999,
                 'enabled' => true,
                 'organization_id' => organization['id']
             })['results'].each do |product|
-              unless product['provider']['name'] == 'Red Hat'
-                product['repositories'].each do |repository|
-                  repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
-                  repository_type += " #{repository['content_type'].capitalize}"
-                  csv << [product['name'], 1, product['label'], organization['name'],
-                          repository['name'], repository_type, repository['url']]
-                end
+              product['repositories'].each do |repository|
+                repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
+                repository_type += " #{repository['content_type'].capitalize}"
+                csv << [product['name'], 1, product['label'], organization['name'],
+                        repository['name'], repository_type, repository['url']]
               end
             end
           end
@@ -55,7 +56,11 @@ module HammerCLICsv
         end
       end
 
+      # FIXME: TODO remove this rubocop
+      # rubocop:disable CyclomaticComplexity
       def create_products_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         if !@existing_products[line[ORGANIZATION]]
           @existing_products[line[ORGANIZATION]] = {}
           @api.resource(:products).call(:index, {
@@ -97,7 +102,7 @@ module HammerCLICsv
             print "Updating product '#{name}'..." if option_verbose?
           end
           @existing_repositories[line[ORGANIZATION] + name] = {}
-          print "done\n" if option_verbose?
+          puts "done" if option_verbose?
 
           repository_name = namify(line[REPOSITORY], number)
 
@@ -134,7 +139,7 @@ module HammerCLICsv
             puts 'already done' if option_verbose?
           else
             sync_repository(line, repository)
-            print "done\n" if option_verbose?
+            puts "done" if option_verbose?
           end
         end
 
@@ -156,8 +161,8 @@ module HammerCLICsv
       end
 
       def sync_repository(line, repository)
-        # TODO: --server needs to come from config/settings
-        args = %W{ repository synchronize
+        args = %W{ --server #{ @server } --username #{ @username } --password #{ @password }
+                   repository synchronize
                    --id #{ repository['id'] }
                    --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) } }
         hammer.run(args)

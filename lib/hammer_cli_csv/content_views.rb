@@ -15,45 +15,28 @@ module HammerCLICsv
       command_name 'content-views'
       desc         'import or export content-views'
 
+      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+
       LABEL = 'Label'
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
       COMPOSITE = 'Composite'
       REPOSITORIES = 'Repositories or Composites'
-      FILTERS = 'Filters'
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, FILTERS]
+          csv << [NAME, COUNT, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
+            next if option_organization && organization['name'] != option_organization
+
             composite_contentviews = []
             @api.resource(:content_views).call(:index, {
                 'per_page' => 999999,
                 'organization_id' => organization['id'],
                 'nondefault' => true
             })['results'].each do |contentview|
-
-              filters = CSV.generate do |column|
-                column << @api.resource(:content_view_filters).call(:index, {
-                    'content_view_id' => contentview['id']
-                })['results'].collect do |filter|
-                  rules = filter['rules'].collect do |rule|
-                    rule['name']
-                  end
-                  in_or_out = filter['inclusion'] == true ? 'Include' : 'Exclude'
-                  if filter['type'] == 'rpm'
-                    "#{ in_or_out }|#{ filter['type'] }|#{ rules.join(',')}"
-                  elsif filter['type'] == 'erratum'
-                    "#{ in_or_out }|#{ filter['type'] }|#{ rules['types'].join(',')}"
-                  else
-                    "???? #{filter['type']}"
-                  end
-                end
-              end
-              filters.delete!("\n")
-
               name = contentview['name']
               label = contentview['label']
               orgname = organization['name']
@@ -65,10 +48,10 @@ module HammerCLICsv
                   end
                 end
                 contentviews.delete!("\n")
-                composite_contentviews << [name, 1, label, orgname, composite, contentviews, filters]
+                composite_contentviews << [name, 1, label, orgname, composite, contentviews]
               else
                 repositories = export_column(contentview, 'repositories', 'name')
-                csv << [name, 1, label, orgname, composite, repositories, filters]
+                csv << [name, 1, label, orgname, composite, repositories]
               end
             end
             composite_contentviews.each do |contentview|
@@ -87,6 +70,8 @@ module HammerCLICsv
       end
 
       def create_contentviews_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         if !@existing_contentviews[line[ORGANIZATION]]
           @existing_contentviews[line[ORGANIZATION]] ||= {}
           @api.resource(:content_views).call(:index, {
@@ -103,7 +88,7 @@ module HammerCLICsv
         if is_composite
           composite_ids = collect_column(line[REPOSITORIES]) do |composite|
             # TODO: export version and use it here
-            katello_contentviewversion(line[ORGANIZATION], composite, 1)
+            katello_contentviewversion(line[ORGANIZATION], composite)
           end
         else
           repository_ids = collect_column(line[REPOSITORIES]) do |repository|

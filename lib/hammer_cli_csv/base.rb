@@ -639,12 +639,12 @@ module HammerCLICsv
                   {
                     :per_page => 999999,
                     'organization_id' => foreman_organization(:name => organization),
-                    'search' => "name:\"#{options[:name]}\""
+                    'search' => search_string('host-collections',options[:name])
                   })['results'].each do |hostcollection|
             @hostcollections[organization][hostcollection['name']] = hostcollection['id'] if hostcollection
           end
           options[:id] = @hostcollections[organization][options[:name]]
-          raise "System group '#{options[:name]}' not found" if !options[:id]
+          raise "Host collection '#{options[:name]}' not found" if !options[:id]
         end
         result = options[:id]
       else
@@ -652,7 +652,7 @@ module HammerCLICsv
         options[:name] = @hostcollections.key(options[:id])
         if !options[:name]
           hostcollection = @api.resource(:host_collections).call(:show, {'id' => options[:id]})
-          raise "System group '#{options[:name]}' not found" if !hostcollection || hostcollection.empty?
+          raise "Host collection '#{options[:name]}' not found" if !hostcollection || hostcollection.empty?
           options[:name] = hostcollection['name']
           @hostcollections[options[:name]] = options[:id]
         end
@@ -749,6 +749,18 @@ module HammerCLICsv
             }
         })
       end if locations && !locations.empty?
+    end
+
+    private
+
+    def search_string(resource, name)
+      operator = case resource
+                 when "gpg-key", "sync-plan", "lifecycle-environment", "host-collections"
+                   @server_status['version'] && @server_status['version'].starts_with?('1.7') ? '=' : ':'
+                 else
+                   ':'
+                 end
+      "name#{operator}\"#{name}\""
     end
   end
 end

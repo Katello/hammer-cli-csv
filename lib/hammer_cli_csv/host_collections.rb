@@ -9,20 +9,6 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-#
-# -= System Groups CSV =-
-#
-# Columns
-#   Name
-#     - System group name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "group%d" -> "group1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-#   Org Label
-#   Limit
-#   Description
-#
 
 require 'hammer_cli'
 require 'json'
@@ -34,6 +20,8 @@ module HammerCLICsv
       command_name 'host-collections'
       desc         'import or export host collections'
 
+      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+
       ORGANIZATION = 'Organization'
       LIMIT = 'Limit'
       DESCRIPTION = 'Description'
@@ -43,6 +31,7 @@ module HammerCLICsv
           csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
           if @server_status['release'] == 'Headpin'
             @headpin.get(:organizations).each do |organization|
+              next if option_organization && organization['name'] != option_organization
               @headpin.get("organizations/#{organization['label']}/system_groups").each do |systemgroup|
                 csv << [systemgroup['name'], 1, organization['name'],
                         systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : systemgroup['max_systems'],
@@ -51,6 +40,7 @@ module HammerCLICsv
             end
           else
             @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
+              next if option_organization && organization['name'] != option_organization
               @api.resource(:host_collections).call(:index, {
                   'organization_id' => organization['id']
               })['results'].each do |hostcollection|
@@ -72,6 +62,8 @@ module HammerCLICsv
       end
 
       def create_hostcollections_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
           @api.resource(:host_collections).call(:index, {

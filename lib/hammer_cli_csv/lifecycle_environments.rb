@@ -93,6 +93,7 @@ module HammerCLICsv
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'name' => name,
                 'prior' => lifecycle_environment(line[ORGANIZATION], :name => prior),
+                'prior_id' => lifecycle_environment(line[ORGANIZATION], :name => prior),
                 'description' => line[DESCRIPTION]
             })
           else
@@ -102,7 +103,6 @@ module HammerCLICsv
                 'name' => name,
                 'new_name' => name,
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'prior' => prior,
                 'description' => line[DESCRIPTION]
             })
           end

@@ -13,9 +13,9 @@ module HammerCLICsv
   class CsvCommand
     class ActivationKeysCommand < BaseCommand
       command_name 'activation-keys'
-      desc         'import or export activation keys'
+      desc         _('import or export activation keys')
 
-      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+      option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
 
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
@@ -77,7 +77,8 @@ module HammerCLICsv
                                 'activation_key_id' => activationkey['id']
                             })['results'].collect do |subscription|
                     amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
-                    "#{amount}|#{subscription['product_name']}"
+                    sku = subscription['product_id'].match(/\A[0-9]/) ? 'Custom' : subscription['product_id']
+                    "#{amount}|#{sku}|#{subscription['product_name']}"
                   end
                 end
                 subscriptions.delete!("\n")
@@ -113,31 +114,31 @@ module HammerCLICsv
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
 
+          params = {
+                     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                     'name' => name,
+                     'environment_id' => lifecycle_environment(line[ORGANIZATION],
+                                                               :name => line[ENVIRONMENT]),
+                     'content_view_id' => katello_contentview(line[ORGANIZATION],
+                                                              :name => line[CONTENTVIEW]),
+                     'description' => line[DESCRIPTION],
+                     'unlimited_content_hosts' => (line[LIMIT] == 'Unlimited') ? true : false,
+                     'max_content_hosts' => (line[LIMIT] == 'Unlimited') ? nil : line[LIMIT].to_i
+                   }
           if !@existing[line[ORGANIZATION]].include? name
-            params = {
-                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                       'name' => name,
-                       'environment_id' => lifecycle_environment(line[ORGANIZATION],
-                                                                 :name => line[ENVIRONMENT]),
-                       'content_view_id' => katello_contentview(line[ORGANIZATION],
-                                                                :name => line[CONTENTVIEW]),
-                       'description' => line[DESCRIPTION],
-                       'unlimited_content_hosts' => (line[LIMIT] == 'Unlimited') ? true : false,
-                       'max_content_hosts' => (line[LIMIT] == 'Unlimited') ? nil : line[LIMIT].to_i
-                     }
-            print "Creating activation key '#{name}'..." if option_verbose?
+            print _("Creating activation key '%{name}'...") % {:name => name} if option_verbose?
             activationkey = @api.resource(:activation_keys).call(:create, params)
             @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
           else
-            print "Updating activation key '#{name}'..." if option_verbose?
-            params['id'] = @existing[line[ORGANIZATION]]
+            print _("Updating activation key '%{name}'...") % {:name => name} if option_verbose?
+            params['id'] = @existing[line[ORGANIZATION]][name]
             activationkey = @api.resource(:activation_keys).call(:update, params)
           end
 
           update_subscriptions(activationkey, line)
           update_groups(activationkey, line)
 
-          puts 'done' if option_verbose?
+          puts _('done') if option_verbose?
         end
       end
 

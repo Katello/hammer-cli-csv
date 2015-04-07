@@ -13,9 +13,10 @@ module HammerCLICsv
   class CsvCommand
     class ProductsCommand < BaseCommand
       command_name 'products'
-      desc         'import or export products'
+      desc         _('import or export products')
 
-      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+      option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
+      option %w(--sync), 'true|false', _('Sync product repositories (default true)')
 
       LABEL = 'Label'
       ORGANIZATION = 'Organization'
@@ -87,9 +88,10 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           product_id = @existing_products[line[ORGANIZATION]][name]
           if product_id.nil?
-            print "Creating product '#{name}'..." if option_verbose?
+            print _("Creating product '%{name}'...") % {:name => name} if option_verbose?
             if line[REPOSITORY_TYPE] =~ /Red Hat/
-              raise "Red Hat product '#{name}' does not exist in '#{line[ORGANIZATION]}'"
+              raise _("Red Hat product '%{name}' does not exist in '%{organization}'") %
+                {:name => name, :organization => line[ORGANIZATION]}
             end
 
             product_id = @api.resource(:products).call(:create, {
@@ -99,10 +101,9 @@ module HammerCLICsv
             @existing_products[line[ORGANIZATION]][name] = product_id
           else
             # Nothing to update for products
-            print "Updating product '#{name}'..." if option_verbose?
+            print _("Updating product '%{name}'...") % {:name => name} if option_verbose?
           end
           @existing_repositories[line[ORGANIZATION] + name] = {}
-          puts "done" if option_verbose?
 
           repository_name = namify(line[REPOSITORY], number)
 
@@ -121,7 +122,10 @@ module HammerCLICsv
           if !repository
             raise "Red Hat product '#{name}' does not have repository '#{repository_name}'" if line[REPOSITORY_TYPE] =~ /Red Hat/
 
-            print "Creating repository '#{repository_name}' in product '#{name}'..." if option_verbose?
+            if option_verbose?
+              print _("Creating repository '%{repository_name}' in product '%{name}'...") %
+                {:repository_name => repository_name, :name => name}
+            end
             repository = @api.resource(:repositories).call(:create, {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'name' => repository_name,
@@ -131,16 +135,10 @@ module HammerCLICsv
                 'content_type' => content_type(line[REPOSITORY_TYPE])
             })
             @existing_repositories[line[ORGANIZATION] + name][line[LABEL]] = repository
-            puts 'done' if option_verbose?
           end
 
-          print "Sync'ing repository '#{repository_name}' in product '#{name}'..." if option_verbose?
-          if repository['sync_state'] == 'finished'
-            puts 'already done' if option_verbose?
-          else
-            sync_repository(line, repository)
-            puts "done" if option_verbose?
-          end
+          sync_repository(line, repository)
+          puts _('done') if option_verbose?
         end
 
       rescue RuntimeError => e
@@ -161,6 +159,21 @@ module HammerCLICsv
       end
 
       def sync_repository(line, repository)
+        if option_sync =~ (/A(true|1|yes)$/i) || HammerCLI::Settings.get(:csv, :products_sync) ||
+              (option_sync.nil? && HammerCLI::Settings.get(:csv, :products_sync).nil?)
+          if option_verbose?
+            print _("syncing repository '%{repository_name}' in product '%{name}'...") %
+              {:repository_name => repository_name, :name => name}
+          end
+          if repository['sync_state'] == 'finished'
+            print _("previously synced, skipping...") if option_verbose?
+          else
+            exec_sync_repository(line, repository)
+          end
+        end
+      end
+
+      def exec_sync_repository(line, repository)
         args = %W{ --server #{ @server } --username #{ @username } --password #{ @password }
                    repository synchronize
                    --id #{ repository['id'] }

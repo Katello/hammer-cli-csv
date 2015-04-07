@@ -9,9 +9,14 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
+require 'hammer_cli_foreman'
+require 'hammer_cli_foreman_tasks'
+
 module HammerCLICsv
   class CsvCommand
     class ContentViewsCommand < BaseCommand
+      include ::HammerCLIForemanTasks::Helper
+
       command_name 'content-views'
       desc         'import or export content-views'
 
@@ -22,10 +27,11 @@ module HammerCLICsv
       DESCRIPTION = 'Description'
       COMPOSITE = 'Composite'
       REPOSITORIES = 'Repositories or Composites'
+      ENVIRONMENTS = "Lifecycle Environments"
 
       def export
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES]
+          csv << [NAME, COUNT, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, ENVIRONMENTS]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
@@ -40,6 +46,10 @@ module HammerCLICsv
               name = contentview['name']
               label = contentview['label']
               orgname = organization['name']
+              environments = CSV.generate do |column|
+                column << environment_names(contentview)
+              end
+              environments.delete!("\n")
               composite = contentview['composite'] == true ? 'Yes' : 'No'
               if composite == 'Yes'
                 contentviews = CSV.generate do |column|
@@ -48,10 +58,10 @@ module HammerCLICsv
                   end
                 end
                 contentviews.delete!("\n")
-                composite_contentviews << [name, 1, label, orgname, composite, contentviews]
+                composite_contentviews << [name, 1, label, orgname, composite, contentviews, environments]
               else
                 repositories = export_column(contentview, 'repositories', 'name')
-                csv << [name, 1, label, orgname, composite, repositories]
+                csv << [name, 1, label, orgname, composite, repositories, environments]
               end
             end
             composite_contentviews.each do |contentview|
@@ -101,7 +111,7 @@ module HammerCLICsv
 
           contentview_id = @existing_contentviews[line[ORGANIZATION]][name]
           if !contentview_id
-            print "Creating content view '#{name}'..." if option_verbose?
+            print _("Creating content view '%{name}'...") % {:name => name} if option_verbose?
             options = {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'name' => name,
@@ -118,7 +128,7 @@ module HammerCLICsv
             @existing_contentviews[line[ORGANIZATION]][name] = contentview_id
             publish = true
           else
-            print "Updating content view '#{name}'..." if option_verbose?
+            print _("Updating content view '%{name}'...") % {:name => name} if option_verbose?
             options = {
                 'id' => contentview_id,
                 'description' => line[DESCRIPTION]
@@ -129,25 +139,51 @@ module HammerCLICsv
               options['repository_ids'] = repository_ids
             end
             contentview = @api.resource(:content_views).call(:update, options)
+            contentview_id = contentview['id']
             publish = contentview['versions'].empty?
           end
 
           # Content views cannot be used in composites unless a publish has occurred
-          # TODO: this command cannot be called more than once during a run, why?
-          if publish
-            args = %W{
-              --server #{ @server } --username #{ @username } --password #{ @server }
-              content-view publish --id #{ contentview_id }
-              --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) }
-            }
-            hammer.run(args)
-          end
+          publish_content_view(contentview_id, line) if publish
+          promote_content_view(contentview_id, line)
 
-          puts 'done' if option_verbose?
+          puts _('done') if option_verbose?
         end
 
       rescue RuntimeError => e
         raise "#{e}\n       #{line}"
+      end
+
+      def environment_names(contentview)
+        names = []
+        contentview['versions'].each do |version|
+          version['environment_ids'].each do |environment_id|
+            names << lifecycle_environment(contentview['organization']['name'], :id => environment_id)
+          end
+        end
+        names.uniq
+      end
+
+      def publish_content_view(contentview_id, line)
+        task_progress(@api.resource(:content_views).call(:publish, {
+            'id' => contentview_id
+        }))
+      end
+
+      def promote_content_view(contentview_id, line)
+        contentview = @api.resource(:content_views).call(:show, {'id' => contentview_id})
+        existing_names = environment_names(contentview)
+
+        CSV.parse_line(line[ENVIRONMENTS]).each do |environment_name|
+          next if environment_name == 'Library' || existing_names.include?(environment_name)
+
+          version = contentview['versions'][-1]
+          task_progress(@api.resource(:content_view_versions).call(:promote, {
+              'id' => version['id'],
+              'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => environment_name),
+              'force' => true
+          }))
+        end
       end
     end
   end

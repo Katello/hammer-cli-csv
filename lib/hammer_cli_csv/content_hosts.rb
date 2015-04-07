@@ -305,9 +305,9 @@ module HammerCLICsv
             'system_id' => host_id
         })['results']
         if existing_subscriptions.length > 0
-          @api.resource(:systems).call(:remove_subscriptions, {
-            'id' => host_id,
-            'subscriptions' => existing_subscriptions
+          @api.resource(:subscriptions).call(:destroy, {
+            'system_id' => host_id,
+            'id' => existing_subscriptions[0]['id']
           })
         end
 

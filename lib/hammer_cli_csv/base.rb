@@ -534,7 +534,7 @@ module HammerCLICsv
       result
     end
 
-    def katello_contentviewversion(organization, name, version)
+    def katello_contentviewversion(organization, name, version='latest')
       @contentviewversions ||= {}
       @contentviewversions[organization] ||= {}
       versionname = "#{version}|#{name}"
@@ -543,12 +543,17 @@ module HammerCLICsv
       id = @contentviewversions[organization][versionname]
       if !id
         contentview_id = katello_contentview(organization, :name => name)
-        @api.resource(:content_view_versions).call(:index, {
-            :per_page => 999999,
-            'content_view_id' => contentview_id
-        })['results'].each do |contentviewversion|
-          if contentviewversion['version'] == version.to_i
-            @contentviewversions[organization][versionname] = contentviewversion['id']
+        contentviewversions = @api.resource(:content_view_versions).call(:index, {
+                                  :per_page => 999999,
+                                  'content_view_id' => contentview_id
+                              })['results'].sort { |a, b| a['created_at'] <=> b['created_at'] }
+        if version == 'latest'
+          @contentviewversions[organization][versionname] = contentviewversions[-1]['id']
+        else
+          contentviewversions.each do |contentviewversion|
+            if contentviewversion['version'] == version.to_f
+              @contentviewversions[organization][versionname] = contentviewversion['id']
+            end
           end
         end
         id = @contentviewversions[organization][versionname]
@@ -662,6 +667,41 @@ module HammerCLICsv
       result
     end
 
+    def katello_product(organization, options = {})
+      @products ||= {}
+      @products[organization] ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @products[organization][options[:name]]
+        if !options[:id]
+          @api.resource(:products).call(:index,
+                  {
+                    :per_page => 999999,
+                    'organization_id' => foreman_organization(:name => organization),
+                    'search' => search_string('host-collections',options[:name])
+                  })['results'].each do |product|
+            @products[organization][product['name']] = product['id'] if product
+          end
+          options[:id] = @products[organization][options[:name]]
+          raise "Host collection '#{options[:name]}' not found" if !options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @products.key(options[:id])
+        if !options[:name]
+          product = @api.resource(:host_collections).call(:show, {'id' => options[:id]})
+          raise "Host collection '#{options[:name]}' not found" if !product || product.empty?
+          options[:name] = product['name']
+          @products[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
     def build_os_name(name, major, minor)
       name += " #{major}" if major && major != ''
       name += ".#{minor}" if minor && minor != ''
@@ -756,7 +796,7 @@ module HammerCLICsv
     def search_string(resource, name)
       operator = case resource
                  when "gpg-key", "sync-plan", "lifecycle-environment", "host-collections"
-                   @server_status['version'] && @server_status['version'].starts_with?('1.7') ? '=' : ':'
+                   @server_status['version'] && @server_status['version'].match(/\A1\.7/) ? '=' : ':'
                  else
                    ':'
                  end

@@ -9,27 +9,14 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-#
-# -= Systems CSV =-
-#
-# Columns
-#   Name
-#     - System name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "os%d" -> "os1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-require 'uri'
 
 module HammerCLICsv
   class CsvCommand
     class SubscriptionsCommand < BaseCommand
       command_name 'subscriptions'
       desc         'import or export subscriptions'
+
+      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
 
       ORGANIZATION = 'Organization'
       MANIFEST = 'Manifest File'
@@ -41,6 +28,7 @@ module HammerCLICsv
         CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, MANIFEST, CONTENT_SET, ARCH, RELEASE]
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+            next if option_organization && organization['name'] != option_organization
             @api.resource(:products).call(:index, {
                 'per_page' => 999999,
                 'organization_id' => organization['id'],
@@ -78,6 +66,8 @@ module HammerCLICsv
       end
 
       def enable_products_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         results = @api.resource(:products).call(:index, {
             'per_page' => 999999,
             'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
@@ -122,7 +112,7 @@ module HammerCLICsv
 
       def import_manifest_from_csv(line)
         args = %W{
-          --server #{ @server } --username #{ @username } --password #{ @server }
+          --server #{ @server } --username #{ @username } --password #{ @password }
           subscription upload --file #{ line[MANIFEST] }
           --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) }
         }

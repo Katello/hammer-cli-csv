@@ -26,7 +26,8 @@ module HammerCLICsv
       RESOURCES = %w( organizations locations puppet_environments operating_systems
                       domains architectures partition_tables lifecycle_environments host_collections
                       provisioning_templates
-                      subscriptions activation_keys hosts content_hosts reports roles users )
+                      subscriptions products content_views content_view_filters activation_keys
+                      hosts content_hosts reports roles users )
       RESOURCES.each do |resource|
         dashed = resource.sub('_', '-')
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"

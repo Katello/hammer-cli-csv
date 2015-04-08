@@ -44,8 +44,9 @@ module HammerCLICsv
               @api.resource(:host_collections).call(:index, {
                   'organization_id' => organization['id']
               })['results'].each do |hostcollection|
-                csv << [hostcollection['name'], 1, organization['id'],
-                        hostcollection['max_systems'].to_i < 0 ? 'Unlimited' : hostcollection['max_systems'],
+                limit = hostcollection['unlimited_content_hosts'] ? 'Unlimited' : hostcollection['max_content_hosts']
+                csv << [hostcollection['name'], 1, organization['name'],
+                        limit,
                         hostcollection['description']]
               end
             end
@@ -76,23 +77,20 @@ module HammerCLICsv
 
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
+          params =  {
+                      'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                      'name' => name,
+                      'unlimited_content_hosts' => (line[LIMIT] == 'Unlimited') ? true : false,
+                      'max_content_hosts' => (line[LIMIT] == 'Unlimited') ? nil : line[LIMIT].to_i,
+                      'description' => line[DESCRIPTION]
+                    }
           if !@existing[line[ORGANIZATION]].include? name
-            print "Creating system group '#{name}'..." if option_verbose?
-            @api.resource(:host_collections).call(:create, {
-                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'name' => name,
-                'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
-                'description' => line[DESCRIPTION]
-            })
+            print "Creating host collection '#{name}'..." if option_verbose?
+            @api.resource(:host_collections).call(:create, params)
           else
-            print "Updating system group '#{name}'..." if option_verbose?
-            @api.resource(:host_collections).call(:update, {
-                'organization_id' => line[ORGANIZATION],
-                'id' => @existing[line[ORGANIZATION]][name],
-                'name' => name,
-                'max_systems' => (line[LIMIT] == 'Unlimited') ? -1 : line[LIMIT],
-                'description' => line[DESCRIPTION]
-            })
+            print "Updating host collection '#{name}'..." if option_verbose?
+            params['id'] = @existing[line[ORGANIZATION]][name]
+            @api.resource(:host_collections).call(:update, params)
           end
           print "done\n" if option_verbose?
         end

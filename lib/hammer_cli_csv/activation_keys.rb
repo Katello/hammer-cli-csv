@@ -15,6 +15,8 @@ module HammerCLICsv
       command_name 'activation-keys'
       desc         'import or export activation keys'
 
+      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
+
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
       LIMIT = 'Limit'
@@ -29,6 +31,8 @@ module HammerCLICsv
                   HOSTCOLLECTIONS, SUBSCRIPTIONS]
           if @server_status['release'] == 'Headpin'
             @headpin.get(:organizations).each do |organization|
+              next if option_organization && organization['name'] != option_organization
+
               @headpin.get("organizations/#{organization['label']}/activation_keys").each do |activationkey|
                 name = namify(activationkey['name'])
                 count = 1
@@ -54,6 +58,8 @@ module HammerCLICsv
             @api.resource(:organizations).call(:index, {
                 :per_page => 999999
             })['results'].each do |organization|
+              next if option_organization && organization['name'] != option_organization
+
               @api.resource(:activation_keys).call(:index, {
                   'per_page' => 999999,
                   'organization_id' => organization['id']
@@ -61,20 +67,21 @@ module HammerCLICsv
                 name = namify(activationkey['name'])
                 count = 1
                 description = activationkey['description']
-                limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : activationkey['usage_limit']
+                limit = activationkey['unlimited_content_hosts'] ? 'Unlimited' : activationkey['max_content_hosts']
                 environment = activationkey['environment']['label']
                 contentview = activationkey['content_view']['name']
                 hostcollections = export_column(activationkey, 'systemGroups', 'name')
                 subscriptions = CSV.generate do |column|
                   column << @api.resource(:subscriptions).call(:index, {
-                                                        'activation_key_id' => activationkey['id']
-                                                      })['results'].collect do |subscription|
+                                'organization_id' => organization['id'],
+                                'activation_key_id' => activationkey['id']
+                            })['results'].collect do |subscription|
                     amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
                     "#{amount}|#{subscription['product_name']}"
                   end
                 end
                 subscriptions.delete!("\n")
-                csv << [name, count, organization['label'], description, limit, environment, contentview,
+                csv << [name, count, organization['name'], description, limit, environment, contentview,
                         hostcollections, subscriptions]
               end
             end
@@ -91,6 +98,8 @@ module HammerCLICsv
       end
 
       def create_activationkeys_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         if !@existing[line[ORGANIZATION]]
           @existing[line[ORGANIZATION]] = {}
           @api.resource(:activation_keys).call(:index, {
@@ -105,35 +114,28 @@ module HammerCLICsv
           name = namify(line[NAME], number)
 
           if !@existing[line[ORGANIZATION]].include? name
+            params = {
+                       'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                       'name' => name,
+                       'environment_id' => lifecycle_environment(line[ORGANIZATION],
+                                                                 :name => line[ENVIRONMENT]),
+                       'content_view_id' => katello_contentview(line[ORGANIZATION],
+                                                                :name => line[CONTENTVIEW]),
+                       'description' => line[DESCRIPTION],
+                       'unlimited_content_hosts' => (line[LIMIT] == 'Unlimited') ? true : false,
+                       'max_content_hosts' => (line[LIMIT] == 'Unlimited') ? nil : line[LIMIT].to_i
+                     }
             print "Creating activation key '#{name}'..." if option_verbose?
-            activationkey = @api.resource(:activation_keys).call(:create, {
-                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'name' => name,
-                'environment_id' => lifecycle_environment(line[ORGANIZATION],
-                                                          :name => line[ENVIRONMENT]),
-                'content_view_id' => katello_contentview(line[ORGANIZATION],
-                                                         :name => line[CONTENTVIEW]),
-                'description' => line[DESCRIPTION],
-                'usage_limit' => usage_limit(line[LIMIT])
-            })
+            activationkey = @api.resource(:activation_keys).call(:create, params)
             @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id']
           else
             print "Updating activation key '#{name}'..." if option_verbose?
-            activationkey = @api.resource(:activation_keys).call(:update, {
-                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'id' => @existing[line[ORGANIZATION]][name],
-                'name' => name,
-                'environment_id' => lifecycle_environment(line[ORGANIZATION],
-                                                          :name => line[ENVIRONMENT]),
-                'content_view_id' => katello_contentview(line[ORGANIZATION],
-                                                         :name => line[CONTENTVIEW]),
-                'description' => line[DESCRIPTION],
-                'usage_limit' => usage_limit(line[LIMIT])
-            })
-
-            update_subscriptions(activationkey, line)
-            update_groups(activationkey, line)
+            params['id'] = @existing[line[ORGANIZATION]]
+            activationkey = @api.resource(:activation_keys).call(:update, params)
           end
+
+          update_subscriptions(activationkey, line)
+          update_groups(activationkey, line)
 
           puts 'done' if option_verbose?
         end

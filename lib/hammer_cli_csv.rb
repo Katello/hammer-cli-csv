@@ -43,6 +43,7 @@ module HammerCLICsv
   require 'hammer_cli_csv/reports'
   require 'hammer_cli_csv/roles'
   require 'hammer_cli_csv/smart_proxies'
+  require 'hammer_cli_csv/splice'
   require 'hammer_cli_csv/subnets'
   require 'hammer_cli_csv/subscriptions'
   require 'hammer_cli_csv/sync_plans'

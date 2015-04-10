@@ -92,13 +92,14 @@ module HammerCLICsv
       name.gsub(/[^a-z0-9\-_]/i, '_')
     end
 
-    def thread_import(return_headers = false)
+    def thread_import(return_headers = false, filename=nil, name_column=nil)
+      filename ||= option_csv_file || '/dev/stdin'
       csv = []
-      CSV.foreach(option_csv_file || '/dev/stdin', {
-                                                     :skip_blanks => true,
-                                                     :headers => :first_row,
-                                                     :return_headers => return_headers
-                                                   }) do |line|
+      CSV.foreach(filename, {
+          :skip_blanks => true,
+          :headers => :first_row,
+          :return_headers => return_headers
+      }) do |line|
         csv << line
       end
       lines_per_thread = csv.length / option_threads.to_i + 1
@@ -112,7 +113,7 @@ module HammerCLICsv
           lines = csv[start_index...finish_index].clone
           splits << Thread.new do
             lines.each do |line|
-              if line[NAME][0] != '#'
+              if line[name_column || NAME][0] != '#'
                 yield line
               end
             end
@@ -796,7 +797,7 @@ module HammerCLICsv
     def search_string(resource, name)
       operator = case resource
                  when "gpg-key", "sync-plan", "lifecycle-environment", "host-collections"
-                   @server_status['version'] && @server_status['version'].match(/\A1\.7/) ? '=' : ':'
+                   @server_status['version'] && @server_status['version'].match(/\A1\.6/) ? ':' : '='
                  else
                    ':'
                  end

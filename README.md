@@ -35,6 +35,24 @@ gem install hammer_cli_katello
 | --password PASSWORD | Password for user. Overrides any config file value. |
 | --verbose | Display verbose progress information during import. |
 
+## Count Substitution
+
+Some columns of input data have a special syntax available termed "Count substitution" below.
+
+This hammer module started out as a way to generate large amounts of test data. As such, it was convenient to be able to add a single row to an input CSV file and have it generate multiple records.
+
+Take this Organization CSV as an example:
+
+```
+Name, Count, Label, Description
+# Start a row with a # to indicate a comment, a row to be skipped
+Organization %d, 4, testorg%d, A test organization
+```
+
+The single row, with a Count value of four, would generate four organizations ("Organization 0", "Organization 1", "Organization 2", and "Organization 3"). Notice that the Label column, which must be unique, also has the Count column substition.
+
+During export, the Count column will always be one (1).
+
 ## Examples
 
 ## Organizations
@@ -282,6 +300,37 @@ Creating organization 'abcMega Corporation'... done
 | Organization | Organization name |   | x | x | x |   |
 | Limit | Usage limit |   | x | x | x |   |
 | Description | Host collection description |   | x | x | x |   |
+
+## Products
+
+| Additional arguments | Description |
+| ---------------:| :--------------|
+| --organization | Only process organization matching this name |
+| --sync | Sync product repositories (default true) |
+
+**Overview**
+* Due to the length of time that syncing repositories can take, the --sync=false option may be used to skip this step. To always disable syncing, ':products_sync: false' may be specified in configuration file.
+* [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=products&state=open)
+* [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/products_test.rb)
+* Sample data
+  * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/products.csv)
+* Supported products and version
+  * Katello-nightly, Katello-2.1, Katello-2.2
+  * Satellite-6.0, Satellite-6.1
+
+**CSV Columns**
+
+*Note: % column indicates Count substituion*
+
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
+| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
+| Name         | Name of the host collections to update or create | x | x | x | x |   |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
+| Label | Unique label  |   | x | x | x |   |
+| Organization | Organization name |   | x | x | x |   |
+| Repository | Repository name |   | x | x | x |   |
+| Repository Url | Repository Url |   | x | x | x |   |
+| Description | Repository description |   | x | x | x |   |
 
 ## Provisioning Templates
 

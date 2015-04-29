@@ -334,16 +334,19 @@ Creating organization 'abcMega Corporation'... done
 
 ## Provisioning Templates
 
+| Additional arguments | Description |
+| ---------------:| :--------------|
+| --organization | Only process organization matching this name |
+
 **Overview**
-* [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=provisionings&state=open)
-* [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/provisionings_test.rb)
+* [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=provisioning-templates&state=open)
+* [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/provisioning_templates_test.rb)
 * Sample data
-  * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/provisionings.csv)
+  * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/provisioning_templates.csv)
 * Supported products and version
   * Foreman-1.5, Foreman-nightly
   * Katello-nightly
   * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -353,6 +356,12 @@ Creating organization 'abcMega Corporation'... done
 | :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
 | Name         | Name of the provisioning templates to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
+| Organizations  | Comma separated list of organizations |   | x | x | x |   |
+| Locations  | Comma separated list of locations |   | x | x | x |   |
+| Operating Systems  | Comma separated list of associated operating systems |   | x | x | x |   |
+| Host Group / Puppet Environment Combinations  | Comma separated list of host group and puppet environment associations |   | x | x | x |   |
+| Kind  | Kind of template (eg. snippet) |   | x | x | x |   |
+| Template  | Full text of template |   | x | x | x |   |
 
 ## Subscriptions
 

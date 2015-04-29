@@ -37,7 +37,10 @@ module HammerCLICsv
                 'enabled' => true,
                 'organization_id' => organization['id']
             })['results'].each do |product|
-              product['repositories'].each do |repository|
+              @api.resource(:repositories).call(:index, {
+                  'product_id' => product['id'],
+                  'organization_id' => organization['id']
+              })['results'].each do |repository|
                 repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
                 repository_type += " #{repository['content_type'].capitalize}"
                 csv << [product['name'], 1, product['label'], organization['name'],

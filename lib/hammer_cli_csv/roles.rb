@@ -84,9 +84,7 @@ module HammerCLICsv
             @existing_roles[name] = role['id']
           else
             print "Updating role '#{name}'..." if option_verbose?
-            @api.resource(:roles).call(:update, {
-                'id' => @existing_roles[name]
-            })
+            # Nothing to update on the role object itself, just filters below
           end
 
           filter_id = foreman_filter(name, line[RESOURCE], search)
@@ -104,11 +102,13 @@ module HammerCLICsv
             print " updating filter #{line[RESOURCE]}..."
             @api.resource(:filters).call(:update, {
                 'id' => filter_id,
-                'search' => search,
-                'unlimited' => search.nil? || search.empty?,
-                'organization_ids' => organizations,
-                'location_ids' => locations,
-                'permission_ids' => permissions
+                'filter' => {
+                    'search' => search,
+                    'unlimited' => search.nil? || search.empty?,
+                    'organization_ids' => organizations,
+                    'location_ids' => locations,
+                    'permission_ids' => permissions
+                }
             })
           end
 

@@ -75,6 +75,18 @@ module HammerCLICsv
         JSON.parse(response.body)
       end
 
+      url = "#{server}/api/v2/plugins"
+      uri = URI(url)
+      nethttp = Net::HTTP.new(uri.host, uri.port)
+      nethttp.use_ssl = uri.scheme == 'https'
+      nethttp.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      server_status['plugins'] = nethttp.start do |http|
+        request = Net::HTTP::Get.new uri.request_uri
+        request.basic_auth(username, password)
+        response = http.request(request)
+        JSON.parse(response.body)['results']
+      end
+
       server_status
     end
 

@@ -85,7 +85,11 @@ module HammerCLICsv
 
         name = "#{line[NAME]}-#{line[UUID]}"
         #checkin_time = Time.parse(line[LAST_CHECKIN_TIME]).strftime("%a, %d %b %Y %H:%M:%S %z")
-        checkin_time = DateTime.parse(line[LAST_CHECKIN_TIME]).strftime("%a, %d %b %Y %H:%M:%S %z")
+        checkin_time = if line[LAST_CHECKIN_TIME].casecmp('now').zero?
+                         DateTime.now.strftime("%a, %d %b %Y %H:%M:%S %z")
+                       else
+                         DateTime.parse(line[LAST_CHECKIN_TIME]).strftime("%a, %d %b %Y %H:%M:%S %z")
+                       end
 
         if !@existing[line[ORGANIZATION]].include? name
           print(_("Creating content host '%{name}'...") % {:name => name}) if option_verbose?
@@ -122,7 +126,7 @@ module HammerCLICsv
                   'facts' => facts(name, line),
                   'installed_products' => products(line)
               },
-              'installed_products' => products(line),  # TODO: http://projects.theforeman.org/issues/9191,
+              'installed_products' => products(line),  # TODO: http://projects.theforeman.org/issues/9191
               'last_checkin' => checkin_time
           })['uuid']
 
@@ -203,12 +207,12 @@ module HammerCLICsv
         products = CSV.parse_line(line[PRODUCTS], {:col_sep => ';'}).collect do |channel|
           product = @product_mapping[channel]
           if product.nil?
-            #puts _("WARNING: No product found for channel '%{name}'") % {:name => channel}
+            # puts _("WARNING: No product found for channel '%{name}'") % {:name => channel}
             next
           end
           product
         end
-        products.compact!
+        products.compact
       end
 
       def preload_host_guests

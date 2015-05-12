@@ -158,6 +158,24 @@ module HammerCLICsv
       end
 
       def import
+        remote = @server_status['plugins'].detect { |plugin| plugin['name'] == 'foreman_csv' }
+        if remote.nil?
+          import_locally
+        else
+          import_remotely
+        end
+      end
+
+      def import_remotely
+        @api.resource(:csv).call(:import_content_hosts, {
+            'content' => ::File.new(::File.expand_path(option_csv_file), 'rb')
+        }, {
+            :content_type => 'multipart/form-data',
+            :multipart => true
+        })
+      end
+
+      def import_locally
         @existing = {}
         @hypervisor_guests = {}
 
@@ -165,14 +183,16 @@ module HammerCLICsv
           create_content_hosts_from_csv(line)
         end
 
-        print(_('Updating hypervisor and guest associations...')) if option_verbose? && !@hypervisor_guests.empty?
-        @hypervisor_guests.each do |host_id, guest_ids|
-          @api.resource(:systems).call(:update, {
-              'id' => host_id,
-              'guest_ids' => guest_ids
-          })
+        if !@hypervisor_guests.empty?
+          print(_('Updating hypervisor and guest associations...')) if option_verbose?
+          @hypervisor_guests.each do |host_id, guest_ids|
+            @api.resource(:systems).call(:update, {
+                'id' => host_id,
+                'guest_ids' => guest_ids
+            })
+          end
         end
-        puts _('done') if option_verbose? && !@hypervisor_guests.empty?
+        puts _('done') if option_verbose?
       end
 
       def create_content_hosts_from_csv(line)
@@ -225,6 +245,7 @@ module HammerCLICsv
                     'facts' => facts(name, line),
                     'installed_products' => products(line)
                 },
+                'facts' => facts(name, line),
                 'installed_products' => products(line),  # TODO: http://projects.theforeman.org/issues/9191,
                 'service_level' => line[SLA]
             })['uuid']

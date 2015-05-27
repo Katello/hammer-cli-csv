@@ -18,9 +18,6 @@ module HammerCLICsv
 
       option %w(-v --verbose), :flag, 'be verbose'
       option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
-      option %w(--server), 'SERVER', 'Server URL'
-      option %w(-u --username), 'USERNAME', 'Username to access server'
-      option %w(-p --password), 'PASSWORD', 'Password to access server'
       option '--dir', 'DIRECTORY', 'directory to import from'
 
       RESOURCES = %w( organizations locations puppet_environments operating_systems
@@ -34,12 +31,8 @@ module HammerCLICsv
       end
 
       def execute
-        @api = ApipieBindings::API.new({
-                                         :uri => option_server || HammerCLI::Settings.get(:csv, :host),
-                                         :username => option_username || HammerCLI::Settings.get(:csv, :username),
-                                         :password => option_password || HammerCLI::Settings.get(:csv, :password),
-                                         :api_version => 2
-                                       })
+        @api = ApipieBindings::API.new({:uri => get_option(:host), :username => get_option(:username),
+                                        :password => get_option(:password), :api_version => 2})
 
         # Swing the hammers
         RESOURCES.each do |resource|
@@ -71,6 +64,15 @@ module HammerCLICsv
         args << '-v' if option_verbose?
         args += %W( --threads #{option_threads} )
         hammer.run(args)
+      end
+
+      private
+
+      def get_option(name)
+        HammerCLI::Settings.settings[:_params][name] ||
+          HammerCLI::Settings.get(:csv, name) ||
+          HammerCLI::Settings.get(:katello, name) ||
+          HammerCLI::Settings.get(:foreman, name)
       end
     end
   end

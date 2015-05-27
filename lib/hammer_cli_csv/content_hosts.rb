@@ -9,14 +9,11 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-require 'hammer_cli'
-require 'json'
-require 'csv'
-require 'uri'
-
 module HammerCLICsv
   class CsvCommand
     class ContentHostsCommand < BaseCommand
+      include ::HammerCLIForemanTasks::Helper
+
       command_name 'content-hosts'
       desc         'import or export content hosts'
 
@@ -167,12 +164,9 @@ module HammerCLICsv
       end
 
       def import_remotely
-        @api.resource(:csv).call(:import_content_hosts, {
-            'content' => ::File.new(::File.expand_path(option_csv_file), 'rb')
-        }, {
-            :content_type => 'multipart/form-data',
-            :multipart => true
-        })
+        params = {'content' => ::File.new(::File.expand_path(option_csv_file), 'rb')}
+        headers = {:content_type => 'multipart/form-data', :multipart => true}
+        task_progress(@api.resource(:csv).call(:import_content_hosts, params, headers))
       end
 
       def import_locally

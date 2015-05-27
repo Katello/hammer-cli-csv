@@ -13,6 +13,9 @@ require 'hammer_cli'
 require 'hammer_cli/exit_codes'
 
 module HammerCLICsv
+  require 'hammer_cli_foreman'
+  require 'hammer_cli_foreman_tasks'
+
   require 'hammer_cli_csv/base'
   require 'hammer_cli_csv/exception_handler'
 

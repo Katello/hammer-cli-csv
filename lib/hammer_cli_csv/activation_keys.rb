@@ -1,21 +1,8 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
 module HammerCLICsv
   class CsvCommand
     class ActivationKeysCommand < BaseCommand
       command_name 'activation-keys'
       desc         _('import or export activation keys')
-
-      option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
 
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
@@ -26,7 +13,7 @@ module HammerCLICsv
       SUBSCRIPTIONS = 'Subscriptions'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
                   HOSTCOLLECTIONS, SUBSCRIPTIONS]
           if @server_status['release'] == 'Headpin'
@@ -146,9 +133,9 @@ module HammerCLICsv
         if line[HOSTCOLLECTIONS] && line[HOSTCOLLECTIONS] != ''
           # TODO: note that existing system groups are not removed
           CSV.parse_line(line[HOSTCOLLECTIONS], {:skip_blanks => true}).each do |name|
-            @api.resource(:host_collections).call(:add_activation_keys, {
-                'id' => katello_hostcollection(line[ORGANIZATION], :name => name),
-                'activation_key_ids' => [activationkey['id']]
+            @api.resource(:activation_keys).call(:add_host_collections, {
+                'id' => activationkey['id'],
+                'host_collection_ids' => [katello_hostcollection(line[ORGANIZATION], :name => name)]
             })
           end
         end

@@ -1,30 +1,3 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
-#
-# -= Domains CSV =-
-#
-# Columns
-#   Name
-#     - Domain name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "os%d" -> "os1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-#
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class CsvCommand
     class DomainsCommand < BaseCommand
@@ -35,7 +8,7 @@ module HammerCLICsv
       ORGANIZATIONS = 'Organizations'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, FULLNAME]
           @api.resource(:domains).call(:index, {:per_page => 999999})['results'].each do |domain|
             puts domain
@@ -64,13 +37,17 @@ module HammerCLICsv
           if !@existing.include? name
             print "Creating domain '#{name}'..." if option_verbose?
             domain_id = @api.resource(:domains).call(:create, {
-                                                       'name' => name
+                                                       'domain' => {
+                                                         'name' => name
+                                                       }
                                                      })['id']
           else
             print "Updating domain '#{name}'..." if option_verbose?
             domain_id = @api.resource(:domains).call(:update, {
                                                        'id' => @existing[name],
-                                                       'name' => name
+                                                       'domain' => {
+                                                         'name' => name
+                                                       }
                                                      })['id']
           end
 

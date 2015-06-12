@@ -1,32 +1,3 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
-#
-# -= Puppet Facts CSV =-
-#
-# Columns
-#   Name
-#     - Host name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "os%d" -> "os1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-#   <Fact Key names>
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class CsvCommand
     class PuppetFactsCommand < BaseCommand
@@ -34,7 +5,7 @@ module HammerCLICsv
       desc         'import or export puppet facts'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           headers = [NAME, COUNT]
           # Extracted facts are always based upon the first host found, otherwise this would be an intensive
           # method to gather all the possible column names

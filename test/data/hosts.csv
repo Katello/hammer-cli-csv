@@ -1,5 +1,5 @@
-Name,Count,Organization,Environment,Operating System,Architecture,MAC Address,Domain,Partition Table
-dhcp130-%03d.megacorp.com,255,Mega Corporation,Development,RHEL 6.4,x86_64,"02:FE:B5:E0:70:%02x",megacorp.com,RedHat default
+Name,Count,Organization,Location,Environment,Operating System,Architecture,MAC Address,Domain,Partition Table
+dhcp130-%03d.megacorp.com,255,Mega Corporation,Asia Pacific,Development,RHEL 6.4,x86_64,"02:FE:B5:E0:70:%02x",megacorp.com,RedHat default
 dhcp129-%03d.megacorp.com,255,Mega Corporation,Development,RHEL 6.4,x86_64,"01:FE:B5:E0:70:%02x",megacorp.com,RedHat default
 # dhcp129-1%02d.megacorp.com,255,Mega Corporation,Development,RHEL 6.4,x86_64,"01:FE:B5:E1:70:%02x",megacorp.com,RedHat default
 # dhcp129-2%02d.megacorp.com,255,Mega Corporation,Development,RHEL 6.4,x86_64,"01:FE:B5:E2:70:%02x",megacorp.com,RedHat default

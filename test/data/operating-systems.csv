@@ -1,16 +1,16 @@
-"Name","Count","Family"
-"CentOS 6.4","1","Redhat"
-"Debian 6.0","1","Debian"
-"Debian 7.0","1","Debian"
-"Fedora 14","1","Redhat"
-"Fedora 17","1","Redhat"
-"Fedora 18","1","Redhat"
-"Fedora 19","1","Redhat"
-"OpenSuSE 11.4","1","Suse"
-"RHEL 5.8","1","Redhat"
-"RHEL 6.3","1","Redhat"
-"RHEL 5.7","1","Redhat"
-"RHEL 6.4","1","Redhat"
-"Solaris 5.10","1","Solaris"
-"Ubuntu 12.10","1","Debian"
-"Windows 6.1","1","Windows"
+Name,Count,Description,Family
+CentOS 6.4,1,,Redhat
+Debian 6.0,1,,Debian
+Debian 7.0,1,,Debian
+Fedora 14,1,,Redhat
+Fedora 17,1,,Redhat
+Fedora 18,1,,Redhat
+Fedora 19,1,,Redhat
+OpenSuSE 11.4,1,,Suse
+RHEL 5.8,1,,Redhat
+RHEL 6.3,1,,Redhat
+RHEL 5.7,1,,Redhat
+RHEL 6.4,1,,Redhat
+Solaris 5.10,1,,Solaris
+Ubuntu 12.10,1,,Debian
+Windows 6.1,1,,Windows

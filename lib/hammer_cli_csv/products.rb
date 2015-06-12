@@ -1,23 +1,10 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
 module HammerCLICsv
   class CsvCommand
     class ProductsCommand < BaseCommand
       command_name 'products'
       desc         _('import or export products')
 
-      option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
-      option %w(--sync), 'true|false', _('Sync product repositories (default true)')
-
+      option %w(--[no-]sync), :flag, _('Sync product repositories (default true)'), :default => true
       LABEL = 'Label'
       ORGANIZATION = 'Organization'
       REPOSITORY = 'Repository'
@@ -26,7 +13,7 @@ module HammerCLICsv
       DESCRIPTION = 'Description'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, LABEL, ORGANIZATION, REPOSITORY, REPOSITORY_TYPE, REPOSITORY_URL]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
@@ -41,6 +28,7 @@ module HammerCLICsv
                   'product_id' => product['id'],
                   'organization_id' => organization['id']
               })['results'].each do |repository|
+                repository = @api.resource(:repositories).call(:show, {:id => repository['id']})
                 repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
                 repository_type += " #{repository['content_type'].capitalize}"
                 csv << [product['name'], 1, product['label'], organization['name'],
@@ -140,7 +128,7 @@ module HammerCLICsv
             @existing_repositories[line[ORGANIZATION] + name][line[LABEL]] = repository
           end
 
-          sync_repository(line, repository)
+          sync_repository(line, name, repository)
           puts _('done') if option_verbose?
         end
 
@@ -161,14 +149,14 @@ module HammerCLICsv
         end
       end
 
-      def sync_repository(line, repository)
-        if option_sync =~ (/A(true|1|yes)$/i) || HammerCLI::Settings.get(:csv, :products_sync) ||
-              (option_sync.nil? && HammerCLI::Settings.get(:csv, :products_sync).nil?)
+      def sync_repository(line, name, repository)
+        if (HammerCLI::Settings.get(:csv, :products_sync) == true || HammerCLI::Settings.get(:csv, :products_sync).nil?) &&
+            option_sync?
           if option_verbose?
             print _("syncing repository '%{repository_name}' in product '%{name}'...") %
-              {:repository_name => repository_name, :name => name}
+              {:repository_name => repository['name'], :name => name}
           end
-          if repository['sync_state'] == 'finished'
+          if repository['last_sync']
             print _("previously synced, skipping...") if option_verbose?
           else
             exec_sync_repository(line, repository)

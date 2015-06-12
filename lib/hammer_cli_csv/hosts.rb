@@ -1,36 +1,3 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
-#
-# -= Hosts CSV =-
-#
-# Columns
-#   Name
-#     - Host name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "os%d" -> "os1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-#   MAC Address
-#     - MAC address
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "FF:FF:FF:FF:FF:%02x" -> "FF:FF:FF:FF:FF:0A"
-#     - Warning: be sure to keep count below 255 or MAC hex will exceed limit
-#
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-require 'uri'
-
 module HammerCLICsv
   class CsvCommand
     class HostsCommand < BaseCommand
@@ -38,6 +5,7 @@ module HammerCLICsv
       desc         'import or export hosts'
 
       ORGANIZATION = 'Organization'
+      LOCATION = 'Location'
       ENVIRONMENT = 'Environment'
       OPERATINGSYSTEM = 'Operating System'
       ARCHITECTURE = 'Architecture'
@@ -46,8 +14,8 @@ module HammerCLICsv
       PARTITIONTABLE = 'Partition Table'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+          csv << [NAME, COUNT, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
           @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|
             host = @api.resource(:hosts).call(:show, {'id' => host['id']})
             raise "Host 'id=#{host['id']}' not found" if !host || host.empty?
@@ -84,28 +52,33 @@ module HammerCLICsv
           if !@existing.include? name
             print "Creating host '#{name}'..." if option_verbose?
             @api.resource(:hosts).call(:create, {
-                'name' => name,
-                'root_pass' => 'changeme',
-                'mac' => namify(line[MACADDRESS], number),
-                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
-                'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
-                'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
-                'domain_id' => foreman_domain(:name => line[DOMAIN]),
-                'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
+                'host' => {
+                  'name' => name,
+                  'root_pass' => 'changeme',
+                  'mac' => namify(line[MACADDRESS], number),
+                  'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                  'location_id' => foreman_location(:name => line[LOCATION]),
+                  'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
+                  'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
+                  'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
+                  'domain_id' => foreman_domain(:name => line[DOMAIN]),
+                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
+                }
             })
           else
             print "Updating host '#{name}'..." if option_verbose?
             @api.resource(:hosts).call(:update, {
                 'id' => @existing[name],
-                'name' => name,
-                'mac' => namify(line[MACADDRESS], number),
-                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
-                'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
-                'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
-                'domain_id' => foreman_domain(:name => line[DOMAIN]),
-                'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
+                'host' => {
+                  'name' => name,
+                  'mac' => namify(line[MACADDRESS], number),
+                  'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                  'environment_id' => foreman_environment(:name => line[ENVIRONMENT]),
+                  'operatingsystem_id' => foreman_operatingsystem(:name => line[OPERATINGSYSTEM]),
+                  'architecture_id' => foreman_architecture(:name => line[ARCHITECTURE]),
+                  'domain_id' => foreman_domain(:name => line[DOMAIN]),
+                  'ptable_id' => foreman_partitiontable(:name => line[PARTITIONTABLE])
+                }
             })
           end
           print "done\n" if option_verbose?

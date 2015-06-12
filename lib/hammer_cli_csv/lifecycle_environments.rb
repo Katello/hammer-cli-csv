@@ -1,44 +1,15 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
-#
-# -= Environments CSV =-
-#
-# Columns
-#   Name
-#     - Environment name
-#     - May contain '%d' which will be replaced with current iteration number of Count
-#     - eg. "os%d" -> "os1"
-#   Count
-#     - Number of times to iterate on this line of the CSV file
-#
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class CsvCommand
     class LifecycleEnvironmentsCommand < BaseCommand
       command_name 'lifecycle-environments'
       desc         'import or export lifecycle environments'
 
-      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
-
       ORGANIZATION = 'Organization'
       PRIORENVIRONMENT = 'Prior Environment'
       DESCRIPTION = 'Description'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
           @api.resource(:organizations).call(:index, {
               'per_page' => 999999
@@ -92,7 +63,7 @@ module HammerCLICsv
             @api.resource(:lifecycle_environments).call(:create, {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'name' => name,
-                'prior' => lifecycle_environment(line[ORGANIZATION], :name => prior),
+                #'prior' => lifecycle_environment(line[ORGANIZATION], :name => prior),
                 'prior_id' => lifecycle_environment(line[ORGANIZATION], :name => prior),
                 'description' => line[DESCRIPTION]
             })
@@ -100,9 +71,6 @@ module HammerCLICsv
             print "Updating environment '#{name}'..." if option_verbose?
             @api.resource(:lifecycle_environments).call(:update, {
                 'id' => @existing[line[ORGANIZATION]][name],
-                'name' => name,
-                'new_name' => name,
-                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'description' => line[DESCRIPTION]
             })
           end

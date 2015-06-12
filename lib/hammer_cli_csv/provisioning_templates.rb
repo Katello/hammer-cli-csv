@@ -1,21 +1,8 @@
-# Copyright 2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
 module HammerCLICsv
   class CsvCommand
     class ProvisioningTemplatesCommand < BaseCommand
       command_name 'provisioning-templates'
       desc         'import or export provisioning templates'
-
-      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
 
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
@@ -25,7 +12,7 @@ module HammerCLICsv
       TEMPLATE = 'Template'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, OPERATINGSYSTEMS, ASSOCIATIONS, KIND, TEMPLATE]
           @api.resource(:config_templates).call(:index, {
               :per_page => 999999

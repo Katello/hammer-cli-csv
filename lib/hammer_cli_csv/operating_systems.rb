@@ -1,14 +1,3 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
 module HammerCLICsv
   class CsvCommand
     class OperatingSystemsCommand < BaseCommand
@@ -16,10 +5,11 @@ module HammerCLICsv
       desc         'import or export operating systems'
 
       FAMILY = 'Family'
+      DESCRIPTION = 'Description'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, FAMILY]
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+          csv << [NAME, COUNT, DESCRIPTION, FAMILY]
           @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem|
             name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
             count = 1
@@ -42,30 +32,25 @@ module HammerCLICsv
       end
 
       def create_operatingsystems_from_csv(line)
+        params =  {
+          'operatingsystem' => {
+            'family' => line[FAMILY],
+            'description' => line[DESCRIPTION]
+          }
+        }
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
           (osname, major, minor) = split_os_name(name)
+          params['operatingsystem']['name'] = osname
+          params['operatingsystem']['major'] = major
+          params['operatingsystem']['minor'] = minor
           if !@existing.include? name
             print "Creating operating system '#{name}'..." if option_verbose?
-            @api.resource(:operatingsystems).call(:create, {
-                'operatingsystem' => {
-                    'name' => osname,
-                    'major' => major,
-                    'minor' => minor,
-                    'family' => line[FAMILY]
-                }
-            })
+            @api.resource(:operatingsystems).call(:create, params)
           else
             print "Updating operating system '#{name}'..." if option_verbose?
-            @api.resource(:operatingsystems).call(:update, {
-                'id' => @existing[name],
-                'operatingsystem' => {
-                    'name' => osname,
-                    'major' => major,
-                    'minor' => minor,
-                    'family' => line[FAMILY]
-                }
-            })
+            params['id'] = @existing[name]
+            @api.resource(:operatingsystems).call(:update, params)
           end
           print "done\n" if option_verbose?
         end

@@ -1,6 +1,0 @@
-# :csv:
-#   :enable_module: true
-#   :host:          'https://localhost'
-#   :username:      'admin'
-#   :password:      'changeme'
-#   :products_sync: true

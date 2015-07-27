@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.summary = "CSV commands for Hammer"
   spec.description = "Hammer-CLI-CSV is a plugin for Hammer to provide bulk actions against a Katello server."
 
-  spec.files = Dir["lib/**/*.rb"]
+  spec.files = Dir["config/**/*", "lib/**/*.rb"]
   spec.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.require_paths = %w(lib)
 

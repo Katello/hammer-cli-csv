@@ -1,17 +1,14 @@
-%global gemname hammer_cli_csv
+%global gem_name hammer_cli_csv
 %global confdir hammer
 
-%global geminstdir %{gem_dir}/gems/%{gemname}-%{version}
-
 Summary: CSV input/output command plugin for the Hammer CLI
-Name: rubygem-%{gemname}
+Name: rubygem-%{gem_name}
 Version: 1.0.0
 Release: 5%{?dist}
 Group: Development/Languages
 License: GPLv3
 URL: https://github.com/Katello/hammer-cli-csv
-Source0: %{gemname}-%{version}.gem
-Source1: csv.yml
+Source0: %{gem_name}-%{version}.gem
 
 %if 0%{?rhel} == 6
 Requires: ruby(abi)
@@ -24,7 +21,7 @@ BuildRequires: ruby(rubygems)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
 BuildArch: noarch
-Provides: rubygem(%{gemname}) = %{version}
+Provides: rubygem(%{gem_name}) = %{version}
 
 %description
 CSV input/output command plugin for the Hammer CLI.
@@ -46,20 +43,21 @@ gem install --local --install-dir .%{gem_dir} \
 
 %install
 mkdir -p %{buildroot}%{_sysconfdir}/%{confdir}/cli.modules.d
-install -m 755 %{SOURCE1} %{buildroot}%{_sysconfdir}/%{confdir}/cli.modules.d/csv.yml
+install -m 755 .%{gem_instdir}/config/csv.yml %{buildroot}%{_sysconfdir}/%{confdir}/cli.modules.d/csv.yml
 mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 %files
-%dir %{geminstdir}
-%{geminstdir}/lib
+%dir %{gem_instdir}
+%{gem_instdir}/lib
 %config(noreplace) %{_sysconfdir}/%{confdir}/cli.modules.d/csv.yml
-%exclude %{gem_dir}/cache/%{gemname}-%{version}.gem
-%{gem_dir}/specifications/%{gemname}-%{version}.gemspec
+%exclude %{gem_dir}/cache/%{gem_name}-%{version}.gem
+%{gem_dir}/specifications/%{gem_name}-%{version}.gemspec
 
 %files doc
-%doc %{gem_dir}/doc/%{gemname}-%{version}
+%doc %{gem_dir}/doc/%{gem_name}-%{version}
+%doc %{gem_instdir}/config
 
 %changelog
 * Thu Mar 05 2015 Eric D. Helms <ericdhelms@gmail.com> 1.0.0-5

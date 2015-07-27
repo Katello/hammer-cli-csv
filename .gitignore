@@ -20,7 +20,6 @@ rerun.txt
 pickle-email-*.html
 .project
 config/initializers/secret_token.rb
-config/*.yml
 config/cli.modules.d/*.yml
 !config/*.template.yml
 !config/cli.modules.d/*.template.yml

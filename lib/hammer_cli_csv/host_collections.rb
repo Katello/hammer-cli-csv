@@ -1,33 +1,15 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class CsvCommand
     class HostCollectionsCommand < BaseCommand
       command_name 'host-collections'
       desc         'import or export host collections'
 
-      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
-
       ORGANIZATION = 'Organization'
       LIMIT = 'Limit'
       DESCRIPTION = 'Description'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb') do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb') do |csv|
           csv << [NAME, COUNT, ORGANIZATION, LIMIT, DESCRIPTION]
           if @server_status['release'] == 'Headpin'
             @headpin.get(:organizations).each do |organization|

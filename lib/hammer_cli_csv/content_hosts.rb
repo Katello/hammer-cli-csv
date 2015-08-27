@@ -1,14 +1,3 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
 module HammerCLICsv
   class CsvCommand
     class ContentHostsCommand < BaseCommand
@@ -16,8 +5,6 @@ module HammerCLICsv
 
       command_name 'content-hosts'
       desc         'import or export content hosts'
-
-      option %w(--organization), 'ORGANIZATION', 'Only process organization matching this name'
 
       ORGANIZATION = 'Organization'
       ENVIRONMENT = 'Environment'
@@ -35,7 +22,7 @@ module HammerCLICsv
       SUBSCRIPTIONS = 'Subscriptions'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
           if @server_status['release'] == 'Headpin'
@@ -164,7 +151,7 @@ module HammerCLICsv
       end
 
       def import_remotely
-        params = {'content' => ::File.new(::File.expand_path(option_csv_file), 'rb')}
+        params = {'content' => ::File.new(::File.expand_path(option_file), 'rb')}
         headers = {:content_type => 'multipart/form-data', :multipart => true}
         task_progress(@api.resource(:csv).call(:import_content_hosts, params, headers))
       end

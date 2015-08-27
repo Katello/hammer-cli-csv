@@ -1,18 +1,3 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
-require 'hammer_cli'
-require 'json'
-require 'csv'
-
 module HammerCLICsv
   class CsvCommand
     class SmartProxiesCommand < BaseCommand
@@ -25,7 +10,7 @@ module HammerCLICsv
       LIFECYCLE_ENVIRONMENTS = 'Lifecycle Environments'
 
       def export
-        CSV.open(option_csv_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
+        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, URL, LIFECYCLE_ENVIRONMENTS]
           @api.resource(:smart_proxies).call(:index, {:per_page => 999999})['results'].each do |smart_proxy|
             smart_proxy = @api.resource(:smart_proxies).call(:show, {'id' => smart_proxy['id']})

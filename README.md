@@ -133,6 +133,7 @@ Creating organization 'abcMega Corporation'... done
 ## Puppet Environments
 
 **Overview**
+* Due to the implications of removing a puppet environment from an organization or location, this column only adds to what is present already.
 * [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=puppet-environments&state=open)
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/puppet_environments_test.rb)
 * Sample data
@@ -226,6 +227,8 @@ Creating organization 'abcMega Corporation'... done
 ## Partition Tables
 
 **Overview**
+* Import and export of the Organizations and Locations columns does not apply to all versions and will be silently ignored when unsupported.
+* Importing Operating Systems column does not apply to all versions and will be silently ignored when unsupported.
 * [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=partition-tables&state=open)
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/partition_tables_test.rb)
 * Sample data
@@ -306,10 +309,10 @@ Creating organization 'abcMega Corporation'... done
 | Additional arguments | Description |
 | ---------------:| :--------------|
 | --organization | Only process organization matching this name |
-| --sync | Sync product repositories (default true) |
+| --[no-]sync | Sync product repositories (default true) |
 
 **Overview**
-* Due to the length of time that syncing repositories can take, the --sync=false option may be used to skip this step. To always disable syncing, ':products_sync: false' may be specified in configuration file.
+* Due to the length of time that syncing repositories can take, the --no-sync option may be used to skip this step. To always disable syncing, ':products_sync: false' may be specified in configuration file.
 * [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=products&state=open)
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/products_test.rb)
 * Sample data

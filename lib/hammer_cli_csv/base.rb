@@ -1,14 +1,3 @@
-# Copyright 2013-2014 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
 require 'apipie-bindings'
 require 'hammer_cli'
 require 'json'
@@ -20,9 +9,18 @@ module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
     option %w(-v --verbose), :flag, 'be verbose'
     option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
-    option %w(--csv-export), :flag, 'Export current data instead of importing'
-    option %w(--csv-file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
+    option %w(--export), :flag, 'Export current data instead of importing'
+    option %w(--file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
     option %w(--prefix), 'PREFIX', 'Prefix for all name columns'
+    option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
+
+    option %w(--csv-file), 'FILE_NAME', 'Option --csv-file is deprecated. Use --file',
+           :deprecated => "Use --file", :hidden => true,
+           :attribute_name => :option_file
+    option %w(--csv-export), :flag, 'Option --csv-export is deprecated. Use --export',
+           :deprecated => "Use --export", :hidden => true,
+           :attribute_name => :option_export
+
 
     NAME = 'Name'
     COUNT = 'Count'
@@ -58,7 +56,7 @@ module HammerCLICsv
                                        })
       end
 
-      option_csv_export? ? export : import
+      option_export? ? export : import
       HammerCLI::EX_OK
     end
 
@@ -105,7 +103,7 @@ module HammerCLICsv
     end
 
     def thread_import(return_headers = false, filename=nil, name_column=nil)
-      filename ||= option_csv_file || '/dev/stdin'
+      filename ||= option_file || '/dev/stdin'
       csv = []
       CSV.foreach(filename, {
           :skip_blanks => true,
@@ -802,6 +800,28 @@ module HammerCLICsv
             }
         })
       end if locations && !locations.empty?
+    end
+
+    def apipie_check_param(resource, action, name)
+      method = @api.resource(pluralize(resource).to_sym).apidoc[:methods].detect do |api_method|
+        api_method[:name] == action.to_s
+      end
+      return false unless method
+
+      found = method[:params].detect do |param|
+        param[:full_name] == name
+      end
+      if !found
+        nested =  method[:params].detect do |param|
+          param[:name] == resource.to_s
+        end
+        if nested
+          found = nested[:params].detect do |param|
+            param[:full_name] == name
+          end
+        end
+      end
+      found
     end
 
     private

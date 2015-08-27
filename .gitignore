@@ -21,6 +21,7 @@ pickle-email-*.html
 .project
 config/initializers/secret_token.rb
 config/cli.modules.d/*.yml
+config/cli_config.yml
 !config/*.template.yml
 !config/cli.modules.d/*.template.yml
 test/data/*.zip

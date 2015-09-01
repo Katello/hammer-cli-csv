@@ -50,11 +50,19 @@ module HammerCLICsv
                   end
                   rules.delete!("\n")
                 when /erratum/
+                  rules = CSV.generate do |column|
+                    rule = filter['rules'][0]
+                    conditions = []
+                    conditions << "start = #{DateTime.parse(rule['start_date']).strftime('%F')}" if rule['start_date']
+                    conditions << "end = #{DateTime.parse(rule['end_date']).strftime('%F')}" if rule['end_date']
+                    conditions += rule['types']
+                    column << conditions
+                  end
+                  rules.delete!("\n")
                 when /package_group/
                 else
                   raise "Unknown filter rule type '#{filter['type']}'"
                 end
-                #puts "#{filter['type']} -> #{rule}"
 
                 name = contentview['name']
                 repositories = export_column(filter, 'repositories', 'name')

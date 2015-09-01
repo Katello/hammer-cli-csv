@@ -6,10 +6,10 @@ Gem::Specification.new do |spec|
 
   spec.name = "hammer_cli_csv"
   spec.version = HammerCLICsv.version
-  spec.authors = ["Tom McKay"]
+  spec.authors = ["Thomas McKay"]
   spec.email = ["thomasmckay@redhat.com"]
   spec.homepage = "http://github.com/Katello/hammer-cli-csv"
-  spec.license = "GPL-2"
+  spec.license = "GPL-3"
 
   spec.platform = Gem::Platform::RUBY
   spec.summary = "CSV commands for Hammer"
@@ -20,7 +20,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w(lib)
 
   spec.add_dependency('hammer_cli_katello')
-  spec.add_dependency("gettext", "~> 2.0")
   spec.add_development_dependency("rubocop", "0.24.1")
 
 end

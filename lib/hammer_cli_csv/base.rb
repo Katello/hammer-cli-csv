@@ -1,6 +1,7 @@
 require 'apipie-bindings'
 require 'hammer_cli'
 require 'json'
+require 'open-uri'
 require 'csv'
 require 'hammer_cli_csv/csv'
 
@@ -105,11 +106,11 @@ module HammerCLICsv
     def thread_import(return_headers = false, filename=nil, name_column=nil)
       filename ||= option_file || '/dev/stdin'
       csv = []
-      CSV.foreach(filename, {
+      CSV.new(open(filename), {
           :skip_blanks => true,
           :headers => :first_row,
           :return_headers => return_headers
-      }) do |line|
+      }).each do |line|
         csv << line
       end
       lines_per_thread = csv.length / option_threads.to_i + 1

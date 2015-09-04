@@ -16,7 +16,9 @@ module HammerCLICsv
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, COUNT, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
-          @api.resource(:hosts).call(:index, {:per_page => 999999})['results'].each do |host|
+          search_options = {:per_page => 999999}
+          search_options['search'] = "organization = #{option_organization}" if option_organization
+          @api.resource(:hosts).call(:index, search_options)['results'].each do |host|
             host = @api.resource(:hosts).call(:show, {'id' => host['id']})
             raise "Host 'id=#{host['id']}' not found" if !host || host.empty?
 
@@ -47,6 +49,8 @@ module HammerCLICsv
       end
 
       def create_hosts_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name

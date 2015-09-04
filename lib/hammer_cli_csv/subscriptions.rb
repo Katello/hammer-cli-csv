@@ -52,6 +52,9 @@ module HammerCLICsv
       end
 
       def enable_products_from_csv(line)
+        organization = line[ORGANIZATION] || option_organization
+        raise "Organization is required in either input CSV or by option --organization" if organization.nil? || organization.empty?
+        line[ORGANIZATION] = organization
         return if option_organization && line[ORGANIZATION] != option_organization
 
         results = @api.resource(:products).call(:index, {

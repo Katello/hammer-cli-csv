@@ -27,15 +27,18 @@ module HammerCLICsv
     COUNT = 'Count'
 
     def execute
-      @server = HammerCLI::Settings.settings[:_params][:host] ||
+      @server = (HammerCLI::Settings.settings[:_params] &&
+                 HammerCLI::Settings.settings[:_params][:host]) ||
         HammerCLI::Settings.get(:csv, :host) ||
         HammerCLI::Settings.get(:katello, :host) ||
         HammerCLI::Settings.get(:foreman, :host)
-      @username = HammerCLI::Settings.settings[:_params][:username] ||
+      @username = (HammerCLI::Settings.settings[:_params] &&
+                   HammerCLI::Settings.settings[:_params][:username]) ||
         HammerCLI::Settings.get(:csv, :username) ||
         HammerCLI::Settings.get(:katello, :username) ||
         HammerCLI::Settings.get(:foreman, :username)
-      @password = HammerCLI::Settings.settings[:_params][:password] ||
+      @password = (HammerCLI::Settings.settings[:_params] &&
+                   HammerCLI::Settings.settings[:_params][:password]) ||
         HammerCLI::Settings.get(:csv, :password) ||
         HammerCLI::Settings.get(:katello, :password) ||
         HammerCLI::Settings.get(:foreman, :password)
@@ -713,6 +716,38 @@ module HammerCLICsv
 
       result
     end
+
+    def foreman_container(options = {})
+      @containers ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @containers[options[:name]]
+        if !options[:id]
+          container = @api.resource(:containers).call(:index, {
+                                                       :per_page => 999999,
+                                                       'search' => "name=\"#{options[:name]}\""
+                                                     })['results']
+          raise "Container '#{options[:name]}' not found" if !container || container.empty?
+          options[:id] = container[0]['id']
+          @containers[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @containers.key(options[:id])
+        if !options[:name]
+          container = @api.resource(:containers).call(:show, {'id' => options[:id]})
+          raise "Container 'id=#{options[:id]}' not found" if !container || container.empty?
+          options[:name] = container['name']
+          @containers[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
 
     def build_os_name(name, major, minor)
       name += " #{major}" if major && major != ''

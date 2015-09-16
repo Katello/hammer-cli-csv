@@ -172,8 +172,8 @@ module HammerCLICsv
                 'guest_ids' => guest_ids
             })
           end
+          puts _('done') if option_verbose?
         end
-        puts _('done') if option_verbose?
       end
 
       def create_content_hosts_from_csv(line)

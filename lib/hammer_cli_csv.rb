@@ -13,6 +13,7 @@ module HammerCLICsv
   require 'hammer_cli_csv/architectures'
   require 'hammer_cli_csv/compute_profiles'
   require 'hammer_cli_csv/compute_resources'
+  require 'hammer_cli_csv/containers'
   require 'hammer_cli_csv/content_hosts'
   require 'hammer_cli_csv/content_views'
   require 'hammer_cli_csv/content_view_filters'

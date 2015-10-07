@@ -37,10 +37,9 @@ module HammerCLICsv
       end
 
       def create_organizations_from_csv(line)
-        return if option_organization && line[ORGANIZATION] != option_organization
-
         line[COUNT].to_i.times do |number|
           name = namify(line[NAME], number)
+          return if option_organization && name != option_organization
           label = namify(line[LABEL], number)
           if !@existing.include? name
             print "Creating organization '#{name}'... " if option_verbose?

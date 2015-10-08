@@ -4,9 +4,11 @@ module HammerCLICsv
       command_name 'export'
       desc         'export into directory'
 
-      option %w(-v --verbose), :flag, 'be verbose'
-      option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
-      option '--dir', 'DIRECTORY', 'directory to import from'
+      option %w(-v --verbose), :flag, _('be verbose')
+      option %w(--threads), 'THREAD_COUNT', _('Number of threads to hammer with'),
+             :default => 1, :hidden => true
+      option '--dir', 'DIRECTORY', _('directory to import from')
+      option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
 
       RESOURCES = %w(
         organizations locations puppet_environments operating_systems
@@ -20,15 +22,18 @@ module HammerCLICsv
       end
 
       def execute
-        @server = HammerCLI::Settings.settings[:_params][:host] ||
+        @server = (HammerCLI::Settings.settings[:_params] &&
+                   HammerCLI::Settings.settings[:_params][:host]) ||
           HammerCLI::Settings.get(:csv, :host) ||
           HammerCLI::Settings.get(:katello, :host) ||
           HammerCLI::Settings.get(:foreman, :host)
-        @username = HammerCLI::Settings.settings[:_params][:username] ||
+        @username = (HammerCLI::Settings.settings[:_params] &&
+                     HammerCLI::Settings.settings[:_params][:username]) ||
           HammerCLI::Settings.get(:csv, :username) ||
           HammerCLI::Settings.get(:katello, :username) ||
           HammerCLI::Settings.get(:foreman, :username)
-        @password = HammerCLI::Settings.settings[:_params][:password] ||
+        @password = (HammerCLI::Settings.settings[:_params] &&
+                     HammerCLI::Settings.settings[:_params][:password]) ||
           HammerCLI::Settings.get(:csv, :password) ||
           HammerCLI::Settings.get(:katello, :password) ||
           HammerCLI::Settings.get(:foreman, :password)
@@ -79,9 +84,10 @@ module HammerCLICsv
         options_file = self.send("option_#{resource}") || "#{option_dir}/#{resource.sub('_', '-')}.csv"
         args = []
         args += %W( --server #{@server} ) if @server
-        args += %W( csv #{resource.sub('_', '-')} --csv-export --file #{options_file} )
+        args += %W( csv #{resource.sub('_', '-')} --export --file #{options_file} )
         args << '-v' if option_verbose?
-        args += %W( --threads #{option_threads} )
+        args += %W( --organization #{option_organization} ) if option_organization
+        args += %W( --threads #{option_threads} ) if option_threads
         puts "Exporting '#{args.join(' ')}'" if option_verbose?
         hammer.run(args)
       end

@@ -16,7 +16,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, CONTENTVIEW, ORGANIZATION, TYPE, DESCRIPTION, REPOSITORIES, RULES]
+          csv << [NAME, CONTENTVIEW, ORGANIZATION, TYPE, DESCRIPTION, REPOSITORIES, RULES]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
@@ -46,7 +46,7 @@ module HammerCLICsv
 
                 name = filter['name']
                 repositories = export_column(filter, 'repositories', 'name')
-                csv << [name, 1, contentview['name'], organization['name'], filter_type, filter['description'],
+                csv << [name, contentview['name'], organization['name'], filter_type, filter['description'],
                         repositories, rules]
               end
             end
@@ -81,7 +81,7 @@ module HammerCLICsv
           katello_repository(line[ORGANIZATION], :name => repository)
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           filter_name = namify(line[NAME], number)
 
           filter_id = @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]][filter_name]

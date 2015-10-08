@@ -8,9 +8,9 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, PARENT]
+          csv << [NAME, PARENT]
           @api.resource(:locations).call(:index, {:per_page => 999999})['results'].each do |location|
-            csv << [location['name'], 1, '']
+            csv << [location['name'], '']
           end
         end
       end
@@ -27,7 +27,7 @@ module HammerCLICsv
       end
 
       def create_locations_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           location_id = @existing[name]
           if !location_id

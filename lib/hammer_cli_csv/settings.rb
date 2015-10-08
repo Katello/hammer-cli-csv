@@ -8,9 +8,9 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb') do |csv|
-          csv << [NAME, COUNT, VALUE]
+          csv << [NAME, VALUE]
           @api.resource(:settings).call(:index, {'per_page' => 999999})['results'].each do |setting|
-            csv << [setting['name'], 1, setting['value']]
+            csv << [setting['name'], setting['value']]
           end
         end
       end
@@ -24,7 +24,7 @@ module HammerCLICsv
       end
 
       def create_settings_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           params =  { 'id' => get_setting_id(name),
                       'setting' => {

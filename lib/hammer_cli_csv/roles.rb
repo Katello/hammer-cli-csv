@@ -12,7 +12,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, RESOURCE, SEARCH, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
+          csv << [NAME, RESOURCE, SEARCH, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
           @api.resource(:roles).call(:index, {'per_page' => 999999})['results'].each do |role|
             @api.resource(:filters).call(:index, {
                 'per_page' => 999999,
@@ -23,7 +23,7 @@ module HammerCLICsv
               permissions = export_column(filter, 'permissions', 'name')
               organizations = export_column(filter, 'organizations', 'name')
               locations = export_column(filter, 'locations', 'name')
-              csv << [role['name'], 1, filter['resource_type'], filter['search'] || '', permissions, organizations, locations]
+              csv << [role['name'], filter['resource_type'], filter['search'] || '', permissions, organizations, locations]
             end
           end
         end
@@ -59,7 +59,7 @@ module HammerCLICsv
           foreman_location(:name => location)
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           search = line[SEARCH] ? namify(line[SEARCH], number) : nil
 

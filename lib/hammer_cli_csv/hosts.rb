@@ -15,15 +15,14 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
+          csv << [NAME, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
           search_options = {:per_page => 999999}
-          search_options['search'] = "organization = #{option_organization}" if option_organization
+          search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
           @api.resource(:hosts).call(:index, search_options)['results'].each do |host|
             host = @api.resource(:hosts).call(:show, {'id' => host['id']})
             raise "Host 'id=#{host['id']}' not found" if !host || host.empty?
 
             name = host['name']
-            count = 1
             organization = foreman_organization(:id => host['organization_id'])
             environment = foreman_environment(:id => host['environment_id'])
             operatingsystem = foreman_operatingsystem(:id => host['operatingsystem_id'])
@@ -32,7 +31,7 @@ module HammerCLICsv
             domain = foreman_domain(:id => host['domain_id'])
             ptable = foreman_partitiontable(:id => host['ptable_id'])
 
-            csv << [name, count, organization, environment, operatingsystem, architecture, mac, domain, ptable]
+            csv << [name, organization, environment, operatingsystem, architecture, mac, domain, ptable]
           end
         end
       end
@@ -51,7 +50,7 @@ module HammerCLICsv
       def create_hosts_from_csv(line)
         return if option_organization && line[ORGANIZATION] != option_organization
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating host '#{name}'..." if option_verbose?

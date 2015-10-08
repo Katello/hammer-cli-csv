@@ -23,7 +23,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
+          csv << [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
           if @server_status['release'] == 'Headpin'
             export_sam csv
@@ -50,7 +50,6 @@ module HammerCLICsv
           host_subscriptions = @headpin.get("systems/#{host_id}/subscriptions")['entitlements']
 
           name = host['name']
-          count = 1
           organization_name = host['owner']['displayName']
           environment = host['environment']['name']
           contentview = host['content_view']['name']
@@ -82,7 +81,7 @@ module HammerCLICsv
           end
           subscriptions.delete!("\n")
 
-          csv << [name, count, organization_name, environment, contentview, hostcollections, virtual, hypervisor,
+          csv << [name, organization_name, environment, contentview, hostcollections, virtual, hypervisor,
                   operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
         end
       end
@@ -101,7 +100,6 @@ module HammerCLICsv
             })
 
             name = host['name']
-            count = 1
             organization_name = organization['name']
             environment = host['environment']['label']
             contentview = host['content_view']['name']
@@ -135,7 +133,7 @@ module HammerCLICsv
               end
             end
             subscriptions.delete!("\n")
-            csv << [name, count, organization_name, environment, contentview, hostcollections, virtual, hypervisor_host,
+            csv << [name, organization_name, environment, contentview, hostcollections, virtual, hypervisor_host,
                     operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
           end
         end
@@ -199,7 +197,7 @@ module HammerCLICsv
           end
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
           if !@existing[line[ORGANIZATION]].include? name

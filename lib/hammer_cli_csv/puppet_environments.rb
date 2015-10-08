@@ -9,14 +9,13 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS]
+          csv << [NAME, ORGANIZATIONS, LOCATIONS]
           @api.resource(:environments).call(:index, {:per_page => 999999})['results'].each do |environment|
             environment = @api.resource(:environments).call(:show, {:id => environment['id']})
             name = environment['name']
-            count = 1
             organizations = export_column(environment, 'organizations', 'name')
             locations = export_column(environment, 'locations', 'name')
-            csv << [name, count, organizations, locations]
+            csv << [name, organizations, locations]
           end
         end
       end
@@ -40,7 +39,7 @@ module HammerCLICsv
           foreman_location(:name => location)
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating environment '#{name}'..." if option_verbose?

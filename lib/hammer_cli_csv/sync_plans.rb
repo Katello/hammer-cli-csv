@@ -13,7 +13,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, ENABLED, STARTDATE, INTERVAL, PRODUCTS]
+          csv << [NAME, ORGANIZATION, DESCRIPTION, ENABLED, STARTDATE, INTERVAL, PRODUCTS]
 
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
             next if option_organization && organization['name'] != option_organization
@@ -23,7 +23,6 @@ module HammerCLICsv
                  'organization_id' => foreman_organization(:name => organization['name'])
             })['results'].each do |sync_plan|
               name = sync_plan['name']
-              count = 1
               organization_name = organization['name']
               description = sync_plan['description']
               enabled = sync_plan['enabled'] ? 'Yes' : 'No'
@@ -35,7 +34,7 @@ module HammerCLICsv
                 end
               end
               products.delete!("\n")
-              csv << [name, count, organization_name, description, enabled, start_date, interval,
+              csv << [name, organization_name, description, enabled, start_date, interval,
                       products]
             end
           end
@@ -63,7 +62,7 @@ module HammerCLICsv
           end
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating sync plan '#{name}'..." if option_verbose?

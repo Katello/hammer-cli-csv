@@ -9,17 +9,17 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, LABEL, DESCRIPTION]
+          csv << [NAME, LABEL, DESCRIPTION]
 
           if @server_status['release'] == 'Headpin'
             @headpin.get(:organizations).each do |organization|
               next if option_organization && organization['name'] != option_organization
-              csv << [organization['name'], 1, organization['label'], organization['description']]
+              csv << [organization['name'], organization['label'], organization['description']]
             end
           else
             @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
               next if option_organization && organization['name'] != option_organization
-              csv << [organization['name'], 1, organization['label'], organization['description']]
+              csv << [organization['name'], organization['label'], organization['description']]
             end
           end
         end
@@ -37,7 +37,7 @@ module HammerCLICsv
       end
 
       def create_organizations_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           return if option_organization && name != option_organization
           label = namify(line[LABEL], number)

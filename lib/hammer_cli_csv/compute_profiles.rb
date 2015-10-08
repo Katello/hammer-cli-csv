@@ -13,18 +13,17 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
+          csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
           @api.resource(:compute_profiles).call(:index, {:per_page => 999999})['results'].each do |compute_profile|
             puts compute_profile
             compute_profile = @api.resource(:compute_profiles).call(:show, {'id' => compute_profile['id']})
             name = compute_profile['name']
-            count = 1
             organizations = export_column(compute_profile, 'organizations', 'name')
             locations = export_column(compute_profile, 'locations', 'name')
             description = compute_profile['description']
             provider = compute_profile['provider']
             url = compute_profile['url']
-            csv << [name, count, organizations, locations, description, provider, url]
+            csv << [name, organizations, locations, description, provider, url]
           end
         end
       end
@@ -41,7 +40,7 @@ module HammerCLICsv
       end
 
       def create_compute_profiles_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating compute profile '#{name}'..." if option_verbose?

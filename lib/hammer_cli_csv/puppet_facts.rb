@@ -11,10 +11,10 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, FACTS]
+          csv << [NAME, ORGANIZATION, FACTS]
 
           search_options = {:per_page => 999999}
-          search_options['search'] = "organization = #{option_organization}" if option_organization
+          search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
           @api.resource(:hosts).call(:index, search_options)['results'].each do |host|
             facts = @api.resource(:fact_values).call(:index, {
                                                                'search' => "host = #{host['name']}",
@@ -33,7 +33,7 @@ module HammerCLICsv
             end
             values.delete!("\n")
 
-            csv << [host['name'], 1, host['organization_name'], values]
+            csv << [host['name'], host['organization_name'], values]
           end
         end
       end
@@ -47,7 +47,7 @@ module HammerCLICsv
       def create_puppetfacts_from_csv(line)
         return if option_organization && line[ORGANIZATION] != option_organization
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           print "Updating puppetfacts '#{name}'..." if option_verbose?
           facts = {}

@@ -1,4 +1,4 @@
 Name,Count,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions
 host%d,1,Mega Corporation,Library,Default Organization View,"Mega Corp HQ",No,,RHEL 6.4,x86_64,1,4 GB,1,Standard,"69|Red Hat Enterprise Linux Server",
 guest%d,4,Mega Corporation,Library,Default Organization View,"Mega Corp HQ,Accounting",Yes,host0,RHEL 6.4,x86_64,1,4 GB,1,Standard,"69|Red Hat Enterprise Linux Server",
-dhcp129-%03d.megacorp.com,999,Mega Corporation,Library,Default Organization View,"Mega Corp HQ",No,,RHEL 6.4,x86_64,1,4 GB,1,Standard,"69|Red Hat Enterprise Linux Server",
+dhcp129-%03d.megacorp.com,100,Mega Corporation,Library,Default Organization View,"Mega Corp HQ",No,,RHEL 6.4,x86_64,1,4 GB,1,Standard,"69|Red Hat Enterprise Linux Server",

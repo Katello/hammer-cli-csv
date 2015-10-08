@@ -29,11 +29,10 @@ module HammerCLICsv
         end
 
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, OSFAMILY, OPERATINGSYSTEMS, LAYOUT]
+          csv << [NAME, ORGANIZATIONS, LOCATIONS, OSFAMILY, OPERATINGSYSTEMS, LAYOUT]
           @api.resource(:ptables).call(:index, {:per_page => 999999})['results'].each do |ptable|
             ptable = @api.resource(:ptables).call(:show, {'id' => ptable['id']})
             name = ptable['name']
-            count = 1
             osfamily = ptable['os_family']
             layout = ptable['layout']
             operatingsystems = export_column(ptable, 'operatingsystems', 'title')
@@ -47,7 +46,7 @@ module HammerCLICsv
             end
             locations.delete!("\n")
 
-            csv << [name, count, organizations, locations, osfamily, operatingsystems, layout]
+            csv << [name, organizations, locations, osfamily, operatingsystems, layout]
           end
         end
       end
@@ -90,7 +89,7 @@ module HammerCLICsv
           params['ptable']['location_ids'] = locations
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           params['ptable']['name'] = name
           if !@existing.include? name

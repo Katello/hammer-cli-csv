@@ -9,7 +9,8 @@ require 'hammer_cli_csv/csv'
 module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
     option %w(-v --verbose), :flag, 'be verbose'
-    option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with', :default => 1
+    option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with',
+           :default => 1, :hidden => true
     option %w(--export), :flag, 'Export current data instead of importing'
     option %w(--file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
     option %w(--prefix), 'PREFIX', 'Prefix for all name columns'
@@ -482,6 +483,99 @@ module HammerCLICsv
       result
     end
 
+    def foreman_host(options = {})
+      @query_hosts ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @query_hosts[options[:name]]
+        if !options[:id]
+          host = @api.resource(:hosts).call(:index, {
+                                              :per_page => 999999,
+                                              'search' => "name=\"#{options[:name]}\""
+                                            })['results']
+          raise "Host '#{options[:name]}' not found" if !host || host.empty?
+          options[:id] = host[0]['id']
+          @query_hosts[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @query_hosts.key(options[:id])
+        if !options[:name]
+          host = @api.resource(:hosts).call(:show, {'id' => options[:id]})
+          raise "Host 'id=#{options[:id]}' not found" if !host || host.empty?
+          options[:name] = host['name']
+          @query_hosts[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def foreman_hostgroup(options = {})
+      @query_hostgroups ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @query_hostgroups[options[:name]]
+        if !options[:id]
+          hostgroup = @api.resource(:hostgroups).call(:index, {
+                                              :per_page => 999999,
+                                              'search' => "name=\"#{options[:name]}\""
+                                            })['results']
+          raise "Host Group '#{options[:name]}' not found" if !hostgroup || hostgroup.empty?
+          options[:id] = hostgroup[0]['id']
+          @query_hostgroups[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @query_hostgroups.key(options[:id])
+        if !options[:name]
+          hostgroup = @api.resource(:hostgroups).call(:show, {'id' => options[:id]})
+          raise "Host Group 'id=#{options[:id]}' not found" if !hostgroup || hostgroup.empty?
+          options[:name] = hostgroup['name']
+          @query_hostgroups[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
+    def foreman_smart_proxy(options = {})
+      @query_smart_proxies ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @query_smart_proxies[options[:name]]
+        if !options[:id]
+          smart_proxy = @api.resource(:smart_proxies).call(:index, {
+                                              :per_page => 999999,
+                                              'search' => "name=\"#{options[:name]}\""
+                                            })['results']
+          raise "Smart Proxy '#{options[:name]}' not found" if !smart_proxy || smart_proxy.empty?
+          options[:id] = smart_proxy[0]['id']
+          @query_smart_proxies[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @query_smart_proxies.key(options[:id])
+        if !options[:name]
+          smart_proxy = @api.resource(:smart_proxies).call(:show, {'id' => options[:id]})
+          raise "Smart Proxy 'id=#{options[:id]}' not found" if !smart_proxy || smart_proxy.empty?
+          options[:name] = smart_proxy['name']
+          @query_smart_proxies[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
     def lifecycle_environment(organization, options = {})
       @lifecycle_environments ||= {}
       @lifecycle_environments[organization] ||= {
@@ -858,6 +952,11 @@ module HammerCLICsv
         end
       end
       found
+    end
+
+    def count(value)
+      return 1 if value.nil? || value.empty?
+      value.to_i
     end
 
     private

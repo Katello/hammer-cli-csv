@@ -15,11 +15,11 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT]
+          csv << [NAME]
           @api.resource(:reports).call(:index, {
               'per_page' => 999999
           })['results'].each do |report|
-            csv << [report['host_name'], 1, report['metrics'].to_json]
+            csv << [report['host_name'], report['metrics'].to_json]
           end
         end
 
@@ -40,7 +40,7 @@ module HammerCLICsv
       end
 
       def create_reports_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
           if !@existing_reports[name]

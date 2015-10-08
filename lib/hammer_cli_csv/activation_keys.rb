@@ -14,7 +14,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
+          csv << [NAME, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
                   HOSTCOLLECTIONS, SUBSCRIPTIONS]
           if @server_status['release'] == 'Headpin'
             @headpin.get(:organizations).each do |organization|
@@ -22,7 +22,6 @@ module HammerCLICsv
 
               @headpin.get("organizations/#{organization['label']}/activation_keys").each do |activationkey|
                 name = namify(activationkey['name'])
-                count = 1
                 description = activationkey['description']
                 limit = activationkey['usage_limit'].to_i < 0 ? 'Unlimited' : activationkey['usage_limit']
                 environment = @headpin.environment(activationkey['environment_id'])['name']
@@ -37,7 +36,7 @@ module HammerCLICsv
                   end
                 end
                 subscriptions.delete!("\n")
-                csv << [name, count, organization['label'], description, limit, environment, contentview,
+                csv << [name, organization['label'], description, limit, environment, contentview,
                         hostcollections, subscriptions]
               end
             end
@@ -98,7 +97,7 @@ module HammerCLICsv
           end
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
           params = {

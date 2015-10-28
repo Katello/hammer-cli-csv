@@ -17,9 +17,19 @@ The following sections will cover installation, usage, and examples. All of the 
 
 ## Installation
 
-```
+```bash
 gem install hammer_cli_csv
 gem install hammer_cli_katello
+
+mkdir -p ~/.hammer/cli.modules.d/
+
+cat <<EOQ > ~/.hammer/cli.modules.d/csv.yml
+:csv:
+  :enable_module: true
+EOQ
+
+# to confirm things work, this should return useful output
+hammer csv --help
 
 ```
 

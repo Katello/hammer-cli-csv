@@ -17,7 +17,7 @@ describe 'content-hosts' do
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --verbose --csv-file #{file.path}})
+        hammer.run(%W{csv content-hosts --verbose --file #{file.path}})
       }
       stderr.must_equal ''
       stdout[0..-2].must_equal "Creating content host '#{hostname}'...done\nUpdating hypervisor and guest associations...done"

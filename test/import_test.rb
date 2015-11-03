@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), 'csv_test_helper')
 require 'stringio'
 require 'tempfile'
 
-describe 'users' do
+describe 'import' do
   extend CommandTestHelper
 
   before :each do

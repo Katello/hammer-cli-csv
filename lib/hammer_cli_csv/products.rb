@@ -14,7 +14,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, LABEL, ORGANIZATION, REPOSITORY, REPOSITORY_TYPE, REPOSITORY_URL]
+          csv << [NAME, LABEL, ORGANIZATION, REPOSITORY, REPOSITORY_TYPE, REPOSITORY_URL]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
@@ -31,7 +31,7 @@ module HammerCLICsv
                 repository = @api.resource(:repositories).call(:show, {:id => repository['id']})
                 repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
                 repository_type += " #{repository['content_type'].capitalize}"
-                csv << [product['name'], 1, product['label'], organization['name'],
+                csv << [product['name'], product['label'], organization['name'],
                         repository['name'], repository_type, repository['url']]
               end
             end
@@ -75,7 +75,7 @@ module HammerCLICsv
           end
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           product_id = @existing_products[line[ORGANIZATION]][name]
           if product_id.nil?

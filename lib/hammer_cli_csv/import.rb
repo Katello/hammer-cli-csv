@@ -7,7 +7,8 @@ module HammerCLICsv
       desc         'import by directory'
 
       option %w(-v --verbose), :flag, _('be verbose')
-      option %w(--threads), 'THREAD_COUNT', _('Number of threads to hammer with'), :default => 1
+      option %w(--threads), 'THREAD_COUNT', _('Number of threads to hammer with'),
+             :default => 1, :hidden => true
       option '--dir', 'DIRECTORY', _('directory to import from')
       option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
       option %w(--prefix), 'PREFIX', _('Prefix for all name columns')
@@ -16,9 +17,9 @@ module HammerCLICsv
                       domains architectures partition_tables lifecycle_environments host_collections
                       provisioning_templates
                       subscriptions products content_views content_view_filters activation_keys
-                      hosts content_hosts reports roles users )
+                      hosts content_hosts smart_proxies reports roles users )
       RESOURCES.each do |resource|
-        dashed = resource.sub('_', '-')
+        dashed = resource.gsub('_', '-')
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"
       end
 
@@ -61,7 +62,7 @@ module HammerCLICsv
 
       def hammer_resource(resource)
         return if !self.send("option_#{resource}") && !option_dir
-        options_file = self.send("option_#{resource}") || "#{option_dir}/#{resource.sub('_', '-')}.csv"
+        options_file = self.send("option_#{resource}") || "#{option_dir}/#{resource.gsub('_', '-')}.csv"
         unless options_file_exists? options_file
           if option_dir
             puts _("Skipping #{resource} because '#{options_file}' does not exist") if option_verbose?
@@ -71,11 +72,11 @@ module HammerCLICsv
         end
         puts _("Importing #{resource} from '#{options_file}'") if option_verbose?
 
-        args = %W( csv #{resource.sub('_', '-')} --file #{options_file} )
+        args = %W( csv #{resource.gsub('_', '-')} --file #{options_file} )
         args << '-v' if option_verbose?
         args += %W( --organization #{option_organization} ) if option_organization
         args += %W( --prefix #{option_prefix} ) if option_prefix
-        args += %W( --threads #{option_threads} )
+        args += %W( --threads #{option_threads} ) if option_threads
         hammer.run(args)
       end
 

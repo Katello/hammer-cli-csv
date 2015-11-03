@@ -14,7 +14,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ADMIN, ROLES]
+          csv << [NAME, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ADMIN, ROLES]
           @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
             if user['organizations']
               organizations = CSV.generate do |column|
@@ -42,7 +42,7 @@ module HammerCLICsv
             end
             admin = user['admin'] ? 'Yes' : 'No'
             if user['login'] != 'admin' && !user['login'].start_with?('hidden-')
-              csv << [user['login'], 1, user['firstname'], user['lastname'], user['mail'],
+              csv << [user['login'], user['firstname'], user['lastname'], user['mail'],
                       organizations, locations, admin, roles]
             end
           end
@@ -61,7 +61,7 @@ module HammerCLICsv
       end
 
       def create_users_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
           roles = collect_column(line[ROLES]) do |role|

@@ -13,9 +13,9 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb') do |csv|
-          csv << [NAME, COUNT, REGISTRY, REPOSITORY, COMPUTERESOURCE, ATTACH, ENTRYPOINT, COMMAND]
+          csv << [NAME, REGISTRY, REPOSITORY, COMPUTERESOURCE, ATTACH, ENTRYPOINT, COMMAND]
           @api.resource(:containers).call(:index, {'per_page' => 999999})['results'].each do |container|
-            csv << [container['name'], 1,
+            csv << [container['name'],
                     container['registry_name'],
                     "#{container['repository_name']}:#{container['tag']}",
                     container['compute_resource_name'],
@@ -36,7 +36,7 @@ module HammerCLICsv
 
       def create_containers_from_csv(line)
         # TODO: containers cannot be updated (no api)
-        # line[COUNT].to_i.times do |number|
+        # count(line[COUNT]).times do |number|
         #   name = namify(line[NAME], number)
         #   params =  { 'id' => foreman_container(:name => name),
         #               'container' => {

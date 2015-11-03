@@ -8,13 +8,12 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, OPERATINGSYSTEMS]
+          csv << [NAME, OPERATINGSYSTEMS]
           @api.resource(:architectures).call(:index, {:per_page => 999999})['results'].each do |architecture|
             architecture = @api.resource(:architectures).call(:show, {:id => architecture['id']})
             name = architecture['name']
-            count = 1
             operatingsystems = export_column(architecture, 'operatingsystems', 'title')
-            csv << [name, count, operatingsystems]
+            csv << [name, operatingsystems]
           end
         end
       end
@@ -31,7 +30,7 @@ module HammerCLICsv
       end
 
       def create_architectures_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           architecture_id = @existing[name]
           operatingsystem_ids = CSV.parse_line(line[OPERATINGSYSTEMS]).collect do |operatingsystem_name|

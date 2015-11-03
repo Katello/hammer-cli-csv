@@ -21,14 +21,13 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, NETWORK, NETWORK_MASK,
+          csv << [NAME, ORGANIZATIONS, LOCATIONS, NETWORK, NETWORK_MASK,
                   NETWORK_FROM, NETWORK_TO, DOMAINS, GATEWAY, DHCP_PROXY, TFTP_PROXY, DNS_PROXY,
                   DNS_PRIMARY, DNS_SECONDARY, VLAN_ID]
           @api.resource(:subnets).call(:index, {:per_page => 999999})['results'].each do |subnet|
             subnet = @api.resource(:subnets).call(:show, {'id' => subnet['id']})
 
             name = subnet['name']
-            count = 1
             organizations = export_column(subnet, 'organizations', 'name')
             locations = export_column(subnet, 'locations', 'name')
             network = subnet['network']
@@ -43,7 +42,7 @@ module HammerCLICsv
             dns_primary = subnet['dns_primary']
             dns_secondary = subnet['dns_secondary']
             vlan_id = subnet['vlanid']
-            csv << [name, count, organizations, locations, network, network_mask,
+            csv << [name, organizations, locations, network, network_mask,
                     network_from, network_to, domains, gateway, dhcp_proxy, tftp_proxy, dns_proxy,
                     dns_primary, dns_secondary, vlan_id]
           end
@@ -66,7 +65,7 @@ module HammerCLICsv
           foreman_domain(:name => domain)
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating subnet '#{name}'..." if option_verbose?

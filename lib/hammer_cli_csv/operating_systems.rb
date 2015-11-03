@@ -9,13 +9,12 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, DESCRIPTION, FAMILY]
+          csv << [NAME, DESCRIPTION, FAMILY]
           @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem|
             name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
-            count = 1
             description = operatingsystem['description']
             family = operatingsystem['family']
-            csv << [name, count, description, family]
+            csv << [name, description, family]
           end
         end
       end
@@ -38,7 +37,7 @@ module HammerCLICsv
             'description' => line[DESCRIPTION]
           }
         }
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           (osname, major, minor) = split_os_name(name)
           params['operatingsystem']['name'] = osname

@@ -1,36 +1,32 @@
 module HammerCLICsv
   class CsvCommand
-    class ProvisioningTemplatesCommand < BaseCommand
-      command_name 'provisioning-templates'
-      desc         'import or export provisioning templates'
+    class JobTemplatesCommand < BaseCommand
+      command_name 'job-templates'
+      desc         'import or export job templates'
 
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
-      OPERATINGSYSTEMS = 'Operating Systems'
-      ASSOCIATIONS = 'Host Group / Puppet Environment Combinations'
-      KIND = 'Kind'
+      JOB = 'Job Category'
+      PROVIDER = 'Provider'
+      SNIPPET = 'Snippet'
       TEMPLATE = 'Template'
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, OPERATINGSYSTEMS, ASSOCIATIONS, KIND, TEMPLATE]
-          @api.resource(:config_templates).call(:index, {
+          csv << [NAME, ORGANIZATIONS, LOCATIONS, JOB, PROVIDER, SNIPPET, TEMPLATE]
+          @api.resource(:job_templates).call(:index, {
               :per_page => 999999
           })['results'].each do |template_id|
-            template = @api.resource(:config_templates).call(:show, {:id => template_id['id']})
+            template = @api.resource(:job_templates).call(:show, {:id => template_id['id']})
             next if template['locked']
             next unless option_organization.nil? || template['organizations'].detect { |org| org['name'] == option_organization }
             name = template['name']
-            kind = template['snippet'] ? 'snippet' : template['template_kind_name']
+            job = template['job_name']
+            snippet = template['snippet'] ? 'Yes' : 'No'
+            provider = template['provider_type']
             organizations = export_column(template, 'organizations', 'name')
             locations = export_column(template, 'locations', 'name')
-            operatingsystems = export_column(template, 'operatingsystems', 'fullname')
-            # TODO: puppet environments for content views are not present in api
-            # http://projects.theforeman.org/issues/10293
-            associations = export_associations(template)
-            unless name == 'Boot disk iPXE - generic host' || name == 'Boot disk iPXE - host'
-              csv << [name, organizations, locations, operatingsystems, associations, kind, template['template']]
-            end
+            csv << [name, organizations, locations, job, provider, snippet, template['template']]
           end
         end
       end
@@ -67,7 +63,7 @@ module HammerCLICsv
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
-            print _("Creating provisioning template '%{name}'...") % {:name => name } if option_verbose?
+            print _("Creating job template '%{name}'...") % {:name => name } if option_verbose?
             template_id = @api.resource(:config_templates).call(:create, {
                 'config_template' => {
                   'name' => name,
@@ -79,7 +75,7 @@ module HammerCLICsv
                 }
             })['id']
           else
-            print _("Updating provisioning template '%{name}'...") % {:name => name} if option_verbose?
+            print _("Updating job template '%{name}'...") % {:name => name} if option_verbose?
             template_id = @api.resource(:config_templates).call(:update, {
                 'id' => @existing[name],
                 'config_template' => {

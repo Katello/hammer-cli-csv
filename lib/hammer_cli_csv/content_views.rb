@@ -18,7 +18,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, ENVIRONMENTS]
+          csv << [NAME, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, ENVIRONMENTS]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
@@ -48,7 +48,7 @@ module HammerCLICsv
                 composite_contentviews << [name, 1, label, orgname, composite, contentviews, environments]
               else
                 repositories = export_column(contentview, 'repositories', 'name')
-                csv << [name, 1, label, orgname, composite, repositories, environments]
+                csv << [name, label, orgname, composite, repositories, environments]
               end
             end
             composite_contentviews.each do |contentview|
@@ -93,7 +93,7 @@ module HammerCLICsv
           end
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
           contentview_id = @existing_contentviews[line[ORGANIZATION]][name]

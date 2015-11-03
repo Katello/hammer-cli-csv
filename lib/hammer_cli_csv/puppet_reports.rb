@@ -21,7 +21,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
+          csv << [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
                   OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
@@ -36,7 +36,6 @@ module HammerCLICsv
               })
 
               name = system['name']
-              count = 1
               organization_label = organization['label']
               environment = system['environment']['label']
               contentview = system['content_view']['name']
@@ -69,7 +68,7 @@ module HammerCLICsv
                 end
               end
               subscriptions.delete!("\n")
-              csv << [name, count, organization_label, environment, contentview, hostcollections, virtual, host,
+              csv << [name, organization_label, environment, contentview, hostcollections, virtual, host,
                       operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
             end
           end
@@ -105,7 +104,7 @@ module HammerCLICsv
           end
         end
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
           # TODO: w/ @daviddavis p-r

@@ -10,13 +10,13 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, PATH, OSFAMILY]
+          csv << [NAME, PATH, OSFAMILY]
           @api.resource(:media).call(:index, {:per_page => 999999})['results'].each do |installation_media|
             name = installation_media['name']
             count = 1
             path = installation_media['path']
             os_family = installation_media['os_family']
-            csv << [name, count, path, os_family]
+            csv << [name, path, os_family]
           end
         end
       end
@@ -33,7 +33,7 @@ module HammerCLICsv
       end
 
       def create_installation_medias_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating installation_media '#{name}'..." if option_verbose?

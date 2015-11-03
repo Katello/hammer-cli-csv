@@ -62,11 +62,6 @@ During export, the Count column will always be one (1).
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/organizations_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/organizations.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -115,10 +110,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/locations_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/locations.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
 
 **CSV Columns**
 
@@ -138,11 +129,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/puppet_environments_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/puppet-environments.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -161,11 +147,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/operating_systems_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/operating-systems.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -184,11 +165,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/domains_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/domains.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -208,11 +184,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/architectures_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/architectures.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -233,11 +204,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/partition_tables_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/partition-tables.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -258,11 +224,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/lifecycle_environments_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/lifecycle-environments.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -287,10 +248,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/host_collections_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/host-collections.csv)
-* Supported products and version
-  * Katello-nightly, Katello-2.1, Katello-2.2
-  * Satellite-6.0, Satellite-6.1
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -317,9 +274,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/products_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/products.csv)
-* Supported products and version
-  * Katello-nightly, Katello-2.1, Katello-2.2
-  * Satellite-6.0, Satellite-6.1
 
 **CSV Columns**
 
@@ -346,10 +300,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/provisioning_templates_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/provisioning_templates.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
 
 **CSV Columns**
 
@@ -373,11 +323,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/subscriptions_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/subscriptions.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -400,14 +345,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/activation_keys_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/activation-keys.csv)
-* Supported products and version
-  * Export
-    * Katello-nightly
-    * Satellite-6.0
-    * SAM-1.4
-  * Import
-    * Katello-nightly
-    * Satellite-6.0
 
 **CSV Columns**
 
@@ -432,11 +369,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/hosts_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/hosts.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -465,10 +397,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/content_hosts_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/content-hosts.csv)
-* Supported products and version
-  * Katello-nightly, Katello-2.1, Katello-2.2
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -500,11 +428,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/reports_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/reports.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -530,10 +453,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/roles_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/roles.csv)
-* Supported products and version
-  * Foreman-1.6, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0.4
 
 **CSV Columns**
 
@@ -556,11 +475,6 @@ Creating organization 'abcMega Corporation'... done
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/users_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/users.csv)
-* Supported products and version
-  * Foreman-1.5, Foreman-nightly
-  * Katello-nightly
-  * Satellite-6.0
-  * SAM-1.4
 
 **CSV Columns**
 
@@ -576,6 +490,31 @@ Creating organization 'abcMega Corporation'... done
 | Organizations | Comma separated list of organizations |   | x | x | x |   |
 | Locations | Comma separated list of locations |   | x | x | x |   |
 | Roles | Comma separated list of role names for user |   | x | x | x |   |
+
+## Settings
+
+**Overview**
+* [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=settings&state=open)
+* [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/settings_test.rb)
+* Sample data
+  * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/settings.csv)
+
+**CSV Columns**
+
+*Note: % column indicates Count substituion*
+
+| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
+| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
+| Name         | Setting name to update or create | x | x | x | x |   |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
+| Value | Setting value |   | x | x | x |   |
+
+**Examples**
+```
+Name,Value
+administrator,admin@megacorp.com
+idle_timeout,60000
+```
 
 ## Import
 

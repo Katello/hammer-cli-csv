@@ -16,18 +16,17 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
+          csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
           @api.resource(:compute_resources).call(:index, {:per_page => 999999})['results'].each do |compute_resource|
             compute_resource = @api.resource(:compute_resources).call(:show, {'id' => compute_resource['id']})
 
             name = compute_resource['name']
-            count = 1
             organizations = export_column(compute_resource, 'organizations', 'name')
             locations = export_column(compute_resource, 'locations', 'name')
             description = compute_resource['description']
             provider = compute_resource['provider']
             url = compute_resource['url']
-            csv << [name, count, organizations, locations, description, provider, url]
+            csv << [name, organizations, locations, description, provider, url]
           end
         end
       end
@@ -44,7 +43,7 @@ module HammerCLICsv
       end
 
       def create_compute_resources_from_csv(line)
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           if !@existing.include? name
             print "Creating compute resource '#{name}'..." if option_verbose?

@@ -12,7 +12,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, MANIFEST, CONTENT_SET, ARCH, RELEASE]
+          csv << [NAME, ORGANIZATION, MANIFEST, CONTENT_SET, ARCH, RELEASE]
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
             next if option_organization && organization['name'] != option_organization
             @api.resource(:products).call(:index, {
@@ -32,7 +32,7 @@ module HammerCLICsv
                     name_split = repository['name'].split(' ')
                     arch = name_split[-2]
                     release = name_split[-1]
-                    csv << [name, 1, organization['name'], nil, content_set, arch, release]
+                    csv << [name, organization['name'], nil, content_set, arch, release]
                   end
                 end
               end

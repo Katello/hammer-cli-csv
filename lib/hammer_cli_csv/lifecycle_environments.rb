@@ -10,7 +10,7 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, COUNT, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
+          csv << [NAME, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
           @api.resource(:organizations).call(:index, {
               'per_page' => 999999
           })['results'].each do |organization|
@@ -22,10 +22,9 @@ module HammerCLICsv
             })['results'].sort { |a, b| a['created_at'] <=> b['created_at'] }.each do |environment|
               if environment['name'] != 'Library'
                 name = environment['name']
-                count = 1
                 prior = environment['prior']['name']
                 description = environment['description']
-                csv << [name, count, organization['name'], prior, description]
+                csv << [name, organization['name'], prior, description]
               end
             end
           end
@@ -54,7 +53,7 @@ module HammerCLICsv
       def create_environments_from_csv(line)
         return if option_organization && line[ORGANIZATION] != option_organization
 
-        line[COUNT].to_i.times do |number|
+        count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           prior = namify(line[PRIORENVIRONMENT], number)
           raise "Organization '#{line[ORGANIZATION]}' does not exist" if !@existing.include? line[ORGANIZATION]

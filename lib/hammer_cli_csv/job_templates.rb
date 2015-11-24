@@ -33,7 +33,7 @@ module HammerCLICsv
 
       def import
         @existing = {}
-        @api.resource(:config_templates).call(:index, {
+        @api.resource(:job_templates).call(:index, {
             :per_page => 999999
         })['results'].each do |template|
           @existing[template['name']] = template['id'] if template
@@ -56,79 +56,71 @@ module HammerCLICsv
         locations = collect_column(line[LOCATIONS]) do |location|
           foreman_location(:name => location)
         end
-        operatingsystems = collect_column(line[OPERATINGSYSTEMS]) do |operatingsystem|
-          foreman_operatingsystem(:name => operatingsystem)
-        end
 
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
-          if !@existing.include? name
-            print _("Creating job template '%{name}'...") % {:name => name } if option_verbose?
-            template_id = @api.resource(:config_templates).call(:create, {
-                'config_template' => {
+          job_name = namify(line[JOB], number)
+          options = {
+                'job_template' => {
                   'name' => name,
-                  'snippet' => line[KIND] == 'snippet',
-                  'template_kind_id' => line[KIND] == 'snippet' ? nil : foreman_template_kind(:name => line[KIND]),
-                  'operatingsystem_ids' => operatingsystems,
+                  'job_name' => job_name,
+                  'snippet' => line[SNIPPET] == 'Yes' ? true : false,
+                  'provider_type' => line[PROVIDER],
+                  'organization_ids' => organizations,
                   'location_ids' => locations,
                   'template' => line[TEMPLATE]
                 }
-            })['id']
+          }
+          template_id = @existing[name]
+          if !template_id
+            print _("Creating job template '%{name}'...") % {:name => name } if option_verbose?
+            template_id = @api.resource(:job_templates).call(:create, options)['id']
+            @existing[name] = template_id
           else
             print _("Updating job template '%{name}'...") % {:name => name} if option_verbose?
-            template_id = @api.resource(:config_templates).call(:update, {
-                'id' => @existing[name],
-                'config_template' => {
-                  'name' => name,
-                  'snippet' => line[KIND] == 'snippet',
-                  'template_kind_id' => line[KIND] == 'snippet' ? nil : foreman_template_kind(:name => line[KIND]),
-                  'operatingsystem_ids' => operatingsystems,
-                  'location_ids' => locations,
-                  'template' => line[TEMPLATE]
-                }
-            })['id']
+            options['id'] = template_id
+            template_id = @api.resource(:job_templates).call(:update, options)['id']
           end
-          @existing[name] = template_id
 
           # Update associated resources
-          @template_organizations ||= {}
-          organizations.each do |organization_id|
-            if @template_organizations[organization_id].nil?
-              @template_organizations[organization_id] = @api.resource(:organizations).call(:show, {
-                  'id' => organization_id
-              })['config_templates'].collect do |template|
-                template['id']
-              end
-            end
-            if !@template_organizations[organization_id].include? template_id
-              @template_organizations[organization_id] << template_id
-              @api.resource(:organizations).call(:update, {
-                  'id' => organization_id,
-                  'organization' => {
-                      'config_template_ids' => @template_organizations[organization_id]
-                  }
-              })
-            end
-          end
-          @template_locations ||= {}
-          locations.each do |location_id|
-            if @template_locations[location_id].nil?
-              @template_locations[location_id] = @api.resource(:locations).call(:show, {
-                  'id' => location_id
-              })['config_templates'].collect do |template|
-                template['id']
-              end
-            end
-            if !@template_locations[location_id].include? template_id
-              @template_locations[location_id] += [template_id]
-              @api.resource(:locations).call(:update, {
-                  'id' => location_id,
-                  'location' => {
-                      'config_template_ids' => @template_locations[location_id]
-                  }
-              })
-            end
-          end
+          # @template_organizations ||= {}
+          # organizations.each do |organization_id|
+          #   if @template_organizations[organization_id].nil?
+          #     @template_organizations[organization_id] = @api.resource(:organizations).call(:show, {
+          #         'id' => organization_id
+          #     })['config_templates'].collect do |template|
+          #       template['id']
+          #     end
+          #   end
+          #   if !@template_organizations[organization_id].include? template_id
+          #     @template_organizations[organization_id] << template_id
+          #     @api.resource(:organizations).call(:update, {
+          #         'id' => organization_id,
+          #         'organization' => {
+          #             'config_template_ids' => @template_organizations[organization_id]
+          #         }
+          #     })
+          #   end
+          # end
+          # @template_locations ||= {}
+          # locations.each do |location_id|
+          #   if @template_locations[location_id].nil?
+          #     @template_locations[location_id] = @api.resource(:locations).call(:show, {
+          #         'id' => location_id
+          #     })['config_templates'].collect do |template|
+          #       template['id']
+          #     end
+          #   end
+          #   if !@template_locations[location_id].include? template_id
+          #     @template_locations[location_id] += [template_id]
+          #     @api.resource(:locations).call(:update, {
+          #         'id' => location_id,
+          #         'location' => {
+          #             'config_template_ids' => @template_locations[location_id]
+          #         }
+          #     })
+          #   end
+          # end
 
           puts _('done') if option_verbose?
         end

@@ -37,7 +37,8 @@ module HammerCLICsv
       def create_smart_proxies_from_csv(line)
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
-          if !@existing.include? line[URL]
+          id = @existing[line[URL]]
+          if id.nil?
             print "Creating smart proxy '#{name}'..." if option_verbose?
             id = @api.resource(:smart_proxies).call(:create, {
                 'smart_proxy' => {
@@ -47,13 +48,13 @@ module HammerCLICsv
             })['id']
           else
             print "Updating smart proxy '#{name}'..." if option_verbose?
-            id = @api.resource(:smart_proxies).call(:update, {
-                'id' => @existing[name],
+            @api.resource(:smart_proxies).call(:update, {
+                'id' => id,
                 'smart_proxy' => {
                     'name' => name,
                     'url' => line[URL]
                 }
-            })['smart_proxy']['id']
+            })
           end
 
           # Update associated resources

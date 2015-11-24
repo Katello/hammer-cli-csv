@@ -189,7 +189,7 @@ module HammerCLICsv
           (total / 20 + 2).to_i.times do |page|
             @api.resource(:systems).call(:index, {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'page' => page,
+                'page' => page + 1,
                 'per_page' => 20
             })['results'].each do |host|
               @existing[line[ORGANIZATION]][host['name']] = host['uuid'] if host
@@ -299,10 +299,9 @@ module HammerCLICsv
       end
 
       def update_subscriptions(host_id, line)
-        existing_subscriptions = @api.resource(:subscriptions).call(:index, {
-            'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+        existing_subscriptions = @api.resource(:systems).call(:subscriptions, {
             'per_page' => 999999,
-            'system_id' => host_id
+            'id' => host_id
         })['results']
         if existing_subscriptions.length > 0
           @api.resource(:subscriptions).call(:destroy, {
@@ -310,6 +309,18 @@ module HammerCLICsv
             'id' => existing_subscriptions[0]['id']
           })
         end
+
+        # existing_subscriptions = @api.resource(:subscriptions).call(:index, {
+        #     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+        #     'per_page' => 999999,
+        #     'system_id' => host_id
+        # })['results']
+        # if existing_subscriptions.length > 0
+        #   @api.resource(:subscriptions).call(:destroy, {
+        #     'system_id' => host_id,
+        #     'id' => existing_subscriptions[0]['id']
+        #   })
+        # end
 
         return if line[SUBSCRIPTIONS].nil? || line[SUBSCRIPTIONS].empty?
 

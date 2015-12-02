@@ -41,7 +41,8 @@ module HammerCLICsv
           name = namify(line[NAME], number)
           return if option_organization && name != option_organization
           label = namify(line[LABEL], number)
-          if !@existing.include? name
+          organization_id = @existing[name]
+          if organization_id.nil?
             print "Creating organization '#{name}'... " if option_verbose?
             @api.resource(:organizations).call(:create, {
                 'name' => name,
@@ -53,10 +54,11 @@ module HammerCLICsv
             })
           else
             print "Updating organization '#{name}'... " if option_verbose?
+            organization = @api.resource(:organizations).call(:show, {'id' => organization_id})
             @api.resource(:organizations).call(:update, {
-                'id' => foreman_organization(:name => name),
+                'id' => organization_id,
                 'organization' => {
-                    'id' => foreman_organization(:name => name),
+                    'id' => organization_id,
                     'description' => line[DESCRIPTION]
                 }
             })

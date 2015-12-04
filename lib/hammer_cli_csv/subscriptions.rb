@@ -51,6 +51,8 @@ module HammerCLICsv
         end
       end
 
+      # FIXME: TODO remove this rubocop
+      # rubocop:disable CyclomaticComplexity
       def enable_products_from_csv(line)
         organization = line[ORGANIZATION] || option_organization
         raise "Organization is required in either input CSV or by option --organization" if organization.nil? || organization.empty?
@@ -77,7 +79,11 @@ module HammerCLICsv
         repository_set = results[0]
 
         repository = repository_set['repositories'].find do |repo|
-          repo['name'].end_with?("#{line[ARCH]} #{line[RELEASE]}")
+          if line[RELEASE].nil? || line[RELEASE].empty?
+            repo['name'].end_with?("#{line[ARCH]}")
+          else
+            repo['name'].end_with?("#{line[ARCH]} #{line[RELEASE]}")
+          end
         end
 
         if repository.nil?
@@ -87,12 +93,14 @@ module HammerCLICsv
           end
           raise "No match for content set '#{line[CONTENT_SET]}'" if !product_content
 
-          @api.resource(:repository_sets).call(:enable, {
+          params = {
               'id' => product_content['content']['id'],
               'product_id' => product['id'],
-              'basearch' => line[ARCH],
-              'releasever' => line[RELEASE]
-          })
+              'basearch' => line[ARCH]
+          }
+          params['releasever'] = line[RELEASE] unless line[RELEASE].nil? || line[RELEASE].empty?
+
+          @api.resource(:repository_sets).call(:enable, params)
           puts 'done' if option_verbose?
         else
           puts "Repository #{repository['name']} already enabled" if option_verbose?

@@ -94,6 +94,7 @@ module HammerCLICsv
     end
 
     def namify(name_format, number = 0)
+      return '' unless name_format
       if name_format.index('%')
         name = name_format % number
       else

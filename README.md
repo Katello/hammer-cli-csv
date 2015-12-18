@@ -167,6 +167,13 @@ Creating organization 'abcMega Corporation'... done
 | Name         | Name of the operating systems to update or create | x | x | x | x |   |
 | Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
 | Family | Operating system family |   | x | x | x |   |
+| Description | Operating system description |   | x | x | x |   |
+| Password Hash | MD5, SHA256, SHA512, or Base64 |   | x | x | x |   |
+| Partition Tables | List of partition table names |   | x | x | x |   |
+| Architectures | List of architectures names |   | x | x | x |   |
+| Media | List of media names |   | x | x | x |   |
+| Provisioning Templates | List of provisioning template names |   | x | x | x |   |
+| Parameters | List of parameters |   | x | x | x |   |
 
 ## Domains
 

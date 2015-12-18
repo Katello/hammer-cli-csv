@@ -4,6 +4,9 @@ module HammerCLICsv
       command_name 'provisioning-templates'
       desc         'import or export provisioning templates'
 
+      option %w(--include-locked), :flag, 'Include locked templates (will fail if re-imported)',
+                                   :attribute_name => :option_include_locked
+
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
       OPERATINGSYSTEMS = 'Operating Systems'
@@ -14,12 +17,13 @@ module HammerCLICsv
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
           csv << [NAME, ORGANIZATIONS, LOCATIONS, OPERATINGSYSTEMS, ASSOCIATIONS, KIND, TEMPLATE]
-          @api.resource(:config_templates).call(:index, {
+          params = {
               :per_page => 999999
-          })['results'].each do |template_id|
+          }
+          params['search'] =  "organization = \"#{option_organization}\"" if option_organization
+          @api.resource(:config_templates).call(:index, params)['results'].each do |template_id|
             template = @api.resource(:config_templates).call(:show, {:id => template_id['id']})
-            next if template['locked']
-            next unless option_organization.nil? || template['organizations'].detect { |org| org['name'] == option_organization }
+            next if template['locked'] && !option_include_locked?
             name = template['name']
             kind = template['snippet'] ? 'snippet' : template['template_kind_name']
             organizations = export_column(template, 'organizations', 'name')

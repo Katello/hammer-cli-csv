@@ -108,6 +108,7 @@ module HammerCLICsv
       end
 
       def import_manifest_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
         args = %W{
           --server #{ @server } --username #{ @username } --password #{ @password }
           subscription upload --file #{ line[MANIFEST] }

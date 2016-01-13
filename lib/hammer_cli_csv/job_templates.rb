@@ -6,15 +6,21 @@ module HammerCLICsv
 
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
+      DESCRIPTION = 'Description'
       JOB = 'Job Category'
       PROVIDER = 'Provider'
       SNIPPET = 'Snippet'
       TEMPLATE = 'Template'
-      INPUT_NAME = 'Input Name'
+      INPUT_NAME = 'Input:Name'
+      INPUT_DESCRIPTION = 'Input:Description'
+      INPUT_REQUIRED = 'Input:Required'
+      INPUT_TYPE = 'Input:Type'
+      INPUT_PARAMETERS = 'Input:Parameters'
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, JOB, PROVIDER, SNIPPET, TEMPLATE, INPUT_NAME]
+          csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, JOB, PROVIDER, SNIPPET, TEMPLATE,
+                  INPUT_NAME, INPUT_DESCRIPTION, INPUT_REQUIRED, INPUT_TYPE, INPUT_PARAMETERS]
           @api.resource(:job_templates).call(:index, {
               :per_page => 999999
           })['results'].each do |template_id|
@@ -22,16 +28,36 @@ module HammerCLICsv
             next if template['locked']
             next unless option_organization.nil? || template['organizations'].detect { |org| org['name'] == option_organization }
             name = template['name']
-            job = template['job_name']
+            description = template['description_format']
+            job = template['job_category']
             snippet = template['snippet'] ? 'Yes' : 'No'
             provider = template['provider_type']
             organizations = export_column(template, 'organizations', 'name')
             locations = export_column(template, 'locations', 'name')
-            csv << [name, organizations, locations, job, provider, snippet, template['template']]
+            csv << [name, organizations, locations, description, job, provider, snippet, template['template']]
 
-            template['template_inputs'].each do |input_id|
-              input = @api.resource(:templates).call(:template_inputs, {:template_id => template['id'], :id => input_id['id']})
-              x = input
+            template_columns = [name] + Array.new(7)
+            @api.resource(:template_inputs).call(:index, {
+                :template_id => template['id']
+            })['results'].each  do|input|
+              input_field = nil
+              input_options = nil
+              case input['input_type']
+              when /user/
+                input_name = export_column(input, 'options') do |value|
+                  value
+                end
+              when /fact/
+                input_name = input['fact_name']
+              when /variable/
+                input_name = input['variable_name']
+              when /puppet_parameter/
+                input_name = "#{input['puppet_class_name']}|#{input['puppet_parameter_name']}"
+              else
+                raise _("Unknown job template input type '%{type}'") % {:type => input['input_type']}
+              end
+              required = input['required'] ? 'Yes' : 'No'
+              csv << template_columns + [input['name'], input['description'], required, input['input_type'], input_name]
             end
           end
         end
@@ -64,30 +90,13 @@ module HammerCLICsv
         end
 
         count(line[COUNT]).times do |number|
-          name = namify(line[NAME], number)
-          job_name = namify(line[JOB], number)
-          options = {
-                'job_template' => {
-                  'name' => name,
-                  'job_name' => job_name,
-                  'snippet' => line[SNIPPET] == 'Yes' ? true : false,
-                  'provider_type' => line[PROVIDER],
-                  'organization_ids' => organizations,
-                  'location_ids' => locations,
-                  'template' => line[TEMPLATE]
-                }
-          }
-          template_id = @existing[name]
-          if !template_id
-            print _("Creating job template '%{name}'...") % {:name => name } if option_verbose?
-            template_id = @api.resource(:job_templates).call(:create, options)['id']
-            @existing[name] = template_id
+          if line[INPUT_NAME].nil? || line[INPUT_NAME].empty?
+            create_template(line, number)
           else
-            print _("Updating job template '%{name}'...") % {:name => name} if option_verbose?
-            options['id'] = template_id
-            template_id = @api.resource(:job_templates).call(:update, options)['id']
+            create_template_input(line, number)
           end
 
+          # ????
           # Update associated resources
           # @template_organizations ||= {}
           # organizations.each do |organization_id|
@@ -128,10 +137,79 @@ module HammerCLICsv
           #   end
           # end
 
-          puts _('done') if option_verbose?
         end
       rescue RuntimeError => e
         raise "#{e}\n       #{line[NAME]}"
+      end
+
+      def create_template(line, number)
+        name = namify(line[NAME], number)
+        job_category = namify(line[JOB], number)
+        options = {
+              'job_template' => {
+                'name' => name,
+                'description_format' => line[DESCRIPTION],
+                'job_category' => job_category,
+                'snippet' => line[SNIPPET] == 'Yes' ? true : false,
+                'provider_type' => line[PROVIDER],
+                #'organization_ids' => organizations,
+                #'location_ids' => locations,
+                'template' => line[TEMPLATE]
+              }
+        }
+        template_id = @existing[name]
+        if !template_id
+          print _("Creating job template '%{name}'...") % {:name => name } if option_verbose?
+          template_id = @api.resource(:job_templates).call(:create, options)['id']
+          @existing[name] = template_id
+        else
+          print _("Updating job template '%{name}'...") % {:name => name} if option_verbose?
+          options['id'] = template_id
+          template_id = @api.resource(:job_templates).call(:update, options)['id']
+        end
+        puts _('done') if option_verbose?
+      end
+
+      def create_template_input(line, number)
+        name = namify(line[NAME], number)
+        template_id = @existing[name]
+        raise "Job template '#{name}' must exist before setting inputs" unless template_id
+
+        options = {
+          'template_id' => template_id,
+          'template_input' => {
+            'name' => line[INPUT_NAME],
+            'description' => line[INPUT_DESCRIPTION],
+            'input_type' => line[INPUT_TYPE],
+            'required' => line[INPUT_REQUIRED] == 'Yes' ? true : false
+          }
+        }
+        case line[INPUT_TYPE]
+        when /user/
+          options['template_input']['options'] = line[INPUT_PARAMETERS]
+        when /fact/
+          options['template_input']['fact_name'] = line[INPUT_PARAMETERS]
+        when /variable/
+          options['template_input']['variable_name'] = line[INPUT_PARAMETERS]
+        when /puppet_parameter/
+          options['template_input']['puppet_class_name'], options['template_input']['puppet_parameter_name'] = line[INPUT_PARAMETERS].split('|')
+        else
+          raise _("Unknown job template input type '%{type}'") % {:type => line[INPUT_TYPE]}
+        end
+
+        template_input = @api.resource(:template_inputs).call(:index, {
+            :template_id => template_id,
+            :search => "name = \"#{line[INPUT_NAME]}\""
+        })['results']
+        if template_input.empty?
+          print _("Creating job template input '%{input_name}' on '%{name}'...") % {:input_name => line[INPUT_NAME], :name => name}
+          @api.resource(:template_inputs).call(:create, options)
+        else
+          print _("Updating job template input '%{input_name}' on '%{name}'...") % {:input_name => line[INPUT_NAME], :name => name}
+          options['id'] = template_input[0]['id']
+          @api.resource(:template_inputs).call(:update, options)
+        end
+        puts _('done') if option_verbose?
       end
 
       def export_associations(template)

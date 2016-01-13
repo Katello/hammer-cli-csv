@@ -55,7 +55,8 @@ module HammerCLICsv
 
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
-          prior = namify(line[PRIORENVIRONMENT], number)
+          prior = line[PRIORENVIRONMENT] == 'Library' ? 'Library' :
+                                            namify(line[PRIORENVIRONMENT], number)
           raise "Organization '#{line[ORGANIZATION]}' does not exist" if !@existing.include? line[ORGANIZATION]
           if !@existing[line[ORGANIZATION]].include? name
             print "Creating environment '#{name}'..." if option_verbose?

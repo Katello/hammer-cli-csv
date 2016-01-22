@@ -10,10 +10,11 @@ module HammerCLICsv
       PROVIDER = 'Provider'
       SNIPPET = 'Snippet'
       TEMPLATE = 'Template'
+      INPUT_NAME = 'Input Name'
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, JOB, PROVIDER, SNIPPET, TEMPLATE]
+          csv << [NAME, ORGANIZATIONS, LOCATIONS, JOB, PROVIDER, SNIPPET, TEMPLATE, INPUT_NAME]
           @api.resource(:job_templates).call(:index, {
               :per_page => 999999
           })['results'].each do |template_id|
@@ -27,6 +28,11 @@ module HammerCLICsv
             organizations = export_column(template, 'organizations', 'name')
             locations = export_column(template, 'locations', 'name')
             csv << [name, organizations, locations, job, provider, snippet, template['template']]
+
+            template['template_inputs'].each do |input_id|
+              input = @api.resource(:templates).call(:template_inputs, {:template_id => template['id'], :id => input_id['id']})
+              x = input
+            end
           end
         end
       end

@@ -96,7 +96,7 @@ module HammerCLICsv
                 'inclusion' => filter_inclusion?(line[TYPE]),
                 'repository_ids' => repository_ids
             })['id']
-            @existing_filters[line[ORGANIZATION]][filter_name] = filter_id
+            @existing_filters[line[ORGANIZATION]][line[CONTENTVIEW]][filter_name] = filter_id
           else
             print "Updating filter '#{filter_name}' for content view filter '#{line[CONTENTVIEW]}'..." if option_verbose?
             @api.resource(:content_view_filters).call(:update, {
@@ -173,7 +173,7 @@ module HammerCLICsv
       end
 
       def export_filter_type(type)
-        case type.split[1]
+        case type
         when /rpm/i
           'Packages'
         when /package_group/i

@@ -546,6 +546,37 @@ module HammerCLICsv
       result
     end
 
+    def foreman_provisioning_template(options = {})
+      @query_config_templates ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @query_config_templates[options[:name]]
+        if !options[:id]
+          config_template = @api.resource(:config_templates).call(:index, {
+                                              :per_page => 999999,
+                                              'search' => "name=\"#{options[:name]}\""
+                                            })['results']
+          raise "Provisioning template '#{options[:name]}' not found" if !config_template || config_template.empty?
+          options[:id] = config_template[0]['id']
+          @query_config_templates[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      else
+        return nil if options[:id].nil?
+        options[:name] = @query_config_templates.key(options[:id])
+        if !options[:name]
+          config_template = @api.resource(:config_templates).call(:show, {'id' => options[:id]})
+          raise "Provisioning template 'id=#{options[:id]}' not found" if !config_template || config_template.empty?
+          options[:name] = config_template['name']
+          @query_config_templates[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      end
+
+      result
+    end
+
     def foreman_smart_proxy(options = {})
       @query_smart_proxies ||= {}
 
@@ -864,11 +895,11 @@ module HammerCLICsv
       [name, major || '', minor || '']
     end
 
-    def export_column(object, name, field)
+    def export_column(object, name, field=nil)
       return '' unless object[name]
       values = CSV.generate do |column|
         column << object[name].collect do |fields|
-          fields[field]
+          field.nil? ? yield(fields) : fields[field]
         end
       end
       values.delete!("\n")

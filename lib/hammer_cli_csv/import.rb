@@ -42,9 +42,14 @@ module HammerCLICsv
         @api = ApipieBindings::API.new({:uri => @server, :username => @username,
                                         :password => @password, :api_version => 2})
 
-        # Swing the hammers
+        resources_specified = RESOURCES.collect do |resource|
+          resource if self.send("option_#{resource}") || ARGV.include?('--' + resource.gsub('_', '-'))
+        end
+        resources_specified.compact!
         RESOURCES.each do |resource|
-          hammer_resource(resource)
+          if resources_specified.include?(resource) || (resources_specified == [] && option_dir)
+            hammer_resource(resource)
+          end
         end
 
         HammerCLI::EX_OK
@@ -62,7 +67,7 @@ module HammerCLICsv
 
       def hammer_resource(resource)
         return if !self.send("option_#{resource}") && !option_dir
-        options_file = self.send("option_#{resource}") || "#{option_dir}/#{resource.gsub('_', '-')}.csv"
+        options_file = "#{option_dir}/#{resource.gsub('_', '-')}.csv" || self.send("option_#{resource}")
         unless options_file_exists? options_file
           if option_dir
             puts _("Skipping #{resource} because '#{options_file}' does not exist") if option_verbose?

@@ -24,6 +24,7 @@ module HammerCLICsv
 
             name = host['name']
             organization = foreman_organization(:id => host['organization_id'])
+            location = foreman_location(:id => host['location_id'])
             environment = foreman_environment(:id => host['environment_id'])
             operatingsystem = foreman_operatingsystem(:id => host['operatingsystem_id'])
             architecture = foreman_architecture(:id => host['architecture_id'])
@@ -31,7 +32,7 @@ module HammerCLICsv
             domain = foreman_domain(:id => host['domain_id'])
             ptable = foreman_partitiontable(:id => host['ptable_id'])
 
-            csv << [name, organization, environment, operatingsystem, architecture, mac, domain, ptable]
+            csv << [name, organization, location, environment, operatingsystem, architecture, mac, domain, ptable]
           end
         end
       end

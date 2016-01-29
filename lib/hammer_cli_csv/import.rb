@@ -17,7 +17,7 @@ module HammerCLICsv
                       domains architectures partition_tables lifecycle_environments host_collections
                       provisioning_templates
                       subscriptions products content_views content_view_filters activation_keys
-                      hosts content_hosts smart_proxies reports roles users )
+                      hosts content_hosts smart_proxies compute_resources reports roles users )
       RESOURCES.each do |resource|
         dashed = resource.gsub('_', '-')
         option "--#{dashed}", 'FILE', "csv file for #{dashed}"

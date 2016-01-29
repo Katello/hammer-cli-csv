@@ -61,12 +61,13 @@ module HammerCLICsv
                     'name' => name,
                     'url' => line[URL]
                 }
-            })['compute_resource']['id']
+            })['id']
           end
 
           # Update associated resources
-          associate_organizations(id, line[ORGANIZATIONS], 'compute_resource')
-          associate_locations(id, line[LOCATIONS], 'compute_resource')
+          # TODO: this doesn't work "Environments you cannot remove environments that are used by hosts or inherited."
+          #associate_organizations(id, line[ORGANIZATIONS], 'compute_resource')
+          #associate_locations(id, line[LOCATIONS], 'compute_resource')
 
           print "done\n" if option_verbose?
         end

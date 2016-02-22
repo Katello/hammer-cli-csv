@@ -106,32 +106,26 @@ module HammerCLICsv
                 'description' => line[DESCRIPTION],
                 'composite' => is_composite
             }
-            if is_composite
-              options['component_ids'] = composite_ids
-            else
-              options['repository_ids'] = repository_ids
-            end
             contentview_id = @api.resource(:content_views).call(:create, options)['id']
             @existing_contentviews[line[ORGANIZATION]][name] = contentview_id
-            publish = true
           else
             print _("Updating content view '%{name}'...") % {:name => name} if option_verbose?
-            options = {
-                'id' => contentview_id,
-                'description' => line[DESCRIPTION]
-            }
-            if is_composite
-              options['component_ids'] = composite_ids
-            else
-              options['repository_ids'] = repository_ids
-            end
-            contentview = @api.resource(:content_views).call(:update, options)
-            contentview_id = contentview['id']
-            publish = contentview['versions'].empty?
           end
 
+          options = {
+            'id' => contentview_id,
+            'description' => line[DESCRIPTION]
+          }
+          if is_composite
+            options['component_ids'] = composite_ids
+          else
+            options['repository_ids'] = repository_ids
+          end
+          contentview = @api.resource(:content_views).call(:update, options)
+          contentview_id = contentview['id']
+
           # Content views cannot be used in composites unless a publish has occurred
-          publish_content_view(contentview_id, line) if publish
+          publish_content_view(contentview_id, line) if contentview['versions'].empty?
           promote_content_view(contentview_id, line)
 
           puts _('done') if option_verbose?

@@ -45,23 +45,21 @@ module HammerCLICsv
       def create_compute_resources_from_csv(line)
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
+          params = {
+            'compute_resource' => {
+              'name' => name,
+              'url' => line[URL],
+              'provider' => line[PROVIDER]
+            }
+          }
           if !@existing.include? name
             print "Creating compute resource '#{name}'..." if option_verbose?
-            id = @api.resource(:compute_resources).call(:create, {
-                'compute_resource' => {
-                    'name' => name,
-                    'url' => line[URL]
-                }
-            })['id']
+            id = @api.resource(:compute_resources).call(:create, params)['id']
           else
             print "Updating compute resource '#{name}'..." if option_verbose?
-            id = @api.resource(:compute_resources).call(:update, {
-                'id' => @existing[name],
-                'compute_resource' => {
-                    'name' => name,
-                    'url' => line[URL]
-                }
-            })['id']
+            id = @existing[name]
+            params['id'] = id
+            @api.resource(:compute_resources).call(:update, params)
           end
 
           # Update associated resources

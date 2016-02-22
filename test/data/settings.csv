@@ -1,5 +1,2 @@
 Name,Count,Value
-administrator,1,root@example.com
 idle_timeout,1,60000
-remote_execution_global_proxy,1,true
-require_ssl_smart_proxies,1,false

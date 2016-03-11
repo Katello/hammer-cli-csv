@@ -1,5 +1,5 @@
 module HammerCLICsv
   def self.version
-    @version ||= Gem::Version.new('1.0.2')
+    @version ||= Gem::Version.new('2.0.0')
   end
 end

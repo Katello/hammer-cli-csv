@@ -3,13 +3,13 @@ source "https://rubygems.org"
 gemspec
 
 group :test do
-  gem 'rake'
+  gem 'rake', '~> 10.1.0'
   gem 'thor'
   gem 'minitest', '4.7.4'
   gem 'minitest-spec-context'
   gem 'simplecov'
   gem 'mocha'
-  gem 'ci_reporter'
+  gem 'ci_reporter', '>= 1.6.3', "< 2.0.0", :require => false
   gem 'rubocop-checkstyle_formatter'
 end
 

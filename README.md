@@ -4,14 +4,13 @@
 
 [Hammer](https://github.com/theforeman/hammer-cli/blob/master/README.md) is a command line interface (CLI) framework which provides a core to which modules may be added. This module, hammer-cli-csv, adds commands to interact with the following products: [Foreman](https://theforeman.org) standalone, [Katello](http://www.katello.org/), Red Hat's Satellite-6, and Red Hat's Subscription Asset Manager (SAM).
 
-The purpose of this module's commands are to allow a convenient mechanism to both export to and import from CSV files (comma separated values). Each of the server's supported resource types, such as organizations and users, are handled.
+The purpose of this module's commands are to allow a convenient mechanism to both export to and import from CSV files (comma separated values). Each of the server's supported resource types, such as organizations and users, is handled.
 
 Some possible uses include
 
 * Import demo or development data easily and consistently
 * Export another server's data and then import into elsewhere for testing and debug
 * Export for backup and auditing
-* Export from SAM-1.4 to import into Satellite-6
 
 The following sections will cover installation, usage, and examples. All of the resource types are follow in the order which generally is required for dependency resolution (eg. roles must exist to assign to users so the role section comes first).
 
@@ -33,12 +32,14 @@ hammer csv --help
 
 ```
 
-## Usage
+## General Usage
+
+Supported commands and options are available by using the --help option. Additional subcommands and options may be listed here but are considered "tech preview" to indicate the lack of testing and official support.
 
 | Option | Description |
 | ---------------:| :--------------|
-| --csv-export | If not specified will run import. |
-| --csv-file FILE_NAME | File to import from or export to. If not specified reads or writes to/from stdin and stdout. Note: On ruby-1.8.7 this option is required. |
+| --export | If not specified will run import. |
+| --file FILE_NAME | File to import from or export to. If not specified reads or writes to/from stdin and stdout. Note: On ruby-1.8.7 this option is required. |
 | --prefix PREFIX | Convenience method to add a prefix to all Count substituted values. See examples below. |
 | --server SERVER | The server to run against. Overrides any config file value. |
 | --username USERNAME | Username for server. Overrides any config file value. |
@@ -77,12 +78,12 @@ During export, the Count column will always be one (1).
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the organization to update or create | x | x | x | x | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x | x |
-| Label | Unique organization label | x |   | x | x | x |
-| Description | Organization description |   | x | x | x | x |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the organization to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Label | Unique organization label | x |   |
+| Description | Organization description |   |
 
 **Examples**
 
@@ -125,11 +126,11 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the location to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Parent Location | Parent location |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the location to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Parent Location | Parent location |   |
 
 ## Puppet Environments
 
@@ -144,11 +145,11 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the puppet environments to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organizations | Comma separated list of organizations |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the puppet environments to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organizations | Comma separated list of organizations |   |
 
 ## Operating Systems
 
@@ -162,18 +163,18 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the operating systems to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Family | Operating system family |   | x | x | x |   |
-| Description | Operating system description |   | x | x | x |   |
-| Password Hash | MD5, SHA256, SHA512, or Base64 |   | x | x | x |   |
-| Partition Tables | List of partition table names |   | x | x | x |   |
-| Architectures | List of architectures names |   | x | x | x |   |
-| Media | List of media names |   | x | x | x |   |
-| Provisioning Templates | List of provisioning template names |   | x | x | x |   |
-| Parameters | List of parameters |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the operating systems to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Family | Operating system family |   |
+| Description | Operating system description |   |
+| Password Hash | MD5, SHA256, SHA512, or Base64 |   |
+| Partition Tables | List of partition table names |   |
+| Architectures | List of architectures names |   |
+| Media | List of media names |   |
+| Provisioning Templates | List of provisioning template names |   |
+| Parameters | List of parameters |   |
 
 ## Domains
 
@@ -187,12 +188,12 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the domains to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Full Name | Full name of the domain |   | x | x | x |   |
-| Organizations | Comma separated list of organizations |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the domains to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Full Name | Full name of the domain |   |
+| Organizations | Comma separated list of organizations |   |
 
 ## Architectures
 
@@ -206,11 +207,11 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the architectures to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Operating Systems | Comma separated list of operating system names |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the architectures to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Operating Systems | Comma separated list of operating system names |   |
 
 ## Partition Tables
 
@@ -226,13 +227,13 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the partition tables to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| OS Family | Operating system family |   | x | x | x |   |
-| Operating Systems | Comma separated list of operating system names |   | x | x | x |   |
-| Layout | Disk layout |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the partition tables to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| OS Family | Operating system family |   |
+| Operating Systems | Comma separated list of operating system names |   |
+| Layout | Disk layout |   |
 
 ## Lifecycle Environments
 
@@ -246,13 +247,13 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the lifecycle environments to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organization | Organization name |   | x | x | x |   |
-| Prior Environment | Previous organization name in path |   | x | x | x |   |
-| Description | Lifecycle environment description |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the lifecycle environments to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organization | Organization name |   |
+| Prior Environment | Previous organization name in path |   |
+| Description | Lifecycle environment description |   |
 
 ## Host Collections
 
@@ -270,13 +271,13 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the host collections to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organization | Organization name |   | x | x | x |   |
-| Limit | Usage limit |   | x | x | x |   |
-| Description | Host collection description |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the host collections to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organization | Organization name |   |
+| Limit | Usage limit |   |
+| Description | Host collection description |   |
 
 ## Products
 
@@ -296,15 +297,15 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the host collections to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Label | Unique label  |   | x | x | x |   |
-| Organization | Organization name |   | x | x | x |   |
-| Repository | Repository name |   | x | x | x |   |
-| Repository Url | Repository Url |   | x | x | x |   |
-| Description | Repository description |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the host collections to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Label | Unique label  |   |
+| Organization | Organization name |   |
+| Repository | Repository name |   |
+| Repository Url | Repository Url |   |
+| Description | Repository description |   |
 
 ## Provisioning Templates
 
@@ -322,16 +323,16 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the provisioning templates to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organizations  | Comma separated list of organizations |   | x | x | x |   |
-| Locations  | Comma separated list of locations |   | x | x | x |   |
-| Operating Systems  | Comma separated list of associated operating systems |   | x | x | x |   |
-| Host Group / Puppet Environment Combinations  | Comma separated list of host group and puppet environment associations |   | x | x | x |   |
-| Kind  | Kind of template (eg. snippet) |   | x | x | x |   |
-| Template  | Full text of template |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the provisioning templates to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organizations  | Comma separated list of organizations |   |
+| Locations  | Comma separated list of locations |   |
+| Operating Systems  | Comma separated list of associated operating systems |   |
+| Host Group / Puppet Environment Combinations  | Comma separated list of host group and puppet environment associations |   |
+| Kind  | Kind of template (eg. snippet) |   |
+| Template  | Full text of template |   |
 
 ## Subscriptions
 
@@ -345,15 +346,15 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the subscriptions to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organization | Organization name |   | x | x | x |   |
-| Manifest File | Path to manifest file |   | x | x | x |   |
-| Content Set | Repository content set to enable |   | x | x | x |   |
-| Arch | Architecture |   | x | x | x |   |
-| Release | Release version |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the subscriptions to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organization | Organization name |   |
+| Manifest File | Path to manifest file |   |
+| Content Set | Repository content set to enable |   |
+| Arch | Architecture |   |
+| Release | Release version |   |
 
 ## Activation Keys
 
@@ -367,17 +368,17 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the activation keys to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organization | Parent organization name |   | x | x | x |   |
-| Description | Activation key description |   | x | x | x |   |
-| Limit | Usage limit |   | x | x | x |   |
-| Environment | Lifecycle environment name |   | x | x | x |   |
-| Content View | Content view name |   | x | x | x |   |
-| Host Collections | Comma separated list of host collections |   | x | x | x |   |
-| Subscriptions | Comma separated list of subscriptions |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the activation keys to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organization | Parent organization name |   |
+| Description | Activation key description |   |
+| Limit | Usage limit |   |
+| Environment | Lifecycle environment name |   |
+| Content View | Content view name |   |
+| Host Collections | Comma separated list of host collections |   |
+| Subscriptions | Comma separated list of subscriptions |   |
 
 ## Hosts
 
@@ -391,17 +392,17 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the hosts to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organization | Organization name |   | x | x | x |   |
-| Environment | Puppet environment name |   | x | x | x |   |
-| Operating System | Operating system name |   | x | x | x |   |
-| Architecture | Architecture name |   | x | x | x |   |
-| MAC Address | Unique MAC address | x | x | x | x |   |
-| Domain | Domain name |   | x | x | x |   |
-| Partition Table | Partition table name |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the hosts to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organization | Organization name |   |
+| Environment | Puppet environment name |   |
+| Operating System | Operating system name |   |
+| Architecture | Architecture name |   |
+| MAC Address | Unique MAC address | x |
+| Domain | Domain name |   |
+| Partition Table | Partition table name |   |
 
 ## Content Hosts
 
@@ -419,24 +420,24 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the content hosts to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Organization | Organization name |   | x | x | x |   |
-| Environment | Puppet environment name |   | x | x | x |   |
-| Content View | Content view name |   | x | x | x |   |
-| Host Collections | Comma separate list of host collectoins |   | x | x | x |   |
-| Virtual | Virtual (Yes or No) |   | x | x | x |   |
-| Host | Virtual content host name |   | x | x | x |   |
-| OS | Operating system name |   | x | x | x |   |
-| Arch | Architecture name |   | x | x | x |   |
-| Sockets | Number of sockets |   | x | x | x |   |
-| RAM | Amount of RAM with units |   | x | x | x |   |
-| Cores | Number of cores |   | x | x | x |   |
-| SLA | Service Level Agreement |   | x | x | x |   |
-| Products | Comma separated list of subscriptions |   | x | x | x |   |
-| Subscriptions | Comma separated list of subscriptions |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the content hosts to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Organization | Organization name |   |
+| Environment | Puppet environment name |   |
+| Content View | Content view name |   |
+| Host Collections | Comma separate list of host collectoins |   |
+| Virtual | Virtual (Yes or No) |   |
+| Host | Virtual content host name |   |
+| OS | Operating system name |   |
+| Arch | Architecture name |   |
+| Sockets | Number of sockets |   |
+| RAM | Amount of RAM with units |   |
+| Cores | Number of cores |   |
+| SLA | Service Level Agreement |   |
+| Products | Comma separated list of subscriptions |   |
+| Subscriptions | Comma separated list of subscriptions |   |
 
 ## Reports
 
@@ -450,18 +451,18 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the reports to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Time | Time of report |   | x | x | x |   |
-| Applied |  |   | x | x | x |   |
-| Restarted |  |   | x | x | x |   |
-| Failed |  |   | x | x | x |   |
-| Failed Restarts |  |   | x | x | x |   |
-| Skipped |  |   | x | x | x |   |
-| Pending |  |   | x | x | x |   |
-| Metrics |  |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the reports to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Time | Time of report |   |
+| Applied |  |   |
+| Restarted |  |   |
+| Failed |  |   |
+| Failed Restarts |  |   |
+| Skipped |  |   |
+| Pending |  |   |
+| Metrics |  |   |
 
 ## Roles
 
@@ -475,15 +476,15 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the roles to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Resource | Resource to apply role to |   | x | x | x |   |
-| Search | Search string |   | x | x | x |   |
-| Permissions | Role permission |   | x | x | x |   |
-| Organizations | Comma separated list of organizations |   | x | x | x |   |
-| Locations | Comma separated list of locations |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the roles to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Resource | Resource to apply role to |   |
+| Search | Search string |   |
+| Permissions | Role permission |   |
+| Organizations | Comma separated list of organizations |   |
+| Locations | Comma separated list of locations |   |
 
 ## Users
 
@@ -497,16 +498,16 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Name of the users to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| First Name | First name of user |   | x | x | x |   |
-| Last Name | Last name of user |   | x | x | x |   |
-| email | Email address |   | x | x | x |   |
-| Organizations | Comma separated list of organizations |   | x | x | x |   |
-| Locations | Comma separated list of locations |   | x | x | x |   |
-| Roles | Comma separated list of role names for user |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Name of the users to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| First Name | First name of user |   |
+| Last Name | Last name of user |   |
+| email | Email address |   |
+| Organizations | Comma separated list of organizations |   |
+| Locations | Comma separated list of locations |   |
+| Roles | Comma separated list of role names for user |   |
 
 ## Settings
 
@@ -520,11 +521,11 @@ Creating organization 'abcMega Corporation'... done
 
 *Note: % column indicates Count substituion*
 
-| Column Title | Column Description | % | Foreman | Katello | Satellite | SAM |
-| :----------- | :----------------- | :-: | :-: | :-: | :-: | :-: |
-| Name         | Setting name to update or create | x | x | x | x |   |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   | x | x | x |   |
-| Value | Setting value |   | x | x | x |   |
+| Column Title | Column Description | % |
+| :----------- | :----------------- | :-: |
+| Name         | Setting name to update or create | x |
+| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Value | Setting value |   |
 
 **Examples**
 ```
@@ -542,18 +543,9 @@ idle_timeout,60000
 **Examples**
 
 ```
-% hammer csv import -v --organizations test/data/organizations.csv --locations test/data/locations.csv
-Creating organization 'Mega Corporation'... done
-Creating organization 'Mega Subsidiary'... done
-Creating location 'Asia Pacific'... done
-Creating location 'Asia Pacific (Tokyo) Region'... done
-Creating location 'Asia Pacific (Singapore) Region'... done
-Creating location 'Asia Pacific (Sydney) Region'... done
-Creating location 'EU (Ireland) Region'... done
-Creating location 'South America (Sao Paulo) Region'... done
-Creating location 'US East (Northern Virginia) Region'... done
-Creating location 'US West (Northern California) Region'... done
-Creating location 'US West (Oregon) Region'... done
+% hammer csv import -v --dir test/data --settings
+Importing settings from 'test/data/settings.csv'
+Updating setting 'idle_timeout'...done
 ```
 
 # Development
@@ -566,3 +558,22 @@ Creating location 'US West (Oregon) Region'... done
 
 The tests are meant to run against a live server.
 
+```rake test TEST=test/settings_test.rb```
+
+Test server configuration is taken from test/config.yml
+
+```
+% cat test/config.yml
+
+:csv:
+  :enable_module: true
+
+:foreman:
+  :enable_module: true
+  :host:          'http://katello:3000'
+  :username:      'admin'
+  :password:      'changeme'
+
+:katello:
+  :enable_module: true
+```

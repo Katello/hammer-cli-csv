@@ -1,13 +1,28 @@
 require File.join(File.dirname(__FILE__), 'csv_test_helper')
 
-require 'stringio'
-require 'tempfile'
-
 describe 'import' do
   extend CommandTestHelper
 
-  before :each do
-    HammerCLI::Settings.load_from_file 'test/config.yml'
+  context "help" do
+    it "displays supported options" do
+      set_user 'admin'
+
+      stdout,stderr = capture {
+        hammer.run(%W{csv import --help})
+      }
+      stderr.must_equal ''
+      stdout.must_equal <<-HELP
+Usage:
+     csv import [OPTIONS]
+
+Options:
+ --dir DIRECTORY               directory to import from
+ --organization ORGANIZATION   Only process organization matching this name
+ --settings FILE               csv file for settings
+ -h, --help                    print help
+ -v, --verbose                 be verbose
+HELP
+    end
   end
 
   context "--dir" do
@@ -19,26 +34,6 @@ describe 'import' do
       stdout.must_equal(
 <<-eos
 Skipping settings because 'does-not-exist/settings.csv' does not exist
-Skipping organizations because 'does-not-exist/organizations.csv' does not exist
-Skipping locations because 'does-not-exist/locations.csv' does not exist
-Skipping puppet_environments because 'does-not-exist/puppet-environments.csv' does not exist
-Skipping operating_systems because 'does-not-exist/operating-systems.csv' does not exist
-Skipping domains because 'does-not-exist/domains.csv' does not exist
-Skipping architectures because 'does-not-exist/architectures.csv' does not exist
-Skipping partition_tables because 'does-not-exist/partition-tables.csv' does not exist
-Skipping lifecycle_environments because 'does-not-exist/lifecycle-environments.csv' does not exist
-Skipping host_collections because 'does-not-exist/host-collections.csv' does not exist
-Skipping provisioning_templates because 'does-not-exist/provisioning-templates.csv' does not exist
-Skipping subscriptions because 'does-not-exist/subscriptions.csv' does not exist
-Skipping products because 'does-not-exist/products.csv' does not exist
-Skipping content_views because 'does-not-exist/content-views.csv' does not exist
-Skipping content_view_filters because 'does-not-exist/content-view_filters.csv' does not exist
-Skipping activation_keys because 'does-not-exist/activation-keys.csv' does not exist
-Skipping hosts because 'does-not-exist/hosts.csv' does not exist
-Skipping content_hosts because 'does-not-exist/content-hosts.csv' does not exist
-Skipping reports because 'does-not-exist/reports.csv' does not exist
-Skipping roles because 'does-not-exist/roles.csv' does not exist
-Skipping users because 'does-not-exist/users.csv' does not exist
 eos
 )
     end

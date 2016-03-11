@@ -6,7 +6,6 @@ module HammerCLICsv
   require 'hammer_cli_foreman_tasks'
 
   require 'hammer_cli_csv/base'
-  require 'hammer_cli_csv/exception_handler'
 
   require 'hammer_cli_csv/csv'
   require 'hammer_cli_csv/activation_keys'

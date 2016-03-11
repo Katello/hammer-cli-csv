@@ -165,9 +165,11 @@ module HammerCLICsv
         if !@hypervisor_guests.empty?
           print(_('Updating hypervisor and guest associations...')) if option_verbose?
           @hypervisor_guests.each do |host_id, guest_ids|
-            @api.resource(:systems).call(:update, {
+            @api.resource(:hosts).call(:update, {
                 'id' => host_id,
-                'guest_ids' => guest_ids
+                'host' => {
+                    'guest_ids' => guest_ids
+                }
             })
           end
           puts _('done') if option_verbose?
@@ -178,21 +180,25 @@ module HammerCLICsv
         return if option_organization && line[ORGANIZATION] != option_organization
 
         if !@existing[line[ORGANIZATION]]
-          @existing[line[ORGANIZATION]] = {}
+          @existing[line[ORGANIZATION]] = true
           # Fetching all content hosts is too slow and times out due to the complexity of the data
           # rendered in the json.
           # http://projects.theforeman.org/issues/6307
-          total = @api.resource(:systems).call(:index, {
+          total = @api.resource(:hosts).call(:index, {
               'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
               'per_page' => 1
           })['total'].to_i
           (total / 20 + 2).to_i.times do |page|
-            @api.resource(:systems).call(:index, {
+            @api.resource(:hosts).call(:index, {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'page' => page + 1,
                 'per_page' => 20
             })['results'].each do |host|
-              @existing[line[ORGANIZATION]][host['name']] = host['uuid'] if host
+              @existing[host['name']] = {
+                :host => host['id'],
+                :subscription => host['subscription']['id'],
+                :content => host['content']['id']
+              }
             end
           end
         end
@@ -200,42 +206,52 @@ module HammerCLICsv
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
-          if !@existing[line[ORGANIZATION]].include? name
+          if !@existing.include? name
             print(_("Creating content host '%{name}'...") % {:name => name}) if option_verbose?
-            host_id = @api.resource(:systems).call(:create, {
+            host_id = @api.resource(:host_subscriptions).call(:register, {
                 'name' => name,
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
                 'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
                 'facts' => facts(name, line),
                 'installed_products' => products(line),
                 'service_level' => line[SLA],
                 'type' => 'system'
-            })['uuid']
-            @existing[line[ORGANIZATION]][name] = host_id
+            })['id']
+            @existing[name] = host_id
           else
+            # TODO: remove passing facet IDs to update
+            # Bug #13849 - updating a host's facet should not require the facet id to be included in facet params
+            #              http://projects.theforeman.org/issues/13849
             print(_("Updating content host '%{name}'...") % {:name => name}) if option_verbose?
-            host_id = @api.resource(:systems).call(:update, {
-                'id' => @existing[line[ORGANIZATION]][name],
-                'system' => {
+            host_id = @api.resource(:hosts).call(:update, {
+                'id' => @existing[name][:host],
+                'host' => {
                     'name' => name,
-                    'environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                    'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-                    'facts' => facts(name, line),
-                    'installed_products' => products(line)
-                },
-                'facts' => facts(name, line),
-                'installed_products' => products(line),  # TODO: http://projects.theforeman.org/issues/9191,
-                'service_level' => line[SLA]
-            })['uuid']
+                    'content_facet_attributes' => {
+                        'id' => @existing[name][:content],
+                        'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                        'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
+                    },
+                    'subscription_facet_attributes' => {
+                        'id' => @existing[name][:subscription],
+                        'facts' => facts(name, line),
+                        # TODO: PUT /hosts subscription_facet_attributes missing "installed_products"
+                        # http://projects.theforeman.org/issues/13854
+                        #'installed_products' => products(line),
+                        'service_level' => line[SLA]
+                    }
+                }
+            })['host_id']
           end
 
           if line[VIRTUAL] == 'Yes' && line[HOST]
-            raise "Content host '#{line[HOST]}' not found" if !@existing[line[ORGANIZATION]][line[HOST]]
-            @hypervisor_guests[@existing[line[ORGANIZATION]][line[HOST]]] ||= []
-            @hypervisor_guests[@existing[line[ORGANIZATION]][line[HOST]]] << "#{line[ORGANIZATION]}/#{name}"
+            raise "Content host '#{line[HOST]}' not found" if !@existing[line[HOST]]
+            @hypervisor_guests[@existing[line[HOST]]] ||= []
+            @hypervisor_guests[@existing[line[HOST]]] << @existing[name]
           end
 
+          update_host_facts(host_id, line)
           update_host_collections(host_id, line)
           update_subscriptions(host_id, line)
 
@@ -262,12 +278,15 @@ module HammerCLICsv
         facts
       end
 
+      def update_host_facts(host_id, line)
+      end
+
       def update_host_collections(host_id, line)
         return nil if !line[HOSTCOLLECTIONS]
         CSV.parse_line(line[HOSTCOLLECTIONS]).each do |hostcollection_name|
-          @api.resource(:host_collections).call(:add_systems, {
+          @api.resource(:host_collections).call(:add_hosts, {
               'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
-              'system_ids' => [host_id]
+              'hosts_ids' => [host_id]
           })
         end
       end
@@ -299,28 +318,15 @@ module HammerCLICsv
       end
 
       def update_subscriptions(host_id, line)
-        existing_subscriptions = @api.resource(:systems).call(:subscriptions, {
-            'per_page' => 999999,
-            'id' => host_id
+        existing_subscriptions = @api.resource(:host_subscriptions).call(:index, {
+            'host_id' => host_id
         })['results']
-        if existing_subscriptions.length > 0
-          @api.resource(:subscriptions).call(:destroy, {
-            'system_id' => host_id,
-            'id' => existing_subscriptions[0]['id']
+        if existing_subscriptions.length != 0
+          @api.resource(:host_subscriptions).call(:remove_subscriptions, {
+            'host_id' => host_id,
+            'subscriptions' => existing_subscriptions
           })
         end
-
-        # existing_subscriptions = @api.resource(:subscriptions).call(:index, {
-        #     'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-        #     'per_page' => 999999,
-        #     'system_id' => host_id
-        # })['results']
-        # if existing_subscriptions.length > 0
-        #   @api.resource(:subscriptions).call(:destroy, {
-        #     'system_id' => host_id,
-        #     'id' => existing_subscriptions[0]['id']
-        #   })
-        # end
 
         return if line[SUBSCRIPTIONS].nil? || line[SUBSCRIPTIONS].empty?
 
@@ -332,8 +338,8 @@ module HammerCLICsv
           }
         end
 
-        @api.resource(:subscriptions).call(:create, {
-            'system_id' => host_id,
+        @api.resource(:host_subscriptions).call(:add_subscriptions, {
+            'host_id' => host_id,
             'subscriptions' => subscriptions
         })
       end

@@ -12,10 +12,21 @@ module HammerCLICsv
       MACADDRESS = 'MAC Address'
       DOMAIN = 'Domain'
       PARTITIONTABLE = 'Partition Table'
+      SUBNET = 'Subnet'
+      REALM = 'Realm'
+      MEDIUM = 'Medium'
+      HOSTGROUP = 'Hostgroup'
+      COMPUTERESOURCE = 'Compute Resource'
+      COMPUTEPROFILE = 'Compute Profile'
+      IMAGE = 'Image'
+      ENABLED = 'Enabled'
+      MANAGED = 'Managed'
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE, MACADDRESS, DOMAIN, PARTITIONTABLE]
+          csv << [NAME, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE,
+                  MACADDRESS, DOMAIN, PARTITIONTABLE, SUBNET, REALM, MEDIUM, HOSTGROUP,
+                  COMPUTERESOURCE, COMPUTEPROFILE, IMAGE, ENABLED, MANAGED]
           search_options = {:per_page => 999999}
           search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
           @api.resource(:hosts).call(:index, search_options)['results'].each do |host|
@@ -31,8 +42,20 @@ module HammerCLICsv
             mac = host['mac']
             domain = host['domain_name']
             ptable = host['ptable_name']
+            subnet = host['subnet_name']
+            realm = host['realm_name']
+            medium = host['medium_name']
+            hostgroup = host['hostgroup_name']
+            compute_resource = host['compute_resource_name']
+            compute_profile = host['compute_profile_name']
+            image = host['image_name']
 
-            csv << [name, organization, location, environment, operatingsystem, architecture, mac, domain, ptable]
+            enabled = host['enabled'] ? 'Yes' : 'No'
+            managed = host['managed'] ? 'Yes' : 'No'
+
+            csv << [name, organization, location, environment, operatingsystem, architecture,
+                    mac, domain, ptable, subnet, realm, medium, hostgroup, compute_resource,
+                    compute_profile, image, enabled, managed]
           end
         end
       end

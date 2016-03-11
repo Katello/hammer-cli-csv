@@ -14,7 +14,8 @@ module HammerCLICsv
 
       def export
         CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, LABEL, ORGANIZATION, REPOSITORY, REPOSITORY_TYPE, REPOSITORY_URL]
+          csv << [NAME, LABEL, ORGANIZATION, DESCRIPTION, REPOSITORY, REPOSITORY_TYPE,
+                  REPOSITORY_URL]
           @api.resource(:organizations).call(:index, {
               :per_page => 999999
           })['results'].each do |organization|
@@ -32,7 +33,8 @@ module HammerCLICsv
                 repository_type = repository['product_type'] == 'custom' ? 'Custom' : 'Red Hat'
                 repository_type += " #{repository['content_type'].capitalize}"
                 csv << [product['name'], product['label'], organization['name'],
-                        repository['name'], repository_type, repository['url']]
+                        product['description'], repository['name'], repository_type,
+                        repository['url']]
               end
             end
           end
@@ -77,6 +79,12 @@ module HammerCLICsv
 
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
+          params = {
+            :name => name,
+            'organization_id' => foreman_organization(:name => line[ORGANIZATION])
+          }
+          params[:description] = line[DESCRIPTION] if !line[DESCRIPTION].nil? &&
+                                                      !line[DESCRIPTION].empty?
           product_id = @existing_products[line[ORGANIZATION]][name]
           if product_id.nil?
             print _("Creating product '%{name}'...") % {:name => name} if option_verbose?
@@ -85,14 +93,12 @@ module HammerCLICsv
                 {:name => name, :organization => line[ORGANIZATION]}
             end
 
-            product_id = @api.resource(:products).call(:create, {
-                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'name' => name
-            })['id']
+            product_id = @api.resource(:products).call(:create, params)['id']
             @existing_products[line[ORGANIZATION]][name] = product_id
           else
-            # Nothing to update for products
             print _("Updating product '%{name}'...") % {:name => name} if option_verbose?
+            params[:id] = product_id
+            @api.resource(:products).call(:update, params)
           end
           @existing_repositories[line[ORGANIZATION] + name] = {}
 

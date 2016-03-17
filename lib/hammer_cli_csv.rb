@@ -23,7 +23,7 @@ module HammerCLICsv
   require 'hammer_cli_csv/hosts'
   require 'hammer_cli_csv/host_groups'
   require 'hammer_cli_csv/import'
-  require 'hammer_cli_csv/installation_medias'
+  require 'hammer_cli_csv/installation_media'
   require 'hammer_cli_csv/job_templates'
   require 'hammer_cli_csv/lifecycle_environments'
   require 'hammer_cli_csv/locations'

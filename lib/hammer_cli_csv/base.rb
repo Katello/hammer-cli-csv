@@ -13,7 +13,8 @@ module HammerCLICsv
            :default => 1, :hidden => true
     option %w(--export), :flag, 'Export current data instead of importing'
     option %w(--file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --csv-export, otherwise required)'
-    option %w(--prefix), 'PREFIX', 'Prefix for all name columns'
+    option %w(--prefix), 'PREFIX', 'Prefix for all name columns',
+           :hidden => true
     option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
 
     option %w(--csv-file), 'FILE_NAME', 'Option --csv-file is deprecated. Use --file',
@@ -23,9 +24,21 @@ module HammerCLICsv
            :deprecated => "Use --export", :hidden => true,
            :attribute_name => :option_export
 
-
     NAME = 'Name'
     COUNT = 'Count'
+
+    def self.supported?
+      false
+    end
+
+    def supported?
+      self.class.supported?
+    end
+
+    def help
+      print_message _('**** This command is unsupported and is provided as tech preview. ****') unless supported?
+      super
+    end
 
     def execute
       @server = (HammerCLI::Settings.settings[:_params] &&

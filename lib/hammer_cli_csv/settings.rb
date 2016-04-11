@@ -6,6 +6,10 @@ module HammerCLICsv
 
       VALUE = 'Value'
 
+      def self.supported?
+        true
+      end
+
       def export
         CSV.open(option_file || '/dev/stdout', 'wb') do |csv|
           csv << [NAME, VALUE]

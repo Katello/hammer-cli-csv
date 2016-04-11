@@ -4,21 +4,29 @@ module HammerCLICsv
       command_name 'export'
       desc         'export into directory'
 
+      def self.supported?
+        true
+      end
+
       option %w(-v --verbose), :flag, _('be verbose')
       option %w(--threads), 'THREAD_COUNT', _('Number of threads to hammer with'),
              :default => 1, :hidden => true
-      option '--dir', 'DIRECTORY', _('directory to import from')
+      option '--dir', 'DIRECTORY', _('directory to export to')
       option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
 
       RESOURCES = %w(
-        organizations locations puppet_environments operating_systems
+        settings organizations locations puppet_environments operating_systems
         domains architectures partition_tables lifecycle_environments host_collections
         provisioning_templates
         subscriptions activation_keys hosts content_hosts reports roles users
       )
+      SUPPORTED_RESOURCES = %w(
+        settings
+      )
       RESOURCES.each do |resource|
         dashed = resource.sub('_', '-')
-        option "--#{dashed}", 'FILE', "csv file for #{dashed}"
+        option "--#{dashed}", 'FILE', "csv file for #{dashed}",
+               :hidden => !SUPPORTED_RESOURCES.include?(resource)
       end
 
       def execute
@@ -46,7 +54,7 @@ module HammerCLICsv
                                       :username => @username,
                                       :password => @password
                                     })
-          skipped_resources = %w( locations puppet_environments operating_systems
+          skipped_resources = %w( settings locations puppet_environments operating_systems
                                   domains architectures partition_tables lifecycle_environments
                                   provisioning_templates
                                   hosts reports )
@@ -58,7 +66,7 @@ module HammerCLICsv
                                            :password => @password,
                                            :api_version => 2
                                          })
-          skipped_resources = []
+          skipped_resources = (RESOURCES - SUPPORTED_RESOURCES)
         end
 
         # Swing the hammers

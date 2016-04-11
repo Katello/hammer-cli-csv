@@ -497,6 +497,38 @@ module HammerCLICsv
       result
     end
 
+    def foreman_medium(options = {})
+      @media ||= {}
+
+      if options[:name]
+        return nil if options[:name].nil? || options[:name].empty?
+        options[:id] = @media[options[:name]]
+        if !options[:id]
+          ptable = @api.resource(:media).call(:index, {
+                                                  :per_page => 999999,
+                                                  'search' => "name=\"#{options[:name]}\""
+                                                })['results']
+          raise "Partition table '#{options[:name]}' not found" if !ptable || ptable.empty?
+          options[:id] = ptable[0]['id']
+          @media[options[:name]] = options[:id]
+        end
+        result = options[:id]
+      elsif options[:id]
+        return nil if options[:id].nil?
+        options[:name] = @media.key(options[:id])
+        if !options[:name]
+          ptable = @api.resource(:media).call(:show, {'id' => options[:id]})
+          options[:name] = ptable['name']
+          @media[options[:name]] = options[:id]
+        end
+        result = options[:name]
+      elsif !options[:name] && !options[:id]
+        result = ''
+      end
+
+      result
+    end
+
     def foreman_host(options = {})
       @query_hosts ||= {}
 

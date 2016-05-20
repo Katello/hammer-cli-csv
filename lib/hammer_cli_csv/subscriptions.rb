@@ -20,6 +20,7 @@ module HammerCLICsv
                 'organization_id' => organization['id'],
                 'enabled' => true
             })['results'].each do |product|
+              product = @api.resource(:products).call(:show, {:id => product['id']})
               if product['redhat']
                 name = product['name']
                 @api.resource(:repository_sets).call(:index, {

@@ -15,6 +15,7 @@ module HammerCLICsv
           csv << [NAME, ORGANIZATION, MANIFEST, CONTENT_SET, ARCH, RELEASE]
           @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
             next if option_organization && organization['name'] != option_organization
+            export_manifest(csv, organization)
             @api.resource(:products).call(:index, {
                 'per_page' => 999999,
                 'organization_id' => organization['id'],
@@ -39,6 +40,19 @@ module HammerCLICsv
               end
             end
           end
+        end
+      end
+
+      def export_manifest(csv, organization)
+        @api.resource(:subscriptions).call(:index, {
+            'per_page' => 999999,
+            'organization_id' => organization['id']
+        })['results'].each do |subscription|
+          next if subscription['product_id'].to_i != 0  # Red Hat subs do not have number SKU
+          details = "#{subscription['quantity']}|#{subscription['product_id']}|" \
+            "#{subscription['name']}|" \
+            "#{subscription['contract_number']}|#{subscription['account_number']}"
+          csv << ["# Manifest Subscription", organization['name'], nil, nil, nil, details]
         end
       end
 

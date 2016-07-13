@@ -1,17 +1,15 @@
-Name,Count,Organization,Manifest File,Content Set,Arch,Release
-MegaCorp,1,Mega Corporation,test/data/megacorp.zip,
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6Server
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6.1
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6.2
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6.3
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6.4
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (RPMs),x86_64,6.5
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (Kickstart),x86_64,6.1
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (Kickstart),x86_64,6.2
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (Kickstart),x86_64,6.3
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (Kickstart),x86_64,6.4
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 6 Server (Kickstart),x86_64,6.5
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 7 Server (RPMs),x86_64,7Server
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 7 Server (RPMs),x86_64,7.0
-Red Hat Enterprise Linux Server,1,Mega Corporation,,Red Hat Enterprise Linux 7 Server (Kickstart),x86_64,7.0
-
+Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract Number,Account Number
+Manifest,Mega Corporation,./test/data/megacorp.zip
+# Manifest Name,Mega Corporation,MegaCorp
+# Manifest URL,Mega Corporation,https://access.stage.redhat.com/management/distributors/c319a1d8-4b30-44cd-b2cf-2ccba4b9a8db
+# Guest Subscription for Host 'host0',Mega Corporation,,"Red Hat Enterprise Linux for Virtual Datacenters, Standard",Unlimited,RH00002,10999110,5700573
+# Subscription,Mega Corporation,,"OpenShift Enterprise Premium, 2 Cores",2,MCT2735,10999111,5700573
+# Subscription,Mega Corporation,,"Red Hat Enterprise Linux for Virtual Datacenters, Premium",1,RH00001,10999116,5700573
+# Subscription,Mega Corporation,,"Red Hat Enterprise Linux for Virtual Datacenters, Standard",1,RH00002,10999110,5700573
+# Subscription,Mega Corporation,,"Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)",200,RH00004,10999113,5700573
+# Subscription,Mega Corporation,,High Availability for Unlimited Guests,4,RH00059,10999359,5700573
+# Subscription,Mega Corporation,,"Red Hat Enterprise Linux Server, Premium (8 sockets) (Up to 4 guests)",4,RH0103708,10999114,5700573
+# Guest Subscription for Host 'host1',Mega Corporation,,High Availability for Unlimited Guests,Unlimited,RH00059,10999359,5700573
+# Guest Subscription for Host 'host1',Mega Corporation,,"Red Hat Enterprise Linux for Virtual Datacenters, Premium",Unlimited,RH00001,10999116,5700573
+# Subscription,Mega Corporation,,Red Hat Satellite,2,MCT0370,10999112,5700573
+# Subscription,Mega Corporation,,Red Hat Satellite Beta,2,MCT3097,11001608,5700573

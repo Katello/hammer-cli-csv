@@ -38,14 +38,13 @@ module MiniTest
         "#{parent}/#{self_class}/#{test_name}"
       end
 
-      def run_with_vcr
+      def start_vcr
         options = self.class.respond_to?(:cassette_options) ? self.class.cassette_options : {}
         VCR.insert_cassette(cassette_name, options)
-        stdout,stderr = capture {
-          yield
-        }
+      end
+
+      def stop_vcr
         VCR.eject_cassette
-        return stdout,stderr
       end
 
       class << self
@@ -133,6 +132,7 @@ class CsvMiniTestRunner
   end
 
   def vcr_config(mode)
+    load_config_settings
     if mode == 'all'
       configure_vcr(:all)
     elsif mode == 'new_episodes'
@@ -141,6 +141,37 @@ class CsvMiniTestRunner
       configure_vcr(:once)
     else
       configure_vcr(:none)
+    end
+  end
+
+  def load_config_settings
+    if File.exists? 'test/config.yml'
+      HammerCLI::Settings.load_from_file 'test/config.yml'
+    else
+      HammerCLI::Settings.load({
+                                 :ui => {
+                                   :interactive => true,
+                                   :per_page => 20,
+                                   :history_file => './log/history'
+                                 },
+                                 :watch_plain => true,
+                                 :log_dir => './log',
+                                 :log_level => 'error',
+                                 :log_api_calls => false,
+                                 :log_size => 5,
+                                 :csv => {
+                                   :enable_module => true
+                                 },
+                                 :foreman => {
+                                   :enable_module => true,
+                                   :host => 'https://localhost',
+                                   :username => 'admin',
+                                   :password => 'changeme'
+                                 },
+                                 :katello => {
+                                   :enable_module => true
+                                 }
+                               })
     end
   end
 end

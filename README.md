@@ -81,7 +81,7 @@ During export, the Count column will always be one (1).
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the organization to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Label | Unique organization label | x |   |
 | Description | Organization description |   |
 
@@ -129,7 +129,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the location to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Parent Location | Parent location |   |
 
 ## Puppet Environments
@@ -148,7 +148,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the puppet environments to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organizations | Comma separated list of organizations |   |
 
 ## Operating Systems
@@ -166,7 +166,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the operating systems to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Family | Operating system family |   |
 | Description | Operating system description |   |
 | Password Hash | MD5, SHA256, SHA512, or Base64 |   |
@@ -191,7 +191,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the domains to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Full Name | Full name of the domain |   |
 | Organizations | Comma separated list of organizations |   |
 
@@ -210,7 +210,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the architectures to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Operating Systems | Comma separated list of operating system names |   |
 
 ## Partition Tables
@@ -230,7 +230,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the partition tables to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | OS Family | Operating system family |   |
 | Operating Systems | Comma separated list of operating system names |   |
 | Layout | Disk layout |   |
@@ -250,7 +250,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the lifecycle environments to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organization | Organization name |   |
 | Prior Environment | Previous organization name in path |   |
 | Description | Lifecycle environment description |   |
@@ -274,7 +274,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the host collections to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organization | Organization name |   |
 | Limit | Usage limit |   |
 | Description | Host collection description |   |
@@ -300,7 +300,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the host collections to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Label | Unique label  |   |
 | Organization | Organization name |   |
 | Repository | Repository name |   |
@@ -326,7 +326,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the provisioning templates to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organizations  | Comma separated list of organizations |   |
 | Locations  | Comma separated list of locations |   |
 | Operating Systems  | Comma separated list of associated operating systems |   |
@@ -336,11 +336,23 @@ Creating organization 'abcMega Corporation'... done
 
 ## Subscriptions
 
+| Additional arguments | Description |
+| ---------------:| :--------------|
+| --organization | Only process organization matching this name |
+
 **Overview**
 * [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=subscriptions&state=open)
 * [Tests](https://github.com/Katello/hammer-cli-csv/blob/master/test/subscriptions_test.rb)
 * Sample data
   * [Mega Corporation](https://github.com/Katello/hammer-cli-csv/blob/master/test/data/subscriptions.csv)
+
+Import will only process rows with a Name of "Manifest" and trigger a manifest import to run on the specified Manifest File. Subscription rows are not be processed.
+
+Export will output a summary of the subscriptions currently imported into the organizations. These rows will have a description in the Name column as a comment (value starting with a #). For example,
+```
+Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract Number,Account Number
+# Subscription,Mega Corporation,,"OpenShift Enterprise Premium, 2 Cores",2,MCT2735,10999111,5700573
+```
 
 **CSV Columns**
 
@@ -348,13 +360,15 @@ Creating organization 'abcMega Corporation'... done
 
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
-| Name         | Name of the subscriptions to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Name         | "Manifest" to trigger import of manifest file | x |
+| Count        | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organization | Organization name |   |
 | Manifest File | Path to manifest file |   |
-| Content Set | Repository content set to enable |   |
-| Arch | Architecture |   |
-| Release | Release version |   |
+| Subscription Name | Name of subscription |   |
+| Quantity     | Subscription quantity |   |
+| SKU          | Subscription SKU |   |
+| Contract Number | Subscription contract number |   |
+| Account Number  | Subscription account number |   |
 
 ## Activation Keys
 
@@ -371,7 +385,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the activation keys to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organization | Parent organization name |   |
 | Description | Activation key description |   |
 | Limit | Usage limit |   |
@@ -395,7 +409,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the hosts to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organization | Organization name |   |
 | Environment | Puppet environment name |   |
 | Operating System | Operating system name |   |
@@ -423,7 +437,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the content hosts to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organization | Organization name |   |
 | Environment | Puppet environment name |   |
 | Content View | Content view name |   |
@@ -454,7 +468,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the reports to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Time | Time of report |   |
 | Applied |  |   |
 | Restarted |  |   |
@@ -479,7 +493,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the roles to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Resource | Resource to apply role to |   |
 | Search | Search string |   |
 | Permissions | Role permission |   |
@@ -501,7 +515,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the users to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | First Name | First name of user |   |
 | Last Name | Last name of user |   |
 | email | Email address |   |
@@ -524,7 +538,7 @@ Creating organization 'abcMega Corporation'... done
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Setting name to update or create | x |
-| Count | Number of times to iterate this CSV row, incrementing value for substitution |   |
+| Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Value | Setting value |   |
 
 **Examples**

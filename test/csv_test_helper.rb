@@ -21,35 +21,6 @@ require './test/test_runner'
 require 'hammer_cli'
 require 'hammer_cli_foreman/commands'
 
-if File.exists? 'test/config.yml'
-  HammerCLI::Settings.load_from_file 'test/config.yml'
-else
-  HammerCLI::Settings.load({
-                             :ui => {
-                               :interactive => true,
-                               :per_page => 20,
-                               :history_file => './log/history'
-                             },
-                             :watch_plain => true,
-                             :log_dir => './log',
-                             :log_level => 'error',
-                             :log_api_calls => false,
-                             :log_size => 5,
-                             :csv => {
-                               :enable_module => true
-                             },
-                             :foreman => {
-                               :enable_module => true,
-                               :host => 'https://localhost',
-                               :username => 'admin',
-                               :password => 'changeme'
-                             },
-                             :katello => {
-                               :enable_module => true
-                             }
-                           })
-end
-
 VCR.insert_cassette("apipie", {})
 require 'hammer_cli_csv'
 require 'hammer_cli_foreman'

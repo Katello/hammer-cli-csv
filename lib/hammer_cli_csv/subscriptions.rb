@@ -16,15 +16,13 @@ module HammerCLICsv
       CONTRACT = 'Contract Number'
       ACCOUNT = 'Account Number'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, ORGANIZATION, MANIFEST, SUBSCRIPTION, QUANTITY, SKU, CONTRACT, ACCOUNT]
-          @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
-            organization = @api.resource(:organizations).call(:show, {'id' => organization['id']})
-            export_manifest(csv, organization)
-            export_subscriptions(csv, organization)
-          end
+      def export(csv)
+        csv << [NAME, ORGANIZATION, MANIFEST, SUBSCRIPTION, QUANTITY, SKU, CONTRACT, ACCOUNT]
+        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
+          organization = @api.resource(:organizations).call(:show, {'id' => organization['id']})
+          export_manifest(csv, organization)
+          export_subscriptions(csv, organization)
         end
       end
 

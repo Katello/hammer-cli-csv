@@ -19,33 +19,31 @@ module HammerCLICsv
       DNS_SECONDARY = 'DNS Secondary'
       VLAN_ID = 'VLAN ID'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, NETWORK, NETWORK_MASK,
-                  NETWORK_FROM, NETWORK_TO, DOMAINS, GATEWAY, DHCP_PROXY, TFTP_PROXY, DNS_PROXY,
-                  DNS_PRIMARY, DNS_SECONDARY, VLAN_ID]
-          @api.resource(:subnets).call(:index, {:per_page => 999999})['results'].each do |subnet|
-            subnet = @api.resource(:subnets).call(:show, {'id' => subnet['id']})
+      def export(csv)
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, NETWORK, NETWORK_MASK,
+                NETWORK_FROM, NETWORK_TO, DOMAINS, GATEWAY, DHCP_PROXY, TFTP_PROXY, DNS_PROXY,
+                DNS_PRIMARY, DNS_SECONDARY, VLAN_ID]
+        @api.resource(:subnets).call(:index, {:per_page => 999999})['results'].each do |subnet|
+          subnet = @api.resource(:subnets).call(:show, {'id' => subnet['id']})
 
-            name = subnet['name']
-            organizations = export_column(subnet, 'organizations', 'name')
-            locations = export_column(subnet, 'locations', 'name')
-            network = subnet['network']
-            network_mask = subnet['mask']
-            network_from = subnet['from']
-            network_to = subnet['to']
-            domains = export_column(subnet, 'domains', 'name')
-            gateway = subnet['gateway']
-            dhcp_proxy = (subnet['dhcp'] && subnet['dhcp'].key?('name')) ? subnet['dhcp']['name'] : ''
-            tftp_proxy = (subnet['tftp'] && subnet['tftp'].key?('name')) ? subnet['tftp']['name'] : ''
-            dns_proxy = (subnet['dns'] && subnet['dns'].key?('name')) ? subnet['dns']['name'] : ''
-            dns_primary = subnet['dns_primary']
-            dns_secondary = subnet['dns_secondary']
-            vlan_id = subnet['vlanid']
-            csv << [name, organizations, locations, network, network_mask,
-                    network_from, network_to, domains, gateway, dhcp_proxy, tftp_proxy, dns_proxy,
-                    dns_primary, dns_secondary, vlan_id]
-          end
+          name = subnet['name']
+          organizations = export_column(subnet, 'organizations', 'name')
+          locations = export_column(subnet, 'locations', 'name')
+          network = subnet['network']
+          network_mask = subnet['mask']
+          network_from = subnet['from']
+          network_to = subnet['to']
+          domains = export_column(subnet, 'domains', 'name')
+          gateway = subnet['gateway']
+          dhcp_proxy = (subnet['dhcp'] && subnet['dhcp'].key?('name')) ? subnet['dhcp']['name'] : ''
+          tftp_proxy = (subnet['tftp'] && subnet['tftp'].key?('name')) ? subnet['tftp']['name'] : ''
+          dns_proxy = (subnet['dns'] && subnet['dns'].key?('name')) ? subnet['dns']['name'] : ''
+          dns_primary = subnet['dns_primary']
+          dns_secondary = subnet['dns_secondary']
+          vlan_id = subnet['vlanid']
+          csv << [name, organizations, locations, network, network_mask,
+                  network_from, network_to, domains, gateway, dhcp_proxy, tftp_proxy, dns_proxy,
+                  dns_primary, dns_secondary, vlan_id]
         end
       end
 

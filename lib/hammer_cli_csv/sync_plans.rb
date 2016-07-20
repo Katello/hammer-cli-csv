@@ -11,32 +11,30 @@ module HammerCLICsv
       INTERVAL = 'Interval'
       PRODUCTS = 'Products'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, ORGANIZATION, DESCRIPTION, ENABLED, STARTDATE, INTERVAL, PRODUCTS]
+      def export(csv)
+        csv << [NAME, ORGANIZATION, DESCRIPTION, ENABLED, STARTDATE, INTERVAL, PRODUCTS]
 
-          @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
+        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
 
-            @api.resource(:sync_plans).call(:index, {
-                 'per_page' => 999999,
-                 'organization_id' => foreman_organization(:name => organization['name'])
-            })['results'].each do |sync_plan|
-              name = sync_plan['name']
-              organization_name = organization['name']
-              description = sync_plan['description']
-              enabled = sync_plan['enabled'] ? 'Yes' : 'No'
-              start_date = sync_plan['sync_date']
-              interval = sync_plan['interval']
-              products = CSV.generate do |column|
-                column << sync_plan['products'].collect do |product|
-                  product['name']
-                end
+          @api.resource(:sync_plans).call(:index, {
+               'per_page' => 999999,
+               'organization_id' => foreman_organization(:name => organization['name'])
+          })['results'].each do |sync_plan|
+            name = sync_plan['name']
+            organization_name = organization['name']
+            description = sync_plan['description']
+            enabled = sync_plan['enabled'] ? 'Yes' : 'No'
+            start_date = sync_plan['sync_date']
+            interval = sync_plan['interval']
+            products = CSV.generate do |column|
+              column << sync_plan['products'].collect do |product|
+                product['name']
               end
-              products.delete!("\n")
-              csv << [name, organization_name, description, enabled, start_date, interval,
-                      products]
             end
+            products.delete!("\n")
+            csv << [name, organization_name, description, enabled, start_date, interval,
+                    products]
           end
         end
       end

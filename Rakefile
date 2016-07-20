@@ -9,14 +9,8 @@ def clear_cassettes
   print "Cassettes cleared\n"
 end
 
-# Rake::TestTask.new do |t|
-#   t.libs << "lib"
-#   t.test_files = Dir['test/setup_test.rb'] + Dir.glob('test/**/*_test.rb')
-#   t.verbose = true
-# end
-
 namespace :test do
-  [:resources].each do |task_name|
+  %w(setup resources).each do |task_name|
     desc "Runs the #{task_name} tests"
     task task_name do
       options = {}
@@ -73,6 +67,7 @@ end
 
 desc 'Runs all tests'
 task :test do
+  Rake::Task['test:setup'].invoke
   Rake::Task['test:resources'].invoke
 end
 

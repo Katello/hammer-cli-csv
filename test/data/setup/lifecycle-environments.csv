@@ -1,0 +1,5 @@
+Name,Organization,Prior Environment,Description
+Development,Test Corporation,Library,"Development, automated promotes from Library"
+Test,Test Corporation,Development,"Test, manual promotions from Development"
+Production,Test Corporation,Test,"Production, manual promotions from Test"
+Archive,Test Corporation,Production,"Archive, no longer in Production"

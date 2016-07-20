@@ -7,16 +7,14 @@ module HammerCLICsv
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS]
-          @api.resource(:environments).call(:index, {:per_page => 999999})['results'].each do |environment|
-            environment = @api.resource(:environments).call(:show, {:id => environment['id']})
-            name = environment['name']
-            organizations = export_column(environment, 'organizations', 'name')
-            locations = export_column(environment, 'locations', 'name')
-            csv << [name, organizations, locations]
-          end
+      def export(csv)
+        csv << [NAME, ORGANIZATIONS, LOCATIONS]
+        @api.resource(:environments).call(:index, {:per_page => 999999})['results'].each do |environment|
+          environment = @api.resource(:environments).call(:show, {:id => environment['id']})
+          name = environment['name']
+          organizations = export_column(environment, 'organizations', 'name')
+          locations = export_column(environment, 'locations', 'name')
+          csv << [name, organizations, locations]
         end
       end
 

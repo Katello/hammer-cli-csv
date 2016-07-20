@@ -22,41 +22,39 @@ module HammerCLICsv
       ENABLED = 'Enabled'
       MANAGED = 'Managed'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE,
-                  MACADDRESS, DOMAIN, PARTITIONTABLE, SUBNET, REALM, MEDIUM, HOSTGROUP,
-                  COMPUTERESOURCE, COMPUTEPROFILE, IMAGE, ENABLED, MANAGED]
-          search_options = {:per_page => 999999}
-          search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
-          @api.resource(:hosts).call(:index, search_options)['results'].each do |host|
-            host = @api.resource(:hosts).call(:show, {'id' => host['id']})
-            raise "Host 'id=#{host['id']}' not found" if !host || host.empty?
+      def export(csv)
+        csv << [NAME, ORGANIZATION, LOCATION, ENVIRONMENT, OPERATINGSYSTEM, ARCHITECTURE,
+                MACADDRESS, DOMAIN, PARTITIONTABLE, SUBNET, REALM, MEDIUM, HOSTGROUP,
+                COMPUTERESOURCE, COMPUTEPROFILE, IMAGE, ENABLED, MANAGED]
+        search_options = {:per_page => 999999}
+        search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
+        @api.resource(:hosts).call(:index, search_options)['results'].each do |host|
+          host = @api.resource(:hosts).call(:show, {'id' => host['id']})
+          raise "Host 'id=#{host['id']}' not found" if !host || host.empty?
 
-            name = host['name']
-            organization = host['organization_name']
-            location = host['location_name']
-            environment = host['environment_name']
-            operatingsystem = host['operatingsystem_name']
-            architecture = host['architecture_name']
-            mac = host['mac']
-            domain = host['domain_name']
-            ptable = host['ptable_name']
-            subnet = host['subnet_name']
-            realm = host['realm_name']
-            medium = host['medium_name']
-            hostgroup = host['hostgroup_name']
-            compute_resource = host['compute_resource_name']
-            compute_profile = host['compute_profile_name']
-            image = host['image_name']
+          name = host['name']
+          organization = host['organization_name']
+          location = host['location_name']
+          environment = host['environment_name']
+          operatingsystem = host['operatingsystem_name']
+          architecture = host['architecture_name']
+          mac = host['mac']
+          domain = host['domain_name']
+          ptable = host['ptable_name']
+          subnet = host['subnet_name']
+          realm = host['realm_name']
+          medium = host['medium_name']
+          hostgroup = host['hostgroup_name']
+          compute_resource = host['compute_resource_name']
+          compute_profile = host['compute_profile_name']
+          image = host['image_name']
 
-            enabled = host['enabled'] ? 'Yes' : 'No'
-            managed = host['managed'] ? 'Yes' : 'No'
+          enabled = host['enabled'] ? 'Yes' : 'No'
+          managed = host['managed'] ? 'Yes' : 'No'
 
-            csv << [name, organization, location, environment, operatingsystem, architecture,
-                    mac, domain, ptable, subnet, realm, medium, hostgroup, compute_resource,
-                    compute_profile, image, enabled, managed]
-          end
+          csv << [name, organization, location, environment, operatingsystem, architecture,
+                  mac, domain, ptable, subnet, realm, medium, hostgroup, compute_resource,
+                  compute_profile, image, enabled, managed]
         end
       end
 

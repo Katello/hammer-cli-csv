@@ -74,7 +74,19 @@ module HammerCLICsv
                                        })
       end
 
-      option_export? ? export : import
+      if option_export?
+        if option_file
+          CSV.open(option_file, 'wb', {:force_quotes => false}) do |csv|
+            export csv
+          end
+        else
+          CSV do |csv|
+            export csv
+          end
+        end
+      else
+        import
+      end
       HammerCLI::EX_OK
     end
 

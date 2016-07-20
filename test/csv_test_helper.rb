@@ -90,6 +90,19 @@ def set_user(username, password='changeme')
                            })
 end
 
+def host_delete(hostname)
+  stdout,stderr = capture {
+    hammer.run(%W(host list --search #{hostname}))
+  }
+  lines = stdout.split("\n")
+  if lines.length == 5
+    id = stdout.split("\n")[3].split(" ")[0]
+    stdout,stderr = capture {
+      hammer.run(%W(host delete --id #{id}))
+    }
+  end
+end
+
 require File.join(File.dirname(__FILE__), 'apipie_resource_mock')
 require File.join(File.dirname(__FILE__), 'helpers/command')
 require File.join(File.dirname(__FILE__), 'helpers/resource_disabled')

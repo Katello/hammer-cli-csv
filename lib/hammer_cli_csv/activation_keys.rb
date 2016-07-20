@@ -15,43 +15,41 @@ module HammerCLICsv
       AUTOATTACH = "Auto-Attach"
       SUBSCRIPTIONS = 'Subscriptions'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
-                  HOSTCOLLECTIONS, AUTOATTACH, SERVICELEVEL, RELEASEVER, SUBSCRIPTIONS]
-          @api.resource(:organizations).call(:index, {
-              :per_page => 999999
-          })['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
+      def export(csv)
+        csv << [NAME, ORGANIZATION, DESCRIPTION, LIMIT, ENVIRONMENT, CONTENTVIEW,
+                HOSTCOLLECTIONS, AUTOATTACH, SERVICELEVEL, RELEASEVER, SUBSCRIPTIONS]
+        @api.resource(:organizations).call(:index, {
+            :per_page => 999999
+        })['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
 
-            @api.resource(:activation_keys).call(:index, {
-                'per_page' => 999999,
-                'organization_id' => organization['id']
-            })['results'].each do |activationkey|
-              name = namify(activationkey['name'])
-              count = 1
-              description = activationkey['description']
-              limit = activationkey['unlimited_content_hosts'] ? 'Unlimited' : activationkey['max_content_hosts']
-              environment = activationkey['environment']['label']
-              contentview = activationkey['content_view']['name']
-              hostcollections = export_column(activationkey, 'host_collections', 'name')
-              autoattach = activationkey['auto_attach'] ? 'Yes' : 'No'
-              servicelevel = activationkey['service_level']
-              releasever = activationkey['release_version']
-              subscriptions = CSV.generate do |column|
-                column << @api.resource(:subscriptions).call(:index, {
-                              'organization_id' => organization['id'],
-                              'activation_key_id' => activationkey['id']
-                          })['results'].collect do |subscription|
-                  amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
-                  sku = subscription['product_id'].match(/\A[0-9]/) ? 'Custom' : subscription['product_id']
-                  "#{amount}|#{sku}|#{subscription['product_name']}"
-                end
+          @api.resource(:activation_keys).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => organization['id']
+          })['results'].each do |activationkey|
+            name = namify(activationkey['name'])
+            count = 1
+            description = activationkey['description']
+            limit = activationkey['unlimited_content_hosts'] ? 'Unlimited' : activationkey['max_content_hosts']
+            environment = activationkey['environment']['label']
+            contentview = activationkey['content_view']['name']
+            hostcollections = export_column(activationkey, 'host_collections', 'name')
+            autoattach = activationkey['auto_attach'] ? 'Yes' : 'No'
+            servicelevel = activationkey['service_level']
+            releasever = activationkey['release_version']
+            subscriptions = CSV.generate do |column|
+              column << @api.resource(:subscriptions).call(:index, {
+                            'organization_id' => organization['id'],
+                            'activation_key_id' => activationkey['id']
+                        })['results'].collect do |subscription|
+                amount = subscription['amount'] == 0 ? 'Automatic' : subscription['amount']
+                sku = subscription['product_id'].match(/\A[0-9]/) ? 'Custom' : subscription['product_id']
+                "#{amount}|#{sku}|#{subscription['product_name']}"
               end
-              subscriptions.delete!("\n")
-              csv << [name, count, organization['name'], description, limit, environment, contentview,
-                      hostcollections, servicelevel, releasever, autoattach, subscriptions]
             end
+            subscriptions.delete!("\n")
+            csv << [name, count, organization['name'], description, limit, environment, contentview,
+                    hostcollections, servicelevel, releasever, autoattach, subscriptions]
           end
         end
       end

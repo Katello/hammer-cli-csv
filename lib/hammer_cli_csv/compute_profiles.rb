@@ -12,19 +12,17 @@ module HammerCLICsv
       URL = 'URL'
 
       def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
-          @api.resource(:compute_profiles).call(:index, {:per_page => 999999})['results'].each do |compute_profile|
-            puts compute_profile
-            compute_profile = @api.resource(:compute_profiles).call(:show, {'id' => compute_profile['id']})
-            name = compute_profile['name']
-            organizations = export_column(compute_profile, 'organizations', 'name')
-            locations = export_column(compute_profile, 'locations', 'name')
-            description = compute_profile['description']
-            provider = compute_profile['provider']
-            url = compute_profile['url']
-            csv << [name, organizations, locations, description, provider, url]
-          end
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
+        @api.resource(:compute_profiles).call(:index, {:per_page => 999999})['results'].each do |compute_profile|
+          puts compute_profile
+          compute_profile = @api.resource(:compute_profiles).call(:show, {'id' => compute_profile['id']})
+          name = compute_profile['name']
+          organizations = export_column(compute_profile, 'organizations', 'name')
+          locations = export_column(compute_profile, 'locations', 'name')
+          description = compute_profile['description']
+          provider = compute_profile['provider']
+          url = compute_profile['url']
+          csv << [name, organizations, locations, description, provider, url]
         end
       end
 

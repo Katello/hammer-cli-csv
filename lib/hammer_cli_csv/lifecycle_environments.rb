@@ -8,24 +8,22 @@ module HammerCLICsv
       PRIORENVIRONMENT = 'Prior Environment'
       DESCRIPTION = 'Description'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
-          @api.resource(:organizations).call(:index, {
-              'per_page' => 999999
-          })['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
+      def export(csv)
+        csv << [NAME, ORGANIZATION, PRIORENVIRONMENT, DESCRIPTION]
+        @api.resource(:organizations).call(:index, {
+            'per_page' => 999999
+        })['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
 
-            @api.resource(:lifecycle_environments).call(:index, {
-                'per_page' => 999999,
-                'organization_id' => organization['id']
-            })['results'].sort { |a, b| a['created_at'] <=> b['created_at'] }.each do |environment|
-              if environment['name'] != 'Library'
-                name = environment['name']
-                prior = environment['prior']['name']
-                description = environment['description']
-                csv << [name, organization['name'], prior, description]
-              end
+          @api.resource(:lifecycle_environments).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => organization['id']
+          })['results'].sort { |a, b| a['created_at'] <=> b['created_at'] }.each do |environment|
+            if environment['name'] != 'Library'
+              name = environment['name']
+              prior = environment['prior']['name']
+              description = environment['description']
+              csv << [name, organization['name'], prior, description]
             end
           end
         end

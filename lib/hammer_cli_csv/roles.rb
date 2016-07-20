@@ -10,25 +10,21 @@ module HammerCLICsv
       ORGANIZATIONS = 'Organizations'
       LOCATIONS = 'Locations'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, RESOURCE, SEARCH, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
-          @api.resource(:roles).call(:index, {'per_page' => 999999})['results'].each do |role|
-            @api.resource(:filters).call(:index, {
-                'per_page' => 999999,
-                'search' => "role=\"#{role['name']}\""
-            })['results'].each do |filter|
-              filter = @api.resource(:filters).call(:show, 'id' => filter['id'])
+      def export(csv)
+        csv << [NAME, RESOURCE, SEARCH, PERMISSIONS, ORGANIZATIONS, LOCATIONS]
+        @api.resource(:roles).call(:index, {'per_page' => 999999})['results'].each do |role|
+          @api.resource(:filters).call(:index, {
+              'per_page' => 999999,
+              'search' => "role=\"#{role['name']}\""
+          })['results'].each do |filter|
+            filter = @api.resource(:filters).call(:show, 'id' => filter['id'])
 
-              permissions = export_column(filter, 'permissions', 'name')
-              organizations = export_column(filter, 'organizations', 'name')
-              locations = export_column(filter, 'locations', 'name')
-              csv << [role['name'], filter['resource_type'], filter['search'] || '', permissions, organizations, locations]
-            end
+            permissions = export_column(filter, 'permissions', 'name')
+            organizations = export_column(filter, 'organizations', 'name')
+            locations = export_column(filter, 'locations', 'name')
+            csv << [role['name'], filter['resource_type'], filter['search'] || '', permissions, organizations, locations]
           end
         end
-
-        HammerCLI::EX_OK
       end
 
       def import

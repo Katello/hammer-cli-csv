@@ -14,41 +14,39 @@ module HammerCLICsv
       REPOSITORIES = 'Repositories'
       RULES = 'Rules'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, CONTENTVIEW, ORGANIZATION, TYPE, DESCRIPTION, REPOSITORIES, RULES]
-          @api.resource(:organizations).call(:index, {
-              :per_page => 999999
-          })['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
+      def export(csv)
+        csv << [NAME, CONTENTVIEW, ORGANIZATION, TYPE, DESCRIPTION, REPOSITORIES, RULES]
+        @api.resource(:organizations).call(:index, {
+            :per_page => 999999
+        })['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
 
-            @api.resource(:content_views).call(:index, {
-                'per_page' => 999999,
-                'organization_id' => organization['id'],
-                'nondefault' => true
-            })['results'].each do |contentview|
-              @api.resource(:content_view_filters).call(:index, {
-                  'content_view_id' => contentview['id']
-              })['results'].collect do |filter|
-                filter_type = "#{filter['inclusion'] == true ? 'Include' : 'Exclude'} #{export_filter_type(filter['type'])}"
+          @api.resource(:content_views).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => organization['id'],
+              'nondefault' => true
+          })['results'].each do |contentview|
+            @api.resource(:content_view_filters).call(:index, {
+                'content_view_id' => contentview['id']
+            })['results'].collect do |filter|
+              filter_type = "#{filter['inclusion'] == true ? 'Include' : 'Exclude'} #{export_filter_type(filter['type'])}"
 
-                rules = nil
-                case filter['type']
-                when /rpm/
-                  rules = export_rpm_rules(filter)
-                when /erratum/
-                  rules = export_erratum_rules(filter)
-                when /package_group/
-                  rules = export_package_group_rules(filter)
-                else
-                  raise "Unknown filter rule type '#{filter['type']}'"
-                end
-
-                name = filter['name']
-                repositories = export_column(filter, 'repositories', 'name')
-                csv << [name, contentview['name'], organization['name'], filter_type, filter['description'],
-                        repositories, rules]
+              rules = nil
+              case filter['type']
+              when /rpm/
+                rules = export_rpm_rules(filter)
+              when /erratum/
+                rules = export_erratum_rules(filter)
+              when /package_group/
+                rules = export_package_group_rules(filter)
+              else
+                raise "Unknown filter rule type '#{filter['type']}'"
               end
+
+              name = filter['name']
+              repositories = export_column(filter, 'repositories', 'name')
+              csv << [name, contentview['name'], organization['name'], filter_type, filter['description'],
+                      repositories, rules]
             end
           end
         end

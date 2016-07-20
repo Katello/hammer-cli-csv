@@ -12,39 +12,37 @@ module HammerCLICsv
       ADMIN = 'Administrator'
       ROLES = 'Roles'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ADMIN, ROLES]
-          @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
-            if user['organizations']
-              organizations = CSV.generate do |column|
-                column << user['organizations'].collect do |organization|
-                  organization['name']
-                end
+      def export(csv)
+        csv << [NAME, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ADMIN, ROLES]
+        @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
+          if user['organizations']
+            organizations = CSV.generate do |column|
+              column << user['organizations'].collect do |organization|
+                organization['name']
               end
-              organizations.delete!("\n")
             end
-            if user['locations']
-              locations = CSV.generate do |column|
-                column << user['locations'].collect do |location|
-                  location['name']
-                end
+            organizations.delete!("\n")
+          end
+          if user['locations']
+            locations = CSV.generate do |column|
+              column << user['locations'].collect do |location|
+                location['name']
               end
-              locations.delete!("\n")
             end
-            if user['roles']
-              roles = CSV.generate do |column|
-                column << user['roles'].collect do |role|
-                  role['name']
-                end
+            locations.delete!("\n")
+          end
+          if user['roles']
+            roles = CSV.generate do |column|
+              column << user['roles'].collect do |role|
+                role['name']
               end
-              roles.delete!("\n")
             end
-            admin = user['admin'] ? 'Yes' : 'No'
-            if user['login'] != 'admin' && !user['login'].start_with?('hidden-')
-              csv << [user['login'], user['firstname'], user['lastname'], user['mail'],
-                      organizations, locations, admin, roles]
-            end
+            roles.delete!("\n")
+          end
+          admin = user['admin'] ? 'Yes' : 'No'
+          if user['login'] != 'admin' && !user['login'].start_with?('hidden-')
+            csv << [user['login'], user['firstname'], user['lastname'], user['mail'],
+                    organizations, locations, admin, roles]
           end
         end
       end

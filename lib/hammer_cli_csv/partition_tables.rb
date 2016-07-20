@@ -10,7 +10,7 @@ module HammerCLICsv
       OPERATINGSYSTEMS = 'Operating Systems'
       LAYOUT = 'Layout'
 
-      def export
+      def export(csv)
         # TODO: partition-tables do not return their organizations or locations
         # http://projects.theforeman.org/issues/11175
         organizations_map = {}
@@ -28,26 +28,24 @@ module HammerCLICsv
           end
         end
 
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, OSFAMILY, OPERATINGSYSTEMS, LAYOUT]
-          @api.resource(:ptables).call(:index, {:per_page => 999999})['results'].each do |ptable|
-            ptable = @api.resource(:ptables).call(:show, {'id' => ptable['id']})
-            name = ptable['name']
-            osfamily = ptable['os_family']
-            layout = ptable['layout']
-            operatingsystems = export_column(ptable, 'operatingsystems', 'title')
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, OSFAMILY, OPERATINGSYSTEMS, LAYOUT]
+        @api.resource(:ptables).call(:index, {:per_page => 999999})['results'].each do |ptable|
+          ptable = @api.resource(:ptables).call(:show, {'id' => ptable['id']})
+          name = ptable['name']
+          osfamily = ptable['os_family']
+          layout = ptable['layout']
+          operatingsystems = export_column(ptable, 'operatingsystems', 'title')
 
-            organizations = CSV.generate do |column|
-              column << organizations_map[name] if organizations_map[name]
-            end
-            organizations.delete!("\n")
-            locations = CSV.generate do |column|
-              column << locations_map[name] if locations_map[name]
-            end
-            locations.delete!("\n")
-
-            csv << [name, organizations, locations, osfamily, operatingsystems, layout]
+          organizations = CSV.generate do |column|
+            column << organizations_map[name] if organizations_map[name]
           end
+          organizations.delete!("\n")
+          locations = CSV.generate do |column|
+            column << locations_map[name] if locations_map[name]
+          end
+          locations.delete!("\n")
+
+          csv << [name, organizations, locations, osfamily, operatingsystems, layout]
         end
       end
 

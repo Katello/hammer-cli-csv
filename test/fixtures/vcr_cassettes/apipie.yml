@@ -39,9 +39,9 @@ http_interactions:
       Apipie-Checksum:
       - e98945ba1db6bdbb4c25ce4988912344
       X-Request-Id:
-      - 4fac5d59-cdd2-482d-a8e5-49e4c92647c2
+      - be669e66-8be8-4a3a-8168-a4636201a334
       X-Runtime:
-      - '0.352564'
+      - '0.282461'
       Transfer-Encoding:
       - chunked
     body:
@@ -18524,5 +18524,5 @@ http_interactions:
         bnVsbCwic2VlIjpbXSwiaGVhZGVycyI6W10sInNob3ciOnRydWV9XSwiaGVh
         ZGVycyI6bnVsbH19LCJsaW5rX2V4dGVuc2lvbiI6Ii5lbi5odG1sIn19
     http_version: 
-  recorded_at: Wed, 03 Aug 2016 18:36:04 GMT
+  recorded_at: Tue, 16 Aug 2016 19:11:44 GMT
 recorded_with: VCR 3.0.3

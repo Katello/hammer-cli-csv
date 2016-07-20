@@ -6,7 +6,7 @@ if RUBY_VERSION > "2.2"
   SimpleCov.formatters = [SimpleCov::Formatter::HTMLFormatter,
                           Coveralls::SimpleCov::Formatter]
   SimpleCov.start do
-    minimum_coverage 26
+    minimum_coverage 36
     maximum_coverage_drop 0.1
     refuse_coverage_drop
     track_files "lib/**/*.rb"
@@ -56,8 +56,6 @@ module MiniTest
           "#{parent}/#{self_class}/suite"
         end
       end
-
-
     end
   end
 end

@@ -1,0 +1,5 @@
+Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract Number,Account Number
+# Manifest Name,Test Corporation,TestCorp
+# Manifest URL,Test Corporation,https://access.stage.redhat.com/management/distributors/d45ac754-56e8-425e-a6ef-2028953f6f2c
+# Subscription,Test Corporation,,"Red Hat Enterprise Linux for Virtual Datacenters, Standard",1,RH00002,10999110,5700573,2016-06-20T04:00:00.000+0000,2017-06-20T03:59:59.000+0000
+# Subscription,Test Corporation,,"Red Hat Enterprise Linux for Virtual Datacenters, Premium",1,RH00001,10999116,5700573,2016-06-20T04:00:00.000+0000,2017-06-20T03:59:59.000+0000

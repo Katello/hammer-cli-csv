@@ -22,45 +22,43 @@ module HammerCLICsv
       PASSWORD = 'Password'
       PUPPET_CLASSES = 'Puppet Classes'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, PARENT, ORGANIZATIONS, LOCATIONS, SUBNET, DOMAIN, OPERATING_SYSTEM,
-                  ENVIRONMENT, COMPUTE_PROFILE, PARTITION_TABLE, MEDIUM, ARCHITECTURE, REALM,
-                  PUPPET_PROXY, PUPPET_CA_PROXY, CONTENT_SOURCE, PASSWORD, PUPPET_CLASSES]
-          search_options = {:per_page => 999999}
-          search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
-          @api.resource(:hostgroups).call(:index, search_options)['results'].each do |hostgroup|
-            hostgroup = @api.resource(:hostgroups).call(:show, {'id' => hostgroup['id']})
-            raise "Host Group 'id=#{hostgroup['id']}' not found" if !hostgroup || hostgroup.empty?
+      def export(csv)
+        csv << [NAME, PARENT, ORGANIZATIONS, LOCATIONS, SUBNET, DOMAIN, OPERATING_SYSTEM,
+                ENVIRONMENT, COMPUTE_PROFILE, PARTITION_TABLE, MEDIUM, ARCHITECTURE, REALM,
+                PUPPET_PROXY, PUPPET_CA_PROXY, CONTENT_SOURCE, PASSWORD, PUPPET_CLASSES]
+        search_options = {:per_page => 999999}
+        search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
+        @api.resource(:hostgroups).call(:index, search_options)['results'].each do |hostgroup|
+          hostgroup = @api.resource(:hostgroups).call(:show, {'id' => hostgroup['id']})
+          raise "Host Group 'id=#{hostgroup['id']}' not found" if !hostgroup || hostgroup.empty?
 
-            name = hostgroup['name']
-            organizations = export_column(hostgroup, 'organizations', 'name')
-            locations = export_column(hostgroup, 'locations', 'name')
-            subnet = hostgroup['subnet_name']
-            operating_system = hostgroup['operatingsystem_name']
-            domain = hostgroup['domain_name']
-            puppet_environment = hostgroup['environment_name']
-            compute_profile = hostgroup['compute_profile_name']
-            partition_table = hostgroup['ptable_name']
-            medium = hostgroup['medium_name']
-            architecture = hostgroup['architecture_name']
-            realm = hostgroup['realm_name']
-            puppet_proxy = hostgroup['puppet_proxy_id'] ? foreman_host(:id => hostgroup['puppet_proxy_id']) : nil
-            puppet_ca_proxy = hostgroup['puppet_ca_proxy_id'] ? foreman_host(:id => hostgroup['puppet_ca_proxy_id']) : nil
-            content_source = hostgroup['content_source_id'] ? foreman_host(:id => hostgroup['content_source_id']) : nil
-            parent = hostgroup['ancestry'] ? foreman_hostgroup(:id => hostgroup['ancestry']) : nil
-            password = nil
-            puppet_classes = export_column(hostgroup, 'puppetclasses') do |puppet_class|
-              "#{puppet_class['module_name']}/#{puppet_class['name']}"
-            end
-
-            # TODO: http://projects.theforeman.org/issues/6273
-            # API call to get the smart class variable override values
-
-            csv << [name, parent, organizations, locations, subnet, domain, operating_system,
-                    puppet_environment, compute_profile, partition_table, medium, architecture,
-                    realm, puppet_proxy, puppet_ca_proxy, content_source, password, puppet_classes]
+          name = hostgroup['name']
+          organizations = export_column(hostgroup, 'organizations', 'name')
+          locations = export_column(hostgroup, 'locations', 'name')
+          subnet = hostgroup['subnet_name']
+          operating_system = hostgroup['operatingsystem_name']
+          domain = hostgroup['domain_name']
+          puppet_environment = hostgroup['environment_name']
+          compute_profile = hostgroup['compute_profile_name']
+          partition_table = hostgroup['ptable_name']
+          medium = hostgroup['medium_name']
+          architecture = hostgroup['architecture_name']
+          realm = hostgroup['realm_name']
+          puppet_proxy = hostgroup['puppet_proxy_id'] ? foreman_host(:id => hostgroup['puppet_proxy_id']) : nil
+          puppet_ca_proxy = hostgroup['puppet_ca_proxy_id'] ? foreman_host(:id => hostgroup['puppet_ca_proxy_id']) : nil
+          content_source = hostgroup['content_source_id'] ? foreman_host(:id => hostgroup['content_source_id']) : nil
+          parent = hostgroup['ancestry'] ? foreman_hostgroup(:id => hostgroup['ancestry']) : nil
+          password = nil
+          puppet_classes = export_column(hostgroup, 'puppetclasses') do |puppet_class|
+            "#{puppet_class['module_name']}/#{puppet_class['name']}"
           end
+
+          # TODO: http://projects.theforeman.org/issues/6273
+          # API call to get the smart class variable override values
+
+          csv << [name, parent, organizations, locations, subnet, domain, operating_system,
+                  puppet_environment, compute_profile, partition_table, medium, architecture,
+                  realm, puppet_proxy, puppet_ca_proxy, content_source, password, puppet_classes]
         end
       end
 

@@ -1,17 +1,17 @@
-require File.join(File.dirname(__FILE__), 'csv_test_helper')
+require './test/csv_test_helper'
+require './lib/hammer_cli_csv'
 
-describe 'settings' do
-  extend CommandTestHelper
+module Resources
+  class TestSettingsUsage < MiniTest::Unit::TestCase
 
-  context "help" do
-    it "displays supported options" do
+    def test_usage
       set_user 'admin'
 
-      stdout,stderr = capture {
+      stdout,stderr = run_with_vcr do
         hammer.run(%W{csv settings --help})
-      }
-      stderr.must_equal ''
-      stdout.must_equal <<-HELP
+      end
+      assert_equal stderr, ''
+      assert_equal stdout, <<-HELP
 Usage:
      csv settings [OPTIONS]
 
@@ -25,8 +25,8 @@ HELP
     end
   end
 
-  context "import" do
-    it "update settings w/ Count column" do
+  class TestSettingsImport < MiniTest::Unit::TestCase
+    def test_update_settings
       set_user 'admin'
 
       name = "settings#{rand(10000)}"
@@ -39,13 +39,14 @@ idle_timeout,1,60000
 FILE
       file.rewind
 
-      stdout,stderr = capture {
+      stdout,stderr = run_with_vcr do
         hammer.run(%W{csv settings --verbose --file #{file.path}})
-      }
+      end
       stderr.must_equal ''
       lines = stdout.split("\n")
-      lines[0].must_equal "Updating setting 'idle_timeout'...done"
+      assert_equal lines[0], "Updating setting 'idle_timeout'...done"
       file.unlink
     end
   end
+
 end

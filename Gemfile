@@ -4,6 +4,8 @@ gemspec
 
 group :test do
   gem 'rake', '~> 10.1.0'
+  gem 'vcr'
+  gem 'webmock', '< 2.0.0' # https://github.com/vcr/vcr/issues/570
   gem 'thor'
   gem 'minitest', '4.7.4'
   gem 'minitest-spec-context'
@@ -11,6 +13,7 @@ group :test do
   gem 'mocha'
   gem 'ci_reporter', '>= 1.6.3', "< 2.0.0", :require => false
   gem 'rubocop-checkstyle_formatter'
+  gem 'coveralls'
 end
 
 # load local gemfile

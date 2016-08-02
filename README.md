@@ -1,4 +1,4 @@
-# hammer-cli-csv ![Travis # Status](https://travis-ci.org/Katello/hammer-cli-csv.svg?branch=master)
+# hammer-cli-csv [![Build Status](https://travis-ci.org/Katello/hammer-cli-csv.svg?branch=master)](https://travis-ci.org/Katello/hammer-cli-csv) [![Coverage Status](https://coveralls.io/repos/github/Katello/hammer-cli-csv/badge.svg?branch=master)](https://coveralls.io/github/Katello/hammer-cli-csv?branch=master)
 
 ## Introduction
 
@@ -552,28 +552,46 @@ Updating setting 'idle_timeout'...done
 
 ## Code style
 
-```rubocop -R <file>```
+    rubocop -R <file>
 
 ## Tests
 
-The tests are meant to run against a live server.
+To run all tests using recorded data, run:
 
-```rake test TEST=test/settings_test.rb```
+    rake test mode=none
 
-Test server configuration is taken from test/config.yml
+To run all tests to record data:
 
-```
-% cat test/config.yml
+    rake test mode=all
 
-:csv:
-  :enable_module: true
+To run a single test using recorded data, run:
 
-:foreman:
-  :enable_module: true
-  :host:          'http://katello:3000'
-  :username:      'admin'
-  :password:      'changeme'
+    rake test mode=none test=resources/settings
 
-:katello:
-  :enable_module: true
-```
+or
+
+    rake test mode=none test=./test/resources/settings_test.rb
+
+To run tests against your live Katello without recording a new cassette set record flag to false (does not apply to mode=none):
+
+    record=false
+
+To see RestClient logs while testing:
+
+    logging=true
+
+Test server configuration is taken from 'test/config.yml'. If that file does not exist then https://localhost with admin / changeme is the default.
+
+    % cat test/config.yml
+
+    :csv:
+      :enable_module: true
+
+    :foreman:
+      :enable_module: true
+      :host:          'http://katello:3000'
+      :username:      'admin'
+      :password:      'changeme'
+
+    :katello:
+      :enable_module: true

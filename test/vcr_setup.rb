@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'vcr'
+require 'hammer_cli'
 
 def configure_vcr(mode = :none)
   if ENV['record'] == 'false' && mode == :none

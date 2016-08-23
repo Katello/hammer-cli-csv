@@ -100,8 +100,6 @@ module HammerCLICsv
           end
           print "done\n" if option_verbose?
         end
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
     end
   end

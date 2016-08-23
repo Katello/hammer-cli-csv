@@ -16,6 +16,7 @@ module HammerCLICsv
     option %w(--prefix), 'PREFIX', 'Prefix for all name columns',
            :hidden => true
     option %w(--organization), 'ORGANIZATION', _('Only process organization matching this name')
+    option %w(--continue-on-error), :flag, _('Continue processing even if individual resource error')
 
     option %w(--csv-file), 'FILE_NAME', 'Option --csv-file is deprecated. Use --file',
            :deprecated => "Use --file", :hidden => true,
@@ -154,8 +155,12 @@ module HammerCLICsv
           lines = csv[start_index...finish_index].clone
           splits << Thread.new do
             lines.each do |line|
-              if line[name_column || NAME][0] != '#'
+              next if line[name_column || NAME][0] == '#'
+              begin
                 yield line
+              rescue RuntimeError => e
+                message = "#{e}\n#{line}"
+                option_continue_on_error? ? $stderr.puts("Error: #{message}") : raise(message)
               end
             end
           end

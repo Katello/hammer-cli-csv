@@ -136,8 +136,6 @@ module HammerCLICsv
           # end
 
         end
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line[NAME]}"
       end
 
       def create_template(line, number)

@@ -13,26 +13,24 @@ module HammerCLICsv
       PROVISIONING_TEMPLATES = 'Provisioning Templates'
       PARAMETERS = 'Parameters'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, DESCRIPTION, FAMILY, PASSWORD_HASH, PARTITION_TABLES, ARCHITECTURES, MEDIA,
-                  PROVISIONING_TEMPLATES, PARAMETERS]
-          @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem_id|
-            operatingsystem = @api.resource(:operatingsystems).call(:show, {:id => operatingsystem_id['id']})
-            name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
-            description = operatingsystem['description']
-            family = operatingsystem['family']
-            password_hash = operatingsystem['password_hash']
-            partition_tables = export_column(operatingsystem, 'ptables', 'name')
-            architectures = export_column(operatingsystem, 'architectures', 'name')
-            media = export_column(operatingsystem, 'media', 'name')
-            partition_tables = export_column(operatingsystem, 'ptables', 'name')
-            parameters = export_column(operatingsystem, 'parameters') do |parameter|
-              "#{parameter['name']}|#{parameter['value']}"
-            end
-            csv << [name, description, family, password_hash, partition_tables, architectures,
-                    media, partition_tables, parameters]
+      def export(csv)
+        csv << [NAME, DESCRIPTION, FAMILY, PASSWORD_HASH, PARTITION_TABLES, ARCHITECTURES, MEDIA,
+                PROVISIONING_TEMPLATES, PARAMETERS]
+        @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem_id|
+          operatingsystem = @api.resource(:operatingsystems).call(:show, {:id => operatingsystem_id['id']})
+          name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
+          description = operatingsystem['description']
+          family = operatingsystem['family']
+          password_hash = operatingsystem['password_hash']
+          partition_tables = export_column(operatingsystem, 'ptables', 'name')
+          architectures = export_column(operatingsystem, 'architectures', 'name')
+          media = export_column(operatingsystem, 'media', 'name')
+          partition_tables = export_column(operatingsystem, 'ptables', 'name')
+          parameters = export_column(operatingsystem, 'parameters') do |parameter|
+            "#{parameter['name']}|#{parameter['value']}"
           end
+          csv << [name, description, family, password_hash, partition_tables, architectures,
+                  media, partition_tables, parameters]
         end
       end
 

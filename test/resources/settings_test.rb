@@ -10,7 +10,7 @@ module Resources
       stdout,stderr = capture {
         hammer.run(%W{csv settings --help})
       }
-      assert_equal stderr, ''
+      assert_equal '', stderr
       assert_equal stdout, <<-HELP
 Usage:
      csv settings [OPTIONS]
@@ -46,7 +46,7 @@ FILE
       }
       stderr.must_equal ''
       lines = stdout.split("\n")
-      assert_equal lines[0], "Updating setting 'idle_timeout'...done"
+      assert_equal "Updating setting 'idle_timeout'...done", lines[0]
       file.unlink
       stop_vcr
     end

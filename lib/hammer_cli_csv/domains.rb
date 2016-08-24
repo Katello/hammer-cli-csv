@@ -12,23 +12,21 @@ module HammerCLICsv
 
       SEPARATOR = ' = '
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, SMART_PROXY, PARAMETERS]
-          search_options = {:per_page => 999999}
-          search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
-          @api.resource(:domains).call(:index, search_options)['results'].each do |domain|
-            domain = @api.resource(:domains).call(:show, {'id' => domain['id']})
-            raise "Domain 'id=#{domain['id']}' not found" if !domain || domain.empty?
+      def export(csv)
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, SMART_PROXY, PARAMETERS]
+        search_options = {:per_page => 999999}
+        search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
+        @api.resource(:domains).call(:index, search_options)['results'].each do |domain|
+          domain = @api.resource(:domains).call(:show, {'id' => domain['id']})
+          raise "Domain 'id=#{domain['id']}' not found" if !domain || domain.empty?
 
-            name = domain['name']
-            organizations = option_organization ? option_organization : export_column(domain, 'organizations', 'name')
-            locations = export_column(domain, 'locations', 'name')
-            description = domain['fullname']
-            capsule = foreman_smart_proxy(:id => domain['dns_id'])
-            parameters = export_parameters(domain['parameters'])
-            csv << [name, organizations, locations, description, capsule, parameters]
-          end
+          name = domain['name']
+          organizations = option_organization ? option_organization : export_column(domain, 'organizations', 'name')
+          locations = export_column(domain, 'locations', 'name')
+          description = domain['fullname']
+          capsule = foreman_smart_proxy(:id => domain['dns_id'])
+          parameters = export_parameters(domain['parameters'])
+          csv << [name, organizations, locations, description, capsule, parameters]
         end
       end
 

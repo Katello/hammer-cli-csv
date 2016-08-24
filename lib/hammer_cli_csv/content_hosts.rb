@@ -6,6 +6,12 @@ module HammerCLICsv
       command_name 'content-hosts'
       desc         'import or export content hosts'
 
+      def self.supported?
+        true
+      end
+
+      option %w(--subscriptions-only), :flag, 'Export only detailed subscription information'
+
       ORGANIZATION = 'Organization'
       ENVIRONMENT = 'Environment'
       CONTENTVIEW = 'Content View'
@@ -20,52 +26,60 @@ module HammerCLICsv
       SLA = 'SLA'
       PRODUCTS = 'Products'
       SUBSCRIPTIONS = 'Subscriptions'
+      SUBS_NAME = 'Subscription Name'
+      SUBS_TYPE = 'Subscription Type'
+      SUBS_QUANTITY = 'Subscription Quantity'
+      SUBS_SKU = 'Subscription SKU'
+      SUBS_CONTRACT = 'Subscription Contract'
+      SUBS_ACCOUNT = 'Subscription Account'
+      SUBS_START = 'Subscription Start'
+      SUBS_END = 'Subscription End'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
-                  OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
-          export_katello csv
+      def export(csv)
+        if option_subscriptions_only?
+          export_subscriptions csv
+        else
+          export_all csv
         end
       end
 
-      def export_katello(csv)
-        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-          next if option_organization && organization['name'] != option_organization
-
-          @api.resource(:hosts).call(:index, {
-              'per_page' => 999999,
-              'organization_id' => foreman_organization(:name => organization['name'])
-          })['results'].each do |host|
-            host = @api.resource(:hosts).call(:show, {
-                'id' => host['id']
-            })
-            host['facts'] ||= {}
-
-            name = host['name']
-            organization_name = organization['name']
-            if host['content_facet_attributes']
-              environment = host['content_facet_attributes']['lifecycle_environment']['name']
-              contentview = host['content_facet_attributes']['content_view']['name']
-              hostcollections = export_column(host['content_facet_attributes'], 'host_collections', 'name')
+      def export_subscriptions(csv)
+        csv << shared_headers + [SUBS_NAME, SUBS_TYPE, SUBS_QUANTITY, SUBS_SKU,
+                                 SUBS_CONTRACT, SUBS_ACCOUNT, SUBS_START, SUBS_END]
+        iterate_hosts(csv) do |host|
+          export_line = shared_columns(host)
+          if host['subscription_facet_attributes']
+            subscriptions = @api.resource(:host_subscriptions).call(:index, {
+                'organization_id' => host['organization_id'],
+                'host_id' => host['id']
+            })['results']
+            if subscriptions.empty?
+              csv << export_line + [nil, nil, nil, nil, nil, nil]
             else
-              environment = nil
-              contentview = nil
-              hostcollections = nil
+              subscriptions.each do |subscription|
+                subscription_type = subscription['product_id'].to_i == 0 ? 'Red Hat' : 'Custom'
+                subscription_type += ' Guest' if subscription['type'] == 'STACK_DERIVED'
+                subscription_type += ' Temporary' if subscription['type'] == 'UNMAPPED_GUEST'
+                csv << export_line + [subscription['product_name'], subscription_type,
+                                      subscription['quantity_consumed'], subscription['product_id'],
+                                      subscription['contract_number'], subscription['account_number'],
+                                      DateTime.parse(subscription['start_date']).strftime('%m/%d/%Y'),
+                                      DateTime.parse(subscription['end_date']).strftime('%m/%d/%Y')]
+              end
             end
-            virtual = host['facts']['virt::is_guest'] == 'true' ? 'Yes' : 'No'
-            hypervisor_host = host['subscription_facet_attributes']['virtual_host'].nil? ? nil : host['subscription_facet_attributes']['virtual_host']['name']
-            operatingsystem = host['facts']['distribution::name'] if host['facts']['distribution::name']
-            operatingsystem += " #{host['facts']['distribution::version']}" if host['facts']['distribution::version']
-            architecture = host['facts']['uname::machine']
-            sockets = host['facts']['cpu::cpu_socket(s)']
-            ram = host['facts']['memory::memtotal']
-            cores = host['facts']['cpu::core(s)_per_socket'] || 1
-            sla = ''
-            products = export_column(host['subscription_facet_attributes'], 'installed_products', 'productName')
+          else
+            csv << export_line + [nil, nil, nil, nil, nil, nil]
+          end
+        end
+      end
+
+      def export_all(csv)
+        csv << shared_headers + [SUBSCRIPTIONS]
+        iterate_hosts(csv) do |host|
+          if host['subscription_facet_attributes']
             subscriptions = CSV.generate do |column|
               column << @api.resource(:host_subscriptions).call(:index, {
-                  'organization_id' => organization['id'],
+                  'organization_id' => host['organization_id'],
                   'host_id' => host['id']
               })['results'].collect do |subscription|
                 "#{subscription['quantity_consumed']}"\
@@ -75,9 +89,11 @@ module HammerCLICsv
               end
             end
             subscriptions.delete!("\n")
-            csv << [name, organization_name, environment, contentview, hostcollections, virtual, hypervisor_host,
-                    operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
+          else
+            subscriptions = nil
           end
+
+          csv << shared_columns(host) + [subscriptions]
         end
       end
 
@@ -99,6 +115,7 @@ module HammerCLICsv
       def import_locally
         @existing = {}
         @hypervisor_guests = {}
+        @all_subscriptions = {}
 
         thread_import do |line|
           create_from_csv(line)
@@ -111,6 +128,7 @@ module HammerCLICsv
               'id' => host_id,
               'host' => {
                 'subscription_facet_attributes' => {
+                  'autoheal' => false,
                   'hypervisor_guest_uuids' => guest_ids
                 }
               }
@@ -128,53 +146,70 @@ module HammerCLICsv
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
-          if !@existing.include? name
-            print(_("Creating content host '%{name}'...") % {:name => name}) if option_verbose?
-            params = {
-              'name' => name,
-              'facts' => facts(name, line),
-              'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-              'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW]),
-              'installed_products' => products(line),
-              'service_level' => line[SLA]
-            }
-            host = @api.resource(:host_subscriptions).call(:create, params)
-            @existing[name] = host['id']
+          if option_subscriptions_only?
+            update_subscriptions_only(name, line)
           else
-            print(_("Updating content host '%{name}'...") % {:name => name}) if option_verbose?
-            params = {
-              'id' => @existing[name],
-              'host' => {
-                'content_facet_attributes' => {
-                  'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                  'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
-                },
-                'subscription_facet_attributes' => {
-                  'facts' => facts(name, line),
-                  'installed_products' => products(line),
-                  'service_level' => line[SLA]
-                }
-              }
-            }
-            host = @api.resource(:hosts).call(:update, params)
+            update_or_create(name, line)
           end
-
-          if line[VIRTUAL] == 'Yes' && line[HOST]
-            raise "Content host '#{line[HOST]}' not found" if !@existing[line[HOST]]
-            @hypervisor_guests[@existing[line[HOST]]] ||= []
-            @hypervisor_guests[@existing[line[HOST]]] << "#{line[ORGANIZATION]}/#{name}"
-          end
-
-          update_host_collections(host, line)
-          update_subscriptions(host, line)
-
-          puts _('done') if option_verbose?
         end
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
 
       private
+
+      def update_subscriptions_only(name, line)
+        raise _("Content host '%{name}' must already exist with --subscriptions-only") % {:name => name} unless @existing.include? name
+
+        print(_("Updating subscriptions for content host '%{name}'...") % {:name => name}) if option_verbose?
+        host = @api.resource(:hosts).call(:show, {:id => @existing[name]})
+        update_subscriptions(host, line, false)
+        puts _('done') if option_verbose?
+      end
+
+      def update_or_create(name, line)
+        if !@existing.include? name
+          print(_("Creating content host '%{name}'...") % {:name => name}) if option_verbose?
+          params = {
+            'name' => name,
+            'facts' => facts(name, line),
+            'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+            'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
+          }
+          params['installed_products'] = products(line) if line[PRODUCTS]
+          params['service_level'] = line[SLA] if line[SLA]
+          host = @api.resource(:host_subscriptions).call(:create, params)
+          @existing[name] = host['id']
+        else
+          print(_("Updating content host '%{name}'...") % {:name => name}) if option_verbose?
+          params = {
+            'id' => @existing[name],
+            'host' => {
+              'content_facet_attributes' => {
+                'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
+                'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
+              },
+              'subscription_facet_attributes' => {
+                'facts' => facts(name, line),
+                'installed_products' => products(line),
+                'service_level' => line[SLA]
+              }
+            }
+          }
+          host = @api.resource(:hosts).call(:update, params)
+        end
+
+        if line[VIRTUAL] == 'Yes' && line[HOST]
+          raise "Content host '#{line[HOST]}' not found" if !@existing[line[HOST]]
+          @hypervisor_guests[@existing[line[HOST]]] ||= []
+          @hypervisor_guests[@existing[line[HOST]]] << "#{line[ORGANIZATION]}/#{name}"
+        end
+
+        update_host_collections(host, line)
+        update_subscriptions(host, line, true)
+
+        puts _('done') if option_verbose?
+      rescue RuntimeError => e
+        raise "#{e}\n       #{line}"
+      end
 
       def facts(name, line)
         facts = {}
@@ -192,13 +227,14 @@ module HammerCLICsv
       end
 
       def update_host_collections(host, line)
-        return nil if !line[HOSTCOLLECTIONS]
-        CSV.parse_line(line[HOSTCOLLECTIONS]).each do |hostcollection_name|
-          @api.resource(:host_collections).call(:add_hosts, {
-              'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
-              'host_ids' => [host['id']]
-          })
-        end
+        # TODO: http://projects.theforeman.org/issues/16234
+        # return nil if line[HOSTCOLLECTIONS].nil? || line[HOSTCOLLECTIONS].empty?
+        # CSV.parse_line(line[HOSTCOLLECTIONS]).each do |hostcollection_name|
+        #   @api.resource(:host_collections).call(:add_hosts, {
+        #       'id' => katello_hostcollection(line[ORGANIZATION], :name => hostcollection_name),
+        #       'host_ids' => [host['id']]
+        #   })
+        # end
       end
 
       def os_name_version(operatingsystem)
@@ -224,17 +260,69 @@ module HammerCLICsv
         end
       end
 
-      def update_subscriptions(host, line)
+      def update_subscriptions(host, line, remove_existing)
         existing_subscriptions = @api.resource(:host_subscriptions).call(:index, {
             'host_id' => host['id']
         })['results']
-        if existing_subscriptions.length != 0
+        if remove_existing && existing_subscriptions.length != 0
+          existing_subscriptions.map! do |existing_subscription|
+            {:id => existing_subscription['id'], :quantity => existing_subscription['quantity_consumed']}
+          end
           @api.resource(:host_subscriptions).call(:remove_subscriptions, {
             'host_id' => host['id'],
             'subscriptions' => existing_subscriptions
           })
+          existing_subscriptions = []
         end
 
+        if line[SUBS_NAME].nil? && line[SUBS_SKU].nil?
+          all_in_one_subscription(host, existing_subscriptions, line)
+        else
+          single_subscription(host, existing_subscriptions, line)
+        end
+      end
+
+      def single_subscription(host, existing_subscriptions, line)
+        already_attached = false
+        if line[SUBS_SKU]
+          already_attached = existing_subscriptions.detect do |subscription|
+            line[SUBS_SKU] == subscription['product_id']
+          end
+        elsif line[SUBS_NAME]
+          already_attached = existing_subscriptions.detect do |subscription|
+            line[SUBS_NAME] == subscription['name']
+          end
+        end
+        if already_attached
+          print _(" '%{name}' already attached...") % {:name => already_attached['name']}
+          return
+        end
+
+        available_subscriptions = @api.resource(:subscriptions).call(:index, {
+          'organization_id' => host['organization_id'],
+          'host_id' => host['id'],
+          'available_for' => 'host',
+          'match_host' => true
+        })['results']
+
+        matches = matches_by_sku_and_name([], line, available_subscriptions)
+        matches = matches_by_type(matches, line)
+        matches = matches_by_account(matches, line)
+        matches = matches_by_contract(matches, line)
+        matches = matches_by_quantity(matches, line)
+
+        raise _("No matching subscriptions") if matches.empty?
+
+        match = matches[0]
+        print _(" attaching '%{name}'...") % {:name => match['name']} if option_verbose?
+
+        @api.resource(:host_subscriptions).call(:add_subscriptions, {
+            'host_id' => host['id'],
+            'subscriptions' => existing_subscriptions + [match]
+        })
+      end
+
+      def all_in_one_subscription(host, existing_subscriptions, line)
         return if line[SUBSCRIPTIONS].nil? || line[SUBSCRIPTIONS].empty?
 
         subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |details|
@@ -273,6 +361,146 @@ module HammerCLICsv
             end
           end
         end
+      end
+
+      def get_all_subscriptions(organization)
+        @api.resource(:subscriptions).call(:index, {
+            :per_page => 999999,
+            'organization_id' => foreman_organization(:name => organization)
+        })['results']
+      end
+
+      def iterate_hosts(csv)
+        hypervisors = []
+        hosts = []
+        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
+
+          @api.resource(:hosts).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => foreman_organization(:name => organization['name'])
+          })['results'].each do |host|
+            host = @api.resource(:hosts).call(:show, {
+                'id' => host['id']
+            })
+            host['facts'] ||= {}
+            if host['subscription_facet_attributes']['virtual_guests'].empty?
+              hosts.push(host)
+            else
+              hypervisors.push(host)
+            end
+          end
+        end
+        hypervisors.each do |host|
+          yield host
+        end
+        hosts.each do |host|
+          yield host
+        end
+      end
+
+      def shared_headers
+        [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
+         OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS]
+      end
+
+      def shared_columns(host)
+        name = host['name']
+        organization_name = host['organization_name']
+        if host['content_facet_attributes']
+          environment = host['content_facet_attributes']['lifecycle_environment']['name']
+          contentview = host['content_facet_attributes']['content_view']['name']
+          hostcollections = export_column(host['content_facet_attributes'], 'host_collections', 'name')
+        else
+          environment = nil
+          contentview = nil
+          hostcollections = nil
+        end
+        if host['subscription_facet_attributes']
+          hypervisor_host = host['subscription_facet_attributes']['virtual_host'].nil? ? nil : host['subscription_facet_attributes']['virtual_host']['name']
+          products = export_column(host['subscription_facet_attributes'], 'installed_products') do |product|
+            "#{product['productId']}|#{product['productName']}"
+          end
+        else
+          hypervisor_host = nil
+          products = nil
+        end
+        virtual = host['facts']['virt::is_guest'] == 'true' ? 'Yes' : 'No'
+        operatingsystem = host['facts']['distribution::name'] if host['facts']['distribution::name']
+        operatingsystem += " #{host['facts']['distribution::version']}" if host['facts']['distribution::version']
+        architecture = host['facts']['uname::machine']
+        sockets = host['facts']['cpu::cpu_socket(s)']
+        ram = host['facts']['memory::memtotal']
+        cores = host['facts']['cpu::core(s)_per_socket'] || 1
+        sla = ''
+
+        [name, organization_name, environment, contentview, hostcollections, virtual, hypervisor_host,
+         operatingsystem, architecture, sockets, ram, cores, sla, products]
+      end
+
+      def matches_by_sku_and_name(matches, line, subscriptions)
+        if line[SUBS_SKU]
+          matches = subscriptions.select do |subscription|
+            line[SUBS_SKU] == subscription['product_id']
+          end
+          raise _("No subscriptions match SKU '%{sku}'") % {:sku => line[SUBS_SKU]} if matches.empty?
+        elsif line[SUBS_NAME]
+          matches = subscriptions.select do |subscription|
+            line[SUBS_NAME] == subscription['name']
+          end
+          raise _("No subscriptions match name '%{name}'") % {:name => line[SUBS_NAME]} if matches.empty?
+        end
+        matches
+      end
+
+      def matches_by_type(matches, line)
+        if line[SUBS_TYPE] == 'Red Hat' || line[SUBS_TYPE] == 'Custom'
+          matches = matches.select do |subscription|
+            subscription['type'] == 'NORMAL'
+          end
+        elsif line[SUBS_TYPE] == 'Red Hat Guest'
+          matches = matches.select do |subscription|
+            subscription['type'] == 'STACK_DERIVED'
+          end
+        elsif line[SUBS_TYPE] == 'Red Hat Temporary'
+          matches = matches.select do |subscription|
+            subscription['type'] == 'UNMAPPED_GUEST'
+          end
+        end
+        raise _("No subscriptions match type '%{type}'") % {:type => line[SUBS_TYPE]} if matches.empty?
+        matches
+      end
+
+      def matches_by_account(matches, line)
+        if matches.length > 1 && line[SUBS_ACCOUNT]
+          refined = matches.select do |subscription|
+            line[SUBS_ACCOUNT] == subscription['account_number']
+          end
+          matches = refined unless refined.empty?
+        end
+        matches
+      end
+
+      def matches_by_contract(matches, line)
+        if matches.length > 1 && line[SUBS_CONTRACT]
+          refined = matches.select do |subscription|
+            line[SUBS_CONTRACT] == subscription['contract_number']
+          end
+          matches = refined unless refined.empty?
+        end
+        matches
+      end
+
+      def matches_by_quantity(matches, line)
+        if line[SUBS_QUANTITY] && line[SUBS_QUANTITY] != 'Automatic'
+          refined = matches.select do |subscription|
+            subscription['available'] == -1 || line[SUBS_QUANTITY].to_i <= subscription['available']
+          end
+          raise _("No '%{name}' subscription with quantity %{quantity} or more available") %
+                    {:name => matches[0]['name'], :quantity => line[SUBS_QUANTITY]} if refined.empty?
+          matches = refined
+        end
+        matches
       end
     end
   end

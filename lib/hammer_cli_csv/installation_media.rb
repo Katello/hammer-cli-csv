@@ -10,20 +10,18 @@ module HammerCLICsv
       OSFAMILY = 'OS Family'
       OPERATING_SYSTEMS = 'Operating Systems'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, PATH, OSFAMILY, OPERATING_SYSTEMS]
-          @api.resource(:media).call(:index, {:per_page => 999999})['results'].each do |medium|
-            medium = @api.resource(:media).call(:show, :id => medium['id'])
-            name = medium['name']
-            organizations = export_column(medium, 'organizations', 'name')
-            locations = export_column(medium, 'locations', 'name')
-            count = 1
-            path = medium['path']
-            os_family = medium['os_family']
-            operating_systems = export_column(medium, 'operatingsystems', 'title')
-            csv << [name, organizations, locations, path, os_family, operating_systems]
-          end
+      def export(csv)
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, PATH, OSFAMILY, OPERATING_SYSTEMS]
+        @api.resource(:media).call(:index, {:per_page => 999999})['results'].each do |medium|
+          medium = @api.resource(:media).call(:show, :id => medium['id'])
+          name = medium['name']
+          organizations = export_column(medium, 'organizations', 'name')
+          locations = export_column(medium, 'locations', 'name')
+          count = 1
+          path = medium['path']
+          os_family = medium['os_family']
+          operating_systems = export_column(medium, 'operatingsystems', 'title')
+          csv << [name, organizations, locations, path, os_family, operating_systems]
         end
       end
 

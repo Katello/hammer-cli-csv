@@ -9,17 +9,15 @@ module HammerCLICsv
       URL = 'URL'
       LIFECYCLE_ENVIRONMENTS = 'Lifecycle Environments'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, URL, LIFECYCLE_ENVIRONMENTS]
-          @api.resource(:smart_proxies).call(:index, {:per_page => 999999})['results'].each do |smart_proxy|
-            smart_proxy = @api.resource(:smart_proxies).call(:show, {'id' => smart_proxy['id']})
-            name = smart_proxy['name']
-            organizations = export_column(smart_proxy, 'organizations', 'name')
-            locations = export_column(smart_proxy, 'locations', 'name')
-            url = smart_proxy['url']
-            csv << [name, organizations, locations, url]
-          end
+      def export(csv)
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, URL, LIFECYCLE_ENVIRONMENTS]
+        @api.resource(:smart_proxies).call(:index, {:per_page => 999999})['results'].each do |smart_proxy|
+          smart_proxy = @api.resource(:smart_proxies).call(:show, {'id' => smart_proxy['id']})
+          name = smart_proxy['name']
+          organizations = export_column(smart_proxy, 'organizations', 'name')
+          locations = export_column(smart_proxy, 'locations', 'name')
+          url = smart_proxy['url']
+          csv << [name, organizations, locations, url]
         end
       end
 

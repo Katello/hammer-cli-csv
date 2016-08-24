@@ -7,20 +7,18 @@ module HammerCLICsv
       LABEL = 'Label'
       DESCRIPTION = 'Description'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, LABEL, DESCRIPTION]
+      def export(csv)
+        csv << [NAME, LABEL, DESCRIPTION]
 
-          if @server_status['release'] == 'Headpin'
-            @headpin.get(:organizations).each do |organization|
-              next if option_organization && organization['name'] != option_organization
-              csv << [organization['name'], organization['label'], organization['description']]
-            end
-          else
-            @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-              next if option_organization && organization['name'] != option_organization
-              csv << [organization['name'], organization['label'], organization['description']]
-            end
+        if @server_status['release'] == 'Headpin'
+          @headpin.get(:organizations).each do |organization|
+            next if option_organization && organization['name'] != option_organization
+            csv << [organization['name'], organization['label'], organization['description']]
+          end
+        else
+          @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+            next if option_organization && organization['name'] != option_organization
+            csv << [organization['name'], organization['label'], organization['description']]
           end
         end
       end

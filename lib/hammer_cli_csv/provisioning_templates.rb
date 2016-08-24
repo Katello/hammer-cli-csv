@@ -14,27 +14,25 @@ module HammerCLICsv
       KIND = 'Kind'
       TEMPLATE = 'Template'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, OPERATINGSYSTEMS, ASSOCIATIONS, KIND, TEMPLATE]
-          params = {
-              :per_page => 999999
-          }
-          params['search'] =  "organization = \"#{option_organization}\"" if option_organization
-          @api.resource(:config_templates).call(:index, params)['results'].each do |template_id|
-            template = @api.resource(:config_templates).call(:show, {:id => template_id['id']})
-            next if template['locked'] && !option_include_locked?
-            name = template['name']
-            kind = template['snippet'] ? 'snippet' : template['template_kind_name']
-            organizations = export_column(template, 'organizations', 'name')
-            locations = export_column(template, 'locations', 'name')
-            operatingsystems = export_column(template, 'operatingsystems', 'fullname')
-            # TODO: puppet environments for content views are not present in api
-            # http://projects.theforeman.org/issues/10293
-            associations = export_associations(template)
-            unless name == 'Boot disk iPXE - generic host' || name == 'Boot disk iPXE - host'
-              csv << [name, organizations, locations, operatingsystems, associations, kind, template['template']]
-            end
+      def export(csv)
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, OPERATINGSYSTEMS, ASSOCIATIONS, KIND, TEMPLATE]
+        params = {
+            :per_page => 999999
+        }
+        params['search'] =  "organization = \"#{option_organization}\"" if option_organization
+        @api.resource(:config_templates).call(:index, params)['results'].each do |template_id|
+          template = @api.resource(:config_templates).call(:show, {:id => template_id['id']})
+          next if template['locked'] && !option_include_locked?
+          name = template['name']
+          kind = template['snippet'] ? 'snippet' : template['template_kind_name']
+          organizations = export_column(template, 'organizations', 'name')
+          locations = export_column(template, 'locations', 'name')
+          operatingsystems = export_column(template, 'operatingsystems', 'fullname')
+          # TODO: puppet environments for content views are not present in api
+          # http://projects.theforeman.org/issues/10293
+          associations = export_associations(template)
+          unless name == 'Boot disk iPXE - generic host' || name == 'Boot disk iPXE - host'
+            csv << [name, organizations, locations, operatingsystems, associations, kind, template['template']]
           end
         end
       end

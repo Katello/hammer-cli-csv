@@ -10,7 +10,7 @@ module Resources
       stdout,stderr = capture {
         hammer.run(%W{csv subscriptions --help})
       }
-      assert_equal stderr, ''
+      assert_equal '', stderr
       assert_equal stdout, <<-HELP
 Usage:
      csv subscriptions [OPTIONS]
@@ -35,18 +35,18 @@ HELP
       # rubocop:disable LineLength
       file.write <<-FILE
 Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract Number,Account Number
-Manifest,Example Corporation,./test/data/doesnotexist.zip
-# Manifest Name,Example Corporation,ExampleCorp
-# Manifest URL,Example Corporation,https://access.stage.redhat.com/management/distributors/1234
+Manifest,Test Corporation,./test/data/doesnotexist.zip
+# Manifest Name,Test Corporation,ExampleCorp
+# Manifest URL,Test Corporation,https://access.stage.redhat.com/management/distributors/1234
 FILE
       file.rewind
 
       stdout,stderr = capture {
         hammer.run(%W{csv subscriptions --verbose --file #{file.path}})
       }
-      assert_equal stdout, ''
+      assert_equal '', stdout
       lines = stderr.split("\n")
-      assert_equal lines[0], "Manifest upload failed:"
+      assert_equal "Manifest upload failed:", lines[0]
       assert_match(/.*Error: No such file or directory.*/, lines[1])
       file.unlink
       stop_vcr

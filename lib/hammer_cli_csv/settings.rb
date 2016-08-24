@@ -10,12 +10,10 @@ module HammerCLICsv
         true
       end
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb') do |csv|
-          csv << [NAME, VALUE]
-          @api.resource(:settings).call(:index, {'per_page' => 999999})['results'].each do |setting|
-            csv << [setting['name'], setting['value']]
-          end
+      def export(csv)
+        csv << [NAME, VALUE]
+        @api.resource(:settings).call(:index, {'per_page' => 999999})['results'].each do |setting|
+          csv << [setting['name'], setting['value']]
         end
       end
 

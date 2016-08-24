@@ -17,48 +17,46 @@ module HammerCLICsv
       INPUT_TYPE = 'Input:Type'
       INPUT_PARAMETERS = 'Input:Parameters'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, JOB, PROVIDER, SNIPPET, TEMPLATE,
-                  INPUT_NAME, INPUT_DESCRIPTION, INPUT_REQUIRED, INPUT_TYPE, INPUT_PARAMETERS]
-          @api.resource(:job_templates).call(:index, {
-              :per_page => 999999
-          })['results'].each do |template_id|
-            template = @api.resource(:job_templates).call(:show, {:id => template_id['id']})
-            next if template['locked']
-            next unless option_organization.nil? || template['organizations'].detect { |org| org['name'] == option_organization }
-            name = template['name']
-            description = template['description_format']
-            job = template['job_category']
-            snippet = template['snippet'] ? 'Yes' : 'No'
-            provider = template['provider_type']
-            organizations = export_column(template, 'organizations', 'name')
-            locations = export_column(template, 'locations', 'name')
-            csv << [name, organizations, locations, description, job, provider, snippet, template['template']]
+      def export(csv)
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, JOB, PROVIDER, SNIPPET, TEMPLATE,
+                INPUT_NAME, INPUT_DESCRIPTION, INPUT_REQUIRED, INPUT_TYPE, INPUT_PARAMETERS]
+        @api.resource(:job_templates).call(:index, {
+            :per_page => 999999
+        })['results'].each do |template_id|
+          template = @api.resource(:job_templates).call(:show, {:id => template_id['id']})
+          next if template['locked']
+          next unless option_organization.nil? || template['organizations'].detect { |org| org['name'] == option_organization }
+          name = template['name']
+          description = template['description_format']
+          job = template['job_category']
+          snippet = template['snippet'] ? 'Yes' : 'No'
+          provider = template['provider_type']
+          organizations = export_column(template, 'organizations', 'name')
+          locations = export_column(template, 'locations', 'name')
+          csv << [name, organizations, locations, description, job, provider, snippet, template['template']]
 
-            template_columns = [name] + Array.new(7)
-            @api.resource(:template_inputs).call(:index, {
-                :template_id => template['id']
-            })['results'].each  do|input|
-              input_field = nil
-              input_options = nil
-              case input['input_type']
-              when /user/
-                input_name = export_column(input, 'options') do |value|
-                  value
-                end
-              when /fact/
-                input_name = input['fact_name']
-              when /variable/
-                input_name = input['variable_name']
-              when /puppet_parameter/
-                input_name = "#{input['puppet_class_name']}|#{input['puppet_parameter_name']}"
-              else
-                raise _("Unknown job template input type '%{type}'") % {:type => input['input_type']}
+          template_columns = [name] + Array.new(7)
+          @api.resource(:template_inputs).call(:index, {
+              :template_id => template['id']
+          })['results'].each  do|input|
+            input_field = nil
+            input_options = nil
+            case input['input_type']
+            when /user/
+              input_name = export_column(input, 'options') do |value|
+                value
               end
-              required = input['required'] ? 'Yes' : 'No'
-              csv << template_columns + [input['name'], input['description'], required, input['input_type'], input_name]
+            when /fact/
+              input_name = input['fact_name']
+            when /variable/
+              input_name = input['variable_name']
+            when /puppet_parameter/
+              input_name = "#{input['puppet_class_name']}|#{input['puppet_parameter_name']}"
+            else
+              raise _("Unknown job template input type '%{type}'") % {:type => input['input_type']}
             end
+            required = input['required'] ? 'Yes' : 'No'
+            csv << template_columns + [input['name'], input['description'], required, input['input_type'], input_name]
           end
         end
       end

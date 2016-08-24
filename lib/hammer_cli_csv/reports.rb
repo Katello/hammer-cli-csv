@@ -13,17 +13,13 @@ module HammerCLICsv
       PENDING = 'Pending'
       METRICS = 'Metrics'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME]
-          @api.resource(:reports).call(:index, {
-              'per_page' => 999999
-          })['results'].each do |report|
-            csv << [report['host_name'], report['metrics'].to_json]
-          end
+      def export(csv)
+        csv << [NAME]
+        @api.resource(:reports).call(:index, {
+            'per_page' => 999999
+        })['results'].each do |report|
+          csv << [report['host_name'], report['metrics'].to_json]
         end
-
-        HammerCLI::EX_OK
       end
 
       def import

@@ -6,15 +6,13 @@ module HammerCLICsv
 
       OPERATINGSYSTEMS = 'Operating Systems'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => true}) do |csv|
-          csv << [NAME, OPERATINGSYSTEMS]
-          @api.resource(:architectures).call(:index, {:per_page => 999999})['results'].each do |architecture|
-            architecture = @api.resource(:architectures).call(:show, {:id => architecture['id']})
-            name = architecture['name']
-            operatingsystems = export_column(architecture, 'operatingsystems', 'title')
-            csv << [name, operatingsystems]
-          end
+      def export(csv)
+        csv << [NAME, OPERATINGSYSTEMS]
+        @api.resource(:architectures).call(:index, {:per_page => 999999})['results'].each do |architecture|
+          architecture = @api.resource(:architectures).call(:show, {:id => architecture['id']})
+          name = architecture['name']
+          operatingsystems = export_column(architecture, 'operatingsystems', 'title')
+          csv << [name, operatingsystems]
         end
       end
 

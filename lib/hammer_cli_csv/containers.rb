@@ -11,18 +11,16 @@ module HammerCLICsv
       ENTRYPOINT = 'Entry Point'
       COMMAND = 'Command'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb') do |csv|
-          csv << [NAME, REGISTRY, REPOSITORY, COMPUTERESOURCE, ATTACH, ENTRYPOINT, COMMAND]
-          @api.resource(:containers).call(:index, {'per_page' => 999999})['results'].each do |container|
-            csv << [container['name'],
-                    container['registry_name'],
-                    "#{container['repository_name']}:#{container['tag']}",
-                    container['compute_resource_name'],
-                    export_attach_types(container),
-                    container['entrypoint'],
-                    container['command']]
-          end
+      def export(csv)
+        csv << [NAME, REGISTRY, REPOSITORY, COMPUTERESOURCE, ATTACH, ENTRYPOINT, COMMAND]
+        @api.resource(:containers).call(:index, {'per_page' => 999999})['results'].each do |container|
+          csv << [container['name'],
+                  container['registry_name'],
+                  "#{container['repository_name']}:#{container['tag']}",
+                  container['compute_resource_name'],
+                  export_attach_types(container),
+                  container['entrypoint'],
+                  container['command']]
         end
       end
 

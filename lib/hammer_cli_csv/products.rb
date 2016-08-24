@@ -14,37 +14,35 @@ module HammerCLICsv
       REPOSITORY_URL = 'Repository Url'
       DESCRIPTION = 'Description'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, LABEL, ORGANIZATION, DESCRIPTION, REPOSITORY, REPOSITORY_TYPE,
-                  CONTENT_SET, RELEASE, REPOSITORY_URL]
-          # TODO: DOWNLOAD_POLICY
-          @api.resource(:organizations).call(:index, {
-              :per_page => 999999
-          })['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
-            @api.resource(:products).call(:index, {
-                'per_page' => 999999,
-                'enabled' => true,
+      def export(csv)
+        csv << [NAME, LABEL, ORGANIZATION, DESCRIPTION, REPOSITORY, REPOSITORY_TYPE,
+                CONTENT_SET, RELEASE, REPOSITORY_URL]
+        # TODO: DOWNLOAD_POLICY
+        @api.resource(:organizations).call(:index, {
+            :per_page => 999999
+        })['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
+          @api.resource(:products).call(:index, {
+              'per_page' => 999999,
+              'enabled' => true,
+              'organization_id' => organization['id']
+          })['results'].each do |product|
+            @api.resource(:repositories).call(:index, {
+                'product_id' => product['id'],
                 'organization_id' => organization['id']
-            })['results'].each do |product|
-              @api.resource(:repositories).call(:index, {
-                  'product_id' => product['id'],
-                  'organization_id' => organization['id']
-              })['results'].each do |repository|
-                repository = @api.resource(:repositories).call(:show, {:id => repository['id']})
-                if repository['product_type'] == 'custom'
-                  repository_type = "Custom #{repository['content_type'].capitalize}"
-                  content_set = nil
-                else
-                  repository_type = "Red Hat #{repository['content_type'].capitalize}"
-                  content_set = get_content_set(organization, product, repository)
-                end
-                release = repository['minor'] #=~ /Server/ ? repository['minor'] : "#{repository['major']}.#{repository['minor']}"
-                csv << [product['name'], product['label'], organization['name'],
-                        product['description'], repository['name'], repository_type,
-                        content_set, release, repository['url']]
+            })['results'].each do |repository|
+              repository = @api.resource(:repositories).call(:show, {:id => repository['id']})
+              if repository['product_type'] == 'custom'
+                repository_type = "Custom #{repository['content_type'].capitalize}"
+                content_set = nil
+              else
+                repository_type = "Red Hat #{repository['content_type'].capitalize}"
+                content_set = get_content_set(organization, product, repository)
               end
+              release = repository['minor'] #=~ /Server/ ? repository['minor'] : "#{repository['major']}.#{repository['minor']}"
+              csv << [product['name'], product['label'], organization['name'],
+                      product['description'], repository['name'], repository_type,
+                      content_set, release, repository['url']]
             end
           end
         end

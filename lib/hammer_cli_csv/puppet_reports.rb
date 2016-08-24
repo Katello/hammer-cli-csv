@@ -19,58 +19,56 @@ module HammerCLICsv
       PRODUCTS = 'Products'
       SUBSCRIPTIONS = 'Subscriptions'
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
-                  OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
-          @api.resource(:organizations).call(:index, {
-              :per_page => 999999
-          })['results'].each do |organization|
-            @api.resource(:systems).call(:index, {
-                'per_page' => 999999,
-                'organization_id' => organization['id']
-            })['results'].each do |system|
-              system = @api.resource(:systems).call(:show, {
-                  'id' => system['uuid'],
-                  'fields' => 'full'
-              })
+      def export(csv)
+        csv << [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, SYSTEMGROUPS, VIRTUAL, HOST,
+                OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS, SUBSCRIPTIONS]
+        @api.resource(:organizations).call(:index, {
+            :per_page => 999999
+        })['results'].each do |organization|
+          @api.resource(:systems).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => organization['id']
+          })['results'].each do |system|
+            system = @api.resource(:systems).call(:show, {
+                'id' => system['uuid'],
+                'fields' => 'full'
+            })
 
-              name = system['name']
-              organization_label = organization['label']
-              environment = system['environment']['label']
-              contentview = system['content_view']['name']
-              hostcollections = CSV.generate do |column|
-                column << system['systemGroups'].collect do |hostcollection|
-                  hostcollection['name']
-                end
+            name = system['name']
+            organization_label = organization['label']
+            environment = system['environment']['label']
+            contentview = system['content_view']['name']
+            hostcollections = CSV.generate do |column|
+              column << system['systemGroups'].collect do |hostcollection|
+                hostcollection['name']
               end
-              hostcollections.delete!("\n")
-              virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
-              host = system['host']
-              operatingsystem = "#{system['facts']['distribution.name']} " if system['facts']['distribution.name']
-              operatingsystem += system['facts']['distribution.version'] if system['facts']['distribution.version']
-              architecture = system['facts']['uname.machine']
-              sockets = system['facts']['cpu.cpu_socket(s)']
-              ram = system['facts']['memory.memtotal']
-              cores = system['facts']['cpu.core(s)_per_socket']
-              sla = ''
-              products = CSV.generate do |column|
-                column << system['installedProducts'].collect do |product|
-                  "#{product['productId']}|#{product['productName']}"
-                end
-              end
-              products.delete!("\n")
-              subscriptions = CSV.generate do |column|
-                column << @api.resource(:subscriptions).call(:index, {
-                    'system_id' => system['uuid']
-                })['results'].collect do |subscription|
-                  "#{subscription['product_id']}|#{subscription['product_name']}"
-                end
-              end
-              subscriptions.delete!("\n")
-              csv << [name, organization_label, environment, contentview, hostcollections, virtual, host,
-                      operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
             end
+            hostcollections.delete!("\n")
+            virtual = system['facts']['virt.is_guest'] == 'true' ? 'Yes' : 'No'
+            host = system['host']
+            operatingsystem = "#{system['facts']['distribution.name']} " if system['facts']['distribution.name']
+            operatingsystem += system['facts']['distribution.version'] if system['facts']['distribution.version']
+            architecture = system['facts']['uname.machine']
+            sockets = system['facts']['cpu.cpu_socket(s)']
+            ram = system['facts']['memory.memtotal']
+            cores = system['facts']['cpu.core(s)_per_socket']
+            sla = ''
+            products = CSV.generate do |column|
+              column << system['installedProducts'].collect do |product|
+                "#{product['productId']}|#{product['productName']}"
+              end
+            end
+            products.delete!("\n")
+            subscriptions = CSV.generate do |column|
+              column << @api.resource(:subscriptions).call(:index, {
+                  'system_id' => system['uuid']
+              })['results'].collect do |subscription|
+                "#{subscription['product_id']}|#{subscription['product_name']}"
+              end
+            end
+            subscriptions.delete!("\n")
+            csv << [name, organization_label, environment, contentview, hostcollections, virtual, host,
+                    operatingsystem, architecture, sockets, ram, cores, sla, products, subscriptions]
           end
         end
       end

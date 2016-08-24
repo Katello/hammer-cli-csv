@@ -16,44 +16,42 @@ module HammerCLICsv
       REPOSITORIES = 'Repositories or Composites'
       ENVIRONMENTS = "Lifecycle Environments"
 
-      def export
-        CSV.open(option_file || '/dev/stdout', 'wb', {:force_quotes => false}) do |csv|
-          csv << [NAME, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, ENVIRONMENTS]
-          @api.resource(:organizations).call(:index, {
-              :per_page => 999999
-          })['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
+      def export(csv)
+        csv << [NAME, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, ENVIRONMENTS]
+        @api.resource(:organizations).call(:index, {
+            :per_page => 999999
+        })['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
 
-            composite_contentviews = []
-            @api.resource(:content_views).call(:index, {
-                'per_page' => 999999,
-                'organization_id' => organization['id'],
-                'nondefault' => true
-            })['results'].each do |contentview|
-              name = contentview['name']
-              label = contentview['label']
-              orgname = organization['name']
-              environments = CSV.generate do |column|
-                column << environment_names(contentview)
-              end
-              environments.delete!("\n")
-              composite = contentview['composite'] == true ? 'Yes' : 'No'
-              if composite == 'Yes'
-                contentviews = CSV.generate do |column|
-                  column << contentview['components'].collect do |component|
-                    component['content_view']['name']
-                  end
+          composite_contentviews = []
+          @api.resource(:content_views).call(:index, {
+              'per_page' => 999999,
+              'organization_id' => organization['id'],
+              'nondefault' => true
+          })['results'].each do |contentview|
+            name = contentview['name']
+            label = contentview['label']
+            orgname = organization['name']
+            environments = CSV.generate do |column|
+              column << environment_names(contentview)
+            end
+            environments.delete!("\n")
+            composite = contentview['composite'] == true ? 'Yes' : 'No'
+            if composite == 'Yes'
+              contentviews = CSV.generate do |column|
+                column << contentview['components'].collect do |component|
+                  component['content_view']['name']
                 end
-                contentviews.delete!("\n")
-                composite_contentviews << [name, 1, label, orgname, composite, contentviews, environments]
-              else
-                repositories = export_column(contentview, 'repositories', 'name')
-                csv << [name, label, orgname, composite, repositories, environments]
               end
+              contentviews.delete!("\n")
+              composite_contentviews << [name, 1, label, orgname, composite, contentviews, environments]
+            else
+              repositories = export_column(contentview, 'repositories', 'name')
+              csv << [name, label, orgname, composite, repositories, environments]
             end
-            composite_contentviews.each do |contentview|
-              csv << contentview
-            end
+          end
+          composite_contentviews.each do |contentview|
+            csv << contentview
           end
         end
       end

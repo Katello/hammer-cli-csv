@@ -16,6 +16,7 @@ Usage:
      csv subscriptions [OPTIONS]
 
 Options:
+ --continue-on-error           Continue processing even if individual resource error
  --export                      Export current data instead of importing
  --file FILE_NAME              CSV file (default to /dev/stdout with --export, otherwise required)
  --organization ORGANIZATION   Only process organization matching this name

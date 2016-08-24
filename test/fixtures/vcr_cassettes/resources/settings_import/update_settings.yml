@@ -1,6 +1,256 @@
 ---
 http_interactions:
 - request:
+    method: put
+    uri: http://admin:changeme@katello:3000/api/settings/104
+    body:
+      encoding: UTF-8
+      string: '{"setting":{"value":"60000"}}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '29'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - e98945ba1db6bdbb4c25ce4988912344
+      Etag:
+      - W/"fad2d243311537e4336d8fdd609f58db"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=3bd66552dd1479004842de123877b27c; path=/; HttpOnly
+      - request_method=PUT; path=/
+      X-Request-Id:
+      - 22959f07-f544-4d77-bce4-54f9f908e55c
+      X-Runtime:
+      - '1.433806'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"value":60000,"description":"Log out idle users after a certain number
+        of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-07-15
+        13:17:56 UTC","updated_at":"2016-07-15 13:38:43 UTC","id":104,"name":"idle_timeout"}'
+    http_version:
+  recorded_at: Wed, 03 Aug 2016 18:37:06 GMT
+- request:
+    method: get
+    uri: http://admin:changeme@katello:3000/api/status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - e98945ba1db6bdbb4c25ce4988912344
+      Etag:
+      - W/"f536fd8685b76bb26a943d472593c93e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=debcf6aad8756b41c3f13af385bab84e; path=/; HttpOnly
+      X-Request-Id:
+      - 71a5d376-c714-402f-8cb9-88abae35f646
+      X-Runtime:
+      - '0.207556'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"result":"ok","status":200,"version":"1.13.0-develop","api_version":2}'
+    http_version:
+  recorded_at: Tue, 23 Aug 2016 12:27:06 GMT
+- request:
+    method: get
+    uri: http://admin:changeme@katello:3000/api/v2/plugins
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - e98945ba1db6bdbb4c25ce4988912344
+      Etag:
+      - W/"5fdeea8a610f7805000b37060cecd4be"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=88376faf79d6c8bbfdd82b5e739cf005; path=/; HttpOnly
+      X-Request-Id:
+      - 8eea7dcf-e74f-4188-aa89-4b0aa6ad610f
+      X-Runtime:
+      - '0.258911'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJ0b3RhbCI6IDQsCiAgInN1YnRvdGFsIjogNCwKICAicGFnZSI6IDEs
+        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
+        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
+        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
+        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
+        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
+        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
+        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
+        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
+        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
+        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
+        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
+        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
+        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
+        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
+        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMCJ9LHsiaWQiOiJmb3JlbWFu
+        X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
+        bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
+        aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
+        IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
+        b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
+        ZCI6ImZvcmVtYW5fcmVtb3RlX2V4ZWN1dGlvbiIsIm5hbWUiOiJmb3JlbWFu
+        X3JlbW90ZV9leGVjdXRpb24iLCJhdXRob3IiOiJGb3JlbWFuIFJlbW90ZSBF
+        eGVjdXRpb24gdGVhbSIsImRlc2NyaXB0aW9uIjoiQSBwbHVnaW4gYnJpbmdp
+        bmcgcmVtb3RlIGV4ZWN1dGlvbiB0byB0aGUgRm9yZW1hbiwgY29tcGxldGlu
+        ZyB0aGUgY29uZmlnIG1hbmFnZW1lbnQgZnVuY3Rpb25hbGl0eSB3aXRoIHJl
+        bW90ZSBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkuIiwidXJsIjoiaHR0cHM6
+        Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9yZW1hbl9yZW1vdGVfZXhlY3V0
+        aW9uIiwidmVyc2lvbiI6IjEuMC4wIn0seyJpZCI6ImthdGVsbG8iLCJuYW1l
+        Ijoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIsImRlc2NyaXB0aW9uIjoiQ29u
+        dGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFnZW1lbnQgcGx1Z2luIGZvciBG
+        b3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5rYXRlbGxvLm9yZyIsInZlcnNp
+        b24iOiIzLjIuMCJ9XQp9Cg==
+    http_version:
+  recorded_at: Tue, 23 Aug 2016 12:27:06 GMT
+- request:
+    method: get
+    uri: http://admin:changeme@katello:3000/api/settings?search=name=%22idle_timeout%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - e98945ba1db6bdbb4c25ce4988912344
+      Etag:
+      - W/"36e0831745e01f3460c82a79d66680fb"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=f6c64e0318b837ee51a30c0bc3462d79; path=/; HttpOnly
+      X-Request-Id:
+      - a06a4276-15a6-495d-a63d-c3530b638bdc
+      X-Runtime:
+      - '0.281033'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "total": 106,
+          "subtotal": 1,
+          "page": 1,
+          "per_page": 20,
+          "search": "name=\"idle_timeout\"",
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"value":60000,"description":"Log out idle users after a certain number of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-08-10 12:38:11 UTC","updated_at":"2016-08-10 13:34:48 UTC","id":99,"name":"idle_timeout"}]
+        }
+    http_version:
+  recorded_at: Tue, 23 Aug 2016 12:27:07 GMT
+- request:
     method: get
     uri: http://admin:changeme@katello:3000/apidoc/v2.json
     body:
@@ -37,9 +287,9 @@ http_interactions:
       Apipie-Checksum:
       - e98945ba1db6bdbb4c25ce4988912344
       X-Request-Id:
-      - cafa3e3b-22c6-493d-8221-c9ea03e9f468
+      - e18b2e18-9920-443d-b53e-ee03ec0cf9c1
       X-Runtime:
-      - '0.131546'
+      - '0.146171'
       Transfer-Encoding:
       - chunked
     body:
@@ -18522,204 +18772,10 @@ http_interactions:
         bnVsbCwic2VlIjpbXSwiaGVhZGVycyI6W10sInNob3ciOnRydWV9XSwiaGVh
         ZGVycyI6bnVsbH19LCJsaW5rX2V4dGVuc2lvbiI6Ii5odG1sIn19
     http_version: 
-  recorded_at: Tue, 02 Aug 2016 17:16:27 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@katello:3000/api/status
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"f536fd8685b76bb26a943d472593c93e"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=33b5190d7df9cd4cd969a9d2421f28ae; path=/; HttpOnly
-      X-Request-Id:
-      - 2b53b0eb-7189-40b5-aae5-87dbfc023cc1
-      X-Runtime:
-      - '0.224774'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"result":"ok","status":200,"version":"1.13.0-develop","api_version":2}'
-    http_version: 
-  recorded_at: Wed, 03 Aug 2016 18:37:03 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@katello:3000/api/v2/plugins
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"85abe67b01ef6683a42df854df2005a3"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=fcf2fdeb7d16c802f12b5fd7054317f6; path=/; HttpOnly
-      X-Request-Id:
-      - a95f47a0-74c4-4e5b-bb03-4992b1d3f954
-      X-Runtime:
-      - '0.215053'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJ0b3RhbCI6IDQsCiAgInN1YnRvdGFsIjogNCwKICAicGFnZSI6IDEs
-        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
-        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
-        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
-        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
-        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
-        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
-        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
-        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
-        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
-        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
-        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
-        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
-        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
-        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjcuMTkifSx7ImlkIjoiZm9yZW1h
-        bl9kb2NrZXIiLCJuYW1lIjoiZm9yZW1hbl9kb2NrZXIiLCJhdXRob3IiOiJE
-        YW5pZWwgTG9iYXRvLCBBbW9zIEJlbmFyaSIsImRlc2NyaXB0aW9uIjoiUHJv
-        dmlzaW9uIGFuZCBtYW5hZ2UgRG9ja2VyIGNvbnRhaW5lcnMgYW5kIGltYWdl
-        cyBmcm9tIEZvcmVtYW4uIiwidXJsIjoiaHR0cDovL2dpdGh1Yi5jb20vdGhl
-        Zm9yZW1hbi9mb3JlbWFuLWRvY2tlciIsInZlcnNpb24iOiIyLjEuMSJ9LHsi
-        aWQiOiJmb3JlbWFuX3JlbW90ZV9leGVjdXRpb24iLCJuYW1lIjoiZm9yZW1h
-        bl9yZW1vdGVfZXhlY3V0aW9uIiwiYXV0aG9yIjoiRm9yZW1hbiBSZW1vdGUg
-        RXhlY3V0aW9uIHRlYW0iLCJkZXNjcmlwdGlvbiI6IkEgcGx1Z2luIGJyaW5n
-        aW5nIHJlbW90ZSBleGVjdXRpb24gdG8gdGhlIEZvcmVtYW4sIGNvbXBsZXRp
-        bmcgdGhlIGNvbmZpZyBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkgd2l0aCBy
-        ZW1vdGUgbWFuYWdlbWVudCBmdW5jdGlvbmFsaXR5LiIsInVybCI6Imh0dHBz
-        Oi8vZ2l0aHViLmNvbS90aGVmb3JlbWFuL2ZvcmVtYW5fcmVtb3RlX2V4ZWN1
-        dGlvbiIsInZlcnNpb24iOiIxLjAuMCJ9LHsiaWQiOiJrYXRlbGxvIiwibmFt
-        ZSI6ImthdGVsbG8iLCJhdXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNv
-        bnRlbnQgYW5kIFN1YnNjcmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3Ig
-        Rm9yZW1hbiIsInVybCI6Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJz
-        aW9uIjoiMy4yLjAifV0KfQo=
-    http_version: 
-  recorded_at: Wed, 03 Aug 2016 18:37:04 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@katello:3000/api/settings?search=name=%22idle_timeout%22
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"0ee4ceb7b718054a40fb49aa97ff9317"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=3382db5153910129bb1d083cd4e68421; path=/; HttpOnly
-      X-Request-Id:
-      - f16c1948-3419-4422-ae0a-eee9bafd7844
-      X-Runtime:
-      - '0.464199'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "total": 104,
-          "subtotal": 1,
-          "page": 1,
-          "per_page": 20,
-          "search": "name=\"idle_timeout\"",
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": [{"value":60000,"description":"Log out idle users after a certain number of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-07-15 13:17:56 UTC","updated_at":"2016-07-15 13:38:43 UTC","id":104,"name":"idle_timeout"}]
-        }
-    http_version: 
-  recorded_at: Wed, 03 Aug 2016 18:37:04 GMT
+  recorded_at: Tue, 23 Aug 2016 12:27:07 GMT
 - request:
     method: put
-    uri: http://admin:changeme@katello:3000/api/settings/104
+    uri: http://admin:changeme@katello:3000/api/settings/99
     body:
       encoding: UTF-8
       string: '{"setting":{"value":"60000"}}'
@@ -18754,23 +18810,23 @@ http_interactions:
       Apipie-Checksum:
       - e98945ba1db6bdbb4c25ce4988912344
       Etag:
-      - W/"fad2d243311537e4336d8fdd609f58db"
+      - W/"076d4507efa74eb8790faa1c97e1c713"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _session_id=3bd66552dd1479004842de123877b27c; path=/; HttpOnly
+      - _session_id=77e996e0e83d5d521158c97d748ee59b; path=/; HttpOnly
       - request_method=PUT; path=/
       X-Request-Id:
-      - 22959f07-f544-4d77-bce4-54f9f908e55c
+      - 940fefbd-b49c-47dd-a68d-3e6ba2c7b040
       X-Runtime:
-      - '1.433806'
+      - '0.375763'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"value":60000,"description":"Log out idle users after a certain number
-        of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-07-15
-        13:17:56 UTC","updated_at":"2016-07-15 13:38:43 UTC","id":104,"name":"idle_timeout"}'
+        of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-08-10
+        12:38:11 UTC","updated_at":"2016-08-10 13:34:48 UTC","id":99,"name":"idle_timeout"}'
     http_version: 
-  recorded_at: Wed, 03 Aug 2016 18:37:06 GMT
+  recorded_at: Tue, 23 Aug 2016 12:27:07 GMT
 recorded_with: VCR 3.0.3

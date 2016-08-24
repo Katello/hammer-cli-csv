@@ -45,6 +45,7 @@ Supported commands and options are available by using the --help option. Additio
 | --username USERNAME | Username for server. Overrides any config file value. |
 | --password PASSWORD | Password for user. Overrides any config file value. |
 | --verbose | Display verbose progress information during import. |
+| --continue-on-error | Continue processing even if individual resource error |
 
 ## Count Substitution
 

@@ -207,8 +207,6 @@ module HammerCLICsv
         update_subscriptions(host, line, true)
 
         puts _('done') if option_verbose?
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
 
       def facts(name, line)

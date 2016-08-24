@@ -130,8 +130,6 @@ module HammerCLICsv
         update_host_collections(host_id, line)
 
         puts _('done') if option_verbose?
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
 
       private

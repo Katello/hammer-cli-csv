@@ -66,8 +66,6 @@ module HammerCLICsv
         }
         hammer.run(args)
 
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
     end
   end

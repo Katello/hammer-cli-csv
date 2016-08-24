@@ -66,8 +66,6 @@ module HammerCLICsv
           puts _('done') if option_verbose?
         end
 
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
 
       private
@@ -264,8 +262,6 @@ module HammerCLICsv
                    --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) } }
         hammer.run(args)
 
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
 
       def get_content_set(organization, product, repository)

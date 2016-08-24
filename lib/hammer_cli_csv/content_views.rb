@@ -129,8 +129,6 @@ module HammerCLICsv
           puts _('done') if option_verbose?
         end
 
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line}"
       end
 
       def environment_names(contentview)

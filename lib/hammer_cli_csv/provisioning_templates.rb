@@ -138,8 +138,6 @@ module HammerCLICsv
 
           puts _('done') if option_verbose?
         end
-      rescue RuntimeError => e
-        raise "#{e}\n       #{line[NAME]}"
       end
 
       def export_associations(template)

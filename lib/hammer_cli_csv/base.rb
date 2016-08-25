@@ -799,42 +799,6 @@ module HammerCLICsv
       result
     end
 
-    def katello_subscription(organization, options = {})
-      @subscriptions ||= {}
-      @subscriptions[organization] ||= {}
-
-      if options[:name]
-        return nil if options[:name].nil? || options[:name].empty?
-        options[:id] = @subscriptions[organization][options[:name]]
-        if !options[:id]
-          results = @api.resource(:subscriptions).call(:index, {
-              :per_page => 999999,
-              'organization_id' => foreman_organization(:name => organization),
-              'search' => "name = \"#{options[:name]}\""
-          })
-          raise "No subscriptions match '#{options[:name]}'" if results['subtotal'] == 0
-          raise "Too many subscriptions match '#{options[:name]}'" if results['subtotal'] > 1
-          subscription = results['results'][0]
-          @subscriptions[organization][options[:name]] = subscription['id']
-          options[:id] = @subscriptions[organization][options[:name]]
-          raise "Subscription '#{options[:name]}' not found" if !options[:id]
-        end
-        result = options[:id]
-      else
-        return nil if options[:id].nil?
-        options[:name] = @subscriptions.key(options[:id])
-        if !options[:name]
-          subscription = @api.resource(:subscriptions).call(:show, {'id' => options[:id]})
-          raise "Subscription '#{options[:name]}' not found" if !subscription || subscription.empty?
-          options[:name] = subscription['name']
-          @subscriptions[options[:name]] = options[:id]
-        end
-        result = options[:name]
-      end
-
-      result
-    end
-
     def katello_hostcollection(organization, options = {})
       @hostcollections ||= {}
       @hostcollections[organization] ||= {}

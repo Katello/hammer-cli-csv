@@ -1,7 +1,10 @@
+#require 'hammer_cli_csv/utils/subscription_utils'
+
 module HammerCLICsv
   class CsvCommand
     class ContentHostsCommand < BaseCommand
       include ::HammerCLIForemanTasks::Helper
+      include ::HammerCLICsv::Utils::Subscriptions
 
       command_name 'content-hosts'
       desc         'import or export content hosts'
@@ -10,7 +13,7 @@ module HammerCLICsv
         true
       end
 
-      option %w(--subscriptions-only), :flag, 'Export only detailed subscription information'
+      option %w(--itemized-subscriptions), :flag, _('Export one subscription per row, only process update subscriptions on import')
 
       ORGANIZATION = 'Organization'
       ENVIRONMENT = 'Environment'
@@ -25,27 +28,20 @@ module HammerCLICsv
       CORES = 'Cores'
       SLA = 'SLA'
       PRODUCTS = 'Products'
-      SUBSCRIPTIONS = 'Subscriptions'
-      SUBS_NAME = 'Subscription Name'
-      SUBS_TYPE = 'Subscription Type'
-      SUBS_QUANTITY = 'Subscription Quantity'
-      SUBS_SKU = 'Subscription SKU'
-      SUBS_CONTRACT = 'Subscription Contract'
-      SUBS_ACCOUNT = 'Subscription Account'
-      SUBS_START = 'Subscription Start'
-      SUBS_END = 'Subscription End'
 
       def export(csv)
-        if option_subscriptions_only?
-          export_subscriptions csv
+        if option_itemized_subscriptions?
+          export_itemized_subscriptions csv
         else
           export_all csv
         end
       end
 
-      def export_subscriptions(csv)
-        csv << shared_headers + [SUBS_NAME, SUBS_TYPE, SUBS_QUANTITY, SUBS_SKU,
-                                 SUBS_CONTRACT, SUBS_ACCOUNT, SUBS_START, SUBS_END]
+      def export_itemized_subscriptions(csv)
+        csv << shared_headers + [Utils::Subscriptions::SUBS_NAME, Utils::Subscriptions::SUBS_TYPE,
+                                 Utils::Subscriptions::SUBS_QUANTITY, Utils::Subscriptions::SUBS_SKU,
+                                 Utils::Subscriptions::SUBS_CONTRACT, Utils::Subscriptions::SUBS_ACCOUNT,
+                                 Utils::Subscriptions::SUBS_START, Utils::Subscriptions::SUBS_END]
         iterate_hosts(csv) do |host|
           export_line = shared_columns(host)
           if host['subscription_facet_attributes']
@@ -74,7 +70,7 @@ module HammerCLICsv
       end
 
       def export_all(csv)
-        csv << shared_headers + [SUBSCRIPTIONS]
+        csv << shared_headers + [Utils::Subscriptions::SUBSCRIPTIONS]
         iterate_hosts(csv) do |host|
           if host['subscription_facet_attributes']
             subscriptions = CSV.generate do |column|
@@ -146,8 +142,8 @@ module HammerCLICsv
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
 
-          if option_subscriptions_only?
-            update_subscriptions_only(name, line)
+          if option_itemized_subscriptions?
+            update_itemized_subscriptions(name, line)
           else
             update_or_create(name, line)
           end
@@ -156,8 +152,8 @@ module HammerCLICsv
 
       private
 
-      def update_subscriptions_only(name, line)
-        raise _("Content host '%{name}' must already exist with --subscriptions-only") % {:name => name} unless @existing.include? name
+      def update_itemized_subscriptions(name, line)
+        raise _("Content host '%{name}' must already exist with --itemized-subscriptions") % {:name => name} unless @existing.include? name
 
         print(_("Updating subscriptions for content host '%{name}'...") % {:name => name}) if option_verbose?
         host = @api.resource(:hosts).call(:show, {:id => @existing[name]})
@@ -273,7 +269,7 @@ module HammerCLICsv
           existing_subscriptions = []
         end
 
-        if line[SUBS_NAME].nil? && line[SUBS_SKU].nil?
+        if line[Utils::Subscriptions::SUBS_NAME].nil? && line[Utils::Subscriptions::SUBS_SKU].nil?
           all_in_one_subscription(host, existing_subscriptions, line)
         else
           single_subscription(host, existing_subscriptions, line)
@@ -282,13 +278,13 @@ module HammerCLICsv
 
       def single_subscription(host, existing_subscriptions, line)
         already_attached = false
-        if line[SUBS_SKU]
+        if line[Utils::Subscriptions::SUBS_SKU]
           already_attached = existing_subscriptions.detect do |subscription|
-            line[SUBS_SKU] == subscription['product_id']
+            line[Utils::Subscriptions::SUBS_SKU] == subscription['product_id']
           end
-        elsif line[SUBS_NAME]
+        elsif line[Utils::Subscriptions::SUBS_NAME]
           already_attached = existing_subscriptions.detect do |subscription|
-            line[SUBS_NAME] == subscription['name']
+            line[Utils::Subscriptions::SUBS_NAME] == subscription['name']
           end
         end
         if already_attached
@@ -324,10 +320,10 @@ module HammerCLICsv
         return if line[SUBSCRIPTIONS].nil? || line[SUBSCRIPTIONS].empty?
 
         subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |details|
-          (amount, sku, name, contract, account) = details.split('|')
+          (amount, sku, name, contract, account) = split_subscription_details(details)
           {
-            :id => katello_subscription(line[ORGANIZATION], :name => name, :contract => contract,
-                                                            :account => account),
+            :id => get_subscription(line[ORGANIZATION], :name => name, :contract => contract,
+                                                        :account => account),
             :quantity => (amount.nil? || amount.empty? || amount == 'Automatic') ? 0 : amount.to_i
           }
         end
@@ -359,13 +355,6 @@ module HammerCLICsv
             end
           end
         end
-      end
-
-      def get_all_subscriptions(organization)
-        @api.resource(:subscriptions).call(:index, {
-            :per_page => 999999,
-            'organization_id' => foreman_organization(:name => organization)
-        })['results']
       end
 
       def iterate_hosts(csv)
@@ -436,70 +425,6 @@ module HammerCLICsv
          operatingsystem, architecture, sockets, ram, cores, sla, products]
       end
 
-      def matches_by_sku_and_name(matches, line, subscriptions)
-        if line[SUBS_SKU]
-          matches = subscriptions.select do |subscription|
-            line[SUBS_SKU] == subscription['product_id']
-          end
-          raise _("No subscriptions match SKU '%{sku}'") % {:sku => line[SUBS_SKU]} if matches.empty?
-        elsif line[SUBS_NAME]
-          matches = subscriptions.select do |subscription|
-            line[SUBS_NAME] == subscription['name']
-          end
-          raise _("No subscriptions match name '%{name}'") % {:name => line[SUBS_NAME]} if matches.empty?
-        end
-        matches
-      end
-
-      def matches_by_type(matches, line)
-        if line[SUBS_TYPE] == 'Red Hat' || line[SUBS_TYPE] == 'Custom'
-          matches = matches.select do |subscription|
-            subscription['type'] == 'NORMAL'
-          end
-        elsif line[SUBS_TYPE] == 'Red Hat Guest'
-          matches = matches.select do |subscription|
-            subscription['type'] == 'STACK_DERIVED'
-          end
-        elsif line[SUBS_TYPE] == 'Red Hat Temporary'
-          matches = matches.select do |subscription|
-            subscription['type'] == 'UNMAPPED_GUEST'
-          end
-        end
-        raise _("No subscriptions match type '%{type}'") % {:type => line[SUBS_TYPE]} if matches.empty?
-        matches
-      end
-
-      def matches_by_account(matches, line)
-        if matches.length > 1 && line[SUBS_ACCOUNT]
-          refined = matches.select do |subscription|
-            line[SUBS_ACCOUNT] == subscription['account_number']
-          end
-          matches = refined unless refined.empty?
-        end
-        matches
-      end
-
-      def matches_by_contract(matches, line)
-        if matches.length > 1 && line[SUBS_CONTRACT]
-          refined = matches.select do |subscription|
-            line[SUBS_CONTRACT] == subscription['contract_number']
-          end
-          matches = refined unless refined.empty?
-        end
-        matches
-      end
-
-      def matches_by_quantity(matches, line)
-        if line[SUBS_QUANTITY] && line[SUBS_QUANTITY] != 'Automatic'
-          refined = matches.select do |subscription|
-            subscription['available'] == -1 || line[SUBS_QUANTITY].to_i <= subscription['available']
-          end
-          raise _("No '%{name}' subscription with quantity %{quantity} or more available") %
-                    {:name => matches[0]['name'], :quantity => line[SUBS_QUANTITY]} if refined.empty?
-          matches = refined
-        end
-        matches
-      end
     end
   end
 end

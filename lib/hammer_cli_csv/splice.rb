@@ -264,7 +264,7 @@ module HammerCLICsv
         subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |details|
           (amount, sku, name) = details.split('|')
           {
-            :id => katello_subscription(line[ORGANIZATION], :name => name),
+            :id => get_subscription(line[ORGANIZATION], :name => name),
             :quantity => (amount.nil? || amount.empty? || amount == 'Automatic') ? 0 : amount.to_i
           }
         end

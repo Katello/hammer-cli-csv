@@ -19,8 +19,8 @@ Options:
  --continue-on-error           Continue processing even if individual resource error
  --export                      Export current data instead of importing
  --file FILE_NAME              CSV file (default to /dev/stdout with --export, otherwise required)
+ --itemized-subscriptions      Export one subscription per row, only process update subscriptions on import
  --organization ORGANIZATION   Only process organization matching this name
- --subscriptions-only          Export only detailed subscription information
  -h, --help                    print help
  -v, --verbose                 be verbose
 HELP
@@ -84,7 +84,7 @@ HELP
       set_user 'admin'
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --export --subscriptions-only --organization Test\ Corporation})
+        hammer.run(%W{csv content-hosts --export --itemized-subscriptions --organization Test\ Corporation})
       }
       assert_equal '', stderr
 

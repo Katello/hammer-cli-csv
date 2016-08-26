@@ -107,7 +107,7 @@ module HammerCLICsv
 
           # TODO: w/ @daviddavis p-r
           #subscriptions(line).each do |subscription|
-          #  katello_subscription(line[ORGANIZATION], :name => subscription[:number])
+          #  get_subscription(line[ORGANIZATION], :name => subscription[:number])
           #end
 
           if !@existing[line[ORGANIZATION]].include? name

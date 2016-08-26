@@ -1,0 +1,176 @@
+# English translations for hammer_cli_csv package.
+# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the hammer_cli_csv package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hammer_cli_csv 2.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-08-26 12:33-0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+
+msgid "import or export activation keys"
+msgstr ""
+
+msgid "Creating activation key '%{name}'..."
+msgstr ""
+
+msgid "Updating activation key '%{name}'..."
+msgstr ""
+
+msgid "done"
+msgstr ""
+
+msgid "Only process organization matching this name"
+msgstr ""
+
+msgid "Continue processing even if individual resource error"
+msgstr ""
+
+msgid "**** This command is unsupported and is provided as tech preview. ****"
+msgstr ""
+
+msgid "Updating hypervisor and guest associations..."
+msgstr ""
+
+msgid "Content host '%{name}' must already exist with --subscriptions-only"
+msgstr ""
+
+msgid "Updating subscriptions for content host '%{name}'..."
+msgstr ""
+
+msgid "Creating content host '%{name}'..."
+msgstr ""
+
+msgid "Updating content host '%{name}'..."
+msgstr ""
+
+msgid " '%{name}' already attached..."
+msgstr ""
+
+msgid "No matching subscriptions"
+msgstr ""
+
+msgid " attaching '%{name}'..."
+msgstr ""
+
+msgid "No subscriptions match SKU '%{sku}'"
+msgstr ""
+
+msgid "No subscriptions match name '%{name}'"
+msgstr ""
+
+msgid "No subscriptions match type '%{type}'"
+msgstr ""
+
+msgid "No '%{name}' subscription with quantity %{quantity} or more available"
+msgstr ""
+
+msgid "Creating content view '%{name}'..."
+msgstr ""
+
+msgid "Updating content view '%{name}'..."
+msgstr ""
+
+msgid "import to or export from a running foreman server"
+msgstr ""
+
+msgid "be verbose"
+msgstr ""
+
+msgid "Number of threads to hammer with"
+msgstr ""
+
+msgid "directory to export to"
+msgstr ""
+
+msgid "directory to import from"
+msgstr ""
+
+msgid "Prefix for all name columns"
+msgstr ""
+
+msgid "Skipping %{resource} because '%{options_file}' does not exist"
+msgstr ""
+
+msgid "Importing %{resource} from '%{options_file}'"
+msgstr ""
+
+msgid "Creating installation medium '%{name}'... "
+msgstr ""
+
+msgid "Updating installation medium '%{name}'... "
+msgstr ""
+
+msgid "Unknown job template input type '%{type}'"
+msgstr ""
+
+msgid "Creating job template '%{name}'..."
+msgstr ""
+
+msgid "Updating job template '%{name}'..."
+msgstr ""
+
+msgid "Creating job template input '%{input_name}' on '%{name}'..."
+msgstr ""
+
+msgid "Updating job template input '%{input_name}' on '%{name}'..."
+msgstr ""
+
+msgid "import or export products"
+msgstr ""
+
+msgid "Sync product repositories (default true)"
+msgstr ""
+
+msgid "Creating product '%{name}'..."
+msgstr ""
+
+msgid "Updating product '%{name}'..."
+msgstr ""
+
+msgid ""
+"Red Hat product '%{product_name}' does not have repository '%{repository_name}"
+"'"
+msgstr ""
+
+msgid "Creating repository '%{repository_name}' in product '%{product_name}'..."
+msgstr ""
+
+msgid "Red Hat product '%{product_name}' does not exist"
+msgstr ""
+
+msgid "Enabling repository %{name}..."
+msgstr ""
+
+msgid "Repository %{name} already enabled"
+msgstr ""
+
+msgid "syncing repository '%{repository_name}' in product '%{name}'..."
+msgstr ""
+
+msgid "previously synced, skipping..."
+msgstr ""
+
+msgid "Creating provisioning template '%{name}'..."
+msgstr ""
+
+msgid "Updating provisioning template '%{name}'..."
+msgstr ""
+
+msgid "Creating organization '%{name}'... "
+msgstr ""
+
+msgid "Satellite-5 Splice"
+msgstr ""
+
+msgid "Deleting content host with id '%{id}'..."
+msgstr ""

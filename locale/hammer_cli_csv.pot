@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the hammer_cli_csv package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: hammer_cli_csv 0.0.6\n"
+"Project-Id-Version: hammer_cli_csv 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-15 12:46-0500\n"
-"PO-Revision-Date: 2015-02-15 12:46-0500\n"
+"POT-Creation-Date: 2016-08-26 13:53-0400\n"
+"PO-Revision-Date: 2016-08-26 13:53-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,228 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: lib/hammer_cli_csv/csv.rb:21
-msgid "import to, or export from a running foretello server"
+#: ../lib/hammer_cli_csv/activation_keys.rb:5
+msgid "import or export activation keys"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/activation_keys.rb:96
+msgid "Creating activation key '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/activation_keys.rb:100
+msgid "Updating activation key '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/activation_keys.rb:108
+#: ../lib/hammer_cli_csv/content_hosts.rb:137
+#: ../lib/hammer_cli_csv/content_hosts.rb:165
+#: ../lib/hammer_cli_csv/content_hosts.rb:209
+#: ../lib/hammer_cli_csv/content_views.rb:129
+#: ../lib/hammer_cli_csv/installation_media.rb:69
+#: ../lib/hammer_cli_csv/job_templates.rb:166
+#: ../lib/hammer_cli_csv/job_templates.rb:208
+#: ../lib/hammer_cli_csv/products.rb:66 ../lib/hammer_cli_csv/products.rb:214
+#: ../lib/hammer_cli_csv/provisioning_templates.rb:139
+#: ../lib/hammer_cli_csv/splice.rb:132 ../lib/hammer_cli_csv/splice.rb:246
+#: ../lib/hammer_cli_csv/splice.rb:298 ../lib/hammer_cli_csv/splice.rb:307
+msgid "done"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/base.rb:18 ../lib/hammer_cli_csv/export.rb:15
+#: ../lib/hammer_cli_csv/import.rb:17
+msgid "Only process organization matching this name"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/base.rb:19
+msgid "Continue processing even if individual resource error"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/base.rb:40
+msgid "**** This command is unsupported and is provided as tech preview. ****"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:125
+#: ../lib/hammer_cli_csv/splice.rb:227
+msgid "Updating hypervisor and guest associations..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:160
+msgid "Content host '%{name}' must already exist with --subscriptions-only"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:162
+msgid "Updating subscriptions for content host '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:170
+#: ../lib/hammer_cli_csv/splice.rb:83
+msgid "Creating content host '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:182
+#: ../lib/hammer_cli_csv/splice.rb:106
+msgid "Updating content host '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:295
+msgid " '%{name}' already attached..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:312
+msgid "No matching subscriptions"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:315
+msgid " attaching '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:444
+msgid "No subscriptions match SKU '%{sku}'"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:449
+msgid "No subscriptions match name '%{name}'"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:468
+msgid "No subscriptions match type '%{type}'"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_hosts.rb:497
+msgid "No '%{name}' subscription with quantity %{quantity} or more available"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_views.rb:99
+msgid "Creating content view '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/content_views.rb:110
+msgid "Updating content view '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/csv.rb:25
+msgid "import to or export from a running foreman server"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/export.rb:11 ../lib/hammer_cli_csv/import.rb:13
+msgid "be verbose"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/export.rb:12 ../lib/hammer_cli_csv/import.rb:14
+msgid "Number of threads to hammer with"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/export.rb:14
+msgid "directory to export to"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/import.rb:16
+msgid "directory to import from"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/import.rb:18
+msgid "Prefix for all name columns"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/import.rb:85
+msgid "Skipping %{resource} because '%{options_file}' does not exist"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/import.rb:91
+msgid "Importing %{resource} from '%{options_file}'"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/installation_media.rb:61
+msgid "Creating installation medium '%{name}'... "
+msgstr ""
+
+#: ../lib/hammer_cli_csv/installation_media.rb:65
+msgid "Updating installation medium '%{name}'... "
+msgstr ""
+
+#: ../lib/hammer_cli_csv/job_templates.rb:56
+#: ../lib/hammer_cli_csv/job_templates.rb:193
+msgid "Unknown job template input type '%{type}'"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/job_templates.rb:158
+msgid "Creating job template '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/job_templates.rb:162
+msgid "Updating job template '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/job_templates.rb:201
+msgid "Creating job template input '%{input_name}' on '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/job_templates.rb:204
+msgid "Updating job template input '%{input_name}' on '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:5
+msgid "import or export products"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:7
+msgid "Sync product repositories (default true)"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:91
+msgid "Creating product '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:95
+msgid "Updating product '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:109
+msgid ""
+"Red Hat product '%{product_name}' does not have repository '%{repository_name}"
+"'"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:114
+msgid "Creating repository '%{repository_name}' in product '%{product_name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:179
+msgid "Red Hat product '%{product_name}' does not exist"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:200
+msgid "Enabling repository %{name}..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:216
+msgid "Repository %{name} already enabled"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:247
+msgid "syncing repository '%{repository_name}' in product '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/products.rb:251
+msgid "previously synced, skipping..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/provisioning_templates.rb:72
+msgid "Creating provisioning template '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/provisioning_templates.rb:84
+msgid "Updating provisioning template '%{name}'..."
+msgstr ""
+
+#: ../lib/hammer_cli_csv/splice.rb:289
+msgid "Creating organization '%{name}'... "
+msgstr ""
+
+#: ../lib/hammer_cli_csv/splice.rb:295
+msgid "Satellite-5 Splice"
+msgstr ""
+
+#: ../lib/hammer_cli_csv/splice.rb:305
+msgid "Deleting content host with id '%{id}'..."
 msgstr ""

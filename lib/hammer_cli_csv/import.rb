@@ -82,12 +82,14 @@ module HammerCLICsv
         unless options_file_exists? options_file
           if option_dir
             return unless SUPPORTED_RESOURCES.include?(resource)
-            puts _("Skipping #{resource} because '#{options_file}' does not exist") if option_verbose?
+            puts _("Skipping %{resource} because '%{options_file}' does not exist") %
+              {:resource => resource, :options_file => options_file} if option_verbose?
             return
           end
           raise "File for #{resource} '#{options_file}' does not exist"
         end
-        puts _("Importing #{resource} from '#{options_file}'") if option_verbose?
+        puts _("Importing %{resource} from '%{options_file}'") %
+          {:resource => resource, :options_file => options_file} if option_verbose?
 
         args = %W( csv #{resource.gsub('_', '-')} --file #{options_file} )
         args << '-v' if option_verbose?

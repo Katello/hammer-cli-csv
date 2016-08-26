@@ -31,3 +31,8 @@ test/config.yml
 .idea
 Gemfile.local
 hammer_cli_csv*.gem
+
+# Locale files
+locale/*/*.edit.po
+locale/*/*.po.time_stamp
+

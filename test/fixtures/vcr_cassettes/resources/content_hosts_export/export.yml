@@ -2,200 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: http://admin:changeme@katello:3000/api/status
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"f536fd8685b76bb26a943d472593c93e"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=6e629008e2b647f0dba29226013334bf; path=/; HttpOnly
-      X-Request-Id:
-      - 1a3f360f-3ca3-404a-8b9a-a9dd1a9f5f58
-      X-Runtime:
-      - '0.457344'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"result":"ok","status":200,"version":"1.13.0-develop","api_version":2}'
-    http_version: 
-  recorded_at: Tue, 16 Aug 2016 19:37:52 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@katello:3000/api/v2/plugins
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"dc4a8351c6668134273bfe99879f93b1"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=f2c5401ffb4099ffefed140b8628e7de; path=/; HttpOnly
-      X-Request-Id:
-      - bc7b3b51-e5e1-487e-9f2e-b42a17140c8d
-      X-Runtime:
-      - '0.215330'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJ0b3RhbCI6IDQsCiAgInN1YnRvdGFsIjogNCwKICAicGFnZSI6IDEs
-        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
-        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
-        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
-        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
-        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
-        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
-        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
-        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
-        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
-        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
-        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
-        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
-        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
-        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjcuMjAifSx7ImlkIjoiZm9yZW1h
-        bl9kb2NrZXIiLCJuYW1lIjoiZm9yZW1hbl9kb2NrZXIiLCJhdXRob3IiOiJE
-        YW5pZWwgTG9iYXRvLCBBbW9zIEJlbmFyaSIsImRlc2NyaXB0aW9uIjoiUHJv
-        dmlzaW9uIGFuZCBtYW5hZ2UgRG9ja2VyIGNvbnRhaW5lcnMgYW5kIGltYWdl
-        cyBmcm9tIEZvcmVtYW4uIiwidXJsIjoiaHR0cDovL2dpdGh1Yi5jb20vdGhl
-        Zm9yZW1hbi9mb3JlbWFuLWRvY2tlciIsInZlcnNpb24iOiIzLjAuMCJ9LHsi
-        aWQiOiJmb3JlbWFuX3JlbW90ZV9leGVjdXRpb24iLCJuYW1lIjoiZm9yZW1h
-        bl9yZW1vdGVfZXhlY3V0aW9uIiwiYXV0aG9yIjoiRm9yZW1hbiBSZW1vdGUg
-        RXhlY3V0aW9uIHRlYW0iLCJkZXNjcmlwdGlvbiI6IkEgcGx1Z2luIGJyaW5n
-        aW5nIHJlbW90ZSBleGVjdXRpb24gdG8gdGhlIEZvcmVtYW4sIGNvbXBsZXRp
-        bmcgdGhlIGNvbmZpZyBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkgd2l0aCBy
-        ZW1vdGUgbWFuYWdlbWVudCBmdW5jdGlvbmFsaXR5LiIsInVybCI6Imh0dHBz
-        Oi8vZ2l0aHViLmNvbS90aGVmb3JlbWFuL2ZvcmVtYW5fcmVtb3RlX2V4ZWN1
-        dGlvbiIsInZlcnNpb24iOiIxLjAuMCJ9LHsiaWQiOiJrYXRlbGxvIiwibmFt
-        ZSI6ImthdGVsbG8iLCJhdXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNv
-        bnRlbnQgYW5kIFN1YnNjcmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3Ig
-        Rm9yZW1hbiIsInVybCI6Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJz
-        aW9uIjoiMy4yLjAifV0KfQo=
-    http_version: 
-  recorded_at: Tue, 16 Aug 2016 19:37:52 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@katello:3000/katello/api/organizations?per_page=999999
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"4334603e104dcf3bf9d4222dd9a77b6a"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=2ae74564c40f295dcbe6db34b987ab90; path=/; HttpOnly
-      X-Request-Id:
-      - b3f09222-4f69-49ca-b78b-4953703cad0d
-      X-Runtime:
-      - '1.289614'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "total": 3,
-          "subtotal": 3,
-          "page": 1,
-          "per_page": 999999,
-          "search": null,
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": [{"label":"Default_Organization","created_at":"2016-08-10 12:38:23 UTC","updated_at":"2016-08-10 12:38:23 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"examplecorp","created_at":"2016-08-10 13:40:47 UTC","updated_at":"2016-08-10 13:40:47 UTC","id":3,"name":"Example Corporation","title":"Example Corporation","description":"The number one example company in the world!"},{"label":"testcorp","created_at":"2016-08-16 12:46:24 UTC","updated_at":"2016-08-16 12:46:24 UTC","id":4,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
-        }
-    http_version: 
-  recorded_at: Tue, 16 Aug 2016 19:37:54 GMT
-- request:
-    method: get
     uri: http://admin:changeme@katello:3000/apidoc/v2.json
     body:
       encoding: US-ASCII
@@ -18719,69 +18525,6 @@ http_interactions:
   recorded_at: Tue, 16 Aug 2016 19:37:54 GMT
 - request:
     method: get
-    uri: http://admin:changeme@katello:3000/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"dec57c653102523d2cd2de13cb7fee01"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=129cb93423e585cf596e928386daeed2; path=/; HttpOnly
-      X-Request-Id:
-      - beb5c37f-3833-4004-a1fe-e0aa2669a10e
-      X-Runtime:
-      - '0.240771'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "total": 3,
-          "subtotal": 1,
-          "page": 1,
-          "per_page": 999999,
-          "search": "name=\"Test Corporation\"",
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": [{"label":"testcorp","created_at":"2016-08-16 12:46:24 UTC","updated_at":"2016-08-16 12:46:24 UTC","id":4,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
-        }
-    http_version: 
-  recorded_at: Tue, 16 Aug 2016 19:37:54 GMT
-- request:
-    method: get
     uri: http://admin:changeme@katello:3000/api/organizations/4/hosts?per_page=999999
     body:
       encoding: US-ASCII
@@ -18843,4 +18586,362 @@ http_interactions:
         }
     http_version: 
   recorded_at: Tue, 16 Aug 2016 19:37:54 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50191/api/status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 07 Sep 2016 12:00:46 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 9544abef9cf8343005f07ed8c9f1f8e7
+      Etag:
+      - W/"f536fd8685b76bb26a943d472593c93e-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 904a0572-249c-4b22-8720-7ba08648b80e
+      X-Runtime:
+      - '0.211952'
+      Via:
+      - 1.1 katello.example.com:50191
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '81'
+      Set-Cookie:
+      - _session_id=43094757b98f0c84367dca9745cc1849; path=/; HttpOnly
+    body:
+      encoding: UTF-8
+      string: '{"result":"ok","status":200,"version":"1.13.0-develop","api_version":2}'
+    http_version: 
+  recorded_at: Wed, 07 Sep 2016 12:00:48 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50191/api/v2/plugins
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 07 Sep 2016 12:00:47 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 9544abef9cf8343005f07ed8c9f1f8e7
+      Etag:
+      - W/"de0a55a439f41ab6fcd72b3d74503dcc-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e31aa255-f52e-4d05-bbd0-ead9edbba837
+      X-Runtime:
+      - '0.169493'
+      Via:
+      - 1.1 katello.example.com:50191
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '564'
+      Set-Cookie:
+      - _session_id=f37f863954fa76f93856fa637261bf44; path=/; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJ0b3RhbCI6IDMsCiAgInN1YnRvdGFsIjogMywKICAicGFnZSI6IDEs
+        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
+        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
+        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
+        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
+        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
+        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
+        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
+        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
+        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
+        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
+        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
+        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
+        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
+        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
+        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMCJ9LHsiaWQiOiJmb3JlbWFu
+        X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
+        bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
+        aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
+        IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
+        b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
+        ZCI6ImthdGVsbG8iLCJuYW1lIjoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIs
+        ImRlc2NyaXB0aW9uIjoiQ29udGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFn
+        ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
+        YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjIuMCJ9XQp9Cg==
+    http_version: 
+  recorded_at: Wed, 07 Sep 2016 12:00:48 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      Content-Type:
+      - application/json
+      Host:
+      - katello.example.com:50191
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 07 Sep 2016 12:00:48 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 9544abef9cf8343005f07ed8c9f1f8e7
+      Etag:
+      - W/"6f6e523169508346de19ea518f842d6f-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a5fcf42a-3d55-42e8-8327-f1eab81ab0a1
+      X-Runtime:
+      - '0.220220'
+      Via:
+      - 1.1 katello.example.com:50191
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '792'
+      Set-Cookie:
+      - _session_id=7948286cfea0282d5cd03f2cbe10203c; path=/; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 3,
+          "subtotal": 3,
+          "page": 1,
+          "per_page": 999999,
+          "search": null,
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"label":"Default_Organization","created_at":"2016-09-02 14:00:59 UTC","updated_at":"2016-09-02 14:00:59 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"examplecorp","created_at":"2016-09-02 15:00:24 UTC","updated_at":"2016-09-02 15:00:24 UTC","id":3,"name":"Example Corporation","title":"Example Corporation","description":"The number one example company in the world!"},{"label":"testcorp","created_at":"2016-09-07 01:39:03 UTC","updated_at":"2016-09-07 01:39:03 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+        }
+    http_version: 
+  recorded_at: Wed, 07 Sep 2016 12:00:49 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      Content-Type:
+      - application/json
+      Host:
+      - katello.example.com:50191
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 07 Sep 2016 12:00:48 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 9544abef9cf8343005f07ed8c9f1f8e7
+      Etag:
+      - W/"471e8acb2053be2e7a823cbd174ec330-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d01088b1-c27f-46d7-baa0-d0f428b2179b
+      X-Runtime:
+      - '0.203692'
+      Via:
+      - 1.1 katello.example.com:50191
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '388'
+      Set-Cookie:
+      - _session_id=64ec458ac4f45b3bab07ef11055a818d; path=/; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 3,
+          "subtotal": 1,
+          "page": 1,
+          "per_page": 999999,
+          "search": "name=\"Test Corporation\"",
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"label":"testcorp","created_at":"2016-09-07 01:39:03 UTC","updated_at":"2016-09-07 01:39:03 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+        }
+    http_version: 
+  recorded_at: Wed, 07 Sep 2016 12:00:49 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50191/api/organizations/9/hosts?per_page=999999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      Content-Type:
+      - application/json
+      Host:
+      - katello.example.com:50191
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 07 Sep 2016 12:00:48 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.13.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 9544abef9cf8343005f07ed8c9f1f8e7
+      Etag:
+      - W/"a4c7cad8c39c0a80e0091f015157f090-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 24909260-7a77-442d-b22a-e457c90f39be
+      X-Runtime:
+      - '1.229753'
+      Via:
+      - 1.1 katello.example.com:50191
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '155'
+      Set-Cookie:
+      - _session_id=2601f43c9d237a31e83c403b75ad4318; path=/; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 0,
+          "subtotal": 0,
+          "page": 1,
+          "per_page": 999999,
+          "search": null,
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": []
+        }
+    http_version: 
+  recorded_at: Wed, 07 Sep 2016 12:00:50 GMT
 recorded_with: VCR 3.0.3

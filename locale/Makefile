@@ -6,7 +6,7 @@
 # make tx-update - download and merge translations from Transifex
 # make clean - clean everything
 #
-DOMAIN = hammer_cli_csv
+DOMAIN = hammer-cli-csv
 VERSION = $(shell ruby -e 'require "rubygems";spec = Gem::Specification::load("../hammer_cli_csv.gemspec");puts spec.version')
 POTFILE = $(DOMAIN).pot
 MOFILE = $(DOMAIN).mo

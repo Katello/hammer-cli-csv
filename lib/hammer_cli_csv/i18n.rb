@@ -14,7 +14,7 @@ module HammerCLICsv
       end
 
       def domain_name
-        'hammer_cli_csv'
+        'hammer-cli-csv'
       end
     end
 
@@ -22,3 +22,11 @@ module HammerCLICsv
 end
 
 HammerCLI::I18n.add_domain(HammerCLICsv::I18n::LocaleDomain.new)
+
+FastGettext.add_text_domain('hammer-cli-csv',
+                            :path => File.expand_path("../../../locale", __FILE__),
+                            :type => :po,
+                            :ignore_fuzzy => true,
+                            :report_warning => false
+                           )
+FastGettext.default_text_domain = 'hammer-cli-csv'

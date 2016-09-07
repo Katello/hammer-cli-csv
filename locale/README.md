@@ -5,7 +5,7 @@ Updating the translations
 
   ```
     mkdir locale/<lang>
-    cp locale/hammer_cli_csv.pot locale/<lang>/hammer_cli_csv.po
+    cp locale/hammer-cli-csv.pot locale/<lang>/hammer-cli-csv.po
   ```
   2. Make sure you have `transifex-client` installed
 

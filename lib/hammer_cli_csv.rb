@@ -5,6 +5,7 @@ module HammerCLICsv
   require 'hammer_cli_foreman'
   require 'hammer_cli_foreman_tasks'
 
+  require 'hammer_cli_csv/i18n'
   require 'hammer_cli_csv/base'
   require 'hammer_cli_csv/utils/subscriptions'
 

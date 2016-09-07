@@ -19,6 +19,10 @@ def configure_vcr(mode = :none)
       c.ignore_hosts uri.host
     end
 
+    if ENV['debug']
+      c.debug_logger = File.open(ENV['debug'], 'w')
+    end
+
     c.default_cassette_options = {
       :record => mode,
       :match_requests_on => [:method, :path, :params, :body_json],
@@ -48,6 +52,14 @@ def configure_vcr(mode = :none)
       end
     rescue
       #ignore the warning thrown about this matcher already being resgistered
+    end
+
+    if ENV['record'] == 'true' && mode != :none
+      username = ENV['PORTALUSERNAME'] || 'username'
+      password = ENV['PORTALPASSWORD'] || 'password'
+      c.filter_sensitive_data('username:password') { "#{username}:#{password}" }
+      c.filter_sensitive_data('subscription/users/username') { "subscription/users/#{username}" }
+      c.filter_sensitive_data('"username":"username"') { "\"username\":\"#{username}\"" }
     end
     # rubocop:enable HandleExceptions
   end

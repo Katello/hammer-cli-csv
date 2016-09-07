@@ -610,3 +610,7 @@ Test server configuration is taken from 'test/config.yml'. If that file does not
 
     :katello:
       :enable_module: true
+
+Note: Since the subscriptions tests rely entirely on having a Red Hat manifest, re-recording these tests is more involved. It requires access to the internal "stage" customer portal and API. To run in recording mode, specify PORTALUSERNAME and PORTALPASSWORD env variables.
+
+    PORTALUSERNAME=thomasmckay PORTALPASSWORD=xyz123 rake test mode=all record=true

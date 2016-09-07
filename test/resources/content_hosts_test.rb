@@ -2,7 +2,7 @@ require './test/csv_test_helper'
 require './lib/hammer_cli_csv'
 
 module Resources
-  class TestContentHostsUsage < MiniTest::Unit::TestCase
+  class TestContentHosts < MiniTest::Unit::TestCase
     def test_usage
       start_vcr
       set_user 'admin'
@@ -26,9 +26,7 @@ Options:
 HELP
       stop_vcr
     end
-  end
 
-  class TestContentHostsImport < MiniTest::Unit::TestCase
     def test_create_and_update
       start_vcr
       set_user 'admin'
@@ -64,9 +62,7 @@ HELP
 
       stop_vcr
     end
-  end
 
-  class TestContentHostsExport < MiniTest::Unit::TestCase
     def test_export
       start_vcr
       set_user 'admin'
@@ -93,9 +89,7 @@ HELP
       # rubocop:enable LineLength
       stop_vcr
     end
-  end
 
-  class TestContentHostsSingle < MiniTest::Unit::TestCase
     # import a single line, testing that subscription is added
     def test_import_single_line
       start_vcr

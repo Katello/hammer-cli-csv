@@ -1,62 +1,6 @@
 ---
 http_interactions:
 - request:
-    method: put
-    uri: http://admin:changeme@katello:3000/api/settings/99
-    body:
-      encoding: UTF-8
-      string: '{"setting":{"value":"60000"}}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '29'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.13.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - e98945ba1db6bdbb4c25ce4988912344
-      Etag:
-      - W/"076d4507efa74eb8790faa1c97e1c713"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=2db127278d1d58e8edacf000b8807c04; path=/; HttpOnly
-      - request_method=PUT; path=/
-      X-Request-Id:
-      - 9f7e6bbd-61d7-45d7-9bb6-73875ebb50d1
-      X-Runtime:
-      - '0.322533'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"value":60000,"description":"Log out idle users after a certain number
-        of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-08-10
-        12:38:11 UTC","updated_at":"2016-08-10 13:34:48 UTC","id":99,"name":"idle_timeout"}'
-    http_version: 
-  recorded_at: Tue, 23 Aug 2016 12:27:09 GMT
-- request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/api/status
     body:
@@ -75,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:03:31 GMT
+      - Mon, 12 Sep 2016 15:38:30 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -97,9 +41,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ca083cfa-80e1-4718-9d98-b4b4fc2593a5
+      - 1b56ad60-d3a1-4170-be15-af1d8b5f3283
       X-Runtime:
-      - '0.218150'
+      - '0.224642'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -107,12 +51,12 @@ http_interactions:
       Content-Length:
       - '81'
       Set-Cookie:
-      - _session_id=fdf26a1e0ae85327c25a29e01103e3c9; path=/; HttpOnly
+      - _session_id=ef1452860f56c741afc8f28a66b143d0; path=/; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:03:32 GMT
+  recorded_at: Mon, 12 Sep 2016 15:38:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/api/v2/plugins
@@ -132,7 +76,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:03:32 GMT
+      - Mon, 12 Sep 2016 15:38:31 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -154,9 +98,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0846426a-0f16-4f7c-8516-5a23c95d6502
+      - 47e47582-c2fc-44ea-8f6a-4c117a6d9242
       X-Runtime:
-      - '0.180131'
+      - '0.180125'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -164,7 +108,7 @@ http_interactions:
       Content-Length:
       - '566'
       Set-Cookie:
-      - _session_id=594dea456656bd0d54082896b20e74d7; path=/; HttpOnly
+      - _session_id=a174676168ae794f656293cc936a599e; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -194,80 +138,7 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjIuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:03:32 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@katello.example.com:50191/api/settings?search=name=%22badsetting%22
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
-      Content-Type:
-      - application/json
-      Host:
-      - katello.example.com:50191
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 09 Sep 2016 20:03:32 GMT
-      Server:
-      - Apache/2.4.6 (CentOS)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 9544abef9cf8343005f07ed8c9f1f8e7
-      Etag:
-      - W/"9cf326b5132c13814d1b9e58e5145928-gzip"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - b9fba7a8-ab09-4a1f-95dd-57304bbd4461
-      X-Runtime:
-      - '0.220234'
-      Via:
-      - 1.1 katello.example.com:50191
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '170'
-      Set-Cookie:
-      - _session_id=b8994796b4fe1bace7d0cd6b33503ce7; path=/; HttpOnly
-    body:
-      encoding: ASCII-8BIT
-      string: |
-        {
-          "total": 101,
-          "subtotal": 0,
-          "page": 1,
-          "per_page": 20,
-          "search": "name=\"badsetting\"",
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": []
-        }
-    http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:03:33 GMT
+  recorded_at: Mon, 12 Sep 2016 15:38:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/api/settings?search=name=%22idle_timeout%22
@@ -291,7 +162,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:03:32 GMT
+      - Mon, 12 Sep 2016 15:38:31 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -313,9 +184,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b93e8380-08e9-4da0-8548-dda550c394c3
+      - 6451e954-2d6e-4114-91ba-63ba43447181
       X-Runtime:
-      - '1.236567'
+      - '0.277428'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -323,7 +194,7 @@ http_interactions:
       Content-Length:
       - '430'
       Set-Cookie:
-      - _session_id=458fa61a5d6339ca36328a2b15e77f5a; path=/; HttpOnly
+      - _session_id=b4dd2deef11b68b70442065fd2276004; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -340,7 +211,7 @@ http_interactions:
           "results": [{"value":60000,"description":"Log out idle users after a certain number of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-09-02 14:00:52 UTC","updated_at":"2016-09-02 14:58:40 UTC","id":78,"name":"idle_timeout"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:03:34 GMT
+  recorded_at: Mon, 12 Sep 2016 15:38:32 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50191/api/settings/78
@@ -366,7 +237,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:03:33 GMT
+      - Mon, 12 Sep 2016 15:38:31 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -388,9 +259,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 6f388d28-22ee-4061-9c26-aca79d5a74ac
+      - cf2ae02a-c071-4ab2-bae5-81dbdf08a6e5
       X-Runtime:
-      - '0.282920'
+      - '1.270987'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -398,7 +269,7 @@ http_interactions:
       Content-Length:
       - '258'
       Set-Cookie:
-      - _session_id=b6e8bc54a65e21d870af83d65fd5ac0b; path=/; HttpOnly
+      - _session_id=411c1969cba5e4825eec2dfea3947aae; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
@@ -406,5 +277,5 @@ http_interactions:
         of minutes","category":"Setting::Auth","settings_type":"integer","default":60,"created_at":"2016-09-02
         14:00:52 UTC","updated_at":"2016-09-02 14:58:40 UTC","id":78,"name":"idle_timeout"}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:03:34 GMT
+  recorded_at: Mon, 12 Sep 2016 15:38:33 GMT
 recorded_with: VCR 3.0.3

@@ -2,7 +2,7 @@ require './test/csv_test_helper'
 require './lib/hammer_cli_csv'
 
 module Resources
-  class TestSettingsUsage < MiniTest::Unit::TestCase
+  class TestSettings < MiniTest::Unit::TestCase
     def test_usage
       start_vcr
       set_user 'admin'
@@ -25,9 +25,7 @@ Options:
 HELP
       stop_vcr
     end
-  end
 
-  class TestSettingsImport < MiniTest::Unit::TestCase
     def test_update_settings
       start_vcr
       set_user 'admin'

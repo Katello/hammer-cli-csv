@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:05:10 GMT
+      - Mon, 12 Sep 2016 15:40:22 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -41,9 +41,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3ef55355-45fc-4eb5-ac63-a0265777a07d
+      - 955f8b7a-305c-456d-9187-401f67aa2ffe
       X-Runtime:
-      - '0.228772'
+      - '0.218424'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -51,12 +51,12 @@ http_interactions:
       Content-Length:
       - '81'
       Set-Cookie:
-      - _session_id=cc11e0389bc827b3d7762dd11948938a; path=/; HttpOnly
+      - _session_id=c21a6bcb7a3c6d94d6baedeadd900b5d; path=/; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:05:11 GMT
+  recorded_at: Mon, 12 Sep 2016 15:40:22 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/api/v2/plugins
@@ -76,7 +76,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:05:10 GMT
+      - Mon, 12 Sep 2016 15:40:22 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -98,9 +98,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3cbaf96b-4a85-404e-bae7-c62676045358
+      - c4b4c0fb-1fcf-4fb7-aaae-459b1f4d9b59
       X-Runtime:
-      - '0.180675'
+      - '0.186518'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -108,7 +108,7 @@ http_interactions:
       Content-Length:
       - '566'
       Set-Cookie:
-      - _session_id=b2c4f4ac74b4565c16cbbe9ec8cbbab6; path=/; HttpOnly
+      - _session_id=1fb7dcb6cd0af8453d9b53f6344f0567; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -138,7 +138,7 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjIuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:05:11 GMT
+  recorded_at: Mon, 12 Sep 2016 15:40:23 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999
@@ -162,7 +162,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:05:11 GMT
+      - Mon, 12 Sep 2016 15:40:22 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -184,9 +184,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 36a9c4ae-6889-4f64-810a-5fd681a19294
+      - 1da026cd-4312-42e9-8420-663bb6a7fedb
       X-Runtime:
-      - '0.213060'
+      - '1.254092'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -194,7 +194,7 @@ http_interactions:
       Content-Length:
       - '792'
       Set-Cookie:
-      - _session_id=fad702a15da68e27730188f70803a331; path=/; HttpOnly
+      - _session_id=39f6a25981325a6a875475d711311569; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -211,7 +211,7 @@ http_interactions:
           "results": [{"label":"Default_Organization","created_at":"2016-09-02 14:00:59 UTC","updated_at":"2016-09-02 14:00:59 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"examplecorp","created_at":"2016-09-02 15:00:24 UTC","updated_at":"2016-09-02 15:00:24 UTC","id":3,"name":"Example Corporation","title":"Example Corporation","description":"The number one example company in the world!"},{"label":"testcorp","created_at":"2016-09-07 01:39:03 UTC","updated_at":"2016-09-07 01:39:03 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:05:11 GMT
+  recorded_at: Mon, 12 Sep 2016 15:40:24 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations/9
@@ -235,7 +235,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:05:11 GMT
+      - Mon, 12 Sep 2016 15:40:24 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -257,9 +257,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a7658745-c795-40f5-8586-8d18be4d5ad8
+      - fd352d8f-a41f-4caa-bc21-dfe57de89f31
       X-Runtime:
-      - '2.678480'
+      - '2.694657'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -267,7 +267,7 @@ http_interactions:
       Content-Length:
       - '21851'
       Set-Cookie:
-      - _session_id=cff02b95a46474dc87ba15ab9fc81a30; path=/; HttpOnly
+      - _session_id=5f61dc21f88e42483446199bbc08c9c4; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"label":"testcorp","owner_details":{"parentOwner":null,"id":"ff80808156eb30a60157024c785205e2","key":"testcorp","displayName":"Test
@@ -402,7 +402,7 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[{"id":2,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[],"parameters":[],"default_content_view_id":4,"library_id":7}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:05:15 GMT
+  recorded_at: Mon, 12 Sep 2016 15:40:27 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations/9/subscriptions?per_page=999999
@@ -426,7 +426,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:05:15 GMT
+      - Mon, 12 Sep 2016 15:40:26 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -448,9 +448,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0340cdbc-5b24-48d6-bc96-6d2b46b3fbf6
+      - 04f4189b-6ce9-45ea-9928-75b72a7acdc6
       X-Runtime:
-      - '1.671569'
+      - '0.824280'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -458,11 +458,11 @@ http_interactions:
       Content-Length:
       - '1348'
       Set-Cookie:
-      - _session_id=80c84314f0e7501692eeefdddec0d899; path=/; HttpOnly
+      - _session_id=31ffa02d4dd6cde01aae36c75fb2bf5c; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
         {"organization":{},"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":19,"cp_id":"ff80808156eb30a6015704818e8706e1","subscription_id":11,"name":"Red Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"id":21,"cp_id":"ff80808156eb30a6015704818f330733","subscription_id":12,"name":"Red Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999116,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false}]}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:05:17 GMT
+  recorded_at: Mon, 12 Sep 2016 15:40:29 GMT
 recorded_with: VCR 3.0.3

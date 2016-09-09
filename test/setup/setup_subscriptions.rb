@@ -7,7 +7,7 @@ module Setup
       start_vcr
 
       stdout,stderr = capture {
-        hammer.run(%W{csv subscriptions --export --organization Test\ Corporation})
+        hammer.run(%W{--reload-cache csv subscriptions --export --organization Test\ Corporation})
       }
       assert_equal stderr, ''
       assert_equal 5, stdout.split("\n").length

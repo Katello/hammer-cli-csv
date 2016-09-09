@@ -2,12 +2,12 @@ require './test/csv_test_helper'
 require './lib/hammer_cli_csv'
 
 module Setup
-  class SetupContentViews < MiniTest::Unit::TestCase
+  class SetupDomains < MiniTest::Unit::TestCase
     def test_setup
       start_vcr
 
       stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv content-views --verbose --file test/data/setup/content-views.csv})
+        hammer.run(%W{--reload-cache csv domains --verbose --file test/data/setup/domains.csv})
       }
       assert_equal stderr, ''
 

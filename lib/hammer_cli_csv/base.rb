@@ -160,7 +160,7 @@ module HammerCLICsv
                 yield line
               rescue RuntimeError => e
                 message = "#{e}\n#{line}"
-                option_continue_on_error? ? $stderr.puts("Error: #{message}") : raise(message)
+                option_continue_on_error? ? $stderr.puts(_("Error: %{message}") % {:message => message}) : raise(message)
               end
             end
           end
@@ -195,7 +195,7 @@ module HammerCLICsv
                                                               :per_page => 999999,
                                                               'search' => "name=\"#{options[:name]}\""
                                                             })['results']
-          raise "Organization '#{options[:name]}' not found" if !organization || organization.empty?
+          raise _("Organization '%{name}' not found") % {:name => options[:name]} if !organization || organization.empty?
           options[:id] = organization[0]['id']
           @organizations[options[:name]] = options[:id]
         end
@@ -205,7 +205,7 @@ module HammerCLICsv
         options[:name] = @organizations.key(options[:id])
         if !options[:name]
           organization = @api.resource(:organizations).call(:show, {'id' => options[:id]})
-          raise "Organization 'id=#{options[:id]}' not found" if !organization || organization.empty?
+          raise _("Organization 'id=%{id}' not found") % {:id => options[:id]} if !organization || organization.empty?
           options[:name] = organization['name']
           @organizations[options[:name]] = options[:id]
         end
@@ -226,7 +226,7 @@ module HammerCLICsv
                                                       :per_page => 999999,
                                                       'search' => "name=\"#{options[:name]}\""
                                                     })['results']
-          raise "Location '#{options[:name]}' not found" if !location || location.empty?
+          raise _("Location '%{name}' not found") % {:name => options[:name]} if !location || location.empty?
           options[:id] = location[0]['id']
           @locations[options[:name]] = options[:id]
         end
@@ -236,7 +236,7 @@ module HammerCLICsv
         options[:name] = @locations.key(options[:id])
         if !options[:name]
           location = @api.resource(:locations).call(:show, {'id' => options[:id]})
-          raise "Location 'id=#{options[:id]}' not found" if !location || location.empty?
+          raise _("Location 'id=%{id}' not found") % {:id => options[:id]} if !location || location.empty?
           options[:name] = location['name']
           @locations[options[:name]] = options[:id]
         end
@@ -257,7 +257,7 @@ module HammerCLICsv
                                               :per_page => 999999,
                                               'search' => "name=\"#{options[:name]}\""
                                             })['results']
-          raise "Role '#{options[:name]}' not found" if !role || role.empty?
+          raise _("Role '%{name}' not found") % {:name => options[:name]} if !role || role.empty?
           options[:id] = role[0]['id']
           @roles[options[:name]] = options[:id]
         end
@@ -267,7 +267,7 @@ module HammerCLICsv
         options[:name] = @roles.key(options[:id])
         if !options[:name]
           role = @api.resource(:roles).call(:show, {'id' => options[:id]})
-          raise "Role 'id=#{options[:id]}' not found" if !role || role.empty?
+          raise _("Role 'id=%{id}' not found") % {:id => options[:id]} if !role || role.empty?
           options[:name] = role['name']
           @roles[options[:name]] = options[:id]
         end
@@ -288,7 +288,7 @@ module HammerCLICsv
                                                           :per_page => 999999,
                                                           'name' => options[:name]
                                                         })['results']
-          raise "Permission '#{options[:name]}' not found" if !permission || permission.empty?
+          raise _("Permission '%{name}' not found") % {:name => options[:name]} if !permission || permission.empty?
           options[:id] = permission[0]['id']
           @permissions[options[:name]] = options[:id]
         end
@@ -298,7 +298,7 @@ module HammerCLICsv
         options[:name] = @permissions.key(options[:id])
         if !options[:name]
           permission = @api.resource(:permissions).call(:show, {'id' => options[:id]})
-          raise "Permission 'id=#{options[:id]}' not found" if !permission || permission.empty?
+          raise _("Permission 'id=%{id}' not found") % {:id => options[:id]} if !permission || permission.empty?
           options[:name] = permission['name']
           @permissions[options[:name]] = options[:id]
         end
@@ -333,7 +333,7 @@ module HammerCLICsv
                                                             :per_page => 999999,
                                                             'search' => "name=\"#{ options[:name] }\""
                                                           })['results']
-          raise "Puppet environment '#{options[:name]}' not found" if !environment || environment.empty?
+          raise _("Puppet environment '%{name}' not found") % {:name => options[:name]} if !environment || environment.empty?
           options[:id] = environment[0]['id']
           @environments[options[:name]] = options[:id]
         end
@@ -343,7 +343,7 @@ module HammerCLICsv
         options[:name] = @environments.key(options[:id])
         if !options[:name]
           environment = @api.resource(:environments).call(:show, {'id' => options[:id]})
-          raise "Puppet environment '#{options[:name]}' not found" if !environment || environment.empty?
+          raise _("Puppet environment 'id=%{id}' not found") % {:id => options[:id]} if !environment || environment.empty?
           options[:name] = environment['name']
           @environments[options[:name]] = options[:id]
         end
@@ -364,7 +364,7 @@ module HammerCLICsv
                                               :per_page => 999999,
                                               'search' => "name=\"#{options[:name]}\""
                                             })['results']
-          raise "Template kind '#{options[:name]}' not found" if !template_kind || template_kind.empty?
+          raise _("Template kind '%{name}' not found") % {:name => options[:name]} if !template_kind || template_kind.empty?
           options[:id] = template_kind[0]['id']
           @template_kinds[options[:name]] = options[:id]
         end
@@ -374,7 +374,7 @@ module HammerCLICsv
         options[:name] = @template_kinds.key(options[:id])
         if !options[:name]
           template_kind = @api.resource(:template_kinds).call(:show, {'id' => options[:id]})
-          raise "Template kind 'id=#{options[:id]}' not found" if !template_kind || template_kind.empty?
+          raise _("Template kind 'id=%{id}' not found") % {:id => options[:id]} if !template_kind || template_kind.empty?
           options[:name] = template_kind['name']
           @template_kinds[options[:name]] = options[:id]
         end
@@ -398,7 +398,7 @@ module HammerCLICsv
                                                                      'search' => search
                                                                    })['results']
           operatingsystem = operatingsystems[0]
-          raise "Operating system '#{options[:name]}' not found" if !operatingsystem || operatingsystem.empty?
+          raise _("Operating system '%{name}' not found") % {:name => options[:name]} if !operatingsystem || operatingsystem.empty?
           options[:id] = operatingsystem['id']
           @operatingsystems[options[:name]] = options[:id]
         end
@@ -408,7 +408,7 @@ module HammerCLICsv
         options[:name] = @operatingsystems.key(options[:id])
         if !options[:name]
           operatingsystem = @api.resource(:operatingsystems).call(:show, {'id' => options[:id]})
-          raise "Operating system 'id=#{options[:id]}' not found" if !operatingsystem || operatingsystem.empty?
+          raise _("Operating system 'id=%{id}' not found") % {:id => options[:id]} if !operatingsystem || operatingsystem.empty?
           options[:name] = build_os_name(operatingsystem['name'],
                                          operatingsystem['major'],
                                          operatingsystem['minor'])
@@ -431,7 +431,7 @@ module HammerCLICsv
                                                               :per_page => 999999,
                                                               'search' => "name=\"#{options[:name]}\""
                                                             })['results']
-          raise "Architecture '#{options[:name]}' not found" if !architecture || architecture.empty?
+          raise _("Architecture '%{name}' not found") % {:name => options[:name]} if !architecture || architecture.empty?
           options[:id] = architecture[0]['id']
           @architectures[options[:name]] = options[:id]
         end
@@ -441,7 +441,7 @@ module HammerCLICsv
         options[:name] = @architectures.key(options[:id])
         if !options[:name]
           architecture = @api.resource(:architectures).call(:show, {'id' => options[:id]})
-          raise "Architecture 'id=#{options[:id]}' not found" if !architecture || architecture.empty?
+          raise _("Architecture 'id=%{id}' not found") % {:id => options[:id]} if !architecture || architecture.empty?
           options[:name] = architecture['name']
           @architectures[options[:name]] = options[:id]
         end
@@ -462,7 +462,7 @@ module HammerCLICsv
                                                   :per_page => 999999,
                                                   'search' => "name=\"#{options[:name]}\""
                                                 })['results']
-          raise "Domain '#{options[:name]}' not found" if !domain || domain.empty?
+          raise _("Domain '%{name}' not found") % {:name => options[:name]} if !domain || domain.empty?
           options[:id] = domain[0]['id']
           @domains[options[:name]] = options[:id]
         end
@@ -472,7 +472,7 @@ module HammerCLICsv
         options[:name] = @domains.key(options[:id])
         if !options[:name]
           domain = @api.resource(:domains).call(:show, {'id' => options[:id]})
-          raise "Domain 'id=#{options[:id]}' not found" if !domain || domain.empty?
+          raise _("Domain 'id=%{id}' not found") % {:id => options[:id]} if !domain || domain.empty?
           options[:name] = domain['name']
           @domains[options[:name]] = options[:id]
         end
@@ -493,7 +493,7 @@ module HammerCLICsv
                                                   :per_page => 999999,
                                                   'search' => "name=\"#{options[:name]}\""
                                                 })['results']
-          raise "Partition table '#{options[:name]}' not found" if !ptable || ptable.empty?
+          raise _("Partition table '%{name}' not found") % {:name => options[:name]} if !ptable || ptable.empty?
           options[:id] = ptable[0]['id']
           @ptables[options[:name]] = options[:id]
         end
@@ -525,7 +525,7 @@ module HammerCLICsv
                                                   :per_page => 999999,
                                                   'search' => "name=\"#{options[:name]}\""
                                                 })['results']
-          raise "Partition table '#{options[:name]}' not found" if !ptable || ptable.empty?
+          raise _("Partition table '%{name}' not found") % {:name => options[:name]} if !ptable || ptable.empty?
           options[:id] = ptable[0]['id']
           @media[options[:name]] = options[:id]
         end
@@ -557,7 +557,7 @@ module HammerCLICsv
                                               :per_page => 999999,
                                               'search' => "name=\"#{options[:name]}\""
                                             })['results']
-          raise "Host '#{options[:name]}' not found" if !host || host.empty?
+          raise _("Host '%{name}' not found") % {:name => options[:name]} if !host || host.empty?
           options[:id] = host[0]['id']
           @query_hosts[options[:name]] = options[:id]
         end
@@ -567,7 +567,7 @@ module HammerCLICsv
         options[:name] = @query_hosts.key(options[:id])
         if !options[:name]
           host = @api.resource(:hosts).call(:show, {'id' => options[:id]})
-          raise "Host 'id=#{options[:id]}' not found" if !host || host.empty?
+          raise _("Host 'id=%{id}' not found") % {:id => options[:id]} if !host || host.empty?
           options[:name] = host['name']
           @query_hosts[options[:name]] = options[:id]
         end
@@ -588,7 +588,7 @@ module HammerCLICsv
                                               :per_page => 999999,
                                               'search' => "name=\"#{options[:name]}\""
                                             })['results']
-          raise "Host Group '#{options[:name]}' not found" if !hostgroup || hostgroup.empty?
+          raise _("Host Group '%{name}' not found") % {:name => options[:name]} if !hostgroup || hostgroup.empty?
           options[:id] = hostgroup[0]['id']
           @query_hostgroups[options[:name]] = options[:id]
         end
@@ -598,7 +598,7 @@ module HammerCLICsv
         options[:name] = @query_hostgroups.key(options[:id])
         if !options[:name]
           hostgroup = @api.resource(:hostgroups).call(:show, {'id' => options[:id]})
-          raise "Host Group 'id=#{options[:id]}' not found" if !hostgroup || hostgroup.empty?
+          raise _("Host Group 'id=%{id}' not found") % {:id => options[:id]} if !hostgroup || hostgroup.empty?
           options[:name] = hostgroup['name']
           @query_hostgroups[options[:name]] = options[:id]
         end
@@ -619,7 +619,7 @@ module HammerCLICsv
                                               :per_page => 999999,
                                               'search' => "name=\"#{options[:name]}\""
                                             })['results']
-          raise "Provisioning template '#{options[:name]}' not found" if !config_template || config_template.empty?
+          raise _("Provisioning template '%{name}' not found") % {:name => options[:name]} if !config_template || config_template.empty?
           options[:id] = config_template[0]['id']
           @query_config_templates[options[:name]] = options[:id]
         end
@@ -629,7 +629,7 @@ module HammerCLICsv
         options[:name] = @query_config_templates.key(options[:id])
         if !options[:name]
           config_template = @api.resource(:config_templates).call(:show, {'id' => options[:id]})
-          raise "Provisioning template 'id=#{options[:id]}' not found" if !config_template || config_template.empty?
+          raise _("Provisioning template 'id=%{id}' not found") % {:id => options[:id]} if !config_template || config_template.empty?
           options[:name] = config_template['name']
           @query_config_templates[options[:name]] = options[:id]
         end
@@ -650,7 +650,7 @@ module HammerCLICsv
                                               :per_page => 999999,
                                               'search' => "name=\"#{options[:name]}\""
                                             })['results']
-          raise "Smart Proxy '#{options[:name]}' not found" if !smart_proxy || smart_proxy.empty?
+          raise _("Smart Proxy '%{name}' not found") % {:name => options[:name]} if !smart_proxy || smart_proxy.empty?
           options[:id] = smart_proxy[0]['id']
           @query_smart_proxies[options[:name]] = options[:id]
         end
@@ -660,7 +660,7 @@ module HammerCLICsv
         options[:name] = @query_smart_proxies.key(options[:id])
         if !options[:name]
           smart_proxy = @api.resource(:smart_proxies).call(:show, {'id' => options[:id]})
-          raise "Smart Proxy 'id=#{options[:id]}' not found" if !smart_proxy || smart_proxy.empty?
+          raise _("Smart Proxy 'id=%{id}' not found") % {:id => options[:id]} if !smart_proxy || smart_proxy.empty?
           options[:name] = smart_proxy['name']
           @query_smart_proxies[options[:name]] = options[:id]
         end
@@ -686,7 +686,7 @@ module HammerCLICsv
             @lifecycle_environments[organization][environment['name']] = environment['id']
           end
           options[:id] = @lifecycle_environments[organization][options[:name]]
-          raise "Lifecycle environment '#{options[:name]}' not found" if !options[:id]
+          raise _("Lifecycle environment '%{name}' not found") % {:name => options[:name]} if !options[:id]
         end
         result = options[:id]
       else
@@ -694,7 +694,7 @@ module HammerCLICsv
         options[:name] = @lifecycle_environments.key(options[:id])
         if !options[:name]
           environment = @api.resource(:lifecycle_environments).call(:show, {'id' => options[:id]})
-          raise "Lifecycle environment '#{options[:name]}' not found" if !environment || environment.empty?
+          raise _("Lifecycle environment '%{name}' not found") % {:name => options[:name]} if !environment || environment.empty?
           options[:name] = environment['name']
           @lifecycle_environments[options[:name]] = options[:id]
         end
@@ -719,7 +719,7 @@ module HammerCLICsv
             @contentviews[organization][contentview['name']] = contentview['id']
           end
           options[:id] = @contentviews[organization][options[:name]]
-          raise "Content view '#{options[:name]}' not found" if !options[:id]
+          raise _("Content view '%{name}' not found") % {:name => options[:name]} if !options[:id]
         end
         result = options[:id]
       else
@@ -727,7 +727,7 @@ module HammerCLICsv
         options[:name] = @contentviews.key(options[:id])
         if !options[:name]
           contentview = @api.resource(:content_views).call(:show, {'id' => options[:id]})
-          raise "Puppet contentview '#{options[:name]}' not found" if !contentview || contentview.empty?
+          raise _("Puppet contentview 'id=%{id}' not found") % {:id => options[:id]} if !contentview || contentview.empty?
           options[:name] = contentview['name']
           @contentviews[options[:name]] = options[:id]
         end
@@ -760,7 +760,7 @@ module HammerCLICsv
           end
         end
         id = @contentviewversions[organization][versionname]
-        raise "Content view version '#{name}' with version '#{version}' not found" if !id
+        raise _("Content view version '%{name}' with version '%{version}' not found") % {:name => name, :version => version} if !id
       end
 
       id
@@ -781,7 +781,7 @@ module HammerCLICsv
             @repositories[organization][repository['name']] = repository['id']
           end
           options[:id] = @repositories[organization][options[:name]]
-          raise "Repository '#{options[:name]}' not found" if !options[:id]
+          raise _("Repository '%{name}' not found") % {:name => options[:name]} if !options[:id]
         end
         result = options[:id]
       else
@@ -789,7 +789,7 @@ module HammerCLICsv
         options[:name] = @repositories.key(options[:id])
         if !options[:name]
           repository = @api.resource(:repositories).call(:show, {'id' => options[:id]})
-          raise "Puppet repository '#{options[:name]}' not found" if !repository || repository.empty?
+          raise _("Puppet repository 'id=%{id}' not found") % {:id => options[:id]} if !repository || repository.empty?
           options[:name] = repository['name']
           @repositoriesr[options[:name]] = options[:id]
         end
@@ -816,7 +816,7 @@ module HammerCLICsv
             @hostcollections[organization][hostcollection['name']] = hostcollection['id'] if hostcollection
           end
           options[:id] = @hostcollections[organization][options[:name]]
-          raise "Host collection '#{options[:name]}' not found" if !options[:id]
+          raise _("Host collection '%{name}' not found") % {:name => options[:name]} if !options[:id]
         end
         result = options[:id]
       else
@@ -824,7 +824,7 @@ module HammerCLICsv
         options[:name] = @hostcollections.key(options[:id])
         if !options[:name]
           hostcollection = @api.resource(:host_collections).call(:show, {'id' => options[:id]})
-          raise "Host collection '#{options[:name]}' not found" if !hostcollection || hostcollection.empty?
+          raise _("Host collection 'id=%{id}' not found") % {:id => options[:id]} if !hostcollection || hostcollection.empty?
           options[:name] = hostcollection['name']
           @hostcollections[options[:name]] = options[:id]
         end
@@ -851,7 +851,7 @@ module HammerCLICsv
             @products[organization][product['name']] = product['id'] if product
           end
           options[:id] = @products[organization][options[:name]]
-          raise "Host collection '#{options[:name]}' not found" if !options[:id]
+          raise _("Host collection '%{name}' not found") % {:name => options[:name]} if !options[:id]
         end
         result = options[:id]
       else
@@ -859,7 +859,7 @@ module HammerCLICsv
         options[:name] = @products.key(options[:id])
         if !options[:name]
           product = @api.resource(:host_collections).call(:show, {'id' => options[:id]})
-          raise "Host collection '#{options[:name]}' not found" if !product || product.empty?
+          raise _("Host collection 'id=%{id}' not found") % {:id => options[:id]} if !product || product.empty?
           options[:name] = product['name']
           @products[options[:name]] = options[:id]
         end
@@ -880,7 +880,7 @@ module HammerCLICsv
                                                        :per_page => 999999,
                                                        'search' => "name=\"#{options[:name]}\""
                                                      })['results']
-          raise "Container '#{options[:name]}' not found" if !container || container.empty?
+          raise _("Container '%{name}' not found") % {:name => options[:name]} if !container || container.empty?
           options[:id] = container[0]['id']
           @containers[options[:name]] = options[:id]
         end
@@ -890,7 +890,7 @@ module HammerCLICsv
         options[:name] = @containers.key(options[:id])
         if !options[:name]
           container = @api.resource(:containers).call(:show, {'id' => options[:id]})
-          raise "Container 'id=#{options[:id]}' not found" if !container || container.empty?
+          raise _("Container 'id=%{id}' not found") % {:id => options[:id]} if !container || container.empty?
           options[:name] = container['name']
           @containers[options[:name]] = options[:id]
         end

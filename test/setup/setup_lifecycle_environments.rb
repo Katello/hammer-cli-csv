@@ -7,7 +7,7 @@ module Setup
       start_vcr
 
       stdout,stderr = capture {
-        hammer.run(%W{csv lifecycle-environments --verbose --file test/data/setup/lifecycle-environments.csv})
+        hammer.run(%W{--reload-cache csv lifecycle-environments --verbose --file test/data/setup/lifecycle-environments.csv})
       }
       assert_equal stderr, ''
 

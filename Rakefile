@@ -3,9 +3,8 @@ require 'bundler/gem_tasks'
 require 'rake/testtask'
 
 def clear_cassettes
-  `rm -rf test/fixtures/vcr_cassettes/*.yml`
-  `rm -rf test/fixtures/vcr_cassettes/extensions/*.yml`
-  `rm -rf test/fixtures/vcr_cassettes/support/*.yml`
+  `rm -rf test/fixtures/vcr_cassettes/setup/*.yml`
+  `rm -rf test/fixtures/vcr_cassettes/resources/*.yml`
   print "Cassettes cleared\n"
 end
 

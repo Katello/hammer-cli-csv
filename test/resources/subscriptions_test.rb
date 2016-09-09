@@ -8,7 +8,7 @@ module Resources
       set_user 'admin'
 
       stdout,stderr = capture {
-        hammer.run(%W{csv subscriptions --help})
+        hammer.run(%W{--reload-cache csv subscriptions --help})
       }
       assert_equal '', stderr
       assert_equal stdout, <<-HELP
@@ -43,7 +43,7 @@ FILE
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv subscriptions --verbose --file #{file.path}})
+        hammer.run(%W{--reload-cache csv subscriptions --verbose --file #{file.path}})
       }
       assert_equal '', stdout
       lines = stderr.split("\n")

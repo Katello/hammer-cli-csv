@@ -7,7 +7,7 @@ module Setup
       start_vcr
 
       stdout,stderr = capture {
-        hammer.run(%W{csv locations --verbose --file test/data/setup/locations.csv})
+        hammer.run(%W{--reload-cache csv locations --verbose --file test/data/setup/locations.csv})
       }
       assert_equal stderr, ''
 

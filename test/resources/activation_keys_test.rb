@@ -8,7 +8,7 @@ module Resources
       set_user 'admin'
 
       stdout,stderr = capture {
-        hammer.run(%W{csv activation-keys --help})
+        hammer.run(%W{--reload-cache csv activation-keys --help})
       }
       assert_equal '', stderr
       assert_equal stdout, <<-HELP
@@ -41,7 +41,7 @@ HELP
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv activation-keys --verbose --file #{file.path}})
+        hammer.run(%W{--reload-cache csv activation-keys --verbose --file #{file.path}})
       }
       assert_equal '', stderr
       assert_equal stdout[0..-2], "Creating activation key '#{@name}'...done"
@@ -49,21 +49,21 @@ HELP
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv activation-keys --verbose --file #{file.path}})
+        hammer.run(%W{--reload-cache csv activation-keys --verbose --file #{file.path}})
       }
       assert_equal '', stderr
       assert_equal stdout[0..-2], "Updating activation key '#{@name}'...done"
       file.unlink
 
       stdout,stderr = capture {
-        hammer.run(%W(activation-key list --organization Test\ Corporation --search name=#{@name}))
+        hammer.run(%W(--reload-cache activation-key list --organization Test\ Corporation --search name=#{@name}))
       }
       assert_equal '', stderr
       assert_equal stdout.split("\n").length, 5
 
       id = stdout.split("\n")[3].split(" ")[0]
       stdout,stderr = capture {
-        hammer.run(%W(activation-key delete --id #{id}))
+        hammer.run(%W(--reload-cache activation-key delete --id #{id}))
       }
 
       stop_vcr

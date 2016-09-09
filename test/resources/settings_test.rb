@@ -8,7 +8,7 @@ module Resources
       set_user 'admin'
 
       stdout,stderr = capture {
-        hammer.run(%W{csv settings --help})
+        hammer.run(%W{--reload-cache csv settings --help})
       }
       assert_equal '', stderr
       assert_equal stdout, <<-HELP
@@ -43,7 +43,7 @@ FILE
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv settings --verbose --file #{file.path}})
+        hammer.run(%W{--reload-cache csv settings --verbose --file #{file.path}})
       }
       stderr.must_equal ''
       lines = stdout.split("\n")
@@ -68,7 +68,7 @@ FILE
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv settings --verbose --continue-on-error --file #{file.path}})
+        hammer.run(%W{--reload-cache csv settings --verbose --continue-on-error --file #{file.path}})
       }
       stderr.must_equal "Error: Setting 'badsetting' not found\nbadsetting,1,1234\n"
       lines = stdout.split("\n")

@@ -8,7 +8,7 @@ module Resources
       set_user 'admin'
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --help})
+        hammer.run(%W{--reload-cache csv content-hosts --help})
       }
       assert_equal '', stderr
       assert_equal stdout, <<-HELP
@@ -41,7 +41,7 @@ HELP
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --verbose --file #{file.path}})
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path}})
       }
       assert_equal '', stderr
       assert_equal stdout[0..-2], "Creating content host '#{@hostname}'...done"
@@ -49,14 +49,14 @@ HELP
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --verbose --file #{file.path}})
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path}})
       }
       assert_equal '', stderr
       assert_equal stdout[0..-2], "Updating content host '#{@hostname}'...done"
       file.unlink
 
       stdout,stderr = capture {
-        hammer.run(%W(host list --search name=#{@hostname}))
+        hammer.run(%W(--reload-cache host list --search name=#{@hostname}))
       }
       assert_equal '', stderr
       assert_equal stdout.split("\n").length, 5
@@ -72,7 +72,7 @@ HELP
       set_user 'admin'
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --export --organization Test\ Corporation})
+        hammer.run(%W{--reload-cache csv content-hosts --export --organization Test\ Corporation})
       }
       assert_equal '', stderr
       assert_equal stdout.split("\n")[0], "Name,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions"
@@ -84,7 +84,7 @@ HELP
       set_user 'admin'
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --export --itemized-subscriptions --organization Test\ Corporation})
+        hammer.run(%W{--reload-cache csv content-hosts --export --itemized-subscriptions --organization Test\ Corporation})
       }
       assert_equal '', stderr
 
@@ -95,7 +95,7 @@ HELP
     end
   end
 
-  class TestContentHostsImport < MiniTest::Unit::TestCase
+  class TestContentHostsSingle < MiniTest::Unit::TestCase
     # import a single line, testing that subscription is added
     def test_import_single_line
       start_vcr
@@ -111,13 +111,13 @@ HELP
       file.rewind
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --verbose --file #{file.path}})
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path}})
       }
       assert_equal '', stderr
       assert_equal "Creating content host '#{@hostname}'...done\n", stdout
 
       stdout,stderr = capture {
-        hammer.run(%W{csv content-hosts --export --organization Test\ Corporation})
+        hammer.run(%W{--reload-cache csv content-hosts --export --organization Test\ Corporation})
       }
       assert_equal '', stderr
       lines = stdout.split("\n")

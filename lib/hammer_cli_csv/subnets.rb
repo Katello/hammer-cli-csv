@@ -8,6 +8,7 @@ module HammerCLICsv
       LOCATIONS = 'Locations'
       NETWORK = 'Network'
       NETWORK_MASK = 'Network Mask'
+      NETWORK_PREFIX = 'Network Prefix'
       NETWORK_FROM = 'From'
       NETWORK_TO = 'To'
       DOMAINS = 'Domains'
@@ -20,7 +21,7 @@ module HammerCLICsv
       VLAN_ID = 'VLAN ID'
 
       def export(csv)
-        csv << [NAME, ORGANIZATIONS, LOCATIONS, NETWORK, NETWORK_MASK,
+        csv << [NAME, ORGANIZATIONS, LOCATIONS, NETWORK, NETWORK_MASK, NETWORK_PREFIX,
                 NETWORK_FROM, NETWORK_TO, DOMAINS, GATEWAY, DHCP_PROXY, TFTP_PROXY, DNS_PROXY,
                 DNS_PRIMARY, DNS_SECONDARY, VLAN_ID]
         @api.resource(:subnets).call(:index, {:per_page => 999999})['results'].each do |subnet|
@@ -31,6 +32,7 @@ module HammerCLICsv
           locations = export_column(subnet, 'locations', 'name')
           network = subnet['network']
           network_mask = subnet['mask']
+          network_prefix = subnet['cidr']
           network_from = subnet['from']
           network_to = subnet['to']
           domains = export_column(subnet, 'domains', 'name')
@@ -41,7 +43,7 @@ module HammerCLICsv
           dns_primary = subnet['dns_primary']
           dns_secondary = subnet['dns_secondary']
           vlan_id = subnet['vlanid']
-          csv << [name, organizations, locations, network, network_mask,
+          csv << [name, organizations, locations, network, network_mask, network_prefix,
                   network_from, network_to, domains, gateway, dhcp_proxy, tftp_proxy, dns_proxy,
                   dns_primary, dns_secondary, vlan_id]
         end
@@ -59,44 +61,40 @@ module HammerCLICsv
       end
 
       def create_subnets_from_csv(line)
+        return if option_organization && line[ORGANIZATION] != option_organization
+
         line[DOMAINS] = (CSV.parse_line(line[DOMAINS]) || []).collect do |domain|
           foreman_domain(:name => domain)
         end
 
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
+          params = {
+            'subnet' => {
+              'name' => name,
+              'network' => line[NETWORK],
+              'mask' => line[NETWORK_MASK],
+              'from' => line[NETWORK_FROM],
+              'to' => line[NETWORK_TO],
+              'domain_ids' => line[DOMAINS],
+              'tftp_id' => foreman_smart_proxy(:name => line[TFTP_PROXY]),
+              'dns_id' => foreman_smart_proxy(:name => line[DNS_PROXY]),
+              'dhcp_id' => foreman_smart_proxy(:name => line[DHCP_PROXY])
+            }
+          }
           if !@existing.include? name
-            print "Creating subnet '#{name}'..." if option_verbose?
-            id = @api.resource(:subnets).call(:create, {
-                'subnet' => {
-                  'name' => name,
-                  'network' => line[NETWORK],
-                  'mask' => line[NETWORK_MASK],
-                  #'from' => line[NETWORK_FROM],
-                  #'to' => line[NETWORK_TO],
-                  #'domain_ids' => line[DOMAINS]
-                }
-            })['id']
+            print _("Creating subnet '%{name}'...") % {:name => name} if option_verbose?
+            id = @api.resource(:subnets).call(:create, params)['id']
           else
-            print "Updating subnet '#{name}'..." if option_verbose?
-            id = @api.resource(:subnets).call(:update, {
-                'id' => @existing[name],
-                'subnet' => {
-                    'name' => name,
-                    'network' => line[NETWORK],
-                    'mask' => line[NETWORK_MASK],
-                    'from' => line[NETWORK_FROM],
-                    'to' => line[NETWORK_TO],
-                    'domain_ids' => line[DOMAINS]
-                }
-            })['id']
+            print _("Updating subnet '%{name}'...") % {:name => name} if option_verbose?
+            params['id'] = @existing[name]
+            id = @api.resource(:subnets).call(:update, params)['id']
           end
 
-          # Update associated resources
           associate_organizations(id, line[ORGANIZATIONS], 'subnet')
           associate_locations(id, line[LOCATIONS], 'subnet')
 
-          print "done\n" if option_verbose?
+          puts _("done") if option_verbose?
         end
       end
     end

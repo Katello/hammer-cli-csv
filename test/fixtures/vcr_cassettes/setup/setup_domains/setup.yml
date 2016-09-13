@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:22 GMT
+      - Mon, 12 Sep 2016 15:39:31 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -41,9 +41,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3b062795-cfad-40d1-9d63-334f7ac2c89e
+      - c2cbf243-1a0b-43f5-b59d-1a63e29f6597
       X-Runtime:
-      - '0.227995'
+      - '0.222909'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -51,12 +51,12 @@ http_interactions:
       Content-Length:
       - '81'
       Set-Cookie:
-      - _session_id=cc5b2364246fc075501a834867073f62; path=/; HttpOnly
+      - _session_id=82d75ed696a6c1fa9123acddf756278c; path=/; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:23 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:32 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/api/v2/plugins
@@ -76,7 +76,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:22 GMT
+      - Mon, 12 Sep 2016 15:39:31 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -98,9 +98,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0d6081da-26ae-4f3f-a68c-698566494a1a
+      - 97a77fc1-8ada-44ac-a5a5-2883c372716a
       X-Runtime:
-      - '0.162795'
+      - '0.189382'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -108,7 +108,7 @@ http_interactions:
       Content-Length:
       - '566'
       Set-Cookie:
-      - _session_id=d43c3b94bc8332d24ab3feee9766c9c0; path=/; HttpOnly
+      - _session_id=926084851a49437673ab9b8657dbe068; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -138,7 +138,7 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjIuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:23 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:32 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/api/domains?per_page=999999
@@ -162,7 +162,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:22 GMT
+      - Mon, 12 Sep 2016 15:39:32 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -184,9 +184,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c335e6c2-d39a-43f4-a3c1-4960a01eafe2
+      - 489d7573-2073-474d-9ba9-a7a2be4b8d2a
       X-Runtime:
-      - '1.234229'
+      - '0.230352'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -194,7 +194,7 @@ http_interactions:
       Content-Length:
       - '423'
       Set-Cookie:
-      - _session_id=b737874ed9e1b725e8e9ca6fa1495b06; path=/; HttpOnly
+      - _session_id=223283f83f398a90ff1c4ff5a0a482f9; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -211,7 +211,7 @@ http_interactions:
           "results": [{"fullname":"","dns_id":null,"created_at":"2016-09-02 15:11:17 UTC","updated_at":"2016-09-08 20:29:23 UTC","id":1,"name":"example.com"},{"fullname":"","dns_id":null,"created_at":"2016-09-09 18:53:19 UTC","updated_at":"2016-09-09 18:53:19 UTC","id":2,"name":"test.com"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:24 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:32 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50191/api/domains/2
@@ -237,7 +237,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:24 GMT
+      - Mon, 12 Sep 2016 15:39:32 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -255,30 +255,30 @@ http_interactions:
       Apipie-Checksum:
       - 9544abef9cf8343005f07ed8c9f1f8e7
       Etag:
-      - W/"0ddfec5fc83785bb95fbbe0a6f136807-gzip"
+      - W/"b9b26295f2fd09bab4028c79b20d4966-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1a8f6eb1-8f38-481b-97aa-e482f2221343
+      - 909555a8-8cd8-4f2b-bb7c-b04940b82c8f
       X-Runtime:
-      - '0.359695'
+      - '1.378997'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '324'
+      - '390'
       Set-Cookie:
-      - _session_id=29fef003479e7e7f7fe3c4af0f6cfaaf; path=/; HttpOnly
+      - _session_id=29b657694fbc5aaf220d8e06df3380bf; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
       string: '{"fullname":"","dns_id":null,"created_at":"2016-09-09 18:53:19 UTC","updated_at":"2016-09-09
-        18:53:19 UTC","id":2,"name":"test.com","subnets":[],"interfaces":[],"parameters":[],"locations":[],"organizations":[{"id":9,"name":"Test
+        18:53:19 UTC","id":2,"name":"test.com","subnets":[{"id":5,"name":"Test Subnet","network_address":"192.168.100.1/24"}],"interfaces":[],"parameters":[],"locations":[],"organizations":[{"id":9,"name":"Test
         Corporation","title":"Test Corporation","description":"Testing today for a
         better tomorrow"}]}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:25 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:34 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -302,7 +302,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:24 GMT
+      - Mon, 12 Sep 2016 15:39:33 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -324,9 +324,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - bb9c5be7-09e5-46f1-94fc-77e4d82aa4f8
+      - 3bf5a7ac-f454-4721-aacf-d197a58e1b7a
       X-Runtime:
-      - '0.208522'
+      - '0.244331'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -334,7 +334,7 @@ http_interactions:
       Content-Length:
       - '388'
       Set-Cookie:
-      - _session_id=4bcd03eb075be8da630b3cd94ac6ea36; path=/; HttpOnly
+      - _session_id=28b6fb280bae37c80390a88bb12b38b0; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -351,7 +351,7 @@ http_interactions:
           "results": [{"label":"testcorp","created_at":"2016-09-07 01:39:03 UTC","updated_at":"2016-09-07 01:39:03 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:25 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:34 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations/9
@@ -375,7 +375,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:24 GMT
+      - Mon, 12 Sep 2016 15:39:34 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -397,9 +397,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3fefd496-4b0a-4a79-88df-3d094bde01b9
+      - 085912c6-6f37-4f27-afa8-dca3ad27bb51
       X-Runtime:
-      - '3.523151'
+      - '3.727742'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -407,7 +407,7 @@ http_interactions:
       Content-Length:
       - '21851'
       Set-Cookie:
-      - _session_id=c4092c1855ebd102e8c4218040a81354; path=/; HttpOnly
+      - _session_id=315c320c5f487c797ed8fccd68597716; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"label":"testcorp","owner_details":{"parentOwner":null,"id":"ff80808156eb30a60157024c785205e2","key":"testcorp","displayName":"Test
@@ -542,7 +542,7 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[{"id":2,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[],"parameters":[],"default_content_view_id":4,"library_id":7}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:28 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:38 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations/9
@@ -568,7 +568,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:28 GMT
+      - Mon, 12 Sep 2016 15:39:37 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -590,9 +590,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8a835f22-26d4-41fb-a309-d5769bfe3f36
+      - 71738a95-2c5b-468e-b8fd-30eb93400f88
       X-Runtime:
-      - '3.986523'
+      - '3.968352'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -600,7 +600,7 @@ http_interactions:
       Content-Length:
       - '16675'
       Set-Cookie:
-      - _session_id=0af47557be6c87009638e65414e5fe9e; path=/; HttpOnly
+      - _session_id=2d678ac0516ada3f953508dabf5a300b; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
@@ -731,5 +731,5 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[{"id":2,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:32 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:42 GMT
 recorded_with: VCR 3.0.3

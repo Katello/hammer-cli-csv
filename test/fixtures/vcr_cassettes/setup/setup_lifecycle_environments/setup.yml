@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:32 GMT
+      - Mon, 12 Sep 2016 15:39:41 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -41,9 +41,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5e78e7bc-9ac2-4efc-b4cc-7c120795d660
+      - f411da2d-82ff-4e7e-9a40-101c5dac12c1
       X-Runtime:
-      - '0.196733'
+      - '0.209871'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -51,12 +51,12 @@ http_interactions:
       Content-Length:
       - '81'
       Set-Cookie:
-      - _session_id=f5fa05806ada8b520cf7446769a096d0; path=/; HttpOnly
+      - _session_id=823247ac70fd77eae451215027f619e8; path=/; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:33 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:42 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/api/v2/plugins
@@ -76,7 +76,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:32 GMT
+      - Mon, 12 Sep 2016 15:39:42 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -98,9 +98,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f8e8fe7e-7ff5-4e4c-8842-c0ad4d3d71b8
+      - e285274a-6ea0-4665-965c-464cc30d48c4
       X-Runtime:
-      - '0.178158'
+      - '0.181014'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -108,7 +108,7 @@ http_interactions:
       Content-Length:
       - '566'
       Set-Cookie:
-      - _session_id=fbfd3f225496515121b6f0e3ea4c6553; path=/; HttpOnly
+      - _session_id=64ba03c8d03f03adc3377578c49d6fa0; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -138,7 +138,7 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjIuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:33 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:42 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999
@@ -162,7 +162,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:32 GMT
+      - Mon, 12 Sep 2016 15:39:42 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -184,9 +184,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a76a3d61-aed3-4aeb-90c5-d8d3a9efbcfc
+      - 78121692-d37b-40a2-8f57-5c4bb9a9bf13
       X-Runtime:
-      - '0.220072'
+      - '1.255230'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -194,7 +194,7 @@ http_interactions:
       Content-Length:
       - '792'
       Set-Cookie:
-      - _session_id=091e0cd198cb7a9a843b02c8d4dcb388; path=/; HttpOnly
+      - _session_id=904045ae21de1f46fd1b39559e487a7a; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -211,7 +211,7 @@ http_interactions:
           "results": [{"label":"Default_Organization","created_at":"2016-09-02 14:00:59 UTC","updated_at":"2016-09-02 14:00:59 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"examplecorp","created_at":"2016-09-02 15:00:24 UTC","updated_at":"2016-09-02 15:00:24 UTC","id":3,"name":"Example Corporation","title":"Example Corporation","description":"The number one example company in the world!"},{"label":"testcorp","created_at":"2016-09-07 01:39:03 UTC","updated_at":"2016-09-07 01:39:03 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:33 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:44 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999&search=name=%22Default%20Organization%22
@@ -235,7 +235,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:33 GMT
+      - Mon, 12 Sep 2016 15:39:43 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -257,9 +257,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cbd26007-2002-44b6-868e-b53f0838068e
+      - f493c50b-c32e-4485-9cb4-c19ab7315507
       X-Runtime:
-      - '1.277271'
+      - '0.358378'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -267,7 +267,7 @@ http_interactions:
       Content-Length:
       - '379'
       Set-Cookie:
-      - _session_id=4661d43342244c01e38fcf97c0dc4fd2; path=/; HttpOnly
+      - _session_id=33583744cc7f930e21508d79101d7602; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -284,7 +284,7 @@ http_interactions:
           "results": [{"label":"Default_Organization","created_at":"2016-09-02 14:00:59 UTC","updated_at":"2016-09-02 14:00:59 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:34 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:44 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations/1/environments?per_page=999999
@@ -308,7 +308,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:34 GMT
+      - Mon, 12 Sep 2016 15:39:44 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -330,9 +330,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0bd45bcc-e416-41b2-b96c-7829503c15c4
+      - ce0538a5-1a10-405c-8a75-67d6ecf62e86
       X-Runtime:
-      - '0.379026'
+      - '1.396106'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -340,13 +340,13 @@ http_interactions:
       Content-Length:
       - '835'
       Set-Cookie:
-      - _session_id=22aa0f16d9dcd99e83e35b55279a6eb3; path=/; HttpOnly
+      - _session_id=d2d62b89a27e73f51b62b220b4b3e24a; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
         {"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"library":true,"id":1,"name":"Library","label":"Library","description":null,"organization":{"name":"Default Organization","label":"Default_Organization","id":1},"created_at":"2016-09-02 14:01:04 UTC","updated_at":"2016-09-02 14:01:04 UTC","prior":null,"successor":null,"counts":{"content_hosts":1,"content_views":0,"packages":0,"puppet_modules":0,"errata":{"security":0,"bugfix":0,"enhancement":0,"total":0},"yum_repositories":0,"docker_repositories":0,"ostree_repositories":0,"products":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}}]}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:35 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:45 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999&search=name=%22Example%20Corporation%22
@@ -370,7 +370,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:34 GMT
+      - Mon, 12 Sep 2016 15:39:45 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -392,9 +392,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 26f251d7-e5ae-4446-8b77-4cb3604c4a87
+      - cb381b9c-a5ce-4e7f-8a95-60e68c709d95
       X-Runtime:
-      - '0.215495'
+      - '0.223449'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -402,7 +402,7 @@ http_interactions:
       Content-Length:
       - '409'
       Set-Cookie:
-      - _session_id=f1abb7c46848a4f0525a559bf1a38adb; path=/; HttpOnly
+      - _session_id=56296a09ca52e4bfff2b0fc5a42f501e; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -419,7 +419,7 @@ http_interactions:
           "results": [{"label":"examplecorp","created_at":"2016-09-02 15:00:24 UTC","updated_at":"2016-09-02 15:00:24 UTC","id":3,"name":"Example Corporation","title":"Example Corporation","description":"The number one example company in the world!"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:35 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:46 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations/3/environments?per_page=999999
@@ -443,7 +443,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:35 GMT
+      - Mon, 12 Sep 2016 15:39:45 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -465,9 +465,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b71f5ece-96d7-4e8f-8b21-25fd299157ab
+      - bd703f33-37ec-4ba1-a162-3e22928e45a4
       X-Runtime:
-      - '1.817325'
+      - '1.884815'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -475,13 +475,13 @@ http_interactions:
       Content-Length:
       - '3238'
       Set-Cookie:
-      - _session_id=203c62d9f2535db08a63afb7bbab5818; path=/; HttpOnly
+      - _session_id=179f745211e7e8f056a784ec68433617; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
         {"total":5,"subtotal":5,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"library":false,"id":4,"name":"Test","label":"Test","description":"Test, manual promotions from Development","organization":{"name":"Example Corporation","label":"examplecorp","id":3},"created_at":"2016-09-02 18:20:05 UTC","updated_at":"2016-09-02 18:20:05 UTC","prior":{"name":"Development","id":3},"successor":{"name":"Production","id":5},"counts":{"content_hosts":0,"content_views":1},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":5,"name":"Production","label":"Production","description":"Production, manual promotions from Test","organization":{"name":"Example Corporation","label":"examplecorp","id":3},"created_at":"2016-09-02 18:20:08 UTC","updated_at":"2016-09-02 18:20:08 UTC","prior":{"name":"Test","id":4},"successor":{"name":"Archive","id":6},"counts":{"content_hosts":0,"content_views":1},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":true,"id":2,"name":"Library","label":"Library","description":null,"organization":{"name":"Example Corporation","label":"examplecorp","id":3},"created_at":"2016-09-02 15:00:26 UTC","updated_at":"2016-09-02 15:00:26 UTC","prior":null,"successor":null,"counts":{"content_hosts":9,"content_views":1,"packages":595,"puppet_modules":0,"errata":{"security":5,"bugfix":18,"enhancement":5,"total":28},"yum_repositories":1,"docker_repositories":0,"ostree_repositories":1,"products":2},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":3,"name":"Development","label":"Development","description":"Development, automated promotes from Library","organization":{"name":"Example Corporation","label":"examplecorp","id":3},"created_at":"2016-09-02 18:20:03 UTC","updated_at":"2016-09-02 18:20:03 UTC","prior":{"name":"Library","id":2},"successor":{"name":"Test","id":4},"counts":{"content_hosts":0,"content_views":1},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":6,"name":"Archive","label":"Archive","description":"Archive, no longer in Production","organization":{"name":"Example Corporation","label":"examplecorp","id":3},"created_at":"2016-09-02 18:20:11 UTC","updated_at":"2016-09-02 18:20:11 UTC","prior":{"name":"Production","id":5},"successor":null,"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":true,"promote_or_remove_content_views_to_environments":true}}]}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:37 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:48 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -505,7 +505,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:36 GMT
+      - Mon, 12 Sep 2016 15:39:47 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -527,9 +527,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 85d91851-7e36-46fb-9bfc-46fa4be0920e
+      - 7ae3011e-5659-42af-8c4d-67953ccf1def
       X-Runtime:
-      - '0.222561'
+      - '0.241815'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -537,7 +537,7 @@ http_interactions:
       Content-Length:
       - '388'
       Set-Cookie:
-      - _session_id=416d90624b0aa06040aaecb219928ab1; path=/; HttpOnly
+      - _session_id=7ce2e9dd1c07dd5862c45968f5c5fe12; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -554,7 +554,7 @@ http_interactions:
           "results": [{"label":"testcorp","created_at":"2016-09-07 01:39:03 UTC","updated_at":"2016-09-07 01:39:03 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:37 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:48 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations/9/environments?per_page=999999
@@ -578,7 +578,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:37 GMT
+      - Mon, 12 Sep 2016 15:39:47 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -600,9 +600,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 6b2400ed-5652-4bd1-b0de-8f3630093a85
+      - a94dfabb-fcb5-45db-aa40-039213bdc461
       X-Runtime:
-      - '1.770496'
+      - '1.929619'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -610,13 +610,13 @@ http_interactions:
       Content-Length:
       - '3209'
       Set-Cookie:
-      - _session_id=ac43af011027de8b7ede482d848eb0cc; path=/; HttpOnly
+      - _session_id=c7e37f3f2905b4b0d63b5a0f2d19c723; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
         {"total":5,"subtotal":5,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"library":false,"id":9,"name":"Test","label":"Test","description":"Test, manual promotions from Development","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:52 UTC","updated_at":"2016-09-08 17:34:52 UTC","prior":{"name":"Development","id":8},"successor":{"name":"Production","id":10},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":10,"name":"Production","label":"Production","description":"Production, manual promotions from Test","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:56 UTC","updated_at":"2016-09-08 17:34:56 UTC","prior":{"name":"Test","id":9},"successor":{"name":"Archive","id":11},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":true,"id":7,"name":"Library","label":"Library","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-07 01:39:05 UTC","updated_at":"2016-09-07 01:39:05 UTC","prior":null,"successor":null,"counts":{"content_hosts":0,"content_views":1,"packages":0,"puppet_modules":0,"errata":{"security":0,"bugfix":0,"enhancement":0,"total":0},"yum_repositories":2,"docker_repositories":0,"ostree_repositories":0,"products":1},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":8,"name":"Development","label":"Development","description":"Development, automated promotes from Library","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:50 UTC","updated_at":"2016-09-08 17:34:50 UTC","prior":{"name":"Library","id":7},"successor":{"name":"Test","id":9},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":11,"name":"Archive","label":"Archive","description":"Archive, no longer in Production","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:58 UTC","updated_at":"2016-09-08 17:34:58 UTC","prior":{"name":"Production","id":10},"successor":null,"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":true,"promote_or_remove_content_views_to_environments":true}}]}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:39 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:50 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50191/katello/api/environments/8
@@ -642,7 +642,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:39 GMT
+      - Mon, 12 Sep 2016 15:39:49 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -664,9 +664,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cc0488cc-7351-4d55-ac6a-229209c30ddf
+      - b2cb02ec-61dc-43e9-9f57-4b9fa3930cf3
       X-Runtime:
-      - '1.481445'
+      - '0.450480'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -674,14 +674,14 @@ http_interactions:
       Content-Length:
       - '611'
       Set-Cookie:
-      - _session_id=295d73a909fb060e27f4f771ae3e6be3; path=/; HttpOnly
+      - _session_id=b7b6670b9085da22e41ca0ae37e034c8; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
       string: |2
           {"library":false,"id":8,"name":"Development","label":"Development","description":"Development, automated promotes from Library","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:50 UTC","updated_at":"2016-09-08 17:34:50 UTC","prior":{"name":"Library","id":7},"successor":{"name":"Test","id":9},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:40 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:50 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50191/katello/api/environments/9
@@ -707,7 +707,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:40 GMT
+      - Mon, 12 Sep 2016 15:39:50 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -729,9 +729,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d5008ddb-73c6-4897-a1d4-a96205dc722d
+      - 2dc47b8b-5ca8-4e1d-b5a4-25363e730fe2
       X-Runtime:
-      - '0.396450'
+      - '1.409081'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -739,14 +739,14 @@ http_interactions:
       Content-Length:
       - '604'
       Set-Cookie:
-      - _session_id=42794b9c66048758d4b7349e3208eb36; path=/; HttpOnly
+      - _session_id=e0ea3fa460b80c7cb5068e4a4249ce84; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
       string: |2
           {"library":false,"id":9,"name":"Test","label":"Test","description":"Test, manual promotions from Development","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:52 UTC","updated_at":"2016-09-08 17:34:52 UTC","prior":{"name":"Development","id":8},"successor":{"name":"Production","id":10},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:41 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:52 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50191/katello/api/environments/10
@@ -772,7 +772,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:40 GMT
+      - Mon, 12 Sep 2016 15:39:51 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -794,9 +794,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e47c5fba-195c-45a2-b8b7-d1622e9749fa
+      - c8a3c490-c18e-4895-8615-2bbb11db2e1a
       X-Runtime:
-      - '1.475747'
+      - '0.390505'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -804,14 +804,14 @@ http_interactions:
       Content-Length:
       - '606'
       Set-Cookie:
-      - _session_id=5de21afa539565ee0f9ccdf89e41ddc4; path=/; HttpOnly
+      - _session_id=c5709b95972a38bfe9ef73072b452898; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
       string: |2
           {"library":false,"id":10,"name":"Production","label":"Production","description":"Production, manual promotions from Test","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:56 UTC","updated_at":"2016-09-08 17:34:56 UTC","prior":{"name":"Test","id":9},"successor":{"name":"Archive","id":11},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:42 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:52 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50191/katello/api/environments/11
@@ -837,7 +837,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:04:42 GMT
+      - Mon, 12 Sep 2016 15:39:52 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       X-Frame-Options:
@@ -859,9 +859,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 63e3ddf7-6488-4f42-805e-851a1bd61ee3
+      - 1b8acbb8-0fc9-4616-bfff-52287662d9ca
       X-Runtime:
-      - '0.363383'
+      - '1.410957'
       Via:
       - 1.1 katello.example.com:50191
       Vary:
@@ -869,12 +869,12 @@ http_interactions:
       Content-Length:
       - '577'
       Set-Cookie:
-      - _session_id=96dbeac27fb9a563c1ae665676d7fd28; path=/; HttpOnly
+      - _session_id=7073965c1ee5226bc4a95c1a10c4ce50; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
       string: |2
           {"library":false,"id":11,"name":"Archive","label":"Archive","description":"Archive, no longer in Production","organization":{"name":"Test Corporation","label":"testcorp","id":9},"created_at":"2016-09-08 17:34:58 UTC","updated_at":"2016-09-08 17:34:58 UTC","prior":{"name":"Production","id":10},"successor":null,"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":true,"promote_or_remove_content_views_to_environments":true}}
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:04:43 GMT
+  recorded_at: Mon, 12 Sep 2016 15:39:54 GMT
 recorded_with: VCR 3.0.3

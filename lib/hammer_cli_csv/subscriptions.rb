@@ -3,6 +3,8 @@ require 'rest_client'
 module HammerCLICsv
   class CsvCommand
     class SubscriptionsCommand < BaseCommand
+      include ::HammerCLICsv::Utils::Subscriptions
+
       command_name 'subscriptions'
       desc         'import or export subscriptions'
 
@@ -24,14 +26,9 @@ module HammerCLICsv
 
       ORGANIZATION = 'Organization'
       MANIFEST = 'Manifest File'
-      SUBSCRIPTION = 'Subscription Name'
-      QUANTITY = 'Quantity'
-      SKU = 'Product SKU'
-      CONTRACT = 'Contract Number'
-      ACCOUNT = 'Account Number'
 
       def export(csv)
-        csv << [NAME, ORGANIZATION, MANIFEST, SUBSCRIPTION, QUANTITY, SKU, CONTRACT, ACCOUNT]
+        csv << [NAME, ORGANIZATION, MANIFEST, SUBS_NAME, SUBS_QUANTITY, SUBS_SKU, SUBS_CONTRACT, SUBS_ACCOUNT, SUBS_START, SUBS_END]
         @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
           next if option_organization && organization['name'] != option_organization
           organization = @api.resource(:organizations).call(:show, {'id' => organization['id']})
@@ -69,20 +66,22 @@ module HammerCLICsv
         else
           thread_import do |line|
             if line[NAME] == 'Manifest' && line[MANIFEST] && !line[MANIFEST].empty?
-              import_manifest(line)
+              import_manifest(line[ORGANIZATION], line[MANIFEST])
             end
           end
         end
       end
 
-      def import_manifest(line)
-        return if option_organization && line[ORGANIZATION] != option_organization
+      def import_manifest(organization_name, filename)
+        return if option_organization && organization_name != option_organization
+        print(_("Importing manifest '%{filename}' into organization '%{organization}'...") % {:filename => filename, :organization => organization_name}) if option_verbose?
         args = %W{
           --server #{ @server } --username #{ @username } --password #{ @password }
-          subscription upload --file #{ line[MANIFEST] }
-          --organization-id #{ foreman_organization(:name => line[ORGANIZATION]) }
+          subscription upload --file #{ filename }
+          --organization-id #{ foreman_organization(:name => organization_name) }
         }
         hammer.run(args)
+        puts(_("done")) if option_verbose?
       end
 
       def import_into_portal
@@ -109,6 +108,7 @@ module HammerCLICsv
             f.write data
           end
           puts _("done") if option_verbose?
+          import_manifest(organization, filename)
         end
       end
 
@@ -126,7 +126,7 @@ module HammerCLICsv
         when "Subscription"
           manifest = @manifests[line[ORGANIZATION]][:manifest]
           raise _('Manifest Name row is required before updating from Subscription rows') unless manifest
-          line[QUANTITY] = line[QUANTITY].to_i  #guarantee integer for future calculations
+          line[SUBS_QUANTITY] = line[SUBS_QUANTITY].to_i  #guarantee integer for future calculations
           add_subscription(line, manifest)
         else
           # ignore
@@ -136,11 +136,11 @@ module HammerCLICsv
       def add_subscription(line, manifest)
         if find_existing_subscription(line, manifest)
           puts _("'%{name}' of quantity %{quantity} already attached") %
-                  {:name => line[SUBSCRIPTION], :quantity => line[QUANTITY]} if option_verbose?
+                  {:name => line[SUBS_NAME], :quantity => line[SUBS_QUANTITY]} if option_verbose?
           return
         end
         print _("Attaching '%{name}' of quantity %{quantity}...") %
-                {:name => line[SUBSCRIPTION], :quantity => line[QUANTITY]} if option_verbose?
+                {:name => line[SUBS_NAME], :quantity => line[SUBS_QUANTITY]} if option_verbose?
         manifest['available_subscriptions'] ||= get_available_subscriptions(manifest)
         attach_subscription(line, manifest)
         puts _('done')
@@ -148,10 +148,10 @@ module HammerCLICsv
 
       def attach_subscription(line, manifest)
         manifest['available_subscriptions'].each do |subscription|
-          if subscription['productId'] == line[SKU] && subscription['quantity'] >= line[QUANTITY]
-            api = rest_client("/subscription/consumers/#{manifest['uuid']}/entitlements?pool=#{subscription['id']}&quantity=#{line[QUANTITY]}")
+          if subscription['productId'] == line[SUBS_SKU] && subscription['quantity'] >= line[SUBS_QUANTITY]
+            api = rest_client("/subscription/consumers/#{manifest['uuid']}/entitlements?pool=#{subscription['id']}&quantity=#{line[SUBS_QUANTITY]}")
             results = api.post({}.to_json)
-            subscription['quantity'] -= line[QUANTITY]
+            subscription['quantity'] -= line[SUBS_QUANTITY]
             break
           end
         end
@@ -164,7 +164,7 @@ module HammerCLICsv
 
       def find_existing_subscription(line, manifest)
         manifest['subscriptions'].each do |subscription|
-          if !subscription['csv_matched'] && subscription['pool']['productId'] == line[SKU] && subscription['quantity'] == line[QUANTITY]
+          if !subscription['csv_matched'] && subscription['pool']['productId'] == line[SUBS_SKU] && subscription['quantity'] == line[SUBS_QUANTITY]
             subscription['csv_matched'] = true
             return true
           end

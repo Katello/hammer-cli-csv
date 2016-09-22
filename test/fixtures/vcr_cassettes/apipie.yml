@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://katello.example.com:50191/apidoc/v2.en.json
+    uri: https://katello.example.com:50219/apidoc/v2.en.json
     body:
       encoding: US-ASCII
       string: ''
@@ -18,22 +18,16 @@ http_interactions:
       Accept-Language:
       - en
       Host:
-      - katello.example.com:50191
+      - katello.example.com:50219
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Fri, 09 Sep 2016 20:02:11 GMT
+      - Thu, 22 Sep 2016 21:04:55 GMT
       Server:
       - Apache/2.4.6 (CentOS)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
       Content-Disposition:
       - inline; filename="v2.en.json"
       Content-Transfer-Encoding:
@@ -45,11 +39,27 @@ http_interactions:
       Apipie-Checksum:
       - 9544abef9cf8343005f07ed8c9f1f8e7
       X-Request-Id:
-      - 7030b134-36a1-4f52-930f-a74400b83282
+      - 223d2be8-37fb-49de-9d0f-4c5ba65ec270
       X-Runtime:
-      - '0.265755'
+      - '0.260498'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
       Via:
-      - 1.1 katello.example.com:50191
+      - 1.1 katello.example.com:50219
       Vary:
       - Accept-Encoding
       Content-Length:
@@ -17651,5 +17661,5 @@ http_interactions:
         ZX1dLCJoZWFkZXJzIjpudWxsfX0sImxpbmtfZXh0ZW5zaW9uIjoiLmVuLmh0
         bWwifX0=
     http_version: 
-  recorded_at: Fri, 09 Sep 2016 20:02:12 GMT
+  recorded_at: Thu, 22 Sep 2016 21:04:57 GMT
 recorded_with: VCR 3.0.3

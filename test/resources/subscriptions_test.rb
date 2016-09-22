@@ -43,7 +43,7 @@ FILE
       stdout,stderr = capture {
         hammer.run(%W{--reload-cache csv subscriptions --verbose --file #{file.path}})
       }
-      assert_equal '', stdout
+      assert_equal "Importing manifest './test/data/doesnotexist.zip' into organization 'Test Corporation'...done\n", stdout
       lines = stderr.split("\n")
       assert_equal "Manifest upload failed:", lines[0]
       assert_match(/.*Error: No such file or directory.*/, lines[1])
@@ -88,7 +88,7 @@ FILE
       file = Tempfile.new('subscriptions_test')
       # rubocop:disable LineLength
       file.write <<-FILE
-Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract Number,Account Number
+Name,Organization,Manifest File,Subscription Name,Subscription Quantity,Subscription SKU,Subscription Contract,Subscription Account
 Manifest,Test Corporation,#{manifestfile.path}
 Manifest Name,Test Corporation,TestCorp
 Manifest URL,Test Corporation,https://access.stage.redhat.com/management/distributors/1234
@@ -102,12 +102,11 @@ FILE
                       --in-portal --portal-username #{username} --portal-password #{password}
                       --portal https://subscription.rhn.stage.redhat.com:443})
       }
-      assert_equal stderr, ''
-      assert_equal stdout, <<-OUTPUT
-Checking manifest 'TestCorp'...done
-'Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)' of quantity 200 already attached
-Downloading manifest for organization 'Test Corporation...writing to file '#{manifestfile.path}'...done
-OUTPUT
+      lines = stdout.split("\n")
+      assert_equal "Checking manifest 'TestCorp'...done", lines[0]
+      assert_equal "'Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)' of quantity 200 already attached", lines[1]
+      assert_equal "Downloading manifest for organization 'Test Corporation...writing to file '#{manifestfile.path}'...done", lines[2]
+      assert_equal "Importing manifest '#{manifestfile.path}' into organization 'Test Corporation'...done", lines[3]
       file.unlink
       manifestfile.unlink
       stop_vcr

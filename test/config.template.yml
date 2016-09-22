@@ -5,6 +5,8 @@
 
 :watch_plain: true # enable/disable color output of logger in Clamp commands
 
+:reload_cache: true
+
 :log_dir: './log'
 :log_level: 'error'
 :log_api_calls: false

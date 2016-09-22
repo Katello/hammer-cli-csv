@@ -51,21 +51,19 @@ module HammerCLICsv
             }
           }
           if !@existing.include? name
-            print "Creating compute resource '#{name}'..." if option_verbose?
+            print _("Creating compute resource '%{name}'...") % {:name => name} if option_verbose?
             id = @api.resource(:compute_resources).call(:create, params)['id']
           else
-            print "Updating compute resource '#{name}'..." if option_verbose?
+            print _("Updating compute resource '%{name}'...") % {:name => name} if option_verbose?
             id = @existing[name]
             params['id'] = id
             @api.resource(:compute_resources).call(:update, params)
           end
 
-          # Update associated resources
-          # TODO: this doesn't work "Environments you cannot remove environments that are used by hosts or inherited."
-          #associate_organizations(id, line[ORGANIZATIONS], 'compute_resource')
-          #associate_locations(id, line[LOCATIONS], 'compute_resource')
+          associate_organizations(id, line[ORGANIZATIONS], 'compute_resource')
+          associate_locations(id, line[LOCATIONS], 'compute_resource')
 
-          print "done\n" if option_verbose?
+          puts _("done") if option_verbose?
         end
       end
     end

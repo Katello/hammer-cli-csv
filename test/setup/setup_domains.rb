@@ -9,7 +9,7 @@ module Setup
       stdout,stderr = capture {
         hammer.run(%W{--reload-cache csv domains --verbose --file test/data/setup/domains.csv})
       }
-      assert_equal stderr, ''
+      assert_equal '', stderr
 
       stop_vcr
     end

@@ -25,7 +25,9 @@ module HammerCLICsv
           locations = export_column(domain, 'locations', 'name')
           description = domain['fullname']
           capsule = foreman_smart_proxy(:id => domain['dns_id'])
-          parameters = export_parameters(domain['parameters'])
+          parameters = export_column(domain, 'parameters') do |parameter|
+            "#{parameter['name']}#{SEPARATOR}#{parameter['value']}"
+          end
           csv << [name, organizations, locations, description, capsule, parameters]
         end
       end
@@ -46,63 +48,69 @@ module HammerCLICsv
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
           description = namify(line[DESCRIPTION], number)
+          params = {
+            'domain' => {
+              'name' => name,
+              'fullname' => description,
+              'dns_id' => dns_id
+            }
+          }
           if !@existing.include? name
-            print "Creating domain '#{name}'..." if option_verbose?
-            domain_id = @api.resource(:domains).call(:create, {
-                                                       'domain' => {
-                                                         'name' => name,
-                                                         'fullname' => description,
-                                                         'dns_id' => dns_id
-                                                       }
-                                                     })['id']
+            print _("Creating domain '%{name}'...") % {:name => name} if option_verbose?
+            domain = @api.resource(:domains).call(:create, params)
           else
-            print "Updating domain '#{name}'..." if option_verbose?
-            domain_id = @api.resource(:domains).call(:update, {
-                                                       'id' => @existing[name],
-                                                       'domain' => {
-                                                         'name' => name,
-                                                         'fullname' => description,
-                                                         'dns_id' => dns_id
-                                                       }
-                                                     })['id']
+            print _("Updating domain '%{name}'...") % {:name => name} if option_verbose?
+            params['id'] = @existing[name]
+            domain = @api.resource(:domains).call(:update, params)
           end
 
-          # Update associated resources
-          domains ||= {}
-          CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
-            organization_id = foreman_organization(:name => organization)
-            if domains[organization].nil?
-              domains[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})['domains'].collect do |domain|
-                domain['id']
-              end
-            end
-            domains[organization] += [domain_id] if !domains[organization].include? domain_id
+          update_organizations(line, domain)
+          update_locations(line, domain)
+          import_parameters(domain['id'], line[PARAMETERS])
 
-            @api.resource(:organizations).call(:update, {
-                                                 'id' => organization_id,
-                                                 'organization' => {
-                                                   'domain_ids' => domains[organization]
-                                                 }
-                                               })
-          end
-
-          import_parameters(domain_id, line[PARAMETERS])
-
-          print "done\n" if option_verbose?
+          puts _("done") if option_verbose?
         end
       end
 
-      private
-
-      def export_parameters(parameters)
-        return '' if parameters.nil? || parameters.empty?
-
-        values = CSV.generate do |column|
-          column  << parameters.collect do |parameter|
-            "#{parameter['name']}#{SEPARATOR}#{parameter['value']}"
+      def update_organizations(line, domain)
+        domains ||= {}
+        CSV.parse_line(line[ORGANIZATIONS]).each do |organization|
+          organization_id = foreman_organization(:name => organization)
+          if domains[organization].nil?
+            domains[organization] = @api.resource(:organizations).call(:show, {'id' => organization_id})['domains'].collect do |existing_domain|
+              existing_domain['id']
+            end
           end
+          domains[organization] += [domain['id']] if !domains[organization].include? domain['id']
+
+          @api.resource(:organizations).call(:update, {
+                                               'id' => organization_id,
+                                               'organization' => {
+                                                 'domain_ids' => domains[organization]
+                                               }
+                                             })
         end
-        values.delete!("\n")
+      end
+
+      def update_locations(line, domain)
+        return if line[LOCATIONS].nil? || line[LOCATIONS].empty?
+        domains ||= {}
+        CSV.parse_line(line[LOCATIONS]).each do |location|
+          location_id = foreman_location(:name => location)
+          if domains[location].nil?
+            domains[location] = @api.resource(:locations).call(:show, {'id' => location_id})['domains'].collect do |existing_domain|
+              existing_domain['id']
+            end
+          end
+          domains[location] += [domain['id']] if !domains[location].include? domain['id']
+
+          @api.resource(:locations).call(:update, {
+                                           'id' => location_id,
+                                           'location' => {
+                                             'domain_ids' => domains[location]
+                                           }
+                                         })
+        end
       end
 
       def import_parameters(domain_id, parameters)
@@ -110,23 +118,18 @@ module HammerCLICsv
           (parameter_name, parameter_value) = parameter.split(SEPARATOR)
 
           results = @api.resource(:parameters).call(:index, { :domain_id => domain_id, :search => "name=\"#{parameter_name}\"" })['results']
+          params = {
+            'domain_id' => domain_id,
+            'parameter' => {
+              'name' => parameter_name,
+              'value' => parameter_value
+            }
+          }
           if results.empty?
-            @api.resource(:parameters).call(:create, {
-                                                       'domain_id' => domain_id,
-                                                       'parameter' => {
-                                                         'name' => parameter_name,
-                                                         'value' => parameter_value
-                                                       }
-                                                     })
+            @api.resource(:parameters).call(:create, params)
           else
-            @api.resource(:parameters).call(:create, {
-                                                       'id' => results[0]['id'],
-                                                       'domain_id' => domain_id,
-                                                       'parameter' => {
-                                                         'name' => parameter_name,
-                                                         'value' => parameter_value
-                                                       }
-                                                     })
+            params['id'] = results[0]['id']
+            @api.resource(:parameters).call(:update, params)
           end
         end
       end

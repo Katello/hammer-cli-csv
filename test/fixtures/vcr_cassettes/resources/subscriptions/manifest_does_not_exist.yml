@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50191/api/status
+    uri: https://admin:changeme@katello.example.com:50219/api/status
     body:
       encoding: US-ASCII
       string: ''
@@ -19,15 +19,9 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 12 Sep 2016 15:39:13 GMT
+      - Thu, 22 Sep 2016 21:04:57 GMT
       Server:
       - Apache/2.4.6 (CentOS)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -41,25 +35,41 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 6f89ad8c-1967-41b4-ba08-52d5ce476c90
+      - ef4c8c60-77df-429a-a4ce-72976a55c0d5
       X-Runtime:
-      - '0.210953'
+      - '0.219761'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
       Via:
-      - 1.1 katello.example.com:50191
+      - 1.1 katello.example.com:50219
       Vary:
       - Accept-Encoding
       Content-Length:
       - '81'
       Set-Cookie:
-      - _session_id=3137521a3912ddd409554b70e5f92e9a; path=/; HttpOnly
+      - _session_id=cf31d4d165addbb0f82de524478ef94c; path=/; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Mon, 12 Sep 2016 15:39:14 GMT
+  recorded_at: Thu, 22 Sep 2016 21:04:59 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50191/api/v2/plugins
+    uri: https://admin:changeme@katello.example.com:50219/api/v2/plugins
     body:
       encoding: US-ASCII
       string: ''
@@ -76,15 +86,9 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 12 Sep 2016 15:39:13 GMT
+      - Thu, 22 Sep 2016 21:04:58 GMT
       Server:
       - Apache/2.4.6 (CentOS)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -94,25 +98,41 @@ http_interactions:
       Apipie-Checksum:
       - 9544abef9cf8343005f07ed8c9f1f8e7
       Etag:
-      - W/"c547959b2afaff0cf0a8d731005e9365-gzip"
+      - W/"1f3be6be9a21bcf6d5ba90bd77fcb5ca-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 107e78bd-8496-4498-a066-9979bf0fd711
+      - 85057a97-ce92-42a2-83f5-db4c81228d85
       X-Runtime:
-      - '0.194051'
+      - '0.165500'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
       Via:
-      - 1.1 katello.example.com:50191
+      - 1.1 katello.example.com:50219
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '566'
+      - '721'
       Set-Cookie:
-      - _session_id=f140516d21d0d992d66cd7e36978c9db; path=/; HttpOnly
+      - _session_id=9f27f4bbed55f2a3d1b771f101f95894; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        ewogICJ0b3RhbCI6IDMsCiAgInN1YnRvdGFsIjogMywKICAicGFnZSI6IDEs
+        ewogICJ0b3RhbCI6IDUsCiAgInN1YnRvdGFsIjogNSwKICAicGFnZSI6IDEs
         CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
         OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
         InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
@@ -127,21 +147,34 @@ http_interactions:
         Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
         c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
         LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMSJ9LHsiaWQiOiJmb3JlbWFu
+        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMiJ9LHsiaWQiOiJmb3JlbWFu
         X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
         bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
         aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
         IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
         b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
-        ZCI6ImthdGVsbG8iLCJuYW1lIjoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIs
-        ImRlc2NyaXB0aW9uIjoiQ29udGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFn
-        ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
-        YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjIuMCJ9XQp9Cg==
+        ZCI6ImZvcmVtYW5fcmVtb3RlX2V4ZWN1dGlvbiIsIm5hbWUiOiJmb3JlbWFu
+        X3JlbW90ZV9leGVjdXRpb24iLCJhdXRob3IiOiJGb3JlbWFuIFJlbW90ZSBF
+        eGVjdXRpb24gdGVhbSIsImRlc2NyaXB0aW9uIjoiQSBwbHVnaW4gYnJpbmdp
+        bmcgcmVtb3RlIGV4ZWN1dGlvbiB0byB0aGUgRm9yZW1hbiwgY29tcGxldGlu
+        ZyB0aGUgY29uZmlnIG1hbmFnZW1lbnQgZnVuY3Rpb25hbGl0eSB3aXRoIHJl
+        bW90ZSBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkuIiwidXJsIjoiaHR0cHM6
+        Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9yZW1hbl9yZW1vdGVfZXhlY3V0
+        aW9uIiwidmVyc2lvbiI6IjEuMi4xIn0seyJpZCI6ImZvcmVtYW5fdGVtcGxh
+        dGVzIiwibmFtZSI6ImZvcmVtYW5fdGVtcGxhdGVzIiwiYXV0aG9yIjoiR3Jl
+        ZyBTdXRjbGlmZmUiLCJkZXNjcmlwdGlvbiI6IkVuZ2luZSB0byBzeW5jaHJv
+        bmlzZSBwcm92aXNpb25pbmcgdGVtcGxhdGVzIGZyb20gR2l0SHViIiwidXJs
+        IjoiaHR0cDovL2dpdGh1Yi5jb20vdGhlZm9yZW1hbi9mb3JlbWFuX3RlbXBs
+        YXRlcyIsInZlcnNpb24iOiIzLjAuMCJ9LHsiaWQiOiJrYXRlbGxvIiwibmFt
+        ZSI6ImthdGVsbG8iLCJhdXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNv
+        bnRlbnQgYW5kIFN1YnNjcmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3Ig
+        Rm9yZW1hbiIsInVybCI6Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJz
+        aW9uIjoiMy4zLjAifV0KfQo=
     http_version: 
-  recorded_at: Mon, 12 Sep 2016 15:39:14 GMT
+  recorded_at: Thu, 22 Sep 2016 21:04:59 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50191/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
+    uri: https://admin:changeme@katello.example.com:50219/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
     body:
       encoding: US-ASCII
       string: ''
@@ -155,22 +188,16 @@ http_interactions:
       Content-Type:
       - application/json
       Host:
-      - katello.example.com:50191
+      - katello.example.com:50219
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Mon, 12 Sep 2016 15:39:14 GMT
+      - Thu, 22 Sep 2016 21:04:58 GMT
       Server:
       - Apache/2.4.6 (CentOS)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -180,21 +207,37 @@ http_interactions:
       Apipie-Checksum:
       - 9544abef9cf8343005f07ed8c9f1f8e7
       Etag:
-      - W/"471e8acb2053be2e7a823cbd174ec330-gzip"
+      - W/"2301fbbcaa43d81f290e0ff70ced8757-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b9b40162-df7c-4423-87f4-68d929599686
+      - 9333d28a-0569-46ac-bc6e-464cb2cea1bb
       X-Runtime:
-      - '1.292192'
+      - '0.229740'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
       Via:
-      - 1.1 katello.example.com:50191
+      - 1.1 katello.example.com:50219
       Vary:
       - Accept-Encoding
       Content-Length:
       - '388'
       Set-Cookie:
-      - _session_id=5b861ef8546209686fad8ad87581bc1e; path=/; HttpOnly
+      - _session_id=c226ee0d6863ad039ff8eeb9ee316fb3; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -208,13 +251,13 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-09-07 01:39:03 UTC","updated_at":"2016-09-07 01:39:03 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-09-22 18:39:46 UTC","updated_at":"2016-09-22 18:39:46 UTC","id":9,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 12 Sep 2016 15:39:15 GMT
+  recorded_at: Thu, 22 Sep 2016 21:04:59 GMT
 - request:
     method: get
-    uri: https://katello.example.com:50191/apidoc/v2.en.json
+    uri: https://katello.example.com:50219/apidoc/v2.en.json
     body:
       encoding: US-ASCII
       string: ''
@@ -230,22 +273,16 @@ http_interactions:
       Accept-Language:
       - en
       Host:
-      - katello.example.com:50191
+      - katello.example.com:50219
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Mon, 12 Sep 2016 15:39:15 GMT
+      - Thu, 22 Sep 2016 21:04:58 GMT
       Server:
       - Apache/2.4.6 (CentOS)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
       Content-Disposition:
       - inline; filename="v2.en.json"
       Content-Transfer-Encoding:
@@ -257,11 +294,27 @@ http_interactions:
       Apipie-Checksum:
       - 9544abef9cf8343005f07ed8c9f1f8e7
       X-Request-Id:
-      - 61f4065f-a067-4c85-a4bd-1ba857f16fdc
+      - 30121a86-143a-411c-b297-9007611595df
       X-Runtime:
-      - '0.169633'
+      - '0.103655'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
       Via:
-      - 1.1 katello.example.com:50191
+      - 1.1 katello.example.com:50219
       Vary:
       - Accept-Encoding
       Content-Length:
@@ -17863,5 +17916,5 @@ http_interactions:
         ZX1dLCJoZWFkZXJzIjpudWxsfX0sImxpbmtfZXh0ZW5zaW9uIjoiLmVuLmh0
         bWwifX0=
     http_version: 
-  recorded_at: Mon, 12 Sep 2016 15:39:16 GMT
+  recorded_at: Thu, 22 Sep 2016 21:04:59 GMT
 recorded_with: VCR 3.0.3

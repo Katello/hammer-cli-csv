@@ -1,2 +1,2 @@
-Name,Description,Organizations
-test.com,,Test Corporation
+Name,Organizations,Locations,Description,DNS Smart Proxy,Parameters
+test.com,Test Corporation,"","",,""

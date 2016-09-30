@@ -12,17 +12,14 @@
 :log_api_calls: false
 :log_size: 5 # MB
 
-:csv:
-  :enable_module: true
-  :host:          'https://localhost'
-  :username:      'admin'
-  :password:      'changeme'
-
 :foreman:
   :enable_module: true
   :host:          'https://localhost'
   :username:      'admin'
   :password:      'changeme'
+
+:csv:
+  :enable_module: true
 
 :katello:
   :enable_module: true

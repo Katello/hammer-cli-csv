@@ -1,5 +1,3 @@
-#require 'hammer_cli_csv/utils/subscription_utils'
-
 module HammerCLICsv
   class CsvCommand
     class ContentHostsCommand < BaseCommand

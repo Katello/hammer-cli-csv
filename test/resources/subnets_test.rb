@@ -37,7 +37,7 @@ HELP
       # rubocop:disable LineLength
       file.write <<-FILE
 Name,Organizations,Locations,Network,Network Mask,Network Prefix,From,To,Domains,Gateway,DHCP Proxy,TFTP Proxy,DNS Proxy,DNS Primary,DNS Secondary,VLAN ID
-Test Subnet,Test Corporation,Default Location,192.168.100.1,255.255.255.0,,"","",test.com,"","",katello.example.com,"","","",""
+Test Subnet,Test Corporation,Testing,192.168.100.1,255.255.255.0,,"","",test.com,"","",,"","","",""
 FILE
       file.rewind
 
@@ -64,8 +64,8 @@ FILE
       # rubocop:disable LineLength
       file.write <<-FILE
 Name,Organizations,Locations,Network,Network Mask,Network Prefix,From,To,Domains,Gateway,DHCP Proxy,TFTP Proxy,DNS Proxy,DNS Primary,DNS Secondary,VLAN ID
-Bad Subnet,Test Corporation,Default Location,192.168.100.1,255.255.255.0,24,bad,,test.com,"","",katello.example.com,"","","",""
-Test Subnet,Test Corporation,Default Location,192.168.100.1,255.255.255.0,24,"","",example.com,"","",katello.example.com,"","","",""
+Bad Subnet,Test Corporation,Testing,192.168.100.1,255.255.255.0,24,bad,,test.com,"","",,"","","",""
+Test Subnet,Test Corporation,Testing,192.168.100.1,255.255.255.0,24,"","",test.com,"","",,"","","",""
 FILE
       file.rewind
 
@@ -75,7 +75,7 @@ FILE
       lines = stderr.split("\n")
       assert_equal "Error: 422 Unprocessable Entity", lines[0]
       lines = stdout.split("\n")
-      assert_equal lines[0], "Creating subnet 'Bad Subnet'...Updating subnet 'Test Subnet'...done"
+      assert_equal "Creating subnet 'Bad Subnet'...Updating subnet 'Test Subnet'...done", lines[0]
       file.unlink
       stop_vcr
     end

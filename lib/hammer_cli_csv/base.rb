@@ -8,6 +8,8 @@ require 'hammer_cli_csv/csv'
 # rubocop:disable ClassLength
 module HammerCLICsv
   class BaseCommand < HammerCLI::Apipie::Command
+    include ::HammerCLICsv::Utils::Config
+
     option %w(-v --verbose), :flag, 'be verbose'
     option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with',
            :default => 1, :hidden => true
@@ -42,38 +44,8 @@ module HammerCLICsv
     end
 
     def execute
-      @server = (HammerCLI::Settings.settings[:_params] &&
-                 HammerCLI::Settings.settings[:_params][:host]) ||
-        HammerCLI::Settings.get(:csv, :host) ||
-        HammerCLI::Settings.get(:katello, :host) ||
-        HammerCLI::Settings.get(:foreman, :host)
-      @username = (HammerCLI::Settings.settings[:_params] &&
-                   HammerCLI::Settings.settings[:_params][:username]) ||
-        HammerCLI::Settings.get(:csv, :username) ||
-        HammerCLI::Settings.get(:katello, :username) ||
-        HammerCLI::Settings.get(:foreman, :username)
-      @password = (HammerCLI::Settings.settings[:_params] &&
-                   HammerCLI::Settings.settings[:_params][:password]) ||
-        HammerCLI::Settings.get(:csv, :password) ||
-        HammerCLI::Settings.get(:katello, :password) ||
-        HammerCLI::Settings.get(:foreman, :password)
-
+      @api = api_connection
       @server_status = check_server_status(@server, @username, @password)
-
-      if @server_status['release'] == 'Headpin'
-        @headpin = HeadpinApi.new({
-                                    :server => @server,
-                                    :username => @username,
-                                    :password => @password
-                                  })
-      else
-        @api = ApipieBindings::API.new({
-                                         :uri => @server,
-                                         :username => @username,
-                                         :password => @password,
-                                         :api_version => 2
-                                       })
-      end
 
       if option_export?
         if option_file

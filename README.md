@@ -599,17 +599,16 @@ Test server configuration is taken from 'test/config.yml'. If that file does not
 
     % cat test/config.yml
 
-    :csv:
-      :enable_module: true
-
     :foreman:
       :enable_module: true
       :host:          'http://katello:3000'
       :username:      'admin'
       :password:      'changeme'
-
     :katello:
       :enable_module: true
+    :csv:
+      :enable_module: true
+
 
 Note: Since the subscriptions tests rely entirely on having a Red Hat manifest, re-recording these tests is more involved. It requires access to the internal "stage" customer portal and API. To run in recording mode, specify PORTALUSERNAME and PORTALPASSWORD env variables.
 

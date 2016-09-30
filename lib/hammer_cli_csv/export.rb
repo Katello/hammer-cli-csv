@@ -1,6 +1,8 @@
 module HammerCLICsv
   class CsvCommand
     class ExportCommand < HammerCLI::Apipie::Command
+      include ::HammerCLICsv::Utils::Config
+
       command_name 'export'
       desc         'export into directory'
 
@@ -30,46 +32,9 @@ module HammerCLICsv
       end
 
       def execute
-        @server = (HammerCLI::Settings.settings[:_params] &&
-                   HammerCLI::Settings.settings[:_params][:host]) ||
-          HammerCLI::Settings.get(:csv, :host) ||
-          HammerCLI::Settings.get(:katello, :host) ||
-          HammerCLI::Settings.get(:foreman, :host)
-        @username = (HammerCLI::Settings.settings[:_params] &&
-                     HammerCLI::Settings.settings[:_params][:username]) ||
-          HammerCLI::Settings.get(:csv, :username) ||
-          HammerCLI::Settings.get(:katello, :username) ||
-          HammerCLI::Settings.get(:foreman, :username)
-        @password = (HammerCLI::Settings.settings[:_params] &&
-                     HammerCLI::Settings.settings[:_params][:password]) ||
-          HammerCLI::Settings.get(:csv, :password) ||
-          HammerCLI::Settings.get(:katello, :password) ||
-          HammerCLI::Settings.get(:foreman, :password)
+        @api = api_connection
+        skipped_resources = (RESOURCES - SUPPORTED_RESOURCES)
 
-        @server_status = check_server_status(@server, @username, @password)
-
-        if @server_status['release'] == 'Headpin'
-          @headpin = HeadpinApi.new({
-                                      :server => @server,
-                                      :username => @username,
-                                      :password => @password
-                                    })
-          skipped_resources = %w( settings locations puppet_environments operating_systems
-                                  domains architectures partition_tables lifecycle_environments
-                                  provisioning_templates
-                                  hosts reports )
-          skipped_resources += %w( subscriptions roles users )  # TODO: not implemented yet
-        else
-          @api = ApipieBindings::API.new({
-                                           :uri => @server,
-                                           :username => @username,
-                                           :password => @password,
-                                           :api_version => 2
-                                         })
-          skipped_resources = (RESOURCES - SUPPORTED_RESOURCES)
-        end
-
-        # Swing the hammers
         (RESOURCES - skipped_resources).each do |resource|
           hammer_resource(resource)
         end

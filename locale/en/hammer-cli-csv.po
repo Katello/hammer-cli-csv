@@ -20,37 +20,22 @@ msgstr ""
 msgid "import or export activation keys"
 msgstr ""
 
-msgid "Creating activation key '%{name}'..."
+msgid "Export one subscription per row, only process update subscriptions on import"
 msgstr ""
 
-msgid "Updating activation key '%{name}'..."
+msgid "Activation key '%{name}' must already exist with --itemized_subscriptions"
+msgstr ""
+
+msgid "Updating subscriptions for activation key '%{name}'..."
 msgstr ""
 
 msgid "done"
 msgstr ""
 
-msgid "Only process organization matching this name"
+msgid "Creating activation key '%{name}'..."
 msgstr ""
 
-msgid "Continue processing even if individual resource error"
-msgstr ""
-
-msgid "**** This command is unsupported and is provided as tech preview. ****"
-msgstr ""
-
-msgid "Updating hypervisor and guest associations..."
-msgstr ""
-
-msgid "Content host '%{name}' must already exist with --subscriptions-only"
-msgstr ""
-
-msgid "Updating subscriptions for content host '%{name}'..."
-msgstr ""
-
-msgid "Creating content host '%{name}'..."
-msgstr ""
-
-msgid "Updating content host '%{name}'..."
+msgid "Updating activation key '%{name}'..."
 msgstr ""
 
 msgid " '%{name}' already attached..."
@@ -62,16 +47,148 @@ msgstr ""
 msgid " attaching '%{name}'..."
 msgstr ""
 
-msgid "No subscriptions match SKU '%{sku}'"
+msgid "Only process organization matching this name"
 msgstr ""
 
-msgid "No subscriptions match name '%{name}'"
+msgid "Continue processing even if individual resource error"
 msgstr ""
 
-msgid "No subscriptions match type '%{type}'"
+msgid "**** This command is unsupported and is provided as tech preview. ****"
 msgstr ""
 
-msgid "No '%{name}' subscription with quantity %{quantity} or more available"
+msgid "Error: %{message}"
+msgstr ""
+
+msgid "Organization '%{name}' not found"
+msgstr ""
+
+msgid "Organization 'id=%{id}' not found"
+msgstr ""
+
+msgid "Location '%{name}' not found"
+msgstr ""
+
+msgid "Location 'id=%{id}' not found"
+msgstr ""
+
+msgid "Role '%{name}' not found"
+msgstr ""
+
+msgid "Role 'id=%{id}' not found"
+msgstr ""
+
+msgid "Permission '%{name}' not found"
+msgstr ""
+
+msgid "Permission 'id=%{id}' not found"
+msgstr ""
+
+msgid "Puppet environment '%{name}' not found"
+msgstr ""
+
+msgid "Puppet environment 'id=%{id}' not found"
+msgstr ""
+
+msgid "Template kind '%{name}' not found"
+msgstr ""
+
+msgid "Template kind 'id=%{id}' not found"
+msgstr ""
+
+msgid "Operating system '%{name}' not found"
+msgstr ""
+
+msgid "Operating system 'id=%{id}' not found"
+msgstr ""
+
+msgid "Architecture '%{name}' not found"
+msgstr ""
+
+msgid "Architecture 'id=%{id}' not found"
+msgstr ""
+
+msgid "Domain '%{name}' not found"
+msgstr ""
+
+msgid "Domain 'id=%{id}' not found"
+msgstr ""
+
+msgid "Partition table '%{name}' not found"
+msgstr ""
+
+msgid "Host '%{name}' not found"
+msgstr ""
+
+msgid "Host 'id=%{id}' not found"
+msgstr ""
+
+msgid "Host Group '%{name}' not found"
+msgstr ""
+
+msgid "Host Group 'id=%{id}' not found"
+msgstr ""
+
+msgid "Provisioning template '%{name}' not found"
+msgstr ""
+
+msgid "Provisioning template 'id=%{id}' not found"
+msgstr ""
+
+msgid "Smart Proxy '%{name}' not found"
+msgstr ""
+
+msgid "Smart Proxy 'id=%{id}' not found"
+msgstr ""
+
+msgid "Lifecycle environment '%{name}' not found"
+msgstr ""
+
+msgid "Content view '%{name}' not found"
+msgstr ""
+
+msgid "Puppet contentview 'id=%{id}' not found"
+msgstr ""
+
+msgid "Content view version '%{name}' with version '%{version}' not found"
+msgstr ""
+
+msgid "Repository '%{name}' not found"
+msgstr ""
+
+msgid "Puppet repository 'id=%{id}' not found"
+msgstr ""
+
+msgid "Host collection '%{name}' not found"
+msgstr ""
+
+msgid "Host collection 'id=%{id}' not found"
+msgstr ""
+
+msgid "Container '%{name}' not found"
+msgstr ""
+
+msgid "Container 'id=%{id}' not found"
+msgstr ""
+
+msgid "Creating compute resource '%{name}'..."
+msgstr ""
+
+msgid "Updating compute resource '%{name}'..."
+msgstr ""
+
+msgid "Updating hypervisor and guest associations..."
+msgstr ""
+
+msgid "Content host '%{name}' must already exist with --itemized-subscriptions"
+msgstr ""
+
+msgid "Updating subscriptions for content host '%{name}'..."
+msgstr ""
+
+msgid "Creating content host '%{name}'..."
+msgstr ""
+
+msgid "Updating content host '%{name}'..."
 msgstr ""
 
 msgid "Creating content view '%{name}'..."
@@ -81,6 +198,12 @@ msgid "Updating content view '%{name}'..."
 msgstr ""
 
 msgid "import to or export from a running foreman server"
+msgstr ""
+
+msgid "Creating domain '%{name}'..."
+msgstr ""
+
+msgid "Updating domain '%{name}'..."
 msgstr ""
 
 msgid "be verbose"
@@ -173,4 +296,52 @@ msgid "Satellite-5 Splice"
 msgstr ""
 
 msgid "Deleting content host with id '%{id}'..."
+msgstr ""
+
+msgid "Creating subnet '%{name}'..."
+msgstr ""
+
+msgid "Updating subnet '%{name}'..."
+msgstr ""
+
+msgid "Import subscription comment lines into portal"
+msgstr ""
+
+msgid "Importing manifest '%{filename}' into organization '%{organization}'..."
+msgstr ""
+
+msgid "--portal-username and --portal-password required"
+msgstr ""
+
+msgid "--portal required"
+msgstr ""
+
+msgid "Downloading manifest for organization '%{organization}..."
+msgstr ""
+
+msgid "writing to file '%{filename}'..."
+msgstr ""
+
+msgid "Checking manifest '%{name}'..."
+msgstr ""
+
+msgid "Manifest Name row is required before updating from Subscription rows"
+msgstr ""
+
+msgid "'%{name}' of quantity %{quantity} already attached"
+msgstr ""
+
+msgid "Attaching '%{name}' of quantity %{quantity}..."
+msgstr ""
+
+msgid "No subscriptions match SKU '%{sku}'"
+msgstr ""
+
+msgid "No subscriptions match name '%{name}'"
+msgstr ""
+
+msgid "No subscriptions match type '%{type}'"
+msgstr ""
+
+msgid "No '%{name}' subscription with quantity %{quantity} or more available"
 msgstr ""

@@ -127,7 +127,7 @@ module HammerCLICsv
           lines = csv[start_index...finish_index].clone
           splits << Thread.new do
             lines.each do |line|
-              next if line[name_column || NAME][0] == '#'
+              next if !line[name_column || NAME].nil? && line[name_column || NAME][0] == '#'
               begin
                 yield line
               rescue RuntimeError => e

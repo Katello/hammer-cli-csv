@@ -13,6 +13,7 @@ module HammerCLICsv
 
       option %w(--itemized-subscriptions), :flag, _('Export one subscription per row, only process update subscriptions on import')
 
+      SEARCH = 'Search'
       ORGANIZATION = 'Organization'
       ENVIRONMENT = 'Environment'
       CONTENTVIEW = 'Content View'
@@ -138,17 +139,32 @@ module HammerCLICsv
         update_existing(line)
 
         count(line[COUNT]).times do |number|
-          name = namify(line[NAME], number)
-
-          if option_itemized_subscriptions?
-            update_itemized_subscriptions(name, line)
+          if  !line[SEARCH].nil? && !line[SEARCH].empty?
+            search = namify(line[SEARCH], number)
+            @api.resource(:hosts).call(:index, {
+                'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'search' => search
+            })['results'].each do |host|
+              if host['subscription_facet_attributes']
+                create_named_from_csv(host['name'], line)
+              end
+            end
           else
-            update_or_create(name, line)
+            name = namify(line[NAME], number)
+            create_named_from_csv(name, line)
           end
         end
       end
 
       private
+
+      def create_named_from_csv(name, line)
+        if option_itemized_subscriptions?
+          update_itemized_subscriptions(name, line)
+        else
+          update_or_create(name, line)
+        end
+      end
 
       def update_itemized_subscriptions(name, line)
         raise _("Content host '%{name}' must already exist with --itemized-subscriptions") % {:name => name} unless @existing.include? name
@@ -369,10 +385,12 @@ module HammerCLICsv
                 'id' => host['id']
             })
             host['facts'] ||= {}
-            if host['subscription_facet_attributes']['virtual_guests'].empty?
-              hosts.push(host)
-            else
-              hypervisors.push(host)
+            unless host['subscription_facet_attributes'].nil?
+              if host['subscription_facet_attributes']['virtual_guests'].empty?
+                hosts.push(host)
+              else
+                hypervisors.push(host)
+              end
             end
           end
         end

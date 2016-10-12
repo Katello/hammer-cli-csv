@@ -207,7 +207,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:04 GMT
+      - Wed, 12 Oct 2016 14:11:19 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -223,9 +223,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 838a48b6-bc4d-4bda-8b3e-f156a45cba51
+      - b0b2bd7e-75e2-427a-83ff-19b6ea7e871c
       X-Runtime:
-      - '1.090733'
+      - '0.076123'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -249,12 +249,12 @@ http_interactions:
       Content-Length:
       - '81'
       Set-Cookie:
-      - _session_id=7e26d4117bfe79bdbcadac9331eb6058; path=/; HttpOnly
+      - _session_id=e9f948a70017139eca13aff55f5a903f; path=/; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:05 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:19 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50218/api/v2/plugins
@@ -274,7 +274,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:04 GMT
+      - Wed, 12 Oct 2016 14:11:19 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -290,9 +290,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1d3f5d7a-6bac-4f15-b6e2-65d30d9c2de3
+      - 89d90c13-0a4a-4d11-ab69-1447e7924c93
       X-Runtime:
-      - '0.087885'
+      - '0.064888'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -316,7 +316,7 @@ http_interactions:
       Content-Length:
       - '565'
       Set-Cookie:
-      - _session_id=8f20458470f0ecb5c216ef084bc3d429; path=/; HttpOnly
+      - _session_id=ccb4aa6587986e746b073417289ea728; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -346,7 +346,7 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjMuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:05 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:19 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50218/api/locations?per_page=999999
@@ -372,7 +372,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:04 GMT
+      - Wed, 12 Oct 2016 14:11:20 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -388,9 +388,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8daa4344-5afe-414f-a2bf-cd11396cd87d
+      - b7e7e241-bad7-4b96-965f-eed35f5726a0
       X-Runtime:
-      - '0.093822'
+      - '1.152980'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -414,7 +414,7 @@ http_interactions:
       Content-Length:
       - '1350'
       Set-Cookie:
-      - _session_id=9724aa7f96d829eb115032d0814d4aef; path=/; HttpOnly
+      - _session_id=938e188eef6395a05a03dc1ba6b1d6f6; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -431,7 +431,7 @@ http_interactions:
           "results": [{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 14:47:06 UTC","updated_at":"2016-09-30 14:47:06 UTC","id":2,"name":"Default Location","title":"Default Location","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:45 UTC","updated_at":"2016-09-30 15:10:45 UTC","id":4,"name":"Test East","title":"Test East","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:04:16 UTC","updated_at":"2016-09-30 15:04:16 UTC","id":3,"name":"Testing","title":"Testing","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:45 UTC","updated_at":"2016-09-30 15:10:45 UTC","id":5,"name":"Test North","title":"Test North","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:46 UTC","updated_at":"2016-09-30 15:10:46 UTC","id":6,"name":"Test South","title":"Test South","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:46 UTC","updated_at":"2016-09-30 15:10:46 UTC","id":7,"name":"Test West","title":"Test West","description":null}]
         }
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:05 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:20 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50218/api/locations/3
@@ -459,7 +459,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:05 GMT
+      - Wed, 12 Oct 2016 14:11:21 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -475,9 +475,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 01f3bf5f-9f77-45d3-aa1f-34ca974212e3
+      - 05b80409-6b09-47e5-ac6a-728e67720bb2
       X-Runtime:
-      - '0.320090'
+      - '0.429791'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -501,7 +501,7 @@ http_interactions:
       Content-Length:
       - '16462'
       Set-Cookie:
-      - _session_id=bc1aeb9aa24ac947ee5fe34f0ff964fb; path=/; HttpOnly
+      - _session_id=b90f9547accea0aef2ca27650c839173; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
@@ -631,7 +631,7 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:06 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:21 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50218/api/locations/4
@@ -659,7 +659,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:06 GMT
+      - Wed, 12 Oct 2016 14:11:21 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -675,9 +675,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9bd14042-21d6-4c29-949b-307f18b1f25b
+      - dcfae431-9b93-4c67-9362-0de6399a9a26
       X-Runtime:
-      - '1.351385'
+      - '0.307197'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -701,7 +701,7 @@ http_interactions:
       Content-Length:
       - '16400'
       Set-Cookie:
-      - _session_id=5dc98d3d6ec1e4d924e5f5d1eec54523; path=/; HttpOnly
+      - _session_id=262bc413eb577ebfd8ce6663cc40a802; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
@@ -831,7 +831,7 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:07 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:21 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50218/api/locations/5
@@ -859,7 +859,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:07 GMT
+      - Wed, 12 Oct 2016 14:11:23 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -875,9 +875,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 4fd99bd6-d5be-47a0-8085-200e044b61ab
+      - 2a374c4f-2ac8-40dd-9c18-85df246f0377
       X-Runtime:
-      - '0.314349'
+      - '1.301331'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -901,7 +901,7 @@ http_interactions:
       Content-Length:
       - '16402'
       Set-Cookie:
-      - _session_id=d37a6893ca40b699b8538f95af9ccddd; path=/; HttpOnly
+      - _session_id=083583ee93ac1ff7e1cbc3b714b52b0e; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
@@ -1031,7 +1031,7 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:08 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:22 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50218/api/locations/6
@@ -1059,7 +1059,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:07 GMT
+      - Wed, 12 Oct 2016 14:11:23 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -1075,9 +1075,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 38b4608c-b4f2-4926-af79-b19b35a71d10
+      - 58dda68b-8b35-4376-aafd-4334fd2b98bc
       X-Runtime:
-      - '0.315094'
+      - '0.316409'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -1101,7 +1101,7 @@ http_interactions:
       Content-Length:
       - '16402'
       Set-Cookie:
-      - _session_id=50b00eecf97695371e5ab6bec1533f54; path=/; HttpOnly
+      - _session_id=d567de3747854001589513244e06be9e; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
@@ -1231,7 +1231,7 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:08 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:23 GMT
 - request:
     method: put
     uri: https://admin:changeme@katello.example.com:50218/api/locations/7
@@ -1259,7 +1259,7 @@ http_interactions:
       message: 'OK '
     headers:
       Date:
-      - Fri, 30 Sep 2016 15:40:08 GMT
+      - Wed, 12 Oct 2016 14:11:23 GMT
       Server:
       - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
@@ -1275,9 +1275,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 277330b2-5988-48c5-bbce-2ab1a4a81648
+      - 39b138e2-0880-46ae-8f0f-100f423caf00
       X-Runtime:
-      - '1.377940'
+      - '0.304801'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -1301,7 +1301,7 @@ http_interactions:
       Content-Length:
       - '16400'
       Set-Cookie:
-      - _session_id=9f116bde9c08ad65692f40cf3aefff01; path=/; HttpOnly
+      - _session_id=40c9b3a8ce59e175634c11d31849ff51; path=/; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
@@ -1431,5 +1431,5 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:40:09 GMT
+  recorded_at: Wed, 12 Oct 2016 14:11:23 GMT
 recorded_with: VCR 3.0.3

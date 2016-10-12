@@ -424,6 +424,7 @@ Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract 
 | Additional arguments | Description |
 | ---------------:| :--------------|
 | --organization | Only process organization matching this name |
+| --itemized-subscriptions | Export one subscription per row, only process update subscriptions on import |
 
 **Overview**
 * [Open Issues](https://github.com/Katello/hammer-cli-csv/issues?labels=content-hosts&state=open)
@@ -438,6 +439,7 @@ Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract 
 | Column Title | Column Description | % |
 | :----------- | :----------------- | :-: |
 | Name         | Name of the content hosts to update or create | x |
+| Search | Alternative to Name column to update content hosts matching search results | x |
 | Count | Number of times to iterate this CSV row during import, incrementing value for substitution |   |
 | Organization | Organization name |   |
 | Environment | Puppet environment name |   |
@@ -453,6 +455,14 @@ Name,Organization,Manifest File,Subscription Name,Quantity,Product SKU,Contract 
 | SLA | Service Level Agreement |   |
 | Products | Comma separated list of subscriptions |   |
 | Subscriptions | Comma separated list of subscriptions |   |
+| Subscription Name | Applicable for --itemized-subscriptions |
+| Subscription Type | Applicable for --itemized-subscriptions |
+| Subscription Quantity | Applicable for --itemized-subscriptions |
+| Subscription SKU | Applicable for --itemized-subscriptions |
+| Subscription Contract | Applicable for --itemized-subscriptions |
+| Subscription Account | Applicable for --itemized-subscriptions |
+| Subscription Start | Applicable for --itemized-subscriptions |
+| Subscription End | Applicable for --itemized-subscriptions |
 
 ## Reports
 

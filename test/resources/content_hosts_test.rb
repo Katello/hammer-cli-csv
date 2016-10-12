@@ -122,5 +122,43 @@ HELP
 
       stop_vcr
     end
+
+    def test_import_search
+      start_vcr
+      set_user 'admin'
+
+      file = Tempfile.new('content_hosts_test')
+      # rubocop:disable LineLength
+      file.write("Name,Count,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions\n")
+      file.write("testaaa%d,2,Test Corporation,Library,Default Organization View,,No,,RHEL 6.4,x86_64,2,4 GB,4,Standard,\"69|Red Hat Enterprise Linux Server\",\n")
+      file.write("testbbb%d,3,Test Corporation,Library,Default Organization View,,No,,RHEL 6.4,x86_64,4,16 GB,8,Premium,\"69|Red Hat Enterprise Linux Server\",\n")
+      # rubocop:enable LineLength
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path}})
+      }
+      assert_equal '', stderr
+
+      file = Tempfile.new('content_hosts_test')
+      # rubocop:disable LineLength
+      file.write("Search,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions\n")
+      file.write("name ~ testaaa,Test Corporation,Library,Default Organization View,,No,,RHEL 6.4,x86_64,2,4 GB,4,Standard,\"69|Red Hat Enterprise Linux Server\",\"\"\"2|RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)|10999113|5700573\"\"\"\n")
+      # rubocop:enable LineLength
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path}})
+      }
+      assert_equal '', stderr
+      assert_equal "Updating content host 'testaaa0'...done\nUpdating content host 'testaaa1'...done\n", stdout
+
+
+      %w{testaaa0 testaaa1 testbbb0 testbbb1 testbbb2}.each do |hostname|
+        host_delete(hostname)
+      end
+
+      stop_vcr
+    end
   end
 end

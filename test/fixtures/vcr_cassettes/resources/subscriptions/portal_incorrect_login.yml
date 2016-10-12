@@ -170,165 +170,6 @@ http_interactions:
   recorded_at: Fri, 30 Sep 2016 15:31:03 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/api/status
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: 'OK '
-    headers:
-      Date:
-      - Fri, 30 Sep 2016 15:39:40 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
-      Etag:
-      - W/"1316c9d778b9181476af8a9546423fb1-gzip"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 747f0c0c-879e-45d1-98c9-db54fbdfeda4
-      X-Runtime:
-      - '0.087741'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '81'
-      Set-Cookie:
-      - _session_id=a854d36efe049cbddbd1d5f1d70a160c; path=/; HttpOnly
-    body:
-      encoding: UTF-8
-      string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
-    http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:39:41 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@katello.example.com:50218/api/v2/plugins
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: 'OK '
-    headers:
-      Date:
-      - Fri, 30 Sep 2016 15:39:40 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
-      Etag:
-      - W/"8f0162a4d2fd78df40b7f264aee93d64-gzip"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - bc995454-daac-4737-9b85-34ddbc44573f
-      X-Runtime:
-      - '0.069535'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '565'
-      Set-Cookie:
-      - _session_id=b8b25bbaa306542857ce68b3416fa590; path=/; HttpOnly
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJ0b3RhbCI6IDMsCiAgInN1YnRvdGFsIjogMywKICAicGFnZSI6IDEs
-        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
-        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
-        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
-        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
-        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
-        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
-        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
-        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
-        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
-        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
-        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
-        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
-        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
-        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMiJ9LHsiaWQiOiJmb3JlbWFu
-        X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
-        bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
-        aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
-        IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
-        b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
-        ZCI6ImthdGVsbG8iLCJuYW1lIjoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIs
-        ImRlc2NyaXB0aW9uIjoiQ29udGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFn
-        ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
-        YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjMuMCJ9XQp9Cg==
-    http_version: 
-  recorded_at: Fri, 30 Sep 2016 15:39:41 GMT
-- request:
-    method: get
     uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
     body:
       encoding: US-ASCII
@@ -369,4 +210,205 @@ http_interactions:
         please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"3996a9f6-7ba7-40b3-9784-8a53292ca798"}'
     http_version: 
   recorded_at: Fri, 30 Sep 2016 15:39:42 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50218/api/status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      Date:
+      - Wed, 12 Oct 2016 14:16:38 GMT
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
+      Foreman-Version:
+      - 1.14.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 68d37bf606b9a03df6e1e749d6054009
+      Etag:
+      - W/"1316c9d778b9181476af8a9546423fb1-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 61cc3c4f-0188-443b-ae97-3e6866ec79fa
+      X-Runtime:
+      - '0.112944'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Via:
+      - 1.1 testing.example.com:50218
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '81'
+      Set-Cookie:
+      - _session_id=c393a86a7e3736cd504597f2bdba1427; path=/; HttpOnly
+    body:
+      encoding: UTF-8
+      string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
+    http_version: 
+  recorded_at: Wed, 12 Oct 2016 14:16:38 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50218/api/v2/plugins
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      Date:
+      - Wed, 12 Oct 2016 14:16:38 GMT
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
+      Foreman-Version:
+      - 1.14.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 68d37bf606b9a03df6e1e749d6054009
+      Etag:
+      - W/"8f0162a4d2fd78df40b7f264aee93d64-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - cab0d532-7ad8-4047-821d-a42ccd862378
+      X-Runtime:
+      - '0.071592'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Via:
+      - 1.1 testing.example.com:50218
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '565'
+      Set-Cookie:
+      - _session_id=442b04764e34f11e3ac77de2aa2efc5e; path=/; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJ0b3RhbCI6IDMsCiAgInN1YnRvdGFsIjogMywKICAicGFnZSI6IDEs
+        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
+        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
+        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
+        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
+        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
+        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
+        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
+        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
+        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
+        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
+        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
+        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
+        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
+        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
+        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMiJ9LHsiaWQiOiJmb3JlbWFu
+        X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
+        bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
+        aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
+        IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
+        b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
+        ZCI6ImthdGVsbG8iLCJuYW1lIjoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIs
+        ImRlc2NyaXB0aW9uIjoiQ29udGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFn
+        ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
+        YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjMuMCJ9XQp9Cg==
+    http_version: 
+  recorded_at: Wed, 12 Oct 2016 14:16:38 GMT
+- request:
+    method: get
+    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      Accept-Language:
+      - en
+      Content-Type:
+      - application/json
+      Host:
+      - subscription.rhn.redhat.com
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      X-Version:
+      - 0.9.51.15-1
+      Www-Authenticate:
+      - Basic Realm=candlepin
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Wed, 12 Oct 2016 14:16:38 GMT
+    body:
+      encoding: UTF-8
+      string: '{"displayMessage":"Invalid username or password. To create a login,
+        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"c70de44c-abaa-4fe7-a454-691e0f801332"}'
+    http_version: 
+  recorded_at: Wed, 12 Oct 2016 14:16:39 GMT
 recorded_with: VCR 3.0.3

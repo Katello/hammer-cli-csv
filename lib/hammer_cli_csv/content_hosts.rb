@@ -324,9 +324,12 @@ module HammerCLICsv
         match = matches[0]
         print _(" attaching '%{name}'...") % {:name => match['name']} if option_verbose?
 
+        amount = line[SUBS_QUANTITY]
+        quantity = (amount.nil? || amount.empty? || amount == 'Automatic') ? 0 : amount.to_i
+
         @api.resource(:host_subscriptions).call(:add_subscriptions, {
             'host_id' => host['id'],
-            'subscriptions' => existing_subscriptions + [match]
+            'subscriptions' => [{:id => match['id'], :quantity => quantity}]
         })
       end
 

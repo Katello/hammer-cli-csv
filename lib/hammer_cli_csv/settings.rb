@@ -12,7 +12,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, VALUE]
-        @api.resource(:settings).call(:index, {'per_page' => 999999})['results'].each do |setting|
+        @api.resource(:settings).call(:index, {
+            'per_page' => 999999,
+            'search' => option_search
+        })['results'].each do |setting|
           csv << [setting['name'], setting['value']]
         end
       end

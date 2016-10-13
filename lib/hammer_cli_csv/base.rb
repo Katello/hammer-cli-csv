@@ -14,6 +14,7 @@ module HammerCLICsv
     option %w(--threads), 'THREAD_COUNT', 'Number of threads to hammer with',
            :default => 1, :hidden => true
     option %w(--export), :flag, 'Export current data instead of importing'
+    option %w(--search), 'SEARCH', 'Only export search results'
     option %w(--file), 'FILE_NAME', 'CSV file (default to /dev/stdout with --export, otherwise required)'
     option %w(--prefix), 'PREFIX', 'Prefix for all name columns',
            :hidden => true

@@ -8,7 +8,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, OPERATINGSYSTEMS]
-        @api.resource(:architectures).call(:index, {:per_page => 999999})['results'].each do |architecture|
+        @api.resource(:architectures).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |architecture|
           architecture = @api.resource(:architectures).call(:show, {:id => architecture['id']})
           name = architecture['name']
           operatingsystems = export_column(architecture, 'operatingsystems', 'title')

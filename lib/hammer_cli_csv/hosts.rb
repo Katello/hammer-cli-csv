@@ -28,6 +28,7 @@ module HammerCLICsv
                 COMPUTERESOURCE, COMPUTEPROFILE, IMAGE, ENABLED, MANAGED]
         search_options = {:per_page => 999999}
         search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
+        search_options['search'] = "#{search_options['search']} AND #{option_search}" if option_search
         @api.resource(:hosts).call(:index, search_options)['results'].each do |host|
           host = @api.resource(:hosts).call(:show, {'id' => host['id']})
           raise "Host 'id=#{host['id']}' not found" if !host || host.empty?

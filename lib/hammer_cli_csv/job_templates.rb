@@ -21,7 +21,8 @@ module HammerCLICsv
         csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, JOB, PROVIDER, SNIPPET, TEMPLATE,
                 INPUT_NAME, INPUT_DESCRIPTION, INPUT_REQUIRED, INPUT_TYPE, INPUT_PARAMETERS]
         @api.resource(:job_templates).call(:index, {
-            :per_page => 999999
+            :per_page => 999999,
+            :search => option_search
         })['results'].each do |template_id|
           template = @api.resource(:job_templates).call(:show, {:id => template_id['id']})
           next if template['locked']

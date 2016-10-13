@@ -16,7 +16,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
-        @api.resource(:compute_resources).call(:index, {:per_page => 999999})['results'].each do |compute_resource|
+        @api.resource(:compute_resources).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |compute_resource|
           compute_resource = @api.resource(:compute_resources).call(:show, {'id' => compute_resource['id']})
 
           name = compute_resource['name']

@@ -10,26 +10,16 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, ORGANIZATION, LIMIT, DESCRIPTION]
-        if @server_status['release'] == 'Headpin'
-          @headpin.get(:organizations).each do |organization|
-            next if option_organization && organization['name'] != option_organization
-            @headpin.get("organizations/#{organization['label']}/system_groups").each do |systemgroup|
-              csv << [systemgroup['name'], organization['name'],
-                      systemgroup['max_systems'].to_i < 0 ? 'Unlimited' : systemgroup['max_systems'],
-                      systemgroup['description']]
-            end
-          end
-        else
-          @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
-            next if option_organization && organization['name'] != option_organization
-            @api.resource(:host_collections).call(:index, {
-                'organization_id' => organization['id']
-            })['results'].each do |hostcollection|
-              limit = hostcollection['unlimited_content_hosts'] ? 'Unlimited' : hostcollection['max_content_hosts']
-              csv << [hostcollection['name'], organization['name'],
-                      limit,
-                      hostcollection['description']]
-            end
+        @api.resource(:organizations).call(:index, {'per_page' => 999999})['results'].each do |organization|
+          next if option_organization && organization['name'] != option_organization
+          @api.resource(:host_collections).call(:index, {
+              'organization_id' => organization['id'],
+              'search' => option_search
+          })['results'].each do |hostcollection|
+            limit = hostcollection['unlimited_content_hosts'] ? 'Unlimited' : hostcollection['max_content_hosts']
+            csv << [hostcollection['name'], organization['name'],
+                    limit,
+                    hostcollection['description']]
           end
         end
       end

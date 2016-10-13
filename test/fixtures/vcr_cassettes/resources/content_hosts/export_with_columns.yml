@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 30 Nov 2016 14:55:45 GMT
+      - Thu, 01 Dec 2016 19:54:10 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -33,13 +33,13 @@ http_interactions:
       Foreman-Api-Version:
       - '2'
       Apipie-Checksum:
-      - ef9e7a17d630b8c2cc5b7e016c24efe7
+      - e1df2e8d43e22495b02a53b48e3b5298
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 7823d01a-478b-46c3-a542-4eb37116b3a6
+      - 89f57003-3808-49e4-9dc7-003b10bcb7ec
       X-Runtime:
-      - '0.050470'
+      - '0.063216'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -51,12 +51,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=57f740365c7e651bc4a644ef8fd46d5d; path=/; secure; HttpOnly
+      - _session_id=1253d49cd585fbdbe1882ee5a86a99c1; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Wed, 30 Nov 2016 14:55:52 GMT
+  recorded_at: Thu, 01 Dec 2016 19:54:18 GMT
 - request:
     method: get
     uri: https://admin:changeme@katello.example.com:50083/api/v2/plugins
@@ -76,7 +76,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 30 Nov 2016 14:55:45 GMT
+      - Thu, 01 Dec 2016 19:54:10 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -90,13 +90,13 @@ http_interactions:
       Foreman-Api-Version:
       - '2'
       Apipie-Checksum:
-      - ef9e7a17d630b8c2cc5b7e016c24efe7
+      - e1df2e8d43e22495b02a53b48e3b5298
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f9645aa3-473b-4926-a91a-3ff0a82ae009
+      - fb29c3be-1a44-407e-b3b6-8cfc04e0d29c
       X-Runtime:
-      - '0.033038'
+      - '0.065820'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -110,7 +110,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=3d6a5ebccb60d0ffcc7e56caacf917bb; path=/; secure; HttpOnly
+      - _session_id=bf83dd22c3ec9210407ea0a7ad417465; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -189,5 +189,5 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Wed, 30 Nov 2016 14:55:52 GMT
+  recorded_at: Thu, 01 Dec 2016 19:54:18 GMT
 recorded_with: VCR 3.0.3

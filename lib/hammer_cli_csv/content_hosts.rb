@@ -439,6 +439,7 @@ module HammerCLICsv
 
           @api.resource(:hosts).call(:index, {
               'per_page' => 999999,
+              'search' => option_search,
               'organization_id' => foreman_organization(:name => organization['name'])
           })['results'].each do |host|
             host = @api.resource(:hosts).call(:show, {

@@ -28,6 +28,7 @@ module HammerCLICsv
                 PUPPET_PROXY, PUPPET_CA_PROXY, CONTENT_SOURCE, PASSWORD, PUPPET_CLASSES]
         search_options = {:per_page => 999999}
         search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
+        search_options['search'] = "#{search_options['search']} AND #{option_search}" if option_search
         @api.resource(:hostgroups).call(:index, search_options)['results'].each do |hostgroup|
           hostgroup = @api.resource(:hostgroups).call(:show, {'id' => hostgroup['id']})
           raise "Host Group 'id=#{hostgroup['id']}' not found" if !hostgroup || hostgroup.empty?

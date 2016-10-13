@@ -24,7 +24,10 @@ module HammerCLICsv
         csv << [NAME, ORGANIZATIONS, LOCATIONS, NETWORK, NETWORK_MASK, NETWORK_PREFIX,
                 NETWORK_FROM, NETWORK_TO, DOMAINS, GATEWAY, DHCP_PROXY, TFTP_PROXY, DNS_PROXY,
                 DNS_PRIMARY, DNS_SECONDARY, VLAN_ID]
-        @api.resource(:subnets).call(:index, {:per_page => 999999})['results'].each do |subnet|
+        @api.resource(:subnets).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |subnet|
           subnet = @api.resource(:subnets).call(:show, {'id' => subnet['id']})
 
           name = subnet['name']

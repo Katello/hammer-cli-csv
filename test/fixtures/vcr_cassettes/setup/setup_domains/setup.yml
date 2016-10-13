@@ -449,365 +449,6 @@ http_interactions:
   recorded_at: Mon, 12 Sep 2016 15:39:42 GMT
 - request:
     method: get
-    uri: http://admin:changeme@centos7-devel.example.com:3000/api/status
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 974492cde78991fdc7ad9dfcc73ff358
-      Etag:
-      - W/"1316c9d778b9181476af8a9546423fb1"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=206e1ed2c9d8258e34ec76a3291f5276; path=/; HttpOnly
-      X-Request-Id:
-      - c240bf3c-8718-4812-bb0e-6a2fa5b037cb
-      X-Runtime:
-      - '0.060349'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:32 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@centos7-devel.example.com:3000/api/v2/plugins
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 974492cde78991fdc7ad9dfcc73ff358
-      Etag:
-      - W/"732bd55e4dc33460e7a4d4e0d0d81834"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=393fb2f16f77724267b6379a97ce8849; path=/; HttpOnly
-      X-Request-Id:
-      - 61760983-d201-43df-88af-d5af974fbdb6
-      X-Runtime:
-      - '0.087200'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJ0b3RhbCI6IDMsCiAgInN1YnRvdGFsIjogMywKICAicGFnZSI6IDEs
-        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
-        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
-        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
-        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
-        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
-        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
-        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
-        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
-        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
-        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
-        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
-        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
-        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
-        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguNSJ9LHsiaWQiOiJmb3JlbWFu
-        X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
-        bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
-        aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
-        IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
-        b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
-        ZCI6ImthdGVsbG8iLCJuYW1lIjoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIs
-        ImRlc2NyaXB0aW9uIjoiQ29udGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFn
-        ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
-        YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjMuMCJ9XQp9Cg==
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:32 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@centos7-devel.example.com:3000/api/domains?per_page=999999
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - centos7-devel.example.com:3000
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 974492cde78991fdc7ad9dfcc73ff358
-      Etag:
-      - W/"46acdc61f25fff0de7a14a37dd7f582c"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=e73fe9e5ad3312ff023ebe7e69bb1aa2; path=/; HttpOnly
-      X-Request-Id:
-      - 986cd7a6-6719-4574-988a-1cc7802be29d
-      X-Runtime:
-      - '1.167133'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "total": 8,
-          "subtotal": 8,
-          "page": 1,
-          "per_page": 999999,
-          "search": null,
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": [{"fullname":"","created_at":"2016-11-19 10:45:48 UTC","updated_at":"2016-11-19 10:45:48 UTC","id":3,"name":"demo.megacorp.com","dns_id":null,"dns":null},{"fullname":"","created_at":"2016-11-19 10:43:52 UTC","updated_at":"2016-11-19 10:43:52 UTC","id":2,"name":"megacorp.com","dns_id":null,"dns":null},{"fullname":"","created_at":"2016-11-19 10:45:50 UTC","updated_at":"2016-11-19 10:45:50 UTC","id":4,"name":"qa.lab.tlv.megacorp.com","dns_id":null,"dns":null},{"fullname":"","created_at":"2016-11-19 10:45:52 UTC","updated_at":"2016-11-19 10:45:52 UTC","id":5,"name":"sat.lab.tlv.megacorp.com","dns_id":null,"dns":null},{"fullname":"","created_at":"2016-11-19 10:33:34 UTC","updated_at":"2016-11-19 10:33:34 UTC","id":1,"name":"test.com","dns_id":null,"dns":null},{"fullname":"","created_at":"2016-11-19 10:45:54 UTC","updated_at":"2016-11-19 10:45:54 UTC","id":6,"name":"test.megacorp.com","dns_id":null,"dns":null},{"fullname":"","created_at":"2016-11-19 10:45:56 UTC","updated_at":"2016-11-19 10:45:56 UTC","id":7,"name":"tlv.megacorp.com","dns_id":null,"dns":null},{"fullname":"","created_at":"2016-11-19 10:45:59 UTC","updated_at":"2016-11-19 10:45:59 UTC","id":8,"name":"virt.bos.megacorp.com","dns_id":null,"dns":null}]
-        }
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:34 GMT
-- request:
-    method: put
-    uri: http://admin:changeme@centos7-devel.example.com:3000/api/domains/1
-    body:
-      encoding: UTF-8
-      string: '{"domain":{"name":"test.com","fullname":"","dns_id":null}}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '58'
-      Host:
-      - centos7-devel.example.com:3000
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 974492cde78991fdc7ad9dfcc73ff358
-      Etag:
-      - W/"61badf03e74a285a7a0f9757f80ff738"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=a2df2c5f5c7372031ceaa42c6c79365e; path=/; HttpOnly
-      - request_method=PUT; path=/
-      X-Request-Id:
-      - 1e8991d4-f7c5-43af-97c8-7bb7efa52cae
-      X-Runtime:
-      - '0.163428'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"fullname":"","created_at":"2016-11-19 10:33:34 UTC","updated_at":"2016-11-19
-        10:33:34 UTC","id":1,"name":"test.com","dns_id":null,"dns":null,"subnets":[{"id":1,"name":"Test
-        Subnet","network_address":"192.168.100.1/24"}],"interfaces":[],"parameters":[],"locations":[],"organizations":[{"id":8,"name":"Test
-        Corporation","title":"Test Corporation","description":"Testing today for a
-        better tomorrow"}]}'
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:34 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@centos7-devel.example.com:3000/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - centos7-devel.example.com:3000
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 974492cde78991fdc7ad9dfcc73ff358
-      Etag:
-      - W/"d6c455aac70450d31262ac2500194873"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=cf8b2204fc9262296924d2c47ac6e42d; path=/; HttpOnly
-      X-Request-Id:
-      - 03bad4d2-4735-407d-b68d-ecf71af3d032
-      X-Runtime:
-      - '0.083491'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "total": 3,
-          "subtotal": 1,
-          "page": 1,
-          "per_page": 999999,
-          "search": "name=\"Test Corporation\"",
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": [{"label":"testcorp","created_at":"2016-11-19 10:33:41 UTC","updated_at":"2016-11-19 10:33:41 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
-        }
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:34 GMT
-- request:
-    method: get
     uri: http://admin:changeme@centos7-devel.example.com:3000/katello/api/organizations/8
     body:
       encoding: US-ASCII
@@ -1190,4 +831,777 @@ http_interactions:
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[{"id":1,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[],"parameters":[]}'
     http_version: 
   recorded_at: Tue, 22 Nov 2016 10:46:36 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50083/api/status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Dec 2016 19:45:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7f9da0e2-df4d-44b6-89e6-7f6fa0d2afc3
+      X-Runtime:
+      - '0.054779'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"8e3341d0a4cc328651f7391aed11fef8"'
+      Status:
+      - 200 OK
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=2f761b04ec55e90edef82d244c872382; path=/; secure; HttpOnly
+    body:
+      encoding: UTF-8
+      string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
+    http_version: 
+  recorded_at: Thu, 01 Dec 2016 19:45:41 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50083/api/v2/plugins
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Dec 2016 19:45:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 11ba3714-d43a-4171-8328-67c418b4977e
+      X-Runtime:
+      - '0.038970'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1338'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=08b37db7971ecf927ab15b7785dd8f63; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJ0b3RhbCI6IDEwLAogICJzdWJ0b3RhbCI6IDEwLAogICJwYWdlIjog
+        MSwKICAicGVyX3BhZ2UiOiAyMCwKICAic2VhcmNoIjogbnVsbCwKICAic29y
+        dCI6IHsKICAgICJieSI6IG51bGwsCiAgICAib3JkZXIiOiBudWxsCiAgfSwK
+        ICAicmVzdWx0cyI6IFt7ImlkIjoiZm9yZW1hbi10YXNrcyIsIm5hbWUiOiJm
+        b3JlbWFuLXRhc2tzIiwiYXV0aG9yIjoiSXZhbiBOZcSNYXMiLCJkZXNjcmlw
+        dGlvbiI6IlRoZSBnb2FsIG9mIHRoaXMgcGx1Z2luIGlzIHRvIHVuaWZ5IHRo
+        ZSB3YXkgb2Ygc2hvd2luZyB0YXNrIHN0YXR1c2VzIGFjcm9zcyB0aGUgRm9y
+        ZW1hbiBpbnN0YW5jZS5cbkl0IGRlZmluZXMgVGFzayBtb2RlbCBmb3Iga2Vl
+        cGluZyB0aGUgaW5mb3JtYXRpb24gYWJvdXQgdGhlIHRhc2tzIGFuZCBMb2Nr
+        IGZvciBhc3NpZ25pbmcgdGhlIHRhc2tzXG50byByZXNvdXJjZXMuIFRoZSBs
+        b2NraW5nIGFsbG93cyBkZWFsaW5nIHdpdGggcHJldmVudGluZyBtdWx0aXBs
+        ZSBjb2xsaWRpbmcgdGFza3MgdG8gYmUgcnVuIG9uIHRoZVxuc2FtZSByZXNv
+        dXJjZS4gSXQgYWxzbyBvcHRpb25hbGx5IHByb3ZpZGVzIER5bmZsb3cgaW5m
+        cmFzdHJ1Y3R1cmUgZm9yIHVzaW5nIGl0IGZvciBtYW5hZ2luZyB0aGUgdGFz
+        a3MuXG4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vdGhlZm9yZW1hbi9m
+        b3JlbWFuLXRhc2tzIiwidmVyc2lvbiI6IjAuNy4xNC45In0seyJpZCI6ImZv
+        cmVtYW5fYm9vdGRpc2siLCJuYW1lIjoiZm9yZW1hbl9ib290ZGlzayIsImF1
+        dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJkZXNjcmlwdGlvbiI6IlBsdWdpbiBm
+        b3IgRm9yZW1hbiB0aGF0IGNyZWF0ZXMgaVBYRS1iYXNlZCBib290IGRpc2tz
+        IHRvIHByb3Zpc2lvbiBob3N0cyB3aXRob3V0IHRoZSBuZWVkIGZvciBQWEUg
+        aW5mcmFzdHJ1Y3R1cmUuIiwidXJsIjoiaHR0cDovL2dpdGh1Yi5jb20vdGhl
+        Zm9yZW1hbi9mb3JlbWFuX2Jvb3RkaXNrIiwidmVyc2lvbiI6IjYuMS4wLjMi
+        fSx7ImlkIjoiZm9yZW1hbl9kaXNjb3ZlcnkiLCJuYW1lIjoiZm9yZW1hbl9k
+        aXNjb3ZlcnkiLCJhdXRob3IiOiJBbW9zIEJlbmFyaSxCcnlhbiBLZWFybmV5
+        LENoYWlybWFuVHViZUFtcCxEYW5pZWwgTG9iYXRvIEdhcmPDrWEsRG9taW5p
+        YyBDbGVhbCxFcmljIEQuIEhlbG1zLEZyYW5rIFdhbGwsR3JlZyBTdXRjbGlm
+        ZmUsSW1yaSBadmlrLEpvc2VwaCBNaXRjaGVsbCBNYWdlbixMdWthcyBaYXBs
+        ZXRhbCxMdWvDocWhIFphcGxldGFsLE1hcmVrIEh1bGFuLE1hcnRpbiBCYcSN
+        b3Zza8O9LE1hdHQgSmFydmlzLE1pY2hhZWwgTW9sbCxOaWNrLE9oYWQgTGV2
+        eSxPcmkgUmFiaW4sUGV0ciBDaGFsdXBhLFBoaXJpbmNlIFBoaWxpcCxTY3Vi
+        YWZsb3lkLFNobG9taSBaYWRvayxTdGVwaGVuIEJlbmphbWluLFlhbm4gQ8Op
+        emFyZCIsImRlc2NyaXB0aW9uIjoiTWFhUyBEaXNjb3ZlcnkgUGx1Z2luIGVu
+        Z2luZSBmb3IgRm9yZW1hbiIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3Ro
+        ZWZvcmVtYW4vZm9yZW1hbl9kaXNjb3ZlcnkiLCJ2ZXJzaW9uIjoiNS4wLjAu
+        OSJ9LHsiaWQiOiJmb3JlbWFuX2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2Rv
+        Y2tlciIsImF1dGhvciI6IkRhbmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwi
+        ZGVzY3JpcHRpb24iOiJQcm92aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29u
+        dGFpbmVycyBhbmQgaW1hZ2VzIGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRw
+        Oi8vZ2l0aHViLmNvbS90aGVmb3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVy
+        c2lvbiI6IjIuMC4xLjExIn0seyJpZCI6ImZvcmVtYW5faG9va3MiLCJuYW1l
+        IjoiZm9yZW1hbl9ob29rcyIsImF1dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJk
+        ZXNjcmlwdGlvbiI6IlBsdWdpbiBlbmdpbmUgZm9yIEZvcmVtYW4gdGhhdCBl
+        bmFibGVzIHJ1bm5pbmcgY3VzdG9tIGhvb2sgc2NyaXB0cyBvbiBGb3JlbWFu
+        IGV2ZW50cyIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4v
+        Zm9yZW1hbl9ob29rcyIsInZlcnNpb24iOiIwLjMuMTEifSx7ImlkIjoiZm9y
+        ZW1hbl9vcGVuc2NhcCIsIm5hbWUiOiJmb3JlbWFuX29wZW5zY2FwIiwiYXV0
+        aG9yIjoixaBpbW9uIEx1a2HFocOtayxTaGxvbWkgWmFkb2ssTWFyZWsgSHVs
+        YW4sT25kcmVqIFByYXphayIsImRlc2NyaXB0aW9uIjoiRm9yZW1hbiBwbHVn
+        LWluIGZvciBtYW5hZ2luZyBzZWN1cml0eSBjb21wbGlhbmNlIHJlcG9ydHMi
+        LCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vT3BlblNDQVAvZm9yZW1hbl9v
+        cGVuc2NhcCIsInZlcnNpb24iOiIwLjUuMy4xOCJ9LHsiaWQiOiJmb3JlbWFu
+        X3JlbW90ZV9leGVjdXRpb24iLCJuYW1lIjoiZm9yZW1hbl9yZW1vdGVfZXhl
+        Y3V0aW9uIiwiYXV0aG9yIjoiRm9yZW1hbiBSZW1vdGUgRXhlY3V0aW9uIHRl
+        YW0iLCJkZXNjcmlwdGlvbiI6IkEgcGx1Z2luIGJyaW5naW5nIHJlbW90ZSBl
+        eGVjdXRpb24gdG8gdGhlIEZvcmVtYW4sIGNvbXBsZXRpbmcgdGhlIGNvbmZp
+        ZyBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkgd2l0aCByZW1vdGUgbWFuYWdl
+        bWVudCBmdW5jdGlvbmFsaXR5LiIsInVybCI6Imh0dHBzOi8vZ2l0aHViLmNv
+        bS90aGVmb3JlbWFuL2ZvcmVtYW5fcmVtb3RlX2V4ZWN1dGlvbiIsInZlcnNp
+        b24iOiIwLjMuMC4xMiJ9LHsiaWQiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0
+        ZSIsIm5hbWUiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0ZSIsImF1dGhvciI6
+        IkFsb24gR29sZGJvaW0sIFNoaW1vbiBTdGVpbiIsImRlc2NyaXB0aW9uIjoi
+        VGhpcyBpcyBhIHBsdWdpbiB0aGF0IGVuYWJsZXMgYnVpbGRpbmcgYSB0aGVt
+        ZSBmb3IgRm9yZW1hbi4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vYWxv
+        bmdvbGRib2ltL2ZvcmVtYW5fdGhlbWVfc2F0ZWxsaXRlIiwidmVyc2lvbiI6
+        IjAuMS4zMyJ9LHsiaWQiOiJrYXRlbGxvIiwibmFtZSI6ImthdGVsbG8iLCJh
+        dXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNvbnRlbnQgYW5kIFN1YnNj
+        cmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3IgRm9yZW1hbiIsInVybCI6
+        Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJzaW9uIjoiMy4wLjAuODIi
+        fSx7ImlkIjoicmVkaGF0X2FjY2VzcyIsIm5hbWUiOiJyZWRoYXRfYWNjZXNz
+        IiwiYXV0aG9yIjoiTGluZGFuaSBQaGlyaSIsImRlc2NyaXB0aW9uIjoiVGhp
+        cyBwbHVnaW4gYWRkcyBSZWQgSGF0IEFjY2VzcyBrbm93bGVkZ2UgYmFzZSBz
+        ZWFyY2gsIGNhc2UgbWFuYWdlbWVudCBhbmQgZGlhZ25vc3RpY3MgdG8gRm9y
+        ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
+        ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
+    http_version: 
+  recorded_at: Thu, 01 Dec 2016 19:45:41 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50083/api/domains?per_page=999999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - katello.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Dec 2016 19:45:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - da310a56-de8a-4e85-a4eb-e6bc595fe7b8
+      X-Runtime:
+      - '0.123730'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"f0b6d9743b4ff3e7cb56d9a60cd98424-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '287'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=dbe8af365a475c8b408d7badffd22de2; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 1,
+          "subtotal": 1,
+          "page": 1,
+          "per_page": 999999,
+          "search": null,
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"fullname":"","dns_id":null,"created_at":"2016-12-01 19:37:20 UTC","updated_at":"2016-12-01 19:37:20 UTC","id":1,"name":"test.com"}]
+        }
+    http_version: 
+  recorded_at: Thu, 01 Dec 2016 19:45:42 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@katello.example.com:50083/api/domains/1
+    body:
+      encoding: UTF-8
+      string: '{"domain":{"name":"test.com","fullname":"","dns_id":null}}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '58'
+      Host:
+      - katello.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Dec 2016 19:45:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9cdc0de0-297a-43a3-bfdc-3dfa7c45b17e
+      X-Runtime:
+      - '0.061780'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"8f34b2d7b2f9f8b20f6fe4c437613471-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '324'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=c38944f3f6137279e2a8c9a2e605d201; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '{"fullname":"","dns_id":null,"created_at":"2016-12-01 19:37:20 UTC","updated_at":"2016-12-01
+        19:37:20 UTC","id":1,"name":"test.com","subnets":[],"parameters":[],"interfaces":[],"locations":[],"organizations":[{"id":3,"name":"Test
+        Corporation","title":"Test Corporation","description":"Testing today for a
+        better tomorrow"}]}'
+    http_version: 
+  recorded_at: Thu, 01 Dec 2016 19:45:42 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - katello.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Dec 2016 19:45:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 3c825ee8-5f25-46e7-b203-feaa2744a591
+      X-Runtime:
+      - '0.038102'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"4b72bc9eba2b7aa56139df896711afca-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '388'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=c841c633cea922c43730ad93122d8b69; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 2,
+          "subtotal": 1,
+          "page": 1,
+          "per_page": 999999,
+          "search": "name=\"Test Corporation\"",
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2016-12-01 19:43:58 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+        }
+    http_version: 
+  recorded_at: Thu, 01 Dec 2016 19:45:42 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50083/katello/api/organizations/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - katello.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Dec 2016 19:45:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - da67df86-f4be-4b2e-9e7b-18727ff3c449
+      X-Runtime:
+      - '0.315358'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"e1e9881301981955d79d2559da4a16eb-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '18672'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=fbb29e67ca085b74e9805dc53da3ccc5; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"label":"testcorp","owner_details":{"parentOwner":null,"id":"ff80808158bbd8b50158bbe26aef03c2","key":"testcorp","displayName":"Test
+        Corporation","contentPrefix":"/testcorp/$env","defaultServiceLevel":null,"upstreamConsumer":{"id":"ff80808158bbd8b50158bbe4a22303fc","uuid":"d45ac754-56e8-425e-a6ef-2028953f6f2c","name":"TestCorp","idCert":{"key":"-----BEGIN
+        RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAnR41trDH6LJ4Tobp73rsvM7Sl+nMItXNW7HSjhKQg78nFotM\naGRB9XS3z7wzKtunqIHcj38UwGBE01qLIO7aBXJHAeDiZVJdRaq03fcpQU3OywCw\nzjzfIRxYP8u5S1bjE60QXwv+ao0nbEYJ45EBmFybL6NJBcATsvPTadRzy236kk0h\nnOJl+IXXU+29eGjY7GWXjm+QYf//CHN+ngEh8g/sxSafDM6w7ZlPi9HJSaXK363R\n/nuy+4KqYE0MHa/7Iyb+HnyQEn/XTuFLJk3/EKr7gwxOVV2in6CQEeXLNuWek1Xt\nUzBDL/jPNoowFM18kmYBBg5/M3gqMX4eXBVfxQIDAQABAoIBAAeWduecv/rH67F3\nKIMNP7OalWcKvnYMNz+vZcjAssP6Dkwza/w6o0jUWzAoGZx/QSiNJPa1H25u98Px\nQnjTsCnFLBK2JpjYEnMT3Go/znk95be+D8vV+ryhns1t7EPsLUk8+WZtsNq6eGXt\nN/sKfLY7+q6hRxyE+y6QQeyBexoe4OnELeeb9KFxpE9H8TV67Ed9jqLbtXsR/8Nq\nWZW7ZYHBuvYuGHgZQWY9wWks3HW1ygC+y1BpfeYA9z85HH+t1x7mG8lOBoe0eV95\nhmHDwQInPPdBB20szGTRB2UjKmFCIGX/EYn/RJZvi/kxlpTzSLTiBDDUKqjAyWC/\ngdRhp/0CgYEA7qh1ng34FXTXYs0otOpCTrjnB17vdJb1SAc2kvWSQiCr9Gr5etGR\nDu7g6EAAvsV8HbQkcBmXyqnVuDhR0Ijt0UaldqGWbpmAcspHMDsy1uDn24qjbZoI\ncC3wQhsy3+8zNRYlbELeJjgzacYRmmtZNc2ML5As5XX8VVji3JqmZUMCgYEAqIjv\nPV4SfqrOv4NFcEvQf32tyiVxXDH4H/WpjHM2ZcAklE4esQkyBqf/2lHcZPrhoaQm\n8OGrquMytXo2TRGypl0syZ49GFq/FUFQbkl8zZpt3OCMkud6RvBmmftYSVCNoyZc\nySBusvO3SgpZYZwJx3FmeH/2gp0YAldH+tQo0lcCgYEAjhkVdtcgaD4aZER9QULd\n2htzy0q2Tnf3cTyCPPwkamUjnTL4ei0/LmIC3aYGC5BwNwtkSq6iV1PJ4Zb+96gf\n2WQz7q+FbzLMbQyNWGVW/uQIiQpCBmcZMRnZHLMvFnBI0AnwnEYwGReLXSZGoufZ\nxRQurL8uTC104ag741fdTRsCgYAtWaOezMiHQykdCZLO0+fH1qbEJW0qlNuipfU4\nsOvrV1fAfIDvvHy0o9JKCgsXNRcv6r77xI3wDvDfOoKQHHoJIDtkCWuBOTH/4zJk\nauvlW2/Cpr3M7fLOUfQZ7TNljwJ9612+VTbUepZQmxZQGK/c9hvPwwcvQFxsjNX2\nnc5aQwKBgGZIGnz4X92HBVa0pR27q+2sebWCxjpREPoEE4HnPivn6Vgy6j40O3VB\nikaW6laDlWHPzYorQeLcZLoiI6yBn5v3unT4Aq74c/mgjBZbsJs+BC6WILWpeV3s\nlN7WgGVHSbBqaBAkMdIrH6IK8dnjYsHq5yO9xtdYmkVZoHEoah8h\n-----END
+        RSA PRIVATE KEY-----\n","cert":"-----BEGIN CERTIFICATE-----\nMIIFqTCCA5GgAwIBAgIIBitiT9Rbj7QwDQYJKoZIhvcNAQEFBQAwgaQxCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMSQwIgYDVQQDDBtSZWQg\nSGF0IENhbmRsZXBpbiBBdXRob3JpdHkxJDAiBgkqhkiG9w0BCQEWFWNhLXN1cHBv\ncnRAcmVkaGF0LmNvbTAeFw0xNjA4MTYxMjI5MzFaFw0xNzA4MTYxMjI5MzFaMC8x\nLTArBgNVBAMTJGQ0NWFjNzU0LTU2ZTgtNDI1ZS1hNmVmLTIwMjg5NTNmNmYyYzCC\nASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ0eNbawx+iyeE6G6e967LzO\n0pfpzCLVzVux0o4SkIO/JxaLTGhkQfV0t8+8Myrbp6iB3I9/FMBgRNNaiyDu2gVy\nRwHg4mVSXUWqtN33KUFNzssAsM483yEcWD/LuUtW4xOtEF8L/mqNJ2xGCeORAZhc\nmy+jSQXAE7Lz02nUc8tt+pJNIZziZfiF11PtvXho2Oxll45vkGH//whzfp4BIfIP\n7MUmnwzOsO2ZT4vRyUmlyt+t0f57svuCqmBNDB2v+yMm/h58kBJ/107hSyZN/xCq\n+4MMTlVdop+gkBHlyzblnpNV7VMwQy/4zzaKMBTNfJJmAQYOfzN4KjF+HlwVX8UC\nAwEAAaOCAVEwggFNMBEGCWCGSAGG+EIBAQQEAwIFoDALBgNVHQ8EBAMCBLAwgd4G\nA1UdIwSB1jCB04AUdy6lzTcNqOHT6mHFVmdD6JHHbRyhgbekgbQwgbExCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMTEwLwYDVQQDDChSZWQg\nSGF0IEVudGl0bGVtZW50IE9wZXJhdGlvbnMgQXV0aG9yaXR5MSQwIgYJKoZIhvcN\nAQkBFhVjYS1zdXBwb3J0QHJlZGhhdC5jb22CAT8wHQYDVR0OBBYEFI7UL/Bk0UoE\n9FSjYlUJle0cykonMBMGA1UdJQQMMAoGCCsGAQUFBwMCMBYGA1UdEQQPMA2GC0NO\nPVRlc3RDb3JwMA0GCSqGSIb3DQEBBQUAA4ICAQBp4djGKuE+NCfYE0Br3IlpKnrm\nCpDF8qs4/r9A/tr+PLLhDnRmzkygSJ7KsIUXYV8oW+QhU5fe2ggPaJFfynY2AVOc\nZHbwvHKoQoUUrVlZFkcwhWcL7vvTEJQUONaOOLUgAzGIdfAmBYPWBqbwf80croGh\nY5xBcNqRw3cxfi0joE+LY4brEW5vJF8DnxhEX0eIJtjas+zb3ckeUJgYIyirXdHJ\nqrAANWjUfh9JFehwjAigx6TnGK+pr+zpbKTX9O7lhmvsCf+82NVlZmY342IUE8Ss\npWjhsydl8NT80fGJV/1fwpgyos9EvpjayXh9bYxZhDkiHaUUL/WBInEdyi4xFJgf\nPXnaV+2q48/3oOVZa2Ng/vcaBG5nEZYvK+jTG205t9d9X9Tp46iH/mvyIH8VIF0H\np/OtIoRnGLjliYP0dHp91G4UTTEpg8Cxa77r77qlwASORsFF8MJGMKMJg/YNO7fQ\nCskpqb7UZfSXmvZ5AIZ/Kzncuj1IvZMLhjMr/QAwSO0/v/GnmSqLwMamM2viq8un\nef2TQy9Xcuxcp0n7mcDHUUaTpiW1tPc5ikUmCUQ2ZuNTjE6Noa0kSV3AHG3TbSkU\n+qT9B5RSL1YBAEw5xwttvjlju2jaYaYT6xI4LioXIVJ8lEwdrggxmqTj1ArgqP2c\nHAtS6vziTnwbP+sS3g==\n-----END
+        CERTIFICATE-----\n","id":"ff80808158bbd8b50158bbe4a22103fb","serial":{"id":6004071080938870125,"revoked":false,"collected":false,"expiration":"2017-08-16T12:29:31.000+0000","serial":6004071080938870125,"created":"2016-12-01T19:37:52.929+0000","updated":"2016-12-01T19:37:52.929+0000"},"created":"2016-12-01T19:37:52.929+0000","updated":"2016-12-01T19:37:52.929+0000"},"type":{"id":"ff80808158bbd8b50158bbe1c9960003","label":"satellite","manifest":true,"created":"2016-12-01T19:34:46.422+0000","updated":"2016-12-01T19:34:46.422+0000"},"ownerId":"ff80808158bbd8b50158bbe26aef03c2","webUrl":"access.stage.redhat.com/management/distributors/","apiUrl":"https://subscription.rhn.stage.redhat.com/subscription/consumers/","created":"2016-12-01T19:37:52.931+0000","updated":"2016-12-01T19:37:52.931+0000"},"logLevel":null,"autobindDisabled":null,"href":"/owners/testcorp","created":"2016-12-01T19:35:27.727+0000","updated":"2016-12-01T19:37:53.037+0000"},"redhat_repository_url":"https://cdn.redhat.com","service_levels":["Premium","Standard"],"service_level":null,"select_all_types":[],"description":"Testing
+        today for a better tomorrow","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2016-12-01
+        19:43:58 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":3,"name":"Test
+        Corporation","title":"Test Corporation","users":[],"smart_proxies":[{"name":"sat62.example.com","id":1,"url":"https://sat62.example.com:9090"}],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":41,"name":"alterator_pkglist","template_kind_id":null,"template_kind_name":null},{"id":10,"name":"Atomic
+        Kickstart default","template_kind_id":5,"template_kind_name":"provision"},{"id":11,"name":"AutoYaST
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":14,"name":"AutoYaST
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":13,"name":"AutoYaST
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":12,"name":"AutoYaST
+        SLES default","template_kind_id":5,"template_kind_name":"provision"},{"id":72,"name":"Boot
+        disk iPXE - generic host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":71,"name":"Boot
+        disk iPXE - host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":42,"name":"chef_client","template_kind_id":null,"template_kind_name":null},{"id":43,"name":"coreos_cloudconfig","template_kind_id":null,"template_kind_name":null},{"id":15,"name":"CoreOS
+        provision","template_kind_id":5,"template_kind_name":"provision"},{"id":16,"name":"CoreOS
+        PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":73,"name":"Discovery
+        Red Hat kexec","template_kind_id":11,"template_kind_name":"kexec"},{"id":44,"name":"epel","template_kind_id":null,"template_kind_name":null},{"id":45,"name":"fix_hosts","template_kind_id":null,"template_kind_name":null},{"id":17,"name":"FreeBSD
+        (mfsBSD) finish","template_kind_id":6,"template_kind_name":"finish"},{"id":18,"name":"FreeBSD
+        (mfsBSD) provision","template_kind_id":5,"template_kind_name":"provision"},{"id":19,"name":"FreeBSD
+        (mfsBSD) PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":46,"name":"freeipa_register","template_kind_id":null,"template_kind_name":null},{"id":20,"name":"Grubby
+        default","template_kind_id":7,"template_kind_name":"script"},{"id":47,"name":"http_proxy","template_kind_id":null,"template_kind_name":null},{"id":89,"name":"idm_register","template_kind_id":null,"template_kind_name":null},{"id":21,"name":"Jumpstart
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":22,"name":"Jumpstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":23,"name":"Jumpstart
+        default PXEGrub","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":39,"name":"Junos
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":37,"name":"Junos
+        default SLAX","template_kind_id":5,"template_kind_name":"provision"},{"id":38,"name":"Junos
+        default ZTP config","template_kind_id":9,"template_kind_name":"ZTP"},{"id":26,"name":"Kickstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":28,"name":"Kickstart
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":27,"name":"Kickstart
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":29,"name":"Kickstart
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":48,"name":"kickstart_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":40,"name":"NX-OS
+        default POAP setup","template_kind_id":10,"template_kind_name":"POAP"},{"id":30,"name":"Preseed
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":31,"name":"Preseed
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":33,"name":"Preseed
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":32,"name":"Preseed
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":34,"name":"Preseed
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":49,"name":"preseed_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":50,"name":"puppet.conf","template_kind_id":null,"template_kind_name":null},{"id":4,"name":"PXEGrub
+        default local boot","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":5,"name":"PXELinux
+        chain iPXE","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":6,"name":"PXELinux
+        chain iPXE UNDI","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":2,"name":"PXELinux
+        default local boot","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":3,"name":"PXELinux
+        default memdisk","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":1,"name":"PXELinux
+        global default","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":51,"name":"redhat_register","template_kind_id":null,"template_kind_name":null},{"id":52,"name":"remote_execution_ssh_keys","template_kind_id":null,"template_kind_name":null},{"id":53,"name":"saltstack_minion","template_kind_id":null,"template_kind_name":null},{"id":90,"name":"Satellite
+        Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":86,"name":"Satellite
+        Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"Satellite
+        Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":87,"name":"Satellite
+        Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":69,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":35,"name":"UserData
+        default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Suse","created_at":"2016-12-01
+        19:25:07 UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"AutoYaST entire
+        SCSI disk","id":54},{"os_family":"Suse","created_at":"2016-12-01 19:25:07
+        UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"AutoYaST entire virtual
+        disk","id":55},{"os_family":"Suse","created_at":"2016-12-01 19:25:07 UTC","updated_at":"2016-12-01
+        19:25:07 UTC","name":"AutoYaST LVM","id":56},{"os_family":"Coreos","created_at":"2016-12-01
+        19:25:07 UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"CoreOS default
+        fake","id":57},{"os_family":"Freebsd","created_at":"2016-12-01 19:25:07 UTC","updated_at":"2016-12-01
+        19:25:07 UTC","name":"FreeBSD","id":58},{"os_family":"Solaris","created_at":"2016-12-01
+        19:25:07 UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"Jumpstart default","id":59},{"os_family":"Solaris","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"Jumpstart mirrored","id":60},{"os_family":"Junos","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"Junos default
+        fake","id":64},{"os_family":"Redhat","created_at":"2016-12-01 19:25:08 UTC","updated_at":"2016-12-01
+        19:25:08 UTC","name":"Kickstart default","id":61},{"os_family":"NXOS","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"NX-OS default
+        fake","id":65},{"os_family":"Debian","created_at":"2016-12-01 19:25:08 UTC","updated_at":"2016-12-01
+        19:25:08 UTC","name":"Preseed custom LVM","id":63},{"os_family":"Debian","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"Preseed default","id":62}],"provisioning_templates":[{"id":7,"name":"Alterator
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":41,"name":"alterator_pkglist","template_kind_id":null,"template_kind_name":null},{"id":10,"name":"Atomic
+        Kickstart default","template_kind_id":5,"template_kind_name":"provision"},{"id":11,"name":"AutoYaST
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":14,"name":"AutoYaST
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":13,"name":"AutoYaST
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":12,"name":"AutoYaST
+        SLES default","template_kind_id":5,"template_kind_name":"provision"},{"id":72,"name":"Boot
+        disk iPXE - generic host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":71,"name":"Boot
+        disk iPXE - host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":42,"name":"chef_client","template_kind_id":null,"template_kind_name":null},{"id":43,"name":"coreos_cloudconfig","template_kind_id":null,"template_kind_name":null},{"id":15,"name":"CoreOS
+        provision","template_kind_id":5,"template_kind_name":"provision"},{"id":16,"name":"CoreOS
+        PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":73,"name":"Discovery
+        Red Hat kexec","template_kind_id":11,"template_kind_name":"kexec"},{"id":44,"name":"epel","template_kind_id":null,"template_kind_name":null},{"id":45,"name":"fix_hosts","template_kind_id":null,"template_kind_name":null},{"id":17,"name":"FreeBSD
+        (mfsBSD) finish","template_kind_id":6,"template_kind_name":"finish"},{"id":18,"name":"FreeBSD
+        (mfsBSD) provision","template_kind_id":5,"template_kind_name":"provision"},{"id":19,"name":"FreeBSD
+        (mfsBSD) PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":46,"name":"freeipa_register","template_kind_id":null,"template_kind_name":null},{"id":20,"name":"Grubby
+        default","template_kind_id":7,"template_kind_name":"script"},{"id":47,"name":"http_proxy","template_kind_id":null,"template_kind_name":null},{"id":89,"name":"idm_register","template_kind_id":null,"template_kind_name":null},{"id":21,"name":"Jumpstart
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":22,"name":"Jumpstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":23,"name":"Jumpstart
+        default PXEGrub","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":39,"name":"Junos
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":37,"name":"Junos
+        default SLAX","template_kind_id":5,"template_kind_name":"provision"},{"id":38,"name":"Junos
+        default ZTP config","template_kind_id":9,"template_kind_name":"ZTP"},{"id":26,"name":"Kickstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":28,"name":"Kickstart
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":27,"name":"Kickstart
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":29,"name":"Kickstart
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":48,"name":"kickstart_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":40,"name":"NX-OS
+        default POAP setup","template_kind_id":10,"template_kind_name":"POAP"},{"id":30,"name":"Preseed
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":31,"name":"Preseed
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":33,"name":"Preseed
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":32,"name":"Preseed
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":34,"name":"Preseed
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":49,"name":"preseed_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":50,"name":"puppet.conf","template_kind_id":null,"template_kind_name":null},{"id":4,"name":"PXEGrub
+        default local boot","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":5,"name":"PXELinux
+        chain iPXE","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":6,"name":"PXELinux
+        chain iPXE UNDI","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":2,"name":"PXELinux
+        default local boot","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":3,"name":"PXELinux
+        default memdisk","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":1,"name":"PXELinux
+        global default","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":51,"name":"redhat_register","template_kind_id":null,"template_kind_name":null},{"id":52,"name":"remote_execution_ssh_keys","template_kind_id":null,"template_kind_name":null},{"id":53,"name":"saltstack_minion","template_kind_id":null,"template_kind_name":null},{"id":90,"name":"Satellite
+        Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":86,"name":"Satellite
+        Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"Satellite
+        Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":87,"name":"Satellite
+        Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":69,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":35,"name":"UserData
+        default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[{"id":1,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[{"id":2,"name":"Default
+        Location","title":"Default Location","description":null}],"parameters":[],"default_content_view_id":2,"library_id":2}'
+    http_version: 
+  recorded_at: Thu, 01 Dec 2016 19:45:42 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@katello.example.com:50083/katello/api/organizations/3
+    body:
+      encoding: UTF-8
+      string: '{"organization":{"domain_ids":[1]}}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '35'
+      Host:
+      - katello.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Dec 2016 19:45:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ee2ec802-286a-44bd-a3f1-4bb7dfe19d27
+      X-Runtime:
+      - '0.366175'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"0180c0b4d00823ad65041c96c0707f10-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '13472'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=6b13b36e1f77389c3a30d918234ba27c; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '{"select_all_types":[],"description":"Testing today for a better tomorrow","created_at":"2016-12-01
+        19:35:26 UTC","updated_at":"2016-12-01 19:45:35 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":3,"name":"Test
+        Corporation","title":"Test Corporation","users":[],"smart_proxies":[{"name":"sat62.example.com","id":1,"url":"https://sat62.example.com:9090"}],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":41,"name":"alterator_pkglist","template_kind_id":null,"template_kind_name":null},{"id":10,"name":"Atomic
+        Kickstart default","template_kind_id":5,"template_kind_name":"provision"},{"id":11,"name":"AutoYaST
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":14,"name":"AutoYaST
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":13,"name":"AutoYaST
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":12,"name":"AutoYaST
+        SLES default","template_kind_id":5,"template_kind_name":"provision"},{"id":72,"name":"Boot
+        disk iPXE - generic host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":71,"name":"Boot
+        disk iPXE - host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":42,"name":"chef_client","template_kind_id":null,"template_kind_name":null},{"id":43,"name":"coreos_cloudconfig","template_kind_id":null,"template_kind_name":null},{"id":15,"name":"CoreOS
+        provision","template_kind_id":5,"template_kind_name":"provision"},{"id":16,"name":"CoreOS
+        PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":73,"name":"Discovery
+        Red Hat kexec","template_kind_id":11,"template_kind_name":"kexec"},{"id":44,"name":"epel","template_kind_id":null,"template_kind_name":null},{"id":45,"name":"fix_hosts","template_kind_id":null,"template_kind_name":null},{"id":17,"name":"FreeBSD
+        (mfsBSD) finish","template_kind_id":6,"template_kind_name":"finish"},{"id":18,"name":"FreeBSD
+        (mfsBSD) provision","template_kind_id":5,"template_kind_name":"provision"},{"id":19,"name":"FreeBSD
+        (mfsBSD) PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":46,"name":"freeipa_register","template_kind_id":null,"template_kind_name":null},{"id":20,"name":"Grubby
+        default","template_kind_id":7,"template_kind_name":"script"},{"id":47,"name":"http_proxy","template_kind_id":null,"template_kind_name":null},{"id":89,"name":"idm_register","template_kind_id":null,"template_kind_name":null},{"id":21,"name":"Jumpstart
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":22,"name":"Jumpstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":23,"name":"Jumpstart
+        default PXEGrub","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":39,"name":"Junos
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":37,"name":"Junos
+        default SLAX","template_kind_id":5,"template_kind_name":"provision"},{"id":38,"name":"Junos
+        default ZTP config","template_kind_id":9,"template_kind_name":"ZTP"},{"id":26,"name":"Kickstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":28,"name":"Kickstart
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":27,"name":"Kickstart
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":29,"name":"Kickstart
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":48,"name":"kickstart_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":40,"name":"NX-OS
+        default POAP setup","template_kind_id":10,"template_kind_name":"POAP"},{"id":30,"name":"Preseed
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":31,"name":"Preseed
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":33,"name":"Preseed
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":32,"name":"Preseed
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":34,"name":"Preseed
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":49,"name":"preseed_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":50,"name":"puppet.conf","template_kind_id":null,"template_kind_name":null},{"id":4,"name":"PXEGrub
+        default local boot","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":5,"name":"PXELinux
+        chain iPXE","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":6,"name":"PXELinux
+        chain iPXE UNDI","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":2,"name":"PXELinux
+        default local boot","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":3,"name":"PXELinux
+        default memdisk","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":1,"name":"PXELinux
+        global default","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":51,"name":"redhat_register","template_kind_id":null,"template_kind_name":null},{"id":52,"name":"remote_execution_ssh_keys","template_kind_id":null,"template_kind_name":null},{"id":53,"name":"saltstack_minion","template_kind_id":null,"template_kind_name":null},{"id":90,"name":"Satellite
+        Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":86,"name":"Satellite
+        Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"Satellite
+        Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":87,"name":"Satellite
+        Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":69,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":35,"name":"UserData
+        default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Suse","created_at":"2016-12-01
+        19:25:07 UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"AutoYaST entire
+        SCSI disk","id":54},{"os_family":"Suse","created_at":"2016-12-01 19:25:07
+        UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"AutoYaST entire virtual
+        disk","id":55},{"os_family":"Suse","created_at":"2016-12-01 19:25:07 UTC","updated_at":"2016-12-01
+        19:25:07 UTC","name":"AutoYaST LVM","id":56},{"os_family":"Coreos","created_at":"2016-12-01
+        19:25:07 UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"CoreOS default
+        fake","id":57},{"os_family":"Freebsd","created_at":"2016-12-01 19:25:07 UTC","updated_at":"2016-12-01
+        19:25:07 UTC","name":"FreeBSD","id":58},{"os_family":"Solaris","created_at":"2016-12-01
+        19:25:07 UTC","updated_at":"2016-12-01 19:25:07 UTC","name":"Jumpstart default","id":59},{"os_family":"Solaris","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"Jumpstart mirrored","id":60},{"os_family":"Junos","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"Junos default
+        fake","id":64},{"os_family":"Redhat","created_at":"2016-12-01 19:25:08 UTC","updated_at":"2016-12-01
+        19:25:08 UTC","name":"Kickstart default","id":61},{"os_family":"NXOS","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"NX-OS default
+        fake","id":65},{"os_family":"Debian","created_at":"2016-12-01 19:25:08 UTC","updated_at":"2016-12-01
+        19:25:08 UTC","name":"Preseed custom LVM","id":63},{"os_family":"Debian","created_at":"2016-12-01
+        19:25:08 UTC","updated_at":"2016-12-01 19:25:08 UTC","name":"Preseed default","id":62}],"provisioning_templates":[{"id":7,"name":"Alterator
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":41,"name":"alterator_pkglist","template_kind_id":null,"template_kind_name":null},{"id":10,"name":"Atomic
+        Kickstart default","template_kind_id":5,"template_kind_name":"provision"},{"id":11,"name":"AutoYaST
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":14,"name":"AutoYaST
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":13,"name":"AutoYaST
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":12,"name":"AutoYaST
+        SLES default","template_kind_id":5,"template_kind_name":"provision"},{"id":72,"name":"Boot
+        disk iPXE - generic host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":71,"name":"Boot
+        disk iPXE - host","template_kind_id":1,"template_kind_name":"Bootdisk"},{"id":42,"name":"chef_client","template_kind_id":null,"template_kind_name":null},{"id":43,"name":"coreos_cloudconfig","template_kind_id":null,"template_kind_name":null},{"id":15,"name":"CoreOS
+        provision","template_kind_id":5,"template_kind_name":"provision"},{"id":16,"name":"CoreOS
+        PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":73,"name":"Discovery
+        Red Hat kexec","template_kind_id":11,"template_kind_name":"kexec"},{"id":44,"name":"epel","template_kind_id":null,"template_kind_name":null},{"id":45,"name":"fix_hosts","template_kind_id":null,"template_kind_name":null},{"id":17,"name":"FreeBSD
+        (mfsBSD) finish","template_kind_id":6,"template_kind_name":"finish"},{"id":18,"name":"FreeBSD
+        (mfsBSD) provision","template_kind_id":5,"template_kind_name":"provision"},{"id":19,"name":"FreeBSD
+        (mfsBSD) PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":46,"name":"freeipa_register","template_kind_id":null,"template_kind_name":null},{"id":20,"name":"Grubby
+        default","template_kind_id":7,"template_kind_name":"script"},{"id":47,"name":"http_proxy","template_kind_id":null,"template_kind_name":null},{"id":89,"name":"idm_register","template_kind_id":null,"template_kind_name":null},{"id":21,"name":"Jumpstart
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":22,"name":"Jumpstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":23,"name":"Jumpstart
+        default PXEGrub","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":39,"name":"Junos
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":37,"name":"Junos
+        default SLAX","template_kind_id":5,"template_kind_name":"provision"},{"id":38,"name":"Junos
+        default ZTP config","template_kind_id":9,"template_kind_name":"ZTP"},{"id":26,"name":"Kickstart
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":28,"name":"Kickstart
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":27,"name":"Kickstart
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":29,"name":"Kickstart
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":48,"name":"kickstart_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":40,"name":"NX-OS
+        default POAP setup","template_kind_id":10,"template_kind_name":"POAP"},{"id":30,"name":"Preseed
+        default","template_kind_id":5,"template_kind_name":"provision"},{"id":31,"name":"Preseed
+        default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":33,"name":"Preseed
+        default iPXE","template_kind_id":4,"template_kind_name":"iPXE"},{"id":32,"name":"Preseed
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":34,"name":"Preseed
+        default user data","template_kind_id":8,"template_kind_name":"user_data"},{"id":49,"name":"preseed_networking_setup","template_kind_id":null,"template_kind_name":null},{"id":50,"name":"puppet.conf","template_kind_id":null,"template_kind_name":null},{"id":4,"name":"PXEGrub
+        default local boot","template_kind_id":3,"template_kind_name":"PXEGrub"},{"id":5,"name":"PXELinux
+        chain iPXE","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":6,"name":"PXELinux
+        chain iPXE UNDI","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":2,"name":"PXELinux
+        default local boot","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":3,"name":"PXELinux
+        default memdisk","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":1,"name":"PXELinux
+        global default","template_kind_id":2,"template_kind_name":"PXELinux"},{"id":51,"name":"redhat_register","template_kind_id":null,"template_kind_name":null},{"id":52,"name":"remote_execution_ssh_keys","template_kind_id":null,"template_kind_name":null},{"id":53,"name":"saltstack_minion","template_kind_id":null,"template_kind_name":null},{"id":90,"name":"Satellite
+        Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":86,"name":"Satellite
+        Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"Satellite
+        Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":87,"name":"Satellite
+        Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":69,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":35,"name":"UserData
+        default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
+        default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[{"id":1,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[{"id":2,"name":"Default
+        Location","title":"Default Location","description":null}],"parameters":[]}'
+    http_version: 
+  recorded_at: Thu, 01 Dec 2016 19:45:42 GMT
 recorded_with: VCR 3.0.3

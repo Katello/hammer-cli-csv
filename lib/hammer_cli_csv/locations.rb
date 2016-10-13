@@ -8,7 +8,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, PARENT]
-        @api.resource(:locations).call(:index, {:per_page => 999999})['results'].each do |location|
+        @api.resource(:locations).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |location|
           csv << [location['name'], '']
         end
       end

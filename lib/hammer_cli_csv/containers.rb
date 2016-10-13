@@ -13,7 +13,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, REGISTRY, REPOSITORY, COMPUTERESOURCE, ATTACH, ENTRYPOINT, COMMAND]
-        @api.resource(:containers).call(:index, {'per_page' => 999999})['results'].each do |container|
+        @api.resource(:containers).call(:index, {
+            'per_page' => 999999,
+            'search' => option_search
+        })['results'].each do |container|
           csv << [container['name'],
                   container['registry_name'],
                   "#{container['repository_name']}:#{container['tag']}",

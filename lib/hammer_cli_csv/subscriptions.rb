@@ -48,6 +48,7 @@ module HammerCLICsv
       def export_subscriptions(csv, organization)
         @api.resource(:subscriptions).call(:index, {
             'per_page' => 999999,
+            'search' => option_search,
             'organization_id' => organization['id']
         })['results'].each do |subscription|
           next if subscription['product_id'].to_i != 0  # Red Hat subs do not have number SKU

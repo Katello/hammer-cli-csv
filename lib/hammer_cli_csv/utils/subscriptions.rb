@@ -119,6 +119,15 @@ module HammerCLICsv
         matches
       end
 
+      def match_with_quantity_to_attach(match, line)
+        if line[SUBS_QUANTITY] && line[SUBS_QUANTITY] != 'Automatic' && !line[SUBS_QUANTITY].empty?
+          match['quantity'] = line[SUBS_QUANTITY]
+        else
+          match['quantity'] = -1
+        end
+        match
+      end
+
       # Subscription amount, SKU, name, contract number, and account number separated by '|'
       # or simply the subscription name.
       def split_subscription_details(details)

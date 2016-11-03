@@ -220,7 +220,14 @@ module HammerCLICsv
         raise _("No matching subscriptions") if matches.empty?
 
         match = matches[0]
-        print _(" attaching '%{name}'...") % {:name => match['name']} if option_verbose?
+
+        match = match_with_quantity_to_attach(match, line)
+
+        if option_verbose?
+          print _(" attaching %{quantity} of '%{name}'...") % {
+            :name => match['name'], :quantity => match['quantity']
+          }
+        end
 
         @api.resource(:activation_keys).call(:add_subscriptions, {
             'id' => activationkey['id'],

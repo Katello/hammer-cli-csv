@@ -152,9 +152,10 @@ module HammerCLICsv
             api = rest_client("/subscription/consumers/#{manifest['uuid']}/entitlements?pool=#{subscription['id']}&quantity=#{line[SUBS_QUANTITY]}")
             results = api.post({}.to_json)
             subscription['quantity'] -= line[SUBS_QUANTITY]
-            break
+            return
           end
         end
+        print _('subscription unavailable...')
       end
 
       def get_available_subscriptions(manifest)
@@ -190,9 +191,10 @@ module HammerCLICsv
               'system.certificate_version' => '3.2'
             }
           }
-          manifest = api.post(body.to_json,
+          results = api.post(body.to_json,
               {'accept' => 'json', 'content_type' => 'application/json'}
           )
+          manifest = JSON.parse(results)
           manifest['subscriptions'] = []
           @manifests[line[ORGANIZATION]][:manifest] = manifest
         end

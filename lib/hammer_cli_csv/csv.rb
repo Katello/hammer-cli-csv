@@ -4,19 +4,21 @@ require 'hammer_cli/exit_codes'
 module HammerCLICsv
   class CsvCommand < HammerCLI::AbstractCommand
     def help
-      self.class.help(invocation_path, CsvSortedBuilder.new)
+      self.class.help(invocation_path, HammerCLICsv::Help::Builder.new)
     end
 
-    class CsvSortedBuilder < SortedBuilder
-      def add_list(heading, items)
-        items.delete_if do |item|
-          if item.class == Clamp::Subcommand::Definition
-            !item.subcommand_class.supported?
-          else
-            false
+    module Help
+      class Builder < HammerCLI::Help::Builder
+        def add_list(heading, items)
+          items.delete_if do |item|
+            if item.class == Clamp::Subcommand::Definition
+              !item.subcommand_class.supported?
+            else
+              false
+            end
           end
+          super(heading, items)
         end
-        super(heading, items)
       end
     end
   end

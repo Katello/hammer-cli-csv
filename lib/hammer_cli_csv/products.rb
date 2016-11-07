@@ -13,11 +13,17 @@ module HammerCLICsv
       RELEASE = 'Release'
       REPOSITORY_URL = 'Repository Url'
       DESCRIPTION = 'Description'
+      VERIFY_SSL = 'Verify SSL'
+      UPSTREAM_USERNAME = 'Username'
+      UPSTREAM_PASSWORD = 'Password'
+      DOWNLOAD_POLICY = 'Download Policy'
+      MIRROR_ON_SYNC = 'Mirror on Sync'
+      UNPROTECTED = 'Publish via HTTP'
 
       def export(csv)
         csv << [NAME, LABEL, ORGANIZATION, DESCRIPTION, REPOSITORY, REPOSITORY_TYPE,
-                CONTENT_SET, RELEASE, REPOSITORY_URL]
-        # TODO: DOWNLOAD_POLICY
+                CONTENT_SET, RELEASE, REPOSITORY_URL, VERIFY_SSL, UNPROTECTED, MIRROR_ON_SYNC, DOWNLOAD_POLICY,
+                UPSTREAM_USERNAME, UPSTREAM_PASSWORD]
         @api.resource(:organizations).call(:index, {
             :per_page => 999999
         })['results'].each do |organization|
@@ -34,7 +40,11 @@ module HammerCLICsv
               repository = @api.resource(:repositories).call(:show, {:id => repository['id']})
               if repository['product_type'] == 'custom'
                 repository_type = "Custom #{repository['content_type'].capitalize}"
-                content_set = nil
+                if repository['content_type'] == 'docker'
+                  content_set = repository['docker_upstream_name']
+                else
+                  content_set = nil
+                end
               else
                 repository_type = "Red Hat #{repository['content_type'].capitalize}"
                 content_set = get_content_set(organization, product, repository)
@@ -42,7 +52,11 @@ module HammerCLICsv
               release = repository['minor'] #=~ /Server/ ? repository['minor'] : "#{repository['major']}.#{repository['minor']}"
               csv << [product['name'], product['label'], organization['name'],
                       product['description'], repository['name'], repository_type,
-                      content_set, release, repository['url']]
+                      content_set, release, repository['url'],
+                      repository['verify_ssl_on_sync'] ? 'Yes' : 'No',
+                      repository['unprotected'] ? 'Yes' : 'No',
+                      repository['mirror_on_sync'] ? 'Yes' : 'No', repository['download_policy'],
+                      repository['upstream_username'],nil]
             end
           end
         end
@@ -71,11 +85,8 @@ module HammerCLICsv
       private
 
       def create_or_update_product(line, number)
-        if !@existing_products[line[ORGANIZATION]]
-          get_existing_products(line)
-        end
-
         product_name = namify(line[NAME], number)
+        get_existing_product(product_name, line)
         if line[REPOSITORY_TYPE] =~ /Red Hat/
           product = enable_red_hat_product(line, product_name)
         else
@@ -101,42 +112,55 @@ module HammerCLICsv
         return product
       end
 
+      # rubocop:disable CyclomaticComplexity
       def create_or_update_repository(line, number, product)
         repository_name = namify(line[REPOSITORY], number)
         repository = get_repository(line, product['name'], product['id'], repository_name)
+
+        params = {
+            'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+            'name' => repository_name,
+            'url' => line[REPOSITORY_URL]
+        }
+        params['verify_ssl'] = line[VERIFY_SSL] == 'Yes' ? true : false if !line[VERIFY_SSL].nil? && !line[VERIFY_SSL].empty?
+        params['unprotected'] = line[UNPROTECTED] == 'Yes' ? true : false if !line[UNPROTECTED].nil? && !line[UNPROTECTED].empty?
+        params['mirror_on_sync'] = line[MIRROR_ON_SYNC] == 'Yes' ? true : false if !line[MIRROR_ON_SYNC].nil? && !line[MIRROR_ON_SYNC].empty?
+        params['download_policy'] = line[DOWNLOAD_POLICY] if !line[DOWNLOAD_POLICY].nil? && !line[DOWNLOAD_POLICY].empty?
+        params['upstream_username'] = line[UPSTREAM_USERNAME] if !line[UPSTREAM_USERNAME].nil? && !line[UPSTREAM_USERNAME].empty?
+        params['upstream_password'] = line[UPSTREAM_PASSWORD] if !line[UPSTREAM_PASSWORD].nil? && !line[UPSTREAM_PASSWORD].empty?
+        if line[REPOSITORY_TYPE] == 'Custom Docker'
+          params['docker_upstream_name'] = line[CONTENT_SET]
+        end
+
         if !repository
           if line[REPOSITORY_TYPE] =~ /Red Hat/
             raise _("Red Hat product '%{product_name}' does not have repository '%{repository_name}'") %
               {:product_name => product['name'], :repository_name => repository_name}
           end
+          params['label'] = labelize(repository_name)
+          params['product_id'] = product['id']
+          params['content_type'] = content_type(line[REPOSITORY_TYPE])
 
-          if option_verbose?
-            print _("Creating repository '%{repository_name}' in product '%{product_name}'...") %
-              {:repository_name => repository_name, :product_name => product['name']}
-          end
-          # TODO: add repo label column (optional)
-          repository = @api.resource(:repositories).call(:create, {
-              'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-              'name' => repository_name,
-              'label' => labelize(repository_name),
-              'product_id' => product['id'],
-              'url' => line[REPOSITORY_URL],
-              'content_type' => content_type(line[REPOSITORY_TYPE])
-          })
-          @existing_repositories[line[ORGANIZATION] + product['name']][line[LABEL]] = repository
+          print _("Creating repository '%{repository_name}'...") % {:repository_name => repository_name} if option_verbose?
+          repository = @api.resource(:repositories).call(:create, params)
+          @existing_repositories[line[ORGANIZATION] + product['name']][repository_name] = repository
         else
-          # TODO: update url
+          print _("Updating repository '%{repository_name}'...") % {:repository_name => repository_name} if option_verbose?
+          params['id'] = repository['id']
+          repository = @api.resource(:repositories).call(:update, params)
         end
 
         sync_repository(line, product['name'], repository)
       end
+      # rubocop:enable CyclomaticComplexity
 
-      def get_existing_products(line)
+      def get_existing_product(product_name, line)
         @existing_products[line[ORGANIZATION]] = {}
         @api.resource(:products).call(:index, {
             'per_page' => 999999,
             'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-            'enabled' => true
+            'enabled' => true,
+            'search' => "name=\"#{product_name}\""
         })['results'].each do |product|
           @existing_products[line[ORGANIZATION]][product['name']] = product
 
@@ -148,7 +172,7 @@ module HammerCLICsv
               'library' => true
           })['results'].each do |repository|
             @existing_repositories[line[ORGANIZATION] + product['name']] ||= {}
-            @existing_repositories[line[ORGANIZATION] + product['name']][repository['label']] = repository['id']
+            @existing_repositories[line[ORGANIZATION] + product['name']][repository['name']] = repository
           end
         end
       end
@@ -235,6 +259,8 @@ module HammerCLICsv
           'yum'
         when /puppet/i
           'puppet'
+        when /docker/i
+          'docker'
         else
           raise "Unrecognized repository type '#{repository_type}'"
         end

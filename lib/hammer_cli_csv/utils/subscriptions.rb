@@ -10,6 +10,7 @@ module HammerCLICsv
       SUBS_ACCOUNT = 'Subscription Account'
       SUBS_START = 'Subscription Start'
       SUBS_END = 'Subscription End'
+      SUBS_VIRT_ONLY = 'Virt Only'
 
       def get_all_subscriptions(organization)
         @api.resource(:subscriptions).call(:index, {
@@ -82,6 +83,10 @@ module HammerCLICsv
           matches = matches.select do |subscription|
             subscription['type'] == 'UNMAPPED_GUEST'
           end
+        elsif line[SUBS_TYPE] == 'Red Hat Entitlement Derived'
+          matches = matches.select do |subscription|
+            subscription['type'] == 'ENTITLEMENT_DERIVED'
+          end
         end
         raise _("No subscriptions match type '%{type}'") % {:type => line[SUBS_TYPE]} if matches.empty?
         matches
@@ -110,10 +115,22 @@ module HammerCLICsv
       def matches_by_quantity(matches, line)
         if line[SUBS_QUANTITY] && line[SUBS_QUANTITY] != 'Automatic'
           refined = matches.select do |subscription|
-            subscription['available'] == -1 || line[SUBS_QUANTITY].to_i <= subscription['available']
+            subscription['available'] < 0 || line[SUBS_QUANTITY].to_i <= subscription['available']
           end
           raise _("No '%{name}' subscription with quantity %{quantity} or more available") %
             {:name => matches[0]['name'], :quantity => line[SUBS_QUANTITY]} if refined.empty?
+          matches = refined
+        end
+        matches
+      end
+
+      def matches_by_virt_only(matches, line)
+        if line[SUBS_VIRT_ONLY]
+          refined = matches.select do |subscription|
+            subscription['virt_only'].to_s == line[SUBS_VIRT_ONLY]
+          end
+          raise _("No '%{name}' subscription with virt_only == %{virt_only}") %
+            {:name => matches[0]['name'], :virt_only => line[SUBS_VIRT_ONLY]} if refined.empty?
           matches = refined
         end
         matches

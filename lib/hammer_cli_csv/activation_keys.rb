@@ -34,7 +34,8 @@ module HammerCLICsv
         csv << shared_headers + [Utils::Subscriptions::SUBS_NAME, Utils::Subscriptions::SUBS_TYPE,
                                  Utils::Subscriptions::SUBS_QUANTITY, Utils::Subscriptions::SUBS_SKU,
                                  Utils::Subscriptions::SUBS_CONTRACT, Utils::Subscriptions::SUBS_ACCOUNT,
-                                 Utils::Subscriptions::SUBS_START, Utils::Subscriptions::SUBS_END]
+                                 Utils::Subscriptions::SUBS_START, Utils::Subscriptions::SUBS_END,
+                                 Utils::Subscriptions::SUBS_VIRT_ONLY]
         iterate_activationkeys(csv) do |activationkey|
           columns = shared_columns(activationkey)
           @api.resource(:subscriptions).call(:index, {
@@ -43,13 +44,15 @@ module HammerCLICsv
           })['results'].collect do |subscription|
             subscription_type = subscription['product_id'].to_i == 0 ? 'Red Hat' : 'Custom'
             subscription_type += ' Guest' if subscription['type'] == 'STACK_DERIVED'
+            subscription_type += ' Entitlement Derived' if subscription['type'] == 'ENTITLEMENT_DERIVED'
             subscription_type += ' Temporary' if subscription['type'] == 'UNMAPPED_GUEST'
             amount = (subscription['quantity_attached'].nil? || subscription['quantity_attached'] < 1) ? 'Automatic' : subscription['quantity_attached']
             csv << columns +
               [subscription['product_name'], subscription_type, amount,
                subscription['product_id'], subscription['contract_number'], subscription['account_number'],
                DateTime.parse(subscription['start_date']),
-               DateTime.parse(subscription['end_date'])]
+               DateTime.parse(subscription['end_date']),
+               subscription['virt_only']]
           end
         end
       end
@@ -193,11 +196,13 @@ module HammerCLICsv
         already_attached = false
         if line[Utils::Subscriptions::SUBS_SKU]
           already_attached = existing_subscriptions.detect do |subscription|
-            line[Utils::Subscriptions::SUBS_SKU] == subscription['product_id']
+            line[Utils::Subscriptions::SUBS_SKU] == subscription['product_id'] &&
+              line[Utils::Subscriptions::SUBS_VIRT_ONLY] == subscription['virt_only'].to_s
           end
         elsif line[Utils::Subscriptions::SUBS_NAME]
           already_attached = existing_subscriptions.detect do |subscription|
-            line[Utils::Subscriptions::SUBS_NAME] == subscription['name']
+            line[Utils::Subscriptions::SUBS_NAME] == subscription['name'] &&
+              line[Utils::Subscriptions::SUBS_VIRT_ONLY] == subscription['virt_only'].to_s
           end
         end
         if already_attached
@@ -216,6 +221,7 @@ module HammerCLICsv
         matches = matches_by_account(matches, line)
         matches = matches_by_contract(matches, line)
         matches = matches_by_quantity(matches, line)
+        matches = matches_by_virt_only(matches, line)
 
         raise _("No matching subscriptions") if matches.empty?
 

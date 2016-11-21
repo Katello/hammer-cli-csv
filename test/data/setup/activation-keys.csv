@@ -1,2 +1,2 @@
 Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscriptions
-ak1,Default Organization,,,,Default Organization View,"",Yes,,,"""1|RH0105260|Red Hat Enterprise Linux Server, Premium (8 sockets) (Unlimited guests)|10855292|5535485"""
+testakey1,Test Corporation,,,,Default Organization View,"",Yes,,,"""1|RH00002|Red Hat Enterprise Linux for Virtual Datacenters, Standard||1583473"""

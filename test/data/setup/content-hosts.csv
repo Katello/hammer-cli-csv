@@ -2,5 +2,5 @@ Name,Count,Organization,Environment,Content View,Host Collections,Virtual,Host,O
 # TODO: below blocked by http://projects.theforeman.org/issues/17505
 #testhypervisor,1,Test Corporation,Library,Default Organization View,,No,,RHEL 7Server,x86_64,4,4 GB,1,,,""
 #testguest%d,2,Test Corporation,Library,Default Organization View,,Yes,testhypervisor,RHEL 7Server,x86_64,1,4GB,1,,"69|Red Hat Enterprise Linux Server","""1|RH00002|Red Hat Enterprise Linux for Virtual Datacenters, Standard|10999110|5700573"""
-testvm,2,Test Corporation,Library,Default Organization View,,Yes,,RHEL 7Server,x86_64,4,4GB,1,,"69|Red Hat Enterprise Linux Server","""|RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)|10999113|5700573"""
-testphysical,2,Test Corporation,Library,Default Organization View,,Yes,,RHEL 7Server,x86_64,8,4GB,1,,"69|Red Hat Enterprise Linux Server","""|RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)|10999113|5700573"""
+testvm,1,Test Corporation,Library,Default Organization View,,Yes,,RHEL 7Server,x86_64,4,4GB,1,,"69|Red Hat Enterprise Linux Server","""|RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)|10999113|5700573"""
+testphysical,1,Test Corporation,Library,Default Organization View,,Yes,,RHEL 7Server,x86_64,8,4GB,1,,"69|Red Hat Enterprise Linux Server","""|RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)|10999113|5700573"""

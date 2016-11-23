@@ -148,21 +148,7 @@ module HammerCLICsv
 
       def import
         raise _("--columns option only relevant with --export") unless option_columns.nil?
-        remote = @server_status['plugins'].detect { |plugin| plugin['name'] == 'foreman_csv' }
-        if remote.nil?
-          import_locally
-        else
-          import_remotely
-        end
-      end
 
-      def import_remotely
-        params = {'content' => ::File.new(::File.expand_path(option_file), 'rb')}
-        headers = {:content_type => 'multipart/form-data', :multipart => true}
-        task_progress(@api.resource(:csv).call(:import_content_hosts, params, headers))
-      end
-
-      def import_locally
         @existing = {}
         @hypervisor_guests = {}
         @all_subscriptions = {}
@@ -270,25 +256,52 @@ module HammerCLICsv
           @hypervisor_guests[@existing[hypervisor]] << "#{line[ORGANIZATION]}/#{name}"
         end
 
+        update_facts(host, line)
         update_host_collections(host, line)
         update_subscriptions(host, line, true)
 
         puts _('done') if option_verbose?
       end
 
-      def facts(name, line)
-        facts = {}
-        facts['system.certificate_version'] = '3.2'  # Required for auto-attach to work
+      def facts(name, line, facts = {})
+        facts['system.certificate_version'] ||= '3.2'  # Required for auto-attach to work
         facts['network.hostname'] = name
-        facts['cpu.core(s)_per_socket'] = line[CORES]
-        facts['cpu.cpu_socket(s)'] = line[SOCKETS]
-        facts['memory.memtotal'] = line[RAM]
-        facts['uname.machine'] = line[ARCHITECTURE]
-        (facts['distribution.name'], facts['distribution.version']) = os_name_version(line[OPERATINGSYSTEM])
-        facts['virt.is_guest'] = line[VIRTUAL] == 'Yes' ? true : false
-        facts['virt.uuid'] = "#{line[ORGANIZATION]}/#{name}" if facts['virt.is_guest']
-        facts['cpu.cpu(s)'] = 1
+        facts['cpu.core(s)_per_socket'] = line[CORES] if !line[CORES].nil? && !line[CORES].empty?
+        facts['cpu.cpu_socket(s)'] = line[SOCKETS] if !line[SOCKETS].nil? && !line[SOCKETS].empty?
+        facts['memory.memtotal'] = line[RAM] if !line[RAM].nil? && !line[RAM].empty?
+        facts['uname.machine'] = line[ARCHITECTURE] if !line[ARCHITECTURE].nil? && !line[ARCHITECTURE].empty?
+        (facts['distribution.name'], facts['distribution.version']) = os_name_version(line[OPERATINGSYSTEM]) if !line[OPERATINGSYSTEM].nil? && !line[OPERATINGSYSTEM].empty?
+        if !line[VIRTUAL].nil? && !line[VIRTUAL].empty?
+          facts['virt.is_guest'] = line[VIRTUAL] == 'Yes' ? true : false
+          facts['virt.uuid'] = "#{line[ORGANIZATION]}/#{name}" if facts['virt.uuid'].nil? && facts['virt.is_guest']
+        end
+        facts['cpu.cpu(s)'] ||= 1
         facts
+      end
+
+      def update_facts(host, line)
+        return if host['subscription_facet_attributes'].nil?
+
+        url = "#{@server}/rhsm/consumers/#{host['subscription_facet_attributes']['uuid']}"
+        uri = URI(url)
+        nethttp = Net::HTTP.new(uri.host, uri.port)
+        nethttp.use_ssl = uri.scheme == 'https'
+        nethttp.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        nethttp.start do |http|
+          request = Net::HTTP::Get.new(uri.request_uri)
+          request = authenticate_request(request)
+          response = http.request(request)
+          results = JSON.parse(response.body)
+
+          facts = facts(host['name'], line, results['facts'])
+
+          request = Net::HTTP::Put.new(uri.request_uri, {'Content-Type' => 'application/json'})
+          request = authenticate_request(request)
+          request.body = {:facts => facts}.to_json
+          response = http.request(request)
+          JSON.parse(response.body)
+        end
+
       end
 
       def update_host_collections(host, line)

@@ -40,7 +40,11 @@ module HammerCLICsv
 
     def help
       print_message _('**** This command is unsupported and is provided as tech preview. ****') unless supported?
-      super
+      super + self.class.help_columns
+    end
+
+    def self.help_columns
+      ''
     end
 
     def execute

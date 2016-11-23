@@ -12,6 +12,7 @@ module HammerCLICsv
       end
 
       option %w(--itemized-subscriptions), :flag, _('Export one subscription per row, only process update subscriptions on import')
+      option %w(--columns), 'COLUMN_NAMES', _('Comma separated list of column names to export')
 
       SEARCH = 'Search'
       ORGANIZATION = 'Organization'
@@ -28,6 +29,61 @@ module HammerCLICsv
       SLA = 'SLA'
       PRODUCTS = 'Products'
 
+      def self.help_columns
+        ['', _('Columns:'),
+         _(" %{name} - Name of resource") % {:name => NAME},
+         _(" %{name} - Search for matching names during import (overrides '%{name_col}' column)") % {:name => SEARCH, :name_col => NAME},
+         _(" %{name} - Organization name") % {:name => ORGANIZATION},
+         _(" %{name} - Lifecycle environment name") % {:name => ENVIRONMENT},
+         _(" %{name} - Content view name") % {:name => CONTENTVIEW},
+         _(" %{name} - Comma separated list of host collection names") % {:name => HOSTCOLLECTIONS},
+         _(" %{name} - Is a virtual host, %{yes} or %{no}") % {:name => NAME, :yes => 'Yes', :no => 'No'},
+         _(" %{name} - Hypervisor host name for virtual hosts") % {:name => HOST},
+         _(" %{name} - Operating system") % {:name => OPERATINGSYSTEM},
+         _(" %{name} - Architecture") % {:name => ARCHITECTURE},
+         _(" %{name} - Number of sockets") % {:name => SOCKETS},
+         _(" %{name} - Quantity of RAM in bytes") % {:name => RAM},
+         _(" %{name} - Number of cores") % {:name => CORES},
+         _(" %{name} - Service Level Agreement value") % {:name => SLA},
+         _(" %{name} - Comma separated list of products, each of the format \"<sku>|<name>\"") % {:name => PRODUCTS},
+         _(" %{name} - Comma separated list of subscriptions, each of the format \"<quantity>|<sku>|<name>|<contract>|<account>\"") % {:name => SUBSCRIPTIONS},
+         _(" %{name} - Subscription name (only applicable for --itemized-subscriptions)") % {:name => SUBS_NAME},
+         _(" %{name} - Subscription type (only applicable for --itemized-subscriptions)") % {:name => SUBS_TYPE},
+         _(" %{name} - Subscription quantity (only applicable for --itemized-subscriptions)") % {:name => SUBS_QUANTITY},
+         _(" %{name} - Subscription SKU (only applicable for --itemized-subscriptions)") % {:name => SUBS_SKU},
+         _(" %{name} - Subscription contract number (only applicable for --itemized-subscriptions)") % {:name => SUBS_CONTRACT},
+         _(" %{name} - Subscription account number (only applicable for --itemized-subscriptions)") % {:name => SUBS_ACCOUNT},
+         _(" %{name} - Subscription start date (only applicable for --itemized-subscriptions)") % {:name => SUBS_START},
+         _(" %{name} - Subscription end date (only applicable for --itemized-subscriptions)") % {:name => SUBS_END}
+        ].join("\n")
+      end
+
+      def column_headers
+        @column_values = {}
+        if option_columns.nil?
+          if ::HammerCLI::Settings.settings[:csv][:columns] &&
+              ::HammerCLI::Settings.settings[:csv][:columns]['content-hosts'.to_sym] &&
+              ::HammerCLI::Settings.settings[:csv][:columns]['content-hosts'.to_sym][:export]
+            @columns = ::HammerCLI::Settings.settings[:csv][:columns]['content-hosts'.to_sym][:export]
+          else
+            if option_itemized_subscriptions?
+              @columns = shared_headers + [SUBS_NAME, SUBS_TYPE, SUBS_QUANTITY, SUBS_SKU,
+                                           SUBS_CONTRACT, SUBS_ACCOUNT, SUBS_START, SUBS_END]
+            else
+              @columns = shared_headers + [SUBSCRIPTIONS]
+            end
+          end
+        else
+          @columns = option_columns.split(',')
+        end
+
+        if ::HammerCLI::Settings.settings[:csv][:columns] && ::HammerCLI::Settings.settings[:csv][:columns]['content-hosts'.to_sym][:define]
+          @column_definitions = ::HammerCLI::Settings.settings[:csv][:columns]['content-hosts'.to_sym][:define]
+        end
+
+        @columns
+      end
+
       def export(csv)
         if option_itemized_subscriptions?
           export_itemized_subscriptions csv
@@ -37,62 +93,59 @@ module HammerCLICsv
       end
 
       def export_itemized_subscriptions(csv)
-        csv << shared_headers + [Utils::Subscriptions::SUBS_NAME, Utils::Subscriptions::SUBS_TYPE,
-                                 Utils::Subscriptions::SUBS_QUANTITY, Utils::Subscriptions::SUBS_SKU,
-                                 Utils::Subscriptions::SUBS_CONTRACT, Utils::Subscriptions::SUBS_ACCOUNT,
-                                 Utils::Subscriptions::SUBS_START, Utils::Subscriptions::SUBS_END]
+        csv << column_headers
         iterate_hosts(csv) do |host|
-          export_line = shared_columns(host)
+          shared_columns(host)
+          custom_columns(host)
+          @column_values[SUBS_NAME] = nil
+          @column_values[SUBS_TYPE] = nil
+          @column_values[SUBS_QUANTITY] = nil
+          @column_values[SUBS_SKU] = nil
+          @column_values[SUBS_CONTRACT] = nil
+          @column_values[SUBS_ACCOUNT] = nil
+          @column_values[SUBS_START] = nil
+          @column_values[SUBS_END] = nil
           if host['subscription_facet_attributes']
             subscriptions = @api.resource(:host_subscriptions).call(:index, {
                 'organization_id' => host['organization_id'],
                 'host_id' => host['id']
             })['results']
             if subscriptions.empty?
-              csv << export_line + [nil, nil, nil, nil, nil, nil]
+              columns_to_csv(csv)
             else
               subscriptions.each do |subscription|
                 subscription_type = subscription['product_id'].to_i == 0 ? 'Red Hat' : 'Custom'
                 subscription_type += ' Guest' if subscription['type'] == 'STACK_DERIVED'
                 subscription_type += ' Temporary' if subscription['type'] == 'UNMAPPED_GUEST'
-                csv << export_line + [subscription['product_name'], subscription_type,
-                                      subscription['quantity_consumed'], subscription['product_id'],
-                                      subscription['contract_number'], subscription['account_number'],
-                                      DateTime.parse(subscription['start_date']).strftime('%m/%d/%Y'),
-                                      DateTime.parse(subscription['end_date']).strftime('%m/%d/%Y')]
+                @column_values[SUBS_NAME] = subscription['product_name']
+                @column_values[SUBS_TYPE] = subscription_type
+                @column_values[SUBS_QUANTITY] = subscription['quantity_consumed']
+                @column_values[SUBS_SKU] = subscription['product_id']
+                @column_values[SUBS_CONTRACT] = subscription['contract_number']
+                @column_values[SUBS_ACCOUNT] = subscription['account_number']
+                @column_values[SUBS_START] = DateTime.parse(subscription['start_date']).strftime('%m/%d/%Y')
+                @column_values[SUBS_END] = DateTime.parse(subscription['end_date']).strftime('%m/%d/%Y')
+                columns_to_csv(csv)
               end
             end
           else
-            csv << export_line + [nil, nil, nil, nil, nil, nil]
+            columns_to_csv(csv)
           end
         end
       end
 
       def export_all(csv)
-        csv << shared_headers + [Utils::Subscriptions::SUBSCRIPTIONS]
+        csv << column_headers
         iterate_hosts(csv) do |host|
-          if host['subscription_facet_attributes']
-            subscriptions = CSV.generate do |column|
-              column << @api.resource(:host_subscriptions).call(:index, {
-                  'organization_id' => host['organization_id'],
-                  'host_id' => host['id']
-              })['results'].collect do |subscription|
-                "#{subscription['quantity_consumed']}"\
-                "|#{subscription['product_id']}"\
-                "|#{subscription['product_name']}"\
-                "|#{subscription['contract_number']}|#{subscription['account_number']}"
-              end
-            end
-            subscriptions.delete!("\n")
-          else
-            subscriptions = nil
-          end
-
-          csv << shared_columns(host) + [subscriptions]
+          all_subscription_column(host)
+          shared_columns(host)
+          custom_columns(host)
+          columns_to_csv(csv)
         end
       end
 
       def import
+        raise _("--columns option only relevant with --export") unless option_columns.nil?
         remote = @server_status['plugins'].detect { |plugin| plugin['name'] == 'foreman_csv' }
         if remote.nil?
           import_locally
@@ -198,7 +251,6 @@ module HammerCLICsv
                 'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
               },
               'subscription_facet_attributes' => {
-                'facts' => facts(name, line),
                 'installed_products' => products(line),
                 'service_level' => line[SLA]
               }
@@ -283,7 +335,7 @@ module HammerCLICsv
           existing_subscriptions = []
         end
 
-        if line[Utils::Subscriptions::SUBS_NAME].nil? && line[Utils::Subscriptions::SUBS_SKU].nil?
+        if line[SUBS_NAME].nil? && line[SUBS_SKU].nil?
           all_in_one_subscription(host, existing_subscriptions, line)
         else
           single_subscription(host, existing_subscriptions, line)
@@ -291,14 +343,19 @@ module HammerCLICsv
       end
 
       def single_subscription(host, existing_subscriptions, line)
+        if !line[SUBS_SKU].nil? && !line[SUBS_SKU].empty? &&
+            !line[SUBS_NAME].nil? && !line[SUBS_NAME].empty?
+          return
+        end
+
         already_attached = false
-        if line[Utils::Subscriptions::SUBS_SKU]
+        if !line[SUBS_SKU].nil? && !line[SUBS_SKU].empty?
           already_attached = existing_subscriptions.detect do |subscription|
-            line[Utils::Subscriptions::SUBS_SKU] == subscription['product_id']
+            line[SUBS_SKU] == subscription['product_id']
           end
-        elsif line[Utils::Subscriptions::SUBS_NAME]
+        elsif !line[SUBS_NAME].nil? && !line[SUBS_NAME].empty?
           already_attached = existing_subscriptions.detect do |subscription|
-            line[Utils::Subscriptions::SUBS_NAME] == subscription['name']
+            line[SUBS_NAME] == subscription['name']
           end
         end
         if already_attached
@@ -440,10 +497,78 @@ module HammerCLICsv
         cores = host['facts']['cpu::core(s)_per_socket'] || 1
         sla = ''
 
-        [name, organization_name, environment, contentview, hostcollections, virtual, hypervisor_host,
-         operatingsystem, architecture, sockets, ram, cores, sla, products]
+        @column_values[NAME] = name
+        @column_values[ORGANIZATION] = organization_name
+        @column_values[ENVIRONMENT] = environment
+        @column_values[CONTENTVIEW] = contentview
+        @column_values[HOSTCOLLECTIONS] = hostcollections
+        @column_values[VIRTUAL] = virtual
+        @column_values[HOST] = hypervisor_host
+        @column_values[OPERATINGSYSTEM] = operatingsystem
+        @column_values[ARCHITECTURE] = architecture
+        @column_values[SOCKETS] = sockets
+        @column_values[RAM] = ram
+        @column_values[CORES] = cores
+        @column_values[SLA] = sla
+        @column_values[PRODUCTS] = products
       end
 
+      def custom_columns(host)
+        return if @column_definitions.nil?
+        @column_definitions.each do |definition|
+          @column_values[definition[:name]] = dig(host, definition[:json])
+        end
+      end
+
+      def dig(host, path)
+        path.inject(host) do |location, key|
+          location.respond_to?(:keys) ? location[key] : nil
+        end
+      end
+
+      def all_subscription_column(host)
+        if host['subscription_facet_attributes'] &&
+           (@columns.include?(SUBS_NAME) ||
+            @columns.include?(SUBSCRIPTIONS) ||
+            @columns.include?(SUBS_TYPE) ||
+            @columns.include?(SUBS_QUANTITY) ||
+            @columns.include?(SUBS_SKU) ||
+            @columns.include?(SUBS_CONTRACT) ||
+            @columns.include?(SUBS_ACCOUNT) ||
+            @columns.include?(SUBS_START) ||
+            @columns.include?(SUBS_END)
+           )
+          subscriptions = CSV.generate do |column|
+            column << @api.resource(:host_subscriptions).call(:index, {
+                'organization_id' => host['organization_id'],
+                'host_id' => host['id']
+            })['results'].collect do |subscription|
+              "#{subscription['quantity_consumed']}"\
+              "|#{subscription['product_id']}"\
+              "|#{subscription['product_name']}"\
+              "|#{subscription['contract_number']}|#{subscription['account_number']}"
+            end
+          end
+          subscriptions.delete!("\n")
+        else
+          subscriptions = nil
+        end
+        @column_values[SUBSCRIPTIONS] = subscriptions
+      end
+
+      def columns_to_csv(csv)
+        if @first_columns_to_csv.nil?
+          @columns.each do |column|
+            # rubocop:disable LineLength
+            $stderr.puts  _("Warning: Column '%{name}' does not match any field, be sure to check spelling. A full list of supported columns are available with 'hammer csv content-hosts --help'") % {:name => column} unless @column_values.key?(column)
+            # rubocop:enable LineLength
+          end
+          @first_columns_to_csv = true
+        end
+        csv << @columns.collect do |column|
+          @column_values[column]
+        end
+      end
     end
   end
 end

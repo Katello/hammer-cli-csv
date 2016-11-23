@@ -18,8 +18,10 @@
   :username:      'admin'
   :password:      'changeme'
 
-:csv:
-  :enable_module: true
-
 :katello:
   :enable_module: true
+
+# :csv: section must be last line to allow testing of config changes
+:csv:
+  :enable_module: true
+  # last line of config.yml with newline

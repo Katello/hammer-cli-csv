@@ -20,7 +20,8 @@ module HammerCLICsv
       CONTENTVIEW = 'Content View'
       HOSTCOLLECTIONS = 'Host Collections'
       VIRTUAL = 'Virtual'
-      HOST = 'Host'
+      HOST = 'Host'  # deprecated for GUESTOF
+      GUESTOF = 'Guest of Host'
       OPERATINGSYSTEM = 'OS'
       ARCHITECTURE = 'Arch'
       SOCKETS = 'Sockets'
@@ -37,8 +38,8 @@ module HammerCLICsv
          _(" %{name} - Lifecycle environment name") % {:name => ENVIRONMENT},
          _(" %{name} - Content view name") % {:name => CONTENTVIEW},
          _(" %{name} - Comma separated list of host collection names") % {:name => HOSTCOLLECTIONS},
-         _(" %{name} - Is a virtual host, %{yes} or %{no}") % {:name => NAME, :yes => 'Yes', :no => 'No'},
-         _(" %{name} - Hypervisor host name for virtual hosts") % {:name => HOST},
+         _(" %{name} - Is a virtual host, %{yes} or %{no}") % {:name => VIRTUAL, :yes => 'Yes', :no => 'No'},
+         _(" %{name} - Hypervisor host name for virtual hosts") % {:name => GUESTOF},
          _(" %{name} - Operating system") % {:name => OPERATINGSYSTEM},
          _(" %{name} - Architecture") % {:name => ARCHITECTURE},
          _(" %{name} - Number of sockets") % {:name => SOCKETS},
@@ -68,7 +69,7 @@ module HammerCLICsv
           else
             if option_itemized_subscriptions?
               @columns = shared_headers + [SUBS_NAME, SUBS_TYPE, SUBS_QUANTITY, SUBS_SKU,
-                                           SUBS_CONTRACT, SUBS_ACCOUNT, SUBS_START, SUBS_END]
+                                           SUBS_CONTRACT, SUBS_ACCOUNT, SUBS_START, SUBS_END, SUBS_GUESTOF]
             else
               @columns = shared_headers + [SUBSCRIPTIONS]
             end
@@ -97,25 +98,26 @@ module HammerCLICsv
         iterate_hosts(csv) do |host|
           shared_columns(host)
           custom_columns(host)
-          @column_values[SUBS_NAME] = nil
-          @column_values[SUBS_TYPE] = nil
-          @column_values[SUBS_QUANTITY] = nil
-          @column_values[SUBS_SKU] = nil
-          @column_values[SUBS_CONTRACT] = nil
-          @column_values[SUBS_ACCOUNT] = nil
-          @column_values[SUBS_START] = nil
-          @column_values[SUBS_END] = nil
           if host['subscription_facet_attributes']
             subscriptions = @api.resource(:host_subscriptions).call(:index, {
                 'organization_id' => host['organization_id'],
                 'host_id' => host['id']
             })['results']
             if subscriptions.empty?
+              %W(#{SUBS_NAME} #{SUBS_TYPE} #{SUBS_QUANTITY} #{SUBS_SKU} #{SUBS_CONTRACT}
+                 #{SUBS_ACCOUNT} #{SUBS_START} #{SUBS_END} #{SUBS_GUESTOF}).each do |entry|
+                @column_values[entry] = nil
+              end
               columns_to_csv(csv)
             else
               subscriptions.each do |subscription|
+                %W(#{SUBS_NAME} #{SUBS_TYPE} #{SUBS_QUANTITY} #{SUBS_SKU} #{SUBS_CONTRACT}
+                   #{SUBS_ACCOUNT} #{SUBS_START} #{SUBS_END} #{SUBS_GUESTOF}).each do |entry|
+                  @column_values[entry] = nil
+                end
+                @column_values[SUBS_GUESTOF] = subscription['host']['name'] if subscription['host']
                 subscription_type = subscription['product_id'].to_i == 0 ? 'Red Hat' : 'Custom'
-                subscription_type += ' Guest' if subscription['type'] == 'STACK_DERIVED'
+                subscription_type += ' Guest' unless @column_values[SUBS_GUESTOF].nil?
                 subscription_type += ' Temporary' if subscription['type'] == 'UNMAPPED_GUEST'
                 @column_values[SUBS_NAME] = subscription['product_name']
                 @column_values[SUBS_TYPE] = subscription_type
@@ -229,13 +231,15 @@ module HammerCLICsv
       end
 
       def update_or_create(name, line)
+        lifecycle_environment_id = lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT])
+        content_view_id = katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
         if !@existing.include? name
           print(_("Creating content host '%{name}'...") % {:name => name}) if option_verbose?
           params = {
             'name' => name,
             'facts' => facts(name, line),
-            'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-            'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
+            'lifecycle_environment_id' => lifecycle_environment_id,
+            'content_view_id' => content_view_id
           }
           params['installed_products'] = products(line) if line[PRODUCTS]
           params['service_level'] = line[SLA] if line[SLA]
@@ -247,8 +251,8 @@ module HammerCLICsv
             'id' => @existing[name],
             'host' => {
               'content_facet_attributes' => {
-                'lifecycle_environment_id' => lifecycle_environment(line[ORGANIZATION], :name => line[ENVIRONMENT]),
-                'content_view_id' => katello_contentview(line[ORGANIZATION], :name => line[CONTENTVIEW])
+                'lifecycle_environment_id' => lifecycle_environment_id,
+                'content_view_id' => content_view_id
               },
               'subscription_facet_attributes' => {
                 'installed_products' => products(line),
@@ -259,10 +263,11 @@ module HammerCLICsv
           host = @api.resource(:hosts).call(:update, params)
         end
 
-        if line[VIRTUAL] == 'Yes' && line[HOST]
-          raise "Content host '#{line[HOST]}' not found" if !@existing[line[HOST]]
-          @hypervisor_guests[@existing[line[HOST]]] ||= []
-          @hypervisor_guests[@existing[line[HOST]]] << "#{line[ORGANIZATION]}/#{name}"
+        hypervisor = hypervisor_from_line(line)
+        if line[VIRTUAL] == 'Yes' && hypervisor
+          raise "Content host '#{hypervisor}' not found" if !@existing[hypervisor]
+          @hypervisor_guests[@existing[hypervisor]] ||= []
+          @hypervisor_guests[@existing[hypervisor]] << "#{line[ORGANIZATION]}/#{name}"
         end
 
         update_host_collections(host, line)
@@ -310,7 +315,7 @@ module HammerCLICsv
       end
 
       def products(line)
-        return nil if !line[PRODUCTS]
+        return if line[PRODUCTS].nil? || line[PRODUCTS].empty?
         CSV.parse_line(line[PRODUCTS]).collect do |product_details|
           product = {}
           (product['product_id'], product['product_name']) = product_details.split('|')
@@ -335,7 +340,8 @@ module HammerCLICsv
           existing_subscriptions = []
         end
 
-        if line[SUBS_NAME].nil? && line[SUBS_SKU].nil?
+        if (line[SUBS_SKU].nil? || line[SUBS_SKU].empty?) &&
+            (line[SUBS_NAME].nil? || line[SUBS_NAME].empty?)
           all_in_one_subscription(host, existing_subscriptions, line)
         else
           single_subscription(host, existing_subscriptions, line)
@@ -343,43 +349,23 @@ module HammerCLICsv
       end
 
       def single_subscription(host, existing_subscriptions, line)
-        if !line[SUBS_SKU].nil? && !line[SUBS_SKU].empty? &&
-            !line[SUBS_NAME].nil? && !line[SUBS_NAME].empty?
+        matches = matches_by_sku_and_name([], line[SUBS_SKU], line[SUBS_NAME], existing_subscriptions)
+        matches = matches_by_hypervisor(matches, line[SUBS_GUESTOF])
+        unless matches.empty?
+          print _(" '%{name}' already attached...") % {:name => subscription_name(matches[0])} if option_verbose?
           return
         end
 
-        already_attached = false
-        if !line[SUBS_SKU].nil? && !line[SUBS_SKU].empty?
-          already_attached = existing_subscriptions.detect do |subscription|
-            line[SUBS_SKU] == subscription['product_id']
-          end
-        elsif !line[SUBS_NAME].nil? && !line[SUBS_NAME].empty?
-          already_attached = existing_subscriptions.detect do |subscription|
-            line[SUBS_NAME] == subscription['name']
-          end
-        end
-        if already_attached
-          print _(" '%{name}' already attached...") % {:name => already_attached['name']}
-          return
-        end
-
-        available_subscriptions = @api.resource(:subscriptions).call(:index, {
-          'organization_id' => host['organization_id'],
-          'host_id' => host['id'],
-          'available_for' => 'host',
-          'match_host' => true
-        })['results']
-
-        matches = matches_by_sku_and_name([], line, available_subscriptions)
-        matches = matches_by_type(matches, line)
-        matches = matches_by_account(matches, line)
-        matches = matches_by_contract(matches, line)
-        matches = matches_by_quantity(matches, line)
+        matches = get_matching_subscriptions(host['organization_id'],
+            :host => host, :sku => line[SUBS_SKU], :name => line[SUBS_NAME], :type => line[SUBS_TYPE],
+            :account => line[SUBS_ACCOUNT], :contract => line[SUBS_CONTRACT],
+            :quantity => line[SUBS_QUANTITY], :hypervisor => line[SUBS_GUESTOF],
+            :sla => line[SLA])
 
         raise _("No matching subscriptions") if matches.empty?
 
         match = matches[0]
-        print _(" attaching '%{name}'...") % {:name => match['name']} if option_verbose?
+        print _(" attaching '%{name}'...") % {:name => subscription_name(match)} if option_verbose?
 
         amount = line[SUBS_QUANTITY]
         quantity = (amount.nil? || amount.empty? || amount == 'Automatic') ? 0 : amount.to_i
@@ -393,11 +379,18 @@ module HammerCLICsv
       def all_in_one_subscription(host, existing_subscriptions, line)
         return if line[SUBSCRIPTIONS].nil? || line[SUBSCRIPTIONS].empty?
 
+        organization_id = foreman_organization(:name => line[ORGANIZATION])
+        hypervisor = hypervisor_from_line(line)
+
         subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |details|
           (amount, sku, name, contract, account) = split_subscription_details(details)
+          matches = get_matching_subscriptions(organization_id,
+              :name => name, :contract => contract, :account => account, :quantity => amount,
+              :hypervisor => hypervisor, :sla => line[SLA])
+          raise "No matching subscription" if matches.empty?
+
           {
-            :id => get_subscription(line[ORGANIZATION], :name => name, :contract => contract,
-                                                        :account => account),
+            :id => matches[0]['id'],
             :quantity => (amount.nil? || amount.empty? || amount == 'Automatic') ? 0 : amount.to_i
           }
         end
@@ -434,11 +427,13 @@ module HammerCLICsv
       def iterate_hosts(csv)
         hypervisors = []
         hosts = []
-        @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
+        @api.resource(:organizations).call(:index, {
+            'full_results' => true
+        })['results'].each do |organization|
           next if option_organization && organization['name'] != option_organization
 
           @api.resource(:hosts).call(:index, {
-              'per_page' => 999999,
+              'full_results' => true,
               'search' => option_search,
               'organization_id' => foreman_organization(:name => organization['name'])
           })['results'].each do |host|
@@ -464,7 +459,7 @@ module HammerCLICsv
       end
 
       def shared_headers
-        [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, HOST,
+        [NAME, ORGANIZATION, ENVIRONMENT, CONTENTVIEW, HOSTCOLLECTIONS, VIRTUAL, GUESTOF,
          OPERATINGSYSTEM, ARCHITECTURE, SOCKETS, RAM, CORES, SLA, PRODUCTS]
       end
 
@@ -504,7 +499,7 @@ module HammerCLICsv
         @column_values[CONTENTVIEW] = contentview
         @column_values[HOSTCOLLECTIONS] = hostcollections
         @column_values[VIRTUAL] = virtual
-        @column_values[HOST] = hypervisor_host
+        @column_values[GUESTOF] = hypervisor_host
         @column_values[OPERATINGSYSTEM] = operatingsystem
         @column_values[ARCHITECTURE] = architecture
         @column_values[SOCKETS] = sockets
@@ -561,7 +556,9 @@ module HammerCLICsv
         if @first_columns_to_csv.nil?
           @columns.each do |column|
             # rubocop:disable LineLength
-            $stderr.puts  _("Warning: Column '%{name}' does not match any field, be sure to check spelling. A full list of supported columns are available with 'hammer csv content-hosts --help'") % {:name => column} unless @column_values.key?(column)
+            if option_export? && !@column_values.key?(column)
+              $stderr.puts  _("Warning: Column '%{name}' does not match any field, be sure to check spelling. A full list of supported columns are available with 'hammer csv content-hosts --help'") % {:name => column}
+            end
             # rubocop:enable LineLength
           end
           @first_columns_to_csv = true
@@ -569,6 +566,12 @@ module HammerCLICsv
         csv << @columns.collect do |column|
           @column_values[column]
         end
+      end
+
+      def hypervisor_from_line(line)
+        hypervisor = line[HOST] if !line[HOST].nil? && !line[HOST].empty?
+        hypervisor ||= line[GUESTOF] if !line[GUESTOF].nil? && !line[GUESTOF].empty?
+        hypervisor
       end
     end
   end

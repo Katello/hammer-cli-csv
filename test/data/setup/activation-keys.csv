@@ -1,2 +1,2 @@
 Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscriptions
-testakey1,Test Corporation,,,,Default Organization View,"",Yes,,,"""1|RH00002|Red Hat Enterprise Linux for Virtual Datacenters, Standard||1583473"""
+testakey,Test Corporation,,,,Default Organization View,"",Yes,,,"""1|RH00002|Red Hat Enterprise Linux for Virtual Datacenters, Standard||1583473"""

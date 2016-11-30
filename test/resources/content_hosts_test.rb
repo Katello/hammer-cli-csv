@@ -34,8 +34,8 @@ Columns:
  Environment - Lifecycle environment name
  Content View - Content view name
  Host Collections - Comma separated list of host collection names
- Name - Is a virtual host, Yes or No
- Host - Hypervisor host name for virtual hosts
+ Virtual - Is a virtual host, Yes or No
+ Guest of Host - Hypervisor host name for virtual hosts
  OS - Operating system
  Arch - Architecture
  Sockets - Number of sockets
@@ -76,8 +76,8 @@ HELP
       hostname = "testhost1"
 
       file = Tempfile.new('content_hosts_test')
-      file.write("Name,Count,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions\n")
-      file.write("#{hostname},1,Test Corporation,Library,Default Organization View,,No,,RHEL 6.4,x86_64,1,4,1,,,\n")
+      file.write("Name,Count,Organization,Environment,Content View,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions\n")
+      file.write("#{hostname},1,Test Corporation,Library,Default Organization View,No,,RHEL 6.4,x86_64,1,4,1,,,\n")
       file.rewind
 
       stdout,stderr = capture {
@@ -113,7 +113,7 @@ HELP
         hammer.run(%W{--reload-cache csv content-hosts --export --organization Test\ Corporation})
       }
       assert_equal '', stderr
-      assert_equal stdout.split("\n")[0], "Name,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions"
+      assert_equal stdout.split("\n")[0], "Name,Organization,Environment,Content View,Host Collections,Virtual,Guest of Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions"
       stop_vcr
     end
 
@@ -126,7 +126,7 @@ HELP
       }
       assert_equal '', stderr
 
-      assert_equal stdout.split("\n")[0], "Name,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscription Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription Contract,Subscription Account,Subscription Start,Subscription End"
+      assert_equal stdout.split("\n")[0], "Name,Organization,Environment,Content View,Host Collections,Virtual,Guest of Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscription Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription Contract,Subscription Account,Subscription Start,Subscription End,Subscription Guest"
       stop_vcr
     end
 

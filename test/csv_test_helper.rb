@@ -101,7 +101,7 @@ def host_delete(hostname)
   }
   lines = stdout.split("\n")
   if lines.length == 5
-    id = stdout.split("\n")[3].split(" ")[0]
+    id = lines[3].split(" ")[0]
     stdout,stderr = capture {
       hammer.run(%W(host delete --id #{id}))
     }

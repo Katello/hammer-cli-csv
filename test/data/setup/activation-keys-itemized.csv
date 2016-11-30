@@ -1,0 +1,3 @@
+Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscription Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription Contract,Subscription Account,Subscription Start,Subscription End,Subscription Guest
+testakeyitemized,Test Corporation,,,,Default Organization View,"",Yes,,,"Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)",Red Hat,Automatic,RH00004,10999113,5700573,2016-06-20T04:00:00+00:00,2017-06-20T03:59:59+00:00,
+testakeyitemized,Test Corporation,,,,Default Organization View,"",Yes,,,"Red Hat Enterprise Linux for Virtual Datacenters, Standard",Red Hat,1,RH00002,10999110,5700573,2016-06-20T04:00:00+00:00,2017-06-20T03:59:59+00:00,

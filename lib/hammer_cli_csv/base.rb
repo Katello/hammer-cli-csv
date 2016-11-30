@@ -146,6 +146,7 @@ module HammerCLICsv
             lines.each do |line|
               next if !line[name_column || NAME].nil? && line[name_column || NAME][0] == '#'
               begin
+                logger.debug(line)
                 yield line
               rescue RuntimeError => e
                 message = "#{e}\n#{line}"

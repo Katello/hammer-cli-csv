@@ -2,6 +2,7 @@ require 'simplecov'
 require 'pathname'
 require 'stringio'
 require 'tempfile'
+require 'fileutils'
 
 SimpleCov.use_merging true
 SimpleCov.start do

@@ -7,5 +7,6 @@ module Setup
   require './test/setup/setup_locations'
   require './test/setup/setup_lifecycle_environments'
   require './test/setup/setup_content_views'
+  require './test/setup/setup_content_hosts'
   require './test/setup/setup_domains'
 end

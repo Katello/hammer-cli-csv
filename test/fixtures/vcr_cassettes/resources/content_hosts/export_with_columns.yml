@@ -1,0 +1,193 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50083/api/status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 30 Nov 2016 14:55:45 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - ef9e7a17d630b8c2cc5b7e016c24efe7
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7823d01a-478b-46c3-a542-4eb37116b3a6
+      X-Runtime:
+      - '0.050470'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"8e3341d0a4cc328651f7391aed11fef8"'
+      Status:
+      - 200 OK
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=57f740365c7e651bc4a644ef8fd46d5d; path=/; secure; HttpOnly
+    body:
+      encoding: UTF-8
+      string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 14:55:52 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@katello.example.com:50083/api/v2/plugins
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 30 Nov 2016 14:55:45 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - ef9e7a17d630b8c2cc5b7e016c24efe7
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f9645aa3-473b-4926-a91a-3ff0a82ae009
+      X-Runtime:
+      - '0.033038'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1338'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=3d6a5ebccb60d0ffcc7e56caacf917bb; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJ0b3RhbCI6IDEwLAogICJzdWJ0b3RhbCI6IDEwLAogICJwYWdlIjog
+        MSwKICAicGVyX3BhZ2UiOiAyMCwKICAic2VhcmNoIjogbnVsbCwKICAic29y
+        dCI6IHsKICAgICJieSI6IG51bGwsCiAgICAib3JkZXIiOiBudWxsCiAgfSwK
+        ICAicmVzdWx0cyI6IFt7ImlkIjoiZm9yZW1hbi10YXNrcyIsIm5hbWUiOiJm
+        b3JlbWFuLXRhc2tzIiwiYXV0aG9yIjoiSXZhbiBOZcSNYXMiLCJkZXNjcmlw
+        dGlvbiI6IlRoZSBnb2FsIG9mIHRoaXMgcGx1Z2luIGlzIHRvIHVuaWZ5IHRo
+        ZSB3YXkgb2Ygc2hvd2luZyB0YXNrIHN0YXR1c2VzIGFjcm9zcyB0aGUgRm9y
+        ZW1hbiBpbnN0YW5jZS5cbkl0IGRlZmluZXMgVGFzayBtb2RlbCBmb3Iga2Vl
+        cGluZyB0aGUgaW5mb3JtYXRpb24gYWJvdXQgdGhlIHRhc2tzIGFuZCBMb2Nr
+        IGZvciBhc3NpZ25pbmcgdGhlIHRhc2tzXG50byByZXNvdXJjZXMuIFRoZSBs
+        b2NraW5nIGFsbG93cyBkZWFsaW5nIHdpdGggcHJldmVudGluZyBtdWx0aXBs
+        ZSBjb2xsaWRpbmcgdGFza3MgdG8gYmUgcnVuIG9uIHRoZVxuc2FtZSByZXNv
+        dXJjZS4gSXQgYWxzbyBvcHRpb25hbGx5IHByb3ZpZGVzIER5bmZsb3cgaW5m
+        cmFzdHJ1Y3R1cmUgZm9yIHVzaW5nIGl0IGZvciBtYW5hZ2luZyB0aGUgdGFz
+        a3MuXG4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vdGhlZm9yZW1hbi9m
+        b3JlbWFuLXRhc2tzIiwidmVyc2lvbiI6IjAuNy4xNC45In0seyJpZCI6ImZv
+        cmVtYW5fYm9vdGRpc2siLCJuYW1lIjoiZm9yZW1hbl9ib290ZGlzayIsImF1
+        dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJkZXNjcmlwdGlvbiI6IlBsdWdpbiBm
+        b3IgRm9yZW1hbiB0aGF0IGNyZWF0ZXMgaVBYRS1iYXNlZCBib290IGRpc2tz
+        IHRvIHByb3Zpc2lvbiBob3N0cyB3aXRob3V0IHRoZSBuZWVkIGZvciBQWEUg
+        aW5mcmFzdHJ1Y3R1cmUuIiwidXJsIjoiaHR0cDovL2dpdGh1Yi5jb20vdGhl
+        Zm9yZW1hbi9mb3JlbWFuX2Jvb3RkaXNrIiwidmVyc2lvbiI6IjYuMS4wLjMi
+        fSx7ImlkIjoiZm9yZW1hbl9kaXNjb3ZlcnkiLCJuYW1lIjoiZm9yZW1hbl9k
+        aXNjb3ZlcnkiLCJhdXRob3IiOiJBbW9zIEJlbmFyaSxCcnlhbiBLZWFybmV5
+        LENoYWlybWFuVHViZUFtcCxEYW5pZWwgTG9iYXRvIEdhcmPDrWEsRG9taW5p
+        YyBDbGVhbCxFcmljIEQuIEhlbG1zLEZyYW5rIFdhbGwsR3JlZyBTdXRjbGlm
+        ZmUsSW1yaSBadmlrLEpvc2VwaCBNaXRjaGVsbCBNYWdlbixMdWthcyBaYXBs
+        ZXRhbCxMdWvDocWhIFphcGxldGFsLE1hcmVrIEh1bGFuLE1hcnRpbiBCYcSN
+        b3Zza8O9LE1hdHQgSmFydmlzLE1pY2hhZWwgTW9sbCxOaWNrLE9oYWQgTGV2
+        eSxPcmkgUmFiaW4sUGV0ciBDaGFsdXBhLFBoaXJpbmNlIFBoaWxpcCxTY3Vi
+        YWZsb3lkLFNobG9taSBaYWRvayxTdGVwaGVuIEJlbmphbWluLFlhbm4gQ8Op
+        emFyZCIsImRlc2NyaXB0aW9uIjoiTWFhUyBEaXNjb3ZlcnkgUGx1Z2luIGVu
+        Z2luZSBmb3IgRm9yZW1hbiIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3Ro
+        ZWZvcmVtYW4vZm9yZW1hbl9kaXNjb3ZlcnkiLCJ2ZXJzaW9uIjoiNS4wLjAu
+        OSJ9LHsiaWQiOiJmb3JlbWFuX2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2Rv
+        Y2tlciIsImF1dGhvciI6IkRhbmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwi
+        ZGVzY3JpcHRpb24iOiJQcm92aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29u
+        dGFpbmVycyBhbmQgaW1hZ2VzIGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRw
+        Oi8vZ2l0aHViLmNvbS90aGVmb3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVy
+        c2lvbiI6IjIuMC4xLjExIn0seyJpZCI6ImZvcmVtYW5faG9va3MiLCJuYW1l
+        IjoiZm9yZW1hbl9ob29rcyIsImF1dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJk
+        ZXNjcmlwdGlvbiI6IlBsdWdpbiBlbmdpbmUgZm9yIEZvcmVtYW4gdGhhdCBl
+        bmFibGVzIHJ1bm5pbmcgY3VzdG9tIGhvb2sgc2NyaXB0cyBvbiBGb3JlbWFu
+        IGV2ZW50cyIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4v
+        Zm9yZW1hbl9ob29rcyIsInZlcnNpb24iOiIwLjMuMTEifSx7ImlkIjoiZm9y
+        ZW1hbl9vcGVuc2NhcCIsIm5hbWUiOiJmb3JlbWFuX29wZW5zY2FwIiwiYXV0
+        aG9yIjoixaBpbW9uIEx1a2HFocOtayxTaGxvbWkgWmFkb2ssTWFyZWsgSHVs
+        YW4sT25kcmVqIFByYXphayIsImRlc2NyaXB0aW9uIjoiRm9yZW1hbiBwbHVn
+        LWluIGZvciBtYW5hZ2luZyBzZWN1cml0eSBjb21wbGlhbmNlIHJlcG9ydHMi
+        LCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vT3BlblNDQVAvZm9yZW1hbl9v
+        cGVuc2NhcCIsInZlcnNpb24iOiIwLjUuMy4xOCJ9LHsiaWQiOiJmb3JlbWFu
+        X3JlbW90ZV9leGVjdXRpb24iLCJuYW1lIjoiZm9yZW1hbl9yZW1vdGVfZXhl
+        Y3V0aW9uIiwiYXV0aG9yIjoiRm9yZW1hbiBSZW1vdGUgRXhlY3V0aW9uIHRl
+        YW0iLCJkZXNjcmlwdGlvbiI6IkEgcGx1Z2luIGJyaW5naW5nIHJlbW90ZSBl
+        eGVjdXRpb24gdG8gdGhlIEZvcmVtYW4sIGNvbXBsZXRpbmcgdGhlIGNvbmZp
+        ZyBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkgd2l0aCByZW1vdGUgbWFuYWdl
+        bWVudCBmdW5jdGlvbmFsaXR5LiIsInVybCI6Imh0dHBzOi8vZ2l0aHViLmNv
+        bS90aGVmb3JlbWFuL2ZvcmVtYW5fcmVtb3RlX2V4ZWN1dGlvbiIsInZlcnNp
+        b24iOiIwLjMuMC4xMiJ9LHsiaWQiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0
+        ZSIsIm5hbWUiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0ZSIsImF1dGhvciI6
+        IkFsb24gR29sZGJvaW0sIFNoaW1vbiBTdGVpbiIsImRlc2NyaXB0aW9uIjoi
+        VGhpcyBpcyBhIHBsdWdpbiB0aGF0IGVuYWJsZXMgYnVpbGRpbmcgYSB0aGVt
+        ZSBmb3IgRm9yZW1hbi4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vYWxv
+        bmdvbGRib2ltL2ZvcmVtYW5fdGhlbWVfc2F0ZWxsaXRlIiwidmVyc2lvbiI6
+        IjAuMS4zMyJ9LHsiaWQiOiJrYXRlbGxvIiwibmFtZSI6ImthdGVsbG8iLCJh
+        dXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNvbnRlbnQgYW5kIFN1YnNj
+        cmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3IgRm9yZW1hbiIsInVybCI6
+        Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJzaW9uIjoiMy4wLjAuODIi
+        fSx7ImlkIjoicmVkaGF0X2FjY2VzcyIsIm5hbWUiOiJyZWRoYXRfYWNjZXNz
+        IiwiYXV0aG9yIjoiTGluZGFuaSBQaGlyaSIsImRlc2NyaXB0aW9uIjoiVGhp
+        cyBwbHVnaW4gYWRkcyBSZWQgSGF0IEFjY2VzcyBrbm93bGVkZ2UgYmFzZSBz
+        ZWFyY2gsIGNhc2UgbWFuYWdlbWVudCBhbmQgZGlhZ25vc3RpY3MgdG8gRm9y
+        ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
+        ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 14:55:52 GMT
+recorded_with: VCR 3.0.3

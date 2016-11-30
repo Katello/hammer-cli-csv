@@ -31,7 +31,7 @@ HELP
       start_vcr
       set_user 'admin'
 
-      @name = "testakey1"
+      @name = "testakey2"
 
       file = Tempfile.new('activation_keys_test')
       file.write("Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscriptions\n")
@@ -64,19 +64,25 @@ HELP
         hammer.run(%W(--reload-cache activation-key delete --id #{id}))
       }
 
+      # Cleanup for subsequent test runs
+      capture {
+        hammer.run(%W{activation-key delete --organization-label testcorp --name #{@name}})
+      }
+
       stop_vcr
     end
 
     def test_itemized_create_and_update
-      stdout,stderr = capture {
+      start_vcr
+      _stdout,stderr = capture {
         hammer.run(%W{--reload-cache csv activation-keys --verbose --file test/data/setup/activation-keys.csv})
       }
+      assert_equal '', stderr
 
-      start_vcr
       set_user 'admin'
 
-      name = "ak1"
-      sub_name = "Red Hat Enterprise Linux Server, Premium (8 sockets) (Unlimited guests)"
+      name = "testakey1"
+      sub_name = "Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"
       quantity = 1
 
       file = Tempfile.new('activation_keys_test')
@@ -84,8 +90,8 @@ HELP
                   Collections,Auto-Attach,Service Level,Release Version,Subscription\
                   Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
                   Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Default Organization,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,#{quantity},RH0105260,10855292,5535485,2016-01-05T05:00:00+00:00,2017-01-05T04:59:59+00:00")
+      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
+                  Hat,#{quantity},RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
 
       file.rewind
 
@@ -116,8 +122,8 @@ HELP
                   Collections,Auto-Attach,Service Level,Release Version,Subscription\
                   Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
                   Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Default Organization,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,Automatic,RH0105260,10855292,5535485,2016-01-05T05:00:00+00:00,2017-01-05T04:59:59+00:00")
+      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
+                  Hat,Automatic,RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
 
       file.rewind
 
@@ -138,8 +144,8 @@ HELP
                   Collections,Auto-Attach,Service Level,Release Version,Subscription\
                   Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
                   Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Default Organization,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,,RH0105260,10855292,5535485,2016-01-05T05:00:00+00:00,2017-01-05T04:59:59+00:00")
+      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
+                  Hat,,RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
 
       file.rewind
 
@@ -160,8 +166,8 @@ HELP
                   Collections,Auto-Attach,Service Level,Release Version,Subscription\
                   Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
                   Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Default Organization,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,\"\",RH0105260,10855292,5535485,2016-01-05T05:00:00+00:00,2017-01-05T04:59:59+00:00")
+      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
+                  Hat,\"\",RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
 
       file.rewind
 

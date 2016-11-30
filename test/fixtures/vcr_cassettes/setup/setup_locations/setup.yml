@@ -190,7 +190,7 @@ http_interactions:
   recorded_at: Mon, 12 Sep 2016 15:40:12 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/api/status
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/status
     body:
       encoding: US-ASCII
       string: ''
@@ -204,12 +204,8 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:19 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -217,21 +213,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"1316c9d778b9181476af8a9546423fb1-gzip"
+      - W/"1316c9d778b9181476af8a9546423fb1"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=e7bc717fe12b84a18347b95eb67f6a42; path=/; HttpOnly
       X-Request-Id:
-      - b0b2bd7e-75e2-427a-83ff-19b6ea7e871c
+      - 9d51d0d8-e2d8-4f5a-beaa-1fbf64ef2f23
       X-Runtime:
-      - '0.076123'
+      - '0.069998'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -242,22 +238,16 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '81'
-      Set-Cookie:
-      - _session_id=e9f948a70017139eca13aff55f5a903f; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:19 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:40 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/api/v2/plugins
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/v2/plugins
     body:
       encoding: US-ASCII
       string: ''
@@ -271,12 +261,8 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:19 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -284,21 +270,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"8f0162a4d2fd78df40b7f264aee93d64-gzip"
+      - W/"732bd55e4dc33460e7a4d4e0d0d81834"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=7d867950f96f811c1eaedf493a3ab326; path=/; HttpOnly
       X-Request-Id:
-      - 89d90c13-0a4a-4d11-ab69-1447e7924c93
+      - 548e02ec-b8a3-4803-9d9b-88713a0e0ead
       X-Runtime:
-      - '0.064888'
+      - '0.092984'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -309,14 +295,8 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '565'
-      Set-Cookie:
-      - _session_id=ccb4aa6587986e746b073417289ea728; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -335,7 +315,7 @@ http_interactions:
         Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
         c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
         LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMiJ9LHsiaWQiOiJmb3JlbWFu
+        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguNSJ9LHsiaWQiOiJmb3JlbWFu
         X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
         bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
         aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
@@ -346,10 +326,10 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjMuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:19 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:40 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/api/locations?per_page=999999
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/locations?per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -359,22 +339,18 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
       - en
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:20 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -382,21 +358,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"ca35fb3d07a45e77dfe961e6a2abbee5-gzip"
+      - W/"bbdf1687df7a0ccc9863a0f689fbfed0"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=6184f3e412285666402808e79b1acc87; path=/; HttpOnly
       X-Request-Id:
-      - b7e7e241-bad7-4b96-965f-eed35f5726a0
+      - 2f43afdd-5edb-462f-bf4b-702b95954046
       X-Runtime:
-      - '1.152980'
+      - '0.120060'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -407,20 +383,14 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1350'
-      Set-Cookie:
-      - _session_id=938e188eef6395a05a03dc1ba6b1d6f6; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
+      encoding: UTF-8
       string: |
         {
-          "total": 6,
-          "subtotal": 6,
+          "total": 15,
+          "subtotal": 15,
           "page": 1,
           "per_page": 999999,
           "search": null,
@@ -428,13 +398,13 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 14:47:06 UTC","updated_at":"2016-09-30 14:47:06 UTC","id":2,"name":"Default Location","title":"Default Location","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:45 UTC","updated_at":"2016-09-30 15:10:45 UTC","id":4,"name":"Test East","title":"Test East","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:04:16 UTC","updated_at":"2016-09-30 15:04:16 UTC","id":3,"name":"Testing","title":"Testing","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:45 UTC","updated_at":"2016-09-30 15:10:45 UTC","id":5,"name":"Test North","title":"Test North","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:46 UTC","updated_at":"2016-09-30 15:10:46 UTC","id":6,"name":"Test South","title":"Test South","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-09-30 15:10:46 UTC","updated_at":"2016-09-30 15:10:46 UTC","id":7,"name":"Test West","title":"Test West","description":null}]
+          "results": [{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:43:58 UTC","updated_at":"2016-11-19 10:43:58 UTC","id":9,"name":"Asia Pacific","title":"Asia Pacific","description":null},{"ancestry":"9","parent_id":9,"parent_name":"Asia Pacific","created_at":"2016-11-19 10:44:01 UTC","updated_at":"2016-11-19 10:44:01 UTC","id":11,"name":"Asia Pacific (Singapore) Region","title":"Asia Pacific/Asia Pacific (Singapore) Region","description":null},{"ancestry":"9","parent_id":9,"parent_name":"Asia Pacific","created_at":"2016-11-19 10:44:03 UTC","updated_at":"2016-11-19 10:44:03 UTC","id":12,"name":"Asia Pacific (Sydney) Region","title":"Asia Pacific/Asia Pacific (Sydney) Region","description":null},{"ancestry":"9","parent_id":9,"parent_name":"Asia Pacific","created_at":"2016-11-19 10:44:00 UTC","updated_at":"2016-11-19 10:44:00 UTC","id":10,"name":"Asia Pacific (Tokyo) Region","title":"Asia Pacific/Asia Pacific (Tokyo) Region","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:32:57 UTC","updated_at":"2016-11-19 10:32:57 UTC","id":2,"name":"Default Location","title":"Default Location","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:44:05 UTC","updated_at":"2016-11-19 10:44:05 UTC","id":13,"name":"EU (Ireland) Region","title":"EU (Ireland) Region","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:44:06 UTC","updated_at":"2016-11-19 10:44:06 UTC","id":14,"name":"South America (Sao Paulo) Region","title":"South America (Sao Paulo) Region","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:33:37 UTC","updated_at":"2016-11-19 10:33:37 UTC","id":4,"name":"Test East","title":"Test East","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:33:36 UTC","updated_at":"2016-11-19 10:33:36 UTC","id":3,"name":"Testing","title":"Testing","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:33:38 UTC","updated_at":"2016-11-19 10:33:38 UTC","id":5,"name":"Test North","title":"Test North","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:33:39 UTC","updated_at":"2016-11-19 10:33:39 UTC","id":6,"name":"Test South","title":"Test South","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:33:39 UTC","updated_at":"2016-11-19 10:33:39 UTC","id":7,"name":"Test West","title":"Test West","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:44:08 UTC","updated_at":"2016-11-19 10:44:08 UTC","id":15,"name":"US East (Northern Virginia) Region","title":"US East (Northern Virginia) Region","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:44:09 UTC","updated_at":"2016-11-19 10:44:09 UTC","id":16,"name":"US West (Northern California) Region","title":"US West (Northern California) Region","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-11-19 10:44:11 UTC","updated_at":"2016-11-19 10:44:11 UTC","id":17,"name":"US West (Oregon) Region","title":"US West (Oregon) Region","description":null}]
         }
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:20 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:40 GMT
 - request:
     method: put
-    uri: https://admin:changeme@katello.example.com:50218/api/locations/3
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/locations/3
     body:
       encoding: UTF-8
       string: '{"location":{"parent_id":null}}'
@@ -444,7 +414,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
@@ -452,16 +422,12 @@ http_interactions:
       Content-Length:
       - '31'
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:21 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -469,21 +435,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"03e1aa609f3db64a4bfe0dd571782e75-gzip"
+      - W/"8d07c9840c17c01952ef8f935b822611"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=1b9138241dfd777c12d05ebfda6802de; path=/; HttpOnly
+      - request_method=PUT; path=/
       X-Request-Id:
-      - 05b80409-6b09-47e5-ac6a-728e67720bb2
+      - 44877d51-2e87-4fee-b95b-04dc6485d879
       X-Runtime:
-      - '0.429791'
+      - '1.420973'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -494,19 +461,12 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '16462'
-      Set-Cookie:
-      - _session_id=b90f9547accea0aef2ca27650c839173; path=/; HttpOnly
-      - request_method=PUT; path=/
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-09-30
-        15:04:16 UTC","updated_at":"2016-09-30 15:04:16 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":3,"name":"Testing","title":"Testing","users":[],"smart_proxies":[{"name":"testing.example.com","id":1,"url":"https://testing.example.com:9090"}],"subnets":[{"id":1,"name":"Test
+      encoding: UTF-8
+      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-11-19
+        10:33:36 UTC","updated_at":"2016-11-19 10:33:36 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":3,"name":"Testing","title":"Testing","users":[],"smart_proxies":[],"subnets":[{"id":1,"name":"Test
         Subnet","network_address":"192.168.100.1/24"}],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
@@ -559,25 +519,25 @@ http_interactions:
         default local boot","template_kind_id":1,"template_kind_name":"PXELinux"},{"id":3,"name":"PXEGrub2
         global default","template_kind_id":3,"template_kind_name":"PXEGrub2"},{"id":2,"name":"PXEGrub
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
-        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Preseed custom
-        LVM","id":83},{"os_family":"Debian","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"NX-OS default
-        fake","id":81},{"os_family":"Redhat","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Junos default
-        fake","id":79},{"os_family":"Solaris","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"CoreOS default
-        fake","id":75},{"os_family":"Suse","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire
-        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-09-30 14:47:09
-        UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
+        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Preseed custom
+        LVM","id":83},{"os_family":"Debian","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"NX-OS default
+        fake","id":81},{"os_family":"Redhat","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Junos default
+        fake","id":79},{"os_family":"Solaris","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"CoreOS default
+        fake","id":75},{"os_family":"Suse","created_at":"2016-11-19 10:33:02 UTC","updated_at":"2016-11-19
+        10:33:02 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire
+        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-11-19 10:33:02
+        UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -631,10 +591,10 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:21 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:42 GMT
 - request:
     method: put
-    uri: https://admin:changeme@katello.example.com:50218/api/locations/4
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/locations/4
     body:
       encoding: UTF-8
       string: '{"location":{"parent_id":null}}'
@@ -644,7 +604,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
@@ -652,16 +612,12 @@ http_interactions:
       Content-Length:
       - '31'
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:21 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -669,21 +625,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"5c0b97d612ec1cc572fd017f6b05d0df-gzip"
+      - W/"4239e2ec0b0172ba55fff2bbda617672"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=f9dc1f0d1897851d1d962b4c4a4342e9; path=/; HttpOnly
+      - request_method=PUT; path=/
       X-Request-Id:
-      - dcfae431-9b93-4c67-9362-0de6399a9a26
+      - 81f90e09-7ad5-43cd-aded-aa644ffa798c
       X-Runtime:
-      - '0.307197'
+      - '0.392851'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -694,20 +651,13 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '16400'
-      Set-Cookie:
-      - _session_id=262bc413eb577ebfd8ce6663cc40a802; path=/; HttpOnly
-      - request_method=PUT; path=/
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-09-30
-        15:10:45 UTC","updated_at":"2016-09-30 15:10:45 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":4,"name":"Test
-        East","title":"Test East","users":[],"smart_proxies":[{"name":"testing.example.com","id":1,"url":"https://testing.example.com:9090"}],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
+      encoding: UTF-8
+      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-11-19
+        10:33:37 UTC","updated_at":"2016-11-19 10:33:37 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":4,"name":"Test
+        East","title":"Test East","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -759,25 +709,25 @@ http_interactions:
         default local boot","template_kind_id":1,"template_kind_name":"PXELinux"},{"id":3,"name":"PXEGrub2
         global default","template_kind_id":3,"template_kind_name":"PXEGrub2"},{"id":2,"name":"PXEGrub
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
-        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Preseed custom
-        LVM","id":83},{"os_family":"Debian","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"NX-OS default
-        fake","id":81},{"os_family":"Redhat","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Junos default
-        fake","id":79},{"os_family":"Solaris","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"CoreOS default
-        fake","id":75},{"os_family":"Suse","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire
-        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-09-30 14:47:09
-        UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
+        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Preseed custom
+        LVM","id":83},{"os_family":"Debian","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"NX-OS default
+        fake","id":81},{"os_family":"Redhat","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Junos default
+        fake","id":79},{"os_family":"Solaris","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"CoreOS default
+        fake","id":75},{"os_family":"Suse","created_at":"2016-11-19 10:33:02 UTC","updated_at":"2016-11-19
+        10:33:02 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire
+        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-11-19 10:33:02
+        UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -831,10 +781,10 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:21 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:42 GMT
 - request:
     method: put
-    uri: https://admin:changeme@katello.example.com:50218/api/locations/5
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/locations/5
     body:
       encoding: UTF-8
       string: '{"location":{"parent_id":null}}'
@@ -844,7 +794,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
@@ -852,16 +802,12 @@ http_interactions:
       Content-Length:
       - '31'
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:23 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -869,21 +815,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"5a47fb515a9884f794e35c309c2a1c4a-gzip"
+      - W/"47ccf8099ffcdac280f10efec39b819e"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=16c008f6d8a1fa9948fb4b9af913ae18; path=/; HttpOnly
+      - request_method=PUT; path=/
       X-Request-Id:
-      - 2a374c4f-2ac8-40dd-9c18-85df246f0377
+      - 53a29601-5295-4fb4-b72b-4100696c0940
       X-Runtime:
-      - '1.301331'
+      - '1.482369'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -894,20 +841,13 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '16402'
-      Set-Cookie:
-      - _session_id=083583ee93ac1ff7e1cbc3b714b52b0e; path=/; HttpOnly
-      - request_method=PUT; path=/
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-09-30
-        15:10:45 UTC","updated_at":"2016-09-30 15:10:45 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":5,"name":"Test
-        North","title":"Test North","users":[],"smart_proxies":[{"name":"testing.example.com","id":1,"url":"https://testing.example.com:9090"}],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
+      encoding: UTF-8
+      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-11-19
+        10:33:38 UTC","updated_at":"2016-11-19 10:33:38 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":5,"name":"Test
+        North","title":"Test North","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -959,25 +899,25 @@ http_interactions:
         default local boot","template_kind_id":1,"template_kind_name":"PXELinux"},{"id":3,"name":"PXEGrub2
         global default","template_kind_id":3,"template_kind_name":"PXEGrub2"},{"id":2,"name":"PXEGrub
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
-        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Preseed custom
-        LVM","id":83},{"os_family":"Debian","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"NX-OS default
-        fake","id":81},{"os_family":"Redhat","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Junos default
-        fake","id":79},{"os_family":"Solaris","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"CoreOS default
-        fake","id":75},{"os_family":"Suse","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire
-        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-09-30 14:47:09
-        UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
+        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Preseed custom
+        LVM","id":83},{"os_family":"Debian","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"NX-OS default
+        fake","id":81},{"os_family":"Redhat","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Junos default
+        fake","id":79},{"os_family":"Solaris","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"CoreOS default
+        fake","id":75},{"os_family":"Suse","created_at":"2016-11-19 10:33:02 UTC","updated_at":"2016-11-19
+        10:33:02 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire
+        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-11-19 10:33:02
+        UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -1031,10 +971,10 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:22 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:44 GMT
 - request:
     method: put
-    uri: https://admin:changeme@katello.example.com:50218/api/locations/6
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/locations/6
     body:
       encoding: UTF-8
       string: '{"location":{"parent_id":null}}'
@@ -1044,7 +984,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
@@ -1052,16 +992,12 @@ http_interactions:
       Content-Length:
       - '31'
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:23 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -1069,21 +1005,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"6b4180c33bb62f15df8b0c82962f2150-gzip"
+      - W/"950e7cb548872289759b35235f6c7a05"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=2f8f7330eaf721434e9758c03fe4e700; path=/; HttpOnly
+      - request_method=PUT; path=/
       X-Request-Id:
-      - 58dda68b-8b35-4376-aafd-4334fd2b98bc
+      - 02e70e57-776e-46ad-950c-ce46e788f61b
       X-Runtime:
-      - '0.316409'
+      - '0.385284'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -1094,20 +1031,13 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '16402'
-      Set-Cookie:
-      - _session_id=d567de3747854001589513244e06be9e; path=/; HttpOnly
-      - request_method=PUT; path=/
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-09-30
-        15:10:46 UTC","updated_at":"2016-09-30 15:10:46 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":6,"name":"Test
-        South","title":"Test South","users":[],"smart_proxies":[{"name":"testing.example.com","id":1,"url":"https://testing.example.com:9090"}],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
+      encoding: UTF-8
+      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-11-19
+        10:33:39 UTC","updated_at":"2016-11-19 10:33:39 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":6,"name":"Test
+        South","title":"Test South","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -1159,25 +1089,25 @@ http_interactions:
         default local boot","template_kind_id":1,"template_kind_name":"PXELinux"},{"id":3,"name":"PXEGrub2
         global default","template_kind_id":3,"template_kind_name":"PXEGrub2"},{"id":2,"name":"PXEGrub
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
-        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Preseed custom
-        LVM","id":83},{"os_family":"Debian","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"NX-OS default
-        fake","id":81},{"os_family":"Redhat","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Junos default
-        fake","id":79},{"os_family":"Solaris","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"CoreOS default
-        fake","id":75},{"os_family":"Suse","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire
-        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-09-30 14:47:09
-        UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
+        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Preseed custom
+        LVM","id":83},{"os_family":"Debian","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"NX-OS default
+        fake","id":81},{"os_family":"Redhat","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Junos default
+        fake","id":79},{"os_family":"Solaris","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"CoreOS default
+        fake","id":75},{"os_family":"Suse","created_at":"2016-11-19 10:33:02 UTC","updated_at":"2016-11-19
+        10:33:02 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire
+        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-11-19 10:33:02
+        UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -1231,10 +1161,10 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:23 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:44 GMT
 - request:
     method: put
-    uri: https://admin:changeme@katello.example.com:50218/api/locations/7
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/locations/7
     body:
       encoding: UTF-8
       string: '{"location":{"parent_id":null}}'
@@ -1244,7 +1174,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
@@ -1252,16 +1182,12 @@ http_interactions:
       Content-Length:
       - '31'
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:23 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -1269,21 +1195,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"8ae09239a10b863deddbd5476171f914-gzip"
+      - W/"e6f4c138bdf53819a80b7362fc4486c1"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=787844adccc0f0d5b28bfa84a7ab476b; path=/; HttpOnly
+      - request_method=PUT; path=/
       X-Request-Id:
-      - 39b138e2-0880-46ae-8f0f-100f423caf00
+      - 5385399c-d6de-476d-9014-087fe13668f7
       X-Runtime:
-      - '0.304801'
+      - '1.492931'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -1294,20 +1221,13 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '16400'
-      Set-Cookie:
-      - _session_id=40c9b3a8ce59e175634c11d31849ff51; path=/; HttpOnly
-      - request_method=PUT; path=/
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-09-30
-        15:10:46 UTC","updated_at":"2016-09-30 15:10:46 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":7,"name":"Test
-        West","title":"Test West","users":[],"smart_proxies":[{"name":"testing.example.com","id":1,"url":"https://testing.example.com:9090"}],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
+      encoding: UTF-8
+      string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-11-19
+        10:33:39 UTC","updated_at":"2016-11-19 10:33:39 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":7,"name":"Test
+        West","title":"Test West","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -1359,25 +1279,25 @@ http_interactions:
         default local boot","template_kind_id":1,"template_kind_name":"PXELinux"},{"id":3,"name":"PXEGrub2
         global default","template_kind_id":3,"template_kind_name":"PXEGrub2"},{"id":2,"name":"PXEGrub
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
-        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Preseed custom
-        LVM","id":83},{"os_family":"Debian","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"NX-OS default
-        fake","id":81},{"os_family":"Redhat","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Junos default
-        fake","id":79},{"os_family":"Solaris","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"CoreOS default
-        fake","id":75},{"os_family":"Suse","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire
-        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-09-30 14:47:09
-        UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
+        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Preseed custom
+        LVM","id":83},{"os_family":"Debian","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"NX-OS default
+        fake","id":81},{"os_family":"Redhat","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Junos default
+        fake","id":79},{"os_family":"Solaris","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"CoreOS default
+        fake","id":75},{"os_family":"Suse","created_at":"2016-11-19 10:33:02 UTC","updated_at":"2016-11-19
+        10:33:02 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire
+        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-11-19 10:33:02
+        UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -1431,5 +1351,5 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:23 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:46 GMT
 recorded_with: VCR 3.0.3

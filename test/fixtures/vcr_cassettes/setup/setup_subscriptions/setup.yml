@@ -249,13 +249,18 @@ http_interactions:
       - _session_id=31ffa02d4dd6cde01aae36c75fb2bf5c; path=/; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: |
-        {"organization":{},"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":19,"cp_id":"ff80808156eb30a6015704818e8706e1","subscription_id":11,"name":"Red Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"id":21,"cp_id":"ff80808156eb30a6015704818f330733","subscription_id":12,"name":"Red Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999116,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false}]}
+      string: '{"organization":{},"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":19,"cp_id":"ff80808156eb30a6015704818e8706e1","subscription_id":11,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"id":21,"cp_id":"ff80808156eb30a6015704818f330733","subscription_id":12,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999116,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false}]}
+
+'
     http_version: 
   recorded_at: Mon, 12 Sep 2016 15:40:29 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/api/status
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/status
     body:
       encoding: US-ASCII
       string: ''
@@ -269,12 +274,8 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:27 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -282,21 +283,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"1316c9d778b9181476af8a9546423fb1-gzip"
+      - W/"1316c9d778b9181476af8a9546423fb1"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=21869acd018c8ea25ee6c67db1852fab; path=/; HttpOnly
       X-Request-Id:
-      - c6e1fafa-59cb-487a-a21b-7a49f8f95d99
+      - 8cbc75a6-4520-4ed9-9ce4-b5315ef8e7f1
       X-Runtime:
-      - '0.081399'
+      - '0.149939'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -307,22 +308,16 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '81'
-      Set-Cookie:
-      - _session_id=85e1f5067933b4f510394dc7c372c0f5; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:27 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:48 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/api/v2/plugins
+    uri: http://admin:changeme@centos7-devel.example.com:3000/api/v2/plugins
     body:
       encoding: US-ASCII
       string: ''
@@ -336,12 +331,8 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:27 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -349,21 +340,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"8f0162a4d2fd78df40b7f264aee93d64-gzip"
+      - W/"732bd55e4dc33460e7a4d4e0d0d81834"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=c3b62040e951e1f8b4af690543f20ac2; path=/; HttpOnly
       X-Request-Id:
-      - acb3bea2-835a-41ea-8933-0b14612c4d80
+      - 4007a8a0-a802-448d-9a64-4a1a181196ba
       X-Runtime:
-      - '0.069202'
+      - '0.100874'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -374,14 +365,8 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '565'
-      Set-Cookie:
-      - _session_id=a52067d8fa99314ec313bf9da9d6f92e; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -400,7 +385,7 @@ http_interactions:
         Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
         c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
         LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguMiJ9LHsiaWQiOiJmb3JlbWFu
+        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguNSJ9LHsiaWQiOiJmb3JlbWFu
         X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
         bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
         aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
@@ -411,10 +396,10 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjMuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:27 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:48 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/katello/api/organizations?per_page=999999
+    uri: http://admin:changeme@centos7-devel.example.com:3000/katello/api/organizations?per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -424,22 +409,18 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
       - en
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:27 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -447,21 +428,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"758d82fead8e0302548ed1a70bdf6bca-gzip"
+      - W/"3376afb5876263c336dbae7d1cfb6801"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=2ea066dbd0a2527765a6722c0b6eabb4; path=/; HttpOnly
       X-Request-Id:
-      - e85cdf29-fd82-448c-85e2-943de8b223de
+      - f06e17d8-9754-4cfd-a38f-823362cd8610
       X-Runtime:
-      - '0.080751'
+      - '0.080201'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -472,20 +453,14 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '563'
-      Set-Cookie:
-      - _session_id=032164fd9e82e0623fba39f40546e088; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
+      encoding: UTF-8
       string: |
         {
-          "total": 2,
-          "subtotal": 2,
+          "total": 3,
+          "subtotal": 3,
           "page": 1,
           "per_page": 999999,
           "search": null,
@@ -493,13 +468,13 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"Default_Organization","created_at":"2016-09-30 14:47:05 UTC","updated_at":"2016-09-30 14:47:05 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"testcorp","created_at":"2016-09-30 15:10:48 UTC","updated_at":"2016-09-30 15:10:48 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"Default_Organization","created_at":"2016-11-19 10:32:57 UTC","updated_at":"2016-11-19 10:32:57 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"megacorp","created_at":"2016-11-19 10:44:13 UTC","updated_at":"2016-11-19 10:44:13 UTC","id":18,"name":"Mega Corporation","title":"Mega Corporation","description":"The number one mega company in the world!"},{"label":"testcorp","created_at":"2016-11-19 10:33:41 UTC","updated_at":"2016-11-19 10:33:41 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:27 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:48 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/katello/api/organizations/8
+    uri: http://admin:changeme@centos7-devel.example.com:3000/katello/api/organizations/8
     body:
       encoding: US-ASCII
       string: ''
@@ -509,22 +484,18 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
       - en
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:28 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -532,21 +503,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"6a598bc5d5d61c73496d98f399fce58f-gzip"
+      - W/"66962977598a5d2b053057a768553ca9"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=9daae8f35975ca03de73d29c7d730365; path=/; HttpOnly
       X-Request-Id:
-      - 3d423272-f038-444c-acd3-7eaf10e740a4
+      - bcef2ece-0c18-4692-93dc-81510c0b5d12
       X-Runtime:
-      - '1.389512'
+      - '1.456089'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -557,24 +528,18 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '21677'
-      Set-Cookie:
-      - _session_id=aa6a40b82e4e2612bd822ebf13189d9a; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: '{"label":"testcorp","owner_details":{"parentOwner":null,"id":"ff808081577b8f0201577ba5d9850003","key":"testcorp","displayName":"Test
-        Corporation","contentPrefix":"/testcorp/$env","defaultServiceLevel":null,"upstreamConsumer":{"id":"ff808081577bae9001577bc066890294","uuid":"d45ac754-56e8-425e-a6ef-2028953f6f2c","name":"TestCorp","idCert":{"key":"-----BEGIN
-        RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAnR41trDH6LJ4Tobp73rsvM7Sl+nMItXNW7HSjhKQg78nFotM\naGRB9XS3z7wzKtunqIHcj38UwGBE01qLIO7aBXJHAeDiZVJdRaq03fcpQU3OywCw\nzjzfIRxYP8u5S1bjE60QXwv+ao0nbEYJ45EBmFybL6NJBcATsvPTadRzy236kk0h\nnOJl+IXXU+29eGjY7GWXjm+QYf//CHN+ngEh8g/sxSafDM6w7ZlPi9HJSaXK363R\n/nuy+4KqYE0MHa/7Iyb+HnyQEn/XTuFLJk3/EKr7gwxOVV2in6CQEeXLNuWek1Xt\nUzBDL/jPNoowFM18kmYBBg5/M3gqMX4eXBVfxQIDAQABAoIBAAeWduecv/rH67F3\nKIMNP7OalWcKvnYMNz+vZcjAssP6Dkwza/w6o0jUWzAoGZx/QSiNJPa1H25u98Px\nQnjTsCnFLBK2JpjYEnMT3Go/znk95be+D8vV+ryhns1t7EPsLUk8+WZtsNq6eGXt\nN/sKfLY7+q6hRxyE+y6QQeyBexoe4OnELeeb9KFxpE9H8TV67Ed9jqLbtXsR/8Nq\nWZW7ZYHBuvYuGHgZQWY9wWks3HW1ygC+y1BpfeYA9z85HH+t1x7mG8lOBoe0eV95\nhmHDwQInPPdBB20szGTRB2UjKmFCIGX/EYn/RJZvi/kxlpTzSLTiBDDUKqjAyWC/\ngdRhp/0CgYEA7qh1ng34FXTXYs0otOpCTrjnB17vdJb1SAc2kvWSQiCr9Gr5etGR\nDu7g6EAAvsV8HbQkcBmXyqnVuDhR0Ijt0UaldqGWbpmAcspHMDsy1uDn24qjbZoI\ncC3wQhsy3+8zNRYlbELeJjgzacYRmmtZNc2ML5As5XX8VVji3JqmZUMCgYEAqIjv\nPV4SfqrOv4NFcEvQf32tyiVxXDH4H/WpjHM2ZcAklE4esQkyBqf/2lHcZPrhoaQm\n8OGrquMytXo2TRGypl0syZ49GFq/FUFQbkl8zZpt3OCMkud6RvBmmftYSVCNoyZc\nySBusvO3SgpZYZwJx3FmeH/2gp0YAldH+tQo0lcCgYEAjhkVdtcgaD4aZER9QULd\n2htzy0q2Tnf3cTyCPPwkamUjnTL4ei0/LmIC3aYGC5BwNwtkSq6iV1PJ4Zb+96gf\n2WQz7q+FbzLMbQyNWGVW/uQIiQpCBmcZMRnZHLMvFnBI0AnwnEYwGReLXSZGoufZ\nxRQurL8uTC104ag741fdTRsCgYAtWaOezMiHQykdCZLO0+fH1qbEJW0qlNuipfU4\nsOvrV1fAfIDvvHy0o9JKCgsXNRcv6r77xI3wDvDfOoKQHHoJIDtkCWuBOTH/4zJk\nauvlW2/Cpr3M7fLOUfQZ7TNljwJ9612+VTbUepZQmxZQGK/c9hvPwwcvQFxsjNX2\nnc5aQwKBgGZIGnz4X92HBVa0pR27q+2sebWCxjpREPoEE4HnPivn6Vgy6j40O3VB\nikaW6laDlWHPzYorQeLcZLoiI6yBn5v3unT4Aq74c/mgjBZbsJs+BC6WILWpeV3s\nlN7WgGVHSbBqaBAkMdIrH6IK8dnjYsHq5yO9xtdYmkVZoHEoah8h\n-----END
-        RSA PRIVATE KEY-----\n","cert":"-----BEGIN CERTIFICATE-----\nMIIFqTCCA5GgAwIBAgIIBitiT9Rbj7QwDQYJKoZIhvcNAQEFBQAwgaQxCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMSQwIgYDVQQDDBtSZWQg\nSGF0IENhbmRsZXBpbiBBdXRob3JpdHkxJDAiBgkqhkiG9w0BCQEWFWNhLXN1cHBv\ncnRAcmVkaGF0LmNvbTAeFw0xNjA4MTYxMjI5MzFaFw0xNzA4MTYxMjI5MzFaMC8x\nLTArBgNVBAMTJGQ0NWFjNzU0LTU2ZTgtNDI1ZS1hNmVmLTIwMjg5NTNmNmYyYzCC\nASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ0eNbawx+iyeE6G6e967LzO\n0pfpzCLVzVux0o4SkIO/JxaLTGhkQfV0t8+8Myrbp6iB3I9/FMBgRNNaiyDu2gVy\nRwHg4mVSXUWqtN33KUFNzssAsM483yEcWD/LuUtW4xOtEF8L/mqNJ2xGCeORAZhc\nmy+jSQXAE7Lz02nUc8tt+pJNIZziZfiF11PtvXho2Oxll45vkGH//whzfp4BIfIP\n7MUmnwzOsO2ZT4vRyUmlyt+t0f57svuCqmBNDB2v+yMm/h58kBJ/107hSyZN/xCq\n+4MMTlVdop+gkBHlyzblnpNV7VMwQy/4zzaKMBTNfJJmAQYOfzN4KjF+HlwVX8UC\nAwEAAaOCAVEwggFNMBEGCWCGSAGG+EIBAQQEAwIFoDALBgNVHQ8EBAMCBLAwgd4G\nA1UdIwSB1jCB04AUdy6lzTcNqOHT6mHFVmdD6JHHbRyhgbekgbQwgbExCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMTEwLwYDVQQDDChSZWQg\nSGF0IEVudGl0bGVtZW50IE9wZXJhdGlvbnMgQXV0aG9yaXR5MSQwIgYJKoZIhvcN\nAQkBFhVjYS1zdXBwb3J0QHJlZGhhdC5jb22CAT8wHQYDVR0OBBYEFI7UL/Bk0UoE\n9FSjYlUJle0cykonMBMGA1UdJQQMMAoGCCsGAQUFBwMCMBYGA1UdEQQPMA2GC0NO\nPVRlc3RDb3JwMA0GCSqGSIb3DQEBBQUAA4ICAQBp4djGKuE+NCfYE0Br3IlpKnrm\nCpDF8qs4/r9A/tr+PLLhDnRmzkygSJ7KsIUXYV8oW+QhU5fe2ggPaJFfynY2AVOc\nZHbwvHKoQoUUrVlZFkcwhWcL7vvTEJQUONaOOLUgAzGIdfAmBYPWBqbwf80croGh\nY5xBcNqRw3cxfi0joE+LY4brEW5vJF8DnxhEX0eIJtjas+zb3ckeUJgYIyirXdHJ\nqrAANWjUfh9JFehwjAigx6TnGK+pr+zpbKTX9O7lhmvsCf+82NVlZmY342IUE8Ss\npWjhsydl8NT80fGJV/1fwpgyos9EvpjayXh9bYxZhDkiHaUUL/WBInEdyi4xFJgf\nPXnaV+2q48/3oOVZa2Ng/vcaBG5nEZYvK+jTG205t9d9X9Tp46iH/mvyIH8VIF0H\np/OtIoRnGLjliYP0dHp91G4UTTEpg8Cxa77r77qlwASORsFF8MJGMKMJg/YNO7fQ\nCskpqb7UZfSXmvZ5AIZ/Kzncuj1IvZMLhjMr/QAwSO0/v/GnmSqLwMamM2viq8un\nef2TQy9Xcuxcp0n7mcDHUUaTpiW1tPc5ikUmCUQ2ZuNTjE6Noa0kSV3AHG3TbSkU\n+qT9B5RSL1YBAEw5xwttvjlju2jaYaYT6xI4LioXIVJ8lEwdrggxmqTj1ArgqP2c\nHAtS6vziTnwbP+sS3g==\n-----END
-        CERTIFICATE-----\n","id":"ff808081577bae9001577bc066890293","serial":{"id":1063893136250440125,"revoked":false,"collected":false,"expiration":"2017-08-16T12:29:31.000+0000","serial":1063893136250440125,"created":"2016-09-30T15:39:49.256+0000","updated":"2016-09-30T15:39:49.256+0000"},"created":"2016-09-30T15:39:49.257+0000","updated":"2016-09-30T15:39:49.257+0000"},"type":{"id":"ff808081577bae9001577bb6eb940000","label":"satellite","manifest":true,"created":"2016-09-30T15:29:27.954+0000","updated":"2016-09-30T15:29:27.954+0000"},"ownerId":"ff808081577b8f0201577ba5d9850003","webUrl":"access.stage.redhat.com/management/distributors/","apiUrl":"https://subscription.rhn.stage.redhat.com/subscription/consumers/","created":"2016-09-30T15:39:49.257+0000","updated":"2016-09-30T15:39:49.257+0000"},"logLevel":null,"href":"/owners/testcorp","created":"2016-09-30T15:10:49.221+0000","updated":"2016-09-30T15:39:49.608+0000"},"redhat_repository_url":"https://cdn.redhat.com","service_levels":["Premium","Standard"],"service_level":null,"select_all_types":[],"description":"Testing
-        today for a better tomorrow","created_at":"2016-09-30 15:10:48 UTC","updated_at":"2016-09-30
-        15:10:48 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":8,"name":"Test
-        Corporation","title":"Test Corporation","users":[],"smart_proxies":[{"name":"testing.example.com","id":1,"url":"https://testing.example.com:9090"}],"subnets":[{"id":1,"name":"Test
+      encoding: UTF-8
+      string: '{"label":"testcorp","owner_details":{"parentOwner":null,"id":"ff808081587c237501587c261f80000c","key":"testcorp","displayName":"Test
+        Corporation","contentPrefix":"/testcorp/$env","defaultServiceLevel":null,"upstreamConsumer":{"id":"ff808081587c237501588c806ca41751","uuid":"2127548b-cf37-42a8-a85f-47dd6ede8c2d","name":"TestCorp","idCert":{"key":"-----BEGIN
+        RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEA08SZrUmSYDnqe5V1tiqZWnD0AopWmP1H3c96/+5mcP0sTgkH\nyy3CxxADn8SIRc2xzgqpRlD993TSJzkuKXe15uekAT63iD135R3zA7RyqvHmw8Gk\nD1hQTDjrMOk1JUPAm2g4fvQhlO8+x4P+qRTP3WYbAdMrpge8ryTgZeeQ71MUV5k/\nPWsm79Di5M3YX/JTHruHeIEaTzW5TF+oRlQscFLXVEo70Ve1llLF7KYjor/WCHfj\n1v6ze/dVN+6YdxgW2JQpIRLPjQuZTO218jqufsMfLvguaGA+QC9qT7fxzt1zl6ra\nRiZkehBJJXcsApJfXvtLkHTd1ciiVOmfjQc7swIDAQABAoIBAFTSKGO6VkDosbzy\nboWapnYNTA9AbdM1j/WOR0v/p1SWc4qGH3MITz4AchMqWxLqgs9ugcLCahcV2Z8Q\nTicZ5ego3A4LmuOdC0rgJhhTzKIf5jh+dUIYM4F0QvACWOEmNB2LLyXajyDiexjb\nC8OZrHCXlzWx6YfFDZRxhtgKWokg2Mj0NmkiQjycJES6hXeRpQbIxqj3uAPxLfHH\nHVmbIljoOfzdjvp22gQOReknIG6U4g+xtl9kE3MUcR2JXvyxioPHn3r/dh8Qvu+3\n89EB5XYBphMBTHoD7vB3xAbzdH59LRypC2HHvB5ODZdU+Yf9yOFtuoXlOMw0WFwb\nCAKUlWECgYEA+a2vvi7onoHJBXucaLCpwndbntWy4jJ46nqx0tpp6oSM5AvdX41R\nZT7kI67QFiUWluad/EabLh+N29vQES8m7HbZwtgU/K+1sg0yI4mFV2Ie+NBkubZF\nlwtvQ2TNzvE3sQ0yhCEObdk5Ku7mPtE/bmvh7QvqCctZFv/OBFgiZZkCgYEA2SEx\nipnTbOFvzBUKt6gJTihriftafOOsqLeIRqi+5hyWi4bEUj/zJ81B8tw+Y0GS2U/O\nfl00MbaaY92lSB+80o71VKWSSHQjTtWPQvnskr0nknpbXX3iyD5DFSlLvlG+OQiv\nEQMRAE1gtKPOiJ3f6cKQuCVSkd3gLcOCvw9mYysCgYEAjSaN5hyq0YFZ3cmmAOFu\n90t29nKlcI9MIHNAuI1Vt4k8BWhXvD8uNui5HRsk9H//J0w1IHviGs8n6ZV5KV3Y\nyXHfZfG226uSMpiXMdP7GA2WqN9XMk5DRULnodgJKebgry1g06XEfIGDeiwY6oZt\nL8W5scM8ilD1irUPCRGyUHECgYEAveBQMZOJl3qhSIfSIn84+/dO65A6NmLnV3eA\nHcJthk/Tuto0jnTMD69oj5fYmvX6FD29JzYccajs5I4sfqD6f+tyUP6lqOSfB86s\nBHcIUd5GX8rOYTi3/EKuaS/+w8U6Iygb6DWVRX1lJzLkZwYgjIyP/+jrhxHPfFWv\n3aL695cCgYEAo3rGmUBfDl86rq9TAXlDk7XjshOqamMMDp30tSBosrfqLHCEqvSQ\nqg+TzzybhEXhSwYVGLviQbTIJ8kTd3qQLJV7o7nQPgU6Om4EzI0aLbo+GWl19jhf\n/klsIweeuoaEhquU/A1gxbv2ucUM+NmiFpqEOYNce8npEwUCe9teFXY=\n-----END
+        RSA PRIVATE KEY-----\n","cert":"-----BEGIN CERTIFICATE-----\nMIIFqTCCA5GgAwIBAgIIdXiNzxxseMUwDQYJKoZIhvcNAQEFBQAwgaQxCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMSQwIgYDVQQDDBtSZWQg\nSGF0IENhbmRsZXBpbiBBdXRob3JpdHkxJDAiBgkqhkiG9w0BCQEWFWNhLXN1cHBv\ncnRAcmVkaGF0LmNvbTAeFw0xNjExMTExNDI4MzRaFw0xNzExMTExNDI4MzRaMC8x\nLTArBgNVBAMTJDIxMjc1NDhiLWNmMzctNDJhOC1hODVmLTQ3ZGQ2ZWRlOGMyZDCC\nASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANPEma1JkmA56nuVdbYqmVpw\n9AKKVpj9R93Pev/uZnD9LE4JB8stwscQA5/EiEXNsc4KqUZQ/fd00ic5Lil3tebn\npAE+t4g9d+Ud8wO0cqrx5sPBpA9YUEw46zDpNSVDwJtoOH70IZTvPseD/qkUz91m\nGwHTK6YHvK8k4GXnkO9TFFeZPz1rJu/Q4uTN2F/yUx67h3iBGk81uUxfqEZULHBS\n11RKO9FXtZZSxeymI6K/1gh349b+s3v3VTfumHcYFtiUKSESz40LmUzttfI6rn7D\nHy74LmhgPkAvak+38c7dc5eq2kYmZHoQSSV3LAKSX177S5B03dXIolTpn40HO7MC\nAwEAAaOCAVEwggFNMBEGCWCGSAGG+EIBAQQEAwIFoDALBgNVHQ8EBAMCBLAwgd4G\nA1UdIwSB1jCB04AUdy6lzTcNqOHT6mHFVmdD6JHHbRyhgbekgbQwgbExCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMTEwLwYDVQQDDChSZWQg\nSGF0IEVudGl0bGVtZW50IE9wZXJhdGlvbnMgQXV0aG9yaXR5MSQwIgYJKoZIhvcN\nAQkBFhVjYS1zdXBwb3J0QHJlZGhhdC5jb22CAT8wHQYDVR0OBBYEFGYQ3MhGU2yo\nTPvY5G5JJULxda/UMBMGA1UdJQQMMAoGCCsGAQUFBwMCMBYGA1UdEQQPMA2GC0NO\nPVRlc3RDb3JwMA0GCSqGSIb3DQEBBQUAA4ICAQCCFqx2QxDyiO2myN3nKGHoSY0l\nAUYS/36yYxBM4pfLylCHYLujklT3uZwpTRxI4AglwKcZMiQtskoaRWG8XbWQFNH7\nGUzHtKf9Lec35UR0gLL4Fiuwq/igEzkb2yTgR1vWdelhxBQ9mOugQVQze7aTOCQb\n2GQEdkt9PGXGPHrc3hCitnEHB1btk7SJFo5kOiR0WhdRz6CioOIVBEaxHdLEFnqG\nAK+D+pm/mprwBLNvl9T3493to0G3s1bvSnl86G16c/QYqsfG3BJI/KCAsIHUjzm4\naPPrBp6kae1KYQt62ZcGQtL8+wNuXjpAUEUUytC2pmFXhnBHNIxjKFy3gWdDX7u3\nILptIoWoG3zvfeO0CeaB0wgqrc7F819pzU1yOJAqFL7hMupI52T3kkbKEQO1kqgQ\nsuZrwgKzcVRoJPumNDHAvUQRih948dBQkCFxMC0dMP05j+EKSdiJ6OCAVgtzeRWS\nDtDBmHdQK0XccJFUrpSh3IimVc+G7kgRrUByZBOv1nxI3mkXUKiVWhUEnGZSpgoW\nMUTJRIp5MIZFGM4Mxhb94GoowOyTm0vaaVdlSjyUIG/8gLJdRDxYEryRM+2dxJ8O\nFa9DHlDWixZaGM5O3Ib2PIaNajkSl+MVhhlK5yC0b0LUc35zenSVYWbwc4E6/3NF\ndU7VYPPRw1GY8iul5Q==\n-----END
+        CERTIFICATE-----\n","id":"ff808081587c237501588c806ca31750","serial":{"id":627796024140478799,"revoked":false,"collected":false,"expiration":"2017-11-11T14:28:34.000+0000","serial":627796024140478799,"created":"2016-11-22T14:46:16.482+0000","updated":"2016-11-22T14:46:16.482+0000"},"created":"2016-11-22T14:46:16.483+0000","updated":"2016-11-22T14:46:16.483+0000"},"type":{"id":"ff808081587c2375015887a15e6c0087","label":"satellite","manifest":true,"created":"2016-11-21T16:04:09.452+0000","updated":"2016-11-21T16:04:09.452+0000"},"ownerId":"ff808081587c237501587c261f80000c","webUrl":"access.stage.redhat.com/management/distributors/","apiUrl":"https://subscription.rhn.stage.redhat.com/subscription/consumers/","created":"2016-11-22T14:46:16.484+0000","updated":"2016-11-22T14:46:16.484+0000"},"logLevel":null,"href":"/owners/testcorp","created":"2016-11-19T10:33:43.040+0000","updated":"2016-11-22T14:46:16.895+0000"},"redhat_repository_url":"https://cdn.redhat.com","service_levels":["Premium","Standard"],"service_level":null,"select_all_types":[],"description":"Testing
+        today for a better tomorrow","created_at":"2016-11-19 10:33:41 UTC","updated_at":"2016-11-19
+        10:33:41 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":8,"name":"Test
+        Corporation","title":"Test Corporation","users":[],"smart_proxies":[{"name":"centos7-devel.example.com","id":1,"url":"http://centos7-devel.example.com:8000"}],"subnets":[{"id":1,"name":"Test
         Subnet","network_address":"192.168.100.1/24"}],"compute_resources":[],"media":[],"config_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
@@ -627,25 +592,25 @@ http_interactions:
         default local boot","template_kind_id":1,"template_kind_name":"PXELinux"},{"id":3,"name":"PXEGrub2
         global default","template_kind_id":3,"template_kind_name":"PXEGrub2"},{"id":2,"name":"PXEGrub
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
-        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Preseed custom
-        LVM","id":83},{"os_family":"Debian","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"NX-OS default
-        fake","id":81},{"os_family":"Redhat","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Junos default
-        fake","id":79},{"os_family":"Solaris","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"CoreOS default
-        fake","id":75},{"os_family":"Suse","created_at":"2016-09-30 14:47:09 UTC","updated_at":"2016-09-30
-        14:47:09 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-09-30
-        14:47:09 UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire
-        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-09-30 14:47:09
-        UTC","updated_at":"2016-09-30 14:47:09 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
+        global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"ptables":[{"os_family":"Xenserver","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"XenServer default","id":84},{"os_family":"Debian","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Preseed custom
+        LVM","id":83},{"os_family":"Debian","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Preseed default","id":82},{"os_family":"NXOS","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"NX-OS default
+        fake","id":81},{"os_family":"Redhat","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Kickstart default","id":80},{"os_family":"Junos","created_at":"2016-11-19
+        10:33:03 UTC","updated_at":"2016-11-19 10:33:03 UTC","name":"Junos default
+        fake","id":79},{"os_family":"Solaris","created_at":"2016-11-19 10:33:03 UTC","updated_at":"2016-11-19
+        10:33:03 UTC","name":"Jumpstart mirrored","id":78},{"os_family":"Solaris","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"Jumpstart default","id":77},{"os_family":"Freebsd","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"FreeBSD","id":76},{"os_family":"Coreos","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"CoreOS default
+        fake","id":75},{"os_family":"Suse","created_at":"2016-11-19 10:33:02 UTC","updated_at":"2016-11-19
+        10:33:02 UTC","name":"AutoYaST LVM","id":74},{"os_family":"Suse","created_at":"2016-11-19
+        10:33:02 UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire
+        virtual disk","id":73},{"os_family":"Suse","created_at":"2016-11-19 10:33:02
+        UTC","updated_at":"2016-11-19 10:33:02 UTC","name":"AutoYaST entire SCSI disk","id":72}],"provisioning_templates":[{"id":89,"name":"Katello
         Atomic Kickstart Default","template_kind_id":5,"template_kind_name":"provision"},{"id":88,"name":"subscription_manager_registration","template_kind_id":null,"template_kind_name":null},{"id":87,"name":"Katello
         Kickstart Default Finish","template_kind_id":6,"template_kind_name":"finish"},{"id":86,"name":"Katello
         Kickstart Default User Data","template_kind_id":8,"template_kind_name":"user_data"},{"id":85,"name":"Katello
@@ -699,10 +664,10 @@ http_interactions:
         global default","template_kind_id":2,"template_kind_name":"PXEGrub"},{"id":1,"name":"PXELinux
         global default","template_kind_id":1,"template_kind_name":"PXELinux"}],"domains":[{"id":1,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[],"parameters":[],"default_content_view_id":2,"library_id":2}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:28 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:50 GMT
 - request:
     method: get
-    uri: https://admin:changeme@katello.example.com:50218/katello/api/organizations/8/subscriptions?per_page=999999
+    uri: http://admin:changeme@centos7-devel.example.com:3000/katello/api/organizations/8/subscriptions?per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -712,22 +677,18 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.1.10p492
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
       Content-Type:
       - application/json
       Accept-Language:
       - en
       Host:
-      - katello.example.com:50218
+      - centos7-devel.example.com:3000
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
-      Date:
-      - Wed, 12 Oct 2016 14:11:31 GMT
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.4/2015-12-16)
       Foreman-Version:
       - 1.14.0-develop
       Foreman-Api-Version:
@@ -735,21 +696,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Apipie-Checksum:
-      - 68d37bf606b9a03df6e1e749d6054009
+      - 974492cde78991fdc7ad9dfcc73ff358
       Etag:
-      - W/"57aba53041e469a8eed527f59d001b40-gzip"
+      - W/"b7ca7890949827180c028561ce310ee6"
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _session_id=8fe0675eb42588ba9be3a207fa879fca; path=/; HttpOnly
       X-Request-Id:
-      - d2eaa71b-8ebb-4e6f-baf5-21739c184c44
+      - e4b1be8c-46e1-4970-838a-8f2e066b0369
       X-Runtime:
-      - '2.139245'
+      - '1.915376'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
         ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -760,18 +721,19 @@ http_interactions:
       - none
       X-Xss-Protection:
       - 1; mode=block
-      Via:
-      - 1.1 testing.example.com:50218
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1972'
-      Set-Cookie:
-      - _session_id=ec89f290defceb9c9c6f6c59bf413f77; path=/; HttpOnly
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: |
-        {"organization":{},"total":3,"subtotal":3,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":1,"cp_id":"ff808081577bae9001577bb702c100da","subscription_id":1,"name":"Red Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999116,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false},{"id":4,"cp_id":"ff808081577bae9001577bb703900138","subscription_id":2,"name":"Red Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"id":2,"cp_id":"ff808081577bae9001577bb70420018a","subscription_id":3,"name":"Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":200,"quantity":200,"consumed":0,"account_number":5700573,"contract_number":10999113,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}
+      encoding: UTF-8
+      string: '{"organization":{},"total":3,"subtotal":3,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":6,"cp_id":"ff808081587c2375015887a17a590167","subscription_id":2,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-11-10T05:00:00.000+0000","end_date":"2017-11-10T04:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":1583473,"contract_number":null,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"id":8,"cp_id":"ff808081587c2375015887a17b3e01bd","subscription_id":3,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-11-10T05:00:00.000+0000","end_date":"2017-11-10T04:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":1583473,"contract_number":null,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false},{"id":10,"cp_id":"ff808081587c2375015887a17be1021f","subscription_id":4,"name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-11-10T05:00:00.000+0000","end_date":"2017-11-10T04:59:59.000+0000","available":200,"quantity":200,"consumed":0,"account_number":1583473,"contract_number":null,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}
+
+'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 14:11:30 GMT
+  recorded_at: Tue, 22 Nov 2016 10:46:52 GMT
 recorded_with: VCR 3.0.3

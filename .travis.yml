@@ -4,5 +4,7 @@ rvm:
   - 2.1
   - 2.2
 before_install:
+  - echo "gem 'hammer_cli_katello', :git => 'https://github.com/Katello/hammer-cli-katello.git'" > Gemfile.local
+  - echo "gem 'hammer_cli_foreman', :git => 'https://github.com/theforeman/hammer-cli-foreman.git'" >> Gemfile.local
   - echo "gem 'hammer_cli', :git => 'https://github.com/theforeman/hammer-cli.git'" >> Gemfile.local
   - gem update bundler

@@ -30,6 +30,7 @@ test/config.yml
 .ruby-gemset
 .idea
 Gemfile.local
+Gemfile.local.rb
 hammer_cli_csv*.gem
 
 # Locale files

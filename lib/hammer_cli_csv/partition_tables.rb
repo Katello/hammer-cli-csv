@@ -15,7 +15,10 @@ module HammerCLICsv
         # http://projects.theforeman.org/issues/11175
         organizations_map = {}
         @api.resource(:organizations).call(:index, {:per_page => 999999})['results'].each do |organization|
-          ptables = @api.resource(:ptables).call(:index, {'organization_id' => organization['id']})['results'].each do |ptable|
+          ptables = @api.resource(:ptables).call(:index, {
+              'organization_id' => organization['id'],
+              'search' => option_search
+          })['results'].each do |ptable|
             organizations_map[ptable['name']] ||= []
             organizations_map[ptable['name']] << organization['name']
           end

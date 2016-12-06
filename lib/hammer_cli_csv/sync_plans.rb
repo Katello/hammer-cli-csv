@@ -19,6 +19,7 @@ module HammerCLICsv
 
           @api.resource(:sync_plans).call(:index, {
                'per_page' => 999999,
+               'search' => option_search,
                'organization_id' => foreman_organization(:name => organization['name'])
           })['results'].each do |sync_plan|
             name = sync_plan['name']

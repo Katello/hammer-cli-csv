@@ -17,6 +17,7 @@ module HammerCLICsv
 
           @api.resource(:lifecycle_environments).call(:index, {
               'per_page' => 999999,
+              'search' => option_search,
               'organization_id' => organization['id']
           })['results'].sort { |a, b| a['created_at'] <=> b['created_at'] }.each do |environment|
             if environment['name'] != 'Library'

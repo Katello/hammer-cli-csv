@@ -16,7 +16,10 @@ module HammerCLICsv
       def export(csv)
         csv << [NAME, DESCRIPTION, FAMILY, PASSWORD_HASH, PARTITION_TABLES, ARCHITECTURES, MEDIA,
                 PROVISIONING_TEMPLATES, PARAMETERS]
-        @api.resource(:operatingsystems).call(:index, {:per_page => 999999})['results'].each do |operatingsystem_id|
+        @api.resource(:operatingsystems).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |operatingsystem_id|
           operatingsystem = @api.resource(:operatingsystems).call(:show, {:id => operatingsystem_id['id']})
           name = build_os_name(operatingsystem['name'], operatingsystem['major'], operatingsystem['minor'])
           description = operatingsystem['description']

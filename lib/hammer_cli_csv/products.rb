@@ -25,7 +25,8 @@ module HammerCLICsv
                 CONTENT_SET, RELEASE, REPOSITORY_URL, VERIFY_SSL, UNPROTECTED, MIRROR_ON_SYNC, DOWNLOAD_POLICY,
                 UPSTREAM_USERNAME, UPSTREAM_PASSWORD]
         @api.resource(:organizations).call(:index, {
-            :per_page => 999999
+            :per_page => 999999,
+            :search => option_search
         })['results'].each do |organization|
           next if option_organization && organization['name'] != option_organization
           @api.resource(:products).call(:index, {

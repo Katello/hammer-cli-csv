@@ -12,7 +12,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, ORGANIZATIONS, LOCATIONS, PATH, OSFAMILY, OPERATING_SYSTEMS]
-        @api.resource(:media).call(:index, {:per_page => 999999})['results'].each do |medium|
+        @api.resource(:media).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |medium|
           medium = @api.resource(:media).call(:show, :id => medium['id'])
           name = medium['name']
           organizations = export_column(medium, 'organizations', 'name')

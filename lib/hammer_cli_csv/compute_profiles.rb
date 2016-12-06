@@ -13,7 +13,10 @@ module HammerCLICsv
 
       def export
         csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, PROVIDER, URL]
-        @api.resource(:compute_profiles).call(:index, {:per_page => 999999})['results'].each do |compute_profile|
+        @api.resource(:compute_profiles).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |compute_profile|
           puts compute_profile
           compute_profile = @api.resource(:compute_profiles).call(:show, {'id' => compute_profile['id']})
           name = compute_profile['name']

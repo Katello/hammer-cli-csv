@@ -20,6 +20,7 @@ module HammerCLICsv
             :per_page => 999999
         }
         params['search'] =  "organization = \"#{option_organization}\"" if option_organization
+        params['search'] = "#{params['search']} AND #{option_search}" if option_search
         @api.resource(:config_templates).call(:index, params)['results'].each do |template_id|
           template = @api.resource(:config_templates).call(:show, {:id => template_id['id']})
           next if template['locked'] && !option_include_locked?

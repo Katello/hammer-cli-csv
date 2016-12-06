@@ -16,6 +16,7 @@ module HammerCLICsv
         csv << [NAME, ORGANIZATIONS, LOCATIONS, DESCRIPTION, SMART_PROXY, PARAMETERS]
         search_options = {:per_page => 999999}
         search_options['search'] = "organization=\"#{option_organization}\"" if option_organization
+        search_options['search'] = "#{search_options['search']} AND #{option_search}" if option_search
         @api.resource(:domains).call(:index, search_options)['results'].each do |domain|
           domain = @api.resource(:domains).call(:show, {'id' => domain['id']})
           raise "Domain 'id=#{domain['id']}' not found" if !domain || domain.empty?

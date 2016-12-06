@@ -11,7 +11,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, ORGANIZATIONS, LOCATIONS, URL, LIFECYCLE_ENVIRONMENTS]
-        @api.resource(:smart_proxies).call(:index, {:per_page => 999999})['results'].each do |smart_proxy|
+        @api.resource(:smart_proxies).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |smart_proxy|
           smart_proxy = @api.resource(:smart_proxies).call(:show, {'id' => smart_proxy['id']})
           name = smart_proxy['name']
           organizations = export_column(smart_proxy, 'organizations', 'name')

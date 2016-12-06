@@ -82,6 +82,7 @@ module HammerCLICsv
 
           @api.resource(:activation_keys).call(:index, {
               'per_page' => 999999,
+              'search' => option_search,
               'organization_id' => organization['id']
           })['results'].each do |activationkey|
             yield activationkey

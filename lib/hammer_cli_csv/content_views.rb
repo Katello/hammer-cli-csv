@@ -19,7 +19,8 @@ module HammerCLICsv
       def export(csv)
         csv << [NAME, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, ENVIRONMENTS]
         @api.resource(:organizations).call(:index, {
-            :per_page => 999999
+            :per_page => 999999,
+            :search => option_search
         })['results'].each do |organization|
           next if option_organization && organization['name'] != option_organization
 

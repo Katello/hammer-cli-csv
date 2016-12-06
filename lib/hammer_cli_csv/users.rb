@@ -14,7 +14,10 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, FIRSTNAME, LASTNAME, EMAIL, ORGANIZATIONS, LOCATIONS, ADMIN, ROLES]
-        @api.resource(:users).call(:index, {:per_page => 999999})['results'].each do |user|
+        @api.resource(:users).call(:index, {
+            :per_page => 999999,
+            :search => option_search
+        })['results'].each do |user|
           if user['organizations']
             organizations = CSV.generate do |column|
               column << user['organizations'].collect do |organization|

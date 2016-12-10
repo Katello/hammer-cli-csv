@@ -50,7 +50,6 @@ module HammerCLICsv
 
     def execute
       @api = api_connection
-      @server_status = check_server_status(@server, @username, @password)
 
       if option_export?
         if option_file
@@ -788,7 +787,7 @@ module HammerCLICsv
                   {
                     :per_page => 999999,
                     'organization_id' => foreman_organization(:name => organization),
-                    'search' => search_string('host-collections',options[:name])
+                    'search' => "name=\"#{options[:name]}\""
                   })['results'].each do |hostcollection|
             @hostcollections[organization][hostcollection['name']] = hostcollection['id'] if hostcollection
           end
@@ -823,7 +822,7 @@ module HammerCLICsv
                   {
                     :per_page => 999999,
                     'organization_id' => foreman_organization(:name => organization),
-                    'search' => search_string('host-collections',options[:name])
+                    'search' => "name=\"#{options[:name]}\""
                   })['results'].each do |product|
             @products[organization][product['name']] = product['id'] if product
           end
@@ -992,18 +991,6 @@ module HammerCLICsv
     def count(value)
       return 1 if value.nil? || value.empty?
       value.to_i
-    end
-
-    private
-
-    def search_string(resource, name)
-      operator = case resource
-                 when "gpg-key", "sync-plan", "lifecycle-environment", "host-collections"
-                   @server_status['version'] && @server_status['version'].match(/\A1\.6/) ? ':' : '='
-                 else
-                   ':'
-                 end
-      "name#{operator}\"#{name}\""
     end
   end
 end

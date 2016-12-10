@@ -146,21 +146,7 @@ module HammerCLICsv
 
       def import
         raise _("--columns option only relevant with --export") unless option_columns.nil?
-        remote = @server_status['plugins'].detect { |plugin| plugin['name'] == 'foreman_csv' }
-        if remote.nil?
-          import_locally
-        else
-          import_remotely
-        end
-      end
 
-      def import_remotely
-        params = {'content' => ::File.new(::File.expand_path(option_file), 'rb')}
-        headers = {:content_type => 'multipart/form-data', :multipart => true}
-        task_progress(@api.resource(:csv).call(:import_content_hosts, params, headers))
-      end
-
-      def import_locally
         @existing = {}
         @hypervisor_guests = {}
         @all_subscriptions = {}

@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:20 GMT
+      - Tue, 13 Dec 2016 14:48:15 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -39,13 +39,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - da59931e-95df-49a6-87d0-0e0618901146
+      - 70875a72-fed8-41e6-a441-260ce1f0c26b
       X-Runtime:
-      - '0.037376'
+      - '0.033461'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=3456ad26956c09046e1a4ed3e4d5bd08; path=/; secure; HttpOnly
+      - _session_id=e6ad0079a02707de0af7c6614bf8c115; path=/; secure; HttpOnly
       Etag:
       - '"8e3341d0a4cc328651f7391aed11fef8"'
       Status:
@@ -58,7 +58,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:18 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:13 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/api/v2/plugins
@@ -80,7 +80,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:21 GMT
+      - Tue, 13 Dec 2016 14:48:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -98,13 +98,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e7e7df58-1b40-4565-96b9-e8b77d52cabe
+      - ac113deb-5677-4b87-a995-4453d055d6a6
       X-Runtime:
-      - '0.039287'
+      - '0.037800'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=06c8d07614a28e492259b626ad6c18e3; path=/; secure; HttpOnly
+      - _session_id=54f227c47bce34f9716cbcac362def67; path=/; secure; HttpOnly
       Etag:
       - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
       Status:
@@ -193,7 +193,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:18 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:13 GMT
 - request:
     method: get
     uri: https://satlap.example.com/apidoc/v2.en.json
@@ -219,7 +219,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:21 GMT
+      - Tue, 13 Dec 2016 14:48:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -237,9 +237,9 @@ http_interactions:
       Apipie-Checksum:
       - e1df2e8d43e22495b02a53b48e3b5298
       X-Request-Id:
-      - 40b10caf-7dfc-4782-99c0-a58defee674f
+      - d8c91468-701a-4c39-9a25-d3f2825c8549
       X-Runtime:
-      - '0.004584'
+      - '0.004413'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -19878,84 +19878,7 @@ http_interactions:
         Ijp0cnVlfV0sImhlYWRlcnMiOm51bGx9fSwibGlua19leHRlbnNpb24iOiIu
         ZW4uaHRtbCJ9fQ==
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:18 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@satlap.example.com/katello/api/organizations?full_results=true
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Tue, 13 Dec 2016 14:47:21 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 5e29cb24-fc11-45f8-b222-abfd88922067
-      X-Runtime:
-      - '0.043124'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=b3ab3e5f2dbe13bcb4963b11ba6d53ce; path=/; secure; HttpOnly
-      Etag:
-      - '"307661b689c047972a4830fc1c360f91-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '559'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: |
-        {
-          "total": 2,
-          "subtotal": 2,
-          "page": 1,
-          "per_page": 20,
-          "search": null,
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": [{"label":"Default_Organization","created_at":"2016-12-07 03:03:54 UTC","updated_at":"2016-12-07 03:03:58 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"testcorp","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-13 11:49:10 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
-        }
-    http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:18 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:13 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -19981,7 +19904,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:21 GMT
+      - Tue, 13 Dec 2016 14:48:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -19999,15 +19922,15 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a8e5ed85-fae2-4f5c-94a9-8660ab6f8196
+      - 2104eed1-6e0b-43af-82a7-a247af148f83
       X-Runtime:
-      - '0.034219'
+      - '0.041125'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=f8a84cd1bc97f6bdc0c9c7715025986b; path=/; secure; HttpOnly
+      - _session_id=3e3ccaae7fa8258628b1625544b5778e; path=/; secure; HttpOnly
       Etag:
-      - '"dece488d5a182a19a03a777e7a66a6cd-gzip"'
+      - '"679e32140c09b4b1376234e361ab87b0-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -20029,13 +19952,13 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-13 11:49:10 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-13 14:47:54 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:18 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:13 GMT
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/api/organizations/8/hosts?full_results=true&search
+    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/activation_keys?per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -20058,7 +19981,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:21 GMT
+      - Tue, 13 Dec 2016 14:48:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20076,21 +19999,740 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 21e6ac2f-3d24-4b6c-a9a0-b10ff40d39bd
+      - 1656f580-3834-47a3-9211-0e262a68ba10
       X-Runtime:
-      - '0.143512'
+      - '0.278120'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=5bfc00ee07b97b25a99856d83d8feaf5; path=/; secure; HttpOnly
+      - _session_id=6c109b1ffdef09517fd5c436a6aeb322; path=/; secure; HttpOnly
       Etag:
-      - '"0093e4891c5402618c30013556e3debc-gzip"'
+      - '"649302e2382c18de9889bbf387af0418-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '4426'
+      - '2325'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":3,"name":"testakeyitemized","description":null,"unlimited_hosts":true,"auto_attach":true,"content_view_id":2,"environment_id":null,"usage_count":0,"user_id":3,"max_hosts":null,"release_version":null,"service_level":null,"content_overrides":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 11:00:46
+        UTC","updated_at":"2016-12-13 11:00:46 UTC","content_view":{"id":2,"name":"Default
+        Organization View"},"environment":null,"products":[{"id":42,"name":"Oracle
+        Java for RHEL Server"},{"id":49,"name":"Red Hat Developer Toolset for RHEL
+        Server"},{"id":47,"name":"Red Hat Software Collections Beta for RHEL Server"},{"id":45,"name":"Red
+        Hat Enterprise Linux Server"},{"id":39,"name":"Red Hat Beta"},{"id":41,"name":"Red
+        Hat Software Collections for RHEL Server"},{"id":46,"name":"dotNET on RHEL
+        for RHEL Server"},{"id":43,"name":"Red Hat Enterprise Linux Atomic Host Beta"},{"id":48,"name":"Red
+        Hat Enterprise Linux Atomic Host"}],"host_collections":[],"permissions":{"view_activation_keys":true,"edit_activation_keys":true,"destroy_activation_keys":true}},{"id":2,"name":"testakey","description":null,"unlimited_hosts":true,"auto_attach":true,"content_view_id":2,"environment_id":null,"usage_count":0,"user_id":3,"max_hosts":null,"release_version":null,"service_level":null,"content_overrides":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 10:58:53
+        UTC","updated_at":"2016-12-13 10:58:54 UTC","content_view":{"id":2,"name":"Default
+        Organization View"},"environment":null,"products":[{"id":42,"name":"Oracle
+        Java for RHEL Server"},{"id":49,"name":"Red Hat Developer Toolset for RHEL
+        Server"},{"id":47,"name":"Red Hat Software Collections Beta for RHEL Server"},{"id":45,"name":"Red
+        Hat Enterprise Linux Server"},{"id":39,"name":"Red Hat Beta"},{"id":41,"name":"Red
+        Hat Software Collections for RHEL Server"},{"id":46,"name":"dotNET on RHEL
+        for RHEL Server"},{"id":43,"name":"Red Hat Enterprise Linux Atomic Host Beta"},{"id":48,"name":"Red
+        Hat Enterprise Linux Atomic Host"}],"host_collections":[],"permissions":{"view_activation_keys":true,"edit_activation_keys":true,"destroy_activation_keys":true}}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:14 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/content_views?per_page=999999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:16 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 298c9ae9-1bd2-4a00-a005-a13ed09e94b0
+      X-Runtime:
+      - '0.062470'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=6e50ab591145efe13cd8285a309e4424; path=/; secure; HttpOnly
+      Etag:
+      - '"24d3d45f9a0cda80146879509dfd209e-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1804'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"component_ids":[],"default":false,"next_version":2,"id":3,"name":"Test
+        Puppet Modules","label":"Test_Puppet_Modules","description":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 10:58:58
+        UTC","updated_at":"2016-12-13 10:58:59 UTC","environments":[{"id":2,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":3,"version":"1.0","published":"2016-12-13
+        10:58:59 UTC","environment_ids":[2]}],"components":[],"activation_keys":[],"last_published":"2016-12-13
+        10:58:59 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}},{"composite":false,"repository_ids":[],"component_ids":[],"default":true,"next_version":1,"id":2,"name":"Default
+        Organization View","label":"e1fa1d00-5399-4ce9-9219-1b9433e76baa","description":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 10:58:26
+        UTC","updated_at":"2016-12-13 10:58:26 UTC","environments":[{"id":2,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":2,"version":"1.0","published":"2016-12-13
+        10:58:26 UTC","environment_ids":[2]}],"components":[],"activation_keys":[{"id":2,"name":"testakey"},{"id":3,"name":"testakeyitemized"}],"last_published":"2016-12-13
+        10:58:26 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:14 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/2
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":8,"name":"testakey","environment_id":null,"content_view_id":2,"description":null,"unlimited_content_hosts":false,"max_content_hosts":0,"service_level":null,"release_version":null}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '198'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:16 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1a3284ac-98be-4bbb-9a2e-8a7d24f82f69
+      X-Runtime:
+      - '0.783004'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=27ebb16808cb53ff0db366614785ee92; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"6f36558bee807360aaf9789314bc4783-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1098'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"id":2,"name":"testakey","description":null,"unlimited_hosts":true,"auto_attach":true,"content_view_id":2,"environment_id":null,"usage_count":0,"user_id":3,"max_hosts":null,"release_version":null,"service_level":null,"content_overrides":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 10:58:53
+        UTC","updated_at":"2016-12-13 10:58:54 UTC","content_view":{"id":2,"name":"Default
+        Organization View"},"environment":null,"products":[{"id":42,"name":"Oracle
+        Java for RHEL Server"},{"id":49,"name":"Red Hat Developer Toolset for RHEL
+        Server"},{"id":47,"name":"Red Hat Software Collections Beta for RHEL Server"},{"id":45,"name":"Red
+        Hat Enterprise Linux Server"},{"id":39,"name":"Red Hat Beta"},{"id":41,"name":"Red
+        Hat Software Collections for RHEL Server"},{"id":46,"name":"dotNET on RHEL
+        for RHEL Server"},{"id":43,"name":"Red Hat Enterprise Linux Atomic Host Beta"},{"id":48,"name":"Red
+        Hat Enterprise Linux Atomic Host"}],"host_collections":[],"permissions":{"view_activation_keys":true,"edit_activation_keys":true,"destroy_activation_keys":true}}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:14 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/2/subscriptions?organization_id=8&per_page=999999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:17 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0df7a1fb-7503-42d1-9fbe-9b514d596de9
+      X-Runtime:
+      - '0.324836'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=50896ccd0dea911cc3e4aa34ee895014; path=/; secure; HttpOnly
+      Etag:
+      - '"d6d449bc76c64670e2eb5c6c812b0f80-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '769'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"organization":{},"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"quantity_attached":1,"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:15 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/2/remove_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"id":33,"quantity":null}]}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '45'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:17 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d74f468f-cbbd-41ca-b450-f06d1ff234c7
+      X-Runtime:
+      - '0.137977'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=6953ac1b195c58f2d8bccca3b1e9c922; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"28f980ca6d7d7d8bdbe90747a65a208f-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '119'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":0,"subtotal":0,"page":1,"per_page":0,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:15 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/subscriptions?full_results=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:17 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f1d4b342-a68c-421a-8535-62d27c21de50
+      X-Runtime:
+      - '0.520374'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=3d955d6c6f05f92e7e61e22aa3487ac7; path=/; secure; HttpOnly
+      Etag:
+      - '"1d8156ba93bd9f2ba0e122307a4974b8-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1972'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"organization":{},"total":3,"subtotal":3,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"id":35,"cp_id":"4028f99158f378890158f7d6851404f2","subscription_id":20,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999116,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false},{"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":198,"quantity":200,"consumed":2,"account_number":5700573,"contract_number":10999113,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:16 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/2/add_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"id":33,"quantity":1}]}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '42'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:18 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - fe6cd359-7cef-4112-9bf2-36c1f25f1b8d
+      X-Runtime:
+      - '0.287019'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=7005cd315810a1d6a9d02e29dc09f16a; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"18ca9f4064c41f6739477c579a98b026-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '722'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":1,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:16 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/api/status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:18 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 6e0a5dd3-0bfb-4c2f-a46a-68509d6b3416
+      X-Runtime:
+      - '0.031637'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=aa385fcc57828ec534c2f1d47200532e; path=/; secure; HttpOnly
+      Etag:
+      - '"8e3341d0a4cc328651f7391aed11fef8"'
+      Status:
+      - 200 OK
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:16 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/api/v2/plugins
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:18 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - af88dfbf-2458-4ded-a722-7ac7a08e053d
+      X-Runtime:
+      - '0.032087'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=38e1abcd2ffbe8be96968b92011babf2; path=/; secure; HttpOnly
+      Etag:
+      - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1338'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJ0b3RhbCI6IDEwLAogICJzdWJ0b3RhbCI6IDEwLAogICJwYWdlIjog
+        MSwKICAicGVyX3BhZ2UiOiAyMCwKICAic2VhcmNoIjogbnVsbCwKICAic29y
+        dCI6IHsKICAgICJieSI6IG51bGwsCiAgICAib3JkZXIiOiBudWxsCiAgfSwK
+        ICAicmVzdWx0cyI6IFt7ImlkIjoiZm9yZW1hbi10YXNrcyIsIm5hbWUiOiJm
+        b3JlbWFuLXRhc2tzIiwiYXV0aG9yIjoiSXZhbiBOZcSNYXMiLCJkZXNjcmlw
+        dGlvbiI6IlRoZSBnb2FsIG9mIHRoaXMgcGx1Z2luIGlzIHRvIHVuaWZ5IHRo
+        ZSB3YXkgb2Ygc2hvd2luZyB0YXNrIHN0YXR1c2VzIGFjcm9zcyB0aGUgRm9y
+        ZW1hbiBpbnN0YW5jZS5cbkl0IGRlZmluZXMgVGFzayBtb2RlbCBmb3Iga2Vl
+        cGluZyB0aGUgaW5mb3JtYXRpb24gYWJvdXQgdGhlIHRhc2tzIGFuZCBMb2Nr
+        IGZvciBhc3NpZ25pbmcgdGhlIHRhc2tzXG50byByZXNvdXJjZXMuIFRoZSBs
+        b2NraW5nIGFsbG93cyBkZWFsaW5nIHdpdGggcHJldmVudGluZyBtdWx0aXBs
+        ZSBjb2xsaWRpbmcgdGFza3MgdG8gYmUgcnVuIG9uIHRoZVxuc2FtZSByZXNv
+        dXJjZS4gSXQgYWxzbyBvcHRpb25hbGx5IHByb3ZpZGVzIER5bmZsb3cgaW5m
+        cmFzdHJ1Y3R1cmUgZm9yIHVzaW5nIGl0IGZvciBtYW5hZ2luZyB0aGUgdGFz
+        a3MuXG4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vdGhlZm9yZW1hbi9m
+        b3JlbWFuLXRhc2tzIiwidmVyc2lvbiI6IjAuNy4xNC45In0seyJpZCI6ImZv
+        cmVtYW5fYm9vdGRpc2siLCJuYW1lIjoiZm9yZW1hbl9ib290ZGlzayIsImF1
+        dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJkZXNjcmlwdGlvbiI6IlBsdWdpbiBm
+        b3IgRm9yZW1hbiB0aGF0IGNyZWF0ZXMgaVBYRS1iYXNlZCBib290IGRpc2tz
+        IHRvIHByb3Zpc2lvbiBob3N0cyB3aXRob3V0IHRoZSBuZWVkIGZvciBQWEUg
+        aW5mcmFzdHJ1Y3R1cmUuIiwidXJsIjoiaHR0cDovL2dpdGh1Yi5jb20vdGhl
+        Zm9yZW1hbi9mb3JlbWFuX2Jvb3RkaXNrIiwidmVyc2lvbiI6IjYuMS4wLjMi
+        fSx7ImlkIjoiZm9yZW1hbl9kaXNjb3ZlcnkiLCJuYW1lIjoiZm9yZW1hbl9k
+        aXNjb3ZlcnkiLCJhdXRob3IiOiJBbW9zIEJlbmFyaSxCcnlhbiBLZWFybmV5
+        LENoYWlybWFuVHViZUFtcCxEYW5pZWwgTG9iYXRvIEdhcmPDrWEsRG9taW5p
+        YyBDbGVhbCxFcmljIEQuIEhlbG1zLEZyYW5rIFdhbGwsR3JlZyBTdXRjbGlm
+        ZmUsSW1yaSBadmlrLEpvc2VwaCBNaXRjaGVsbCBNYWdlbixMdWthcyBaYXBs
+        ZXRhbCxMdWvDocWhIFphcGxldGFsLE1hcmVrIEh1bGFuLE1hcnRpbiBCYcSN
+        b3Zza8O9LE1hdHQgSmFydmlzLE1pY2hhZWwgTW9sbCxOaWNrLE9oYWQgTGV2
+        eSxPcmkgUmFiaW4sUGV0ciBDaGFsdXBhLFBoaXJpbmNlIFBoaWxpcCxTY3Vi
+        YWZsb3lkLFNobG9taSBaYWRvayxTdGVwaGVuIEJlbmphbWluLFlhbm4gQ8Op
+        emFyZCIsImRlc2NyaXB0aW9uIjoiTWFhUyBEaXNjb3ZlcnkgUGx1Z2luIGVu
+        Z2luZSBmb3IgRm9yZW1hbiIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3Ro
+        ZWZvcmVtYW4vZm9yZW1hbl9kaXNjb3ZlcnkiLCJ2ZXJzaW9uIjoiNS4wLjAu
+        OSJ9LHsiaWQiOiJmb3JlbWFuX2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2Rv
+        Y2tlciIsImF1dGhvciI6IkRhbmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwi
+        ZGVzY3JpcHRpb24iOiJQcm92aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29u
+        dGFpbmVycyBhbmQgaW1hZ2VzIGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRw
+        Oi8vZ2l0aHViLmNvbS90aGVmb3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVy
+        c2lvbiI6IjIuMC4xLjExIn0seyJpZCI6ImZvcmVtYW5faG9va3MiLCJuYW1l
+        IjoiZm9yZW1hbl9ob29rcyIsImF1dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJk
+        ZXNjcmlwdGlvbiI6IlBsdWdpbiBlbmdpbmUgZm9yIEZvcmVtYW4gdGhhdCBl
+        bmFibGVzIHJ1bm5pbmcgY3VzdG9tIGhvb2sgc2NyaXB0cyBvbiBGb3JlbWFu
+        IGV2ZW50cyIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4v
+        Zm9yZW1hbl9ob29rcyIsInZlcnNpb24iOiIwLjMuMTEifSx7ImlkIjoiZm9y
+        ZW1hbl9vcGVuc2NhcCIsIm5hbWUiOiJmb3JlbWFuX29wZW5zY2FwIiwiYXV0
+        aG9yIjoixaBpbW9uIEx1a2HFocOtayxTaGxvbWkgWmFkb2ssTWFyZWsgSHVs
+        YW4sT25kcmVqIFByYXphayIsImRlc2NyaXB0aW9uIjoiRm9yZW1hbiBwbHVn
+        LWluIGZvciBtYW5hZ2luZyBzZWN1cml0eSBjb21wbGlhbmNlIHJlcG9ydHMi
+        LCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vT3BlblNDQVAvZm9yZW1hbl9v
+        cGVuc2NhcCIsInZlcnNpb24iOiIwLjUuMy4xOCJ9LHsiaWQiOiJmb3JlbWFu
+        X3JlbW90ZV9leGVjdXRpb24iLCJuYW1lIjoiZm9yZW1hbl9yZW1vdGVfZXhl
+        Y3V0aW9uIiwiYXV0aG9yIjoiRm9yZW1hbiBSZW1vdGUgRXhlY3V0aW9uIHRl
+        YW0iLCJkZXNjcmlwdGlvbiI6IkEgcGx1Z2luIGJyaW5naW5nIHJlbW90ZSBl
+        eGVjdXRpb24gdG8gdGhlIEZvcmVtYW4sIGNvbXBsZXRpbmcgdGhlIGNvbmZp
+        ZyBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkgd2l0aCByZW1vdGUgbWFuYWdl
+        bWVudCBmdW5jdGlvbmFsaXR5LiIsInVybCI6Imh0dHBzOi8vZ2l0aHViLmNv
+        bS90aGVmb3JlbWFuL2ZvcmVtYW5fcmVtb3RlX2V4ZWN1dGlvbiIsInZlcnNp
+        b24iOiIwLjMuMC4xMiJ9LHsiaWQiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0
+        ZSIsIm5hbWUiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0ZSIsImF1dGhvciI6
+        IkFsb24gR29sZGJvaW0sIFNoaW1vbiBTdGVpbiIsImRlc2NyaXB0aW9uIjoi
+        VGhpcyBpcyBhIHBsdWdpbiB0aGF0IGVuYWJsZXMgYnVpbGRpbmcgYSB0aGVt
+        ZSBmb3IgRm9yZW1hbi4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vYWxv
+        bmdvbGRib2ltL2ZvcmVtYW5fdGhlbWVfc2F0ZWxsaXRlIiwidmVyc2lvbiI6
+        IjAuMS4zMyJ9LHsiaWQiOiJrYXRlbGxvIiwibmFtZSI6ImthdGVsbG8iLCJh
+        dXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNvbnRlbnQgYW5kIFN1YnNj
+        cmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3IgRm9yZW1hbiIsInVybCI6
+        Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJzaW9uIjoiMy4wLjAuODIi
+        fSx7ImlkIjoicmVkaGF0X2FjY2VzcyIsIm5hbWUiOiJyZWRoYXRfYWNjZXNz
+        IiwiYXV0aG9yIjoiTGluZGFuaSBQaGlyaSIsImRlc2NyaXB0aW9uIjoiVGhp
+        cyBwbHVnaW4gYWRkcyBSZWQgSGF0IEFjY2VzcyBrbm93bGVkZ2UgYmFzZSBz
+        ZWFyY2gsIGNhc2UgbWFuYWdlbWVudCBhbmQgZGlhZ25vc3RpY3MgdG8gRm9y
+        ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
+        ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:16 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:18 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 15c97e23-7c10-473b-a063-2514280f49ac
+      X-Runtime:
+      - '0.041972'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=fa05227d1b327ec46230c9b9fd8ef6de; path=/; secure; HttpOnly
+      Etag:
+      - '"679e32140c09b4b1376234e361ab87b0-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '388'
       Content-Type:
       - application/json; charset=utf-8
     body:
@@ -20098,21 +20740,21 @@ http_interactions:
       string: |
         {
           "total": 2,
-          "subtotal": 2,
+          "subtotal": 1,
           "page": 1,
-          "per_page": 20,
-          "search": null,
+          "per_page": 999999,
+          "search": "name=\"Test Corporation\"",
           "sort": {
             "by": null,
             "order": null
           },
-          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-13 11:01:00 UTC","updated_at":"2016-12-13 11:49:06 UTC","last_compile":"2016-12-13 11:01:02 UTC","global_status":0,"global_status_label":"Warning","organization_id":8,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":5,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":5,"uuid":"a39750b1-252f-41d2-8f8d-646ecd711e02","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":5,"uuid":"a39750b1-252f-41d2-8f8d-646ecd711e02","last_checkin":"2016-12-13 11:01:00 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-13 11:01:01 UTC"},"content_host_id":5},{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testvm","image_id":null,"image_name":null,"created_at":"2016-12-13 10:58:55 UTC","updated_at":"2016-12-13 11:48:59 UTC","last_compile":"2016-12-13 10:58:57 UTC","global_status":0,"global_status_label":"Warning","organization_id":8,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testvm","id":4,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":4,"uuid":"05f67758-243c-440b-9349-776aafb933e1","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":4,"uuid":"05f67758-243c-440b-9349-776aafb933e1","last_checkin":"2016-12-13 10:58:55 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-13 10:58:56 UTC"},"content_host_id":4}]
+          "results": [{"label":"testcorp","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-13 14:47:54 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:18 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:16 GMT
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/api/hosts/5
+    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/activation_keys?per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -20135,7 +20777,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:21 GMT
+      - Tue, 13 Dec 2016 14:48:18 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20153,42 +20795,51 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 7a9ae29c-62df-423d-82dd-70c1527578a3
+      - 95c1aaa2-2a4d-4cc7-8fa4-0c67b820455d
       X-Runtime:
-      - '0.302962'
+      - '0.276983'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=69f029d2a4bba0edc8b166157ebc9a9b; path=/; secure; HttpOnly
+      - _session_id=310a96489b5f6e3026ea3bc7bc01056a; path=/; secure; HttpOnly
       Etag:
-      - '"ad5c0377fc0b2c053648e4100b6ef71c-gzip"'
+      - '"649302e2382c18de9889bbf387af0418-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '3850'
+      - '2325'
       Content-Type:
       - application/json; charset=utf-8
     body:
       encoding: ASCII-8BIT
-      string: '{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-13
-        11:01:00 UTC","updated_at":"2016-12-13 11:49:06 UTC","last_compile":"2016-12-13
-        11:01:02 UTC","global_status":0,"global_status_label":"Warning","organization_id":8,"organization_name":"Test
-        Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could
-        not calculate errata status, ensure host is registered and katello-agent is
-        installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":5,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":5,"uuid":"a39750b1-252f-41d2-8f8d-646ecd711e02","content_view_id":2,"content_view_name":"Default
-        Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default
-        Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0},"content_view_version":"1.0","content_view_version_id":2,"content_view_default?":true,"lifecycle_environment_library?":true,"katello_agent_installed":false},"subscription_facet_attributes":{"id":5,"uuid":"a39750b1-252f-41d2-8f8d-646ecd711e02","last_checkin":"2016-12-13
-        11:01:00 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-13
-        11:01:01 UTC","activation_keys":[],"compliance_reasons":[],"virtual_host":null,"virtual_guests":[],"installed_products":[{"id":"4028f99158f378890158f7d7ccd506f2","productId":"69","productName":"Red
-        Hat Enterprise Linux Server","version":"7Server","arch":"x86_64","status":"green","startDate":"2016-06-20T04:00:00.000+0000","endDate":"2017-06-20T03:59:59.000+0000","created":"2016-12-13T11:01:04.853+0000","updated":"2016-12-13T11:01:04.853+0000"}]},"content_host_id":5,"parameters":[],"interfaces":[{"id":5,"name":"testphysical","ip":null,"mac":null,"identifier":null,"primary":true,"provision":true,"type":"interface"}],"puppetclasses":[],"config_groups":[],"all_parameters":[],"all_puppetclasses":[],"facts":{"cpu::core(s)_per_socket":"1","cpu::cpu_socket(s)":"8","memory::memtotal":"4GB","uname::machine":"x86_64","distribution::name":"RHEL","distribution::version":"7Server","virt::is_guest":"true","virt::uuid":"Test
-        Corporation/testphysical","system::certificate_version":"3.2","network::hostname":"testphysical","cpu::cpu(s)":"1","system":null,"network":null,"cpu":null,"memory":null,"uname":null,"distribution":null,"virt":null,"_timestamp":"2016-12-13T11:01:02+00:00"},"host_collections":[],"permissions":{"view_hosts":true,"create_hosts":true,"edit_hosts":true,"destroy_hosts":true,"build_hosts":true,"power_hosts":true,"console_hosts":true,"ipmi_boot":true,"puppetrun_hosts":true,"view_discovered_hosts":true,"submit_discovered_hosts":true,"auto_provision_discovered_hosts":true,"provision_discovered_hosts":true,"edit_discovered_hosts":true,"destroy_discovered_hosts":true}}'
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":3,"name":"testakeyitemized","description":null,"unlimited_hosts":true,"auto_attach":true,"content_view_id":2,"environment_id":null,"usage_count":0,"user_id":3,"max_hosts":null,"release_version":null,"service_level":null,"content_overrides":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 11:00:46
+        UTC","updated_at":"2016-12-13 11:00:46 UTC","content_view":{"id":2,"name":"Default
+        Organization View"},"environment":null,"products":[{"id":42,"name":"Oracle
+        Java for RHEL Server"},{"id":49,"name":"Red Hat Developer Toolset for RHEL
+        Server"},{"id":47,"name":"Red Hat Software Collections Beta for RHEL Server"},{"id":45,"name":"Red
+        Hat Enterprise Linux Server"},{"id":39,"name":"Red Hat Beta"},{"id":41,"name":"Red
+        Hat Software Collections for RHEL Server"},{"id":46,"name":"dotNET on RHEL
+        for RHEL Server"},{"id":43,"name":"Red Hat Enterprise Linux Atomic Host Beta"},{"id":48,"name":"Red
+        Hat Enterprise Linux Atomic Host"}],"host_collections":[],"permissions":{"view_activation_keys":true,"edit_activation_keys":true,"destroy_activation_keys":true}},{"id":2,"name":"testakey","description":null,"unlimited_hosts":true,"auto_attach":true,"content_view_id":2,"environment_id":null,"usage_count":0,"user_id":3,"max_hosts":null,"release_version":null,"service_level":null,"content_overrides":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 10:58:53
+        UTC","updated_at":"2016-12-13 10:58:54 UTC","content_view":{"id":2,"name":"Default
+        Organization View"},"environment":null,"products":[{"id":42,"name":"Oracle
+        Java for RHEL Server"},{"id":49,"name":"Red Hat Developer Toolset for RHEL
+        Server"},{"id":47,"name":"Red Hat Software Collections Beta for RHEL Server"},{"id":45,"name":"Red
+        Hat Enterprise Linux Server"},{"id":39,"name":"Red Hat Beta"},{"id":41,"name":"Red
+        Hat Software Collections for RHEL Server"},{"id":46,"name":"dotNET on RHEL
+        for RHEL Server"},{"id":43,"name":"Red Hat Enterprise Linux Atomic Host Beta"},{"id":48,"name":"Red
+        Hat Enterprise Linux Atomic Host"}],"host_collections":[],"permissions":{"view_activation_keys":true,"edit_activation_keys":true,"destroy_activation_keys":true}}]}
+
+'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:19 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:16 GMT
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/api/hosts/4
+    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/content_views?per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -20211,7 +20862,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:21 GMT
+      - Tue, 13 Dec 2016 14:48:19 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20229,42 +20880,122 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1fb58a8b-fc87-47f1-9338-9186d8c2384a
+      - 41f87f16-d7f8-47a6-8fba-0f301e7ea6a0
       X-Runtime:
-      - '0.288398'
+      - '0.059333'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=0b3ba8b327e26c33e197c5bb171eb647; path=/; secure; HttpOnly
+      - _session_id=491172272577f6e64180486fa12b0f21; path=/; secure; HttpOnly
       Etag:
-      - '"6450bb45f7cdc8ae0fdc6a0fb74f6bd7-gzip"'
+      - '"24d3d45f9a0cda80146879509dfd209e-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '3820'
+      - '1804'
       Content-Type:
       - application/json; charset=utf-8
     body:
       encoding: ASCII-8BIT
-      string: '{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testvm","image_id":null,"image_name":null,"created_at":"2016-12-13
-        10:58:55 UTC","updated_at":"2016-12-13 11:48:59 UTC","last_compile":"2016-12-13
-        10:58:57 UTC","global_status":0,"global_status_label":"Warning","organization_id":8,"organization_name":"Test
-        Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could
-        not calculate errata status, ensure host is registered and katello-agent is
-        installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testvm","id":4,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":4,"uuid":"05f67758-243c-440b-9349-776aafb933e1","content_view_id":2,"content_view_name":"Default
-        Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default
-        Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0},"content_view_version":"1.0","content_view_version_id":2,"content_view_default?":true,"lifecycle_environment_library?":true,"katello_agent_installed":false},"subscription_facet_attributes":{"id":4,"uuid":"05f67758-243c-440b-9349-776aafb933e1","last_checkin":"2016-12-13
-        10:58:55 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-13
-        10:58:56 UTC","activation_keys":[],"compliance_reasons":[],"virtual_host":null,"virtual_guests":[],"installed_products":[{"id":"4028f99158f378890158f7d7a08106d8","productId":"69","productName":"Red
-        Hat Enterprise Linux Server","version":"7Server","arch":"x86_64","status":"green","startDate":"2016-06-20T04:00:00.000+0000","endDate":"2017-06-20T03:59:59.000+0000","created":"2016-12-13T11:00:53.505+0000","updated":"2016-12-13T11:00:53.505+0000"}]},"content_host_id":4,"parameters":[],"interfaces":[{"id":4,"name":"testvm","ip":null,"mac":null,"identifier":null,"primary":true,"provision":true,"type":"interface"}],"puppetclasses":[],"config_groups":[],"all_parameters":[],"all_puppetclasses":[],"facts":{"system::certificate_version":"3.2","network::hostname":"testvm","cpu::core(s)_per_socket":"1","cpu::cpu_socket(s)":"4","memory::memtotal":"4GB","uname::machine":"x86_64","distribution::name":"RHEL","distribution::version":"7Server","virt::is_guest":"true","virt::uuid":"Test
-        Corporation/testvm","cpu::cpu(s)":"1","system":null,"network":null,"cpu":null,"memory":null,"uname":null,"distribution":null,"virt":null,"_timestamp":"2016-12-13T10:58:57+00:00"},"host_collections":[],"permissions":{"view_hosts":true,"create_hosts":true,"edit_hosts":true,"destroy_hosts":true,"build_hosts":true,"power_hosts":true,"console_hosts":true,"ipmi_boot":true,"puppetrun_hosts":true,"view_discovered_hosts":true,"submit_discovered_hosts":true,"auto_provision_discovered_hosts":true,"provision_discovered_hosts":true,"edit_discovered_hosts":true,"destroy_discovered_hosts":true}}'
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"component_ids":[],"default":false,"next_version":2,"id":3,"name":"Test
+        Puppet Modules","label":"Test_Puppet_Modules","description":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 10:58:58
+        UTC","updated_at":"2016-12-13 10:58:59 UTC","environments":[{"id":2,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":3,"version":"1.0","published":"2016-12-13
+        10:58:59 UTC","environment_ids":[2]}],"components":[],"activation_keys":[],"last_published":"2016-12-13
+        10:58:59 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}},{"composite":false,"repository_ids":[],"component_ids":[],"default":true,"next_version":1,"id":2,"name":"Default
+        Organization View","label":"e1fa1d00-5399-4ce9-9219-1b9433e76baa","description":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 10:58:26
+        UTC","updated_at":"2016-12-13 10:58:26 UTC","environments":[{"id":2,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":2,"version":"1.0","published":"2016-12-13
+        10:58:26 UTC","environment_ids":[2]}],"components":[],"activation_keys":[{"id":2,"name":"testakey"},{"id":3,"name":"testakeyitemized"}],"last_published":"2016-12-13
+        10:58:26 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
+
+'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:19 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:16 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":8,"name":"testakeyitemized","environment_id":null,"content_view_id":2,"description":null,"unlimited_content_hosts":false,"max_content_hosts":0,"service_level":null,"release_version":null}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '206'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:19 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d9072eeb-b5bd-49cd-8068-aeec1e77db01
+      X-Runtime:
+      - '0.444196'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=ee881405a563df15ed6b6ef36bd61eb1; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"f9ae009d00589f64e2a46d3c6f693d92-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1106'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"id":3,"name":"testakeyitemized","description":null,"unlimited_hosts":true,"auto_attach":true,"content_view_id":2,"environment_id":null,"usage_count":0,"user_id":3,"max_hosts":null,"release_version":null,"service_level":null,"content_overrides":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 11:00:46
+        UTC","updated_at":"2016-12-13 11:00:46 UTC","content_view":{"id":2,"name":"Default
+        Organization View"},"environment":null,"products":[{"id":42,"name":"Oracle
+        Java for RHEL Server"},{"id":49,"name":"Red Hat Developer Toolset for RHEL
+        Server"},{"id":47,"name":"Red Hat Software Collections Beta for RHEL Server"},{"id":45,"name":"Red
+        Hat Enterprise Linux Server"},{"id":39,"name":"Red Hat Beta"},{"id":41,"name":"Red
+        Hat Software Collections for RHEL Server"},{"id":46,"name":"dotNET on RHEL
+        for RHEL Server"},{"id":43,"name":"Red Hat Enterprise Linux Atomic Host Beta"},{"id":48,"name":"Red
+        Hat Enterprise Linux Atomic Host"}],"host_collections":[],"permissions":{"view_activation_keys":true,"edit_activation_keys":true,"destroy_activation_keys":true}}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:17 GMT
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/api/hosts/5/subscriptions?organization_id=8
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/subscriptions?organization_id=8&per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -20287,7 +21018,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:22 GMT
+      - Tue, 13 Dec 2016 14:48:19 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20305,35 +21036,333 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 06445154-cd74-4958-be9b-fe5b91aadf05
+      - 20be8d29-452b-4821-8524-de131cd71117
       X-Runtime:
-      - '0.231670'
+      - '0.379715'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=530e31d396365336c2c3d4162d736105; path=/; secure; HttpOnly
+      - _session_id=4e69a6a678799bc2f0c948308cc3f009; path=/; secure; HttpOnly
       Etag:
-      - '"08063d363b63add4fe3c07b6a2f5ee13-gzip"'
+      - '"d6d449bc76c64670e2eb5c6c812b0f80-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '770'
+      - '769'
       Content-Type:
       - application/json; charset=utf-8
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":1,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"quantity_consumed":1,"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
+      string: '{"organization":{},"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"quantity_attached":1,"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:17 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/remove_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"id":33,"quantity":null}]}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '45'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:20 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f57e6491-ce11-405b-86d9-a22db5eedaae
+      X-Runtime:
+      - '0.141169'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=107d3cb53cc8dfbf317b2c7cb9064c73; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"28f980ca6d7d7d8bdbe90747a65a208f-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '119'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":0,"subtotal":0,"page":1,"per_page":0,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:17 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/subscriptions?available_for=activation_key&full_results=true&organization_id=8
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:20 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1b8a52c7-a52b-48bf-b24f-cd1d6df003c3
+      X-Runtime:
+      - '0.641633'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=bae9596b724ad3259635d19fefe417f5; path=/; secure; HttpOnly
+      Etag:
+      - '"57cf86cba08d9b2f2f5d3aeb7b1f4351-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '2047'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"organization":{},"total":3,"subtotal":3,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"quantity_attached":null,"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"quantity_attached":null,"id":35,"cp_id":"4028f99158f378890158f7d6851404f2","subscription_id":20,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999116,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false},{"quantity_attached":null,"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
         Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":198,"quantity":200,"consumed":2,"account_number":5700573,"contract_number":10999113,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
         Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}
 
 '
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:19 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:18 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/add_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"quantity_attached":null,"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":198,"quantity":-1,"consumed":2,"account_number":5700573,"contract_number":10999113,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '673'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:21 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - cd6f345f-1090-480f-8eba-6ad92782f913
+      X-Runtime:
+      - '0.308001'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=c94b272e4293816c011fcdd09b49250f; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"b06f9b87778777fcf0baf51a31dc19fc-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '748'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":1,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":198,"quantity":200,"consumed":2,"account_number":5700573,"contract_number":10999113,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:18 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":8,"name":"testakeyitemized","environment_id":null,"content_view_id":2,"description":null,"unlimited_content_hosts":false,"max_content_hosts":0,"service_level":null,"release_version":null}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '206'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:21 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 8c10ab76-8a2c-4653-9fd9-5fe3eeb2c915
+      X-Runtime:
+      - '0.410644'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=b4d91e4b9eddf80fd59aae7d1937e82f; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"4fdb666bc1aa7efbfa2d09db4f79a576-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1254'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"id":3,"name":"testakeyitemized","description":null,"unlimited_hosts":true,"auto_attach":true,"content_view_id":2,"environment_id":null,"usage_count":0,"user_id":3,"max_hosts":null,"release_version":null,"service_level":null,"content_overrides":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":8},"created_at":"2016-12-13 11:00:46
+        UTC","updated_at":"2016-12-13 11:00:46 UTC","content_view":{"id":2,"name":"Default
+        Organization View"},"environment":null,"products":[{"id":43,"name":"Red Hat
+        Enterprise Linux Atomic Host Beta"},{"id":42,"name":"Oracle Java for RHEL
+        Server"},{"id":49,"name":"Red Hat Developer Toolset for RHEL Server"},{"id":47,"name":"Red
+        Hat Software Collections Beta for RHEL Server"},{"id":44,"name":"Red Hat Container
+        Images"},{"id":38,"name":"Red Hat Container Images Beta"},{"id":45,"name":"Red
+        Hat Enterprise Linux Server"},{"id":48,"name":"Red Hat Enterprise Linux Atomic
+        Host"},{"id":39,"name":"Red Hat Beta"},{"id":40,"name":"dotNET on RHEL Beta
+        for RHEL Server"},{"id":41,"name":"Red Hat Software Collections for RHEL Server"},{"id":46,"name":"dotNET
+        on RHEL for RHEL Server"}],"host_collections":[],"permissions":{"view_activation_keys":true,"edit_activation_keys":true,"destroy_activation_keys":true}}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:19 GMT
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/api/hosts/4/subscriptions?organization_id=8
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/subscriptions?organization_id=8&per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -20356,7 +21385,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:22 GMT
+      - Tue, 13 Dec 2016 14:48:21 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20374,30 +21403,247 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 89decf7a-edbd-494d-b3b6-b141f7757649
+      - a266a851-2ede-4d53-83a3-6d5c0fc22b60
       X-Runtime:
-      - '0.227273'
+      - '0.351952'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=92d98d9518c71bd83c1ab83944b9a05d; path=/; secure; HttpOnly
+      - _session_id=078d369f4f48552374bdf91cc4c62734; path=/; secure; HttpOnly
       Etag:
-      - '"08063d363b63add4fe3c07b6a2f5ee13-gzip"'
+      - '"10718816b5254ed055feffc70bc18973-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '770'
+      - '795'
       Content-Type:
       - application/json; charset=utf-8
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":1,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"quantity_consumed":1,"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
+      string: '{"organization":{},"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"quantity_attached":0,"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
         Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":198,"quantity":200,"consumed":2,"account_number":5700573,"contract_number":10999113,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
         Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}
 
 '
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:20 GMT
+  recorded_at: Tue, 13 Dec 2016 14:48:19 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/remove_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"id":37,"quantity":null}]}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '45'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:22 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - de024ab9-8022-4a54-b576-d015dedab425
+      X-Runtime:
+      - '0.148583'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=3c6996f05d872f7ff3adbd860481cace; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"28f980ca6d7d7d8bdbe90747a65a208f-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '119'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":0,"subtotal":0,"page":1,"per_page":0,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:19 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/subscriptions?available_for=activation_key&full_results=true&organization_id=8
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:22 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 59abfe88-c6f2-4140-b58c-d9b022b2c5b3
+      X-Runtime:
+      - '0.751784'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=b5538cc3666122dc3303f16a8acbc836; path=/; secure; HttpOnly
+      Etag:
+      - '"57cf86cba08d9b2f2f5d3aeb7b1f4351-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '2047'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"organization":{},"total":3,"subtotal":3,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"quantity_attached":null,"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false},{"quantity_attached":null,"id":35,"cp_id":"4028f99158f378890158f7d6851404f2","subscription_id":20,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999116,"support_level":"Premium","product_id":"RH00001","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Premium","unmapped_guest":false,"virt_only":false},{"quantity_attached":null,"id":37,"cp_id":"4028f99158f378890158f7d685490550","subscription_id":21,"name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":198,"quantity":200,"consumed":2,"account_number":5700573,"contract_number":10999113,"support_level":"Standard","product_id":"RH00004","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)","unmapped_guest":false,"virt_only":false}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:20 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@satlap.example.com/katello/api/activation_keys/3/add_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"quantity_attached":null,"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":"1","consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false}]}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '650'
+      Host:
+      - satlap.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 13 Dec 2016 14:48:23 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 4d03d9c6-0ec0-478b-9efd-ea940d2395d0
+      X-Runtime:
+      - '0.281574'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=9c588ea0e1a72f3eabb02eeed973a3cb; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Etag:
+      - '"18ca9f4064c41f6739477c579a98b026-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '722'
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":1,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":33,"cp_id":"4028f99158f378890158f7d684cc04a0","subscription_id":19,"name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","start_date":"2016-06-20T04:00:00.000+0000","end_date":"2017-06-20T03:59:59.000+0000","available":1,"quantity":1,"consumed":0,"account_number":5700573,"contract_number":10999110,"support_level":"Standard","product_id":"RH00002","sockets":2,"cores":null,"ram":null,"instance_multiplier":1,"stacking_id":0,"multi_entitlement":true,"type":"NORMAL","product_name":"Red
+        Hat Enterprise Linux for Virtual Datacenters, Standard","unmapped_guest":false,"virt_only":false}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 14:48:20 GMT
 recorded_with: VCR 3.0.3

@@ -32,18 +32,20 @@ HELP
       start_vcr
       set_user 'admin'
 
-      @name = "testakey2"
+      name = "testakey1"
 
       file = Tempfile.new('activation_keys_test')
-      file.write("Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscriptions\n")
-      file.write("#{@name},Test Corporation,,,,Default Organization View,"",No,,,\n")
+      file.write <<-EOF
+Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscriptions
+#{name},Test Corporation,,,,Default Organization View,"",No,,,
+EOF
       file.rewind
 
       stdout,stderr = capture {
         hammer.run(%W{--reload-cache csv activation-keys --verbose --file #{file.path}})
       }
       assert_equal '', stderr
-      assert_equal stdout[0..-2], "Creating activation key '#{@name}'...done"
+      assert_equal stdout[0..-2], "Creating activation key '#{name}'...done"
 
       file.rewind
 
@@ -51,49 +53,30 @@ HELP
         hammer.run(%W{--reload-cache csv activation-keys --verbose --file #{file.path}})
       }
       assert_equal '', stderr
-      assert_equal stdout[0..-2], "Updating activation key '#{@name}'...done"
+      assert_equal stdout[0..-2], "Updating activation key '#{name}'...done"
       file.unlink
 
-      stdout,stderr = capture {
-        hammer.run(%W(--reload-cache activation-key list --organization Test\ Corporation --search name=#{@name}))
-      }
-      assert_equal '', stderr
-      assert_equal stdout.split("\n").length, 5
-
-      id = stdout.split("\n")[3].split(" ")[0]
-      stdout,stderr = capture {
-        hammer.run(%W(--reload-cache activation-key delete --id #{id}))
-      }
-
-      # Cleanup for subsequent test runs
-      capture {
-        hammer.run(%W{activation-key delete --organization-label testcorp --name #{@name}})
-      }
+      activation_key_delete(name)
 
       stop_vcr
     end
 
     def test_itemized_create_and_update
       start_vcr
-      _stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv activation-keys --verbose --file test/data/setup/activation-keys.csv})
-      }
-      assert_equal '', stderr
-
       set_user 'admin'
 
-      name = "testakey1"
+      name = "testakey2"
       sub_name = "Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"
       quantity = 1
+      activation_key_create(name)
 
       file = Tempfile.new('activation_keys_test')
-      file.write("Name,Organization,Description,Limit,Environment,Content View,Host\
-                  Collections,Auto-Attach,Service Level,Release Version,Subscription\
-                  Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
-                  Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,#{quantity},RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
-
+      # rubocop:disable LineLength
+      file.write <<-EOF
+Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscription Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription Contract,Subscription Account,Subscription Start,Subscription End
+#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red Hat,#{quantity},RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000
+EOF
+      # rubocop:enable LineLength
       file.rewind
 
       # Attaching an integer quantity of a subscription
@@ -112,75 +95,96 @@ HELP
       assert_equal '', stderr
       assert_equal stdout[0..-2], "Updating subscriptions for activation key '#{name}'... '#{sub_name}' already attached...done"
 
-      # Attaching automatic quantity with Automatic in quantity field
-      stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv activation-keys --verbose --file test/data/setup/activation-keys.csv})
-      }
-
-      file.rewind
-
-      file.write("Name,Organization,Description,Limit,Environment,Content View,Host\
-                  Collections,Auto-Attach,Service Level,Release Version,Subscription\
-                  Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
-                  Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,Automatic,RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
-
-      file.rewind
-
-      stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv activation-keys --verbose --itemized-subscriptions --file #{file.path}})
-      }
-      assert_equal '', stderr
-      assert_equal stdout[0..-2], "Updating subscriptions for activation key '#{name}'... attaching -1 of '#{sub_name}'...done"
-
-      # Attaching automatic quantity with nothing in quantity field
-      stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv activation-keys --verbose --file test/data/setup/activation-keys.csv})
-      }
-
-      file.rewind
-
-      file.write("Name,Organization,Description,Limit,Environment,Content View,Host\
-                  Collections,Auto-Attach,Service Level,Release Version,Subscription\
-                  Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
-                  Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,,RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
-
-      file.rewind
-
-      stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv activation-keys --verbose --itemized-subscriptions --file #{file.path}})
-      }
-      assert_equal '', stderr
-      assert_equal stdout[0..-2], "Updating subscriptions for activation key '#{name}'... attaching -1 of '#{sub_name}'...done"
-
-      # Attaching automatic quantity with "" in quantity field
-      stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv activation-keys --verbose --file test/data/setup/activation-keys.csv})
-      }
-
-      file.rewind
-
-      file.write("Name,Organization,Description,Limit,Environment,Content View,Host\
-                  Collections,Auto-Attach,Service Level,Release Version,Subscription\
-                  Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription\
-                  Contract,Subscription Account,Subscription Start,Subscription End\n")
-      file.write("#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red\
-                  Hat,\"\",RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000")
-
-      file.rewind
-
-      stdout,stderr = capture {
-        hammer.run(%W{--reload-cache csv activation-keys --verbose --itemized-subscriptions --file #{file.path}})
-      }
-      assert_equal '', stderr
-      assert_equal stdout[0..-2], "Updating subscriptions for activation key '#{name}'... attaching -1 of '#{sub_name}'...done"
-
-      file.unlink
+      activation_key_delete(name)
 
       stop_vcr
+    end
+
+    def test_itemized_update_automatic_quantity
+      start_vcr
+      set_user 'admin'
+
+      name = "testakey3"
+      sub_name = "Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"
+      quantity = "Automatic"
+      activation_key_create(name)
+
+      file = Tempfile.new('activation_keys_test')
+      # rubocop:disable LineLength
+      file.write <<-EOF
+Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscription Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription Contract,Subscription Account,Subscription Start,Subscription End
+#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red Hat,#{quantity},RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000
+EOF
+      # rubocop:enable LineLength
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv activation-keys --verbose --itemized-subscriptions --file #{file.path}})
+      }
+      assert_equal '', stderr
+      assert_equal stdout[0..-2], "Updating subscriptions for activation key '#{name}'... attaching -1 of '#{sub_name}'...done"
+
+      activation_key_delete(name)
+
+      stop_vcr
+    end
+
+    def test_itemized_update_blank_quantity
+      start_vcr
+      set_user 'admin'
+
+      name = "testakey4"
+      sub_name = "Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"
+      quantity = ""
+      activation_key_create(name)
+
+      file = Tempfile.new('activation_keys_test')
+      # rubocop:disable LineLength
+      file.write <<-EOF
+Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscription Name,Subscription Type,Subscription Quantity,Subscription SKU,Subscription Contract,Subscription Account,Subscription Start,Subscription End
+#{name},Test Corporation,,,,Default Organization View,\"\",Yes,,,\"#{sub_name}\",Red Hat,#{quantity},RH00004,,1583473,2016-11-10T05:00:00.000+0000,2017-11-10T04:59:59.000+0000
+EOF
+      # rubocop:enable LineLength
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv activation-keys --verbose --itemized-subscriptions --file #{file.path}})
+      }
+      assert_equal '', stderr
+      assert_equal stdout[0..-2], "Updating subscriptions for activation key '#{name}'... attaching -1 of '#{sub_name}'...done"
+
+      activation_key_delete(name)
+
+      stop_vcr
+    end
+
+    def activation_key_create(name)
+      file = Tempfile.new('activation_keys_test')
+      # rubocop:disable LineLength
+      file.write <<-EOF
+Name,Organization,Description,Limit,Environment,Content View,Host Collections,Auto-Attach,Service Level,Release Version,Subscriptions
+#{name},Test Corporation,,,,Default Organization View,"",Yes,,,
+EOF
+      # rubocop:enable LineLength
+      file.rewind
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv activation-keys --verbose --file #{file.path}})
+      }
+      assert_equal '', stderr
+      assert_equal stdout[0..-2], "Creating activation key '#{name}'...done"
+    end
+
+    def activation_key_delete(name)
+      stdout,stderr = capture {
+        hammer.run(%W(activation-key list --organization Test\ Corporation --search name=#{name}))
+      }
+      lines = stdout.split("\n")
+      if lines.length == 5
+        id = lines[3].split(" ")[0]
+        stdout,stderr = capture {
+          hammer.run(%W(activation-key delete --organization Test\ Corporation --id #{id}))
+        }
+      end
     end
   end
 end

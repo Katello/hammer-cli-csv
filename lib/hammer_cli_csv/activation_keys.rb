@@ -34,7 +34,8 @@ module HammerCLICsv
         csv << shared_headers + [Utils::Subscriptions::SUBS_NAME, Utils::Subscriptions::SUBS_TYPE,
                                  Utils::Subscriptions::SUBS_QUANTITY, Utils::Subscriptions::SUBS_SKU,
                                  Utils::Subscriptions::SUBS_CONTRACT, Utils::Subscriptions::SUBS_ACCOUNT,
-                                 Utils::Subscriptions::SUBS_START, Utils::Subscriptions::SUBS_END]
+                                 Utils::Subscriptions::SUBS_START, Utils::Subscriptions::SUBS_END,
+                                 Utils::Subscriptions::SUBS_GUESTOF]
         iterate_activationkeys(csv) do |activationkey|
           columns = shared_columns(activationkey)
           @api.resource(:subscriptions).call(:index, {
@@ -42,14 +43,16 @@ module HammerCLICsv
               'activation_key_id' => activationkey['id']
           })['results'].collect do |subscription|
             subscription_type = subscription['product_id'].to_i == 0 ? 'Red Hat' : 'Custom'
-            subscription_type += ' Guest' if subscription['type'] == 'STACK_DERIVED'
+            hypervisor = subscription['host']['name'] if subscription['host']
+            subscription_type += ' Guest' unless hypervisor.nil?
             subscription_type += ' Temporary' if subscription['type'] == 'UNMAPPED_GUEST'
             amount = (subscription['quantity_attached'].nil? || subscription['quantity_attached'] < 1) ? 'Automatic' : subscription['quantity_attached']
             csv << columns +
               [subscription['product_name'], subscription_type, amount,
                subscription['product_id'], subscription['contract_number'], subscription['account_number'],
                DateTime.parse(subscription['start_date']),
-               DateTime.parse(subscription['end_date'])]
+               DateTime.parse(subscription['end_date']),
+               hypervisor]
           end
         end
       end
@@ -191,42 +194,25 @@ module HammerCLICsv
       end
 
       def single_subscription(activationkey, existing_subscriptions, line)
-        already_attached = false
-        if line[Utils::Subscriptions::SUBS_SKU]
-          already_attached = existing_subscriptions.detect do |subscription|
-            line[Utils::Subscriptions::SUBS_SKU] == subscription['product_id']
-          end
-        elsif line[Utils::Subscriptions::SUBS_NAME]
-          already_attached = existing_subscriptions.detect do |subscription|
-            line[Utils::Subscriptions::SUBS_NAME] == subscription['name']
-          end
-        end
-        if already_attached
-          print _(" '%{name}' already attached...") % {:name => already_attached['name']}
+        matches = matches_by_sku_and_name([], line[SUBS_SKU], line[SUBS_NAME], existing_subscriptions)
+        matches = matches_by_hypervisor(matches, line[SUBS_GUESTOF])
+        unless matches.empty?
+          print _(" '%{name}' already attached...") % {:name => subscription_name(matches[0])} if option_verbose?
           return
         end
 
-        available_subscriptions = @api.resource(:subscriptions).call(:index, {
-                                                                       'organization_id' => activationkey['organization']['id'],
-                                                                       'activation_key_id' => activationkey['id'],
-                                                                       'available_for' => 'activation_key'
-                                                                     })['results']
-
-        matches = matches_by_sku_and_name([], line, available_subscriptions)
-        matches = matches_by_type(matches, line)
-        matches = matches_by_account(matches, line)
-        matches = matches_by_contract(matches, line)
-        matches = matches_by_quantity(matches, line)
+        matches = get_matching_subscriptions(activationkey['organization']['id'],
+            :activation_key => activationkey, :sku => line[SUBS_SKU], :name => line[SUBS_NAME],
+            :type => line[SUBS_TYPE], :account => line[SUBS_ACCOUNT],
+            :contract => line[SUBS_CONTRACT], :hypervisor => hypervisor_from_line(line))
 
         raise _("No matching subscriptions") if matches.empty?
-
         match = matches[0]
-
-        match = match_with_quantity_to_attach(match, line)
+        match = match_with_quantity_to_attach(match, line[SUBS_QUANTITY])
 
         if option_verbose?
           print _(" attaching %{quantity} of '%{name}'...") % {
-            :name => match['name'], :quantity => match['quantity']
+            :name => subscription_name(match), :quantity => match['quantity']
           }
         end
 
@@ -239,10 +225,18 @@ module HammerCLICsv
       def all_in_one_subscription(activationkey, existing_subscriptions, line)
         return if line[SUBSCRIPTIONS].nil? || line[SUBSCRIPTIONS].empty?
 
+        organization_id = foreman_organization(:name => line[ORGANIZATION])
+        hypervisor = hypervisor_from_line(line)
+
         subscriptions = CSV.parse_line(line[SUBSCRIPTIONS], {:skip_blanks => true}).collect do |details|
           (amount, sku, name, contract, account) = split_subscription_details(details)
+          matches = get_matching_subscriptions(organization_id,
+              :name => name, :contract => contract, :account => account, :quantity => amount,
+              :hypervisor => hypervisor)
+          raise _("No matching subscriptions") if matches.empty?
+
           {
-            :id => get_subscription(line[ORGANIZATION], :name => name),
+            :id => matches[0]['id'],
             :quantity => (amount.nil? || amount == 'Automatic') ? 0 : amount.to_i
           }
         end
@@ -287,6 +281,11 @@ module HammerCLICsv
             @existing[line[ORGANIZATION]][activationkey['name']] = activationkey['id'] if activationkey
           end
         end
+      end
+
+      def hypervisor_from_line(line)
+        hypervisor = line[SUBS_GUESTOF] if !line[SUBS_GUESTOF].nil? && !line[SUBS_GUESTOF].empty?
+        hypervisor
       end
     end
   end

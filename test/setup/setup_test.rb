@@ -8,5 +8,6 @@ module Setup
   require './test/setup/setup_lifecycle_environments'
   require './test/setup/setup_content_views'
   require './test/setup/setup_content_hosts'
+  require './test/setup/setup_activation_keys'
   require './test/setup/setup_domains'
 end

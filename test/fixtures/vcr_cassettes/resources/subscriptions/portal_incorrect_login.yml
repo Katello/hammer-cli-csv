@@ -2,511 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 21:55:55 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"8073ded3-ca48-4fa3-9910-b17295e58956"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 17:55:55 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 21:59:59 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"7485d021-1ec6-41ac-9d1f-3c1ef7b42c96"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 17:59:59 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 22:03:27 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"acdd8c08-fe49-435b-9cee-b759179a3a2d"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 18:03:27 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 22:08:36 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"b12043cb-38ad-48d4-95c4-607bab507664"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 18:08:36 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 22:13:39 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"a889dac1-260e-402f-9fb8-c71699558088"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 18:13:39 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 22:18:03 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"a31980db-2444-4deb-8f2c-94c001fd193d"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 18:18:03 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 22:21:44 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"af692e53-e31c-451a-8c09-bf65bc17bc9d"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 18:21:44 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Mon, 21 Nov 2016 22:25:38 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"63439645-dc0e-435a-ab6a-3e9816599c3e"}'
-    http_version: 
-  recorded_at: Mon, 21 Nov 2016 18:25:39 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Tue, 22 Nov 2016 14:19:21 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"fb05f3d9-ac3f-4eb8-816a-594d0d440fb3"}'
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:19:22 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Tue, 22 Nov 2016 14:25:08 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"726d8022-b504-4ca1-978d-0d40e8634013"}'
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:25:08 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Tue, 22 Nov 2016 14:29:21 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"8303d41e-70d5-4025-9e9a-c13eba5ed8df"}'
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:29:21 GMT
-- request:
-    method: get
-    uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
-      Accept-Language:
-      - en
-      Content-Type:
-      - application/json
-      Host:
-      - subscription.rhn.redhat.com
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Server:
-      - Apache-Coyote/1.1
-      X-Version:
-      - 0.9.51.20-1
-      Www-Authenticate:
-      - Basic Realm=candlepin
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Tue, 22 Nov 2016 14:34:58 GMT
-    body:
-      encoding: UTF-8
-      string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"16a86bff-863e-4577-8fa5-90b587af7bc0"}'
-    http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:34:58 GMT
-- request:
-    method: get
-    uri: http://admin:changeme@centos7-devel.example.com:3000/api/status
+    uri: https://admin:changeme@satlap.example.com/api/status
     body:
       encoding: US-ASCII
       string: ''
@@ -517,53 +13,55 @@ http_interactions:
       - "*/*"
       User-Agent:
       - Ruby
+      Host:
+      - satlap.example.com
   response:
     status:
       code: 200
       message: OK
     headers:
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 974492cde78991fdc7ad9dfcc73ff358
-      Etag:
-      - W/"1316c9d778b9181476af8a9546423fb1"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=2602bc16fd2da9fdd989519068c2f84e; path=/; HttpOnly
-      X-Request-Id:
-      - eb3b2549-b659-46d9-8bf1-3f83198fb9cb
-      X-Runtime:
-      - '0.183345'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
+      Date:
+      - Tue, 13 Dec 2016 14:47:55 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
+      - SAMEORIGIN
       X-Xss-Protection:
       - 1; mode=block
-      Transfer-Encoding:
-      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e8b7a8a9-50a9-4f6a-bbeb-bf28f5c4be78
+      X-Runtime:
+      - '0.038845'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=0d158eda23f58a87086f8f5ef311232c; path=/; secure; HttpOnly
+      Etag:
+      - '"8e3341d0a4cc328651f7391aed11fef8"'
+      Status:
+      - 200 OK
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json; charset=utf-8
     body:
       encoding: UTF-8
-      string: '{"result":"ok","status":200,"version":"1.14.0-develop","api_version":2}'
+      string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:26 GMT
+  recorded_at: Tue, 13 Dec 2016 14:47:53 GMT
 - request:
     method: get
-    uri: http://admin:changeme@centos7-devel.example.com:3000/api/v2/plugins
+    uri: https://admin:changeme@satlap.example.com/api/v2/plugins
     body:
       encoding: US-ASCII
       string: ''
@@ -574,75 +72,128 @@ http_interactions:
       - "*/*"
       User-Agent:
       - Ruby
+      Host:
+      - satlap.example.com
   response:
     status:
       code: 200
       message: OK
     headers:
-      Foreman-Version:
-      - 1.14.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 974492cde78991fdc7ad9dfcc73ff358
-      Etag:
-      - W/"732bd55e4dc33460e7a4d4e0d0d81834"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Set-Cookie:
-      - _session_id=eda01eebe34763bde53def4bc9562015; path=/; HttpOnly
-      X-Request-Id:
-      - a0e3eb35-7b16-4cee-a7de-6e15bc81b25b
-      X-Runtime:
-      - '1.149655'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
+      Date:
+      - Tue, 13 Dec 2016 14:47:55 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
+      - SAMEORIGIN
       X-Xss-Protection:
       - 1; mode=block
-      Transfer-Encoding:
-      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - fced82a6-3cc7-41a6-b541-cd38a5d5337f
+      X-Runtime:
+      - '0.032389'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Set-Cookie:
+      - _session_id=1557d7ba975cf5a2b6ee88f073af7f0c; path=/; secure; HttpOnly
+      Etag:
+      - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1338'
+      Content-Type:
+      - application/json; charset=utf-8
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        ewogICJ0b3RhbCI6IDMsCiAgInN1YnRvdGFsIjogMywKICAicGFnZSI6IDEs
-        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
-        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
-        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
-        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
-        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
-        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
-        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
-        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
-        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
-        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
-        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
-        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
-        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
-        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjguNSJ9LHsiaWQiOiJmb3JlbWFu
-        X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
-        bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
-        aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
-        IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
-        b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
-        ZCI6ImthdGVsbG8iLCJuYW1lIjoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIs
-        ImRlc2NyaXB0aW9uIjoiQ29udGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFn
-        ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
-        YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjMuMCJ9XQp9Cg==
+        ewogICJ0b3RhbCI6IDEwLAogICJzdWJ0b3RhbCI6IDEwLAogICJwYWdlIjog
+        MSwKICAicGVyX3BhZ2UiOiAyMCwKICAic2VhcmNoIjogbnVsbCwKICAic29y
+        dCI6IHsKICAgICJieSI6IG51bGwsCiAgICAib3JkZXIiOiBudWxsCiAgfSwK
+        ICAicmVzdWx0cyI6IFt7ImlkIjoiZm9yZW1hbi10YXNrcyIsIm5hbWUiOiJm
+        b3JlbWFuLXRhc2tzIiwiYXV0aG9yIjoiSXZhbiBOZcSNYXMiLCJkZXNjcmlw
+        dGlvbiI6IlRoZSBnb2FsIG9mIHRoaXMgcGx1Z2luIGlzIHRvIHVuaWZ5IHRo
+        ZSB3YXkgb2Ygc2hvd2luZyB0YXNrIHN0YXR1c2VzIGFjcm9zcyB0aGUgRm9y
+        ZW1hbiBpbnN0YW5jZS5cbkl0IGRlZmluZXMgVGFzayBtb2RlbCBmb3Iga2Vl
+        cGluZyB0aGUgaW5mb3JtYXRpb24gYWJvdXQgdGhlIHRhc2tzIGFuZCBMb2Nr
+        IGZvciBhc3NpZ25pbmcgdGhlIHRhc2tzXG50byByZXNvdXJjZXMuIFRoZSBs
+        b2NraW5nIGFsbG93cyBkZWFsaW5nIHdpdGggcHJldmVudGluZyBtdWx0aXBs
+        ZSBjb2xsaWRpbmcgdGFza3MgdG8gYmUgcnVuIG9uIHRoZVxuc2FtZSByZXNv
+        dXJjZS4gSXQgYWxzbyBvcHRpb25hbGx5IHByb3ZpZGVzIER5bmZsb3cgaW5m
+        cmFzdHJ1Y3R1cmUgZm9yIHVzaW5nIGl0IGZvciBtYW5hZ2luZyB0aGUgdGFz
+        a3MuXG4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vdGhlZm9yZW1hbi9m
+        b3JlbWFuLXRhc2tzIiwidmVyc2lvbiI6IjAuNy4xNC45In0seyJpZCI6ImZv
+        cmVtYW5fYm9vdGRpc2siLCJuYW1lIjoiZm9yZW1hbl9ib290ZGlzayIsImF1
+        dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJkZXNjcmlwdGlvbiI6IlBsdWdpbiBm
+        b3IgRm9yZW1hbiB0aGF0IGNyZWF0ZXMgaVBYRS1iYXNlZCBib290IGRpc2tz
+        IHRvIHByb3Zpc2lvbiBob3N0cyB3aXRob3V0IHRoZSBuZWVkIGZvciBQWEUg
+        aW5mcmFzdHJ1Y3R1cmUuIiwidXJsIjoiaHR0cDovL2dpdGh1Yi5jb20vdGhl
+        Zm9yZW1hbi9mb3JlbWFuX2Jvb3RkaXNrIiwidmVyc2lvbiI6IjYuMS4wLjMi
+        fSx7ImlkIjoiZm9yZW1hbl9kaXNjb3ZlcnkiLCJuYW1lIjoiZm9yZW1hbl9k
+        aXNjb3ZlcnkiLCJhdXRob3IiOiJBbW9zIEJlbmFyaSxCcnlhbiBLZWFybmV5
+        LENoYWlybWFuVHViZUFtcCxEYW5pZWwgTG9iYXRvIEdhcmPDrWEsRG9taW5p
+        YyBDbGVhbCxFcmljIEQuIEhlbG1zLEZyYW5rIFdhbGwsR3JlZyBTdXRjbGlm
+        ZmUsSW1yaSBadmlrLEpvc2VwaCBNaXRjaGVsbCBNYWdlbixMdWthcyBaYXBs
+        ZXRhbCxMdWvDocWhIFphcGxldGFsLE1hcmVrIEh1bGFuLE1hcnRpbiBCYcSN
+        b3Zza8O9LE1hdHQgSmFydmlzLE1pY2hhZWwgTW9sbCxOaWNrLE9oYWQgTGV2
+        eSxPcmkgUmFiaW4sUGV0ciBDaGFsdXBhLFBoaXJpbmNlIFBoaWxpcCxTY3Vi
+        YWZsb3lkLFNobG9taSBaYWRvayxTdGVwaGVuIEJlbmphbWluLFlhbm4gQ8Op
+        emFyZCIsImRlc2NyaXB0aW9uIjoiTWFhUyBEaXNjb3ZlcnkgUGx1Z2luIGVu
+        Z2luZSBmb3IgRm9yZW1hbiIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3Ro
+        ZWZvcmVtYW4vZm9yZW1hbl9kaXNjb3ZlcnkiLCJ2ZXJzaW9uIjoiNS4wLjAu
+        OSJ9LHsiaWQiOiJmb3JlbWFuX2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2Rv
+        Y2tlciIsImF1dGhvciI6IkRhbmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwi
+        ZGVzY3JpcHRpb24iOiJQcm92aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29u
+        dGFpbmVycyBhbmQgaW1hZ2VzIGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRw
+        Oi8vZ2l0aHViLmNvbS90aGVmb3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVy
+        c2lvbiI6IjIuMC4xLjExIn0seyJpZCI6ImZvcmVtYW5faG9va3MiLCJuYW1l
+        IjoiZm9yZW1hbl9ob29rcyIsImF1dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJk
+        ZXNjcmlwdGlvbiI6IlBsdWdpbiBlbmdpbmUgZm9yIEZvcmVtYW4gdGhhdCBl
+        bmFibGVzIHJ1bm5pbmcgY3VzdG9tIGhvb2sgc2NyaXB0cyBvbiBGb3JlbWFu
+        IGV2ZW50cyIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4v
+        Zm9yZW1hbl9ob29rcyIsInZlcnNpb24iOiIwLjMuMTEifSx7ImlkIjoiZm9y
+        ZW1hbl9vcGVuc2NhcCIsIm5hbWUiOiJmb3JlbWFuX29wZW5zY2FwIiwiYXV0
+        aG9yIjoixaBpbW9uIEx1a2HFocOtayxTaGxvbWkgWmFkb2ssTWFyZWsgSHVs
+        YW4sT25kcmVqIFByYXphayIsImRlc2NyaXB0aW9uIjoiRm9yZW1hbiBwbHVn
+        LWluIGZvciBtYW5hZ2luZyBzZWN1cml0eSBjb21wbGlhbmNlIHJlcG9ydHMi
+        LCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vT3BlblNDQVAvZm9yZW1hbl9v
+        cGVuc2NhcCIsInZlcnNpb24iOiIwLjUuMy4xOCJ9LHsiaWQiOiJmb3JlbWFu
+        X3JlbW90ZV9leGVjdXRpb24iLCJuYW1lIjoiZm9yZW1hbl9yZW1vdGVfZXhl
+        Y3V0aW9uIiwiYXV0aG9yIjoiRm9yZW1hbiBSZW1vdGUgRXhlY3V0aW9uIHRl
+        YW0iLCJkZXNjcmlwdGlvbiI6IkEgcGx1Z2luIGJyaW5naW5nIHJlbW90ZSBl
+        eGVjdXRpb24gdG8gdGhlIEZvcmVtYW4sIGNvbXBsZXRpbmcgdGhlIGNvbmZp
+        ZyBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkgd2l0aCByZW1vdGUgbWFuYWdl
+        bWVudCBmdW5jdGlvbmFsaXR5LiIsInVybCI6Imh0dHBzOi8vZ2l0aHViLmNv
+        bS90aGVmb3JlbWFuL2ZvcmVtYW5fcmVtb3RlX2V4ZWN1dGlvbiIsInZlcnNp
+        b24iOiIwLjMuMC4xMiJ9LHsiaWQiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0
+        ZSIsIm5hbWUiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0ZSIsImF1dGhvciI6
+        IkFsb24gR29sZGJvaW0sIFNoaW1vbiBTdGVpbiIsImRlc2NyaXB0aW9uIjoi
+        VGhpcyBpcyBhIHBsdWdpbiB0aGF0IGVuYWJsZXMgYnVpbGRpbmcgYSB0aGVt
+        ZSBmb3IgRm9yZW1hbi4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vYWxv
+        bmdvbGRib2ltL2ZvcmVtYW5fdGhlbWVfc2F0ZWxsaXRlIiwidmVyc2lvbiI6
+        IjAuMS4zMyJ9LHsiaWQiOiJrYXRlbGxvIiwibmFtZSI6ImthdGVsbG8iLCJh
+        dXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNvbnRlbnQgYW5kIFN1YnNj
+        cmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3IgRm9yZW1hbiIsInVybCI6
+        Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJzaW9uIjoiMy4wLjAuODIi
+        fSx7ImlkIjoicmVkaGF0X2FjY2VzcyIsIm5hbWUiOiJyZWRoYXRfYWNjZXNz
+        IiwiYXV0aG9yIjoiTGluZGFuaSBQaGlyaSIsImRlc2NyaXB0aW9uIjoiVGhp
+        cyBwbHVnaW4gYWRkcyBSZWQgSGF0IEFjY2VzcyBrbm93bGVkZ2UgYmFzZSBz
+        ZWFyY2gsIGNhc2UgbWFuYWdlbWVudCBhbmQgZGlhZ25vc3RpY3MgdG8gRm9y
+        ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
+        ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:27 GMT
+  recorded_at: Tue, 13 Dec 2016 14:47:53 GMT
 - request:
     method: get
     uri: https://username:password@subscription.rhn.redhat.com/subscription/users/username/owners
@@ -655,7 +206,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.0p0
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
       Accept-Language:
       - en
       Content-Type:
@@ -678,11 +229,11 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Tue, 22 Nov 2016 14:46:28 GMT
+      - Tue, 13 Dec 2016 14:47:53 GMT
     body:
       encoding: UTF-8
       string: '{"displayMessage":"Invalid username or password. To create a login,
-        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"86d6582c-5052-4d35-96ad-b51838e60ea9"}'
+        please visit https://www.redhat.com/wapps/ugc/register.html","requestUuid":"85fb1c7e-0a46-442e-9b7f-d157865885b6"}'
     http_version: 
-  recorded_at: Tue, 22 Nov 2016 10:46:28 GMT
+  recorded_at: Tue, 13 Dec 2016 14:47:54 GMT
 recorded_with: VCR 3.0.3

@@ -50,7 +50,7 @@ module HammerCLICsv
 
     def execute
       @api = api_connection
-      @server_status = check_server_status(@server, @username, @password)
+      @server_status = check_server_status(@server)
 
       if option_export?
         if option_file
@@ -68,15 +68,27 @@ module HammerCLICsv
       HammerCLI::EX_OK
     end
 
-    def check_server_status(server, username, password)
+    def authenticate_request(request)
+      if HammerCLI.context[:api_connection]
+        HammerCLIForeman.foreman_api_connection.authenticator.authenticate(request, {})
+      else
+        request.basic_auth(
+          HammerCLIForeman.credentials.username,
+          HammerCLIForeman.credentials.password
+        )
+      end
+      request
+    end
+
+    def check_server_status(server)
       url = "#{server}/api/status"
       uri = URI(url)
       nethttp = Net::HTTP.new(uri.host, uri.port)
       nethttp.use_ssl = uri.scheme == 'https'
       nethttp.verify_mode = OpenSSL::SSL::VERIFY_NONE
       server_status = nethttp.start do |http|
-        request = Net::HTTP::Get.new uri.request_uri
-        request.basic_auth(username, password)
+        request = Net::HTTP::Get.new uri
+        authenticate_request(request)
         response = http.request(request)
         JSON.parse(response.body)
       end
@@ -87,8 +99,8 @@ module HammerCLICsv
       nethttp.use_ssl = uri.scheme == 'https'
       nethttp.verify_mode = OpenSSL::SSL::VERIFY_NONE
       server_status['plugins'] = nethttp.start do |http|
-        request = Net::HTTP::Get.new uri.request_uri
-        request.basic_auth(username, password)
+        request = Net::HTTP::Get.new uri
+        authenticate_request(request)
         response = http.request(request)
         JSON.parse(response.body)['results']
       end

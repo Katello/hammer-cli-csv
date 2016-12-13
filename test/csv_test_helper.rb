@@ -73,8 +73,12 @@ ensure
 end
 
 def set_user(username, password='changeme')
-  HammerCLI::Connection.drop_all
-  HammerCLIForeman.clear_credentials
+  if HammerCLI.context[:api_connection]
+    HammerCLI.context[:api_connection].drop_all
+  else
+    HammerCLI::Connection.drop_all
+    HammerCLIForeman.clear_credentials
+  end
   HammerCLI::Settings.load({
                                :_params => {
                                    :username => username,

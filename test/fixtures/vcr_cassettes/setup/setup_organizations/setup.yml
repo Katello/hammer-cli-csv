@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:42 GMT
+      - Wed, 14 Dec 2016 13:43:45 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -39,13 +39,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 460ca5d1-3a17-41a6-a905-43744cfe4ac8
+      - aa1f14d0-6272-4827-a41a-5972efca245e
       X-Runtime:
-      - '0.025010'
+      - '0.042610'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=d02948f74a8cdb586ad0b7109a06259d; path=/; secure; HttpOnly
+      - _session_id=4f0e36f443ce10faa5dc592cb3e77d3f; path=/; secure; HttpOnly
       Etag:
       - '"8e3341d0a4cc328651f7391aed11fef8"'
       Status:
@@ -58,7 +58,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:39 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:40 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/api/v2/plugins
@@ -80,7 +80,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:42 GMT
+      - Wed, 14 Dec 2016 13:43:45 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -98,13 +98,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b5f2a179-67a3-4aa2-92c8-4d118795f431
+      - ceb7c4ef-3d47-4510-b363-7f86d6c091b6
       X-Runtime:
-      - '0.030943'
+      - '0.049744'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=6b47f705a1462c7780ab138aff1a7d83; path=/; secure; HttpOnly
+      - _session_id=7a0fe2ffa4d1d5cca47ff3830ef91dd4; path=/; secure; HttpOnly
       Etag:
       - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
       Status:
@@ -193,7 +193,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:40 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:40 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/katello/api/organizations?per_page=999999
@@ -219,7 +219,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:42 GMT
+      - Wed, 14 Dec 2016 13:43:45 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -237,15 +237,15 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ec800d6f-b1c1-4082-bdfd-321258fdf3b8
+      - 931b13b2-742d-46d4-a3b6-8911e271c743
       X-Runtime:
-      - '0.033794'
+      - '0.033683'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=e7f35fd7015ff8c67fc2b9b8983d654e; path=/; secure; HttpOnly
+      - _session_id=9e96ba22f40cd5d3910c23aa76ed4e00; path=/; secure; HttpOnly
       Etag:
-      - '"79a6984c12669cb275bce9726a51bcf1-gzip"'
+      - '"229d03fccc980ffc544f226761057985-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -267,10 +267,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"Default_Organization","created_at":"2016-12-07 03:03:54 UTC","updated_at":"2016-12-07 03:03:58 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"testcorp","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-13 14:48:39 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"Default_Organization","created_at":"2016-12-07 03:03:54 UTC","updated_at":"2016-12-07 03:03:58 UTC","id":1,"name":"Default Organization","title":"Default Organization","description":null},{"label":"testcorp","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-14 13:43:42 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:40 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:40 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8
@@ -296,7 +296,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:42 GMT
+      - Wed, 14 Dec 2016 13:43:45 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -314,15 +314,15 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ea664887-8260-42d5-8dcd-77c035d82721
+      - a22ec74e-0ca4-49be-9f90-2d245b4a2c4a
       X-Runtime:
-      - '0.209530'
+      - '0.214922'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=4259d36d6a3e01b7af913d1e013ce2a7; path=/; secure; HttpOnly
+      - _session_id=4ebe7b4c943b7cfc4d6cc481b2d9cd8a; path=/; secure; HttpOnly
       Etag:
-      - '"950f96ed6c36e3b1b51062e00b211f4c-gzip"'
+      - '"63790d29113a46c3ae6f15fb2434fcb6-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -338,8 +338,8 @@ http_interactions:
         RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAnR41trDH6LJ4Tobp73rsvM7Sl+nMItXNW7HSjhKQg78nFotM\naGRB9XS3z7wzKtunqIHcj38UwGBE01qLIO7aBXJHAeDiZVJdRaq03fcpQU3OywCw\nzjzfIRxYP8u5S1bjE60QXwv+ao0nbEYJ45EBmFybL6NJBcATsvPTadRzy236kk0h\nnOJl+IXXU+29eGjY7GWXjm+QYf//CHN+ngEh8g/sxSafDM6w7ZlPi9HJSaXK363R\n/nuy+4KqYE0MHa/7Iyb+HnyQEn/XTuFLJk3/EKr7gwxOVV2in6CQEeXLNuWek1Xt\nUzBDL/jPNoowFM18kmYBBg5/M3gqMX4eXBVfxQIDAQABAoIBAAeWduecv/rH67F3\nKIMNP7OalWcKvnYMNz+vZcjAssP6Dkwza/w6o0jUWzAoGZx/QSiNJPa1H25u98Px\nQnjTsCnFLBK2JpjYEnMT3Go/znk95be+D8vV+ryhns1t7EPsLUk8+WZtsNq6eGXt\nN/sKfLY7+q6hRxyE+y6QQeyBexoe4OnELeeb9KFxpE9H8TV67Ed9jqLbtXsR/8Nq\nWZW7ZYHBuvYuGHgZQWY9wWks3HW1ygC+y1BpfeYA9z85HH+t1x7mG8lOBoe0eV95\nhmHDwQInPPdBB20szGTRB2UjKmFCIGX/EYn/RJZvi/kxlpTzSLTiBDDUKqjAyWC/\ngdRhp/0CgYEA7qh1ng34FXTXYs0otOpCTrjnB17vdJb1SAc2kvWSQiCr9Gr5etGR\nDu7g6EAAvsV8HbQkcBmXyqnVuDhR0Ijt0UaldqGWbpmAcspHMDsy1uDn24qjbZoI\ncC3wQhsy3+8zNRYlbELeJjgzacYRmmtZNc2ML5As5XX8VVji3JqmZUMCgYEAqIjv\nPV4SfqrOv4NFcEvQf32tyiVxXDH4H/WpjHM2ZcAklE4esQkyBqf/2lHcZPrhoaQm\n8OGrquMytXo2TRGypl0syZ49GFq/FUFQbkl8zZpt3OCMkud6RvBmmftYSVCNoyZc\nySBusvO3SgpZYZwJx3FmeH/2gp0YAldH+tQo0lcCgYEAjhkVdtcgaD4aZER9QULd\n2htzy0q2Tnf3cTyCPPwkamUjnTL4ei0/LmIC3aYGC5BwNwtkSq6iV1PJ4Zb+96gf\n2WQz7q+FbzLMbQyNWGVW/uQIiQpCBmcZMRnZHLMvFnBI0AnwnEYwGReLXSZGoufZ\nxRQurL8uTC104ag741fdTRsCgYAtWaOezMiHQykdCZLO0+fH1qbEJW0qlNuipfU4\nsOvrV1fAfIDvvHy0o9JKCgsXNRcv6r77xI3wDvDfOoKQHHoJIDtkCWuBOTH/4zJk\nauvlW2/Cpr3M7fLOUfQZ7TNljwJ9612+VTbUepZQmxZQGK/c9hvPwwcvQFxsjNX2\nnc5aQwKBgGZIGnz4X92HBVa0pR27q+2sebWCxjpREPoEE4HnPivn6Vgy6j40O3VB\nikaW6laDlWHPzYorQeLcZLoiI6yBn5v3unT4Aq74c/mgjBZbsJs+BC6WILWpeV3s\nlN7WgGVHSbBqaBAkMdIrH6IK8dnjYsHq5yO9xtdYmkVZoHEoah8h\n-----END
         RSA PRIVATE KEY-----\n","cert":"-----BEGIN CERTIFICATE-----\nMIIFqTCCA5GgAwIBAgIIBitiT9Rbj7QwDQYJKoZIhvcNAQEFBQAwgaQxCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMSQwIgYDVQQDDBtSZWQg\nSGF0IENhbmRsZXBpbiBBdXRob3JpdHkxJDAiBgkqhkiG9w0BCQEWFWNhLXN1cHBv\ncnRAcmVkaGF0LmNvbTAeFw0xNjA4MTYxMjI5MzFaFw0xNzA4MTYxMjI5MzFaMC8x\nLTArBgNVBAMTJGQ0NWFjNzU0LTU2ZTgtNDI1ZS1hNmVmLTIwMjg5NTNmNmYyYzCC\nASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ0eNbawx+iyeE6G6e967LzO\n0pfpzCLVzVux0o4SkIO/JxaLTGhkQfV0t8+8Myrbp6iB3I9/FMBgRNNaiyDu2gVy\nRwHg4mVSXUWqtN33KUFNzssAsM483yEcWD/LuUtW4xOtEF8L/mqNJ2xGCeORAZhc\nmy+jSQXAE7Lz02nUc8tt+pJNIZziZfiF11PtvXho2Oxll45vkGH//whzfp4BIfIP\n7MUmnwzOsO2ZT4vRyUmlyt+t0f57svuCqmBNDB2v+yMm/h58kBJ/107hSyZN/xCq\n+4MMTlVdop+gkBHlyzblnpNV7VMwQy/4zzaKMBTNfJJmAQYOfzN4KjF+HlwVX8UC\nAwEAAaOCAVEwggFNMBEGCWCGSAGG+EIBAQQEAwIFoDALBgNVHQ8EBAMCBLAwgd4G\nA1UdIwSB1jCB04AUdy6lzTcNqOHT6mHFVmdD6JHHbRyhgbekgbQwgbExCzAJBgNV\nBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEWMBQGA1UECgwNUmVkIEhh\ndCwgSW5jLjEYMBYGA1UECwwPUmVkIEhhdCBOZXR3b3JrMTEwLwYDVQQDDChSZWQg\nSGF0IEVudGl0bGVtZW50IE9wZXJhdGlvbnMgQXV0aG9yaXR5MSQwIgYJKoZIhvcN\nAQkBFhVjYS1zdXBwb3J0QHJlZGhhdC5jb22CAT8wHQYDVR0OBBYEFI7UL/Bk0UoE\n9FSjYlUJle0cykonMBMGA1UdJQQMMAoGCCsGAQUFBwMCMBYGA1UdEQQPMA2GC0NO\nPVRlc3RDb3JwMA0GCSqGSIb3DQEBBQUAA4ICAQBp4djGKuE+NCfYE0Br3IlpKnrm\nCpDF8qs4/r9A/tr+PLLhDnRmzkygSJ7KsIUXYV8oW+QhU5fe2ggPaJFfynY2AVOc\nZHbwvHKoQoUUrVlZFkcwhWcL7vvTEJQUONaOOLUgAzGIdfAmBYPWBqbwf80croGh\nY5xBcNqRw3cxfi0joE+LY4brEW5vJF8DnxhEX0eIJtjas+zb3ckeUJgYIyirXdHJ\nqrAANWjUfh9JFehwjAigx6TnGK+pr+zpbKTX9O7lhmvsCf+82NVlZmY342IUE8Ss\npWjhsydl8NT80fGJV/1fwpgyos9EvpjayXh9bYxZhDkiHaUUL/WBInEdyi4xFJgf\nPXnaV+2q48/3oOVZa2Ng/vcaBG5nEZYvK+jTG205t9d9X9Tp46iH/mvyIH8VIF0H\np/OtIoRnGLjliYP0dHp91G4UTTEpg8Cxa77r77qlwASORsFF8MJGMKMJg/YNO7fQ\nCskpqb7UZfSXmvZ5AIZ/Kzncuj1IvZMLhjMr/QAwSO0/v/GnmSqLwMamM2viq8un\nef2TQy9Xcuxcp0n7mcDHUUaTpiW1tPc5ikUmCUQ2ZuNTjE6Noa0kSV3AHG3TbSkU\n+qT9B5RSL1YBAEw5xwttvjlju2jaYaYT6xI4LioXIVJ8lEwdrggxmqTj1ArgqP2c\nHAtS6vziTnwbP+sS3g==\n-----END
         CERTIFICATE-----\n","id":"4028f99158f378890158f8a79a630b85","serial":{"id":8920514391689940460,"revoked":false,"collected":false,"expiration":"2017-08-16T12:29:31.000+0000","serial":8920514391689940460,"created":"2016-12-13T14:48:03.426+0000","updated":"2016-12-13T14:48:03.426+0000"},"created":"2016-12-13T14:48:03.427+0000","updated":"2016-12-13T14:48:03.427+0000"},"type":{"id":"4028f99158d73c980158d7417b9c0005","label":"satellite","manifest":true,"created":"2016-12-07T03:09:02.748+0000","updated":"2016-12-07T03:09:02.748+0000"},"ownerId":"4028f99158f378890158f7d5665f03ed","webUrl":"access.stage.redhat.com/management/distributors/","apiUrl":"https://subscription.rhn.stage.redhat.com/subscription/consumers/","created":"2016-12-13T14:48:03.427+0000","updated":"2016-12-13T14:48:03.427+0000"},"logLevel":null,"autobindDisabled":null,"href":"/owners/testcorp","created":"2016-12-13T10:58:27.551+0000","updated":"2016-12-13T14:48:03.496+0000"},"redhat_repository_url":"https://cdn.redhat.com","service_levels":["Premium","Standard"],"service_level":null,"select_all_types":[],"description":"Testing
-        today for a better tomorrow","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-13
-        14:48:39 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":8,"name":"Test
+        today for a better tomorrow","created_at":"2016-12-13 10:58:26 UTC","updated_at":"2016-12-14
+        13:43:42 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":8,"name":"Test
         Corporation","title":"Test Corporation","users":[],"smart_proxies":[{"name":"sat-rhel7.example.com","id":1,"url":"https://sat-rhel7.example.com:9090"}],"subnets":[{"id":1,"name":"Test
         Subnet","network_address":"192.168.100.1/24"}],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
         default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
@@ -451,7 +451,7 @@ http_interactions:
         default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[{"id":2,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[{"id":2,"name":"Default
         Location","title":"Default Location","description":null}],"parameters":[],"default_content_view_id":2,"library_id":2}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:40 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:40 GMT
 - request:
     method: put
     uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8
@@ -479,7 +479,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:42 GMT
+      - Wed, 14 Dec 2016 13:43:45 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -497,16 +497,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cb7e8cdd-2775-4fbc-a998-50d2a82dfa23
+      - 87c93895-9fc3-4816-92d9-0e490d592a15
       X-Runtime:
-      - '0.300215'
+      - '0.301617'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=77ca7460d49b06375995b685b87b7d1c; path=/; secure; HttpOnly
+      - _session_id=9353e67ae85c2777747e3efb3eb51927; path=/; secure; HttpOnly
       - request_method=PUT; path=/
       Etag:
-      - '"9ffb9215f1fda72fcd4d22059b222548-gzip"'
+      - '"7e651e39e5572a06297f766dc97ea0b2-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -518,7 +518,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"select_all_types":[],"description":"Testing today for a better tomorrow","created_at":"2016-12-13
-        10:58:26 UTC","updated_at":"2016-12-13 14:48:42 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":8,"name":"Test
+        10:58:26 UTC","updated_at":"2016-12-14 13:43:45 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":8,"name":"Test
         Corporation","title":"Test Corporation","users":[],"smart_proxies":[{"name":"sat-rhel7.example.com","id":1,"url":"https://sat-rhel7.example.com:9090"}],"subnets":[{"id":1,"name":"Test
         Subnet","network_address":"192.168.100.1/24"}],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
         default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
@@ -630,5 +630,5 @@ http_interactions:
         default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[{"id":2,"name":"test.com"}],"realms":[],"environments":[],"hostgroups":[],"locations":[{"id":2,"name":"Default
         Location","title":"Default Location","description":null}],"parameters":[]}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:40 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:41 GMT
 recorded_with: VCR 3.0.3

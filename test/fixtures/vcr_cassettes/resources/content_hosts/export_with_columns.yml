@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:18 GMT
+      - Wed, 14 Dec 2016 13:46:01 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -39,13 +39,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c93d487e-13e2-4072-aaa2-1a8d4f574762
+      - 65b020c2-06a4-4fe1-a799-86c05f63cd24
       X-Runtime:
-      - '0.034570'
+      - '0.038318'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=0558b841d790099166fe79474886f4d4; path=/; secure; HttpOnly
+      - _session_id=0484b839546558a83185fc2b2989e87f; path=/; secure; HttpOnly
       Etag:
       - '"8e3341d0a4cc328651f7391aed11fef8"'
       Status:
@@ -58,7 +58,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:16 GMT
+  recorded_at: Wed, 14 Dec 2016 13:45:57 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/api/v2/plugins
@@ -80,7 +80,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:47:18 GMT
+      - Wed, 14 Dec 2016 13:46:01 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -98,13 +98,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 94577379-5f11-4995-88d3-1a1f51294b4f
+      - aa85c5c9-584d-4982-99cf-bbd015c81bb3
       X-Runtime:
-      - '0.047404'
+      - '0.038246'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=8daa06e8d11cab64966944a353f1a815; path=/; secure; HttpOnly
+      - _session_id=4e94f480cc7eef9a527c6bba530cf5d8; path=/; secure; HttpOnly
       Etag:
       - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
       Status:
@@ -193,5 +193,5 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:47:16 GMT
+  recorded_at: Wed, 14 Dec 2016 13:45:57 GMT
 recorded_with: VCR 3.0.3

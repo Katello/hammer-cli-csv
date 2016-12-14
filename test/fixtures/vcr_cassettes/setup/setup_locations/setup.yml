@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:40 GMT
+      - Wed, 14 Dec 2016 13:43:43 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -39,13 +39,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 76ca7cb8-3067-4fbc-aa20-8d340c13c134
+      - 0ccbe58d-34d6-49ea-8ac7-273aef6cde81
       X-Runtime:
-      - '0.034655'
+      - '0.039506'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=de33bc4153c958ea6d4f692de02ee5fb; path=/; secure; HttpOnly
+      - _session_id=6039a83cad42beaf851357f69fd2b225; path=/; secure; HttpOnly
       Etag:
       - '"8e3341d0a4cc328651f7391aed11fef8"'
       Status:
@@ -58,7 +58,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:38 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:38 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/api/v2/plugins
@@ -80,7 +80,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:40 GMT
+      - Wed, 14 Dec 2016 13:43:43 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -98,13 +98,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8acda9e8-7fdb-4f14-91be-aa82f1e4d3f1
+      - 608f1117-6dfa-4b09-8746-2c8da095de33
       X-Runtime:
-      - '0.029882'
+      - '0.045438'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=46e716965d73b9895c4699f0b69e1a17; path=/; secure; HttpOnly
+      - _session_id=7e2ae5aee2e1e41955d4cda54321c2c7; path=/; secure; HttpOnly
       Etag:
       - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
       Status:
@@ -193,7 +193,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:38 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:38 GMT
 - request:
     method: get
     uri: https://admin:changeme@satlap.example.com/api/locations?per_page=999999
@@ -219,7 +219,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:41 GMT
+      - Wed, 14 Dec 2016 13:43:43 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -237,15 +237,15 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 163b7e15-6f80-4f46-8db5-b893cfaef256
+      - 66cb2103-d7b1-4c5b-ab03-e6321089516b
       X-Runtime:
-      - '0.036311'
+      - '0.035941'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=f50c4cd2af4259458ebdc971056fdcd7; path=/; secure; HttpOnly
+      - _session_id=e133edd9be90f2a83d4fb1abe5b877e3; path=/; secure; HttpOnly
       Etag:
-      - '"11a8fab5d174703e047ee215c1e7f4c0-gzip"'
+      - '"e3182d44d3e6447f1a85f9a09ac2c8c6-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -267,10 +267,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-07 03:03:54 UTC","updated_at":"2016-12-07 03:03:54 UTC","id":2,"name":"Default Location","title":"Default Location","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:24 UTC","updated_at":"2016-12-13 11:49:08 UTC","id":4,"name":"Test East","title":"Test East","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:23 UTC","updated_at":"2016-12-13 14:47:55 UTC","id":3,"name":"Testing","title":"Testing","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:24 UTC","updated_at":"2016-12-13 11:49:08 UTC","id":5,"name":"Test North","title":"Test North","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:25 UTC","updated_at":"2016-12-13 11:49:09 UTC","id":6,"name":"Test South","title":"Test South","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:25 UTC","updated_at":"2016-12-13 11:49:09 UTC","id":7,"name":"Test West","title":"Test West","description":null}]
+          "results": [{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-07 03:03:54 UTC","updated_at":"2016-12-07 03:03:54 UTC","id":2,"name":"Default Location","title":"Default Location","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:24 UTC","updated_at":"2016-12-14 13:43:11 UTC","id":4,"name":"Test East","title":"Test East","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:23 UTC","updated_at":"2016-12-14 13:43:11 UTC","id":3,"name":"Testing","title":"Testing","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:24 UTC","updated_at":"2016-12-14 13:43:12 UTC","id":5,"name":"Test North","title":"Test North","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:25 UTC","updated_at":"2016-12-14 13:43:12 UTC","id":6,"name":"Test South","title":"Test South","description":null},{"ancestry":null,"parent_id":null,"parent_name":null,"created_at":"2016-12-13 10:58:25 UTC","updated_at":"2016-12-14 13:43:12 UTC","id":7,"name":"Test West","title":"Test West","description":null}]
         }
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:38 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:38 GMT
 - request:
     method: put
     uri: https://admin:changeme@satlap.example.com/api/locations/3
@@ -298,7 +298,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:41 GMT
+      - Wed, 14 Dec 2016 13:43:43 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -316,16 +316,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 47d77dc5-0ffa-4840-8f1e-0734b085abaa
+      - 51b0e692-211f-4b50-a0c4-72aa244053f7
       X-Runtime:
-      - '0.229318'
+      - '0.220036'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=a9a45080cf138dc36751c87424925392; path=/; secure; HttpOnly
+      - _session_id=5c591bc6b15c9963a3e0245e009ce280; path=/; secure; HttpOnly
       - request_method=PUT; path=/
       Etag:
-      - '"7e7fe73f6632c0d53305c9cb5adfd854-gzip"'
+      - '"2b78bb6e65b2cc502249e2a482a0074e-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -337,7 +337,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-12-13
-        10:58:23 UTC","updated_at":"2016-12-13 14:48:41 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":3,"name":"Testing","title":"Testing","users":[],"smart_proxies":[],"subnets":[{"id":1,"name":"Test
+        10:58:23 UTC","updated_at":"2016-12-14 13:43:43 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":3,"name":"Testing","title":"Testing","users":[],"smart_proxies":[],"subnets":[{"id":1,"name":"Test
         Subnet","network_address":"192.168.100.1/24"}],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
         default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
         default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
@@ -447,7 +447,7 @@ http_interactions:
         default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
         default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:38 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:39 GMT
 - request:
     method: put
     uri: https://admin:changeme@satlap.example.com/api/locations/4
@@ -475,7 +475,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:41 GMT
+      - Wed, 14 Dec 2016 13:43:43 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -493,16 +493,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 36ce644b-df64-4b44-a778-0e4ef2b0c7c3
+      - 52ea90e6-6d34-4902-95b5-f3b85483dfea
       X-Runtime:
-      - '0.210945'
+      - '0.226417'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=87c396705bb7517c6cd930fcdacfeabc; path=/; secure; HttpOnly
+      - _session_id=2cc4c1672a0e07b8f5344aafcb0d7475; path=/; secure; HttpOnly
       - request_method=PUT; path=/
       Etag:
-      - '"66e9755d952fe29e28d5d98fa6372046-gzip"'
+      - '"417a7a505d956060b6e79c117fccbb61-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -514,7 +514,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-12-13
-        10:58:24 UTC","updated_at":"2016-12-13 14:48:41 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":4,"name":"Test
+        10:58:24 UTC","updated_at":"2016-12-14 13:43:43 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":4,"name":"Test
         East","title":"Test East","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
         default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
         default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
@@ -624,7 +624,7 @@ http_interactions:
         default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
         default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:39 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:39 GMT
 - request:
     method: put
     uri: https://admin:changeme@satlap.example.com/api/locations/5
@@ -652,7 +652,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:41 GMT
+      - Wed, 14 Dec 2016 13:43:44 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -670,16 +670,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2ef15aa8-b5d5-4bb5-bb0a-d97bfe2bd8a5
+      - 482a9009-4afc-44f1-a4d8-42510e234a39
       X-Runtime:
-      - '0.274144'
+      - '0.461095'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=72d053f059afe8514b33d6ea8fa7af5f; path=/; secure; HttpOnly
+      - _session_id=e2f71f7a551969b683d8160c848878a6; path=/; secure; HttpOnly
       - request_method=PUT; path=/
       Etag:
-      - '"8f8e3a24761c1b7958b063d651118b31-gzip"'
+      - '"4ce970f611d9b5783293436f1a3038c8-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -691,7 +691,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-12-13
-        10:58:24 UTC","updated_at":"2016-12-13 14:48:41 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":5,"name":"Test
+        10:58:24 UTC","updated_at":"2016-12-14 13:43:44 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":5,"name":"Test
         North","title":"Test North","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
         default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
         default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
@@ -801,7 +801,7 @@ http_interactions:
         default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
         default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:39 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:39 GMT
 - request:
     method: put
     uri: https://admin:changeme@satlap.example.com/api/locations/6
@@ -829,7 +829,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:41 GMT
+      - Wed, 14 Dec 2016 13:43:44 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -847,16 +847,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 18db53e3-1eca-4a8e-a008-104127e0268e
+      - b77d9bb6-8803-47e2-a533-31c282d5b991
       X-Runtime:
-      - '0.222533'
+      - '0.199474'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=92f78d7ccdc33b92658be35e89af3707; path=/; secure; HttpOnly
+      - _session_id=2e09aefbfa2b22bb5b72828c57d477b6; path=/; secure; HttpOnly
       - request_method=PUT; path=/
       Etag:
-      - '"f829fbab06877ea1a2a7ebb0b0fd6533-gzip"'
+      - '"58ca9d2770f94adabab399abfc7ecd07-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -868,7 +868,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-12-13
-        10:58:25 UTC","updated_at":"2016-12-13 14:48:42 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":6,"name":"Test
+        10:58:25 UTC","updated_at":"2016-12-14 13:43:44 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":6,"name":"Test
         South","title":"Test South","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
         default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
         default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
@@ -978,7 +978,7 @@ http_interactions:
         default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
         default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:39 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:40 GMT
 - request:
     method: put
     uri: https://admin:changeme@satlap.example.com/api/locations/7
@@ -1006,7 +1006,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Dec 2016 14:48:42 GMT
+      - Wed, 14 Dec 2016 13:43:44 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1024,16 +1024,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b0a939be-ef5e-4a12-a60f-388230405f0c
+      - 8ce9522b-81f7-433a-bfc7-e5e9892f29e5
       X-Runtime:
-      - '0.221867'
+      - '0.203489'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Set-Cookie:
-      - _session_id=e41b68f8c390c6444c483d3775de4e3a; path=/; secure; HttpOnly
+      - _session_id=1612341c83b20478b81b00e072991a4d; path=/; secure; HttpOnly
       - request_method=PUT; path=/
       Etag:
-      - '"71b36977a45012bf724ace8a68db1d19-gzip"'
+      - '"84a297e86e97aad6a90779d59f984562-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -1045,7 +1045,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"select_all_types":["ProvisioningTemplate","Hostgroup"],"description":null,"created_at":"2016-12-13
-        10:58:25 UTC","updated_at":"2016-12-13 14:48:42 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":7,"name":"Test
+        10:58:25 UTC","updated_at":"2016-12-14 13:43:44 UTC","ancestry":null,"parent_id":null,"parent_name":null,"id":7,"name":"Test
         West","title":"Test West","users":[],"smart_proxies":[],"subnets":[],"compute_resources":[],"media":[],"config_templates":[{"id":7,"name":"Alterator
         default","template_kind_id":5,"template_kind_name":"provision"},{"id":8,"name":"Alterator
         default finish","template_kind_id":6,"template_kind_name":"finish"},{"id":9,"name":"Alterator
@@ -1155,5 +1155,5 @@ http_interactions:
         default","template_kind_id":8,"template_kind_name":"user_data"},{"id":36,"name":"WAIK
         default PXELinux","template_kind_id":2,"template_kind_name":"PXELinux"}],"domains":[],"realms":[],"environments":[],"hostgroups":[],"organizations":[],"parameters":[]}'
     http_version: 
-  recorded_at: Tue, 13 Dec 2016 14:48:39 GMT
+  recorded_at: Wed, 14 Dec 2016 13:43:40 GMT
 recorded_with: VCR 3.0.3

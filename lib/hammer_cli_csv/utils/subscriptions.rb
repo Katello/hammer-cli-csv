@@ -168,12 +168,9 @@ module HammerCLICsv
 
         if !subs_quantity.nil? && !subs_quantity.empty? && subs_quantity != 'Automatic'
           subs_quantity = subs_quantity.to_i
-          refined = matches.select do |subscription|
+          matches.select! do |subscription|
             subscription['available'] == -1 || subs_quantity <= subscription['available']
           end
-          raise _("No '%{name}' subscription with quantity %{quantity} or more available") %
-            {:name => matches[0]['name'], :quantity => subs_quantity} if refined.empty?
-          matches = refined
         end
         debug_subscriptions("matches_by_quantity: #{subs_quantity}", matches)
         matches

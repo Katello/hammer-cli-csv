@@ -44,7 +44,7 @@ msgstr ""
 msgid "No matching subscriptions"
 msgstr ""
 
-msgid " attaching '%{name}'..."
+msgid " attaching %{quantity} of '%{name}'..."
 msgstr ""
 
 msgid "Only process organization matching this name"
@@ -176,6 +176,101 @@ msgstr ""
 msgid "Updating compute resource '%{name}'..."
 msgstr ""
 
+msgid "Comma separated list of column names to export"
+msgstr ""
+
+msgid "Columns:"
+msgstr ""
+
+msgid " %{name} - Name of resource"
+msgstr ""
+
+msgid ""
+" %{name} - Search for matching names during import (overrides '%{name_col}' co"
+"lumn)"
+msgstr ""
+
+msgid " %{name} - Organization name"
+msgstr ""
+
+msgid " %{name} - Lifecycle environment name"
+msgstr ""
+
+msgid " %{name} - Content view name"
+msgstr ""
+
+msgid " %{name} - Comma separated list of host collection names"
+msgstr ""
+
+msgid " %{name} - Is a virtual host, %{yes} or %{no}"
+msgstr ""
+
+msgid " %{name} - Hypervisor host name for virtual hosts"
+msgstr ""
+
+msgid " %{name} - Operating system"
+msgstr ""
+
+msgid " %{name} - Architecture"
+msgstr ""
+
+msgid " %{name} - Number of sockets"
+msgstr ""
+
+msgid " %{name} - Quantity of RAM in bytes"
+msgstr ""
+
+msgid " %{name} - Number of cores"
+msgstr ""
+
+msgid " %{name} - Service Level Agreement value"
+msgstr ""
+
+msgid " %{name} - Comma separated list of products, each of the format \"<sku>|<name>\""
+msgstr ""
+
+msgid ""
+" %{name} - Comma separated list of subscriptions, each of the format \"<quantit"
+"y>|<sku>|<name>|<contract>|<account>\""
+msgstr ""
+
+msgid " %{name} - Subscription name (only applicable for --itemized-subscriptions)"
+msgstr ""
+
+msgid " %{name} - Subscription type (only applicable for --itemized-subscriptions)"
+msgstr ""
+
+msgid ""
+" %{name} - Subscription quantity (only applicable for --itemized-subscriptions"
+")"
+msgstr ""
+
+msgid " %{name} - Subscription SKU (only applicable for --itemized-subscriptions)"
+msgstr ""
+
+msgid ""
+" %{name} - Subscription contract number (only applicable for --itemized-subscr"
+"iptions)"
+msgstr ""
+
+msgid ""
+" %{name} - Subscription account number (only applicable for --itemized-subscri"
+"ptions)"
+msgstr ""
+
+msgid ""
+" %{name} - Subscription start date (only applicable for --itemized-subscriptio"
+"ns)"
+msgstr ""
+
+msgid ""
+" %{name} - Subscription end date (only applicable for --itemized-subscriptions"
+")"
+msgstr ""
+
+msgid "--columns option only relevant with --export"
+msgstr ""
+
 msgid "Updating hypervisor and guest associations..."
 msgstr ""
 
@@ -189,6 +284,15 @@ msgid "Creating content host '%{name}'..."
 msgstr ""
 
 msgid "Updating content host '%{name}'..."
+msgstr ""
+
+msgid " attaching '%{name}'..."
+msgstr ""
+
+msgid ""
+"Warning: Column '%{name}' does not match any field, be sure to check spelling."
+" A full list of supported columns are available with 'hammer csv content-hosts"
+" --help'"
 msgstr ""
 
 msgid "Creating content view '%{name}'..."
@@ -265,7 +369,10 @@ msgid ""
 "'"
 msgstr ""
 
-msgid "Creating repository '%{repository_name}' in product '%{product_name}'..."
+msgid "Creating repository '%{repository_name}'..."
+msgstr ""
+
+msgid "Updating repository '%{repository_name}'..."
 msgstr ""
 
 msgid "Red Hat product '%{product_name}' does not exist"
@@ -334,13 +441,10 @@ msgstr ""
 msgid "Attaching '%{name}' of quantity %{quantity}..."
 msgstr ""
 
+msgid "subscription unavailable..."
+msgstr ""
+
 msgid "No subscriptions match SKU '%{sku}'"
-msgstr ""
-
-msgid "No subscriptions match name '%{name}'"
-msgstr ""
-
-msgid "No subscriptions match type '%{type}'"
 msgstr ""
 
 msgid "No '%{name}' subscription with quantity %{quantity} or more available"

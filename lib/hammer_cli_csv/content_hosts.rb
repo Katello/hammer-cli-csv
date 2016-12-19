@@ -101,7 +101,8 @@ module HammerCLICsv
           if host['subscription_facet_attributes']
             subscriptions = @api.resource(:host_subscriptions).call(:index, {
                 'organization_id' => host['organization_id'],
-                'host_id' => host['id']
+                'host_id' => host['id'],
+                'full_results' => true
             })['results']
             if subscriptions.empty?
               %W(#{SUBS_NAME} #{SUBS_TYPE} #{SUBS_QUANTITY} #{SUBS_SKU} #{SUBS_CONTRACT}
@@ -184,7 +185,8 @@ module HammerCLICsv
             search = namify(line[SEARCH], number)
             @api.resource(:hosts).call(:index, {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
-                'search' => search
+                'search' => search,
+                'per_page' => 999999
             })['results'].each do |host|
               if host['subscription_facet_attributes']
                 create_named_from_csv(host['name'], line)
@@ -340,7 +342,8 @@ module HammerCLICsv
 
       def update_subscriptions(host, line, remove_existing)
         existing_subscriptions = @api.resource(:host_subscriptions).call(:index, {
-            'host_id' => host['id']
+            'host_id' => host['id'],
+            'full_results' => true
         })['results']
         if remove_existing && existing_subscriptions.length != 0
           existing_subscriptions.map! do |existing_subscription|
@@ -445,20 +448,28 @@ module HammerCLICsv
         })['results'].each do |organization|
           next if option_organization && organization['name'] != option_organization
 
-          @api.resource(:hosts).call(:index, {
-              'full_results' => true,
+          total = @api.resource(:hosts).call(:index, {
+              'organization_id' => foreman_organization(:name => organization['name']),
               'search' => option_search,
-              'organization_id' => foreman_organization(:name => organization['name'])
-          })['results'].each do |host|
-            host = @api.resource(:hosts).call(:show, {
-                'id' => host['id']
-            })
-            host['facts'] ||= {}
-            unless host['subscription_facet_attributes'].nil?
-              if host['subscription_facet_attributes']['virtual_guests'].empty?
-                hosts.push(host)
-              else
-                hypervisors.push(host)
+              'per_page' => 1
+          })['total'].to_i
+          (total / 20 + 1).to_i.times do |page|
+            @api.resource(:hosts).call(:index, {
+                'page' => page + 1,
+                'per_page' => 20,
+                'search' => option_search,
+                'organization_id' => foreman_organization(:name => organization['name'])
+            })['results'].each do |host|
+              host = @api.resource(:hosts).call(:show, {
+                  'id' => host['id']
+              })
+              host['facts'] ||= {}
+              unless host['subscription_facet_attributes'].nil?
+                if host['subscription_facet_attributes']['virtual_guests'].empty?
+                  hosts.push(host)
+                else
+                  hypervisors.push(host)
+                end
               end
             end
           end

@@ -169,7 +169,7 @@ module HammerCLICsv
         if !subs_quantity.nil? && !subs_quantity.empty? && subs_quantity != 'Automatic'
           subs_quantity = subs_quantity.to_i
           matches.select! do |subscription|
-            subscription['available'] == -1 || subs_quantity <= subscription['available']
+            subscription['available'] < 0 || subs_quantity <= subscription['available']
           end
         end
         debug_subscriptions("matches_by_quantity: #{subs_quantity}", matches)

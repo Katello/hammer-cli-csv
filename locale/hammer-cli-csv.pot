@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: hammer-cli-csv 2.2.0\n"
+"Project-Id-Version: hammer-cli-csv 2.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-15 06:41-0500\n"
-"PO-Revision-Date: 2016-12-15 06:41-0500\n"
+"POT-Creation-Date: 2016-12-22 11:28-0500\n"
+"PO-Revision-Date: 2016-12-22 11:28-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -38,9 +38,9 @@ msgstr ""
 #: ../lib/hammer_cli_csv/activation_keys.rb:126
 #: ../lib/hammer_cli_csv/activation_keys.rb:157
 #: ../lib/hammer_cli_csv/compute_resources.rb:69
-#: ../lib/hammer_cli_csv/content_hosts.rb:173
-#: ../lib/hammer_cli_csv/content_hosts.rb:216
-#: ../lib/hammer_cli_csv/content_hosts.rb:263
+#: ../lib/hammer_cli_csv/content_hosts.rb:174
+#: ../lib/hammer_cli_csv/content_hosts.rb:218
+#: ../lib/hammer_cli_csv/content_hosts.rb:265
 #: ../lib/hammer_cli_csv/content_views.rb:130
 #: ../lib/hammer_cli_csv/domains.rb:72
 #: ../lib/hammer_cli_csv/installation_media.rb:72
@@ -67,13 +67,13 @@ msgid "Updating activation key '%{name}'..."
 msgstr ""
 
 #: ../lib/hammer_cli_csv/activation_keys.rb:200
-#: ../lib/hammer_cli_csv/content_hosts.rb:368
+#: ../lib/hammer_cli_csv/content_hosts.rb:371
 msgid " '%{name}' already attached..."
 msgstr ""
 
 #: ../lib/hammer_cli_csv/activation_keys.rb:209
 #: ../lib/hammer_cli_csv/activation_keys.rb:236
-#: ../lib/hammer_cli_csv/content_hosts.rb:378
+#: ../lib/hammer_cli_csv/content_hosts.rb:381
 msgid "No matching subscriptions"
 msgstr ""
 
@@ -372,38 +372,38 @@ msgid ""
 ")"
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:150
+#: ../lib/hammer_cli_csv/content_hosts.rb:151
 msgid "--columns option only relevant with --export"
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:161
+#: ../lib/hammer_cli_csv/content_hosts.rb:162
 #: ../lib/hammer_cli_csv/splice.rb:227
 msgid "Updating hypervisor and guest associations..."
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:211
+#: ../lib/hammer_cli_csv/content_hosts.rb:213
 msgid "Content host '%{name}' must already exist with --itemized-subscriptions"
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:213
+#: ../lib/hammer_cli_csv/content_hosts.rb:215
 msgid "Updating subscriptions for content host '%{name}'..."
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:223
+#: ../lib/hammer_cli_csv/content_hosts.rb:225
 #: ../lib/hammer_cli_csv/splice.rb:83
 msgid "Creating content host '%{name}'..."
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:235
+#: ../lib/hammer_cli_csv/content_hosts.rb:237
 #: ../lib/hammer_cli_csv/splice.rb:106
 msgid "Updating content host '%{name}'..."
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:381
+#: ../lib/hammer_cli_csv/content_hosts.rb:384
 msgid " attaching '%{name}'..."
 msgstr ""
 
-#: ../lib/hammer_cli_csv/content_hosts.rb:573
+#: ../lib/hammer_cli_csv/content_hosts.rb:584
 msgid ""
 "Warning: Column '%{name}' does not match any field, be sure to check spelling."
 " A full list of supported columns are available with 'hammer csv content-hosts"
@@ -611,8 +611,4 @@ msgstr ""
 
 #: ../lib/hammer_cli_csv/utils/subscriptions.rb:65
 msgid "No subscriptions match SKU '%{sku}'"
-msgstr ""
-
-#: ../lib/hammer_cli_csv/utils/subscriptions.rb:174
-msgid "No '%{name}' subscription with quantity %{quantity} or more available"
 msgstr ""

@@ -446,6 +446,3 @@ msgstr ""
 
 msgid "No subscriptions match SKU '%{sku}'"
 msgstr ""
-
-msgid "No '%{name}' subscription with quantity %{quantity} or more available"
-msgstr ""

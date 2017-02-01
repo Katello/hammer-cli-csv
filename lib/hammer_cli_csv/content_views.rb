@@ -45,7 +45,7 @@ module HammerCLICsv
                 end
               end
               contentviews.delete!("\n")
-              composite_contentviews << [name, 1, label, orgname, composite, contentviews, environments]
+              composite_contentviews << [name, label, orgname, composite, contentviews, environments]
             else
               repositories = export_column(contentview, 'repositories', 'name')
               csv << [name, label, orgname, composite, repositories, environments]

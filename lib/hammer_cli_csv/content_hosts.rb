@@ -244,7 +244,8 @@ module HammerCLICsv
               },
               'subscription_facet_attributes' => {
                 'installed_products' => products(line),
-                'service_level' => line[SLA]
+                'service_level' => line[SLA],
+                'autoheal' => true
               }
             }
           }
@@ -595,6 +596,7 @@ module HammerCLICsv
       def hypervisor_from_line(line)
         hypervisor = line[HOST] if !line[HOST].nil? && !line[HOST].empty?
         hypervisor ||= line[GUESTOF] if !line[GUESTOF].nil? && !line[GUESTOF].empty?
+        hypervisor = namify(hypervisor, 1) if !hypervisor.nil? && !hypervisor.empty?
         hypervisor
       end
     end

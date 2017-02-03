@@ -389,6 +389,43 @@ HELP
       config[:csv].delete(:columns)
       # HammerCLI::Settings.load_from_file(File.dirname(__FILE__) + "/../config.yml")
     end
+
+    def test_hypervisor_prefix
+      start_vcr
+      set_user 'admin'
+
+      prefix = "abc"
+      hypervisorname = "prefixhv"
+      guestname = "prefixguest"
+
+      file = Tempfile.new('content_hosts_test')
+      file.write <<-EOF
+Name,Count,Organization,Environment,Content View,Virtual,Guest of Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions
+#{hypervisorname},1,Test Corporation,Library,Default Organization View,No,,RHEL 6.4,x86_64,1,4,1,,,
+#{guestname},1,Test Corporation,Library,Default Organization View,Yes,#{hypervisorname},RHEL 6.4,x86_64,1,4,1,,,
+EOF
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --prefix #{prefix} --file #{file.path}})
+      }
+      assert_equal '', stderr
+      lines = stdout.split("\n")
+      assert_equal lines[0], "Creating content host '#{prefix}#{hypervisorname}'...done"
+      assert_equal lines[1], "Creating content host '#{prefix}#{guestname}'...done"
+
+      stdout,stderr = capture {
+        hammer.run(%W(--reload-cache csv content-hosts --export --organization Test\ Corporation --search name~#{prefix}))
+      }
+      assert_equal '', stderr
+      lines = stdout.split("\n")
+      assert_match(/#{prefix}#{hypervisorname}.*/, lines[1])
+      assert_match(/#{prefix}#{guestname}.*#{prefix}#{hypervisorname}.*/, lines[2])
+      host_delete("#{prefix}#{hypervisorname}")
+      host_delete("#{prefix}#{guestname}")
+
+      stop_vcr
+    end
   end
 end
 # rubocop:enable LineLength

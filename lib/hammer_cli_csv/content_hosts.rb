@@ -12,6 +12,7 @@ module HammerCLICsv
       end
 
       option %w(--itemized-subscriptions), :flag, _('Export one subscription per row, only process update subscriptions on import')
+      option %w(--clear-subscriptions), :flag, _('When processing --itemized-subscriptions, clear existing subscriptions first')
       option %w(--columns), 'COLUMN_NAMES', _('Comma separated list of column names to export')
 
       SEARCH = 'Search'
@@ -86,6 +87,8 @@ module HammerCLICsv
       end
 
       def export(csv)
+        raise _("--clear-subscriptions option only relevant during import") if option_clear_subscriptions?
+
         if option_itemized_subscriptions?
           export_itemized_subscriptions csv
         else
@@ -151,6 +154,7 @@ module HammerCLICsv
         raise _("--columns option only relevant with --export") unless option_columns.nil?
 
         @existing = {}
+        @visited = {}
         @hypervisor_guests = {}
         @all_subscriptions = {}
 
@@ -214,7 +218,8 @@ module HammerCLICsv
 
         print(_("Updating subscriptions for content host '%{name}'...") % {:name => name}) if option_verbose?
         host = @api.resource(:hosts).call(:show, {:id => @existing[name]})
-        update_subscriptions(host, line, false)
+        remove_existing = clear_subscriptions?(host['name'])
+        update_subscriptions(host, line, remove_existing)
         puts _('done') if option_verbose?
       end
 
@@ -347,13 +352,14 @@ module HammerCLICsv
             'full_results' => true
         })['results']
         if remove_existing && existing_subscriptions.length != 0
+          print _("clearing existing subscriptions...") if option_verbose?
           existing_subscriptions.map! do |existing_subscription|
-            {:id => existing_subscription['id'], :quantity => existing_subscription['quantity_consumed']}
+            subs = [{:id => existing_subscription['id'], :quantity => existing_subscription['quantity_consumed']}]
+            @api.resource(:host_subscriptions).call(:remove_subscriptions, {
+              'host_id' => host['id'],
+              'subscriptions' => subs
+            })
           end
-          @api.resource(:host_subscriptions).call(:remove_subscriptions, {
-            'host_id' => host['id'],
-            'subscriptions' => existing_subscriptions
-          })
           existing_subscriptions = []
         end
 
@@ -425,11 +431,13 @@ module HammerCLICsv
           # http://projects.theforeman.org/issues/6307
           total = @api.resource(:hosts).call(:index, {
               'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+              'search' => option_search,
               'per_page' => 1
-          })['total'].to_i
+          })['subtotal'].to_i
           (total / 20 + 1).to_i.times do |page|
             @api.resource(:hosts).call(:index, {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
+                'search' => option_search,
                 'page' => page + 1,
                 'per_page' => 20
             })['results'].each do |host|
@@ -598,6 +606,15 @@ module HammerCLICsv
         hypervisor ||= line[GUESTOF] if !line[GUESTOF].nil? && !line[GUESTOF].empty?
         hypervisor = namify(hypervisor, 1) if !hypervisor.nil? && !hypervisor.empty?
         hypervisor
+      end
+
+      def clear_subscriptions?(name)
+        if option_clear_subscriptions? && !@visited.include?(name)
+          @visited[name] = true
+          true
+        else
+          false
+        end
       end
     end
   end

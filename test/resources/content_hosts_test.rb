@@ -17,6 +17,7 @@ Usage:
      csv content-hosts [OPTIONS]
 
 Options:
+ --clear-subscriptions         When processing --itemized-subscriptions, clear existing subscriptions first
  --columns COLUMN_NAMES        Comma separated list of column names to export
  --continue-on-error           Continue processing even if individual resource error
  --export                      Export current data instead of importing
@@ -53,6 +54,19 @@ Columns:
  Subscription Start - Subscription start date (only applicable for --itemized-subscriptions)
  Subscription End - Subscription end date (only applicable for --itemized-subscriptions)
 HELP
+      stop_vcr
+    end
+
+    def test_export_with_clear_subscriptions
+      start_vcr
+      set_user 'admin'
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv content-hosts --export --clear-subscriptions})
+      }
+      assert_equal "Error: --clear-subscriptions option only relevant during import\n", stderr
+      assert_equal stdout, ''
+
       stop_vcr
     end
 
@@ -186,12 +200,55 @@ HELP
         hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path}})
       }
       assert_equal '', stderr
-      assert_equal "Updating content host 'testaaa0'...done\nUpdating content host 'testaaa1'...done\n", stdout
+      assert_equal "Updating content host 'testaaa0'...clearing existing subscriptions...done\nUpdating content host 'testaaa1'...clearing existing subscriptions...done\n", stdout
 
 
       %w{testaaa0 testaaa1 testbbb0 testbbb1 testbbb2}.each do |hostname|
         host_delete(hostname)
       end
+
+      stop_vcr
+    end
+
+    # import a single line, then import again w/ clearing
+    def test_import_single_line_clear_subs
+      start_vcr
+      set_user 'admin'
+
+      hostname = 'tester1'
+
+      file = Tempfile.new('content_hosts_test')
+      file.write("Name,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions\n")
+      file.write("#{hostname},Test Corporation,Library,Default Organization View,\"\",Yes,,RHEL 7.2,x86_64,2,3882752,1,\"\",\"69|Red Hat Enterprise Linux Server,290|Red Hat OpenShift Enterprise\",\"\"\"1|RH00001|Red Hat Enterprise Linux for Virtual Datacenters, Premium\"\"\"\n")
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path}})
+      }
+      assert_equal '', stderr
+      assert_equal "Creating content host '#{hostname}'...done\n", stdout
+
+      file = Tempfile.new('content_hosts_test')
+      file.write("Name,Organization,Environment,Content View,Host Collections,Virtual,Host,OS,Arch,Sockets,RAM,Cores,SLA,Products,Subscriptions\n")
+      file.write("#{hostname},Test Corporation,Library,Default Organization View,\"\",Yes,,RHEL 7.2,x86_64,2,3882752,1,\"\",\"69|Red Hat Enterprise Linux Server,290|Red Hat OpenShift Enterprise\",\"\"\"|RH00004|Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)\"\"\"\n")
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv content-hosts --verbose --file #{file.path} --clear-subscriptions})
+      }
+      assert_equal '', stderr
+      assert_equal "Updating content host '#{hostname}'...clearing existing subscriptions...done\n", stdout
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv content-hosts --export --organization Test\ Corporation --itemized-subscriptions --search name=#{hostname}})
+      }
+      assert_equal '', stderr
+      lines = stdout.split("\n")
+      lines.select! { |line| line.match(/tester1.*/) }
+      assert_equal 1, lines.length
+      assert_match(/.*Test Corporation,Library,Default Organization View,"",Yes,,RHEL 7.2,x86_64,2,3882752,1.*/, lines[0])
+      assert_match(/.*Red Hat Enterprise Linux Server, Standard.*/, lines[0])
+      host_delete(hostname)
 
       stop_vcr
     end

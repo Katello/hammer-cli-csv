@@ -10,7 +10,8 @@ module HammerCLICsv
       REPOSITORY = 'Repository'
       REPOSITORY_TYPE = 'Repository Type'
       CONTENT_SET = 'Content Set'
-      RELEASE = 'Release'
+      RELEASEVER = '$releasever'
+      BASEARCH = '$basearch'
       REPOSITORY_URL = 'Repository Url'
       DESCRIPTION = 'Description'
       VERIFY_SSL = 'Verify SSL'
@@ -22,7 +23,7 @@ module HammerCLICsv
 
       def export(csv)
         csv << [NAME, LABEL, ORGANIZATION, DESCRIPTION, REPOSITORY, REPOSITORY_TYPE,
-                CONTENT_SET, RELEASE, REPOSITORY_URL, VERIFY_SSL, UNPROTECTED, MIRROR_ON_SYNC, DOWNLOAD_POLICY,
+                CONTENT_SET, BASEARCH, RELEASEVER, REPOSITORY_URL, VERIFY_SSL, UNPROTECTED, MIRROR_ON_SYNC, DOWNLOAD_POLICY,
                 UPSTREAM_USERNAME, UPSTREAM_PASSWORD]
         @api.resource(:organizations).call(:index, {
             :per_page => 999999,
@@ -50,10 +51,11 @@ module HammerCLICsv
                 repository_type = "Red Hat #{repository['content_type'].capitalize}"
                 content_set = get_content_set(organization, product, repository)
               end
-              release = repository['minor'] #=~ /Server/ ? repository['minor'] : "#{repository['major']}.#{repository['minor']}"
+              releasever = repository['minor']
+              basearch = nil
               csv << [product['name'], product['label'], organization['name'],
                       product['description'], repository['name'], repository_type,
-                      content_set, release, repository['url'],
+                      content_set, basearch, releasever, repository['url'],
                       repository['verify_ssl_on_sync'] ? 'Yes' : 'No',
                       repository['unprotected'] ? 'Yes' : 'No',
                       repository['mirror_on_sync'] ? 'Yes' : 'No', repository['download_policy'],
@@ -228,13 +230,13 @@ module HammerCLICsv
           end
           raise "No match for content set '#{line[CONTENT_SET]}'" if !product_content
 
-          basearch,releasever = parse_basearch_releasever(line[REPOSITORY])
+          basearch,releasever = parse_basearch_releasever(line)
           params = {
               'id' => product_content['content']['id'],
-              'product_id' => product['id'],
-              'basearch' => basearch,
-              'releasever' => releasever
+              'product_id' => product['id']
           }
+          params['basearch'] = basearch if !basearch.nil? && repository_set['contentUrl'] =~ /\$basearch/
+          params['releasever'] = releasever if !releasever.nil? && repository_set['contentUrl'] =~ /\$releasever/
           @api.resource(:repository_sets).call(:enable, params)
           puts _('done') if option_verbose?
         else
@@ -245,13 +247,19 @@ module HammerCLICsv
 
       # basearch and releasever are required for repo set enable. The repository ends with, for example,
       # "x86_64 6.1" or "ia64 6 Server"
-      def parse_basearch_releasever(content_set)
+      def parse_basearch_releasever(line)
+        basearch = line[BASEARCH] if !line[BASEARCH].nil? && !line[BASEARCH].empty?
+        releasever = line[RELEASEVER] if !line[RELEASEVER].nil? && !line[RELEASEVER].empty?
+        content_set = line[REPOSITORY]
         pieces = content_set.split
         if pieces[-1] == 'Server'
-          return pieces[-3], "#{pieces[-2]}#{pieces[-1]}"
+          basearch = pieces[-3] unless basearch
+          releasever = "#{pieces[-2]}#{pieces[-1]}" unless releasever
         else
-          return pieces[-2], pieces[-1]
+          basearch = pieces[-2] unless basearch
+          releasever = pieces[-1] unless releasever
         end
+        return basearch,releasever
       end
 
       def content_type(repository_type)

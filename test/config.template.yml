@@ -12,6 +12,9 @@
 :log_api_calls: false
 :log_size: 5 # MB
 
+:ssl:
+  :verify_ssl: false
+
 :foreman:
   :enable_module: true
   :host:          'https://localhost'

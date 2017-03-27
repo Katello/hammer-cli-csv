@@ -1019,6 +1019,403 @@ http_interactions:
   recorded_at: Mon, 19 Dec 2016 16:41:01 GMT
 - request:
     method: get
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195/subscriptions?full_results=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:05:33 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9f13f483-0e96-41ae-9300-c1f0aa67306a
+      X-Runtime:
+      - '0.087983'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"28f980ca6d7d7d8bdbe90747a65a208f-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '119'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=1bd4a22bf246b65913618f8a216294bb; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":0,"subtotal":0,"page":1,"per_page":0,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:05:39 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195
+    body:
+      encoding: UTF-8
+      string: '{"host":{"content_facet_attributes":{"lifecycle_environment_id":2,"content_view_id":2},"subscription_facet_attributes":{"installed_products":null,"service_level":null,"autoheal":true}}}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '185'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:05:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2682a51f-2a61-4603-8b21-5209cd3fd737
+      X-Runtime:
+      - '0.452454'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"9011f50c4213133d93cc9b4e38e06d98-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '3473'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=02f594e37f728de3ecb9c24b8d442771; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27
+        18:05:31 UTC","updated_at":"2017-03-27 18:05:33 UTC","last_compile":"2017-03-27
+        18:05:32 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test
+        Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could
+        not calculate errata status, ensure host is registered and katello-agent is
+        installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":195,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":194,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"content_view_name":"Default
+        Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default
+        Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0},"content_view_version":"1.0","content_view_version_id":2,"content_view_default?":true,"lifecycle_environment_library?":true,"katello_agent_installed":false},"subscription_facet_attributes":{"id":200,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27
+        18:05:31 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27
+        18:05:32 UTC","activation_keys":[],"compliance_reasons":[],"virtual_host":null,"virtual_guests":[],"installed_products":[]},"content_host_id":200,"parameters":[],"interfaces":[{"id":196,"name":"testhost1","ip":null,"mac":null,"identifier":null,"primary":true,"provision":true,"type":"interface"}],"puppetclasses":[],"config_groups":[],"all_parameters":[],"all_puppetclasses":[],"facts":{"system::certificate_version":"3.2","network::hostname":"testhost1","cpu::core(s)_per_socket":"1","cpu::cpu_socket(s)":"1","memory::memtotal":"4","uname::machine":"x86_64","distribution::name":"RHEL","distribution::version":"6.4","virt::is_guest":"false","cpu::cpu(s)":"1","system":null,"network":null,"cpu":null,"memory":null,"uname":null,"distribution":null,"virt":null,"_timestamp":"2017-03-27T18:05:32+00:00"},"host_collections":[],"permissions":{"view_hosts":true,"create_hosts":true,"edit_hosts":true,"destroy_hosts":true,"build_hosts":true,"power_hosts":true,"console_hosts":true,"ipmi_boot":true,"puppetrun_hosts":true,"view_discovered_hosts":true,"submit_discovered_hosts":true,"auto_provision_discovered_hosts":true,"provision_discovered_hosts":true,"edit_discovered_hosts":true,"destroy_discovered_hosts":true}}'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/rhsm/consumers/a65947ce-a64a-48de-aa1c-3e1a75a0ce1d
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:05:34 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      X-Candlepin-Version:
+      - katello/3.0.0.82
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7353b9f9-1e4b-4f41-8132-6ad88349a6ab
+      X-Runtime:
+      - '0.090456'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"97183d12e8cb96d559ff807ee28cab3d-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '3132'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=e383532f5e55676193edce622fa4511d; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"ff8080815adcc9a9015b10f1c5e60c42","uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","name":"testhost1","username":"foreman_admin","entitlementStatus":"valid","serviceLevel":"","releaseVer":{"releaseVer":null},"idCert":{"key":"-----BEGIN
+        RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAlrE8FX5Nvu9iNRk2A0HABOUnqaONOv4ZoxHlUx5XouTCuLN6\nOwO7ywCK+Hd1mcZ89K4f4KJWK27duxUY97nflO+SCst2+t2HlEn+NQMkCRm9vT5e\niRo565D+iNPCM2R+8oHVBJMpa5VZGwpeL3NLGshGTlWKgLz6vuZ85IZvMr2Yenmc\nJeQ+G/Rh9A4TinnOU1yn8yStYlhgWc8yZake6b46s1lJwXXeg5/HmPgsnYSbALfm\npYShw+UCs+Vt/9B4rq0xhui469SjruT3GotH9qq1hivP6UjJECNf2z9EEytTGaoA\n9Wn1dEUIZbjSnhq/Vs7Iexnfa+XVl7AgdbtXOwIDAQABAoIBADQx94nKUcuMxwt1\nTAwcvhHz/aT4jXadhOvCyxfbLqexbPDk2bWPOYC7E2e0mPtGkQl/NnNsR0SMBilC\nyX8k1piT0pYCm5eRG+D1MCPUjqrIS7w82inK97zsX/2su1tpt77v0YTgJDyrYk3H\nbZAp8x23uQJxBqRI0OFGnIPbPLDqCHCagSSi/VVkzvtMobPrqGUpNR0o2+dW/I1E\nm/J3W1/d2WTvaay0ALYi3qSsfnifW9+wwfwJN2G/Y6/nxOEdfM+XDo90kInjmTYj\nvibZi80aIeoUXuxkLUeoTne0lNTSuWdSmhWLZv603hAdbw2IemeWB0dA5iM1vZGM\nm0/HAwECgYEA7MHiPtpzj+oI+j/XQAYAjKN3klqCv/lnGCDlJBrc5rHji+rXhe6H\n6J654Wlbk8OvUO1C12WkRoOlifOUEtI3xVfYOpoBbsz56zwWeftIzQ0/H99envDP\nPhbSzSENbNVI81i/r3dgEQWhT1si9GvIvnXB4b6VnSB1v5ZN+LsCG1sCgYEAovCh\nRNrMdRTMosB9DSl4nxnXKi9Sv0KQ+SQyFT/jkN5L/DS3jUjUGLHtpjmXPRWVXNpA\nIGHmAHS5kZHcSVmBztgeeEXe2qAu/xJCmVTxs/3JyR6tsW+H0u0ph2eQS5wrYdnF\nW3XESAL2lNoZAzLSYzfteOyDBno36kGvmX4o2aECgYEAtPfmJcD4wDJVtmMB9xAf\nb2CrzxScCH1sjgbm31ghLb0ffx18rAUNoYNh9aiAtUvIQAV7KAWrMbMC35Vtw40n\n0BI7V1/MZJMNHP+K9qZamVHcxFIKk1biMkVj0CPJjTziTA+0RTzsE1bIXE3/Q/D3\nOo3sKs9wsO/U0SLkapEXJS0CgYA/V3YJ81jKJxTKLDQw2q9WglAfyRfM3E7JW6XQ\nlu6bUZ+OYtv8I5S4KOsu1HKTv4E6AGovbH9iK/47tc1CAnaw91kY/mh86wp6BBo5\ny0jO5Nj9w1xYfvf5KlMbnUn96q7+sg7D2Es+h1BeW06f7LDW+1XozWC+MuLrwS9H\nZ0DwIQKBgQDAmDTf6SChY+ZEyoS6Bx9Utj8RxTvP4292k77kkrk5mCY9e0P/ndtc\nZWQCnSuEROt/Ni3DA4JbKlzYUMoZ+dwSQXiKuZErr43fUJdj+fz8rF7o96GjfzVO\nYm3rPpuescTGudraWzGawJ4vAPt/mzl8Qsfq6lxAOCcKECuJWDi+MQ==\n-----END
+        RSA PRIVATE KEY-----\n","cert":"-----BEGIN CERTIFICATE-----\nMIIEUjCCAzqgAwIBAgIIW7LRzeQUnfEwDQYJKoZIhvcNAQEFBQAwfDELMAkGA1UE\nBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRAwDgYDVQQHEwdSYWxlaWdo\nMRAwDgYDVQQKEwdLYXRlbGxvMRQwEgYDVQQLEwtTb21lT3JnVW5pdDEaMBgGA1UE\nAxMRc2F0NjIuZXhhbXBsZS5jb20wHhcNMTcwMzI3MTgwNTMyWhcNMzMwMzI3MTgw\nNTMyWjAvMS0wKwYDVQQDEyRhNjU5NDdjZS1hNjRhLTQ4ZGUtYWExYy0zZTFhNzVh\nMGNlMWQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCWsTwVfk2+72I1\nGTYDQcAE5Sepo406/hmjEeVTHlei5MK4s3o7A7vLAIr4d3WZxnz0rh/golYrbt27\nFRj3ud+U75IKy3b63YeUSf41AyQJGb29Pl6JGjnrkP6I08IzZH7ygdUEkylrlVkb\nCl4vc0sayEZOVYqAvPq+5nzkhm8yvZh6eZwl5D4b9GH0DhOKec5TXKfzJK1iWGBZ\nzzJlqR7pvjqzWUnBdd6Dn8eY+CydhJsAt+alhKHD5QKz5W3/0HiurTGG6Ljr1KOu\n5Pcai0f2qrWGK8/pSMkQI1/bP0QTK1MZqgD1afV0RQhluNKeGr9Wzsh7Gd9r5dWX\nsCB1u1c7AgMBAAGjggEjMIIBHzARBglghkgBhvhCAQEEBAMCBaAwCwYDVR0PBAQD\nAgSwMIGvBgNVHSMEgacwgaSAFE0a7C+GbR8izagxm3Zq6NJUOCLhoYGApH4wfDEL\nMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRAwDgYDVQQHEwdS\nYWxlaWdoMRAwDgYDVQQKEwdLYXRlbGxvMRQwEgYDVQQLEwtTb21lT3JnVW5pdDEa\nMBgGA1UEAxMRc2F0NjIuZXhhbXBsZS5jb22CCQCOJqql+xfH2TAdBgNVHQ4EFgQU\nAWUBgYFnDfb+8omtfQMbKTV9kKowEwYDVR0lBAwwCgYIKwYBBQUHAwIwFwYDVR0R\nBBAwDoYMQ049dGVzdGhvc3QxMA0GCSqGSIb3DQEBBQUAA4IBAQC5S8iMyxtHmj0v\nz7a+ihJkAuYtyz6sLW0Zsw9bEFyI5bfdtXGSF32tSGY3DrcGgJ/MPHk78pMu6/NJ\nwYulSy6Vr7y2C1LF9lRWjfpgMy0rhUGqc90NwAGXaJxg0Pce3Q34Wj7rs1hVj5sm\nGyfSISH37VQFQOjbm/cpdoGaUY5CnJb6BLo7fMkM91m5oMLqZuHLbovp9cJs4VFf\nU63bN+XA0weTIUo01DDRtV8P0DlirfVind8091wjmOtC1RWyQaeG7pBD1bI7X3Lm\nuFbwm3x0EaIwUt9T4UWy01XAteUBJV1hAC2UVJCr31p+maNDg+aoXq2a5Vm77R6s\nZ/DFvqpC\n-----END
+        CERTIFICATE-----\n","id":"ff8080815adcc9a9015b10f1c6840c44","serial":{"id":6607574285530996209,"revoked":false,"collected":false,"expiration":"2033-03-27T18:05:32.008+0000","serial":6607574285530996209,"created":"2017-03-27T18:05:32.008+0000","updated":"2017-03-27T18:05:32.008+0000"},"created":"2017-03-27T18:05:32.164+0000","updated":"2017-03-27T18:05:32.164+0000"},"type":{"id":"1000","label":"system","manifest":false},"owner":{"id":"ff80808158bbd8b50158bbe26aef03c2","key":"testcorp","displayName":"Test
+        Corporation","href":"/owners/testcorp"},"environment":{"owner":{"id":"ff80808158bbd8b50158bbe26aef03c2","key":"testcorp","displayName":"Test
+        Corporation","href":"/owners/testcorp"},"name":"Library","description":null,"id":"2","environmentContent":[],"created":"2016-12-01T19:35:27.852+0000","updated":"2016-12-01T19:35:27.852+0000"},"entitlementCount":0,"facts":{"network.hostname":"testhost1","distribution.name":"RHEL","distribution.version":"6.4","system.certificate_version":"3.2","_timestamp":"2017-03-27T18:05:31+00:00","uname.machine":"x86_64","cpu.cpu_socket(s)":"1","memory.memtotal":"4","cpu.core(s)_per_socket":"1","cpu.cpu(s)":"1","virt.is_guest":"false"},"lastCheckin":null,"installedProducts":[],"canActivate":false,"guestIds":[],"capabilities":[],"hypervisorId":null,"contentTags":[],"autoheal":true,"dev":false,"href":"/consumers/a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","created":"2017-03-27T18:05:32.006+0000","updated":"2017-03-27T18:05:32.172+0000"}'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/rhsm/consumers/a65947ce-a64a-48de-aa1c-3e1a75a0ce1d
+    body:
+      encoding: UTF-8
+      string: '{"facts":{"network.hostname":"testhost1","distribution.name":"RHEL","distribution.version":"6.4","system.certificate_version":"3.2","_timestamp":"2017-03-27T18:05:31+00:00","uname.machine":"x86_64","cpu.cpu_socket(s)":"1","memory.memtotal":"4","cpu.core(s)_per_socket":"1","cpu.cpu(s)":"1","virt.is_guest":false}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:05:35 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - a8541352-a607-488f-b5e2-75ed01a1e79b
+      X-Runtime:
+      - '0.015168'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Status:
+      - 403 Forbidden
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=4542b1c197ed7c132ab79a251b65fd69; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"displayMessage":"Access denied","errors":["Access denied"]}'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195/subscriptions?full_results=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:05:35 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - b68f4f1b-4f96-4cb4-9bd2-40159de12753
+      X-Runtime:
+      - '0.097971'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"28f980ca6d7d7d8bdbe90747a65a208f-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '119'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=d8e17b9b25611cf714563994ddfe9874; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":0,"subtotal":0,"page":1,"per_page":0,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+- request:
+    method: delete
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:05:35 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0fe689f3-d1bb-4288-be36-0d8b40e4a8e8
+      X-Runtime:
+      - '0.810904'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"2b3d6af5555fec5b70880caa5a9838a3-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1358'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=adb36c48063076169223831df44a34f3; path=/; secure; HttpOnly
+      - request_method=DELETE; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":195,"name":"testhost1","last_compile":"2017-03-27T18:05:32.000Z","last_report":null,"updated_at":"2017-03-27T18:05:33.114Z","created_at":"2017-03-27T18:05:31.806Z","root_pass":null,"architecture_id":null,"operatingsystem_id":null,"environment_id":null,"ptable_id":null,"medium_id":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"puppet_proxy_id":null,"certname":"testhost1","image_id":null,"organization_id":3,"location_id":2,"otp":null,"realm_id":null,"compute_profile_id":null,"provision_method":"build","content_source_id":null,"grub_pass":"","discovery_rule_id":null,"content_view_id":null,"lifecycle_environment_id":null,"global_status":0,"lookup_value_matcher":"fqdn=testhost1","openscap_proxy_id":null,"content_facet_attributes":{"id":194,"host_id":195,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"lifecycle_environment_id":2,"kickstart_repository_id":null},"subscription_facet_attributes":{"id":200,"host_id":195,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27T18:05:31.831Z","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27T18:05:32.006Z"}}'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:05:42 GMT
+- request:
+    method: get
     uri: https://admin:changeme@devel.example.com:50083/api/status
     body:
       encoding: US-ASCII
@@ -1038,7 +1435,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:30 GMT
+      - Mon, 27 Mar 2017 18:34:22 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1056,9 +1453,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ae59d4be-071b-4f3f-80a4-570f605a18f4
+      - bcaf36ae-0bb7-4206-a995-207c46aac3f1
       X-Runtime:
-      - '0.066499'
+      - '0.046953'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -1070,12 +1467,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=bb0cc4ca4f9dfd145f6b8e3db72d22bb; path=/; secure; HttpOnly
+      - _session_id=9a1c86ff0228d574a2999841858f5a0d; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:36 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:28 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
@@ -1097,7 +1494,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:30 GMT
+      - Mon, 27 Mar 2017 18:34:22 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1115,9 +1512,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 7363208b-af5e-4573-89a7-68b230b28825
+      - 07a690be-0b04-4f96-bdcd-c27f360e3d34
       X-Runtime:
-      - '0.048465'
+      - '0.048324'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -1131,7 +1528,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=2b30518558b4724f9e42de4cd051f013; path=/; secure; HttpOnly
+      - _session_id=ffa90c3f6ee322477093cac94b1a934f; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -1210,7 +1607,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:36 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:28 GMT
 - request:
     method: get
     uri: https://devel.example.com:50083/apidoc/v2.en.json
@@ -1236,7 +1633,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:30 GMT
+      - Mon, 27 Mar 2017 18:34:22 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1254,9 +1651,9 @@ http_interactions:
       Apipie-Checksum:
       - e1df2e8d43e22495b02a53b48e3b5298
       X-Request-Id:
-      - 2ab5f878-e23f-4e8e-8044-9cb713e2efdd
+      - 100240e0-4f1d-408c-8a9c-f921a469b357
       X-Runtime:
-      - '0.007272'
+      - '0.005375'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -20895,7 +21292,7 @@ http_interactions:
         Ijp0cnVlfV0sImhlYWRlcnMiOm51bGx9fSwibGlua19leHRlbnNpb24iOiIu
         ZW4uaHRtbCJ9fQ==
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:37 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:28 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -20921,7 +21318,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:30 GMT
+      - Mon, 27 Mar 2017 18:34:22 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20939,13 +21336,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b4383cd6-5fee-4fd3-9adb-f8ba30800a67
+      - 2c64c354-7066-417c-bd73-48b3135e4e4a
       X-Runtime:
-      - '0.082358'
+      - '0.056567'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"2009333f9dea90f7e284b5ac7176fd38-gzip"'
+      - '"45c0a1d1908621d8a984de3fe2b76754-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -20955,7 +21352,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=fb0cfab8ed31d9d31750cb16c0aadad5; path=/; secure; HttpOnly
+      - _session_id=d060773a357c1e80868aadc526a4d967; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -20969,10 +21366,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2016-12-01 19:45:39 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-03-27 18:28:18 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:37 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:28 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/organizations/3/hosts?per_page=1
@@ -20998,7 +21395,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:30 GMT
+      - Mon, 27 Mar 2017 18:34:22 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21016,13 +21413,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 304d1d41-3da0-4fee-b37e-81744080ea70
+      - 83b7df27-301d-4f26-ba92-b7202bbdc358
       X-Runtime:
-      - '0.158013'
+      - '0.135770'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"c7b5f9500f4b16e2a0ccdab75fa46175-gzip"'
+      - '"aa071a3b0682e7e6e0310fa5e49927ac-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21032,7 +21429,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=95edcb32f0b72e002474a5bccb69cc54; path=/; secure; HttpOnly
+      - _session_id=c24d1d06a2ce85ca53346535d6b8c208; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21046,10 +21443,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-01 19:38:28 UTC","updated_at":"2016-12-01 19:43:53 UTC","last_compile":"2016-12-01 19:38:30 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":7,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","last_checkin":"2016-12-01 19:38:28 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:38:28 UTC"},"content_host_id":6}]
+          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-01 19:38:28 UTC","updated_at":"2017-03-27 18:21:56 UTC","last_compile":"2016-12-01 19:38:30 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":7,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","last_checkin":"2016-12-01 19:38:28 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:38:28 UTC"},"content_host_id":6}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:37 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:28 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/organizations/3/hosts?page=1&per_page=20
@@ -21075,7 +21472,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:31 GMT
+      - Mon, 27 Mar 2017 18:34:22 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21093,13 +21490,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 37729416-9f4d-42ee-97fb-afb1652957b7
+      - d40e8cb4-e4ea-4a2d-b48a-9629b6499b2d
       X-Runtime:
-      - '0.165228'
+      - '0.384118'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"45ecf6e7a477c9531ef71cc8635b2810-gzip"'
+      - '"790c22d6d1fcf8c0b08afacb06f8909f-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21109,7 +21506,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=0e5f76c3e54431daa4fe40315e15ba25; path=/; secure; HttpOnly
+      - _session_id=41f899da6092cafb43396cbb3d2fd79c; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21123,10 +21520,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-01 19:38:28 UTC","updated_at":"2016-12-01 19:43:53 UTC","last_compile":"2016-12-01 19:38:30 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":7,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","last_checkin":"2016-12-01 19:38:28 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:38:28 UTC"},"content_host_id":6},{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testvm","image_id":null,"image_name":null,"created_at":"2016-12-01 19:37:05 UTC","updated_at":"2016-12-01 19:43:43 UTC","last_compile":"2016-12-01 19:37:06 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testvm","id":6,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","last_checkin":"2016-12-01 19:37:05 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:37:05 UTC"},"content_host_id":5}]
+          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-01 19:38:28 UTC","updated_at":"2017-03-27 18:21:56 UTC","last_compile":"2016-12-01 19:38:30 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":7,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","last_checkin":"2016-12-01 19:38:28 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:38:28 UTC"},"content_host_id":6},{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testvm","image_id":null,"image_name":null,"created_at":"2016-12-01 19:37:05 UTC","updated_at":"2017-03-27 18:28:09 UTC","last_compile":"2016-12-01 19:37:06 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testvm","id":6,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","last_checkin":"2016-12-01 19:37:05 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:37:05 UTC"},"content_host_id":5}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:37 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:29 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/environments?per_page=999999
@@ -21152,7 +21549,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:31 GMT
+      - Mon, 27 Mar 2017 18:34:23 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21170,9 +21567,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9b7c34e6-2be0-42ec-9e8a-2f3c0129edd9
+      - b559c0d1-05bc-4d1d-b784-6a6dfc81f7a6
       X-Runtime:
-      - '0.117466'
+      - '0.179800'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21186,7 +21583,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=774f4b9a8d4c8d7766a4aa13c1efd855; path=/; secure; HttpOnly
+      - _session_id=d8fa9f0aceea43f290f8f1bc2f3410a6; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":5,"subtotal":5,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"library":false,"id":4,"name":"Test","label":"Test","description":"Test,
@@ -21203,7 +21600,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:37 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:29 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/content_views?per_page=999999
@@ -21229,7 +21626,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:31 GMT
+      - Mon, 27 Mar 2017 18:34:23 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21247,9 +21644,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3fc20e3f-1fff-49f2-9bd0-653ffe688a6b
+      - 1150fa48-c745-4ec3-bdf4-360e8d6a87be
       X-Runtime:
-      - '0.053914'
+      - '0.079041'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21263,7 +21660,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=ed3193a972a1f7cb5a6f993ceb156b22; path=/; secure; HttpOnly
+      - _session_id=94e3ecdb88f012fe8619acefa8864086; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"component_ids":[],"default":false,"next_version":2,"id":3,"name":"Test
@@ -21280,7 +21677,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:37 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:29 GMT
 - request:
     method: post
     uri: https://admin:changeme@devel.example.com:50083/api/hosts/subscriptions
@@ -21308,7 +21705,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:31 GMT
+      - Mon, 27 Mar 2017 18:34:23 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21326,13 +21723,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 94c1ccaa-33c2-464c-ac6f-ca41c89983f5
+      - ac9d699e-5189-482e-957b-70b607bf0787
       X-Runtime:
-      - '1.576842'
+      - '1.486182'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"a28b112c718ac47604bf21a11d023de3-gzip"'
+      - '"ef5aa3547b6ba7cad7996c8d13dbdd62-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21342,19 +21739,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=a551ef1827af1983e72a6691df2008c5; path=/; secure; HttpOnly
+      - _session_id=26c60b43e48f9120737e666bc827b0fd; path=/; secure; HttpOnly
       - request_method=POST; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"id":195,"name":"testhost1","content_view":"Default Organization
+      string: '  {"id":211,"name":"testhost1","content_view":"Default Organization
         View","content_view_id":null,"environment":"Library"}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:39 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:31 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195/subscriptions?full_results=true
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/211/subscriptions?full_results=true
     body:
       encoding: US-ASCII
       string: ''
@@ -21377,7 +21774,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:33 GMT
+      - Mon, 27 Mar 2017 18:34:24 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21395,9 +21792,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9f13f483-0e96-41ae-9300-c1f0aa67306a
+      - 404e443e-1156-4423-82cd-63ca74800725
       X-Runtime:
-      - '0.087983'
+      - '0.099248'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21411,14 +21808,14 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=1bd4a22bf246b65913618f8a216294bb; path=/; secure; HttpOnly
+      - _session_id=5a10307bd011cb849835e4af5560d77d; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":0,"subtotal":0,"page":1,"per_page":0,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:39 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/status
@@ -21440,7 +21837,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:33 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21458,9 +21855,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f052bc72-a19c-4b02-bdbf-e060557d39d2
+      - f110b864-a98a-471a-a3bf-1069bf401337
       X-Runtime:
-      - '0.026889'
+      - '0.037066'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21472,12 +21869,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=a46130186b184505142e447147a035d5; path=/; secure; HttpOnly
+      - _session_id=523c40010018644af3030b656565a6a9; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:39 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
@@ -21499,7 +21896,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:33 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21517,9 +21914,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9dadfe04-9fa1-4fc4-9319-4513e79fb07c
+      - 76aedcc9-c663-4371-be48-f88bae13bfc8
       X-Runtime:
-      - '0.029085'
+      - '0.030747'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21533,7 +21930,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=e5a61fdd2715fd95df25d2e455057766; path=/; secure; HttpOnly
+      - _session_id=f1aafd7af8669e55234c63ccde8dab25; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -21612,7 +22009,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:39 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -21638,7 +22035,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:33 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21656,13 +22053,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0301cbbf-dc4a-43fa-b224-721cde579c82
+      - 0bcd351c-5ac1-4e0b-a9dd-025de82c04e2
       X-Runtime:
-      - '0.135013'
+      - '0.034916'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"2009333f9dea90f7e284b5ac7176fd38-gzip"'
+      - '"45c0a1d1908621d8a984de3fe2b76754-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21672,7 +22069,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=28f8e566159d0d68c776597455b4cf0b; path=/; secure; HttpOnly
+      - _session_id=295d3686100e6c45c505f83c1ded7494; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21686,10 +22083,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2016-12-01 19:45:39 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-03-27 18:28:18 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:39 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/organizations/3/hosts?per_page=1
@@ -21715,7 +22112,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:33 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21733,13 +22130,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 841c1278-8783-4e59-92af-336d06864a4c
+      - b913f716-8841-4687-86eb-38082d336c4c
       X-Runtime:
-      - '0.139879'
+      - '0.156258'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"d000217fb03c1a5784a9c37bb491ebcf-gzip"'
+      - '"cd70bdab123e342092864c4e276e09fb-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21749,7 +22146,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=0310d7797b42d2cf7266bede72f43366; path=/; secure; HttpOnly
+      - _session_id=574c742fc6b935ea715d0ff148874c6a; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21763,10 +22160,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:05:31 UTC","updated_at":"2017-03-27 18:05:33 UTC","last_compile":"2017-03-27 18:05:32 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":195,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":194,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":200,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27 18:05:31 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:05:32 UTC"},"content_host_id":200}]
+          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:34:23 UTC","updated_at":"2017-03-27 18:34:24 UTC","last_compile":"2017-03-27 18:34:24 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":211,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":210,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":216,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","last_checkin":"2017-03-27 18:34:23 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:34:23 UTC"},"content_host_id":216}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:39 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/organizations/3/hosts?page=1&per_page=20
@@ -21792,7 +22189,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:33 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21810,13 +22207,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - fd44b1a1-d9b6-4b5a-a4e6-376d72067021
+      - 609980d8-3f35-48c4-b3f5-60ca91cddbec
       X-Runtime:
-      - '0.308378'
+      - '0.231968'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"dc347af1c3c825bd89df3500b5335a6c-gzip"'
+      - '"36cee6e03cc7b887894236a336cad227-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21826,7 +22223,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=594a76ba1fbb88f83392efc13f9c54f8; path=/; secure; HttpOnly
+      - _session_id=13416800268be1ef4d736eefe8731c3a; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21840,10 +22237,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:05:31 UTC","updated_at":"2017-03-27 18:05:33 UTC","last_compile":"2017-03-27 18:05:32 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":195,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":194,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":200,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27 18:05:31 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:05:32 UTC"},"content_host_id":200},{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-01 19:38:28 UTC","updated_at":"2016-12-01 19:43:53 UTC","last_compile":"2016-12-01 19:38:30 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":7,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","last_checkin":"2016-12-01 19:38:28 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:38:28 UTC"},"content_host_id":6},{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testvm","image_id":null,"image_name":null,"created_at":"2016-12-01 19:37:05 UTC","updated_at":"2016-12-01 19:43:43 UTC","last_compile":"2016-12-01 19:37:06 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testvm","id":6,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","last_checkin":"2016-12-01 19:37:05 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:37:05 UTC"},"content_host_id":5}]
+          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:34:23 UTC","updated_at":"2017-03-27 18:34:24 UTC","last_compile":"2017-03-27 18:34:24 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":211,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":210,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":216,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","last_checkin":"2017-03-27 18:34:23 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:34:23 UTC"},"content_host_id":216},{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testphysical","image_id":null,"image_name":null,"created_at":"2016-12-01 19:38:28 UTC","updated_at":"2017-03-27 18:21:56 UTC","last_compile":"2016-12-01 19:38:30 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testphysical","id":7,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":6,"uuid":"22955fb7-7b12-4db8-83be-6443ba725d77","last_checkin":"2016-12-01 19:38:28 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:38:28 UTC"},"content_host_id":6},{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testvm","image_id":null,"image_name":null,"created_at":"2016-12-01 19:37:05 UTC","updated_at":"2017-03-27 18:28:09 UTC","last_compile":"2016-12-01 19:37:06 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testvm","id":6,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":5,"uuid":"2b996a62-2be7-4cb6-adaa-0933a69cb9bc","last_checkin":"2016-12-01 19:37:05 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2016-12-01 19:37:05 UTC"},"content_host_id":5}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:40 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/environments?per_page=999999
@@ -21869,7 +22266,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:34 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21887,9 +22284,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - fc2af7ab-d013-401c-8370-351a14aa35fb
+      - 50b7dc33-382e-4dea-b54d-cf93e51bbfb1
       X-Runtime:
-      - '0.257529'
+      - '0.188194'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21903,7 +22300,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=78dd685c74de8be3f8190dab540dd45a; path=/; secure; HttpOnly
+      - _session_id=a137d2ccbb7459f1067cbe98deb72031; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":5,"subtotal":5,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"library":false,"id":4,"name":"Test","label":"Test","description":"Test,
@@ -21920,7 +22317,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:40 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:32 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/content_views?per_page=999999
@@ -21946,7 +22343,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:34 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21964,9 +22361,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 760bc472-f5ca-4967-961b-00298b13532f
+      - 0b220f07-f588-4c3b-a34d-6664860ef3d0
       X-Runtime:
-      - '0.156533'
+      - '0.081745'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21980,7 +22377,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=6359e488cdc668d3497b798dddf99065; path=/; secure; HttpOnly
+      - _session_id=7c674ae930b3691cf98a7b71e21a1645; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"component_ids":[],"default":false,"next_version":2,"id":3,"name":"Test
@@ -21997,10 +22394,10 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:40 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:32 GMT
 - request:
     method: put
-    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/211
     body:
       encoding: UTF-8
       string: '{"host":{"content_facet_attributes":{"lifecycle_environment_id":2,"content_view_id":2},"subscription_facet_attributes":{"installed_products":null,"service_level":null,"autoheal":true}}}'
@@ -22025,7 +22422,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:34 GMT
+      - Mon, 27 Mar 2017 18:34:25 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22043,13 +22440,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2682a51f-2a61-4603-8b21-5209cd3fd737
+      - a2896fd0-ace2-40b7-83fb-d4891b087fb3
       X-Runtime:
-      - '0.452454'
+      - '0.357213'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"9011f50c4213133d93cc9b4e38e06d98-gzip"'
+      - '"bcf428d35828ac0ae9f1294849fcb65a-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -22059,25 +22456,25 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=02f594e37f728de3ecb9c24b8d442771; path=/; secure; HttpOnly
+      - _session_id=93ab4e205eef03111366ae66a788b64a; path=/; secure; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
       string: '{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27
-        18:05:31 UTC","updated_at":"2017-03-27 18:05:33 UTC","last_compile":"2017-03-27
-        18:05:32 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test
+        18:34:23 UTC","updated_at":"2017-03-27 18:34:24 UTC","last_compile":"2017-03-27
+        18:34:24 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test
         Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could
         not calculate errata status, ensure host is registered and katello-agent is
-        installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":195,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":194,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"content_view_name":"Default
+        installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":211,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":210,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","content_view_id":2,"content_view_name":"Default
         Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default
-        Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0},"content_view_version":"1.0","content_view_version_id":2,"content_view_default?":true,"lifecycle_environment_library?":true,"katello_agent_installed":false},"subscription_facet_attributes":{"id":200,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27
-        18:05:31 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27
-        18:05:32 UTC","activation_keys":[],"compliance_reasons":[],"virtual_host":null,"virtual_guests":[],"installed_products":[]},"content_host_id":200,"parameters":[],"interfaces":[{"id":196,"name":"testhost1","ip":null,"mac":null,"identifier":null,"primary":true,"provision":true,"type":"interface"}],"puppetclasses":[],"config_groups":[],"all_parameters":[],"all_puppetclasses":[],"facts":{"system::certificate_version":"3.2","network::hostname":"testhost1","cpu::core(s)_per_socket":"1","cpu::cpu_socket(s)":"1","memory::memtotal":"4","uname::machine":"x86_64","distribution::name":"RHEL","distribution::version":"6.4","virt::is_guest":"false","cpu::cpu(s)":"1","system":null,"network":null,"cpu":null,"memory":null,"uname":null,"distribution":null,"virt":null,"_timestamp":"2017-03-27T18:05:32+00:00"},"host_collections":[],"permissions":{"view_hosts":true,"create_hosts":true,"edit_hosts":true,"destroy_hosts":true,"build_hosts":true,"power_hosts":true,"console_hosts":true,"ipmi_boot":true,"puppetrun_hosts":true,"view_discovered_hosts":true,"submit_discovered_hosts":true,"auto_provision_discovered_hosts":true,"provision_discovered_hosts":true,"edit_discovered_hosts":true,"destroy_discovered_hosts":true}}'
+        Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0},"content_view_version":"1.0","content_view_version_id":2,"content_view_default?":true,"lifecycle_environment_library?":true,"katello_agent_installed":false},"subscription_facet_attributes":{"id":216,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","last_checkin":"2017-03-27
+        18:34:23 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27
+        18:34:23 UTC","activation_keys":[],"compliance_reasons":[],"virtual_host":null,"virtual_guests":[],"installed_products":[]},"content_host_id":216,"parameters":[],"interfaces":[{"id":212,"name":"testhost1","ip":null,"mac":null,"identifier":null,"primary":true,"provision":true,"type":"interface"}],"puppetclasses":[],"config_groups":[],"all_parameters":[],"all_puppetclasses":[],"facts":{"memory":null,"uname":null,"system::certificate_version":"3.2","network::hostname":"testhost1","cpu::core(s)_per_socket":"1","cpu::cpu_socket(s)":"1","memory::memtotal":"4","uname::machine":"x86_64","distribution::name":"RHEL","distribution::version":"6.4","virt::is_guest":"false","cpu::cpu(s)":"1","system":null,"network":null,"cpu":null,"distribution":null,"virt":null,"_timestamp":"2017-03-27T18:34:24+00:00"},"host_collections":[],"permissions":{"view_hosts":true,"create_hosts":true,"edit_hosts":true,"destroy_hosts":true,"build_hosts":true,"power_hosts":true,"console_hosts":true,"ipmi_boot":true,"puppetrun_hosts":true,"view_discovered_hosts":true,"submit_discovered_hosts":true,"auto_provision_discovered_hosts":true,"provision_discovered_hosts":true,"edit_discovered_hosts":true,"destroy_discovered_hosts":true}}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:32 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/rhsm/consumers/a65947ce-a64a-48de-aa1c-3e1a75a0ce1d
+    uri: https://admin:changeme@devel.example.com:50083/rhsm/consumers/5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9
     body:
       encoding: US-ASCII
       string: ''
@@ -22094,7 +22491,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:34 GMT
+      - Mon, 27 Mar 2017 18:34:26 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22112,39 +22509,39 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 7353b9f9-1e4b-4f41-8132-6ad88349a6ab
+      - 46ede3e1-4348-46da-b245-b76c09fc842f
       X-Runtime:
-      - '0.090456'
+      - '0.082760'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"97183d12e8cb96d559ff807ee28cab3d-gzip"'
+      - '"715665ea8b456705a6b3e01c10ab9057-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '3132'
+      - '3130'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=e383532f5e55676193edce622fa4511d; path=/; secure; HttpOnly
+      - _session_id=dee319fad21ac8976be9974bd4bf4742; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"ff8080815adcc9a9015b10f1c5e60c42","uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","name":"testhost1","username":"foreman_admin","entitlementStatus":"valid","serviceLevel":"","releaseVer":{"releaseVer":null},"idCert":{"key":"-----BEGIN
-        RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAlrE8FX5Nvu9iNRk2A0HABOUnqaONOv4ZoxHlUx5XouTCuLN6\nOwO7ywCK+Hd1mcZ89K4f4KJWK27duxUY97nflO+SCst2+t2HlEn+NQMkCRm9vT5e\niRo565D+iNPCM2R+8oHVBJMpa5VZGwpeL3NLGshGTlWKgLz6vuZ85IZvMr2Yenmc\nJeQ+G/Rh9A4TinnOU1yn8yStYlhgWc8yZake6b46s1lJwXXeg5/HmPgsnYSbALfm\npYShw+UCs+Vt/9B4rq0xhui469SjruT3GotH9qq1hivP6UjJECNf2z9EEytTGaoA\n9Wn1dEUIZbjSnhq/Vs7Iexnfa+XVl7AgdbtXOwIDAQABAoIBADQx94nKUcuMxwt1\nTAwcvhHz/aT4jXadhOvCyxfbLqexbPDk2bWPOYC7E2e0mPtGkQl/NnNsR0SMBilC\nyX8k1piT0pYCm5eRG+D1MCPUjqrIS7w82inK97zsX/2su1tpt77v0YTgJDyrYk3H\nbZAp8x23uQJxBqRI0OFGnIPbPLDqCHCagSSi/VVkzvtMobPrqGUpNR0o2+dW/I1E\nm/J3W1/d2WTvaay0ALYi3qSsfnifW9+wwfwJN2G/Y6/nxOEdfM+XDo90kInjmTYj\nvibZi80aIeoUXuxkLUeoTne0lNTSuWdSmhWLZv603hAdbw2IemeWB0dA5iM1vZGM\nm0/HAwECgYEA7MHiPtpzj+oI+j/XQAYAjKN3klqCv/lnGCDlJBrc5rHji+rXhe6H\n6J654Wlbk8OvUO1C12WkRoOlifOUEtI3xVfYOpoBbsz56zwWeftIzQ0/H99envDP\nPhbSzSENbNVI81i/r3dgEQWhT1si9GvIvnXB4b6VnSB1v5ZN+LsCG1sCgYEAovCh\nRNrMdRTMosB9DSl4nxnXKi9Sv0KQ+SQyFT/jkN5L/DS3jUjUGLHtpjmXPRWVXNpA\nIGHmAHS5kZHcSVmBztgeeEXe2qAu/xJCmVTxs/3JyR6tsW+H0u0ph2eQS5wrYdnF\nW3XESAL2lNoZAzLSYzfteOyDBno36kGvmX4o2aECgYEAtPfmJcD4wDJVtmMB9xAf\nb2CrzxScCH1sjgbm31ghLb0ffx18rAUNoYNh9aiAtUvIQAV7KAWrMbMC35Vtw40n\n0BI7V1/MZJMNHP+K9qZamVHcxFIKk1biMkVj0CPJjTziTA+0RTzsE1bIXE3/Q/D3\nOo3sKs9wsO/U0SLkapEXJS0CgYA/V3YJ81jKJxTKLDQw2q9WglAfyRfM3E7JW6XQ\nlu6bUZ+OYtv8I5S4KOsu1HKTv4E6AGovbH9iK/47tc1CAnaw91kY/mh86wp6BBo5\ny0jO5Nj9w1xYfvf5KlMbnUn96q7+sg7D2Es+h1BeW06f7LDW+1XozWC+MuLrwS9H\nZ0DwIQKBgQDAmDTf6SChY+ZEyoS6Bx9Utj8RxTvP4292k77kkrk5mCY9e0P/ndtc\nZWQCnSuEROt/Ni3DA4JbKlzYUMoZ+dwSQXiKuZErr43fUJdj+fz8rF7o96GjfzVO\nYm3rPpuescTGudraWzGawJ4vAPt/mzl8Qsfq6lxAOCcKECuJWDi+MQ==\n-----END
-        RSA PRIVATE KEY-----\n","cert":"-----BEGIN CERTIFICATE-----\nMIIEUjCCAzqgAwIBAgIIW7LRzeQUnfEwDQYJKoZIhvcNAQEFBQAwfDELMAkGA1UE\nBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRAwDgYDVQQHEwdSYWxlaWdo\nMRAwDgYDVQQKEwdLYXRlbGxvMRQwEgYDVQQLEwtTb21lT3JnVW5pdDEaMBgGA1UE\nAxMRc2F0NjIuZXhhbXBsZS5jb20wHhcNMTcwMzI3MTgwNTMyWhcNMzMwMzI3MTgw\nNTMyWjAvMS0wKwYDVQQDEyRhNjU5NDdjZS1hNjRhLTQ4ZGUtYWExYy0zZTFhNzVh\nMGNlMWQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCWsTwVfk2+72I1\nGTYDQcAE5Sepo406/hmjEeVTHlei5MK4s3o7A7vLAIr4d3WZxnz0rh/golYrbt27\nFRj3ud+U75IKy3b63YeUSf41AyQJGb29Pl6JGjnrkP6I08IzZH7ygdUEkylrlVkb\nCl4vc0sayEZOVYqAvPq+5nzkhm8yvZh6eZwl5D4b9GH0DhOKec5TXKfzJK1iWGBZ\nzzJlqR7pvjqzWUnBdd6Dn8eY+CydhJsAt+alhKHD5QKz5W3/0HiurTGG6Ljr1KOu\n5Pcai0f2qrWGK8/pSMkQI1/bP0QTK1MZqgD1afV0RQhluNKeGr9Wzsh7Gd9r5dWX\nsCB1u1c7AgMBAAGjggEjMIIBHzARBglghkgBhvhCAQEEBAMCBaAwCwYDVR0PBAQD\nAgSwMIGvBgNVHSMEgacwgaSAFE0a7C+GbR8izagxm3Zq6NJUOCLhoYGApH4wfDEL\nMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRAwDgYDVQQHEwdS\nYWxlaWdoMRAwDgYDVQQKEwdLYXRlbGxvMRQwEgYDVQQLEwtTb21lT3JnVW5pdDEa\nMBgGA1UEAxMRc2F0NjIuZXhhbXBsZS5jb22CCQCOJqql+xfH2TAdBgNVHQ4EFgQU\nAWUBgYFnDfb+8omtfQMbKTV9kKowEwYDVR0lBAwwCgYIKwYBBQUHAwIwFwYDVR0R\nBBAwDoYMQ049dGVzdGhvc3QxMA0GCSqGSIb3DQEBBQUAA4IBAQC5S8iMyxtHmj0v\nz7a+ihJkAuYtyz6sLW0Zsw9bEFyI5bfdtXGSF32tSGY3DrcGgJ/MPHk78pMu6/NJ\nwYulSy6Vr7y2C1LF9lRWjfpgMy0rhUGqc90NwAGXaJxg0Pce3Q34Wj7rs1hVj5sm\nGyfSISH37VQFQOjbm/cpdoGaUY5CnJb6BLo7fMkM91m5oMLqZuHLbovp9cJs4VFf\nU63bN+XA0weTIUo01DDRtV8P0DlirfVind8091wjmOtC1RWyQaeG7pBD1bI7X3Lm\nuFbwm3x0EaIwUt9T4UWy01XAteUBJV1hAC2UVJCr31p+maNDg+aoXq2a5Vm77R6s\nZ/DFvqpC\n-----END
-        CERTIFICATE-----\n","id":"ff8080815adcc9a9015b10f1c6840c44","serial":{"id":6607574285530996209,"revoked":false,"collected":false,"expiration":"2033-03-27T18:05:32.008+0000","serial":6607574285530996209,"created":"2017-03-27T18:05:32.008+0000","updated":"2017-03-27T18:05:32.008+0000"},"created":"2017-03-27T18:05:32.164+0000","updated":"2017-03-27T18:05:32.164+0000"},"type":{"id":"1000","label":"system","manifest":false},"owner":{"id":"ff80808158bbd8b50158bbe26aef03c2","key":"testcorp","displayName":"Test
+      string: '{"id":"ff8080815adcc9a9015b110c32820d8c","uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","name":"testhost1","username":"foreman_admin","entitlementStatus":"valid","serviceLevel":"","releaseVer":{"releaseVer":null},"idCert":{"key":"-----BEGIN
+        RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAoH0vt9YXiW9Cn8Wz72CioU1uMRGfmLBSb/VLuMZrEmesn00X\nQbdsJjqjhuyzNDA82asRPipTWZHUz5Nu8cyiWosqftocbzL0Tc4pfB1pWAbrPE4v\n/YMDxMx/+PkNAm9EwrD9EQ7QdC6nCOzVsD+yDMbe4YA3ZPsUKKN9dFZ0UVtKhMlc\n9Kcjx0z/pAlrlQO6cR5KG7Aep55Dlrkv6n+elP/ZYSxEqzDli8YfQ36GYPgIwGTE\nAL0z17Wzegq2zMUoJJ/NfqxN4x4K2J0WQSmCfLEbX1mA7H61r7B2kxiLnxG8+Qrh\ncuTDmT/RXzxgi9+sX4q5b06+xvVpMrNzYha/7wIDAQABAoIBAQCGyd1D5vmJofow\nuhjvWRf9pUyAxa5mzN/PzBK2s17F7HDcsiBwPx8D1If3D+FKWaEhpz0qGt46AfLc\nC5VIW3eX1/3u4Dy1X/QzTI0nAoSxO85hrcE8h8aoiKCKeJFmlBEJ+x/wLaMBkRUU\nt+SYzEY72OLkPY1IsF8z6mu5Q8sZb+A/0E2qd47kM3lhBCNEg8GhMbcshG+fj4kh\nVX9FEQMoSvjrq0T1Lbc2LuDTLD+uDZ7RZuAdx/xq/CeqCxCddcB8tK2yCKEf7bE3\nOFrVRjdxawY/TcWFfmmipSUSTBbrzP7ZefZXJJZYdMD8e4DdFKKAe9e7bW9MMtuv\nR0OEfIrhAoGBANB6BCgzNvJxE6wl3mATUu5XSH4fOAEKdxzLn0A37x6VEQfP0vGA\nQ0DGIX0TMOqb2DPIuH6/jdrh1huQyb47jQiooVc3THbd5bsY1dXRGeGGa3jMx3S6\nqFaGaKPjUMfiUg/Exg3TYLrgUOGwKcQdoDrZ4KG/msBctLuY3RboXfJXAoGBAMUS\nxtrd7xDFjGUUo6v7QOcqT9/YSUnwF+cBbmoGfFUOQeE18lu20VhdsWaGhxAZabRI\n6vycwzYCI9uQRuJLvbDCuu1/wvJ8j4franuU3TfLoSirIK4zliLhI9gfIQe1GlcM\nBlFyKgyMylEikr1bYr8WER7ORfduU4GCRWBy1pApAoGBAMr2v61Tjx8hr4FdrM3k\ngkzAdTc0tZVt1uEV7Ijc69PeVKJCVp//u3oIavoWAP2nlCl2NQhQ/Y4naAeWQpMN\n7xSK9+itUag4CDzKxQRRetzxvRfyZgzi3JjAaoeD+1VepX3smNVFAVtun8/ZbhAc\nt64UCHnwzHySxPIOtNBkkXIpAoGAdDOdI2KnWxlQri1cUMUmwOd3D4Mlu74hKenz\nI/tNBo4QlG3NyPxkNhmQx+Zc70Y8yLwSKv94L3lVkVpiIX8Ni5NWy0GBPp/ptfg+\n4j2lrweXsDYvX+g1B73+96lrPXMw49DITO/nEV1W0j5zjcm70PZ/A84W/U2FWaDp\nrXQpRfkCgYAHrLQzfiU5r72FNpo4fUfI9al+iKHGN6zILD3gvUmacs+ZfNk/4pvg\n8a5bKIOZFbKBeYwIiHaMnnKPTNffmH4EmXGSp2AlSssVW220cW+VyyYkfnOLAO27\nTQuC/xX1hXZ39aQNlaTCL+lhTliPOY0P3aa++/gUUhdMnXA6E6AhIg==\n-----END
+        RSA PRIVATE KEY-----\n","cert":"-----BEGIN CERTIFICATE-----\nMIIEUjCCAzqgAwIBAgIIW2DUx1VkVv0wDQYJKoZIhvcNAQEFBQAwfDELMAkGA1UE\nBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRAwDgYDVQQHEwdSYWxlaWdo\nMRAwDgYDVQQKEwdLYXRlbGxvMRQwEgYDVQQLEwtTb21lT3JnVW5pdDEaMBgGA1UE\nAxMRc2F0NjIuZXhhbXBsZS5jb20wHhcNMTcwMzI3MTgzNDIzWhcNMzMwMzI3MTgz\nNDIzWjAvMS0wKwYDVQQDEyQ1ZjBlYzkwMC04YzNhLTRiNGItYmNkNC05MGVhOTJl\nYmZmYzkwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCgfS+31heJb0Kf\nxbPvYKKhTW4xEZ+YsFJv9Uu4xmsSZ6yfTRdBt2wmOqOG7LM0MDzZqxE+KlNZkdTP\nk27xzKJaiyp+2hxvMvRNzil8HWlYBus8Ti/9gwPEzH/4+Q0Cb0TCsP0RDtB0LqcI\n7NWwP7IMxt7hgDdk+xQoo310VnRRW0qEyVz0pyPHTP+kCWuVA7pxHkobsB6nnkOW\nuS/qf56U/9lhLESrMOWLxh9DfoZg+AjAZMQAvTPXtbN6CrbMxSgkn81+rE3jHgrY\nnRZBKYJ8sRtfWYDsfrWvsHaTGIufEbz5CuFy5MOZP9FfPGCL36xfirlvTr7G9Wky\ns3NiFr/vAgMBAAGjggEjMIIBHzARBglghkgBhvhCAQEEBAMCBaAwCwYDVR0PBAQD\nAgSwMIGvBgNVHSMEgacwgaSAFE0a7C+GbR8izagxm3Zq6NJUOCLhoYGApH4wfDEL\nMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRAwDgYDVQQHEwdS\nYWxlaWdoMRAwDgYDVQQKEwdLYXRlbGxvMRQwEgYDVQQLEwtTb21lT3JnVW5pdDEa\nMBgGA1UEAxMRc2F0NjIuZXhhbXBsZS5jb22CCQCOJqql+xfH2TAdBgNVHQ4EFgQU\nwlTAnD7RxRXrlC53uzV5YZ/WpkAwEwYDVR0lBAwwCgYIKwYBBQUHAwIwFwYDVR0R\nBBAwDoYMQ049dGVzdGhvc3QxMA0GCSqGSIb3DQEBBQUAA4IBAQC9toBQnoCLRBgC\nefDr6i1lRyc4fwHHLXNl5cqP1SPvIMAa4zycGKnjOrA0nAW+PSYzhhhnr44BoTvt\nNAPZfphbk8/+7GZitQkD153HjM7SV799vzbX/+IZUtQkh1WjciobnfvDReSYa7p4\nuyTxIRMjWSHpz3pGkenwXnDRJBAvuixKCB+0WTmJs1328TdNLfiEHcS9l5k7hAqW\nYCAq2nM4lSOrm2K+sC2p+JoZ0VaDsP/zgeT4s+Lkhp7plzjJz+1hid8dPIkgYP02\nByF9/DlcsppYr2hBTmXFdbp4OvDey/ALLeIiVQrK9cRIE+9sdLEBf15wDtadKCOU\nIYj/x/q8\n-----END
+        CERTIFICATE-----\n","id":"ff8080815adcc9a9015b110c33600d8e","serial":{"id":6584496607811884797,"revoked":false,"collected":false,"expiration":"2033-03-27T18:34:23.749+0000","serial":6584496607811884797,"created":"2017-03-27T18:34:23.749+0000","updated":"2017-03-27T18:34:23.749+0000"},"created":"2017-03-27T18:34:23.968+0000","updated":"2017-03-27T18:34:23.968+0000"},"type":{"id":"1000","label":"system","manifest":false},"owner":{"id":"ff80808158bbd8b50158bbe26aef03c2","key":"testcorp","displayName":"Test
         Corporation","href":"/owners/testcorp"},"environment":{"owner":{"id":"ff80808158bbd8b50158bbe26aef03c2","key":"testcorp","displayName":"Test
-        Corporation","href":"/owners/testcorp"},"name":"Library","description":null,"id":"2","environmentContent":[],"created":"2016-12-01T19:35:27.852+0000","updated":"2016-12-01T19:35:27.852+0000"},"entitlementCount":0,"facts":{"network.hostname":"testhost1","distribution.name":"RHEL","distribution.version":"6.4","system.certificate_version":"3.2","_timestamp":"2017-03-27T18:05:31+00:00","uname.machine":"x86_64","cpu.cpu_socket(s)":"1","memory.memtotal":"4","cpu.core(s)_per_socket":"1","cpu.cpu(s)":"1","virt.is_guest":"false"},"lastCheckin":null,"installedProducts":[],"canActivate":false,"guestIds":[],"capabilities":[],"hypervisorId":null,"contentTags":[],"autoheal":true,"dev":false,"href":"/consumers/a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","created":"2017-03-27T18:05:32.006+0000","updated":"2017-03-27T18:05:32.172+0000"}'
+        Corporation","href":"/owners/testcorp"},"name":"Library","description":null,"id":"2","environmentContent":[],"created":"2016-12-01T19:35:27.852+0000","updated":"2016-12-01T19:35:27.852+0000"},"entitlementCount":0,"facts":{"network.hostname":"testhost1","distribution.name":"RHEL","distribution.version":"6.4","system.certificate_version":"3.2","_timestamp":"2017-03-27T18:34:23+00:00","uname.machine":"x86_64","cpu.cpu_socket(s)":"1","memory.memtotal":"4","cpu.core(s)_per_socket":"1","cpu.cpu(s)":"1","virt.is_guest":"false"},"lastCheckin":null,"installedProducts":[],"canActivate":false,"guestIds":[],"capabilities":[],"hypervisorId":null,"contentTags":[],"autoheal":true,"dev":false,"href":"/consumers/5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","created":"2017-03-27T18:34:23.746+0000","updated":"2017-03-27T18:34:23.974+0000"}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:32 GMT
 - request:
     method: put
-    uri: https://admin:changeme@devel.example.com:50083/rhsm/consumers/a65947ce-a64a-48de-aa1c-3e1a75a0ce1d
+    uri: https://admin:changeme@devel.example.com:50083/rhsm/consumers/5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9
     body:
       encoding: UTF-8
-      string: '{"facts":{"network.hostname":"testhost1","distribution.name":"RHEL","distribution.version":"6.4","system.certificate_version":"3.2","_timestamp":"2017-03-27T18:05:31+00:00","uname.machine":"x86_64","cpu.cpu_socket(s)":"1","memory.memtotal":"4","cpu.core(s)_per_socket":"1","cpu.cpu(s)":"1","virt.is_guest":false}}'
+      string: '{"facts":{"network.hostname":"testhost1","distribution.name":"RHEL","distribution.version":"6.4","system.certificate_version":"3.2","_timestamp":"2017-03-27T18:34:23+00:00","uname.machine":"x86_64","cpu.cpu_socket(s)":"1","memory.memtotal":"4","cpu.core(s)_per_socket":"1","cpu.cpu(s)":"1","virt.is_guest":false}}'
     headers:
       Content-Type:
       - application/json
@@ -22160,7 +22557,7 @@ http_interactions:
       message: Forbidden
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:35 GMT
+      - Mon, 27 Mar 2017 18:34:26 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22176,9 +22573,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - a8541352-a607-488f-b5e2-75ed01a1e79b
+      - c11480c6-173c-4c4e-83d6-e64d295458be
       X-Runtime:
-      - '0.015168'
+      - '0.016676'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -22186,7 +22583,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=4542b1c197ed7c132ab79a251b65fd69; path=/; secure; HttpOnly
+      - _session_id=7104bffeb612034e3f621d16b46fdde9; path=/; secure; HttpOnly
       - request_method=PUT; path=/
       Transfer-Encoding:
       - chunked
@@ -22194,10 +22591,10 @@ http_interactions:
       encoding: UTF-8
       string: '{"displayMessage":"Access denied","errors":["Access denied"]}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:32 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195/subscriptions?full_results=true
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/211/subscriptions?full_results=true
     body:
       encoding: US-ASCII
       string: ''
@@ -22220,7 +22617,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:35 GMT
+      - Mon, 27 Mar 2017 18:34:26 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22238,9 +22635,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b68f4f1b-4f96-4cb4-9bd2-40159de12753
+      - 6b7f1979-eaba-4f4c-9103-e2d93a47cadf
       X-Runtime:
-      - '0.097971'
+      - '0.133222'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -22254,14 +22651,14 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=d8e17b9b25611cf714563994ddfe9874; path=/; secure; HttpOnly
+      - _session_id=a865b759f6deb79ee2532da02d3d413c; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":0,"subtotal":0,"page":1,"per_page":0,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:32 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/hosts?page=1&per_page=20&search=name=testhost1
@@ -22287,7 +22684,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:35 GMT
+      - Mon, 27 Mar 2017 18:34:26 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22305,13 +22702,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 62734157-2e2b-4e86-86d3-877a99f70a0c
+      - 1fb5cb58-49b0-414d-88a8-5be6fe1c0682
       X-Runtime:
-      - '0.164130'
+      - '0.134651'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"20f732491f419ac1f1bba3bf1ec8c2ce-gzip"'
+      - '"616ced47db30b898bf18addcb49afc6b-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -22321,7 +22718,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=db7f601e6f9920c75df0d8c7463a88dc; path=/; secure; HttpOnly
+      - _session_id=d2687c6862ccf278854b2f93038b5fe4; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -22335,10 +22732,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:05:31 UTC","updated_at":"2017-03-27 18:05:33 UTC","last_compile":"2017-03-27 18:05:32 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":195,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":194,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":200,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27 18:05:31 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:05:32 UTC"},"content_host_id":200}]
+          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:34:23 UTC","updated_at":"2017-03-27 18:34:24 UTC","last_compile":"2017-03-27 18:34:24 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":211,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":210,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":216,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","last_checkin":"2017-03-27 18:34:23 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:34:23 UTC"},"content_host_id":216}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:32 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/hosts?page=1&per_page=20&search=testhost1
@@ -22364,7 +22761,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:35 GMT
+      - Mon, 27 Mar 2017 18:34:26 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22382,13 +22779,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2a9706fd-68c1-4c52-98e0-37bbb3bcfcad
+      - bafc838e-ef6f-4172-b09a-b856129cefd2
       X-Runtime:
-      - '0.226337'
+      - '0.267537'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"d32025d57e4c757365c17baa56223de5-gzip"'
+      - '"b4bbccdacdf454f0b8b63ac75455e575-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -22398,7 +22795,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=95f5217115fa6a7f4f9b5c3cc981cebf; path=/; secure; HttpOnly
+      - _session_id=7392bf415aaec1e7474f5edd292b461a; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -22412,13 +22809,13 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:05:31 UTC","updated_at":"2017-03-27 18:05:33 UTC","last_compile":"2017-03-27 18:05:32 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":195,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":194,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":200,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27 18:05:31 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:05:32 UTC"},"content_host_id":200}]
+          "results": [{"ip":null,"environment_id":null,"environment_name":null,"last_report":null,"mac":null,"realm_id":null,"realm_name":null,"sp_mac":null,"sp_ip":null,"sp_name":null,"domain_id":null,"domain_name":null,"architecture_id":null,"architecture_name":null,"operatingsystem_id":null,"operatingsystem_name":null,"subnet_id":null,"subnet_name":null,"sp_subnet_id":null,"ptable_id":null,"ptable_name":null,"medium_id":null,"medium_name":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"compute_resource_name":null,"compute_profile_id":null,"compute_profile_name":null,"capabilities":["build"],"provision_method":"build","puppet_proxy_id":null,"certname":"testhost1","image_id":null,"image_name":null,"created_at":"2017-03-27 18:34:23 UTC","updated_at":"2017-03-27 18:34:24 UTC","last_compile":"2017-03-27 18:34:24 UTC","global_status":0,"global_status_label":"Warning","organization_id":3,"organization_name":"Test Corporation","location_id":2,"location_name":"Default Location","puppet_status":0,"model_name":null,"errata_status":0,"errata_status_label":"Could not calculate errata status, ensure host is registered and katello-agent is installed","subscription_status":0,"subscription_status_label":"Fully entitled","name":"testhost1","id":211,"hostgroup_name":null,"hostgroup_title":null,"content_facet_attributes":{"id":210,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","content_view_id":2,"content_view_name":"Default Organization View","lifecycle_environment_id":2,"lifecycle_environment_name":"Library","content_view":{"id":2,"name":"Default Organization View"},"lifecycle_environment":{"id":2,"name":"Library"},"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0}},"subscription_facet_attributes":{"id":216,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","last_checkin":"2017-03-27 18:34:23 UTC","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27 18:34:23 UTC"},"content_host_id":216}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:41 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:33 GMT
 - request:
     method: delete
-    uri: https://admin:changeme@devel.example.com:50083/api/hosts/195
+    uri: https://admin:changeme@devel.example.com:50083/api/hosts/211
     body:
       encoding: US-ASCII
       string: ''
@@ -22441,7 +22838,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:05:35 GMT
+      - Mon, 27 Mar 2017 18:34:27 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22459,13 +22856,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0fe689f3-d1bb-4288-be36-0d8b40e4a8e8
+      - 986b5f95-9735-4fe6-9c7d-208b898399c5
       X-Runtime:
-      - '0.810904'
+      - '0.831462'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"2b3d6af5555fec5b70880caa5a9838a3-gzip"'
+      - '"1d41a7db781c5d0f454187d74f6f197b-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -22475,11 +22872,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=adb36c48063076169223831df44a34f3; path=/; secure; HttpOnly
+      - _session_id=91b7e21bbeacc580c5a8e7bfae55986c; path=/; secure; HttpOnly
       - request_method=DELETE; path=/
     body:
       encoding: ASCII-8BIT
-      string: '{"id":195,"name":"testhost1","last_compile":"2017-03-27T18:05:32.000Z","last_report":null,"updated_at":"2017-03-27T18:05:33.114Z","created_at":"2017-03-27T18:05:31.806Z","root_pass":null,"architecture_id":null,"operatingsystem_id":null,"environment_id":null,"ptable_id":null,"medium_id":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"puppet_proxy_id":null,"certname":"testhost1","image_id":null,"organization_id":3,"location_id":2,"otp":null,"realm_id":null,"compute_profile_id":null,"provision_method":"build","content_source_id":null,"grub_pass":"","discovery_rule_id":null,"content_view_id":null,"lifecycle_environment_id":null,"global_status":0,"lookup_value_matcher":"fqdn=testhost1","openscap_proxy_id":null,"content_facet_attributes":{"id":194,"host_id":195,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","content_view_id":2,"lifecycle_environment_id":2,"kickstart_repository_id":null},"subscription_facet_attributes":{"id":200,"host_id":195,"uuid":"a65947ce-a64a-48de-aa1c-3e1a75a0ce1d","last_checkin":"2017-03-27T18:05:31.831Z","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27T18:05:32.006Z"}}'
+      string: '{"id":211,"name":"testhost1","last_compile":"2017-03-27T18:34:24.000Z","last_report":null,"updated_at":"2017-03-27T18:34:24.825Z","created_at":"2017-03-27T18:34:23.521Z","root_pass":null,"architecture_id":null,"operatingsystem_id":null,"environment_id":null,"ptable_id":null,"medium_id":null,"build":false,"comment":null,"disk":null,"installed_at":null,"model_id":null,"hostgroup_id":null,"owner_id":3,"owner_type":"User","enabled":true,"puppet_ca_proxy_id":null,"managed":false,"use_image":null,"image_file":"","uuid":null,"compute_resource_id":null,"puppet_proxy_id":null,"certname":"testhost1","image_id":null,"organization_id":3,"location_id":2,"otp":null,"realm_id":null,"compute_profile_id":null,"provision_method":"build","content_source_id":null,"grub_pass":"","discovery_rule_id":null,"content_view_id":null,"lifecycle_environment_id":null,"global_status":0,"lookup_value_matcher":"fqdn=testhost1","openscap_proxy_id":null,"content_facet_attributes":{"id":210,"host_id":211,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","content_view_id":2,"lifecycle_environment_id":2,"kickstart_repository_id":null},"subscription_facet_attributes":{"id":216,"host_id":211,"uuid":"5f0ec900-8c3a-4b4b-bcd4-90ea92ebffc9","last_checkin":"2017-03-27T18:34:23.543Z","service_level":null,"release_version":null,"autoheal":true,"registered_at":"2017-03-27T18:34:23.746Z"}}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:05:42 GMT
+  recorded_at: Mon, 27 Mar 2017 18:34:34 GMT
 recorded_with: VCR 3.0.3

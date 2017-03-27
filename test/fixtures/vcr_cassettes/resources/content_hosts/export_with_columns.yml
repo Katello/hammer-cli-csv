@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/api/status
+    uri: https://admin:changeme@devel.example.com:50083/api/status
     body:
       encoding: US-ASCII
       string: ''
@@ -14,14 +14,14 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - satlap.example.com
+      - devel.example.com:50083
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Mon, 19 Dec 2016 16:42:13 GMT
+      - Mon, 27 Mar 2017 18:05:53 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -31,37 +31,37 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Foreman-Version:
-      - 1.11.0.61
+      - 1.11.0.54
       Foreman-Api-Version:
       - '2'
       Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
+      - e1df2e8d43e22495b02a53b48e3b5298
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 14a188db-c155-4601-8c4b-a604ad0c4b27
+      - bb19b048-07cb-4c8b-8ceb-7690a126c24a
       X-Runtime:
-      - '0.034396'
+      - '0.049974'
       X-Powered-By:
       - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=c244c23a0d95008fd5d6d97e012926ea; path=/; secure; HttpOnly
       Etag:
-      - '"6ec0375dc2b106a955e67a8139b7d9c5"'
+      - '"8e3341d0a4cc328651f7391aed11fef8"'
       Status:
       - 200 OK
       Content-Length:
       - '66'
       Content-Type:
       - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=6ea02bcb18bae08e2290eafc5c5a5eb5; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
-      string: '{"result":"ok","status":200,"version":"1.11.0.61","api_version":2}'
+      string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:41:57 GMT
+  recorded_at: Mon, 27 Mar 2017 18:06:00 GMT
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/api/v2/plugins
+    uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
     body:
       encoding: US-ASCII
       string: ''
@@ -73,14 +73,14 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - satlap.example.com
+      - devel.example.com:50083
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Mon, 19 Dec 2016 16:42:13 GMT
+      - Mon, 27 Mar 2017 18:05:54 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -90,31 +90,31 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Foreman-Version:
-      - 1.11.0.61
+      - 1.11.0.54
       Foreman-Api-Version:
       - '2'
       Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
+      - e1df2e8d43e22495b02a53b48e3b5298
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 73042539-aa34-4621-b795-663ab720103a
+      - f67f3dcc-24c2-4c33-a023-1ab4a608c240
       X-Runtime:
-      - '0.034376'
+      - '0.061929'
       X-Powered-By:
       - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=ea52e7e6c724fc820f5e0e0bdc949d00; path=/; secure; HttpOnly
       Etag:
-      - '"973c5d3fa1e5326b7762aec3d6a31dde-gzip"'
+      - '"077fb42a553a8a1a1bbf6262a2cc79ec-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1339'
+      - '1338'
       Content-Type:
       - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=8d2cb69baaa207e0e22a2f9aa5922556; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -133,65 +133,65 @@ http_interactions:
         dXJjZS4gSXQgYWxzbyBvcHRpb25hbGx5IHByb3ZpZGVzIER5bmZsb3cgaW5m
         cmFzdHJ1Y3R1cmUgZm9yIHVzaW5nIGl0IGZvciBtYW5hZ2luZyB0aGUgdGFz
         a3MuXG4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vdGhlZm9yZW1hbi9m
-        b3JlbWFuLXRhc2tzIiwidmVyc2lvbiI6IjAuNy4xNC4xMSJ9LHsiaWQiOiJm
-        b3JlbWFuX2Jvb3RkaXNrIiwibmFtZSI6ImZvcmVtYW5fYm9vdGRpc2siLCJh
-        dXRob3IiOiJEb21pbmljIENsZWFsIiwiZGVzY3JpcHRpb24iOiJQbHVnaW4g
-        Zm9yIEZvcmVtYW4gdGhhdCBjcmVhdGVzIGlQWEUtYmFzZWQgYm9vdCBkaXNr
-        cyB0byBwcm92aXNpb24gaG9zdHMgd2l0aG91dCB0aGUgbmVlZCBmb3IgUFhF
-        IGluZnJhc3RydWN0dXJlLiIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3Ro
-        ZWZvcmVtYW4vZm9yZW1hbl9ib290ZGlzayIsInZlcnNpb24iOiI2LjEuMC4z
-        In0seyJpZCI6ImZvcmVtYW5fZGlzY292ZXJ5IiwibmFtZSI6ImZvcmVtYW5f
-        ZGlzY292ZXJ5IiwiYXV0aG9yIjoiQW1vcyBCZW5hcmksQnJ5YW4gS2Vhcm5l
-        eSxDaGFpcm1hblR1YmVBbXAsRGFuaWVsIExvYmF0byBHYXJjw61hLERvbWlu
-        aWMgQ2xlYWwsRXJpYyBELiBIZWxtcyxGcmFuayBXYWxsLEdyZWcgU3V0Y2xp
-        ZmZlLEltcmkgWnZpayxKb3NlcGggTWl0Y2hlbGwgTWFnZW4sTHVrYXMgWmFw
-        bGV0YWwsTHVrw6HFoSBaYXBsZXRhbCxNYXJlayBIdWxhbixNYXJ0aW4gQmHE
-        jW92c2vDvSxNYXR0IEphcnZpcyxNaWNoYWVsIE1vbGwsTmljayxPaGFkIExl
-        dnksT3JpIFJhYmluLFBldHIgQ2hhbHVwYSxQaGlyaW5jZSBQaGlsaXAsU2N1
-        YmFmbG95ZCxTaGxvbWkgWmFkb2ssU3RlcGhlbiBCZW5qYW1pbixZYW5uIEPD
-        qXphcmQiLCJkZXNjcmlwdGlvbiI6Ik1hYVMgRGlzY292ZXJ5IFBsdWdpbiBl
-        bmdpbmUgZm9yIEZvcmVtYW4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90
-        aGVmb3JlbWFuL2ZvcmVtYW5fZGlzY292ZXJ5IiwidmVyc2lvbiI6IjUuMC4w
-        LjkifSx7ImlkIjoiZm9yZW1hbl9kb2NrZXIiLCJuYW1lIjoiZm9yZW1hbl9k
-        b2NrZXIiLCJhdXRob3IiOiJEYW5pZWwgTG9iYXRvLCBBbW9zIEJlbmFyaSIs
-        ImRlc2NyaXB0aW9uIjoiUHJvdmlzaW9uIGFuZCBtYW5hZ2UgRG9ja2VyIGNv
-        bnRhaW5lcnMgYW5kIGltYWdlcyBmcm9tIEZvcmVtYW4uIiwidXJsIjoiaHR0
-        cDovL2dpdGh1Yi5jb20vdGhlZm9yZW1hbi9mb3JlbWFuLWRvY2tlciIsInZl
-        cnNpb24iOiIyLjAuMS4xMSJ9LHsiaWQiOiJmb3JlbWFuX2hvb2tzIiwibmFt
-        ZSI6ImZvcmVtYW5faG9va3MiLCJhdXRob3IiOiJEb21pbmljIENsZWFsIiwi
-        ZGVzY3JpcHRpb24iOiJQbHVnaW4gZW5naW5lIGZvciBGb3JlbWFuIHRoYXQg
-        ZW5hYmxlcyBydW5uaW5nIGN1c3RvbSBob29rIHNjcmlwdHMgb24gRm9yZW1h
-        biBldmVudHMiLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVmb3JlbWFu
-        L2ZvcmVtYW5faG9va3MiLCJ2ZXJzaW9uIjoiMC4zLjExIn0seyJpZCI6ImZv
-        cmVtYW5fb3BlbnNjYXAiLCJuYW1lIjoiZm9yZW1hbl9vcGVuc2NhcCIsImF1
-        dGhvciI6IsWgaW1vbiBMdWthxaHDrWssU2hsb21pIFphZG9rLE1hcmVrIEh1
-        bGFuLE9uZHJlaiBQcmF6YWsiLCJkZXNjcmlwdGlvbiI6IkZvcmVtYW4gcGx1
-        Zy1pbiBmb3IgbWFuYWdpbmcgc2VjdXJpdHkgY29tcGxpYW5jZSByZXBvcnRz
-        IiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL09wZW5TQ0FQL2ZvcmVtYW5f
-        b3BlbnNjYXAiLCJ2ZXJzaW9uIjoiMC41LjMuMTgifSx7ImlkIjoiZm9yZW1h
-        bl9yZW1vdGVfZXhlY3V0aW9uIiwibmFtZSI6ImZvcmVtYW5fcmVtb3RlX2V4
-        ZWN1dGlvbiIsImF1dGhvciI6IkZvcmVtYW4gUmVtb3RlIEV4ZWN1dGlvbiB0
-        ZWFtIiwiZGVzY3JpcHRpb24iOiJBIHBsdWdpbiBicmluZ2luZyByZW1vdGUg
-        ZXhlY3V0aW9uIHRvIHRoZSBGb3JlbWFuLCBjb21wbGV0aW5nIHRoZSBjb25m
-        aWcgbWFuYWdlbWVudCBmdW5jdGlvbmFsaXR5IHdpdGggcmVtb3RlIG1hbmFn
-        ZW1lbnQgZnVuY3Rpb25hbGl0eS4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5j
-        b20vdGhlZm9yZW1hbi9mb3JlbWFuX3JlbW90ZV9leGVjdXRpb24iLCJ2ZXJz
-        aW9uIjoiMC4zLjAuMTIifSx7ImlkIjoiZm9yZW1hbl90aGVtZV9zYXRlbGxp
-        dGUiLCJuYW1lIjoiZm9yZW1hbl90aGVtZV9zYXRlbGxpdGUiLCJhdXRob3Ii
-        OiJBbG9uIEdvbGRib2ltLCBTaGltb24gU3RlaW4iLCJkZXNjcmlwdGlvbiI6
-        IlRoaXMgaXMgYSBwbHVnaW4gdGhhdCBlbmFibGVzIGJ1aWxkaW5nIGEgdGhl
-        bWUgZm9yIEZvcmVtYW4uIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL2Fs
-        b25nb2xkYm9pbS9mb3JlbWFuX3RoZW1lX3NhdGVsbGl0ZSIsInZlcnNpb24i
-        OiIwLjEuMzYifSx7ImlkIjoia2F0ZWxsbyIsIm5hbWUiOiJrYXRlbGxvIiwi
-        YXV0aG9yIjoiTi9BIiwiZGVzY3JpcHRpb24iOiJDb250ZW50IGFuZCBTdWJz
-        Y3JpcHRpb24gTWFuYWdlbWVudCBwbHVnaW4gZm9yIEZvcmVtYW4iLCJ1cmwi
-        OiJodHRwOi8vd3d3LmthdGVsbG8ub3JnIiwidmVyc2lvbiI6IjMuMC4wLjkw
-        In0seyJpZCI6InJlZGhhdF9hY2Nlc3MiLCJuYW1lIjoicmVkaGF0X2FjY2Vz
-        cyIsImF1dGhvciI6IkxpbmRhbmkgUGhpcmkiLCJkZXNjcmlwdGlvbiI6IlRo
-        aXMgcGx1Z2luIGFkZHMgUmVkIEhhdCBBY2Nlc3Mga25vd2xlZGdlIGJhc2Ug
-        c2VhcmNoLCBjYXNlIG1hbmFnZW1lbnQgYW5kIGRpYWdub3N0aWNzIHRvIEZv
-        cmVtYW4iLCJ1cmwiOiJodHRwOi8vd3d3LmxwaGlyaS5yZWRoYXQuY29tIiwi
-        dmVyc2lvbiI6IjEuMC4xMyJ9XQp9Cg==
+        b3JlbWFuLXRhc2tzIiwidmVyc2lvbiI6IjAuNy4xNC45In0seyJpZCI6ImZv
+        cmVtYW5fYm9vdGRpc2siLCJuYW1lIjoiZm9yZW1hbl9ib290ZGlzayIsImF1
+        dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJkZXNjcmlwdGlvbiI6IlBsdWdpbiBm
+        b3IgRm9yZW1hbiB0aGF0IGNyZWF0ZXMgaVBYRS1iYXNlZCBib290IGRpc2tz
+        IHRvIHByb3Zpc2lvbiBob3N0cyB3aXRob3V0IHRoZSBuZWVkIGZvciBQWEUg
+        aW5mcmFzdHJ1Y3R1cmUuIiwidXJsIjoiaHR0cDovL2dpdGh1Yi5jb20vdGhl
+        Zm9yZW1hbi9mb3JlbWFuX2Jvb3RkaXNrIiwidmVyc2lvbiI6IjYuMS4wLjMi
+        fSx7ImlkIjoiZm9yZW1hbl9kaXNjb3ZlcnkiLCJuYW1lIjoiZm9yZW1hbl9k
+        aXNjb3ZlcnkiLCJhdXRob3IiOiJBbW9zIEJlbmFyaSxCcnlhbiBLZWFybmV5
+        LENoYWlybWFuVHViZUFtcCxEYW5pZWwgTG9iYXRvIEdhcmPDrWEsRG9taW5p
+        YyBDbGVhbCxFcmljIEQuIEhlbG1zLEZyYW5rIFdhbGwsR3JlZyBTdXRjbGlm
+        ZmUsSW1yaSBadmlrLEpvc2VwaCBNaXRjaGVsbCBNYWdlbixMdWthcyBaYXBs
+        ZXRhbCxMdWvDocWhIFphcGxldGFsLE1hcmVrIEh1bGFuLE1hcnRpbiBCYcSN
+        b3Zza8O9LE1hdHQgSmFydmlzLE1pY2hhZWwgTW9sbCxOaWNrLE9oYWQgTGV2
+        eSxPcmkgUmFiaW4sUGV0ciBDaGFsdXBhLFBoaXJpbmNlIFBoaWxpcCxTY3Vi
+        YWZsb3lkLFNobG9taSBaYWRvayxTdGVwaGVuIEJlbmphbWluLFlhbm4gQ8Op
+        emFyZCIsImRlc2NyaXB0aW9uIjoiTWFhUyBEaXNjb3ZlcnkgUGx1Z2luIGVu
+        Z2luZSBmb3IgRm9yZW1hbiIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3Ro
+        ZWZvcmVtYW4vZm9yZW1hbl9kaXNjb3ZlcnkiLCJ2ZXJzaW9uIjoiNS4wLjAu
+        OSJ9LHsiaWQiOiJmb3JlbWFuX2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2Rv
+        Y2tlciIsImF1dGhvciI6IkRhbmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwi
+        ZGVzY3JpcHRpb24iOiJQcm92aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29u
+        dGFpbmVycyBhbmQgaW1hZ2VzIGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRw
+        Oi8vZ2l0aHViLmNvbS90aGVmb3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVy
+        c2lvbiI6IjIuMC4xLjExIn0seyJpZCI6ImZvcmVtYW5faG9va3MiLCJuYW1l
+        IjoiZm9yZW1hbl9ob29rcyIsImF1dGhvciI6IkRvbWluaWMgQ2xlYWwiLCJk
+        ZXNjcmlwdGlvbiI6IlBsdWdpbiBlbmdpbmUgZm9yIEZvcmVtYW4gdGhhdCBl
+        bmFibGVzIHJ1bm5pbmcgY3VzdG9tIGhvb2sgc2NyaXB0cyBvbiBGb3JlbWFu
+        IGV2ZW50cyIsInVybCI6Imh0dHA6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4v
+        Zm9yZW1hbl9ob29rcyIsInZlcnNpb24iOiIwLjMuMTEifSx7ImlkIjoiZm9y
+        ZW1hbl9vcGVuc2NhcCIsIm5hbWUiOiJmb3JlbWFuX29wZW5zY2FwIiwiYXV0
+        aG9yIjoixaBpbW9uIEx1a2HFocOtayxTaGxvbWkgWmFkb2ssTWFyZWsgSHVs
+        YW4sT25kcmVqIFByYXphayIsImRlc2NyaXB0aW9uIjoiRm9yZW1hbiBwbHVn
+        LWluIGZvciBtYW5hZ2luZyBzZWN1cml0eSBjb21wbGlhbmNlIHJlcG9ydHMi
+        LCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vT3BlblNDQVAvZm9yZW1hbl9v
+        cGVuc2NhcCIsInZlcnNpb24iOiIwLjUuMy4xOCJ9LHsiaWQiOiJmb3JlbWFu
+        X3JlbW90ZV9leGVjdXRpb24iLCJuYW1lIjoiZm9yZW1hbl9yZW1vdGVfZXhl
+        Y3V0aW9uIiwiYXV0aG9yIjoiRm9yZW1hbiBSZW1vdGUgRXhlY3V0aW9uIHRl
+        YW0iLCJkZXNjcmlwdGlvbiI6IkEgcGx1Z2luIGJyaW5naW5nIHJlbW90ZSBl
+        eGVjdXRpb24gdG8gdGhlIEZvcmVtYW4sIGNvbXBsZXRpbmcgdGhlIGNvbmZp
+        ZyBtYW5hZ2VtZW50IGZ1bmN0aW9uYWxpdHkgd2l0aCByZW1vdGUgbWFuYWdl
+        bWVudCBmdW5jdGlvbmFsaXR5LiIsInVybCI6Imh0dHBzOi8vZ2l0aHViLmNv
+        bS90aGVmb3JlbWFuL2ZvcmVtYW5fcmVtb3RlX2V4ZWN1dGlvbiIsInZlcnNp
+        b24iOiIwLjMuMC4xMiJ9LHsiaWQiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0
+        ZSIsIm5hbWUiOiJmb3JlbWFuX3RoZW1lX3NhdGVsbGl0ZSIsImF1dGhvciI6
+        IkFsb24gR29sZGJvaW0sIFNoaW1vbiBTdGVpbiIsImRlc2NyaXB0aW9uIjoi
+        VGhpcyBpcyBhIHBsdWdpbiB0aGF0IGVuYWJsZXMgYnVpbGRpbmcgYSB0aGVt
+        ZSBmb3IgRm9yZW1hbi4iLCJ1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vYWxv
+        bmdvbGRib2ltL2ZvcmVtYW5fdGhlbWVfc2F0ZWxsaXRlIiwidmVyc2lvbiI6
+        IjAuMS4zMyJ9LHsiaWQiOiJrYXRlbGxvIiwibmFtZSI6ImthdGVsbG8iLCJh
+        dXRob3IiOiJOL0EiLCJkZXNjcmlwdGlvbiI6IkNvbnRlbnQgYW5kIFN1YnNj
+        cmlwdGlvbiBNYW5hZ2VtZW50IHBsdWdpbiBmb3IgRm9yZW1hbiIsInVybCI6
+        Imh0dHA6Ly93d3cua2F0ZWxsby5vcmciLCJ2ZXJzaW9uIjoiMy4wLjAuODIi
+        fSx7ImlkIjoicmVkaGF0X2FjY2VzcyIsIm5hbWUiOiJyZWRoYXRfYWNjZXNz
+        IiwiYXV0aG9yIjoiTGluZGFuaSBQaGlyaSIsImRlc2NyaXB0aW9uIjoiVGhp
+        cyBwbHVnaW4gYWRkcyBSZWQgSGF0IEFjY2VzcyBrbm93bGVkZ2UgYmFzZSBz
+        ZWFyY2gsIGNhc2UgbWFuYWdlbWVudCBhbmQgZGlhZ25vc3RpY3MgdG8gRm9y
+        ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
+        ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:41:57 GMT
+  recorded_at: Mon, 27 Mar 2017 18:06:00 GMT
 recorded_with: VCR 3.0.3

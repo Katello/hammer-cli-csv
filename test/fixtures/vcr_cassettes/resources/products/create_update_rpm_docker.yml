@@ -1356,6 +1356,933 @@ http_interactions:
   recorded_at: Mon, 19 Dec 2016 16:42:10 GMT
 - request:
     method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?all=false&library=true&organization_id=3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:47 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - b56cee0c-5783-4e99-9678-c5b317141931
+      X-Runtime:
+      - '0.065899'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"6a5cc8a6caa41dfb85f960ee483ee634-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '120'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=1a04888c19f298e4daaea1f6fe59fdb4; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":0,"subtotal":0,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:53 GMT
+- request:
+    method: post
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","verify_ssl":false,"unprotected":false,"mirror_on_sync":false,"download_policy":"on_demand","label":"Zoo","product_id":69,"content_type":"yum"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '248'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:47 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 28b183af-195f-460c-a2e4-d241835efb85
+      X-Runtime:
+      - '2.577466'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"b9298799098261ae7b675ee3dd0309b0-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1222'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=6c2a17993ca3863dac49bdccad77ce93; path=/; secure; HttpOnly
+      - request_method=POST; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_update_rpm_docker/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639748543","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:47
+        UTC","updated_at":"2017-03-27 18:35:50 UTC","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:56 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:50 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 37a86881-da97-415e-aef0-b641de8080cf
+      X-Runtime:
+      - '0.053778'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"7ef3e1ef2aa26cae8d902d91f31965d5-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '663'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=73c18456d3359add857b2ef7d0108abc; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:56 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    body:
+      encoding: UTF-8
+      string: '{"name":"product create_update_rpm_docker","organization_id":3,"description":"Docker
+        Product"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '94'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:50 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 3e9bccea-627d-4bd4-b528-5573f6f6294f
+      X-Runtime:
+      - '1.736442'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"77525a3dbb5c9249193b06c12165c687-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1665'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=a3f76f6a584482cb78c5b082b3beeed6; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"product_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69}],"available_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69}],"redhat":false,"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Docker
+        Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1,"created_at":"2017-03-27
+        18:35:46 UTC","updated_at":"2017-03-27 18:35:50 UTC","repositories":[{"name":"Zoo","id":16}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:58 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?all=false&library=true&organization_id=3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:52 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2491ebe6-c34d-48b0-bc5a-8f1f506ecd63
+      X-Runtime:
+      - '0.062368'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"7ef3e1ef2aa26cae8d902d91f31965d5-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '663'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=bebf16363edb983106bd7bf59047c208; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:58 GMT
+- request:
+    method: post
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":3,"name":"thomasmckay/hammer","url":"https://registry-1.docker.io/","verify_ssl":true,"unprotected":true,"mirror_on_sync":true,"docker_upstream_name":"thomasmckay/hammer","label":"thomasmckay_hammer","product_id":69,"content_type":"docker"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '259'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:52 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1b9939d2-03a0-462a-abb3-7f3453c9444c
+      X-Runtime:
+      - '2.519761'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"c492a6ea4b88eec8daf0056ebe1d5c3b-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1272'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=3a9d3fb99cb70f5ee58d07177f56fe0f; path=/; secure; HttpOnly
+      - request_method=POST; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"content_type":"docker","docker_upstream_name":"thomasmckay/hammer","mirror_on_sync":true,"unprotected":true,"full_path":"sat62.example.com:5000/testcorp-product_create_update_rpm_docker-thomasmckay_hammer","checksum_type":null,"container_repository_name":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","download_policy":null,"url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639754098","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:52
+        UTC","updated_at":"2017-03-27 18:35:54 UTC","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:55 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 418f3295-6cdd-4d31-95c1-ab74111798b8
+      X-Runtime:
+      - '0.074629'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"603b82ab137188998bd1a33d7fdf5f3a-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1207'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=b6c33c5b6c4c62b56a05a7d4fc9d6d2f; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null},{"content_type":"docker","url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    body:
+      encoding: UTF-8
+      string: '{"name":"product create_update_rpm_docker","organization_id":3,"description":"Yum
+        Product"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '91'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:55 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 8180678f-b601-4b77-a068-79bd09a382f4
+      X-Runtime:
+      - '1.387088'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"7ec493bda87782cc489b590dadc37d9a-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '2522'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=c0c6c578f7a565df146fd44fc5412d80; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"product_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"available_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"redhat":false,"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Yum
+        Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2,"created_at":"2017-03-27
+        18:35:46 UTC","updated_at":"2017-03-27 18:35:55 UTC","repositories":[{"name":"thomasmckay/hammer","id":17},{"name":"Zoo","id":16}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:02 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/16
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","verify_ssl":false,"unprotected":false,"mirror_on_sync":false,"download_policy":"on_demand"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '197'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:56 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2afd048e-01f5-486a-afc3-40157fa143d4
+      X-Runtime:
+      - '1.546281'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"b9298799098261ae7b675ee3dd0309b0-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1222'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=4a838cf1068fcbff7478f917a69658df; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_update_rpm_docker/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639748543","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:47
+        UTC","updated_at":"2017-03-27 18:35:50 UTC","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:04 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:58 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 207dcc4e-4278-4870-b337-f840b6f01e22
+      X-Runtime:
+      - '0.093668'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"603b82ab137188998bd1a33d7fdf5f3a-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1207'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=fb1ad72847d73e4b5a1d6f84569d346a; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null},{"content_type":"docker","url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:04 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    body:
+      encoding: UTF-8
+      string: '{"name":"product create_update_rpm_docker","organization_id":3,"description":"Docker
+        Product"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '94'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:58 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 398912a3-fe03-439e-ad4e-3ae0be5ebb62
+      X-Runtime:
+      - '1.727060'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"bbf8126200fa650ea8a3d1d3694f82d8-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '2443'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=924d422bf597034cb35d3f78cdc0b4c9; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"product_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-03-27T18:35:58.043+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"available_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-03-27T18:35:58.043+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"redhat":false,"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Docker
+        Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2,"created_at":"2017-03-27
+        18:35:46 UTC","updated_at":"2017-03-27 18:35:58 UTC","repositories":[{"name":"thomasmckay/hammer","id":17},{"name":"Zoo","id":16}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:06 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/17
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":3,"name":"thomasmckay/hammer","url":"https://registry-1.docker.io/","verify_ssl":true,"unprotected":true,"mirror_on_sync":true,"docker_upstream_name":"thomasmckay/hammer"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '190'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:36:00 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5a22a2bc-0b5f-4963-854c-8a8f01e23cd8
+      X-Runtime:
+      - '0.626364'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"c492a6ea4b88eec8daf0056ebe1d5c3b-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1272'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=36e849d46f326d1be930633e7b4d3b32; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"content_type":"docker","docker_upstream_name":"thomasmckay/hammer","mirror_on_sync":true,"unprotected":true,"full_path":"sat62.example.com:5000/testcorp-product_create_update_rpm_docker-thomasmckay_hammer","checksum_type":null,"container_repository_name":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","download_policy":null,"url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639754098","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:52
+        UTC","updated_at":"2017-03-27 18:35:54 UTC","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:07 GMT
+- request:
+    method: delete
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:36:01 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - ae573e2d-9e50-4dfe-9edc-89592c840d87
+      X-Runtime:
+      - '1.609683'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Status:
+      - 202 Accepted
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=7adbb6c9fa720481c008017d91609f6f; path=/; secure; HttpOnly
+      - request_method=DELETE; path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '  {"id":"1c149fa8-7b0e-4319-9bfb-c5082f8043d4","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-03-27
+        18:36:01 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":69,"name":"product
+        create_update_rpm_docker","label":"product_create_update_rpm_docker","cp_id":"1490639746899"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":69},"output":{},"humanized":{"action":"Delete
+        Product","input":[["product",{"text":"product ''product create_update_rpm_docker''","link":"#/products/69/info"}],["organization",{"text":"organization
+        ''Test Corporation''","link":"/organizations/3/edit"}]],"output":"","errors":[]},"cli_example":null}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:36:08 GMT
+- request:
+    method: get
     uri: https://admin:changeme@devel.example.com:50083/api/status
     body:
       encoding: US-ASCII
@@ -1375,7 +2302,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:45 GMT
+      - Wed, 19 Apr 2017 17:07:06 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1393,9 +2320,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2f0aa20e-d26d-4178-b897-85ebec7a76a7
+      - a63c4270-bf77-4c1b-b3f7-d16ef5173a88
       X-Runtime:
-      - '0.044354'
+      - '0.057084'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -1407,12 +2334,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=0a82afdb8e26bdaae00bc01aea8718f8; path=/; secure; HttpOnly
+      - _session_id=0df637eb94cb82f3d99e0b90f6182d76; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:52 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:25 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
@@ -1434,7 +2361,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:46 GMT
+      - Wed, 19 Apr 2017 17:07:06 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1452,9 +2379,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 603c7483-94ab-4581-9c4d-26571952b469
+      - 6324c1a7-c5df-4f2f-b418-79ffaf72a5d5
       X-Runtime:
-      - '0.037028'
+      - '0.066433'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -1468,7 +2395,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=fa6d33f8622a1a8cfd25f0eb4f54ee57; path=/; secure; HttpOnly
+      - _session_id=538e62ef59f9905cd0f7d7110144e0c7; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -1547,7 +2474,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:52 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:25 GMT
 - request:
     method: get
     uri: https://devel.example.com:50083/apidoc/v2.en.json
@@ -1560,7 +2487,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -1573,7 +2500,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:46 GMT
+      - Wed, 19 Apr 2017 17:07:06 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1591,9 +2518,9 @@ http_interactions:
       Apipie-Checksum:
       - e1df2e8d43e22495b02a53b48e3b5298
       X-Request-Id:
-      - 213aff04-0e18-4bdb-bdbf-ac95c33b2814
+      - 696ede17-71c2-40d8-a605-c1bc94f90f1c
       X-Runtime:
-      - '0.006938'
+      - '0.011727'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -21232,7 +22159,7 @@ http_interactions:
         Ijp0cnVlfV0sImhlYWRlcnMiOm51bGx9fSwibGlua19leHRlbnNpb24iOiIu
         ZW4uaHRtbCJ9fQ==
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:52 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:25 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -21245,7 +22172,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21258,7 +22185,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:46 GMT
+      - Wed, 19 Apr 2017 17:07:06 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21276,13 +22203,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - dc8664ec-0f26-4acb-9660-96e2f851ec0b
+      - 0040e89b-cca1-4d45-b4a2-16ea88bfa7a3
       X-Runtime:
-      - '0.032906'
+      - '0.082171'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"45c0a1d1908621d8a984de3fe2b76754-gzip"'
+      - '"91d3578ba2141f4a65055b10047bdf20-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21292,7 +22219,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=65f3758ff7ef0266456ac2deb672529d; path=/; secure; HttpOnly
+      - _session_id=00d28181fb792f5cff13388501a602e8; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21306,10 +22233,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-03-27 18:28:18 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:52 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:25 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22product%20create_update_rpm_docker%22
@@ -21322,7 +22249,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21335,7 +22262,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:46 GMT
+      - Wed, 19 Apr 2017 17:07:06 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21353,13 +22280,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 56771da6-216b-4ea4-8b23-ba99a7d30d17
+      - 68cc0db4-27d2-4d8e-918a-d958f2c9cab6
       X-Runtime:
-      - '0.083305'
+      - '0.080736'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"d73e2784b9be21af45051fa93afe93a6-gzip"'
+      - '"a8015931953e6081537fdf1dc3613279-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -21369,15 +22296,15 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=d9223acb86dd956141fc6943ad820e7e; path=/; secure; HttpOnly
+      - _session_id=577f20e664a7bb6a154016d349068617; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":0,"page":1,"per_page":"999999","error":null,"search":"name=\"product
+      string: '{"total":2,"subtotal":0,"page":1,"per_page":"999999","error":null,"search":"name=\"product
         create_update_rpm_docker\"","sort":{"by":null,"order":null},"results":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:52 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:25 GMT
 - request:
     method: post
     uri: https://admin:changeme@devel.example.com:50083/katello/api/products
@@ -21391,7 +22318,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21406,7 +22333,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:46 GMT
+      - Wed, 19 Apr 2017 17:07:07 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21424,38 +22351,38 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8659c02c-a05a-49a3-a3fe-5332b976d0db
+      - 07018501-3468-45e7-9ec3-efb1b728702e
       X-Runtime:
-      - '1.208264'
+      - '2.650297'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"00b52ffebb356574bc554189abc52e45-gzip"'
+      - '"a7651cb0343a5498684df4731f5b42d1-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '905'
+      - '906'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=e902fc7d37e43b1a10f0388f434470e4; path=/; secure; HttpOnly
+      - _session_id=6caa072eb00d9a5ebff639b30af167bf; path=/; secure; HttpOnly
       - request_method=POST; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"product_content":[],"available_content":[],"redhat":false,"id":69,"cp_id":null,"name":"product
+      string: '  {"product_content":[],"available_content":[],"redhat":false,"id":117,"cp_id":null,"name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Yum
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":0,"created_at":"2017-03-27
-        18:35:46 UTC","updated_at":"2017-03-27 18:35:46 UTC","repositories":[],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":0,"created_at":"2017-04-19
+        17:07:07 UTC","updated_at":"2017-04-19 17:07:07 UTC","repositories":[],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:53 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:28 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?all=false&library=true&organization_id=3
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117/repositories?all=false&library=true&organization_id=3
     body:
       encoding: US-ASCII
       string: ''
@@ -21465,7 +22392,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21478,7 +22405,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:47 GMT
+      - Wed, 19 Apr 2017 17:07:09 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21496,9 +22423,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b56cee0c-5783-4e99-9678-c5b317141931
+      - 4c42c09c-106e-4741-8ecc-6498048a19e1
       X-Runtime:
-      - '0.065899'
+      - '0.054502'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21512,33 +22439,33 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=1a04888c19f298e4daaea1f6fe59fdb4; path=/; secure; HttpOnly
+      - _session_id=659d91a3ae0f5573468ee521cc36dc62; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":0,"subtotal":0,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:53 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:28 GMT
 - request:
     method: post
     uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
     body:
       encoding: UTF-8
-      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","verify_ssl":false,"unprotected":false,"mirror_on_sync":false,"download_policy":"on_demand","label":"Zoo","product_id":69,"content_type":"yum"}'
+      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","verify_ssl":false,"unprotected":false,"mirror_on_sync":false,"download_policy":"on_demand","label":"Zoo","product_id":117,"content_type":"yum"}'
     headers:
       Accept:
       - application/json;version=2
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
       - en
       Content-Length:
-      - '248'
+      - '249'
       Host:
       - devel.example.com:50083
   response:
@@ -21547,7 +22474,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:47 GMT
+      - Wed, 19 Apr 2017 17:07:09 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21565,34 +22492,34 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 28b183af-195f-460c-a2e4-d241835efb85
+      - 5551fd01-b68b-4a3b-b3c6-3cdae717e0c8
       X-Runtime:
-      - '2.577466'
+      - '2.471428'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"b9298799098261ae7b675ee3dd0309b0-gzip"'
+      - '"37baa8c3e03c6051c3a48feb2f531904-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1222'
+      - '1223'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=6c2a17993ca3863dac49bdccad77ce93; path=/; secure; HttpOnly
+      - _session_id=70c91989ed797a7a3a387ec862c1c45c; path=/; secure; HttpOnly
       - request_method=POST; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_update_rpm_docker/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639748543","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:47
-        UTC","updated_at":"2017-03-27 18:35:50 UTC","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_update_rpm_docker/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1492621631553","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:09
+        UTC","updated_at":"2017-04-19 17:07:12 UTC","id":73,"name":"Zoo","label":"Zoo","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:56 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:31 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22product%20create_update_rpm_docker%22
@@ -21605,7 +22532,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21618,7 +22545,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:50 GMT
+      - Wed, 19 Apr 2017 17:07:12 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21636,37 +22563,37 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a72e987c-6a22-4a0d-94e1-c04bb4a8c844
+      - 3574fd66-17d1-4c29-bd14-c3b8178f9f58
       X-Runtime:
-      - '0.074302'
+      - '0.066153'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"02a640855ebe22618de485c05b9b7ab3-gzip"'
+      - '"3eb457b9948c4b9f6a6118c7b1be157b-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '548'
+      - '549'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=32ced78dbefd7ddf894649b3bfa898bc; path=/; secure; HttpOnly
+      - _session_id=50d71890a97f3cdf689ef97d113daf43; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
-        create_update_rpm_docker\"","sort":{"by":null,"order":null},"results":[{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":3,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
+        create_update_rpm_docker\"","sort":{"by":null,"order":null},"results":[{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Yum
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:56 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:31 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
     body:
       encoding: US-ASCII
       string: ''
@@ -21676,7 +22603,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21689,7 +22616,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:50 GMT
+      - Wed, 19 Apr 2017 17:07:12 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21707,34 +22634,34 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 37a86881-da97-415e-aef0-b641de8080cf
+      - 7b16cf89-7ab4-42e1-b614-5ceebe5c7e3c
       X-Runtime:
-      - '0.053778'
+      - '0.062022'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"7ef3e1ef2aa26cae8d902d91f31965d5-gzip"'
+      - '"9a072ba6a957d119d280e90e68f111d6-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '663'
+      - '664'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=73c18456d3359add857b2ef7d0108abc; path=/; secure; HttpOnly
+      - _session_id=b6076e8b84c6b6ea1f517199fff4f8ae; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":73,"name":"Zoo","label":"Zoo","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:56 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:31 GMT
 - request:
     method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117
     body:
       encoding: UTF-8
       string: '{"name":"product create_update_rpm_docker","organization_id":3,"description":"Docker
@@ -21745,7 +22672,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21760,7 +22687,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:50 GMT
+      - Wed, 19 Apr 2017 17:07:12 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21778,38 +22705,38 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3e9bccea-627d-4bd4-b528-5573f6f6294f
+      - ed0bcdb4-f8cc-44d4-9b1f-4eb9f6c08544
       X-Runtime:
-      - '1.736442'
+      - '1.154081'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"77525a3dbb5c9249193b06c12165c687-gzip"'
+      - '"eb95e97f5dbee55e70306c8673f7559b-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1665'
+      - '1668'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=a3f76f6a584482cb78c5b082b3beeed6; path=/; secure; HttpOnly
+      - _session_id=6bffda37553fbfd6f237afcf1ec472fa; path=/; secure; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"product_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69}],"available_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69}],"redhat":false,"id":69,"cp_id":"1490639746899","name":"product
+      string: '  {"product_content":[{"enabled":true,"content":{"id":"1492621631553","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:11.553+0000","created":"2017-04-19T17:07:11.553+0000"},"product_id":117}],"available_content":[{"enabled":true,"content":{"id":"1492621631553","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:11.553+0000","created":"2017-04-19T17:07:11.553+0000"},"product_id":117}],"redhat":false,"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Docker
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1,"created_at":"2017-03-27
-        18:35:46 UTC","updated_at":"2017-03-27 18:35:50 UTC","repositories":[{"name":"Zoo","id":16}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1,"created_at":"2017-04-19
+        17:07:07 UTC","updated_at":"2017-04-19 17:07:12 UTC","repositories":[{"name":"Zoo","id":73}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:58 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:32 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?all=false&library=true&organization_id=3
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117/repositories?all=false&library=true&organization_id=3
     body:
       encoding: US-ASCII
       string: ''
@@ -21819,7 +22746,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -21832,7 +22759,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:52 GMT
+      - Wed, 19 Apr 2017 17:07:13 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21850,50 +22777,50 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2491ebe6-c34d-48b0-bc5a-8f1f506ecd63
+      - a49434ba-5ee0-4338-a964-af56bba328a1
       X-Runtime:
-      - '0.062368'
+      - '0.059907'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"7ef3e1ef2aa26cae8d902d91f31965d5-gzip"'
+      - '"9a072ba6a957d119d280e90e68f111d6-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '663'
+      - '664'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=bebf16363edb983106bd7bf59047c208; path=/; secure; HttpOnly
+      - _session_id=8d83f591124c1ab1e3f64faff76beeba; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":73,"name":"Zoo","label":"Zoo","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:58 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:32 GMT
 - request:
     method: post
     uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
     body:
       encoding: UTF-8
-      string: '{"organization_id":3,"name":"thomasmckay/hammer","url":"https://registry-1.docker.io/","verify_ssl":true,"unprotected":true,"mirror_on_sync":true,"docker_upstream_name":"thomasmckay/hammer","label":"thomasmckay_hammer","product_id":69,"content_type":"docker"}'
+      string: '{"organization_id":3,"name":"thomasmckay/hammer","url":"https://registry-1.docker.io/","verify_ssl":true,"unprotected":true,"mirror_on_sync":true,"docker_upstream_name":"thomasmckay/hammer","label":"thomasmckay_hammer","product_id":117,"content_type":"docker"}'
     headers:
       Accept:
       - application/json;version=2
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
       - en
       Content-Length:
-      - '259'
+      - '260'
       Host:
       - devel.example.com:50083
   response:
@@ -21902,7 +22829,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:52 GMT
+      - Wed, 19 Apr 2017 17:07:13 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21920,34 +22847,34 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1b9939d2-03a0-462a-abb3-7f3453c9444c
+      - 833677d3-eec8-49cb-9f72-04f62c6ec1cf
       X-Runtime:
-      - '2.519761'
+      - '2.556797'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"c492a6ea4b88eec8daf0056ebe1d5c3b-gzip"'
+      - '"6718ae6edf78ede7b0cc6a35be1be438-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1272'
+      - '1273'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=3a9d3fb99cb70f5ee58d07177f56fe0f; path=/; secure; HttpOnly
+      - _session_id=d98a56ac28ed71b8e69e376586591102; path=/; secure; HttpOnly
       - request_method=POST; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"content_type":"docker","docker_upstream_name":"thomasmckay/hammer","mirror_on_sync":true,"unprotected":true,"full_path":"sat62.example.com:5000/testcorp-product_create_update_rpm_docker-thomasmckay_hammer","checksum_type":null,"container_repository_name":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","download_policy":null,"url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639754098","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:52
-        UTC","updated_at":"2017-03-27 18:35:54 UTC","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '  {"content_type":"docker","docker_upstream_name":"thomasmckay/hammer","mirror_on_sync":true,"unprotected":true,"full_path":"sat62.example.com:5000/testcorp-product_create_update_rpm_docker-thomasmckay_hammer","checksum_type":null,"container_repository_name":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","download_policy":null,"url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","major":null,"minor":null,"gpg_key_id":null,"content_id":"1492621635543","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:13
+        UTC","updated_at":"2017-04-19 17:07:16 UTC","id":74,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:35 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/status
@@ -21969,7 +22896,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:54 GMT
+      - Wed, 19 Apr 2017 17:07:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21987,9 +22914,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f769537f-65cd-4643-b227-1332a895186b
+      - 38af5060-a158-4e02-beb1-67435bdc117c
       X-Runtime:
-      - '0.031223'
+      - '0.037919'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -22001,12 +22928,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=c34c13cc2b1e668bcbe9df869f1aab1e; path=/; secure; HttpOnly
+      - _session_id=4559514bf0d00d8327ce15208ac6e871; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:35 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
@@ -22028,7 +22955,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:54 GMT
+      - Wed, 19 Apr 2017 17:07:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22046,9 +22973,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 53dce8c2-6c2b-4653-ad64-35a475559cb3
+      - 2d703e4b-b8da-4cf3-80e9-df7301945811
       X-Runtime:
-      - '0.030001'
+      - '0.031386'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -22062,7 +22989,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=d2d0724b862bcbe1c0542f9ba800eaf6; path=/; secure; HttpOnly
+      - _session_id=4323c8afe0bd9ac0a3f1b9c587255b32; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -22141,7 +23068,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:35 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -22154,7 +23081,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22167,7 +23094,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:54 GMT
+      - Wed, 19 Apr 2017 17:07:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22185,13 +23112,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - bf85492b-d8da-4237-bfa4-abe38db22703
+      - 99eb31a3-1eb9-40fc-abe9-9149b7c168f2
       X-Runtime:
-      - '0.072753'
+      - '0.076911'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"45c0a1d1908621d8a984de3fe2b76754-gzip"'
+      - '"91d3578ba2141f4a65055b10047bdf20-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -22201,7 +23128,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=d8a32237a5641681aaa9ab838431cd94; path=/; secure; HttpOnly
+      - _session_id=84a4a2128a8508485649de508157ccae; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -22215,10 +23142,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-03-27 18:28:18 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:35 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22product%20create_update_rpm_docker%22
@@ -22231,7 +23158,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22244,7 +23171,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:54 GMT
+      - Wed, 19 Apr 2017 17:07:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22262,37 +23189,37 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e8f7cdb4-8805-4fc1-ad10-98c26ac468c2
+      - 8af41810-6e3d-4aa3-9400-2af247ac3c74
       X-Runtime:
-      - '0.102577'
+      - '0.098752'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"e01cb29729e5a09f2278a0459a227d8d-gzip"'
+      - '"6abbb678ea9799e2fa0ba4a6688f70fc-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '551'
+      - '552'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=70501062bb19d8148dd70d10ab4aa206; path=/; secure; HttpOnly
+      - _session_id=694978d556183a72ee93bdeb56154788; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
-        create_update_rpm_docker\"","sort":{"by":null,"order":null},"results":[{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":3,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
+        create_update_rpm_docker\"","sort":{"by":null,"order":null},"results":[{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Docker
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:35 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
     body:
       encoding: US-ASCII
       string: ''
@@ -22302,7 +23229,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22315,7 +23242,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:55 GMT
+      - Wed, 19 Apr 2017 17:07:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22333,35 +23260,35 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 418f3295-6cdd-4d31-95c1-ab74111798b8
+      - 0cab59c1-12aa-4c60-9369-39372a21c9fc
       X-Runtime:
-      - '0.074629'
+      - '0.071580'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"603b82ab137188998bd1a33d7fdf5f3a-gzip"'
+      - '"611b12cd70a2e8520f9c1cc43a14540e-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1207'
+      - '1209'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=b6c33c5b6c4c62b56a05a7d4fc9d6d2f; path=/; secure; HttpOnly
+      - _session_id=5a0f1ea85292a27f207343f8c55bc464; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":2,"subtotal":2,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
-        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null},{"content_type":"docker","url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":73,"name":"Zoo","label":"Zoo","product":{"id":117,"cp_id":"1492621628500","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null},{"content_type":"docker","url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","id":74,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:01 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:35 GMT
 - request:
     method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117
     body:
       encoding: UTF-8
       string: '{"name":"product create_update_rpm_docker","organization_id":3,"description":"Yum
@@ -22372,7 +23299,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22387,7 +23314,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:55 GMT
+      - Wed, 19 Apr 2017 17:07:16 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22405,38 +23332,38 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8180678f-b601-4b77-a068-79bd09a382f4
+      - db048568-1233-4ecf-84c3-1f21ab8a4ea8
       X-Runtime:
-      - '1.387088'
+      - '0.972043'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"7ec493bda87782cc489b590dadc37d9a-gzip"'
+      - '"32a5a140625e90e62104c97b38fee8c2-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '2522'
+      - '2527'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=c0c6c578f7a565df146fd44fc5412d80; path=/; secure; HttpOnly
+      - _session_id=d1ee3ae8efc82e77354f9a30fd7c61ff; path=/; secure; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"product_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"available_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:48.543+0000","updated":"2017-03-27T18:35:48.543+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"redhat":false,"id":69,"cp_id":"1490639746899","name":"product
+      string: '  {"product_content":[{"enabled":true,"content":{"id":"1492621631553","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:11.553+0000","created":"2017-04-19T17:07:11.553+0000"},"product_id":117},{"enabled":true,"content":{"id":"1492621635543","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:15.543+0000","created":"2017-04-19T17:07:15.543+0000"},"product_id":117}],"available_content":[{"enabled":true,"content":{"id":"1492621631553","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:11.553+0000","created":"2017-04-19T17:07:11.553+0000"},"product_id":117},{"enabled":true,"content":{"id":"1492621635543","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:15.543+0000","created":"2017-04-19T17:07:15.543+0000"},"product_id":117}],"redhat":false,"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Yum
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2,"created_at":"2017-03-27
-        18:35:46 UTC","updated_at":"2017-03-27 18:35:55 UTC","repositories":[{"name":"thomasmckay/hammer","id":17},{"name":"Zoo","id":16}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2,"created_at":"2017-04-19
+        17:07:07 UTC","updated_at":"2017-04-19 17:07:16 UTC","repositories":[{"name":"thomasmckay/hammer","id":74},{"name":"Zoo","id":73}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:02 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:36 GMT
 - request:
     method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/16
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/73
     body:
       encoding: UTF-8
       string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","verify_ssl":false,"unprotected":false,"mirror_on_sync":false,"download_policy":"on_demand"}'
@@ -22446,7 +23373,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22461,7 +23388,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:56 GMT
+      - Wed, 19 Apr 2017 17:07:17 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22479,34 +23406,34 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2afd048e-01f5-486a-afc3-40157fa143d4
+      - 1991b71d-eca8-4139-9249-b078ac20fa79
       X-Runtime:
-      - '1.546281'
+      - '0.590405'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"b9298799098261ae7b675ee3dd0309b0-gzip"'
+      - '"37baa8c3e03c6051c3a48feb2f531904-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1222'
+      - '1223'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=4a838cf1068fcbff7478f917a69658df; path=/; secure; HttpOnly
+      - _session_id=ce82963f5a64e317df2ac632789b16d4; path=/; secure; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_update_rpm_docker/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639748543","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:47
-        UTC","updated_at":"2017-03-27 18:35:50 UTC","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_update_rpm_docker/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1492621631553","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:09
+        UTC","updated_at":"2017-04-19 17:07:12 UTC","id":73,"name":"Zoo","label":"Zoo","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:04 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:37 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22product%20create_update_rpm_docker%22
@@ -22519,7 +23446,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22532,7 +23459,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:58 GMT
+      - Wed, 19 Apr 2017 17:07:18 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22550,37 +23477,37 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f607ee2c-2284-4002-bb72-358c9e4ee975
+      - 451a144c-1b74-409e-9f83-0c049a24b895
       X-Runtime:
-      - '0.140217'
+      - '0.116384'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"55fcafa597c5cd55edcad4f14f8f92c3-gzip"'
+      - '"717bc7e549b3e5ebf2f2a662615caf33-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '548'
+      - '549'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=b9fadfdea9a155738f6a3a6a2951b9b4; path=/; secure; HttpOnly
+      - _session_id=fa1ddaeb7ed6d6fae7424f160670ee78; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
-        create_update_rpm_docker\"","sort":{"by":null,"order":null},"results":[{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":3,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
+        create_update_rpm_docker\"","sort":{"by":null,"order":null},"results":[{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Yum
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:04 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:37 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
     body:
       encoding: US-ASCII
       string: ''
@@ -22590,7 +23517,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22603,7 +23530,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:58 GMT
+      - Wed, 19 Apr 2017 17:07:18 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22621,35 +23548,35 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 207dcc4e-4278-4870-b337-f840b6f01e22
+      - e58ba5b0-4b30-4051-9a1b-aaea89765c80
       X-Runtime:
-      - '0.093668'
+      - '0.118954'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"603b82ab137188998bd1a33d7fdf5f3a-gzip"'
+      - '"611b12cd70a2e8520f9c1cc43a14540e-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1207'
+      - '1209'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=fb1ad72847d73e4b5a1d6f84569d346a; path=/; secure; HttpOnly
+      - _session_id=37ead4c67363c2ecbc7498e3433d03fd; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":2,"subtotal":2,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":16,"name":"Zoo","label":"Zoo","product":{"id":69,"cp_id":"1490639746899","name":"product
-        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null},{"content_type":"docker","url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":2,"subtotal":2,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_update_rpm_docker/Zoo","id":73,"name":"Zoo","label":"Zoo","product":{"id":117,"cp_id":"1492621628500","name":"product
+        create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null},{"content_type":"docker","url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","id":74,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:04 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:37 GMT
 - request:
     method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117
     body:
       encoding: UTF-8
       string: '{"name":"product create_update_rpm_docker","organization_id":3,"description":"Docker
@@ -22660,7 +23587,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22675,7 +23602,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:58 GMT
+      - Wed, 19 Apr 2017 17:07:18 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22693,38 +23620,38 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 398912a3-fe03-439e-ad4e-3ae0be5ebb62
+      - 9593cb7a-fb02-42ef-bb19-dc74224b71b3
       X-Runtime:
-      - '1.727060'
+      - '1.135236'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"bbf8126200fa650ea8a3d1d3694f82d8-gzip"'
+      - '"e41866a557e518789fd2f6bf75e868e7-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '2443'
+      - '2448'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=924d422bf597034cb35d3f78cdc0b4c9; path=/; secure; HttpOnly
+      - _session_id=d7e581137d857d3fe2288ea58de1067c; path=/; secure; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"product_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-03-27T18:35:58.043+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"available_content":[{"enabled":true,"content":{"id":"1490639748543","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-03-27T18:35:58.043+0000"},"product_id":69},{"enabled":true,"content":{"id":"1490639754098","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:54.098+0000","updated":"2017-03-27T18:35:54.098+0000"},"product_id":69}],"redhat":false,"id":69,"cp_id":"1490639746899","name":"product
+      string: '  {"product_content":[{"enabled":true,"content":{"id":"1492621631553","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:18.112+0000"},"product_id":117},{"enabled":true,"content":{"id":"1492621635543","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:15.543+0000","created":"2017-04-19T17:07:15.543+0000"},"product_id":117}],"available_content":[{"enabled":true,"content":{"id":"1492621631553","type":"yum","label":"testcorp_product_create_update_rpm_docker_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:18.112+0000"},"product_id":117},{"enabled":true,"content":{"id":"1492621635543","type":"docker","label":"testcorp_product_create_update_rpm_docker_thomasmckay_hammer","name":"thomasmckay/hammer","vendor":"Custom","contentUrl":"/custom/product_create_update_rpm_docker/thomasmckay_hammer","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:15.543+0000","created":"2017-04-19T17:07:15.543+0000"},"product_id":117}],"redhat":false,"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Docker
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2,"created_at":"2017-03-27
-        18:35:46 UTC","updated_at":"2017-03-27 18:35:58 UTC","repositories":[{"name":"thomasmckay/hammer","id":17},{"name":"Zoo","id":16}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2,"created_at":"2017-04-19
+        17:07:07 UTC","updated_at":"2017-04-19 17:07:18 UTC","repositories":[{"name":"thomasmckay/hammer","id":74},{"name":"Zoo","id":73}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:06 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:38 GMT
 - request:
     method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/17
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/74
     body:
       encoding: UTF-8
       string: '{"organization_id":3,"name":"thomasmckay/hammer","url":"https://registry-1.docker.io/","verify_ssl":true,"unprotected":true,"mirror_on_sync":true,"docker_upstream_name":"thomasmckay/hammer"}'
@@ -22734,7 +23661,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22749,7 +23676,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:36:00 GMT
+      - Wed, 19 Apr 2017 17:07:19 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22767,34 +23694,34 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5a22a2bc-0b5f-4963-854c-8a8f01e23cd8
+      - 56bbcb0c-5c75-42bd-8e59-6bf06883b80e
       X-Runtime:
-      - '0.626364'
+      - '0.612027'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"c492a6ea4b88eec8daf0056ebe1d5c3b-gzip"'
+      - '"6718ae6edf78ede7b0cc6a35be1be438-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1272'
+      - '1273'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=36e849d46f326d1be930633e7b4d3b32; path=/; secure; HttpOnly
+      - _session_id=ed7c15bb1defa68eb5531e5f360559ca; path=/; secure; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"content_type":"docker","docker_upstream_name":"thomasmckay/hammer","mirror_on_sync":true,"unprotected":true,"full_path":"sat62.example.com:5000/testcorp-product_create_update_rpm_docker-thomasmckay_hammer","checksum_type":null,"container_repository_name":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","download_policy":null,"url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639754098","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:52
-        UTC","updated_at":"2017-03-27 18:35:54 UTC","id":17,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":69,"cp_id":"1490639746899","name":"product
+      string: '  {"content_type":"docker","docker_upstream_name":"thomasmckay/hammer","mirror_on_sync":true,"unprotected":true,"full_path":"sat62.example.com:5000/testcorp-product_create_update_rpm_docker-thomasmckay_hammer","checksum_type":null,"container_repository_name":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","download_policy":null,"url":"https://registry-1.docker.io/","relative_path":"testcorp-product_create_update_rpm_docker-thomasmckay_hammer","major":null,"minor":null,"gpg_key_id":null,"content_id":"1492621635543","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:13
+        UTC","updated_at":"2017-04-19 17:07:16 UTC","id":74,"name":"thomasmckay/hammer","label":"thomasmckay_hammer","product":{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:07 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:39 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?search=name%20=%20%22Test%20Corporation%22
@@ -22807,7 +23734,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22820,7 +23747,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:36:00 GMT
+      - Wed, 19 Apr 2017 17:07:20 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22838,13 +23765,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 47a94350-9086-45f7-8cbd-d30e06b8ea4e
+      - 70025f36-7382-4082-b2e5-a930f08d299b
       X-Runtime:
-      - '0.069871'
+      - '0.060134'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"4ca819c8f4b990404bfbc12a1ceaa3fb-gzip"'
+      - '"33f5ad55285e93110ffd8103723370df-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -22854,7 +23781,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=e9c5b6418a59f62501f1e55655d0ace1; path=/; secure; HttpOnly
+      - _session_id=398196cc196f170db84532039c35730b; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -22868,10 +23795,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-03-27 18:28:18 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:07 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:39 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?page=1&per_page=20&search=product%20create_update_rpm_docker&sort
@@ -22884,7 +23811,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22897,7 +23824,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:36:00 GMT
+      - Wed, 19 Apr 2017 17:07:20 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22915,37 +23842,37 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 73da9a34-e372-4f1a-9822-492d8917d073
+      - 58f847ad-9e08-4d90-863a-3a9e7feca374
       X-Runtime:
-      - '0.127476'
+      - '0.151901'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"bb17884b59fbef706f04afb581abca34-gzip"'
+      - '"59f8941a9bd90bbe7e635d6ad963cd58-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '541'
+      - '542'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=33544619af0310052a5cfaa398262ccb; path=/; secure; HttpOnly
+      - _session_id=b50d8c96a78ef3d850d160edd030cc7a; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":22,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"product
-        create_update_rpm_docker","sort":{"by":null,"order":null},"results":[{"id":69,"cp_id":"1490639746899","name":"product
+      string: '{"total":35,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"product
+        create_update_rpm_docker","sort":{"by":null,"order":null},"results":[{"id":117,"cp_id":"1492621628500","name":"product
         create_update_rpm_docker","label":"product_create_update_rpm_docker","description":"Docker
         Product","provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":2}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:07 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:39 GMT
 - request:
     method: delete
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/69
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/117
     body:
       encoding: US-ASCII
       string: ''
@@ -22955,7 +23882,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -22968,7 +23895,7 @@ http_interactions:
       message: Accepted
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:36:01 GMT
+      - Wed, 19 Apr 2017 17:07:20 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -22986,9 +23913,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - ae573e2d-9e50-4dfe-9edc-89592c840d87
+      - 84822535-bf04-4dfd-9219-f75ee5a6711d
       X-Runtime:
-      - '1.609683'
+      - '2.678102'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -22996,20 +23923,20 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=7adbb6c9fa720481c008017d91609f6f; path=/; secure; HttpOnly
+      - _session_id=b87dbd0bbc176fe94002adbda0891b21; path=/; secure; HttpOnly
       - request_method=DELETE; path=/
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '  {"id":"1c149fa8-7b0e-4319-9bfb-c5082f8043d4","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-03-27
-        18:36:01 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":69,"name":"product
-        create_update_rpm_docker","label":"product_create_update_rpm_docker","cp_id":"1490639746899"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
-        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":69},"output":{},"humanized":{"action":"Delete
-        Product","input":[["product",{"text":"product ''product create_update_rpm_docker''","link":"#/products/69/info"}],["organization",{"text":"organization
+      string: '  {"id":"703a9489-cd8d-4d16-94c4-4c4476361f51","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-04-19
+        17:07:20 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":117,"name":"product
+        create_update_rpm_docker","label":"product_create_update_rpm_docker","cp_id":"1492621628500"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":117},"output":{},"humanized":{"action":"Delete
+        Product","input":[["product",{"text":"product ''product create_update_rpm_docker''","link":"#/products/117/info"}],["organization",{"text":"organization
         ''Test Corporation''","link":"/organizations/3/edit"}]],"output":"","errors":[]},"cli_example":null}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:36:08 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:42 GMT
 recorded_with: VCR 3.0.3

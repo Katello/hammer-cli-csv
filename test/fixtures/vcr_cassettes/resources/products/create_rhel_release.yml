@@ -2,1133 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/products?enabled=true&per_page=999999&search=name=%22product%20update_rpm%22
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:27 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - eba67652-b271-40c7-8539-ae3b4f0d1ce4
-      X-Runtime:
-      - '0.049624'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=780d2fa66f405d3da6b8142c0530a44f; path=/; secure; HttpOnly
-      Etag:
-      - '"cb0c2169649b29767199733777584f2c-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '151'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":0,"page":1,"per_page":"999999","error":null,"search":"name=\"product
-        update_rpm\"","sort":{"by":null,"order":null},"results":[]}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:11 GMT
-- request:
-    method: post
-    uri: https://admin:changeme@satlap.example.com/katello/api/products
-    body:
-      encoding: UTF-8
-      string: '{"name":"product update_rpm","organization_id":8}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '49'
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:27 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - aab55eb7-903b-4e2c-945f-1d65a7d222a3
-      X-Runtime:
-      - '2.538468'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=7ed45111abf253279a5324f721410cfe; path=/; secure; HttpOnly
-      - request_method=POST; path=/
-      Etag:
-      - '"92aaa4013d2ba59208125ec97ae3a293-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '868'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '  {"product_content":[],"available_content":[],"redhat":false,"id":78,"cp_id":null,"name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":8},"sync_plan":null,"repository_count":0,"created_at":"2016-12-19
-        16:42:28 UTC","updated_at":"2016-12-19 16:42:28 UTC","repositories":[],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:13 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@satlap.example.com/katello/api/products/78/repositories?all=false&library=true&organization_id=8
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:30 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 50d5d4d6-01e7-4c16-b633-692b9e4d3b44
-      X-Runtime:
-      - '0.041715'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=32627222fbe6c522fa984035f878ec66; path=/; secure; HttpOnly
-      Etag:
-      - '"6a5cc8a6caa41dfb85f960ee483ee634-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '120'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":0,"subtotal":0,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:14 GMT
-- request:
-    method: post
-    uri: https://admin:changeme@satlap.example.com/katello/api/repositories
-    body:
-      encoding: UTF-8
-      string: '{"organization_id":8,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","label":"Zoo","product_id":78,"content_type":"yum"}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '156'
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:30 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 2df0bd51-dc1e-4ad0-9595-ac9637939a05
-      X-Runtime:
-      - '1.505383'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=4a3ed04ee3bbf54a76f5987b443c5a35; path=/; secure; HttpOnly
-      - request_method=POST; path=/
-      Etag:
-      - '"4c1fb4d6e6e8843a00ad3ce7c0420a8a-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1181'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat-rhel7.example.com/pulp/repos/testcorp/Library/custom/product_update_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1482165751122","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":8},"created_at":"2016-12-19 16:42:30
-        UTC","updated_at":"2016-12-19 16:42:31 UTC","id":27,"name":"Zoo","label":"Zoo","product":{"id":78,"cp_id":"1482165749010","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:15 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/products?enabled=true&per_page=999999&search=name=%22product%20update_rpm%22
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:32 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - a4a858f9-4245-465a-a6f5-7636e3a40af0
-      X-Runtime:
-      - '0.053760'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=4a1d82aa0027544c221a97b9ebe7de23; path=/; secure; HttpOnly
-      Etag:
-      - '"c72b10602464ddad3668d165f1f624c7-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '497'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
-        update_rpm\"","sort":{"by":null,"order":null},"results":[{"id":78,"cp_id":"1482165749010","name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":8},"sync_plan":null,"repository_count":1}]}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:15 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@satlap.example.com/katello/api/products/78/repositories?enabled=true&library=true&organization_id=8&page_size=999999&paged=true
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:32 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - d4dbe924-d340-4fc1-bfa7-d9d099581dc3
-      X-Runtime:
-      - '0.069954'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=2ed45d26b640ab939fd1be6876de25ec; path=/; secure; HttpOnly
-      Etag:
-      - '"22dd9b66d2e6b0018ef042c9fc5ab9da-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '635'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","id":27,"name":"Zoo","label":"Zoo","product":{"id":78,"cp_id":"1482165749010","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:15 GMT
-- request:
-    method: put
-    uri: https://admin:changeme@satlap.example.com/katello/api/products/78
-    body:
-      encoding: UTF-8
-      string: '{"name":"product update_rpm","organization_id":8}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '49'
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:32 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 81278b8b-c180-43d5-b0df-e977f8a4aa90
-      X-Runtime:
-      - '0.923375'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=fd4c2ee5c64a3889c7a8debaf46f88e2; path=/; secure; HttpOnly
-      - request_method=PUT; path=/
-      Etag:
-      - '"553ff427ce580f114ba9c7f630d5e6fb-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1569'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '  {"product_content":[{"enabled":true,"content":{"id":"1482165751122","type":"yum","label":"testcorp_product_update_rpm_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_update_rpm/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2016-12-19T16:42:31.122+0000","updated":"2016-12-19T16:42:31.122+0000"},"product_id":78}],"available_content":[{"enabled":true,"content":{"id":"1482165751122","type":"yum","label":"testcorp_product_update_rpm_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_update_rpm/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2016-12-19T16:42:31.122+0000","updated":"2016-12-19T16:42:31.122+0000"},"product_id":78}],"redhat":false,"id":78,"cp_id":"1482165749010","name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":8},"sync_plan":null,"repository_count":1,"created_at":"2016-12-19
-        16:42:28 UTC","updated_at":"2016-12-19 16:42:29 UTC","repositories":[{"name":"Zoo","id":27}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:16 GMT
-- request:
-    method: put
-    uri: https://admin:changeme@satlap.example.com/katello/api/repositories/27
-    body:
-      encoding: UTF-8
-      string: '{"organization_id":8,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/"}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '105'
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:33 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 8bde683f-02a1-4443-bf23-11e05af1c811
-      X-Runtime:
-      - '0.549128'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=f8c575e9f1e9da9d0b2b2258904cad07; path=/; secure; HttpOnly
-      - request_method=PUT; path=/
-      Etag:
-      - '"4c1fb4d6e6e8843a00ad3ce7c0420a8a-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1181'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat-rhel7.example.com/pulp/repos/testcorp/Library/custom/product_update_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1482165751122","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":8},"created_at":"2016-12-19 16:42:30
-        UTC","updated_at":"2016-12-19 16:42:31 UTC","id":27,"name":"Zoo","label":"Zoo","product":{"id":78,"cp_id":"1482165749010","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:17 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@satlap.example.com/katello/api/organizations/8/products?page=1&per_page=20&search=product%20update_rpm&sort
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:33 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - e46ad8ee-7fe4-4a5e-867d-3ca830ceeaec
-      X-Runtime:
-      - '0.058624'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=f592bbfc264358e20ce52523505573b2; path=/; secure; HttpOnly
-      Etag:
-      - '"ad2d8eb573381a9e04d8ac799ad6a33e-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '487'
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":22,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"product
-        update_rpm","sort":{"by":null,"order":null},"results":[{"id":78,"cp_id":"1482165749010","name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":8},"sync_plan":null,"repository_count":1}]}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:17 GMT
-- request:
-    method: delete
-    uri: https://admin:changeme@satlap.example.com/katello/api/products/78
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - satlap.example.com
-  response:
-    status:
-      code: 202
-      message: Accepted
-    headers:
-      Date:
-      - Mon, 19 Dec 2016 16:42:33 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.61
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - 9793fd9909c89b81479655ed560c4340
-      Cache-Control:
-      - no-cache
-      X-Request-Id:
-      - 91943f09-2c4f-4866-8231-c562962c4434
-      X-Runtime:
-      - '0.929364'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Set-Cookie:
-      - _session_id=20c246e05fe03ea97f87957fba3fd888; path=/; secure; HttpOnly
-      - request_method=DELETE; path=/
-      Status:
-      - 202 Accepted
-      Transfer-Encoding:
-      - chunked
-      Content-Type:
-      - application/json; charset=utf-8
-    body:
-      encoding: UTF-8
-      string: '  {"id":"cff9ba3b-b06b-4285-a104-27fc08f4113d","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2016-12-19
-        16:42:34 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":78,"name":"product
-        update_rpm","label":"product_update_rpm","cp_id":"1482165749010"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":8,"name":"Test
-        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":78},"output":{},"humanized":{"action":"Delete
-        Product","input":[["product",{"text":"product ''product update_rpm''","link":"#/products/78/info"}],["organization",{"text":"organization
-        ''Test Corporation''","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}
-
-'
-    http_version: 
-  recorded_at: Mon, 19 Dec 2016 16:42:18 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/67/repositories?all=false&library=true&organization_id=3
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 27 Mar 2017 18:35:32 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - b5cbee5d-5edd-4e17-a315-eb8c8eb6c004
-      X-Runtime:
-      - '0.047073'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Etag:
-      - '"6a5cc8a6caa41dfb85f960ee483ee634-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '120'
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=8ad4d7151e8252b03abb4f27b84f2d8d; path=/; secure; HttpOnly
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":0,"subtotal":0,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
-
-'
-    http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:38 GMT
-- request:
-    method: post
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
-    body:
-      encoding: UTF-8
-      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","label":"Zoo","product_id":67,"content_type":"yum"}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '156'
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 27 Mar 2017 18:35:32 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - cff598a0-a93a-4565-a46c-9efdf45bddba
-      X-Runtime:
-      - '2.329472'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Etag:
-      - '"dcb77d21ce3e8f645b8dfb1cacb6b1b3-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1177'
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=ff935f63e6cbccaa73fb0a19a53bcaba; path=/; secure; HttpOnly
-      - request_method=POST; path=/
-    body:
-      encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat62.example.com/pulp/repos/testcorp/Library/custom/product_update_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639734052","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:32
-        UTC","updated_at":"2017-03-27 18:35:34 UTC","id":14,"name":"Zoo","label":"Zoo","product":{"id":67,"cp_id":"1490639731063","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
-
-'
-    http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:40 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/67/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 27 Mar 2017 18:35:35 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - d9a4f95b-7fb2-4a48-bdbe-e59e973391ef
-      X-Runtime:
-      - '0.057732'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Etag:
-      - '"03e7b2ba8eb7cb011689426aac4460c0-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '635'
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=20a45ee5e7a29a2daf8e0d2e54d23be7; path=/; secure; HttpOnly
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","id":14,"name":"Zoo","label":"Zoo","product":{"id":67,"cp_id":"1490639731063","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
-
-'
-    http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:41 GMT
-- request:
-    method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/67
-    body:
-      encoding: UTF-8
-      string: '{"name":"product update_rpm","organization_id":3}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '49'
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 27 Mar 2017 18:35:35 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 5ba603ef-f898-4e70-9004-55af92cfda89
-      X-Runtime:
-      - '0.957576'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Etag:
-      - '"6e73467fd30555fdc5753b347222d907-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1569'
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=17adf5e7d8aea9cfabd4b451cca1dd5f; path=/; secure; HttpOnly
-      - request_method=PUT; path=/
-    body:
-      encoding: ASCII-8BIT
-      string: '  {"product_content":[{"enabled":true,"content":{"id":"1490639734052","type":"yum","label":"testcorp_product_update_rpm_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_update_rpm/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:34.052+0000","updated":"2017-03-27T18:35:34.052+0000"},"product_id":67}],"available_content":[{"enabled":true,"content":{"id":"1490639734052","type":"yum","label":"testcorp_product_update_rpm_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_update_rpm/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"created":"2017-03-27T18:35:34.052+0000","updated":"2017-03-27T18:35:34.052+0000"},"product_id":67}],"redhat":false,"id":67,"cp_id":"1490639731063","name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1,"created_at":"2017-03-27
-        18:35:29 UTC","updated_at":"2017-03-27 18:35:31 UTC","repositories":[{"name":"Zoo","id":14}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
-
-'
-    http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:42 GMT
-- request:
-    method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/14
-    body:
-      encoding: UTF-8
-      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/"}'
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Content-Length:
-      - '105'
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 27 Mar 2017 18:35:36 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 0e3c6dea-042f-470d-beeb-eca0c65eea72
-      X-Runtime:
-      - '0.677794'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Etag:
-      - '"dcb77d21ce3e8f645b8dfb1cacb6b1b3-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '1177'
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=792172c16d6dec8da770a21344b367cd; path=/; secure; HttpOnly
-      - request_method=PUT; path=/
-    body:
-      encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat62.example.com/pulp/repos/testcorp/Library/custom/product_update_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639734052","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:32
-        UTC","updated_at":"2017-03-27 18:35:34 UTC","id":14,"name":"Zoo","label":"Zoo","product":{"id":67,"cp_id":"1490639731063","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
-
-'
-    http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:43 GMT
-- request:
-    method: delete
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/67
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 202
-      message: Accepted
-    headers:
-      Date:
-      - Mon, 27 Mar 2017 18:35:37 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - no-cache
-      X-Request-Id:
-      - ae45a5b4-2a6a-41c3-b48f-117a43f8dee5
-      X-Runtime:
-      - '1.323245'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Status:
-      - 202 Accepted
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=37164b96bd482d0c83211ed574aab64a; path=/; secure; HttpOnly
-      - request_method=DELETE; path=/
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '  {"id":"ae523793-46a9-44ab-aa69-f64b7a7625ad","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-03-27
-        18:35:37 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":67,"name":"product
-        update_rpm","label":"product_update_rpm","cp_id":"1490639731063"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
-        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":67},"output":{},"humanized":{"action":"Delete
-        Product","input":[["product",{"text":"product ''product update_rpm''","link":"#/products/67/info"}],["organization",{"text":"organization
-        ''Test Corporation''","link":"/organizations/3/edit"}]],"output":"","errors":[]},"cli_example":null}
-
-'
-    http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:44 GMT
-- request:
-    method: get
     uri: https://admin:changeme@devel.example.com:50083/api/status
     body:
       encoding: US-ASCII
@@ -1148,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:23 GMT
+      - Wed, 19 Apr 2017 17:06:59 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1166,9 +39,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ee44dbc8-8b5b-4e1b-86ea-2a1399f0d00b
+      - 643fa774-e144-46fb-b219-2609207df8db
       X-Runtime:
-      - '0.041630'
+      - '0.033571'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -1180,12 +53,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=f385054e0a4d87b30feef44fc2d474b1; path=/; secure; HttpOnly
+      - _session_id=5e78e86cddf7db24f8eb01431ef2da8b; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:42 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
@@ -1207,7 +80,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:23 GMT
+      - Wed, 19 Apr 2017 17:06:59 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1225,9 +98,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0057df41-4598-441d-9845-e9230496c5a1
+      - eebf1780-eed8-4d66-b030-7ebbf784dd3c
       X-Runtime:
-      - '0.070695'
+      - '0.037013'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -1241,7 +114,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=3ce58857fe7493c110b7847b11a66e9d; path=/; secure; HttpOnly
+      - _session_id=55533de989deb07d2e1c0fb779de8ff9; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -1320,7 +193,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:42 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
 - request:
     method: get
     uri: https://devel.example.com:50083/apidoc/v2.en.json
@@ -1346,7 +219,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:23 GMT
+      - Wed, 19 Apr 2017 17:06:59 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -1364,9 +237,9 @@ http_interactions:
       Apipie-Checksum:
       - e1df2e8d43e22495b02a53b48e3b5298
       X-Request-Id:
-      - 1b467b41-44a4-4690-8847-be12d54b1f17
+      - 71a1f525-3b3d-4116-ad75-c6c2d05159ce
       X-Runtime:
-      - '0.005116'
+      - '0.005886'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -21005,7 +19878,7 @@ http_interactions:
         Ijp0cnVlfV0sImhlYWRlcnMiOm51bGx9fSwibGlua19leHRlbnNpb24iOiIu
         ZW4uaHRtbCJ9fQ==
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:42 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -21031,7 +19904,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:23 GMT
+      - Wed, 19 Apr 2017 17:06:59 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21049,9 +19922,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c6021c90-f945-4342-bacd-ec170854d78f
+      - f8a20233-bf02-4331-8d3c-8bdb6e08da0a
       X-Runtime:
-      - '0.035689'
+      - '0.083534'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21065,7 +19938,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=06bd8e7b229c0642c4a0dce90c31cd96; path=/; secure; HttpOnly
+      - _session_id=81ee9ad86374539632f04ccf7fe54bd4; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21082,10 +19955,10 @@ http_interactions:
           "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:42 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22product%20update_rpm%22
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22Red%20Hat%20Satellite%20Capsule%22
     body:
       encoding: US-ASCII
       string: ''
@@ -21108,7 +19981,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:23 GMT
+      - Wed, 19 Apr 2017 17:06:59 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21126,37 +19999,37 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 845ea827-28ff-431e-9ebe-34fb2feaff53
+      - 3ead2380-938e-4d8b-8c72-975cf978162e
       X-Runtime:
-      - '0.042544'
+      - '0.049166'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"b65d054f43b13cdb0021460ca21410e0-gzip"'
+      - '"b5044fa6b67c5b4c9c83277d0a362394-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '151'
+      - '158'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=e405879034641552337265ca06d0530f; path=/; secure; HttpOnly
+      - _session_id=339f881ec0259b83021541ce281e7ec2; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":3,"subtotal":0,"page":1,"per_page":"999999","error":null,"search":"name=\"product
-        update_rpm\"","sort":{"by":null,"order":null},"results":[]}
+      string: '{"total":2,"subtotal":0,"page":1,"per_page":"999999","error":null,"search":"name=\"Red
+        Hat Satellite Capsule\"","sort":{"by":null,"order":null},"results":[]}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:42 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
 - request:
-    method: post
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?name=Red%20Hat%20Satellite%20Capsule&per_page=999999
     body:
-      encoding: UTF-8
-      string: '{"name":"product update_rpm","organization_id":3}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept:
       - application/json;version=2
@@ -21168,8 +20041,6 @@ http_interactions:
       - application/json
       Accept-Language:
       - en
-      Content-Length:
-      - '49'
       Host:
       - devel.example.com:50083
   response:
@@ -21178,7 +20049,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:23 GMT
+      - Wed, 19 Apr 2017 17:06:59 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21196,37 +20067,166 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 43f875df-1df3-4cd3-a79e-a09807d10c63
+      - f138d0f0-8a5f-45a1-b27b-5588367b7d32
       X-Runtime:
-      - '1.684408'
+      - '0.074043'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"453ae69453ccf2f4e220bb5d3ece62ed-gzip"'
+      - '"e829528df0ce84c8e61e755941e72717-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '869'
+      - '476'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=5a4b23c7fb8c6f403524c7bc12669e9f; path=/; secure; HttpOnly
-      - request_method=POST; path=/
+      - _session_id=9009098c1cd7c7304bb1d5530cb3e783; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '  {"product_content":[],"available_content":[],"redhat":false,"id":118,"cp_id":null,"name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","label":"Red_Hat_Satellite_Capsule","description":null,"provider_id":4,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":0}]}
+
+'
+    http_version: 
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/91
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 19 Apr 2017 17:06:59 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 73e35f76-cec5-410c-85b8-0bb95e2873e9
+      X-Runtime:
+      - '0.129457'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"1c281beb2c591330be20bfb1b9f18e24-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '19487'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=a520b826db941ead1b3f733aa1c274ca; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"product_content":[{"enabled":false,"content":{"id":"4748","type":"file","label":"rhel-6-server-satellite-capsule-6.2-isos","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4079","type":"file","label":"rhel-6-server-satellite-capsule-6.1-isos","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4754","type":"yum","label":"rhel-7-server-satellite-capsule-6.2-source-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3775","type":"yum","label":"rhel-6-server-satellite-capsule-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4087","type":"yum","label":"rhel-7-server-satellite-capsule-6.1-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4085","type":"yum","label":"rhel-7-server-satellite-capsule-6.1-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3785","type":"yum","label":"rhel-7-server-satellite-capsule-optional-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule-optional/6.0/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5297","type":"yum","label":"rhel-7-server-satellite-capsule-6.3-source-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3783","type":"yum","label":"rhel-7-server-satellite-capsule-optional-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 7 Server) (RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule-optional/6.0/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5290","type":"yum","label":"rhel-6-server-satellite-capsule-6.3-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3777","type":"yum","label":"rhel-6-server-satellite-capsule-optional-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule-optional/6.0/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5291","type":"file","label":"rhel-6-server-satellite-capsule-6.3-isos","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4088","type":"yum","label":"rhel-7-server-satellite-capsule-6.1-source-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5295","type":"file","label":"rhel-7-server-satellite-capsule-6.3-isos","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4078","type":"yum","label":"rhel-6-server-satellite-capsule-6.1-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3778","type":"yum","label":"rhel-6-server-satellite-capsule-optional-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule-optional/6.0/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3774","type":"yum","label":"rhel-6-server-satellite-capsule-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3776","type":"yum","label":"rhel-6-server-satellite-capsule-optional-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 6 Server) (RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule-optional/6.0/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3772","type":"yum","label":"rhel-6-server-satellite-capsule-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5292","type":"yum","label":"rhel-6-server-satellite-capsule-6.3-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4747","type":"yum","label":"rhel-6-server-satellite-capsule-6.2-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4749","type":"yum","label":"rhel-6-server-satellite-capsule-6.2-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4753","type":"yum","label":"rhel-7-server-satellite-capsule-6.2-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4081","type":"yum","label":"rhel-6-server-satellite-capsule-6.1-source-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4750","type":"yum","label":"rhel-6-server-satellite-capsule-6.2-source-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5296","type":"yum","label":"rhel-7-server-satellite-capsule-6.3-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3773","type":"file","label":"rhel-6-server-satellite-capsule-6.0-isos","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3779","type":"yum","label":"rhel-7-server-satellite-capsule-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3781","type":"yum","label":"rhel-7-server-satellite-capsule-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4080","type":"yum","label":"rhel-6-server-satellite-capsule-6.1-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3782","type":"yum","label":"rhel-7-server-satellite-capsule-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3780","type":"file","label":"rhel-7-server-satellite-capsule-6.0-isos","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5293","type":"yum","label":"rhel-6-server-satellite-capsule-6.3-source-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4751","type":"yum","label":"rhel-7-server-satellite-capsule-6.2-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4752","type":"file","label":"rhel-7-server-satellite-capsule-6.2-isos","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5294","type":"yum","label":"rhel-7-server-satellite-capsule-6.3-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3784","type":"yum","label":"rhel-7-server-satellite-capsule-optional-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule-optional/6.0/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4086","type":"file","label":"rhel-7-server-satellite-capsule-6.1-isos","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91}],"available_content":[],"redhat":true,"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","label":"Red_Hat_Satellite_Capsule","description":null,"provider_id":4,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":0,"created_at":"2017-04-19
-        17:07:24 UTC","updated_at":"2017-04-19 17:07:24 UTC","repositories":[],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+        14:56:17 UTC","updated_at":"2017-04-19 14:56:17 UTC","repositories":[],"provider":{"name":"Red
+        Hat"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:44 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/118/repositories?all=false&library=true&organization_id=3
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/91/repository_sets?name=Red%20Hat%20Satellite%20Capsule%206.2%20(for%20RHEL%207%20Server)%20(RPMs)&organization_id=3&per_page=999999
     body:
       encoding: US-ASCII
       string: ''
@@ -21249,7 +20249,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:25 GMT
+      - Wed, 19 Apr 2017 17:07:00 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21267,36 +20267,38 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0ca32068-8880-48b7-8a15-24428c3296f1
+      - d2be719a-8a94-4ecb-a2fc-6563c1b63e03
       X-Runtime:
-      - '0.043486'
+      - '0.097384'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"6a5cc8a6caa41dfb85f960ee483ee634-gzip"'
+      - '"f6a5adab5263b5a99216908dde2b4b5d-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '120'
+      - '447'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=125f0a8c87d0dc114e42504ea626a8bb; path=/; secure; HttpOnly
+      - _session_id=79caf44a7ac29e9b4b73be7fe0f6fb09; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":0,"subtotal":0,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+      string: '{"total":1,"subtotal":1,"page":null,"per_page":null,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"repositories":[],"type":"yum","vendor":"Red
+        Hat","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/os","id":"4751","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (RPMs)","label":"rhel-7-server-satellite-capsule-6.2-rpms"}]}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:44 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:19 GMT
 - request:
-    method: post
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/91/repository_sets/4751/enable
     body:
       encoding: UTF-8
-      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","label":"Zoo","product_id":118,"content_type":"yum"}'
+      string: '{"basearch":"x86_64"}'
     headers:
       Accept:
       - application/json;version=2
@@ -21309,7 +20311,78 @@ http_interactions:
       Accept-Language:
       - en
       Content-Length:
-      - '157'
+      - '21'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Date:
+      - Wed, 19 Apr 2017 17:07:00 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - b93473af-b209-4b79-8416-7ff5cbe61fb2
+      X-Runtime:
+      - '2.767888'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Status:
+      - 202 Accepted
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=83124d799978084abdc6a82f40ca234e; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '  {"id":"d28f0286-acb4-4d56-b2c0-afec3c7bec22","label":"Actions::Katello::RepositorySet::EnableRepository","pending":false,"username":"admin","started_at":"2017-04-19
+        17:07:00 UTC","ended_at":"2017-04-19 17:07:02 UTC","state":"stopped","result":"success","progress":1.0,"input":{"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"repository":{"id":72,"name":"Red
+        Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64","label":"Red_Hat_Satellite_Capsule_6_2_for_RHEL_7_Server_RPMs_x86_64"},"product":{"id":91,"name":"Red
+        Hat Satellite Capsule","label":"Red_Hat_Satellite_Capsule","cp_id":"269"},"provider":{"id":4,"name":"Red
+        Hat"},"organization":{"id":3,"name":"Test Corporation","label":"testcorp"}},"output":{},"humanized":{"action":"Enable","input":[["repository",{"text":"repository
+        ''Red Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64''","link":null}],["product",{"text":"product
+        ''Red Hat Satellite Capsule''","link":"#/products/91/info"}],["organization",{"text":"organization
+        ''Test Corporation''","link":"/organizations/3/edit"}]],"output":"","errors":[]},"cli_example":null}
+
+'
+    http_version: 
+  recorded_at: Wed, 19 Apr 2017 17:07:21 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/91/repositories?all=false&library=true&organization_id=3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
       Host:
       - devel.example.com:50083
   response:
@@ -21318,7 +20391,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:25 GMT
+      - Wed, 19 Apr 2017 17:07:03 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21336,34 +20409,107 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 33806f94-106b-4a08-ba82-9ca40000b342
+      - 679b8cb5-2ea8-49f7-aa05-dfac1aa35f07
       X-Runtime:
-      - '2.654590'
+      - '0.076791'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"fd6a9d3664c8e9de3b95908b8121a615-gzip"'
+      - '"18422ea3d096645acf47007d37ef4bf1-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1178'
+      - '796'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=f4a84f9426a849a9b37045257074edb3; path=/; secure; HttpOnly
-      - request_method=POST; path=/
+      - _session_id=924020fd2a77bab581564a4013590266; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat62.example.com/pulp/repos/testcorp/Library/custom/product_update_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1492621647487","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:25
-        UTC","updated_at":"2017-04-19 17:07:28 UTC","id":75,"name":"Zoo","label":"Zoo","product":{"id":118,"cp_id":"1492621644304","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","relative_path":"testcorp/Library/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","id":72,"name":"Red
+        Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64","label":"Red_Hat_Satellite_Capsule_6_2_for_RHEL_7_Server_RPMs_x86_64","product":{"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:47 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:21 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/72
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":3,"name":"Red Hat Satellite Capsule 6.2 for RHEL
+        7 Server RPMs x86_64","url":"https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","verify_ssl":false,"unprotected":false,"mirror_on_sync":false,"download_policy":"on_demand"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '274'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 19 Apr 2017 17:07:03 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ee6071a1-d1c8-40c8-801a-e0ab832eb294
+      X-Runtime:
+      - '2.161944'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"bc8f5e265a41b64507538f21f4238e64-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1363'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=a3cb335baac784d393f8854e4002ba78; path=/; secure; HttpOnly
+      - request_method=PUT; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","relative_path":"testcorp/Library/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","major":null,"minor":null,"gpg_key_id":null,"content_id":"4751","content_view_version_id":2,"library_instance_id":null,"product_type":"redhat","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:01
+        UTC","updated_at":"2017-04-19 17:07:03 UTC","id":72,"name":"Red Hat Satellite
+        Capsule 6.2 for RHEL 7 Server RPMs x86_64","label":"Red_Hat_Satellite_Capsule_6_2_for_RHEL_7_Server_RPMs_x86_64","product":{"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+
+'
+    http_version: 
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/status
@@ -21385,7 +20531,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:28 GMT
+      - Wed, 19 Apr 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21403,9 +20549,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9c83cbba-fc3d-4e17-bbfd-762a74e70964
+      - b5de9e52-4d4f-4915-bdb8-1aa763981e33
       X-Runtime:
-      - '0.041692'
+      - '0.094433'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21417,12 +20563,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=ab16fd200f93ba47ada067130ad1bd87; path=/; secure; HttpOnly
+      - _session_id=c2e956ae365a1fd7dfa3fb37724e0fc9; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:47 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
@@ -21444,7 +20590,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:28 GMT
+      - Wed, 19 Apr 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21462,9 +20608,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 282b2faa-2350-4e09-962e-62b323abf9cf
+      - 82ae41fc-89b2-48bb-8410-a2ff5d95d7d9
       X-Runtime:
-      - '0.031951'
+      - '0.065398'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21478,7 +20624,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=533b92523d959675c4137dc0a9076aeb; path=/; secure; HttpOnly
+      - _session_id=5392128ddccbaba5490809d38801a33f; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -21557,7 +20703,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:47 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -21583,7 +20729,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:28 GMT
+      - Wed, 19 Apr 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21601,9 +20747,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b902f903-456e-4c2f-a403-2cac84cc423a
+      - 1a3d08ab-985e-44f4-8b7a-fef2849270ff
       X-Runtime:
-      - '0.036048'
+      - '0.073771'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -21617,7 +20763,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=c4a293e2d26f9b1994a391fcd9002990; path=/; secure; HttpOnly
+      - _session_id=b293b482ce251eabb70632a9cbb6e3a6; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -21634,10 +20780,10 @@ http_interactions:
           "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:47 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22product%20update_rpm%22
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22Red%20Hat%20Satellite%20Capsule%22
     body:
       encoding: US-ASCII
       string: ''
@@ -21660,7 +20806,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:28 GMT
+      - Wed, 19 Apr 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21678,36 +20824,36 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 73f98f47-c0b5-4179-8f3c-bae8aa28cd98
+      - 0baa92e2-15b7-4078-b5ec-563a39b07be6
       X-Runtime:
-      - '0.074044'
+      - '0.141000'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"bdb7772f54ed2ae8b9afb625b264c684-gzip"'
+      - '"52a952978d7dff5edc2792b06d2e964c-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '498'
+      - '508'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=ed4a88857f14e273a44d5bb12e705fe9; path=/; secure; HttpOnly
+      - _session_id=ad9299b6abb9325a6b1b55c6e982acf6; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":3,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"product
-        update_rpm\"","sort":{"by":null,"order":null},"results":[{"id":118,"cp_id":"1492621644304","name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
+      string: '{"total":2,"subtotal":1,"page":1,"per_page":"999999","error":null,"search":"name=\"Red
+        Hat Satellite Capsule\"","sort":{"by":null,"order":null},"results":[{"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","label":"Red_Hat_Satellite_Capsule","description":null,"provider_id":4,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1}]}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:47 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/118/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/91/repositories?enabled=true&library=true&organization_id=3&page_size=999999&paged=true
     body:
       encoding: US-ASCII
       string: ''
@@ -21730,7 +20876,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:28 GMT
+      - Wed, 19 Apr 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21748,37 +20894,38 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 0b565a27-d49f-411f-b087-5577a24052fd
+      - fd063008-d630-40b8-a4a1-92e47b1258e8
       X-Runtime:
-      - '0.134545'
+      - '0.072056'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"676ba10df6f43e13a448ef7cdcdfaff1-gzip"'
+      - '"18422ea3d096645acf47007d37ef4bf1-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '636'
+      - '796'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=e6992105172c17f1a05c9200e52c1258; path=/; secure; HttpOnly
+      - _session_id=0f295561858543074d83244337f934e9; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","id":75,"name":"Zoo","label":"Zoo","product":{"id":118,"cp_id":"1492621644304","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
+      string: '{"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"content_type":"yum","url":"https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","relative_path":"testcorp/Library/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","id":72,"name":"Red
+        Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64","label":"Red_Hat_Satellite_Capsule_6_2_for_RHEL_7_Server_RPMs_x86_64","product":{"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null}]}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:47 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
 - request:
-    method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/118
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/91
     body:
-      encoding: UTF-8
-      string: '{"name":"product update_rpm","organization_id":3}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept:
       - application/json;version=2
@@ -21790,8 +20937,6 @@ http_interactions:
       - application/json
       Accept-Language:
       - en
-      Content-Length:
-      - '49'
       Host:
       - devel.example.com:50083
   response:
@@ -21800,7 +20945,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:28 GMT
+      - Wed, 19 Apr 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21818,40 +20963,102 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e002309e-6351-48a8-a414-bd860c70e3bc
+      - 6ce88305-da33-4aa0-b4ab-617fe1d54963
       X-Runtime:
-      - '0.978649'
+      - '0.114931'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"de1c36318bc115a71893f393e77445b1-gzip"'
+      - '"9e09b967fecd0d30d1d1547f66d65bb3-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1572'
+      - '20046'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=4eb6c7b7c2fd03e8418ca18d59fd5b36; path=/; secure; HttpOnly
-      - request_method=PUT; path=/
+      - _session_id=72efa0d2de19127ea579971beec68a12; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '  {"product_content":[{"enabled":true,"content":{"id":"1492621647487","type":"yum","label":"testcorp_product_update_rpm_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_update_rpm/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:27.487+0000","created":"2017-04-19T17:07:27.487+0000"},"product_id":118}],"available_content":[{"enabled":true,"content":{"id":"1492621647487","type":"yum","label":"testcorp_product_update_rpm_Zoo","name":"Zoo","vendor":"Custom","contentUrl":"/custom/product_update_rpm/Zoo","gpgUrl":"","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T17:07:27.487+0000","created":"2017-04-19T17:07:27.487+0000"},"product_id":118}],"redhat":false,"id":118,"cp_id":"1492621644304","name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
+      string: '  {"product_content":[{"enabled":false,"content":{"id":"4748","type":"file","label":"rhel-6-server-satellite-capsule-6.2-isos","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4079","type":"file","label":"rhel-6-server-satellite-capsule-6.1-isos","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4754","type":"yum","label":"rhel-7-server-satellite-capsule-6.2-source-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3775","type":"yum","label":"rhel-6-server-satellite-capsule-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4087","type":"yum","label":"rhel-7-server-satellite-capsule-6.1-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4085","type":"yum","label":"rhel-7-server-satellite-capsule-6.1-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3785","type":"yum","label":"rhel-7-server-satellite-capsule-optional-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule-optional/6.0/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5297","type":"yum","label":"rhel-7-server-satellite-capsule-6.3-source-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3783","type":"yum","label":"rhel-7-server-satellite-capsule-optional-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 7 Server) (RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule-optional/6.0/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5290","type":"yum","label":"rhel-6-server-satellite-capsule-6.3-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3777","type":"yum","label":"rhel-6-server-satellite-capsule-optional-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule-optional/6.0/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5291","type":"file","label":"rhel-6-server-satellite-capsule-6.3-isos","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4088","type":"yum","label":"rhel-7-server-satellite-capsule-6.1-source-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5295","type":"file","label":"rhel-7-server-satellite-capsule-6.3-isos","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4078","type":"yum","label":"rhel-6-server-satellite-capsule-6.1-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3778","type":"yum","label":"rhel-6-server-satellite-capsule-optional-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule-optional/6.0/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3774","type":"yum","label":"rhel-6-server-satellite-capsule-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3776","type":"yum","label":"rhel-6-server-satellite-capsule-optional-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 6 Server) (RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule-optional/6.0/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3772","type":"yum","label":"rhel-6-server-satellite-capsule-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5292","type":"yum","label":"rhel-6-server-satellite-capsule-6.3-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.826+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4747","type":"yum","label":"rhel-6-server-satellite-capsule-6.2-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/os","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4749","type":"yum","label":"rhel-6-server-satellite-capsule-6.2-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4753","type":"yum","label":"rhel-7-server-satellite-capsule-6.2-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4081","type":"yum","label":"rhel-6-server-satellite-capsule-6.1-source-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4750","type":"yum","label":"rhel-6-server-satellite-capsule-6.2-source-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.2/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5296","type":"yum","label":"rhel-7-server-satellite-capsule-6.3-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3773","type":"file","label":"rhel-6-server-satellite-capsule-6.0-isos","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 6 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/6/$releasever/$basearch/sat-capsule/6.0/iso","requiredTags":"rhel-6-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3779","type":"yum","label":"rhel-7-server-satellite-capsule-6.0-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3781","type":"yum","label":"rhel-7-server-satellite-capsule-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4080","type":"yum","label":"rhel-6-server-satellite-capsule-6.1-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 6 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.1/debug","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3782","type":"yum","label":"rhel-7-server-satellite-capsule-6.0-source-rpms","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/source/SRPMS","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3780","type":"file","label":"rhel-7-server-satellite-capsule-6.0-isos","name":"Red
+        Hat Satellite Capsule 6.0 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule/6.0/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5293","type":"yum","label":"rhel-6-server-satellite-capsule-6.3-source-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 6 Server) (Source RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/6/6Server/$basearch/sat-capsule/6.3/source/SRPMS","requiredTags":"rhel-6-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4751","type":"yum","label":"rhel-7-server-satellite-capsule-6.2-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4752","type":"file","label":"rhel-7-server-satellite-capsule-6.2-isos","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"5294","type":"yum","label":"rhel-7-server-satellite-capsule-6.3-rpms","name":"Red
+        Hat Satellite Capsule 6.3 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.3/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"3784","type":"yum","label":"rhel-7-server-satellite-capsule-optional-6.0-debug-rpms","name":"Red
+        Hat Satellite Capsule 6.0 - Optional (for RHEL 7 Server) (Debug RPMs)","vendor":"Red
+        Hat","contentUrl":"/content/dist/rhel/server/7/$releasever/$basearch/sat-capsule-optional/6.0/debug","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91},{"enabled":false,"content":{"id":"4086","type":"file","label":"rhel-7-server-satellite-capsule-6.1-isos","name":"Red
+        Hat Satellite Capsule 6.1 (for RHEL 7 Server) (ISOs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.1/iso","requiredTags":"rhel-7-server","gpgUrl":"http://","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91}],"available_content":[{"enabled":false,"content":{"id":"4751","type":"yum","label":"rhel-7-server-satellite-capsule-6.2-rpms","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (RPMs)","vendor":"Red Hat","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/os","requiredTags":"rhel-7-server","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","metadataExpire":1,"modifiedProductIds":[],"updated":"2017-04-19T14:56:15.827+0000","arches":"x86_64"},"product_id":91}],"redhat":true,"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","label":"Red_Hat_Satellite_Capsule","description":null,"provider_id":4,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1,"created_at":"2017-04-19
-        17:07:24 UTC","updated_at":"2017-04-19 17:07:25 UTC","repositories":[{"name":"Zoo","id":75}],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+        14:56:17 UTC","updated_at":"2017-04-19 14:56:17 UTC","repositories":[{"name":"Red
+        Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64","id":72}],"provider":{"name":"Red
+        Hat"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:48 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
 - request:
-    method: put
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/75
+    method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/91/repository_sets?name=Red%20Hat%20Satellite%20Capsule%206.2%20(for%20RHEL%207%20Server)%20(RPMs)&organization_id=3&per_page=999999
     body:
-      encoding: UTF-8
-      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/"}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept:
       - application/json;version=2
@@ -21863,8 +21070,6 @@ http_interactions:
       - application/json
       Accept-Language:
       - en
-      Content-Length:
-      - '105'
       Host:
       - devel.example.com:50083
   response:
@@ -21873,7 +21078,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Apr 2017 17:07:29 GMT
+      - Wed, 19 Apr 2017 17:07:06 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -21891,248 +21096,106 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c63d9d16-e63f-4062-b2c1-8a803824ecd2
+      - f8542a4a-5d54-4e68-9616-41583f852186
       X-Runtime:
-      - '0.636955'
+      - '0.112648'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"fd6a9d3664c8e9de3b95908b8121a615-gzip"'
+      - '"e24d4ce08e8c606a60912f4c397e1055-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1178'
+      - '525'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=e17586819c16f0ffc15267ad1db74b5e; path=/; secure; HttpOnly
+      - _session_id=7a1e37d071cb8adae01ec62614e12f89; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":1,"subtotal":1,"page":null,"per_page":null,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"repositories":[{"id":72,"name":"Red
+        Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64"}],"type":"yum","vendor":"Red
+        Hat","gpgUrl":"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release","contentUrl":"/content/dist/rhel/server/7/7Server/$basearch/sat-capsule/6.2/os","id":"4751","name":"Red
+        Hat Satellite Capsule 6.2 (for RHEL 7 Server) (RPMs)","label":"rhel-7-server-satellite-capsule-6.2-rpms"}]}
+
+'
+    http_version: 
+  recorded_at: Wed, 19 Apr 2017 17:07:24 GMT
+- request:
+    method: put
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories/72
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":3,"name":"Red Hat Satellite Capsule 6.2 for RHEL
+        7 Server RPMs x86_64","url":"https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","verify_ssl":false,"unprotected":false,"mirror_on_sync":false,"download_policy":"on_demand"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '274'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 19 Apr 2017 17:07:06 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 46727d4d-0a19-42e3-b1de-804eafe22d1f
+      X-Runtime:
+      - '0.388246'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"bc8f5e265a41b64507538f21f4238e64-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1363'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=44f902a7e555312db72544da1ece9e26; path=/; secure; HttpOnly
       - request_method=PUT; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat62.example.com/pulp/repos/testcorp/Library/custom/product_update_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_update_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1492621647487","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:25
-        UTC","updated_at":"2017-04-19 17:07:28 UTC","id":75,"name":"Zoo","label":"Zoo","product":{"id":118,"cp_id":"1492621644304","name":"product
-        update_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":false,"unprotected":false,"full_path":"https://sat62.example.com/pulp/repos/testcorp/Library/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os/","checksum_type":null,"container_repository_name":null,"download_policy":"on_demand","url":"https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","relative_path":"testcorp/Library/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os","major":null,"minor":null,"gpg_key_id":null,"content_id":"4751","content_view_version_id":2,"library_instance_id":null,"product_type":"redhat","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:07:01
+        UTC","updated_at":"2017-04-19 17:07:03 UTC","id":72,"name":"Red Hat Satellite
+        Capsule 6.2 for RHEL 7 Server RPMs x86_64","label":"Red_Hat_Satellite_Capsule_6_2_for_RHEL_7_Server_RPMs_x86_64","product":{"id":91,"cp_id":"269","name":"Red
+        Hat Satellite Capsule","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
 
 '
     http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:49 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?search=name%20=%20%22Test%20Corporation%22
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Wed, 19 Apr 2017 17:07:30 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - f4b3cf50-fcab-46f7-8812-7b37acbef7cf
-      X-Runtime:
-      - '0.069702'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Etag:
-      - '"33f5ad55285e93110ffd8103723370df-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '386'
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=be08ce465b77a760974db7e084053d62; path=/; secure; HttpOnly
-    body:
-      encoding: ASCII-8BIT
-      string: |
-        {
-          "total": 2,
-          "subtotal": 1,
-          "page": 1,
-          "per_page": 20,
-          "search": "name = \"Test Corporation\"",
-          "sort": {
-            "by": null,
-            "order": null
-          },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
-        }
-    http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:49 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?page=1&per_page=20&search=product%20update_rpm&sort
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Wed, 19 Apr 2017 17:07:30 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - dac75a29-7e41-451f-972e-6d3e27456a75
-      X-Runtime:
-      - '0.110987'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Etag:
-      - '"5cea78814ac6fa4d70ba2d4527a218e5-gzip"'
-      Status:
-      - 200 OK
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '488'
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=9ed21b8a012de537389feb6f1ea976f7; path=/; secure; HttpOnly
-    body:
-      encoding: ASCII-8BIT
-      string: '{"total":35,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"product
-        update_rpm","sort":{"by":null,"order":null},"results":[{"id":118,"cp_id":"1492621644304","name":"product
-        update_rpm","label":"product_update_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1}]}
-
-'
-    http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:49 GMT
-- request:
-    method: delete
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/118
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en
-      Host:
-      - devel.example.com:50083
-  response:
-    status:
-      code: 202
-      message: Accepted
-    headers:
-      Date:
-      - Wed, 19 Apr 2017 17:07:30 GMT
-      Server:
-      - Apache/2.4.6 (Red Hat Enterprise Linux)
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Foreman-Version:
-      - 1.11.0.54
-      Foreman-Api-Version:
-      - '2'
-      Apipie-Checksum:
-      - e1df2e8d43e22495b02a53b48e3b5298
-      Cache-Control:
-      - no-cache
-      X-Request-Id:
-      - 3f503715-bbd6-4a77-bc96-0cd6fef0888c
-      X-Runtime:
-      - '1.142586'
-      X-Powered-By:
-      - Phusion Passenger 4.0.18
-      Status:
-      - 202 Accepted
-      Content-Type:
-      - application/json; charset=utf-8
-      Set-Cookie:
-      - _session_id=961cdd830b2a59c8282a2e1324f04fde; path=/; secure; HttpOnly
-      - request_method=DELETE; path=/
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '  {"id":"a0ed363c-d8d9-49da-a770-e023112c6c73","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-04-19
-        17:07:30 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":118,"name":"product
-        update_rpm","label":"product_update_rpm","cp_id":"1492621644304"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
-        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":118},"output":{},"humanized":{"action":"Delete
-        Product","input":[["product",{"text":"product ''product update_rpm''","link":"#/products/118/info"}],["organization",{"text":"organization
-        ''Test Corporation''","link":"/organizations/3/edit"}]],"output":"","errors":[]},"cli_example":null}
-
-'
-    http_version: 
-  recorded_at: Wed, 19 Apr 2017 17:07:50 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:25 GMT
 recorded_with: VCR 3.0.3

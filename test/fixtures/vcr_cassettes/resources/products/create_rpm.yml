@@ -422,6 +422,215 @@ http_interactions:
   recorded_at: Mon, 19 Dec 2016 16:42:24 GMT
 - request:
     method: get
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/68/repositories?all=false&library=true&organization_id=3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:42 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 697b4c7a-903c-4e59-9ee6-4606977a016a
+      X-Runtime:
+      - '0.038186'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"6a5cc8a6caa41dfb85f960ee483ee634-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '120'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=4a646bba7c2cd9a790d3e2021703ae1f; path=/; secure; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total":0,"subtotal":0,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:48 GMT
+- request:
+    method: post
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
+    body:
+      encoding: UTF-8
+      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","label":"Zoo","product_id":68,"content_type":"yum"}'
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Content-Length:
+      - '156'
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:42 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a44ead26-8e3e-4c62-a678-f181c39f00b7
+      X-Runtime:
+      - '2.403828'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Etag:
+      - '"a4aa64d6c9a42d5901baa47fe73d2dc3-gzip"'
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1177'
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=2123d8037bfbe5eda1fea2e642271d8a; path=/; secure; HttpOnly
+      - request_method=POST; path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639744011","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:42
+        UTC","updated_at":"2017-03-27 18:35:44 UTC","id":15,"name":"Zoo","label":"Zoo","product":{"id":68,"cp_id":"1490639740047","name":"product
+        create_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:50 GMT
+- request:
+    method: delete
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/68
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en
+      Host:
+      - devel.example.com:50083
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Date:
+      - Mon, 27 Mar 2017 18:35:44 GMT
+      Server:
+      - Apache/2.4.6 (Red Hat Enterprise Linux)
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Foreman-Version:
+      - 1.11.0.54
+      Foreman-Api-Version:
+      - '2'
+      Apipie-Checksum:
+      - e1df2e8d43e22495b02a53b48e3b5298
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - 3072481c-c28c-4aaa-bf1c-a98c378a9edb
+      X-Runtime:
+      - '0.992744'
+      X-Powered-By:
+      - Phusion Passenger 4.0.18
+      Status:
+      - 202 Accepted
+      Content-Type:
+      - application/json; charset=utf-8
+      Set-Cookie:
+      - _session_id=41712914c1f00fe1dd910da5101896c6; path=/; secure; HttpOnly
+      - request_method=DELETE; path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '  {"id":"b22a6b04-cc4c-44cc-adb2-1095bbee05d5","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-03-27
+        18:35:44 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":68,"name":"product
+        create_rpm","label":"product_create_rpm","cp_id":"1490639740047"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":68},"output":{},"humanized":{"action":"Delete
+        Product","input":[["product",{"text":"product ''product create_rpm''","link":"#/products/68/info"}],["organization",{"text":"organization
+        ''Test Corporation''","link":"/organizations/3/edit"}]],"output":"","errors":[]},"cli_example":null}
+
+'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 18:35:52 GMT
+- request:
+    method: get
     uri: https://admin:changeme@devel.example.com:50083/api/status
     body:
       encoding: US-ASCII
@@ -441,7 +650,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:38 GMT
+      - Wed, 19 Apr 2017 17:06:53 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -459,9 +668,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 80232f05-2e27-45b4-a1cc-ff57a80330da
+      - 4741efef-93a6-45bc-bba3-f94c469bac51
       X-Runtime:
-      - '0.175302'
+      - '0.060129'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -473,12 +682,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=58ae385abacf2b21fb26c4c08f0b293f; path=/; secure; HttpOnly
+      - _session_id=2f42a6f1e5ea79077abd951b1527cf7a; path=/; secure; HttpOnly
     body:
       encoding: UTF-8
       string: '{"result":"ok","status":200,"version":"1.11.0.54","api_version":2}'
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:44 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:12 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/api/v2/plugins
@@ -500,7 +709,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:38 GMT
+      - Wed, 19 Apr 2017 17:06:53 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -518,9 +727,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b0de717b-eaa9-4694-a4a5-be6e4456ce5a
+      - c91650a2-2114-4f28-8f7d-169e6444be5e
       X-Runtime:
-      - '0.201136'
+      - '0.035719'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -534,7 +743,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=b492e6349bb0994a4193ec3b7ce81c51; path=/; secure; HttpOnly
+      - _session_id=a6eda52021ff368c84ef74818a4dace9; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -613,7 +822,7 @@ http_interactions:
         ZW1hbiIsInVybCI6Imh0dHA6Ly93d3cubHBoaXJpLnJlZGhhdC5jb20iLCJ2
         ZXJzaW9uIjoiMS4wLjEzIn1dCn0K
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:45 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:12 GMT
 - request:
     method: get
     uri: https://devel.example.com:50083/apidoc/v2.en.json
@@ -626,7 +835,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -639,7 +848,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:39 GMT
+      - Wed, 19 Apr 2017 17:06:53 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -657,9 +866,9 @@ http_interactions:
       Apipie-Checksum:
       - e1df2e8d43e22495b02a53b48e3b5298
       X-Request-Id:
-      - c4b3b3ff-fa19-48e1-9da2-443d82ca13a4
+      - 7c3b274b-cfc8-411c-9634-6c7217d1f1df
       X-Runtime:
-      - '0.005169'
+      - '0.004672'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -20298,7 +20507,7 @@ http_interactions:
         Ijp0cnVlfV0sImhlYWRlcnMiOm51bGx9fSwibGlua19leHRlbnNpb24iOiIu
         ZW4uaHRtbCJ9fQ==
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:45 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:12 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -20311,7 +20520,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -20324,7 +20533,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:39 GMT
+      - Wed, 19 Apr 2017 17:06:53 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20342,13 +20551,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c4f54496-8303-4f29-861f-4fa2d661acba
+      - 11d4faaa-4b63-432b-b98d-5d81df20dd02
       X-Runtime:
-      - '0.087129'
+      - '0.033475'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"45c0a1d1908621d8a984de3fe2b76754-gzip"'
+      - '"91d3578ba2141f4a65055b10047bdf20-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -20358,7 +20567,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=4c8aac0758584e41c9d5a79162548b07; path=/; secure; HttpOnly
+      - _session_id=017efe4d941c1e2e7cd4de8d507d7f85; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -20372,10 +20581,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-03-27 18:28:18 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:45 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:12 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?enabled=true&per_page=999999&search=name=%22product%20create_rpm%22
@@ -20388,7 +20597,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -20401,7 +20610,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:39 GMT
+      - Wed, 19 Apr 2017 17:06:53 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20419,9 +20628,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 83a69639-5523-4224-a62e-39973ea87455
+      - 90dfee38-8a6b-4884-9820-f8b5aa0982b0
       X-Runtime:
-      - '0.057004'
+      - '0.058386'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -20435,7 +20644,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=d158a2b5bc160be49f7a3c6b29f77963; path=/; secure; HttpOnly
+      - _session_id=5412cc36d8fb79eb29f83461e9cee309; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":1,"subtotal":0,"page":1,"per_page":"999999","error":null,"search":"name=\"product
@@ -20443,7 +20652,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:45 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:12 GMT
 - request:
     method: post
     uri: https://admin:changeme@devel.example.com:50083/katello/api/products
@@ -20456,7 +20665,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -20471,7 +20680,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:39 GMT
+      - Wed, 19 Apr 2017 17:06:54 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20489,37 +20698,37 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 80b24a8b-8e2e-4b53-be0e-07d8e1c74bcc
+      - b1c29b6d-883b-4f15-8c1f-ccd1260875ef
       X-Runtime:
-      - '2.889246'
+      - '1.790358'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"2327cf34b90f86ef25125473847cf55a-gzip"'
+      - '"90297b0a53d735169dee1a1802048c4c-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '868'
+      - '869'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=da385ecd359a8b88ee0d755622ebebde; path=/; secure; HttpOnly
+      - _session_id=203c03187edac574c243d3b9ea368ef2; path=/; secure; HttpOnly
       - request_method=POST; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"product_content":[],"available_content":[],"redhat":false,"id":68,"cp_id":null,"name":"product
+      string: '  {"product_content":[],"available_content":[],"redhat":false,"id":116,"cp_id":null,"name":"product
         create_rpm","label":"product_create_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":0,"created_at":"2017-03-27
-        18:35:39 UTC","updated_at":"2017-03-27 18:35:39 UTC","repositories":[],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
+        Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":0,"created_at":"2017-04-19
+        17:06:54 UTC","updated_at":"2017-04-19 17:06:54 UTC","repositories":[],"provider":{"name":"Anonymous"},"sync_status":{"id":null,"product_id":null,"progress":null,"sync_id":null,"state":null,"raw_state":null,"start_time":null,"finish_time":null,"duration":null,"display_size":null,"size":null,"is_running":null,"error_details":null},"permissions":{"destroy_products":true,"edit_products":true,"sync_products":true},"published_content_view_ids":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:48 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:14 GMT
 - request:
     method: get
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/68/repositories?all=false&library=true&organization_id=3
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/116/repositories?all=false&library=true&organization_id=3
     body:
       encoding: US-ASCII
       string: ''
@@ -20529,7 +20738,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -20542,7 +20751,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:42 GMT
+      - Wed, 19 Apr 2017 17:06:55 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20560,9 +20769,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 697b4c7a-903c-4e59-9ee6-4606977a016a
+      - 43ace56a-aa91-4b55-9831-250899f25cb7
       X-Runtime:
-      - '0.038186'
+      - '0.043205'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
@@ -20576,33 +20785,33 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=4a646bba7c2cd9a790d3e2021703ae1f; path=/; secure; HttpOnly
+      - _session_id=15b945f331bec5aab7a8770f032a047e; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: '{"total":0,"subtotal":0,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:48 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:14 GMT
 - request:
     method: post
     uri: https://admin:changeme@devel.example.com:50083/katello/api/repositories
     body:
       encoding: UTF-8
-      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","label":"Zoo","product_id":68,"content_type":"yum"}'
+      string: '{"organization_id":3,"name":"Zoo","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","label":"Zoo","product_id":116,"content_type":"yum"}'
     headers:
       Accept:
       - application/json;version=2
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
       - en
       Content-Length:
-      - '156'
+      - '157'
       Host:
       - devel.example.com:50083
   response:
@@ -20611,7 +20820,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:42 GMT
+      - Wed, 19 Apr 2017 17:06:55 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20629,34 +20838,34 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a44ead26-8e3e-4c62-a678-f181c39f00b7
+      - c863a9f3-d34f-4d52-99d2-cfdb66411728
       X-Runtime:
-      - '2.403828'
+      - '2.313974'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"a4aa64d6c9a42d5901baa47fe73d2dc3-gzip"'
+      - '"b16524700dd80145c63d069bc5be5cc3-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1177'
+      - '1178'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=2123d8037bfbe5eda1fea2e642271d8a; path=/; secure; HttpOnly
+      - _session_id=6ff3c5fe80e140fa09331c4442eb4b24; path=/; secure; HttpOnly
       - request_method=POST; path=/
     body:
       encoding: ASCII-8BIT
-      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1490639744011","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
-        Corporation","label":"testcorp","id":3},"created_at":"2017-03-27 18:35:42
-        UTC","updated_at":"2017-03-27 18:35:44 UTC","id":15,"name":"Zoo","label":"Zoo","product":{"id":68,"cp_id":"1490639740047","name":"product
+      string: '  {"content_type":"yum","docker_upstream_name":null,"mirror_on_sync":true,"unprotected":true,"full_path":"http://sat62.example.com/pulp/repos/testcorp/Library/custom/product_create_rpm/Zoo/","checksum_type":null,"container_repository_name":null,"download_policy":"immediate","url":"https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/","relative_path":"testcorp/Library/custom/product_create_rpm/Zoo","major":null,"minor":null,"gpg_key_id":null,"content_id":"1492621617528","content_view_version_id":2,"library_instance_id":null,"product_type":"custom","promoted":false,"ostree_branches":[],"organization":{"name":"Test
+        Corporation","label":"testcorp","id":3},"created_at":"2017-04-19 17:06:56
+        UTC","updated_at":"2017-04-19 17:06:58 UTC","id":71,"name":"Zoo","label":"Zoo","product":{"id":116,"cp_id":"1492621614594","name":"product
         create_rpm","sync_plan":["name","description","sync_date","interval","next_sync"]},"last_sync":null,"content_counts":{"ostree_branch":0,"docker_manifest":0,"docker_tag":0,"rpm":0,"package":0,"package_group":0,"erratum":0,"puppet_module":0},"last_sync_words":null,"gpg_key":null,"environment":{"id":2},"permissions":{"deletable":true}}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:50 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:17 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations?search=name%20=%20%22Test%20Corporation%22
@@ -20669,7 +20878,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -20682,7 +20891,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:44 GMT
+      - Wed, 19 Apr 2017 17:06:58 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20700,13 +20909,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 23f24d96-a2d7-4556-843a-a6d72a59581e
+      - 22af9d4a-a93f-4307-ac01-624061c9db35
       X-Runtime:
-      - '0.040450'
+      - '0.037599'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"4ca819c8f4b990404bfbc12a1ceaa3fb-gzip"'
+      - '"33f5ad55285e93110ffd8103723370df-gzip"'
       Status:
       - 200 OK
       Vary:
@@ -20716,7 +20925,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=a06b1044de18cf198cab1da542fec6d2; path=/; secure; HttpOnly
+      - _session_id=88c5236e50603e942a82736434e23170; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
       string: |
@@ -20730,10 +20939,10 @@ http_interactions:
             "by": null,
             "order": null
           },
-          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-03-27 18:28:18 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+          "results": [{"label":"testcorp","created_at":"2016-12-01 19:35:26 UTC","updated_at":"2017-04-06 01:50:20 UTC","id":3,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:50 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:17 GMT
 - request:
     method: get
     uri: https://admin:changeme@devel.example.com:50083/katello/api/organizations/3/products?page=1&per_page=20&search=product%20create_rpm&sort
@@ -20746,7 +20955,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -20759,7 +20968,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:44 GMT
+      - Wed, 19 Apr 2017 17:06:58 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20777,36 +20986,36 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 05c25a72-d56f-4417-babf-683598f0eccf
+      - 17c997f2-8f59-44c8-a79e-be5a7f63f62a
       X-Runtime:
-      - '0.115922'
+      - '0.070253'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Etag:
-      - '"bb7f7f4a889f6005a9ab9911068ff8c1-gzip"'
+      - '"1d787c4c6fe58db7e39416dcc8c07371-gzip"'
       Status:
       - 200 OK
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '487'
+      - '488'
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=d47973e67f0d5b6f35ed65ebfe4ddd6f; path=/; secure; HttpOnly
+      - _session_id=9bde21bf3530841273038b128bc10ded; path=/; secure; HttpOnly
     body:
       encoding: ASCII-8BIT
-      string: '{"total":22,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"product
-        create_rpm","sort":{"by":null,"order":null},"results":[{"id":68,"cp_id":"1490639740047","name":"product
+      string: '{"total":35,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"product
+        create_rpm","sort":{"by":null,"order":null},"results":[{"id":116,"cp_id":"1492621614594","name":"product
         create_rpm","label":"product_create_rpm","description":null,"provider_id":3,"sync_plan_id":null,"sync_summary":{},"gpg_key_id":null,"sync_state":null,"last_sync":null,"last_sync_words":null,"organization":{"name":"Test
         Corporation","label":"testcorp","id":3},"sync_plan":null,"repository_count":1}]}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:51 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:17 GMT
 - request:
     method: delete
-    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/68
+    uri: https://admin:changeme@devel.example.com:50083/katello/api/products/116
     body:
       encoding: US-ASCII
       string: ''
@@ -20816,7 +21025,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.1p112
       Content-Type:
       - application/json
       Accept-Language:
@@ -20829,7 +21038,7 @@ http_interactions:
       message: Accepted
     headers:
       Date:
-      - Mon, 27 Mar 2017 18:35:44 GMT
+      - Wed, 19 Apr 2017 17:06:58 GMT
       Server:
       - Apache/2.4.6 (Red Hat Enterprise Linux)
       X-Frame-Options:
@@ -20847,9 +21056,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 3072481c-c28c-4aaa-bf1c-a98c378a9edb
+      - 82b04a7c-ce22-4acb-9659-11f945c0e9f6
       X-Runtime:
-      - '0.992744'
+      - '0.986363'
       X-Powered-By:
       - Phusion Passenger 4.0.18
       Status:
@@ -20857,20 +21066,20 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - _session_id=41712914c1f00fe1dd910da5101896c6; path=/; secure; HttpOnly
+      - _session_id=c44d0dee2c359e9a3238bf79001007c4; path=/; secure; HttpOnly
       - request_method=DELETE; path=/
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '  {"id":"b22a6b04-cc4c-44cc-adb2-1095bbee05d5","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-03-27
-        18:35:44 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":68,"name":"product
-        create_rpm","label":"product_create_rpm","cp_id":"1490639740047"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
-        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":68},"output":{},"humanized":{"action":"Delete
-        Product","input":[["product",{"text":"product ''product create_rpm''","link":"#/products/68/info"}],["organization",{"text":"organization
+      string: '  {"id":"a178ebdf-114a-4435-958b-a81404b9e12d","label":"Actions::Katello::Product::Destroy","pending":true,"username":"admin","started_at":"2017-04-19
+        17:06:58 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"product":{"id":116,"name":"product
+        create_rpm","label":"product_create_rpm","cp_id":"1492621614594"},"provider":{"id":3,"name":"Anonymous"},"organization":{"id":3,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth","candlepin","candlepin_auth"],"product_id":116},"output":{},"humanized":{"action":"Delete
+        Product","input":[["product",{"text":"product ''product create_rpm''","link":"#/products/116/info"}],["organization",{"text":"organization
         ''Test Corporation''","link":"/organizations/3/edit"}]],"output":"","errors":[]},"cli_example":null}
 
 '
     http_version: 
-  recorded_at: Mon, 27 Mar 2017 18:35:52 GMT
+  recorded_at: Wed, 19 Apr 2017 17:07:18 GMT
 recorded_with: VCR 3.0.3

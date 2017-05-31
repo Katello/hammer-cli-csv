@@ -152,7 +152,8 @@ module HammerCLICsv
         contentview = @api.resource(:content_views).call(:show, {'id' => contentview_id})
         existing_names = environment_names(contentview)
 
-        CSV.parse_line(line[ENVIRONMENTS]).each do |environment_name|
+        environments = CSV.parse_line(line[ENVIRONMENTS]) || []
+        environments.each do |environment_name|
           next if environment_name == 'Library' || existing_names.include?(environment_name)
 
           version = contentview['versions'][-1]

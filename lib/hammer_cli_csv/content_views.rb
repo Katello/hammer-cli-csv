@@ -124,8 +124,13 @@ module HammerCLICsv
           contentview_id = contentview['id']
 
           # Content views cannot be used in composites unless a publish has occurred
-          publish_content_view(contentview_id, line) if contentview['versions'].empty?
-          promote_content_view(contentview_id, line)
+          if contentview['versions'].empty? && !line[ENVIRONMENTS].empty?
+            publish_content_view(contentview_id, line)
+          end
+
+          unless line[ENVIRONMENTS].empty?
+            promote_content_view(contentview_id, line)
+          end
 
           puts _('done') if option_verbose?
         end

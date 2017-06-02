@@ -108,6 +108,28 @@ def host_delete(hostname)
   end
 end
 
+def content_view_delete(name)
+  org = 'Test Corporation'
+  id = nil
+  stdout,stderr = capture {
+    hammer.run(%W(content-view list --search #{name}))
+  }
+  lines = stdout.split("\n")
+  if lines.length == 5
+    id = lines[3].split(" ")[0]
+  end
+
+  if id
+    stdout,stderr = capture {
+      hammer.run(%W(content-view remove --id #{id} --organization #{org} --environments Library))
+    }
+
+    stdout,stderr = capture {
+      hammer.run(%W(content-view delete --id #{id}))
+    }
+  end
+end
+
 require File.join(File.dirname(__FILE__), 'apipie_resource_mock')
 require File.join(File.dirname(__FILE__), 'helpers/command')
 require File.join(File.dirname(__FILE__), 'helpers/resource_disabled')

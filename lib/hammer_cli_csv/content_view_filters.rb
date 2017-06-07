@@ -106,12 +106,15 @@ module HammerCLICsv
             })
           end
 
-          existing_rules = {}
+          # drop existing rules
           @api.resource(:content_view_filter_rules).call(:index, {
               'per_page' => 999999,
               'content_view_filter_id' => filter_id
           })['results'].each do |rule|
-            existing_rules[rule['name']] = rule
+            @api.resource(:content_view_filter_rules).call(:destroy, {
+                'content_view_filter_id' => filter_id,
+                'id' =>  rule['id']
+            })
           end
 
           collect_column(line[RULES]) do |rule|
@@ -138,16 +141,8 @@ module HammerCLICsv
               raise "Unknown type '#{type}' from '#{line[RULES]}'"
             end
 
-            rule = existing_rules[name]
-            if !rule
-              print "." if option_verbose?
-              rule = @api.resource(:content_view_filter_rules).call(:create, params)
-              existing_rules[rule['name']] = rule
-            else
-              print "." if option_verbose?
-              params['id'] = rule['id']
-              @api.resource(:content_view_filter_rules).call(:update, params)
-            end
+            print "." if option_verbose?
+            @api.resource(:content_view_filter_rules).call(:create, params)
           end
 
           puts 'done' if option_verbose?

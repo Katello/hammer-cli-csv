@@ -130,6 +130,23 @@ def content_view_delete(name)
   end
 end
 
+def content_view_filter_delete(org, cv, name)
+  id = nil
+  stdout,stderr = capture {
+    hammer.run(%W(content-view filter list --search name=#{name} --content-view #{cv} --organization #{org}))
+  }
+  lines = stdout.split("\n")
+  if lines.length == 5
+    id = lines[3].split(" ")[0]
+  end
+
+  if id
+    stdout,stderr = capture {
+      hammer.run(%W(content-view filter delete --id #{id}))
+    }
+  end
+end
+
 require File.join(File.dirname(__FILE__), 'apipie_resource_mock')
 require File.join(File.dirname(__FILE__), 'helpers/command')
 require File.join(File.dirname(__FILE__), 'helpers/resource_disabled')

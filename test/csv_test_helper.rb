@@ -108,7 +108,7 @@ def host_delete(hostname)
   end
 end
 
-def content_view_delete(name)
+def content_view_delete(name, environments="Library")
   org = 'Test Corporation'
   id = nil
   stdout,stderr = capture {
@@ -121,7 +121,7 @@ def content_view_delete(name)
 
   if id
     stdout,stderr = capture {
-      hammer.run(%W(content-view remove --id #{id} --organization #{org} --environments Library))
+      hammer.run(%W(content-view remove --id #{id} --organization #{org} --environments #{environments}))
     }
 
     stdout,stderr = capture {

@@ -9,6 +9,10 @@ module HammerCLICsv
       command_name 'content-views'
       desc         'import or export content-views'
 
+      option %w(--[no-]publish), :flag, _('Publish content view on import (default false)')
+      option %w(--[no-]promote), :flag,
+        _('Publish and promote content view on import (default false)')
+
       LABEL = 'Label'
       ORGANIZATION = 'Organization'
       DESCRIPTION = 'Description'
@@ -17,6 +21,10 @@ module HammerCLICsv
       ENVIRONMENTS = "Lifecycle Environments"
 
       def export(csv)
+        if (options.keys & %w(option_promote option_publish)).any?
+          fail _("Cannot pass publish or promote options on export")
+        end
+
         csv << [NAME, LABEL, ORGANIZATION, COMPOSITE, REPOSITORIES, ENVIRONMENTS]
         @api.resource(:organizations).call(:index, {
             :per_page => 999999,
@@ -58,6 +66,10 @@ module HammerCLICsv
       end
 
       def import
+        if options.keys.include?('option_publish') && !option_publish? && option_promote?
+          fail _("Cannot pass in --promote with --no-publish")
+        end
+
         @existing_contentviews = {}
 
         thread_import do |line|
@@ -97,7 +109,7 @@ module HammerCLICsv
 
           contentview_id = @existing_contentviews[line[ORGANIZATION]][name]
           if !contentview_id
-            print _("Creating content view '%{name}'...") % {:name => name} if option_verbose?
+            puts _("Creating content view '%{name}'...") % {:name => name} if option_verbose?
             options = {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'name' => name,
@@ -108,7 +120,7 @@ module HammerCLICsv
             contentview_id = @api.resource(:content_views).call(:create, options)['id']
             @existing_contentviews[line[ORGANIZATION]][name] = contentview_id
           else
-            print _("Updating content view '%{name}'...") % {:name => name} if option_verbose?
+            puts _("Updating content view '%{name}'...") % {:name => name} if option_verbose?
           end
 
           options = {
@@ -123,13 +135,15 @@ module HammerCLICsv
           contentview = @api.resource(:content_views).call(:update, options)
           contentview_id = contentview['id']
 
-          # Content views cannot be used in composites unless a publish has occurred
-          if contentview['versions'].empty? && !line[ENVIRONMENTS].empty?
-            publish_content_view(contentview_id, line)
-          end
+          if option_publish? || option_promote?
+            # Content views cannot be used in composites unless a publish has occurred
+            if contentview['versions'].empty? && !line[ENVIRONMENTS].empty?
+              publish_content_view(contentview_id, line)
+            end
 
-          unless line[ENVIRONMENTS].empty?
-            promote_content_view(contentview_id, line)
+            if !line[ENVIRONMENTS].empty? && option_promote?
+              promote_content_view(contentview_id, line)
+            end
           end
 
           puts _('done') if option_verbose?

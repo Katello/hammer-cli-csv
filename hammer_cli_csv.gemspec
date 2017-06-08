@@ -6,10 +6,16 @@ Gem::Specification.new do |spec|
 
   spec.name = "hammer_cli_csv"
   spec.version = HammerCLICsv.version
-  spec.authors = ["Thomas McKay"]
-  spec.email = ["thomasmckay@redhat.com"]
+  spec.authors = [
+    "Thomas McKay",
+    "Eric Helms",
+    "Adam Price",
+    "Andrew Kofink",
+    "David Davis"
+  ]
+  spec.email = ["katello@lists.fedorahosted.org"]
   spec.homepage = "http://github.com/Katello/hammer-cli-csv"
-  spec.license = "GPL-3"
+  spec.license = "GPL-3.0"
 
   spec.platform = Gem::Platform::RUBY
   spec.summary = "CSV commands for Hammer"

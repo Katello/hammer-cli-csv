@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:14 GMT
+      - Fri, 09 Jun 2017 17:07:01 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -37,9 +37,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8632e02f-f5c2-452d-9a98-c82834e71641
+      - a6d4666b-74ac-4666-bb44-7577a8aab3a1
       X-Runtime:
-      - '0.122959'
+      - '1.127749'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -57,7 +57,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=e7ff37c5006e90ba63ed492ca0f2f462; path=/; HttpOnly
+      - _session_id=62fb97c620a59ccc275ba848136d5155; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
@@ -70,7 +70,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"result":"ok","status":200,"version":"1.16.0-develop","api_version":2}'
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:14 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:02 GMT
 - request:
     method: get
     uri: https://admin:changeme@centos7-devel.example.com/api/v2/plugins
@@ -92,7 +92,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:14 GMT
+      - Fri, 09 Jun 2017 17:07:02 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -108,9 +108,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 203d9d0c-b696-4d23-8e0d-63fc17e0cec0
+      - ae8f9300-c81b-4da7-bf32-bb59cd422f84
       X-Runtime:
-      - '0.152680'
+      - '0.117414'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -128,7 +128,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=95d428bf32b427b8cfb5ffdb4c73ec03; path=/; HttpOnly
+      - _session_id=2cca38537ed7030f5c2d386687784f32; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
@@ -166,7 +166,7 @@ http_interactions:
         ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
         YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjUuMCJ9XQp9Cg==
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:15 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:03 GMT
 - request:
     method: get
     uri: https://centos7-devel.example.com/apidoc/v2.en_GB.json
@@ -192,7 +192,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:15 GMT
+      - Fri, 09 Jun 2017 17:07:03 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Content-Type:
@@ -202,9 +202,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - c061a1a6-1109-469e-ab94-f72297af8a19
+      - 965ba88a-7bc8-490b-a066-0cf8cb3fb2b6
       X-Runtime:
-      - '0.071224'
+      - '0.070174'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -231,7 +231,7 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:15 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:03 GMT
 - request:
     method: get
     uri: https://centos7-devel.example.com/apidoc/v2.en.json
@@ -257,7 +257,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:15 GMT
+      - Fri, 09 Jun 2017 17:07:03 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Content-Disposition:
@@ -271,9 +271,9 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       X-Request-Id:
-      - ae3f5553-55ed-4e54-9c0e-7da70886d7c7
+      - 5ff26c64-a60b-4e50-9341-9df1e94748fd
       X-Runtime:
-      - '0.072032'
+      - '0.072570'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -20664,7 +20664,7 @@ http_interactions:
         OltdLCJzaG93Ijp0cnVlfV0sImhlYWRlcnMiOm51bGx9fSwibGlua19leHRl
         bnNpb24iOiIuZW4uaHRtbCJ9fQ==
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:15 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:03 GMT
 - request:
     method: get
     uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
@@ -20690,7 +20690,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:15 GMT
+      - Fri, 09 Jun 2017 17:07:03 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -20706,9 +20706,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e17cd9c0-9f0c-46b9-8d6d-398076a3a08f
+      - db52d564-5758-44cd-a46c-91621ca57f34
       X-Runtime:
-      - '0.186988'
+      - '0.134193'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -20726,7 +20726,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=c9b02a78c341ea7bd0399f7c230afcda; path=/; HttpOnly
+      - _session_id=ca1e1d26997bf2bd3f216c0736396252; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
@@ -20751,7 +20751,7 @@ http_interactions:
           "results": [{"label":"testcorp","created_at":"2017-06-07 17:04:57 UTC","updated_at":"2017-06-07 17:04:57 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:16 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:03 GMT
 - request:
     method: get
     uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations/8/content_views?nondefault=true&per_page=999999
@@ -20777,7 +20777,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:16 GMT
+      - Fri, 09 Jun 2017 17:07:03 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -20793,9 +20793,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 448ce7ed-1701-4c0d-bf88-13ecc04d16fa
+      - 59f09e54-2062-402f-8ebe-6998bf79635d
       X-Runtime:
-      - '0.222158'
+      - '0.200496'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -20813,7 +20813,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=9c6e38fa6294eb9f97283a1a6cfd8485; path=/; HttpOnly
+      - _session_id=165715fbb6ba568c41fe4e443bb50b96; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
@@ -20827,7 +20827,7 @@ http_interactions:
       string: |
         {"total":2,"subtotal":2,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":8,"name":"Test Puppet Modules","label":"Test_Puppet_Modules","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:08:08 UTC","updated_at":"2017-06-07 17:08:11 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":8,"version":"1.0","published":"2017-06-07 17:08:11 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-07 17:08:11 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}},{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":9,"name":"Test Yum","label":"Test_Yum","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:08:36 UTC","updated_at":"2017-06-07 17:08:40 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":9,"version":"1.0","published":"2017-06-07 17:08:40 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-07 17:08:40 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:17 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:03 GMT
 - request:
     method: post
     uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations/8/content_views
@@ -20855,7 +20855,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:17 GMT
+      - Fri, 09 Jun 2017 17:07:03 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -20867,13 +20867,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"03a437da55c492c5b5360c8c2248bc57-gzip"
+      - W/"1761b231fcfa510f313e04212da399cd-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2ad6fff2-91cf-4d3b-b58c-ad6e5b8d643d
+      - 95adbf9c-b730-44d6-8b75-0cf93dfcc278
       X-Runtime:
-      - '0.179286'
+      - '0.265154'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -20891,7 +20891,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=449dc26efdc92a00481e72bf324fc70f; path=/; HttpOnly
+      - _session_id=6f64a0935fd91a22d802971181a687b3; path=/; HttpOnly
       - request_method=POST; path=/
       Via:
       - 1.1 centos7-devel.example.com
@@ -20904,12 +20904,12 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: |2
-          {"content_host_count":0,"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":70,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:06:17 UTC","updated_at":"2017-06-09 17:06:17 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}
+          {"content_host_count":0,"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":72,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:07:04 UTC","updated_at":"2017-06-09 17:07:04 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:17 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:05 GMT
 - request:
     method: put
-    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/70
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/72
     body:
       encoding: UTF-8
       string: '{"description":null,"repository_ids":[]}'
@@ -20934,7 +20934,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:17 GMT
+      - Fri, 09 Jun 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -20946,13 +20946,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"03a437da55c492c5b5360c8c2248bc57-gzip"
+      - W/"1761b231fcfa510f313e04212da399cd-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - fc2a0c3f-ae39-442c-9722-93dfb0f0c80f
+      - 0f927422-1df0-491f-954a-4d34cf35be7e
       X-Runtime:
-      - '1.424906'
+      - '0.466315'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -20970,7 +20970,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=b81e2d4b192ff2b90790b07680ccc221; path=/; HttpOnly
+      - _session_id=752cd5e9c1385248cb60840d8dcca136; path=/; HttpOnly
       - request_method=PUT; path=/
       Via:
       - 1.1 centos7-devel.example.com
@@ -20983,31 +20983,37 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: |2
-          {"content_host_count":0,"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":70,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:06:17 UTC","updated_at":"2017-06-09 17:06:17 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}
+          {"content_host_count":0,"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":72,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:07:04 UTC","updated_at":"2017-06-09 17:07:04 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:18 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:05 GMT
 - request:
-    method: get
-    uri: https://admin:changeme@centos7-devel.example.com/api/status
+    method: post
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/72/publish
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: "{}"
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - "*/*"
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
       User-Agent:
-      - Ruby
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Content-Length:
+      - '2'
       Host:
       - centos7-devel.example.com
   response:
     status:
-      code: 200
-      message: OK
+      code: 202
+      message: Accepted
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:18 GMT
+      - Fri, 09 Jun 2017 17:07:05 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21018,14 +21024,12 @@ http_interactions:
       - application/json; charset=utf-8
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
-      Etag:
-      - W/"daee39b3fc9265eda63ba5b269a33b30-gzip"
       Cache-Control:
-      - max-age=0, private, must-revalidate
+      - no-cache
       X-Request-Id:
-      - 629202c3-f4e4-4b25-a6e2-9eba18495b0e
+      - 1993f630-1a8c-4494-b024-15fa4da7f384
       X-Runtime:
-      - '0.125187'
+      - '3.167965'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21043,119 +21047,23 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=6ccbbe93e8c751437d385da7688feaee; path=/; HttpOnly
+      - _session_id=a07f9cce2522b273d85906be6285636e; path=/; HttpOnly
+      - request_method=POST; path=/
       Via:
       - 1.1 centos7-devel.example.com
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '81'
       Connection:
       - close
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: ASCII-8BIT
-      string: '{"result":"ok","status":200,"version":"1.16.0-develop","api_version":2}'
+      encoding: UTF-8
+      string: |2
+          {"id":"7073aa66-02c9-4666-b57a-d5009f57247d","label":"Actions::Katello::ContentView::Publish","pending":true,"username":"admin","started_at":"2017-06-09 17:07:06 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test Corporation","label":"testcorp"},"services_checked":["candlepin","candlepin_auth","pulp","pulp_auth"],"history_id":96,"content_view_id":72,"environment_id":5,"user_id":3,"current_user_id":3,"locale":"en-GB"},"output":{},"humanized":{"action":"Publish","input":[["content_view",{"text":"content view 'testcv1'","link":"#/content_views/72/versions"}],["organization",{"text":"organisation 'Test Corporation'","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:18 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:08 GMT
 - request:
     method: get
-    uri: https://admin:changeme@centos7-devel.example.com/api/v2/plugins
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - centos7-devel.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 09 Jun 2017 17:06:18 GMT
-      Server:
-      - Apache/2.4.6 (CentOS)
-      Foreman-Version:
-      - 1.16.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 801a7a10d05883b9611f929d3ab6042d
-      Etag:
-      - W/"95fd6e562dda24aea3ba5cd3ff59001d-gzip"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - a6dac314-5d79-4bf0-a377-468698cb1080
-      X-Runtime:
-      - '0.115996'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Set-Cookie:
-      - _session_id=e20901fd97739840aeb8a123dab244c2; path=/; HttpOnly
-      Via:
-      - 1.1 centos7-devel.example.com
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '566'
-      Connection:
-      - close
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJ0b3RhbCI6IDMsCiAgInN1YnRvdGFsIjogMywKICAicGFnZSI6IDEs
-        CiAgInBlcl9wYWdlIjogMjAsCiAgInNlYXJjaCI6IG51bGwsCiAgInNvcnQi
-        OiB7CiAgICAiYnkiOiBudWxsLAogICAgIm9yZGVyIjogbnVsbAogIH0sCiAg
-        InJlc3VsdHMiOiBbeyJpZCI6ImZvcmVtYW4tdGFza3MiLCJuYW1lIjoiZm9y
-        ZW1hbi10YXNrcyIsImF1dGhvciI6Ikl2YW4gTmXEjWFzIiwiZGVzY3JpcHRp
-        b24iOiJUaGUgZ29hbCBvZiB0aGlzIHBsdWdpbiBpcyB0byB1bmlmeSB0aGUg
-        d2F5IG9mIHNob3dpbmcgdGFzayBzdGF0dXNlcyBhY3Jvc3MgdGhlIEZvcmVt
-        YW4gaW5zdGFuY2UuXG5JdCBkZWZpbmVzIFRhc2sgbW9kZWwgZm9yIGtlZXBp
-        bmcgdGhlIGluZm9ybWF0aW9uIGFib3V0IHRoZSB0YXNrcyBhbmQgTG9jayBm
-        b3IgYXNzaWduaW5nIHRoZSB0YXNrc1xudG8gcmVzb3VyY2VzLiBUaGUgbG9j
-        a2luZyBhbGxvd3MgZGVhbGluZyB3aXRoIHByZXZlbnRpbmcgbXVsdGlwbGUg
-        Y29sbGlkaW5nIHRhc2tzIHRvIGJlIHJ1biBvbiB0aGVcbnNhbWUgcmVzb3Vy
-        Y2UuIEl0IGFsc28gb3B0aW9uYWxseSBwcm92aWRlcyBEeW5mbG93IGluZnJh
-        c3RydWN0dXJlIGZvciB1c2luZyBpdCBmb3IgbWFuYWdpbmcgdGhlIHRhc2tz
-        LlxuIiwidXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL3RoZWZvcmVtYW4vZm9y
-        ZW1hbi10YXNrcyIsInZlcnNpb24iOiIwLjkuMiJ9LHsiaWQiOiJmb3JlbWFu
-        X2RvY2tlciIsIm5hbWUiOiJmb3JlbWFuX2RvY2tlciIsImF1dGhvciI6IkRh
-        bmllbCBMb2JhdG8sIEFtb3MgQmVuYXJpIiwiZGVzY3JpcHRpb24iOiJQcm92
-        aXNpb24gYW5kIG1hbmFnZSBEb2NrZXIgY29udGFpbmVycyBhbmQgaW1hZ2Vz
-        IGZyb20gRm9yZW1hbi4iLCJ1cmwiOiJodHRwOi8vZ2l0aHViLmNvbS90aGVm
-        b3JlbWFuL2ZvcmVtYW4tZG9ja2VyIiwidmVyc2lvbiI6IjMuMC4wIn0seyJp
-        ZCI6ImthdGVsbG8iLCJuYW1lIjoia2F0ZWxsbyIsImF1dGhvciI6Ik4vQSIs
-        ImRlc2NyaXB0aW9uIjoiQ29udGVudCBhbmQgU3Vic2NyaXB0aW9uIE1hbmFn
-        ZW1lbnQgcGx1Z2luIGZvciBGb3JlbWFuIiwidXJsIjoiaHR0cDovL3d3dy5r
-        YXRlbGxvLm9yZyIsInZlcnNpb24iOiIzLjUuMCJ9XQp9Cg==
-    http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:19 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations?per_page=999999&search=name=%22Test%20Corporation%22
+    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/7073aa66-02c9-4666-b57a-d5009f57247d
     body:
       encoding: US-ASCII
       string: ''
@@ -21178,7 +21086,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:19 GMT
+      - Fri, 09 Jun 2017 17:07:08 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21190,13 +21098,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"f8d5ef0396db85c4313aee3b1f86a0eb-gzip"
+      - W/"3246747f10384cbc7b9b0ffee6c0e352-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - eaf687da-53a8-4a9c-ba08-c6c67df865d1
+      - 29df0bff-4424-45ea-ae43-5b11bef56287
       X-Runtime:
-      - '0.122903'
+      - '0.174070'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21214,13 +21122,171 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=bb682dccebef1f8bf8c805aac5a77f88; path=/; HttpOnly
+      - _session_id=368c8123d1a49c425f3ebb36b7066ead; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '388'
+      - '825'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"7073aa66-02c9-4666-b57a-d5009f57247d","label":"Actions::Katello::ContentView::Publish","pending":true,"username":"admin","started_at":"2017-06-09
+        17:07:06 UTC","ended_at":null,"state":"running","result":"pending","progress":0.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["candlepin","candlepin_auth","pulp","pulp_auth"],"history_id":96,"content_view_id":72,"environment_id":5,"user_id":3,"current_user_id":3,"locale":"en-GB"},"output":{},"humanized":{"action":"Publish","input":[["content_view",{"text":"content
+        view ''testcv1''","link":"#/content_views/72/versions"}],["organization",{"text":"organisation
+        ''Test Corporation''","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}'
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:09 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/7073aa66-02c9-4666-b57a-d5009f57247d
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:11 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"272238832081a33fbc8587e27fbba618-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - b3cac3e1-0012-4732-a2c9-a99596ac7611
+      X-Runtime:
+      - '0.142336'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=05349aa063f5119d810715385c5ad288; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '847'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"7073aa66-02c9-4666-b57a-d5009f57247d","label":"Actions::Katello::ContentView::Publish","pending":false,"username":"admin","started_at":"2017-06-09
+        17:07:06 UTC","ended_at":"2017-06-09 17:07:09 UTC","state":"stopped","result":"success","progress":1.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["candlepin","candlepin_auth","pulp","pulp_auth"],"history_id":96,"content_view_id":72,"environment_id":5,"user_id":3,"current_user_id":3,"locale":"en-GB"},"output":{},"humanized":{"action":"Publish","input":[["content_view",{"text":"content
+        view ''testcv1''","link":"#/content_views/72/versions"}],["organization",{"text":"organisation
+        ''Test Corporation''","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}'
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:11 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations?search=label%20=%20%22testcorp%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:11 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"9dbd7fdd945433e7a5ef3f40dc9874af-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 4a673538-26de-42fb-af8b-b93d8ecf5365
+      X-Runtime:
+      - '0.146543'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=a7749350a3b82013071f1b0e34856e88; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '379'
       Connection:
       - close
     body:
@@ -21230,8 +21296,8 @@ http_interactions:
           "total": 2,
           "subtotal": 1,
           "page": 1,
-          "per_page": 999999,
-          "search": "name=\"Test Corporation\"",
+          "per_page": 20,
+          "search": "label = \"testcorp\"",
           "sort": {
             "by": null,
             "order": null
@@ -21239,10 +21305,10 @@ http_interactions:
           "results": [{"label":"testcorp","created_at":"2017-06-07 17:04:57 UTC","updated_at":"2017-06-07 17:04:57 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:19 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:11 GMT
 - request:
     method: get
-    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations/8/content_views?nondefault=true&per_page=999999
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations/8/content_views?name=testcv1
     body:
       encoding: US-ASCII
       string: ''
@@ -21265,7 +21331,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:19 GMT
+      - Fri, 09 Jun 2017 17:07:11 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21277,13 +21343,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"b338bd679ec42e688cb16494e39833a2-gzip"
+      - W/"e3ae3e79b134a827774af144a33ed7a5-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 124069c3-9103-4403-a556-4f8fee89656e
+      - 595d2773-dca9-4bfc-bc01-d62ef75e6d98
       X-Runtime:
-      - '1.237440'
+      - '0.195370'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21301,27 +21367,27 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=113d6c31ea577a449e59068e30acaff2; path=/; HttpOnly
+      - _session_id=37fafd97a06ca6b822fa22baf87466d6; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '2557'
+      - '983'
       Connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: |
-        {"total":3,"subtotal":3,"page":1,"per_page":"999999","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":70,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:06:17 UTC","updated_at":"2017-06-09 17:06:17 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}},{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":8,"name":"Test Puppet Modules","label":"Test_Puppet_Modules","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:08:08 UTC","updated_at":"2017-06-07 17:08:11 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":8,"version":"1.0","published":"2017-06-07 17:08:11 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-07 17:08:11 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}},{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":9,"name":"Test Yum","label":"Test_Yum","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:08:36 UTC","updated_at":"2017-06-07 17:08:40 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":9,"version":"1.0","published":"2017-06-07 17:08:40 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-07 17:08:40 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
+        {"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":72,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:07:04 UTC","updated_at":"2017-06-09 17:07:06 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":48,"version":"1.0","published":"2017-06-09 17:07:06 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-09 17:07:06 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:20 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:11 GMT
 - request:
-    method: put
-    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/70
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations?search=label%20=%20%22testcorp%22
     body:
-      encoding: UTF-8
-      string: '{"description":null,"repository_ids":[]}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept:
       - application/json;version=2
@@ -21333,8 +21399,6 @@ http_interactions:
       - application/json
       Accept-Language:
       - en_GB
-      Content-Length:
-      - '40'
       Host:
       - centos7-devel.example.com
   response:
@@ -21343,7 +21407,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:20 GMT
+      - Fri, 09 Jun 2017 17:07:11 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21355,13 +21419,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"03a437da55c492c5b5360c8c2248bc57-gzip"
+      - W/"9dbd7fdd945433e7a5ef3f40dc9874af-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 638361ed-c9f4-4af8-90a7-2621682b6715
+      - 2ba7a2a7-1a8a-41e6-b281-6dad3f771b45
       X-Runtime:
-      - '0.418933'
+      - '0.136854'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21379,98 +21443,434 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=600fb757387b98bc21b641af770774c1; path=/; HttpOnly
-      - request_method=PUT; path=/
+      - _session_id=702c01e22ed8cf395c7c50b4a64acfd6; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '707'
+      - '379'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 2,
+          "subtotal": 1,
+          "page": 1,
+          "per_page": 20,
+          "search": "label = \"testcorp\"",
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"label":"testcorp","created_at":"2017-06-07 17:04:57 UTC","updated_at":"2017-06-07 17:04:57 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+        }
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:12 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations?search=label%20=%20%22testcorp%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:12 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"9dbd7fdd945433e7a5ef3f40dc9874af-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 31423094-5c9a-482d-a82f-169b305e55fc
+      X-Runtime:
+      - '0.124499'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=b663f8fffe8da211c07abab1492b85d3; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '379'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 2,
+          "subtotal": 1,
+          "page": 1,
+          "per_page": 20,
+          "search": "label = \"testcorp\"",
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"label":"testcorp","created_at":"2017-06-07 17:04:57 UTC","updated_at":"2017-06-07 17:04:57 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+        }
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:13 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/72/content_view_versions?organization_id=8&page=1&per_page=20&sort
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:13 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"5d66f513a5b308c2c5a04e959f7830f4-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2aac7f02-946c-44dd-b594-155835cbb3e9
+      X-Runtime:
+      - '0.253381'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=decdf7ee2beeee9b1c224a77b055d0ab; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '2048'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {"total":1,"subtotal":1,"page":"1","per_page":"20","error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"version":"1.0","major":1,"minor":0,"composite_content_view_ids":[],"content_view_id":72,"default":false,"description":null,"package_count":0,"file_count":0,"package_group_count":0,"puppet_module_count":0,"docker_manifest_count":0,"docker_tag_count":0,"ostree_branch_count":0,"id":48,"name":"testcv1 1.0","created_at":"2017-06-09 17:07:06 UTC","updated_at":"2017-06-09 17:07:06 UTC","content_view":{"id":72,"name":"testcv1","label":"testcv1"},"katello_content_views":[],"environments":[{"id":5,"name":"Library","label":"Library","puppet_environment_id":null,"permissions":{"readable":true,"promotable_or_removable":true,"all_hosts_editable":true,"all_keys_editable":true},"host_count":0,"activation_key_count":0}],"repositories":[],"last_event":{"user":"admin","status":"successful","description":null,"created_at":"2017-06-09 17:07:06 UTC","updated_at":"2017-06-09 17:07:09 UTC","environment":null,"task":{"id":"7073aa66-02c9-4666-b57a-d5009f57247d","label":"Actions::Katello::ContentView::Publish","pending":false,"username":"admin","started_at":"2017-06-09 17:07:06 UTC","ended_at":"2017-06-09 17:07:09 UTC","state":"stopped","result":"success","progress":1.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test Corporation","label":"testcorp"},"services_checked":["candlepin","candlepin_auth","pulp","pulp_auth"],"history_id":96,"content_view_id":72,"environment_id":5,"user_id":3,"current_user_id":3,"locale":"en-GB"},"output":{},"humanized":{"action":"Publish","input":[["content_view",{"text":"content view 'testcv1'","link":"#/content_views/72/versions"}],["organization",{"text":"organisation 'Test Corporation'","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null},"version":"1.0","publish":true,"version_id":48},"active_history":[],"errata_counts":{"security":0,"bugfix":0,"enhancement":0,"total":0},"permissions":{"deletable":true}}]}
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:13 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations?search=label%20=%20%22testcorp%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:13 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"9dbd7fdd945433e7a5ef3f40dc9874af-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 137a0ce5-9c78-495a-9f48-2adc1913f55a
+      X-Runtime:
+      - '0.126871'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=7aea89e73ac4455c1bfca5ca85e0fea1; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '379'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "total": 2,
+          "subtotal": 1,
+          "page": 1,
+          "per_page": 20,
+          "search": "label = \"testcorp\"",
+          "sort": {
+            "by": null,
+            "order": null
+          },
+          "results": [{"label":"testcorp","created_at":"2017-06-07 17:04:57 UTC","updated_at":"2017-06-07 17:04:57 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
+        }
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:13 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations/8/content_views?name=testcv1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:13 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"e3ae3e79b134a827774af144a33ed7a5-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e7bc7f34-f9af-4c31-aa7a-924e25da6782
+      X-Runtime:
+      - '1.205449'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=b899bfd0440a17de9fd6ff1a87944d91; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '983'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {"total":1,"subtotal":1,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":72,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:07:04 UTC","updated_at":"2017-06-09 17:07:06 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":48,"version":"1.0","published":"2017-06-09 17:07:06 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-09 17:07:06 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:14 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/72
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:15 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"493ee73b357f26ac37c890614ab5516c-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 6f095a8e-1e4f-4e2e-bd54-831848add6e0
+      X-Runtime:
+      - '0.169698'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=2bd7557a998fca2aa0870398eda1d4e4; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '889'
       Connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: |2
-          {"content_host_count":0,"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":70,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:06:17 UTC","updated_at":"2017-06-09 17:06:17 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}
+          {"content_host_count":0,"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":72,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:07:04 UTC","updated_at":"2017-06-09 17:07:06 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":48,"version":"1.0","published":"2017-06-09 17:07:06 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-09 17:07:06 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:21 GMT
-- request:
-    method: get
-    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views?page=1&per_page=20&search=name=testcv1&sort
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json;version=2
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
-      Content-Type:
-      - application/json
-      Accept-Language:
-      - en_GB
-      Host:
-      - centos7-devel.example.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 09 Jun 2017 17:06:21 GMT
-      Server:
-      - Apache/2.4.6 (CentOS)
-      Foreman-Version:
-      - 1.16.0-develop
-      Foreman-Api-Version:
-      - '2'
-      Content-Type:
-      - application/json; charset=utf-8
-      Apipie-Checksum:
-      - 801a7a10d05883b9611f929d3ab6042d
-      Etag:
-      - W/"abeab7eb495433775fb566b7b0c1c0a6-gzip"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - bcfdae56-a6ff-44de-9a51-e4a6114a77c2
-      X-Runtime:
-      - '0.178502'
-      Content-Security-Policy:
-      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
-        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
-        ''self''; style-src ''unsafe-inline'' ''self'''
-      Strict-Transport-Security:
-      - max-age=631152000; includeSubdomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - sameorigin
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      X-Xss-Protection:
-      - 1; mode=block
-      Set-Cookie:
-      - _session_id=6e91f7b8bbb5ad6811c75e41938269ac; path=/; HttpOnly
-      Via:
-      - 1.1 centos7-devel.example.com
-      Vary:
-      - Accept-Encoding
-      Content-Length:
-      - '816'
-      Connection:
-      - close
-    body:
-      encoding: ASCII-8BIT
-      string: |
-        {"total":10,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"name=testcv1","sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":70,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:06:17 UTC","updated_at":"2017-06-09 17:06:17 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
-    http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:21 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:15 GMT
 - request:
     method: get
     uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views?page=1&per_page=20&search=testcv1&sort
@@ -21496,7 +21896,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:21 GMT
+      - Fri, 09 Jun 2017 17:07:15 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21508,13 +21908,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"3eea563c7b9ca3020841e862a43f8ee5-gzip"
+      - W/"82b4a363c136c21509ad6161dc6995de-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d7c9d38c-40f7-4219-a1a6-4c86bc83589d
+      - acc032d7-91c2-432c-9f74-7300535ef1bb
       X-Runtime:
-      - '1.179304'
+      - '0.237224'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21532,21 +21932,21 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=8d812ca090d0f35ef81a96adbd3b51af; path=/; HttpOnly
+      - _session_id=d40ab69aa08ddc4cc07677ecffaa2b8f; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '811'
+      - '993'
       Connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: |
-        {"total":10,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"testcv1","sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":0,"latest_version":null,"id":70,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:06:17 UTC","updated_at":"2017-06-09 17:06:17 UTC","environments":[],"repositories":[],"puppet_modules":[],"versions":[],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"1.0","last_published":null,"permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
+        {"total":10,"subtotal":1,"page":"1","per_page":"20","error":null,"search":"testcv1","sort":{"by":null,"order":null},"results":[{"composite":false,"repository_ids":[],"default":false,"force_puppet_environment":false,"version_count":1,"latest_version":"1.0","id":72,"name":"testcv1","label":"testcv1","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-09 17:07:04 UTC","updated_at":"2017-06-09 17:07:06 UTC","environments":[{"id":5,"name":"Library","label":"Library","permissions":{"readable":true}}],"repositories":[],"puppet_modules":[],"versions":[{"id":48,"version":"1.0","published":"2017-06-09 17:07:06 UTC","environment_ids":[5]}],"components":[],"content_view_components":[],"activation_keys":[],"next_version":"2.0","last_published":"2017-06-09 17:07:06 UTC","permissions":{"view_content_views":true,"edit_content_views":true,"destroy_content_views":true,"publish_content_views":true,"promote_or_remove_content_views":true}}]}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:22 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:15 GMT
 - request:
     method: get
     uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations?search=name%20=%20%22Test%20Corporation%22
@@ -21572,7 +21972,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:22 GMT
+      - Fri, 09 Jun 2017 17:07:15 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21588,9 +21988,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 24a4d561-8bb9-48c2-abe0-eae7bc2beab5
+      - 7ee3114f-5b15-486f-8570-2bfcc225a18a
       X-Runtime:
-      - '0.123936'
+      - '1.201576'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21608,7 +22008,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=0c40a4005b7398b188020e8ae015ea22; path=/; HttpOnly
+      - _session_id=083241f4920a128c16eb5deb9d178764; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
@@ -21633,7 +22033,7 @@ http_interactions:
           "results": [{"label":"testcorp","created_at":"2017-06-07 17:04:57 UTC","updated_at":"2017-06-07 17:04:57 UTC","id":8,"name":"Test Corporation","title":"Test Corporation","description":"Testing today for a better tomorrow"}]
         }
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:22 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:16 GMT
 - request:
     method: get
     uri: https://admin:changeme@centos7-devel.example.com/katello/api/organizations/8/environments
@@ -21659,7 +22059,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:22 GMT
+      - Fri, 09 Jun 2017 17:07:16 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21671,13 +22071,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"f7dbfe0ff32021b9f87a506527f7d1bc-gzip"
+      - W/"b5c4eaf0c38a1deef5ad9e11ec15f7a1-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d4b2e277-e426-4563-bc1b-294bc307c954
+      - 49d60657-3a86-4cb2-b147-194ce25b07d0
       X-Runtime:
-      - '0.358574'
+      - '0.373877'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21695,7 +22095,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=3e168b4c089513ea78c6f7c993797ae7; path=/; HttpOnly
+      - _session_id=b7fdeb18b5f2531e5844c15073815d2a; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
@@ -21707,12 +22107,12 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: |
-        {"total":5,"subtotal":5,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"library":false,"id":9,"name":"Archive","label":"Archive","description":"Archive, no longer in Production","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:19 UTC","updated_at":"2017-06-07 17:09:19 UTC","prior":{"name":"Production","id":8},"successor":null,"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":true,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":6,"name":"Development","label":"Development","description":"Development, automated promotes from Library","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:15 UTC","updated_at":"2017-06-07 17:09:15 UTC","prior":{"name":"Library","id":5},"successor":{"name":"Test","id":7},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":true,"id":5,"name":"Library","label":"Library","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:04:58 UTC","updated_at":"2017-06-07 17:04:58 UTC","prior":null,"successor":null,"counts":{"content_hosts":1,"content_views":2,"packages":0,"puppet_modules":0,"errata":{"security":0,"bugfix":0,"enhancement":0,"total":0},"yum_repositories":0,"docker_repositories":0,"ostree_repositories":0,"products":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":8,"name":"Production","label":"Production","description":"Production, manual promotions from Test","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:19 UTC","updated_at":"2017-06-07 17:09:19 UTC","prior":{"name":"Test","id":7},"successor":{"name":"Archive","id":9},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":7,"name":"Test","label":"Test","description":"Test, manual promotions from Development","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:17 UTC","updated_at":"2017-06-07 17:09:17 UTC","prior":{"name":"Development","id":6},"successor":{"name":"Production","id":8},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}}]}
+        {"total":5,"subtotal":5,"page":1,"per_page":20,"error":null,"search":null,"sort":{"by":null,"order":null},"results":[{"library":false,"id":9,"name":"Archive","label":"Archive","description":"Archive, no longer in Production","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:19 UTC","updated_at":"2017-06-07 17:09:19 UTC","prior":{"name":"Production","id":8},"successor":null,"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":true,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":6,"name":"Development","label":"Development","description":"Development, automated promotes from Library","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:15 UTC","updated_at":"2017-06-07 17:09:15 UTC","prior":{"name":"Library","id":5},"successor":{"name":"Test","id":7},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":true,"id":5,"name":"Library","label":"Library","description":null,"organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:04:58 UTC","updated_at":"2017-06-07 17:04:58 UTC","prior":null,"successor":null,"counts":{"content_hosts":1,"content_views":3,"packages":0,"puppet_modules":0,"errata":{"security":0,"bugfix":0,"enhancement":0,"total":0},"yum_repositories":0,"docker_repositories":0,"ostree_repositories":0,"products":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":8,"name":"Production","label":"Production","description":"Production, manual promotions from Test","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:19 UTC","updated_at":"2017-06-07 17:09:19 UTC","prior":{"name":"Test","id":7},"successor":{"name":"Archive","id":9},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}},{"library":false,"id":7,"name":"Test","label":"Test","description":"Test, manual promotions from Development","organization":{"name":"Test Corporation","label":"testcorp","id":8},"created_at":"2017-06-07 17:09:17 UTC","updated_at":"2017-06-07 17:09:17 UTC","prior":{"name":"Development","id":6},"successor":{"name":"Production","id":8},"counts":{"content_hosts":0,"content_views":0},"permissions":{"create_lifecycle_environments":true,"view_lifecycle_environments":true,"edit_lifecycle_environments":true,"destroy_lifecycle_environments":false,"promote_or_remove_content_views_to_environments":true}}]}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:23 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:17 GMT
 - request:
     method: put
-    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/70/remove
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/72/remove
     body:
       encoding: UTF-8
       string: '{"environment_ids":[5]}'
@@ -21733,11 +22133,11 @@ http_interactions:
       - centos7-devel.example.com
   response:
     status:
-      code: 403
-      message: Forbidden
+      code: 202
+      message: Accepted
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:23 GMT
+      - Fri, 09 Jun 2017 17:07:17 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21751,9 +22151,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 643a872f-bc09-4425-b314-46e5222e916c
+      - bb4ce6ce-f3c2-4133-ab49-6565326536e3
       X-Runtime:
-      - '0.136432'
+      - '1.523691'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21771,7 +22171,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=0bd41e5d5b18339809aabd72f53efbb4; path=/; HttpOnly
+      - _session_id=f7bc30472576a7bae37b07e8b10cef69; path=/; HttpOnly
       - request_method=PUT; path=/
       Via:
       - 1.1 centos7-devel.example.com
@@ -21781,15 +22181,173 @@ http_interactions:
       - chunked
     body:
       encoding: UTF-8
-      string: |
-        {
-          "error": {"message":"Access denied","details":"Missing one of the required permissions: destroy_content_views, promote_or_remove_content_views"}
-        }
+      string: |2
+          {"id":"d6390cce-fd4c-46f2-9374-aea05048bce6","label":"Actions::Katello::ContentView::Remove","pending":true,"username":"admin","started_at":"2017-06-09 17:07:17 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test Corporation","label":"testcorp"},"services_checked":["candlepin","candlepin_auth"],"content_view_id":72,"environment_ids":[5],"environment_names":["Library"],"version_ids":[],"content_view_history_ids":[97],"locale":"en-GB"},"output":{},"humanized":{"action":"Remove Versions and Associations","input":[["content_view",{"text":"content view 'testcv1'","link":"#/content_views/72/versions"}],["organization",{"text":"organisation 'Test Corporation'","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:23 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:18 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/d6390cce-fd4c-46f2-9374-aea05048bce6
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:18 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"0380baaf42f7e01a421b9dd913aa4f84-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 6c929e8f-dabb-4027-bb71-bffb2997d379
+      X-Runtime:
+      - '0.176129'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=66b18b3fefba9ef0731e9bb39cd5a32d; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '866'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"d6390cce-fd4c-46f2-9374-aea05048bce6","label":"Actions::Katello::ContentView::Remove","pending":true,"username":"admin","started_at":"2017-06-09
+        17:07:17 UTC","ended_at":null,"state":"running","result":"pending","progress":0.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["candlepin","candlepin_auth"],"content_view_id":72,"environment_ids":[5],"environment_names":["Library"],"version_ids":[],"content_view_history_ids":[97],"locale":"en-GB"},"output":{},"humanized":{"action":"Remove
+        Versions and Associations","input":[["content_view",{"text":"content view
+        ''testcv1''","link":"#/content_views/72/versions"}],["organization",{"text":"organisation
+        ''Test Corporation''","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}'
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:19 GMT
+- request:
+    method: get
+    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/d6390cce-fd4c-46f2-9374-aea05048bce6
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json;version=2
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.2.4p230
+      Content-Type:
+      - application/json
+      Accept-Language:
+      - en_GB
+      Host:
+      - centos7-devel.example.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Jun 2017 17:07:21 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Foreman-Version:
+      - 1.16.0-develop
+      Foreman-Api-Version:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Apipie-Checksum:
+      - 801a7a10d05883b9611f929d3ab6042d
+      Etag:
+      - W/"dff2e9371d21ed62dd1041c59a56361a-gzip"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 27ce92f3-4d6e-411f-a059-3407276f9a4f
+      X-Runtime:
+      - '0.158141'
+      Content-Security-Policy:
+      - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
+        img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
+        ''self''; style-src ''unsafe-inline'' ''self'''
+      Strict-Transport-Security:
+      - max-age=631152000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - sameorigin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - _session_id=4b463f904f33112b348a326d0055b81e; path=/; HttpOnly
+      Via:
+      - 1.1 centos7-devel.example.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '888'
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"d6390cce-fd4c-46f2-9374-aea05048bce6","label":"Actions::Katello::ContentView::Remove","pending":false,"username":"admin","started_at":"2017-06-09
+        17:07:17 UTC","ended_at":"2017-06-09 17:07:19 UTC","state":"stopped","result":"success","progress":1.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["candlepin","candlepin_auth"],"content_view_id":72,"environment_ids":[5],"environment_names":["Library"],"version_ids":[],"content_view_history_ids":[97],"locale":"en-GB"},"output":{},"humanized":{"action":"Remove
+        Versions and Associations","input":[["content_view",{"text":"content view
+        ''testcv1''","link":"#/content_views/72/versions"}],["organization",{"text":"organisation
+        ''Test Corporation''","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}'
+    http_version: 
+  recorded_at: Fri, 09 Jun 2017 17:07:21 GMT
 - request:
     method: delete
-    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/70
+    uri: https://admin:changeme@centos7-devel.example.com/katello/api/content_views/72
     body:
       encoding: US-ASCII
       string: ''
@@ -21812,7 +22370,7 @@ http_interactions:
       message: Accepted
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:23 GMT
+      - Fri, 09 Jun 2017 17:07:21 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21826,9 +22384,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 08307f23-c235-4986-bcc0-9127e40cf4c6
+      - ce644a7c-37db-4a74-b979-ebe1e7d62782
       X-Runtime:
-      - '1.391825'
+      - '1.595633'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21846,7 +22404,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=157b2735b2d1283916528a9332c2da5b; path=/; HttpOnly
+      - _session_id=2bd61865da6330deba58fffefeddd821; path=/; HttpOnly
       - request_method=DELETE; path=/
       Via:
       - 1.1 centos7-devel.example.com
@@ -21857,12 +22415,12 @@ http_interactions:
     body:
       encoding: UTF-8
       string: |2
-          {"id":"3724fb03-4fcc-47c0-9c40-8b46d3907410","label":"Actions::Katello::ContentView::Destroy","pending":true,"username":"admin","started_at":"2017-06-09 17:06:24 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"content_view":{"id":70,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test Corporation","label":"testcorp"},"remote_user":"admin","remote_cp_user":"admin","locale":"en-GB"},"output":{},"humanized":{"action":"Delete","input":[["content_view",{"text":"content view 'testcv1'","link":"#/content_views/70/versions"}],["organization",{"text":"organisation 'Test Corporation'","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}
+          {"id":"7dc5f304-82de-4f85-ae5d-813e9a8537a8","label":"Actions::Katello::ContentView::Destroy","pending":true,"username":"admin","started_at":"2017-06-09 17:07:21 UTC","ended_at":null,"state":"planned","result":"pending","progress":0.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth"],"remote_user":"admin","remote_cp_user":"admin","locale":"en-GB"},"output":{},"humanized":{"action":"Delete","input":[["content_view",{"text":"content view 'testcv1'","link":"#/content_views/72/versions"}],["organization",{"text":"organisation 'Test Corporation'","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:24 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:22 GMT
 - request:
     method: get
-    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/3724fb03-4fcc-47c0-9c40-8b46d3907410
+    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/7dc5f304-82de-4f85-ae5d-813e9a8537a8
     body:
       encoding: US-ASCII
       string: ''
@@ -21885,7 +22443,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:24 GMT
+      - Fri, 09 Jun 2017 17:07:22 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21897,13 +22455,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"536903f1212f73cf4dae325497b0ee2f-gzip"
+      - W/"84dccc0aa5a3b02e8d03f0ce477f80c1-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 50e55de1-5989-40be-a2d6-acfd560b0f72
+      - 18a63d99-44de-4a92-a536-7b2ade07a023
       X-Runtime:
-      - '0.181387'
+      - '0.210902'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -21921,27 +22479,27 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=a589a8c06d2478038cd6aa9cdbeb228a; path=/; HttpOnly
+      - _session_id=841567770e76c059200186c6987bda17; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '714'
+      - '754'
       Connection:
       - close
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"3724fb03-4fcc-47c0-9c40-8b46d3907410","label":"Actions::Katello::ContentView::Destroy","pending":true,"username":"admin","started_at":"2017-06-09
-        17:06:24 UTC","ended_at":null,"state":"running","result":"pending","progress":1.0,"input":{"content_view":{"id":70,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
-        Corporation","label":"testcorp"},"remote_user":"admin","remote_cp_user":"admin","locale":"en-GB"},"output":{},"humanized":{"action":"Delete","input":[["content_view",{"text":"content
-        view ''testcv1''","link":"#/content_views/70/versions"}],["organization",{"text":"organisation
+      string: '{"id":"7dc5f304-82de-4f85-ae5d-813e9a8537a8","label":"Actions::Katello::ContentView::Destroy","pending":true,"username":"admin","started_at":"2017-06-09
+        17:07:21 UTC","ended_at":null,"state":"running","result":"pending","progress":0.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth"],"remote_user":"admin","remote_cp_user":"admin","locale":"en-GB"},"output":{},"humanized":{"action":"Delete","input":[["content_view",{"text":"content
+        view ''testcv1''","link":"#/content_views/72/versions"}],["organization",{"text":"organisation
         ''Test Corporation''","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}'
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:25 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:23 GMT
 - request:
     method: get
-    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/3724fb03-4fcc-47c0-9c40-8b46d3907410
+    uri: https://admin:changeme@centos7-devel.example.com/foreman_tasks/api/tasks/7dc5f304-82de-4f85-ae5d-813e9a8537a8
     body:
       encoding: US-ASCII
       string: ''
@@ -21964,7 +22522,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Jun 2017 17:06:27 GMT
+      - Fri, 09 Jun 2017 17:07:25 GMT
       Server:
       - Apache/2.4.6 (CentOS)
       Foreman-Version:
@@ -21976,13 +22534,13 @@ http_interactions:
       Apipie-Checksum:
       - 801a7a10d05883b9611f929d3ab6042d
       Etag:
-      - W/"298357732d6d2b54103600dbd5d577c3-gzip"
+      - W/"36cd89268267aad88821522c60ff818a-gzip"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d335699a-f089-4faa-8f12-7fec3a2c688a
+      - 70e8a229-562c-48a6-8b15-ea82259d2220
       X-Runtime:
-      - '0.151482'
+      - '0.148557'
       Content-Security-Policy:
       - 'default-src ''self''; child-src ''self''; connect-src ''self'' ws: wss:;
         img-src ''self'' data: *.gravatar.com; script-src ''unsafe-eval'' ''unsafe-inline''
@@ -22000,22 +22558,22 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Set-Cookie:
-      - _session_id=d8b6f103f02ff97d3418f5a5ba4b32d0; path=/; HttpOnly
+      - _session_id=dac9cd24f2cd4a26476eda6378883005; path=/; HttpOnly
       Via:
       - 1.1 centos7-devel.example.com
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '736'
+      - '776'
       Connection:
       - close
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"3724fb03-4fcc-47c0-9c40-8b46d3907410","label":"Actions::Katello::ContentView::Destroy","pending":false,"username":"admin","started_at":"2017-06-09
-        17:06:24 UTC","ended_at":"2017-06-09 17:06:25 UTC","state":"stopped","result":"success","progress":1.0,"input":{"content_view":{"id":70,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
-        Corporation","label":"testcorp"},"remote_user":"admin","remote_cp_user":"admin","locale":"en-GB"},"output":{},"humanized":{"action":"Delete","input":[["content_view",{"text":"content
-        view ''testcv1''","link":"#/content_views/70/versions"}],["organization",{"text":"organisation
+      string: '{"id":"7dc5f304-82de-4f85-ae5d-813e9a8537a8","label":"Actions::Katello::ContentView::Destroy","pending":false,"username":"admin","started_at":"2017-06-09
+        17:07:21 UTC","ended_at":"2017-06-09 17:07:24 UTC","state":"stopped","result":"success","progress":1.0,"input":{"content_view":{"id":72,"name":"testcv1","label":"testcv1"},"organization":{"id":8,"name":"Test
+        Corporation","label":"testcorp"},"services_checked":["pulp","pulp_auth"],"remote_user":"admin","remote_cp_user":"admin","locale":"en-GB"},"output":{},"humanized":{"action":"Delete","input":[["content_view",{"text":"content
+        view ''testcv1''","link":"#/content_views/72/versions"}],["organization",{"text":"organisation
         ''Test Corporation''","link":"/organizations/8/edit"}]],"output":"","errors":[]},"cli_example":null}'
     http_version: 
-  recorded_at: Fri, 09 Jun 2017 17:06:27 GMT
+  recorded_at: Fri, 09 Jun 2017 17:07:25 GMT
 recorded_with: VCR 3.0.3

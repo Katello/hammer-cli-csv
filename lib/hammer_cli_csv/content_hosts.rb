@@ -452,10 +452,9 @@ module HammerCLICsv
       def iterate_hosts(csv)
         hypervisors = []
         hosts = []
-        @api.resource(:organizations).call(:index, {
-            'full_results' => true
-        })['results'].each do |organization|
-          next if option_organization && organization['name'] != option_organization
+        organization_search_options = {:per_page => 999999}
+        organization_search_options['search'] = "name=\"#{option_organization}\"" if option_organization
+        @api.resource(:organizations).call(:index, organization_search_options)['results'].each do |organization|
 
           total = @api.resource(:hosts).call(:index, {
               'organization_id' => foreman_organization(:name => organization['name']),

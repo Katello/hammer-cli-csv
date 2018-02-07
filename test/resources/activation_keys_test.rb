@@ -22,8 +22,8 @@ Options:
  --itemized-subscriptions      Export one subscription per row, only process update subscriptions on import
  --organization ORGANIZATION   Only process organization matching this name
  --search SEARCH               Only export search results
- -h, --help                    print help
- -v, --verbose                 be verbose
+ -h, --help                    Print help
+ -v, --verbose                 Be verbose
 HELP
       stop_vcr
     end

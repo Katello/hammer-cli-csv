@@ -248,7 +248,7 @@ module HammerCLICsv
                 'content_view_id' => content_view_id
               },
               'subscription_facet_attributes' => {
-                'installed_products' => products(line),
+                'installed_products_attributes' => products(line),
                 'service_level' => line[SLA],
                 'autoheal' => true
               }

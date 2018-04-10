@@ -1,6 +1,9 @@
 Release Notes
 =============
 
+### 2.3.1 (2018-04-10)
+- [c436027](https://github.com/Katello/hammer-cli-csv/commit/c436027) - Fixes [#23184](http://projects.theforeman.org/issues/23184) - properly update installed prods (2018-04-10 12:17:35 2018 -0400) *Justin Sherrill*
+
 ### 2.3.0 (2017-06-08)
 - [f92e695](https://github.com/Katello/hammer-cli-csv/commit/f92e695) - Fixes [#19927](http://projects.theforeman.org/issues/19927) - Drop and readd rules when importing filters (2017-06-08 09:01:45 -0400) *David Davis*
 - [ebb0044](https://github.com/Katello/hammer-cli-csv/commit/ebb0044) - Fixes [#19718](http://projects.theforeman.org/issues/19718) - Allow import of unpublished CVs (2017-06-06 13:31:15 -0400) *Andrew Kofink*

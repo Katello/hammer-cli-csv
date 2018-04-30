@@ -106,6 +106,7 @@ module HammerCLICsv
 
         count(line[COUNT]).times do |number|
           name = namify(line[NAME], number)
+          label = labelize(namify(line[LABEL] || line[NAME], number))
 
           contentview_id = @existing_contentviews[line[ORGANIZATION]][name]
           if !contentview_id
@@ -113,7 +114,7 @@ module HammerCLICsv
             options = {
                 'organization_id' => foreman_organization(:name => line[ORGANIZATION]),
                 'name' => name,
-                'label' => labelize(name),
+                'label' => label,
                 'description' => line[DESCRIPTION],
                 'composite' => is_composite
             }

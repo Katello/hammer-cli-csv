@@ -133,13 +133,13 @@ FILE
       start_vcr
       set_user 'admin'
 
-      name = 'Red Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64'
+      name = 'Red Hat Enterprise Linux 7 Server RPMs x86_64 7.1'
 
       file = Tempfile.new('products_test')
       # rubocop:disable LineLength
       file.write <<-FILE
 Name,Label,Organization,Description,Repository,Repository Type,Content Set,$basearch,$releasever,Repository Url,Verify SSL,Publish via HTTP,Mirror on Sync,Download Policy,Username,Password
-Red Hat Satellite Capsule,Red_Hat_Satellite_Capsule,Test Corporation,,Red Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64,Red Hat Yum,Red Hat Satellite Capsule 6.2 (for RHEL 7 Server) (RPMs),x86_64,,https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-capsule/6.2/os,No,No,No,on_demand,,
+Red Hat Enterprise Linux Server,Red_Hat_Enterprise_Linux_Server,Test Corporation,,Red Hat Enterprise Linux 7 Server RPMs x86_64 7.1,Red Hat Yum,Red Hat Enterprise Linux 7 Server (RPMs),,7.1,https://cdn.redhat.com/content/dist/rhel/server/7/7.1/x86_64/os,Yes,No,Yes,on_demand,,
 FILE
       # rubocop:enable LineLength
       file.rewind
@@ -149,7 +149,7 @@ FILE
       }
       stderr.must_equal ''
       lines = stdout.split("\n")
-      assert_equal "Enabling repository Red Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64...done", lines[0]
+      assert_equal "Enabling repository #{name}...done", lines[0]
       assert_equal "Updating repository '#{name}'...done", lines[1]
 
       file.rewind
@@ -158,27 +158,127 @@ FILE
       }
       stderr.must_equal ''
       lines = stdout.split("\n")
-      assert_equal "Repository Red Hat Satellite Capsule 6.2 for RHEL 7 Server RPMs x86_64 already enabled", lines[0]
+      assert_equal "Repository #{name} already enabled", lines[0]
       assert_equal "Updating repository '#{name}'...done", lines[1]
 
       file.unlink
 
-      # TODO: need to 'repository-set disable' but command is not working (test again against Sat-6.3)
-      #       disable manually for now after the test to re-record
+      stdout,stderr = capture {
+        hammer.run(%W(repository-set disable --organization Test\ Corporation --product Red\ Hat\ Enterprise\ Linux\ Server --name Red\ Hat\ Enterprise\ Linux\ 7\ Server\ \(RPMs\) --releasever 7.1 --basearch x86_64}))
+      }
+
+      stop_vcr
+    end
+
+    def test_create_no_label_column
+      start_vcr
+      set_user 'admin'
+
+      name = 'No Label'
+
+      file = Tempfile.new('products_test')
+      # rubocop:disable LineLength
+      file.write <<-FILE
+Name,Organization,Description,Repository,Repository Type,Content Set,$basearch,$releasever,Repository Url,Verify SSL,Publish via HTTP,Mirror on Sync,Download Policy,Username,Password
+No Label,Test Corporation,,openshift/origin,Custom Docker,openshift/origin,,,https://registry-1.docker.io,Yes,Yes,Yes,"",,
+FILE
+      # rubocop:enable LineLength
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv products --no-sync --verbose --file #{file.path}})
+      }
+      stderr.must_equal ''
+      lines = stdout.split("\n")
+      assert_equal "Creating product '#{name}'...Creating repository 'openshift/origin'...done", lines[0]
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache product info --organization Test\ Corporation --name #{name}})
+      }
+      stderr.must_equal ''
+      lines = stdout.split("\n")
+      assert_equal "Label:        No_Label", lines[2]
+
+      file.unlink
+
+      product_delete(name)
+      stop_vcr
+    end
+
+    def test_create_empty_label
+      start_vcr
+      set_user 'admin'
+
+      name = 'EmptyLabel'
+
+      file = Tempfile.new('products_test')
+      # rubocop:disable LineLength
+      file.write <<-FILE
+Name,Label,Organization,Description,Repository,Repository Type,Content Set,$basearch,$releasever,Repository Url,Verify SSL,Publish via HTTP,Mirror on Sync,Download Policy,Username,Password
+#{name},,Test Corporation,,openshift/origin,Custom Docker,openshift/origin,,,https://registry-1.docker.io,Yes,Yes,Yes,"",,
+FILE
+      # rubocop:enable LineLength
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv products --no-sync --verbose --file #{file.path}})
+      }
+      stderr.must_equal ''
+      lines = stdout.split("\n")
+      assert_equal "Creating product '#{name}'...Creating repository 'openshift/origin'...done", lines[0]
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache product info --organization Test\ Corporation --name '#{name}'})
+      }
+      stderr.must_equal ''
+      lines = stdout.split("\n")
+      assert_equal "Label:        #{name}", lines[2]
+
+      file.unlink
+
+      product_delete(name)
+      stop_vcr
+    end
+
+    def test_create_with_label
+      start_vcr
+      set_user 'admin'
+
+      name = 'With Label'
+
+      file = Tempfile.new('products_test')
+      # rubocop:disable LineLength
+      file.write <<-FILE
+Name,Label,Organization,Description,Repository,Repository Type,Content Set,$basearch,$releasever,Repository Url,Verify SSL,Publish via HTTP,Mirror on Sync,Download Policy,Username,Password
+With Label,withlabel,Test Corporation,,openshift/origin,Custom Docker,openshift/origin,,,https://registry-1.docker.io,Yes,Yes,Yes,"",,
+FILE
+      # rubocop:enable LineLength
+      file.rewind
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache csv products --no-sync --verbose --file #{file.path}})
+      }
+      stderr.must_equal ''
+      lines = stdout.split("\n")
+      assert_equal "Creating product '#{name}'...Creating repository 'openshift/origin'...done", lines[0]
+
+      stdout,stderr = capture {
+        hammer.run(%W{--reload-cache product info --organization Test\ Corporation --name #{name}})
+      }
+      stderr.must_equal ''
+      lines = stdout.split("\n")
+      assert_equal "Label:        withlabel", lines[2]
+
+      file.unlink
+
+      product_delete(name)
       stop_vcr
     end
 
     def product_delete(name)
       stdout,stderr = capture {
-        hammer.run(%W(product list --organization Test\ Corporation --search #{name}))
+        hammer.run(%W(product delete --organization Test\ Corporation --name #{name}))
       }
-      lines = stdout.split("\n")
-      if lines.length == 5
-        id = stdout.split("\n")[3].split(" ")[0]
-        stdout,stderr = capture {
-          hammer.run(%W(product delete --organization Test\ Corporation --id #{id}))
-        }
-      end
     end
   end
 end

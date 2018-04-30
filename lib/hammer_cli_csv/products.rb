@@ -89,13 +89,14 @@ module HammerCLICsv
 
       def create_or_update_product(line, number)
         product_name = namify(line[NAME], number)
+        product_label = labelize(namify(line[LABEL] || line[NAME], number))
         get_existing_product(product_name, line)
         if line[REPOSITORY_TYPE] =~ /Red Hat/
           product = enable_red_hat_product(line, product_name)
         else
-          # TODO: product label? other?
           params = {
             :name => product_name,
+            :label => product_label,
             'organization_id' => foreman_organization(:name => line[ORGANIZATION])
           }
           params[:description] = line[DESCRIPTION] if !line[DESCRIPTION].nil? &&

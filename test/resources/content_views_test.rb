@@ -25,8 +25,8 @@ Options:
  --file FILE_NAME              CSV file (default to /dev/stdout with --export, otherwise required)
  --organization ORGANIZATION   Only process organization matching this name
  --search SEARCH               Only export search results
- -h, --help                    print help
- -v, --verbose                 be verbose
+ -h, --help                    Print help
+ -v, --verbose                 Be verbose
 HELP
       stop_vcr
     end
